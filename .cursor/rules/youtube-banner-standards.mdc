@@ -1,0 +1,75 @@
+---
+description: YouTube banner creation standards for Torah lesson videos
+alwaysApply: true
+---
+
+# YouTube Banner Standards
+
+## Banner Design Requirements
+
+All YouTube banners for video lessons must follow these specifications:
+
+### Dimensions & Format
+- **Size**: 2560x1440 pixels (YouTube standard)
+- **Format**: PNG
+- **Color space**: RGB
+
+### Visual Elements
+
+**Background**:
+- Use the library background image (Dmitry Kalashnik with books and Torah scroll)
+- Maintain professional, scholarly atmosphere
+- Ensure good contrast for text readability
+
+**Styling**:
+- White and gold curved border on the left side
+- Gold decorative ornaments (crown, floral patterns, dividers)
+- Semi-transparent dark overlay behind text areas (for readability)
+- Jewish/Hebrew theme elements (Star of David, etc.)
+
+### Text Hierarchy
+
+| Level | Purpose | Style | Color |
+|-------|---------|-------|-------|
+| Primary | Lesson title/question | Large, elegant serif font | Gold |
+| Secondary | Subtitle/source | Medium, elegant serif | White |
+| Tertiary | Name plate | "ДМИТРИЙ КАЛАШНИК" | White on dark background |
+
+### File Naming Convention
+
+```
+youtube_banner_kalashnik_[descriptive_topic].png
+```
+
+Examples:
+- `youtube_banner_kalashnik_children_fire.png`
+- `youtube_banner_kalashnik_bruki_nosok.png`
+- `youtube_banner_kalashnik_znamena.png`
+
+### Consistency Checklist
+
+When creating new banners, verify:
+
+- [ ] Background image is the original library scene
+- [ ] Left border styling matches previous banners
+- [ ] Gold decorative elements are present and consistent
+- [ ] Name plate shows "ДМИТРИЙ КАЛАШНИК"
+- [ ] Text is readable and properly positioned
+- [ ] Colors match the gold/white/dark scheme
+- [ ] Overall professional and scholarly appearance
+
+## Approved Banner Examples
+
+Reference these created banners for consistency:
+
+1. **Children & Spiritual Fire**
+   - Title: "Как отсутствие детей приводит к зажиганию чуждого огня?"
+   - Subtitle: "Рав Йоханан Цвейг - Недельная глава Бемидбар"
+
+2. **Gursky Chassidim & Trousers**
+   - Title: "Зачем гурские хасиды заправляют брюки в носки?"
+   - Subtitle: "Уроки главы Бемидбар"
+
+3. **Banners for Jewish People**
+   - Title: "Почему hаШем дал знамена еврейскому народу, а не народам мира?"
+   - Subtitle: "Зера Шимшон, Бемидбар"

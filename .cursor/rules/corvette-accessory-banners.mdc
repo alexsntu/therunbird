@@ -1,0 +1,168 @@
+---
+description: Chevrolet Corvette C6 accessory product banner standards for e-commerce categories
+alwaysApply: true
+---
+
+# Corvette C6 Accessory Product Banners
+
+## Banner Design Requirements
+
+All product category banners for Chevrolet Corvette C6 accessories must follow these specifications:
+
+### Dimensions & Format
+- **Size**: 800x430 pixels minimum (or proportionally larger: 1600x860, 2400x1290, 3200x1720)
+- **Format**: PNG
+- **Color space**: RGB
+- **Aspect ratio**: 16:9
+
+### Layout Structure
+
+**Upper Section** (approximately 355px for 800x430 size):
+- Premium accessory component centered
+- Corvette C6 luxury interior background (dark, professional automotive setting)
+- Professional dramatic lighting
+- Realistic high-quality automotive product photography
+- No text or logos on this area
+
+**Lower Section** (exactly 75px for 800x430 size):
+- Solid dark gray/charcoal bar (#3a3a3a to #4a4a4a)
+- Smooth, professional appearance
+- Reserved for category name text overlay
+- Consistent across all banners
+
+### Visual Elements
+
+**Background**:
+- Corvette C6 interior (steering wheel, dashboard, carbon fiber, chrome details visible in soft focus)
+- Dark luxury automotive setting
+- Professional lighting with smooth gradients
+- Emphasizes premium quality and craftsmanship
+
+**Accessory Presentation**:
+- Centered positioning in upper section
+- Clear, detailed visibility of component
+- Premium materials clearly visible (leather stitching, carbon fiber texture, chrome polish, etc.)
+- Dramatic lighting highlighting key features
+- Realistic automotive product photography style
+
+**Styling**:
+- No text overlays on the image itself
+- No logos or branding on the photo
+- Professional, clean aesthetic
+- Consistent with luxury automotive branding
+
+### Color & Tone
+
+| Element | Value | Purpose |
+|---------|-------|---------|
+| Background tone | Dark (#1a1a1a - #2a2a2a) | Luxury, emphasis on product |
+| Footer bar | Dark gray (#3a3a3a - #4a4a4a) | Text overlay area, consistency |
+| Lighting accent | Warm white/silver | Highlights premium details |
+| Overall mood | Dramatic, professional | High-end automotive feel |
+
+### File Naming Convention
+
+```
+corvette_accessory_[component_name]_banner.png
+```
+
+Examples:
+- `corvette_accessory_handbrake_banner.png`
+- `corvette_accessory_handbrake_boot_banner.png`
+- `corvette_accessory_shift_knob_elongated_banner.png`
+- `corvette_accessory_shift_knob_ball_banner.png`
+
+### Consistency Checklist
+
+When creating new banners, verify:
+
+- [ ] Dimensions are 800x430px (or proportionally larger)
+- [ ] Bottom 75px is dark gray/charcoal footer bar
+- [ ] Footer color matches previous banners (#3a3a3a - #4a4a4a range)
+- [ ] Corvette C6 interior visible in background
+- [ ] Accessory is centered in upper section
+- [ ] Lighting is dramatic and professional
+- [ ] Premium details are clearly visible
+- [ ] Realistic automotive product photography style
+- [ ] No text on the image itself
+- [ ] Smooth transition between product area and footer
+- [ ] File format is PNG
+- [ ] Filename follows convention
+- [ ] Consistent styling with other banners
+
+### Component Examples
+
+**Handbrake Assembly**
+- Position: Centered, angled view
+- Details: Chrome polish, leather stitching visible
+- Context: Corvette interior with dashboard/steering wheel in soft focus
+
+**Handbrake Boot Cover**
+- Position: Centered, highlighting lower leather portion
+- Details: Premium leather texture, decorative stitching, craftsmanship
+- Context: Complete ручник assembly to show part relationships
+
+**Shift Knob (Elongated)**
+- Position: Centered, upright display
+- Details: Carbon fiber texture, leather stitching, gear indicator visible
+- Context: Mounted in transmission area with shifter base visible
+
+**Shift Knob (Ball-shaped)**
+- Position: Centered, top-down view showing logo
+- Details: Carbon fiber body, polished metal collar, leather base
+- Context: Corvette gear shifter mechanism partially visible
+
+### Text Overlay Guidelines
+
+The 75px footer bar is reserved for category names. Recommended:
+- **Font**: Sans-serif, bold, white or light gray
+- **Size**: Proportional to banner size (recommend 16-20px for 800px width)
+- **Position**: Centered vertically within the 75px bar
+- **Contrast**: Sufficient contrast against #3a3a3a - #4a4a4a background
+
+Example category names:
+- "Ручной тормоз Corvette C6"
+- "Чехол ручного тормоза"
+- "Ручка КПП"
+- "Шаровая ручка КПП"
+
+## Creating Consistent Banners
+
+### Standard Process
+
+1. **Define the accessory component** and its key premium features
+2. **Research visual reference** - how the component appears on real Corvette C6 vehicles
+3. **Specify Corvette interior background** - should show luxury automotive setting
+4. **Request 75px footer bar** - dark gray, consistent with other banners
+5. **Verify proportions** - 800x430 or larger proportional size
+6. **Quality check** - compare footer bar with previous banners
+
+### Common Footer Bar Issue
+
+**Problem**: Footer bars not matching across banners (different colors, heights, textures)
+
+**Solution**: When creating new banners, explicitly reference the exact specifications:
+- Height: Exactly 75px
+- Color range: #3a3a3a to #4a4a4a
+- Style: Smooth, solid, no texture variation
+- Compare visually with existing banners after generation
+
+## Approved Banner Examples
+
+Reference these created banners for consistency:
+
+1. **Handbrake Assembly**
+   - File: `corvette_accessory_handbrake_banner.png`
+   - Features: Complete ручник, chrome and leather, Corvette interior background
+
+2. **Handbrake Boot Cover**
+   - File: `corvette_accessory_handbrake_boot_banner.png`
+   - Features: Lower leather cover with stitching, complete assembly shown, emphasizes boot
+
+3. **Shift Knob (Elongated)**
+   - File: `corvette_accessory_shift_knob_elongated_banner.png`
+   - Features: Carbon fiber, leather stitching, gear indicator, Corvette interior
+
+4. **Shift Knob (Ball)**
+   - File: `corvette_accessory_shift_knob_ball_banner.png`
+   - Features: Spherical carbon fiber, polished collar, Corvette logo, interior background
