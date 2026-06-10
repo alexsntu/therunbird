@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VETTE CRAFT — Dark V2: Carbon Racing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #090909;
+      --bg-card:  #101010;
+      --bg-high:  #181818;
+      --white:    #F2F2F2;
+      --mid:      #888;
+      --muted:    #444;
+      --accent:   #E8C210;
+      --a-dim:    rgba(232,194,16,.12);
+      --a-bord:   rgba(232,194,16,.28);
+      --red:      #E01030;
+      --border:   rgba(255,255,255,.07);
+      --bord2:    rgba(255,255,255,.12);
+      --shadow:   0 8px 48px rgba(0,0,0,.75);
+      --scard:    0 2px 20px rgba(0,0,0,.5);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* === UTILITIES === */
+    .cf {
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.011) 0, rgba(255,255,255,.011) 1px, transparent 1px, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.011) 0, rgba(255,255,255,.011) 1px, transparent 1px, transparent 50%);
+      background-size: 8px 8px;
+    }
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 88px 40px; }
+    .sec-eye { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+    .sec-h {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,60px);
+      color: var(--white); letter-spacing: .03em; line-height: 1;
+    }
+
+    /* === ANN BAR === */
+    .ann {
+      background: var(--accent); color: #0A0A0A;
+      text-align: center; padding: 9px 16px;
+      font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* === NAV === */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(9,9,9,.94);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      max-width: 1440px; margin: 0 auto; padding: 0 40px;
+      height: 66px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-b { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: .1em; color: var(--white); }
+    .logo-b span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--mid); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-r { display: flex; align-items: center; gap: 8px; }
+    .ni {
+      width: 38px; height: 38px; border-radius: 7px; border: 1px solid var(--border);
+      background: none; color: var(--mid); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all .2s;
+    }
+    .ni:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-cart {
+      height: 38px; padding: 0 20px; background: var(--accent); color: #0A0A0A;
+      border: none; border-radius: 6px; font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px; letter-spacing: .08em; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: all .2s;
+    }
+    .nav-cart:hover { background: #F0D020; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; display: block; }
+
+    /* === HERO === */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center;
+      background: var(--bg); overflow: hidden;
+    }
+    .hero-giant {
+      position: absolute; font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(140px,22vw,280px); letter-spacing: -.02em;
+      color: rgba(255,255,255,.022); top: 50%; left: 50%;
+      transform: translate(-50%,-50%); white-space: nowrap;
+      pointer-events: none; user-select: none; z-index: 0;
+    }
+    .hero-stripe { position: absolute; left: 0; right: 0; background: var(--accent); pointer-events: none; }
+    .hero-s1 { top: 38%; height: 2px; opacity: .6; }
+    .hero-s2 { top: calc(38% + 10px); height: 2px; opacity: .25; }
+    .hero-cf-bg {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.01) 0, rgba(255,255,255,.01) 1px, transparent 1px, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.01) 0, rgba(255,255,255,.01) 1px, transparent 1px, transparent 50%);
+      background-size: 9px 9px;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto; padding: 80px 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 7px 16px; border: 1px solid var(--a-bord);
+      border-radius: 100px; color: var(--accent);
+      font-size: 10.5px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; margin-bottom: 26px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(68px,9vw,130px);
+      line-height: .88; letter-spacing: .02em;
+      color: var(--white); margin-bottom: 26px;
+    }
+    .hero-h1 .y { color: var(--accent); }
+    .hero-p { font-size: 15px; line-height: 1.75; color: #777; max-width: 420px; margin-bottom: 40px; font-weight: 300; }
+    .hero-p strong { color: #bbb; font-weight: 500; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-y {
+      padding: 15px 36px; background: var(--accent); color: #0A0A0A;
+      border: none; border-radius: 3px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .1em;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-y:hover { background: #F0D020; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(232,194,16,.3); }
+    .btn-outline-w {
+      padding: 15px 36px; background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,.2); border-radius: 3px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: .1em;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-outline-w:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.05); }
+
+    /* hero visual */
+    .hero-vis { display: flex; justify-content: center; position: relative; }
+    .hero-frame {
+      width: 100%; max-width: 480px; aspect-ratio: 1;
+      background: #0D0D0D; border-radius: 12px;
+      border: 1px solid var(--a-bord);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-frame::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.01) 0, rgba(255,255,255,.01) 1px, transparent 1px, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.01) 0, rgba(255,255,255,.01) 1px, transparent 1px, transparent 50%);
+      background-size: 7px 7px;
+    }
+    .hero-frame-label {
+      position: absolute; bottom: 16px; left: 16px; right: 16px; z-index: 2;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(12px);
+      border: 1px solid rgba(232,194,16,.2); border-radius: 8px;
+      padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .hfl-name { font-size: 13px; font-weight: 600; color: var(--white); }
+    .hfl-sub { font-size: 11px; color: var(--accent); margin-top: 1px; }
+    .hfl-price { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--accent); }
+    .hero-frame-corner {
+      position: absolute; top: 16px; left: 16px; z-index: 2;
+      padding: 5px 10px; background: var(--accent); border-radius: 3px;
+      font-size: 10px; font-weight: 800; letter-spacing: .1em; color: #0A0A0A; text-transform: uppercase;
+    }
+
+    /* === MODEL SELECTOR === */
+    .model-bar {
+      background: #0C0C0C;
+      border-top: 2px solid var(--accent);
+      border-bottom: 1px solid var(--border);
+    }
+    .model-inner {
+      max-width: 1440px; margin: 0 auto; padding: 0 40px;
+      display: flex; align-items: center; overflow-x: auto;
+    }
+    .model-lbl {
+      font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap; margin-right: 24px; padding: 18px 0;
+    }
+    .model-btn {
+      font-family: 'Bebas Neue', sans-serif; font-size: 21px; letter-spacing: .08em;
+      padding: 0 28px; height: 56px; border: none; background: none; color: var(--muted);
+      cursor: pointer; border-right: 1px solid var(--border); transition: all .2s; white-space: nowrap;
+    }
+    .model-btn:hover { color: #ccc; background: rgba(255,255,255,.03); }
+    .model-btn.act { color: var(--accent); background: rgba(232,194,16,.06); }
+
+    /* === CATEGORY STRIP (numbered horizontal) === */
+    .cat-strip-wrap { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cat-strip {
+      max-width: 1440px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(6,1fr);
+    }
+    .cat-item {
+      padding: 28px 24px; border-right: 1px solid var(--border);
+      cursor: pointer; transition: background .2s; position: relative; overflow: hidden;
+    }
+    .cat-item:last-child { border-right: none; }
+    .cat-item:hover { background: rgba(255,255,255,.03); }
+    .cat-item::after {
+      content: '→'; position: absolute; bottom: 24px; right: 20px;
+      font-size: 16px; color: var(--accent); opacity: 0;
+      transform: translateX(-6px); transition: all .25s;
+    }
+    .cat-item:hover::after { opacity: 1; transform: translateX(0); }
+    .cat-n {
+      font-family: 'Bebas Neue', sans-serif; font-size: 44px;
+      color: var(--accent); opacity: .75; line-height: 1; margin-bottom: 10px;
+    }
+    .cat-nm {
+      font-family: 'Bebas Neue', sans-serif; font-size: 17px;
+      color: var(--white); letter-spacing: .05em; margin-bottom: 3px;
+    }
+    .cat-ct { font-size: 11px; color: var(--muted); }
+
+    /* === BUILD SECTION (configurator preview) === */
+    .build-section { background: var(--bg-card); }
+    .build-inner {
+      max-width: 1440px; margin: 0 auto; padding: 88px 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .build-label {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;
+      font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 700;
+    }
+    .build-h {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px,5vw,64px);
+      color: var(--white); line-height: 1; margin-bottom: 18px; letter-spacing: .02em;
+    }
+    .build-p { font-size: 15px; color: var(--mid); line-height: 1.75; margin-bottom: 36px; }
+    .build-steps { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+    .build-step { display: flex; align-items: center; gap: 14px; }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--a-dim); border: 1px solid var(--a-bord);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--accent);
+      flex-shrink: 0;
+    }
+    .step-text { font-size: 14px; color: var(--mid); }
+    .step-text strong { color: var(--white); font-weight: 500; }
+    .build-vis {
+      background: #0D0D0D; border-radius: 12px;
+      border: 1px solid var(--border); padding: 32px;
+    }
+    .bv-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    }
+    .swatches-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+    .sw {
+      width: 42px; height: 42px; border-radius: 8px; cursor: pointer;
+      border: 2px solid transparent; transition: all .2s;
+      position: relative;
+    }
+    .sw.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,194,16,.2); }
+    .sw:hover { transform: scale(1.1); }
+    .sw-black { background: #0D0D0D; outline: 1px solid rgba(255,255,255,.15); }
+    .sw-red { background: #8B0000; }
+    .sw-blue { background: #0B2E8A; }
+    .sw-gold { background: #C8900A; }
+    .sw-white { background: #E8E8E8; }
+    .sw-green { background: #0B4A1A; }
+    .thread-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .thr {
+      width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      border: 2px solid transparent; transition: all .2s;
+    }
+    .thr:hover { transform: scale(1.15); }
+    .thr.active { border-color: var(--white); box-shadow: 0 0 0 2px rgba(255,255,255,.2); }
+    .t-y { background: #E8C210; }
+    .t-r { background: #E01030; }
+    .t-w { background: #F2F2F2; }
+    .t-b { background: #1A4FA0; }
+    .t-s { background: #888; }
+    .t-or { background: #E05810; }
+    .bv-preview {
+      background: #141414; border-radius: 8px; padding: 20px;
+      text-align: center; border: 1px solid rgba(232,194,16,.1);
+    }
+    .bvp-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .bvp-config { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--accent); letter-spacing: .06em; }
+
+    /* === PRODUCTS === */
+    .products-section { background: var(--bg); }
+    .prod-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .pc {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden; cursor: pointer;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+    .pc:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .pi {
+      aspect-ratio: 1; background: #0D0D0D; position: relative;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .pi::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.008) 0, rgba(255,255,255,.008) 1px, transparent 1px, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.008) 0, rgba(255,255,255,.008) 1px, transparent 1px, transparent 50%);
+      background-size: 6px 6px;
+    }
+    .pi-icon { opacity: .28; position: relative; z-index: 1; }
+    .pi-tag {
+      position: absolute; top: 10px; left: 10px; z-index: 2;
+      padding: 4px 10px; background: var(--accent); color: #0A0A0A;
+      border-radius: 3px; font-size: 10px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+    }
+    .pi-fav {
+      position: absolute; top: 10px; right: 10px; z-index: 2;
+      width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border);
+      background: #0A0A0A; color: var(--mid); font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .2s; cursor: pointer;
+    }
+    .pc:hover .pi-fav { opacity: 1; }
+    .pb { padding: 14px; }
+    .pb-cat { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .pb-name { font-size: 14px; font-weight: 500; color: var(--white); line-height: 1.4; margin-bottom: 4px; }
+    .pb-var { font-size: 12px; color: #555; margin-bottom: 14px; }
+    .pb-foot { display: flex; align-items: center; justify-content: space-between; }
+    .pb-price { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--white); }
+    .pb-price .fr { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--muted); font-weight: 400; margin-right: 2px; }
+    .add-b {
+      width: 36px; height: 36px; border-radius: 6px; background: var(--accent);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: #0A0A0A; transition: all .2s;
+    }
+    .add-b:hover { background: #F0D020; transform: scale(1.08); }
+
+    /* === TESTIMONIALS === */
+    .reviews-section { background: var(--bg-card); }
+    .rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .rc {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 28px; transition: border-color .2s;
+    }
+    .rc:hover { border-color: var(--a-bord); }
+    .rc-stars { color: var(--accent); font-size: 18px; letter-spacing: 2px; margin-bottom: 16px; }
+    .rc-text { font-size: 14px; color: #777; line-height: 1.8; font-style: italic; margin-bottom: 22px; }
+    .rc-author { display: flex; align-items: center; gap: 14px; }
+    .rc-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--a-dim); border: 1px solid var(--a-bord);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--accent);
+      flex-shrink: 0;
+    }
+    .rc-name { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+    .rc-car { font-size: 11px; color: var(--accent); letter-spacing: .06em; }
+
+    /* === GALLERY === */
+    .gallery-section { background: var(--bg); }
+    .gal-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 3px; }
+    .gal-tile {
+      aspect-ratio: 1; overflow: hidden; cursor: pointer;
+      position: relative;
+    }
+    .gal-bg { position: absolute; inset: 0; transition: transform .45s ease; }
+    .gal-tile:hover .gal-bg { transform: scale(1.08); }
+    .g1 { background: linear-gradient(135deg,#1A1A1A 0%,#0D0D0D 100%); }
+    .g2 { background: linear-gradient(135deg,#1D150E 0%,#100A05 100%); }
+    .g3 { background: linear-gradient(135deg,#1A0D10 0%,#0E0608 100%); }
+    .g4 { background: linear-gradient(135deg,#0E1420 0%,#080C16 100%); }
+    .g5 { background: linear-gradient(135deg,#1A1506 0%,#0E0D02 100%); }
+    .g6 { background: linear-gradient(135deg,#141020 0%,#0A0812 100%); }
+    .gal-cf {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.012) 0, rgba(255,255,255,.012) 1px, transparent 1px, transparent 50%),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.012) 0, rgba(255,255,255,.012) 1px, transparent 1px, transparent 50%);
+      background-size: 7px 7px;
+    }
+    .gal-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: rgba(232,194,16,.0); transition: background .2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gal-tile:hover .gal-overlay { background: rgba(232,194,16,.15); }
+    .gal-overlay svg { opacity: 0; transition: opacity .2s; }
+    .gal-tile:hover .gal-overlay svg { opacity: 1; }
+    .gal-tag {
+      position: absolute; bottom: 10px; left: 10px; z-index: 3;
+      font-size: 10px; font-weight: 700; color: var(--accent);
+      letter-spacing: .08em; text-transform: uppercase;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
+      padding: 4px 8px; border-radius: 3px;
+    }
+
+    /* === CTA YELLOW (inverted) === */
+    .cta-y { background: var(--accent); padding: 90px 40px; text-align: center; position: relative; overflow: hidden; }
+    .cta-y-giant {
+      position: absolute; font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(100px,18vw,220px); color: rgba(0,0,0,.06);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      white-space: nowrap; pointer-events: none;
+    }
+    .cta-y-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .cty-tag { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(0,0,0,.5); font-weight: 700; margin-bottom: 16px; }
+    .cty-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px,8vw,100px); color: #0A0A0A; line-height: 1; margin-bottom: 18px; }
+    .cty-p { font-size: 15px; color: rgba(0,0,0,.6); max-width: 500px; margin: 0 auto 36px; line-height: 1.7; }
+    .cty-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-dark {
+      padding: 15px 40px; background: #0A0A0A; color: var(--accent);
+      border: none; border-radius: 3px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: .1em;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-dark:hover { background: #1A1A1A; transform: translateY(-2px); }
+    .btn-outline-dark {
+      padding: 15px 40px; background: transparent; color: #0A0A0A;
+      border: 2px solid rgba(0,0,0,.3); border-radius: 3px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: .1em;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-outline-dark:hover { border-color: rgba(0,0,0,.7); }
+
+    /* === FOOTER === */
+    footer { background: #040404; border-top: 1px solid rgba(255,255,255,.05); }
+    .foot-main {
+      max-width: 1440px; margin: 0 auto; padding: 60px 40px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+    }
+    .foot-logo-b { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: .1em; color: #555; margin-bottom: 14px; }
+    .foot-logo-b span { color: var(--accent); }
+    .foot-desc { font-size: 14px; color: #3A3A3A; line-height: 1.75; max-width: 260px; margin-bottom: 24px; }
+    .foot-soc { display: flex; gap: 9px; }
+    .fsb {
+      width: 36px; height: 36px; border-radius: 7px; border: 1px solid rgba(255,255,255,.08);
+      background: none; color: #444; cursor: pointer; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; transition: all .2s;
+    }
+    .fsb:hover { border-color: var(--accent); color: var(--accent); }
+    .fch { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #444; margin-bottom: 18px; }
+    .fcl { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .fcl a { font-size: 14px; color: #3A3A3A; transition: color .2s; }
+    .fcl a:hover { color: #888; }
+    .foot-bot {
+      max-width: 1440px; margin: 0 auto; padding: 20px 40px;
+      border-top: 1px solid rgba(255,255,255,.04);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .foot-bot p { font-size: 12px; color: #333; }
+    .pay-row { display: flex; gap: 7px; }
+    .pay-ic { width: 44px; height: 26px; border-radius: 4px; background: rgba(255,255,255,.05); font-size: 9px; font-weight: 800; color: #555; display: flex; align-items: center; justify-content: center; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) { .prod-grid { grid-template-columns: repeat(2,1fr); } .foot-main { grid-template-columns: 1fr 1fr; gap: 40px; } .foot-main > div:first-child { grid-column: span 2; } }
+    @media (max-width: 900px) { .cat-strip { grid-template-columns: repeat(3,1fr); } .build-inner { grid-template-columns: 1fr; } .rev-grid { grid-template-columns: 1fr; } .gal-grid { grid-template-columns: repeat(3,1fr); } .hero-inner { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 58px; }
+      .nav-links { display: none; } .hamburger { display: flex; }
+      .hero-inner { padding: 50px 20px; text-align: center; }
+      .hero-vis { order: -1; max-width: 280px; margin: 0 auto; }
+      .hero-badge { margin: 0 auto 22px; }
+      .hero-p { margin: 0 auto 36px; }
+      .hero-btns { justify-content: center; }
+      .model-inner { padding: 0 20px; }
+      .cat-strip { grid-template-columns: repeat(2,1fr); }
+      .wrap { padding: 60px 20px; }
+      .build-inner { padding: 60px 20px; }
+      .gal-grid { grid-template-columns: repeat(2,1fr); }
+      .cta-y { padding: 60px 20px; }
+      .foot-main { grid-template-columns: 1fr; padding: 40px 20px; }
+      .foot-main > div:first-child { grid-column: span 1; }
+      .foot-bot { padding: 18px 20px; flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 480px) { .prod-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- ANN BAR -->
+<div class="ann">✦ &nbsp; Hand-Built to Order &nbsp; ✦ &nbsp; C5 · C6 · C7 · C8 Corvette &nbsp; ✦ &nbsp; Free US Shipping $300+ &nbsp; ✦</div>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <div class="logo-b">VETTE <span>CRAFT</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Steering Wheels</a></li>
+      <li><a href="#">Shift Knobs</a></li>
+      <li><a href="#">Handbrakes</a></li>
+      <li><a href="#">Emblems</a></li>
+      <li><a href="#">Custom Order</a></li>
+    </ul>
+    <div class="nav-r">
+      <button class="ni">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <button class="nav-cart">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        Cart (0)
+      </button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-cf-bg"></div>
+  <div class="hero-giant">CORVETTE</div>
+  <div class="hero-stripe hero-s1"></div>
+  <div class="hero-stripe hero-s2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="badge-dot"></span> Handcrafted to Order · Since 2018</div>
+      <h1 class="hero-h1">THE<br><span class="y">CORVETTE</span><br>STANDARD</h1>
+      <p class="hero-p">
+        Premium interior accessories built for the world's most iconic American sports car.
+        <strong>Carbon fiber</strong>, <strong>Nappa leather</strong>, genuine <strong>Alcantara</strong> —
+        every piece made to your exact configuration.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-y">Shop Now</button>
+        <button class="btn-outline-w">Configure Yours →</button>
+      </div>
+    </div>
+
+    <div class="hero-vis">
+      <div class="hero-frame">
+        <div class="hero-frame-corner">C8 Ready</div>
+        <svg width="68%" height="68%" viewBox="0 0 400 400" style="position:relative;z-index:1;">
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#1E1E1E" stroke-width="28"/>
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#E8C210" stroke-width="28" stroke-dasharray="82 196" opacity=".65"/>
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#E8C210" stroke-width="28" stroke-dasharray="82 196" stroke-dashoffset="-278" opacity=".65"/>
+          <line x1="200" y1="200" x2="200" y2="40" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="62" y2="302" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="338" y2="302" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="200" y2="40" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="62" y2="302" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="338" y2="302" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="200" cy="200" r="32" fill="#141414" stroke="#2A2A2A" stroke-width="2"/>
+          <circle cx="200" cy="200" r="18" fill="#E8C210" opacity=".8"/>
+          <circle cx="200" cy="200" r="8" fill="#111"/>
+          <rect x="136" y="192" width="26" height="14" rx="5" fill="#1C1C1C" stroke="#333" stroke-width="1.5"/>
+          <rect x="238" y="192" width="26" height="14" rx="5" fill="#1C1C1C" stroke="#333" stroke-width="1.5"/>
+        </svg>
+        <div class="hero-frame-label">
+          <div><div class="hfl-name">Carbon + Nappa Steering Wheel</div><div class="hfl-sub">Gloss Carbon · Yellow Thread</div></div>
+          <div class="hfl-price">$520</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL SELECTOR -->
+<div class="model-bar">
+  <div class="model-inner">
+    <span class="model-lbl">Select Your Corvette:</span>
+    <button class="model-btn">C5 (1997–2004)</button>
+    <button class="model-btn">C6 (2005–2013)</button>
+    <button class="model-btn">C7 (2014–2019)</button>
+    <button class="model-btn act">C8 (2020–Present)</button>
+  </div>
+</div>
+
+<!-- CATEGORY STRIP -->
+<div class="cat-strip-wrap">
+  <div class="cat-strip">
+    <div class="cat-item"><div class="cat-n">01</div><div class="cat-nm">Steering Wheels</div><div class="cat-ct">11 configs · 3 materials</div></div>
+    <div class="cat-item"><div class="cat-n">02</div><div class="cat-nm">Shift Knobs</div><div class="cat-ct">5 types · multiple finishes</div></div>
+    <div class="cat-item"><div class="cat-n">03</div><div class="cat-nm">Handbrakes</div><div class="cat-ct">Grip · Cover · Button</div></div>
+    <div class="cat-item"><div class="cat-n">04</div><div class="cat-nm">Horn Pads</div><div class="cat-ct">Round · T-Shape</div></div>
+    <div class="cat-item"><div class="cat-n">05</div><div class="cat-nm">SW Emblems</div><div class="cat-ct">Z06 · ZR1 · Racing</div></div>
+    <div class="cat-item"><div class="cat-n">06</div><div class="cat-nm">Side Skirts</div><div class="cat-ct">Carbon · Gloss · Matte</div></div>
+  </div>
+</div>
+
+<!-- BUILD SECTION -->
+<div class="build-section">
+  <div class="build-inner">
+    <div>
+      <div class="build-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Build Your Custom Set
+      </div>
+      <h2 class="build-h">Configure<br>Every Detail</h2>
+      <p class="build-p">Every piece is made to your exact specification. Choose your material, carbon finish, and thread color — and we'll build it by hand.</p>
+      <div class="build-steps">
+        <div class="build-step"><div class="step-num">1</div><div class="step-text"><strong>Select a product</strong> — steering wheel, shift knob, handbrake, or emblem</div></div>
+        <div class="build-step"><div class="step-num">2</div><div class="step-text"><strong>Choose materials</strong> — carbon type, leather finish, Alcantara</div></div>
+        <div class="build-step"><div class="step-num">3</div><div class="step-text"><strong>Pick thread color</strong> — yellow, red, white, blue, or match your interior</div></div>
+      </div>
+      <button class="btn-y">Start Configuring</button>
+    </div>
+
+    <div class="build-vis">
+      <div class="bv-title">Carbon Finish</div>
+      <div class="swatches-row">
+        <div class="sw sw-black active" title="Black Carbon"></div>
+        <div class="sw sw-red" title="Red Carbon"></div>
+        <div class="sw sw-blue" title="Blue Carbon"></div>
+        <div class="sw sw-gold" title="Gold Carbon"></div>
+        <div class="sw sw-white" title="White Carbon"></div>
+        <div class="sw sw-green" title="Green Carbon"></div>
+      </div>
+      <div class="bv-title" style="margin-top:8px;">Thread Color</div>
+      <div class="thread-row">
+        <div class="thr t-y active" title="Yellow"></div>
+        <div class="thr t-r" title="Red"></div>
+        <div class="thr t-w" title="White"></div>
+        <div class="thr t-b" title="Blue"></div>
+        <div class="thr t-s" title="Silver"></div>
+        <div class="thr t-or" title="Orange"></div>
+      </div>
+      <div class="bvp-preview" style="margin-top:20px;">
+        <div class="bvp-label">Current Selection</div>
+        <div class="bvp-config">Gloss Black Carbon · Yellow Thread</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED PRODUCTS -->
+<div class="products-section">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;">
+      <div><div class="sec-eye">Most Popular</div><div class="sec-h">Featured Products</div></div>
+      <a href="#" style="color:var(--accent);font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid var(--accent);padding-bottom:2px;">All Products →</a>
+    </div>
+    <div class="prod-grid">
+
+      <div class="pc">
+        <div class="pi">
+          <svg class="pi-icon" width="110" height="110" viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="160" fill="none" stroke="#555" stroke-width="22"/>
+            <circle cx="200" cy="200" r="160" fill="none" stroke="#E8C210" stroke-width="22" stroke-dasharray="75 180" opacity=".7"/>
+            <line x1="200" y1="200" x2="200" y2="48" stroke="#444" stroke-width="11" stroke-linecap="round"/>
+            <line x1="200" y1="200" x2="66" y2="292" stroke="#444" stroke-width="11" stroke-linecap="round"/>
+            <line x1="200" y1="200" x2="334" y2="292" stroke="#444" stroke-width="11" stroke-linecap="round"/>
+            <circle cx="200" cy="200" r="28" fill="#333"/>
+          </svg>
+          <div class="pi-tag">Bestseller</div>
+          <div class="pi-fav">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pb-cat">Steering Wheel</div>
+          <div class="pb-name">Carbon + Nappa Leather Wrap</div>
+          <div class="pb-var">Gloss Carbon · Custom Thread Color</div>
+          <div class="pb-foot">
+            <div class="pb-price"><span class="fr">from</span>$480</div>
+            <button class="add-b"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pi">
+          <svg class="pi-icon" width="88" height="88" viewBox="0 0 200 200">
+            <ellipse cx="100" cy="55" rx="50" ry="40" fill="none" stroke="#555" stroke-width="9"/>
+            <ellipse cx="100" cy="55" rx="50" ry="40" fill="none" stroke="#E8C210" stroke-width="9" stroke-dasharray="55 115" opacity=".7"/>
+            <rect x="90" y="93" width="20" height="68" rx="8" fill="none" stroke="#444" stroke-width="9"/>
+            <line x1="100" y1="161" x2="100" y2="188" stroke="#444" stroke-width="11" stroke-linecap="round"/>
+          </svg>
+          <div class="pi-tag">New</div>
+          <div class="pi-fav">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pb-cat">Shift Knob</div>
+          <div class="pb-name">Tall Drift-Style Shift Knob</div>
+          <div class="pb-var">Carbon / Alcantara / Leather · 6 configs</div>
+          <div class="pb-foot">
+            <div class="pb-price"><span class="fr">from</span>$220</div>
+            <button class="add-b"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pi">
+          <svg class="pi-icon" width="88" height="88" viewBox="0 0 200 200">
+            <rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#555" stroke-width="9"/>
+            <rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#E8C210" stroke-width="9" stroke-dasharray="70 165" opacity=".7"/>
+            <circle cx="100" cy="18" r="11" fill="none" stroke="#444" stroke-width="7"/>
+            <rect x="38" y="135" width="124" height="18" rx="9" fill="none" stroke="#444" stroke-width="7"/>
+          </svg>
+          <div class="pi-fav">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pb-cat">Handbrake</div>
+          <div class="pb-name">Carbon + Alcantara Handbrake</div>
+          <div class="pb-var">Matte Carbon · Yellow Stitching</div>
+          <div class="pb-foot">
+            <div class="pb-price"><span class="fr">from</span>$185</div>
+            <button class="add-b"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pi">
+          <svg class="pi-icon" width="96" height="96" viewBox="0 0 200 200">
+            <polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#555" stroke-width="9"/>
+            <polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#E8C210" stroke-width="9" stroke-dasharray="65 165" opacity=".7"/>
+            <text x="100" y="118" font-size="36" fill="#555" text-anchor="middle" font-weight="900" font-family="sans-serif">Z06</text>
+          </svg>
+          <div class="pi-tag">Custom</div>
+          <div class="pi-fav">♡</div>
+        </div>
+        <div class="pb">
+          <div class="pb-cat">SW Emblem</div>
+          <div class="pb-name">Z06 Carbon Steering Emblem</div>
+          <div class="pb-var">Gloss or Matte · Multiple Colors</div>
+          <div class="pb-foot">
+            <div class="pb-price"><span class="fr">from</span>$95</div>
+            <button class="add-b"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="reviews-section">
+  <div class="wrap">
+    <div style="margin-bottom:52px;">
+      <div class="sec-eye">Customer Reviews</div>
+      <div class="sec-h">What Owners Say</div>
+    </div>
+    <div class="rev-grid">
+      <div class="rc">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Incredible quality. My C8 interior looks factory-premium now. The carbon and Alcantara steering wheel is a conversation starter every time someone gets in. Build quality is better than anything I've seen from the big brands."</p>
+        <div class="rc-author">
+          <div class="rc-avatar">M</div>
+          <div><div class="rc-name">Mike R.</div><div class="rc-car">2023 Corvette C8 Stingray · Z51</div></div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Worth every penny. I've tried the cheap alternatives — nothing compares. The Nappa leather shift knob feels incredible after 8 months of daily driving. The yellow stitching on black carbon is exactly what I wanted."</p>
+        <div class="rc-author">
+          <div class="rc-avatar">D</div>
+          <div><div class="rc-name">Dave T.</div><div class="rc-car">2021 Corvette C8 · Yellow jacket edition</div></div>
+        </div>
+      </div>
+      <div class="rc">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Ordered the full set — steering wheel, shift knob, and handbrake. The attention to detail is on another level. Communication was great, lead time was exactly as stated. My Z06 interior is finally complete."</p>
+        <div class="rc-author">
+          <div class="rc-avatar">J</div>
+          <div><div class="rc-name">Jason K.</div><div class="rc-car">2023 Corvette C8 Z06 · Carbon pack</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div style="max-width:1440px;margin:0 auto;padding:0 40px 88px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;">
+      <div><div class="sec-eye">Customer Installs</div><div class="sec-h">In the Wild</div></div>
+      <a href="#" style="color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid var(--accent);padding-bottom:2px;">View All →</a>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-tile"><div class="gal-bg g1"></div><div class="gal-cf"></div><div class="gal-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8C210" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="gal-tag">SW · Carbon</div></div>
+      <div class="gal-tile"><div class="gal-bg g2"></div><div class="gal-cf"></div><div class="gal-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8C210" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="gal-tag">Knob · Nappa</div></div>
+      <div class="gal-tile"><div class="gal-bg g3"></div><div class="gal-cf"></div><div class="gal-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8C210" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="gal-tag">HB · Alcantara</div></div>
+      <div class="gal-tile"><div class="gal-bg g4"></div><div class="gal-cf"></div><div class="gal-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8C210" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="gal-tag">Full Set · C8</div></div>
+      <div class="gal-tile"><div class="gal-bg g5"></div><div class="gal-cf"></div><div class="gal-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8C210" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="gal-tag">Emblem · ZR1</div></div>
+      <div class="gal-tile"><div class="gal-bg g6"></div><div class="gal-cf"></div><div class="gal-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8C210" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="gal-tag">SW · Red Carbon</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA YELLOW INVERSION -->
+<div class="cta-y">
+  <div class="cta-y-giant">CUSTOM</div>
+  <div class="cta-y-inner">
+    <div class="cty-tag">Built For You</div>
+    <div class="cty-h">Configure<br>Your Set</div>
+    <p class="cty-p">Tell us your Corvette generation, material preferences, and thread color. We'll hand-build it and ship it directly to your door.</p>
+    <div class="cty-btns">
+      <button class="btn-dark">Start Custom Order</button>
+      <button class="btn-outline-dark">Browse Catalog</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-main">
+    <div>
+      <div class="foot-logo-b">VETTE <span>CRAFT</span></div>
+      <p class="foot-desc">Premium handmade interior accessories for Chevrolet Corvette enthusiasts. Every piece built to order — carbon fiber, Nappa leather, and genuine Alcantara.</p>
+      <div class="foot-soc">
+        <button class="fsb">ig</button><button class="fsb">fb</button>
+        <button class="fsb">yt</button><button class="fsb">in</button>
+      </div>
+    </div>
+    <div><div class="fch">Products</div><ul class="fcl"><li><a href="#">Steering Wheels</a></li><li><a href="#">Shift Knobs</a></li><li><a href="#">Handbrakes</a></li><li><a href="#">Horn Pads</a></li><li><a href="#">Emblems</a></li><li><a href="#">Side Skirts</a></li></ul></div>
+    <div><div class="fch">Information</div><ul class="fcl"><li><a href="#">About Us</a></li><li><a href="#">Materials Guide</a></li><li><a href="#">Custom Orders</a></li><li><a href="#">Installation</a></li><li><a href="#">FAQ</a></li></ul></div>
+    <div><div class="fch">Support</div><ul class="fcl"><li><a href="#">Shipping & Returns</a></li><li><a href="#">Track Order</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Warranty</a></li></ul></div>
+  </div>
+  <div class="foot-bot">
+    <p>© 2025 Vette Craft. All rights reserved. · Not affiliated with General Motors or Chevrolet.</p>
+    <div class="pay-row"><div class="pay-ic">VISA</div><div class="pay-ic">MC</div><div class="pay-ic">AMEX</div><div class="pay-ic">PP</div></div>
+  </div>
+</footer>
+
+<script>
+  // Model selector interactivity
+  document.querySelectorAll('.model-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('act'));
+      btn.classList.add('act');
+    });
+  });
+  // Swatch selection
+  document.querySelectorAll('.sw').forEach(sw => {
+    sw.addEventListener('click', () => {
+      sw.closest('.swatches-row').querySelectorAll('.sw').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+    });
+  });
+  document.querySelectorAll('.thr').forEach(t => {
+    t.addEventListener('click', () => {
+      t.closest('.thread-row').querySelectorAll('.thr').forEach(s => s.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

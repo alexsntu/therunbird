@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORVETTELAB — Premium Corvette Accessories</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0D0D0D;
+            color: #FFFFFF;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* ── NAVIGATION ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 22px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.92), transparent);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+        .logo span { color: #CC0000; }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #BBBBBB;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.25s;
+        }
+        .nav-links a:hover { color: #CC0000; }
+
+        .nav-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        .nav-right a {
+            color: #BBBBBB;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .cart-btn {
+            background: #CC0000;
+            color: #fff !important;
+            padding: 10px 26px;
+            border-radius: 2px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 68% 50%, rgba(180,0,0,0.18) 0%, transparent 55%),
+                linear-gradient(135deg, #080808 0%, #181818 60%, #0D0D0D 100%);
+        }
+
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, transparent 20%, black 80%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 920px;
+            padding: 0 40px;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #CC0000;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+        .eyebrow::before, .eyebrow::after {
+            content: '';
+            height: 1px;
+            width: 56px;
+            background: #CC0000;
+        }
+
+        .hero-title {
+            font-size: 88px;
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+        .hero-title .red { color: #CC0000; }
+
+        .hero-sub {
+            font-size: 15px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 52px;
+            line-height: 1.9;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #CC0000;
+            color: #fff;
+            padding: 17px 52px;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 2px;
+            transition: background 0.25s;
+        }
+        .btn-primary:hover { background: #AA0000; }
+
+        .btn-ghost {
+            background: transparent;
+            color: #fff;
+            padding: 17px 52px;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 2px;
+            transition: border-color 0.25s;
+        }
+        .btn-ghost:hover { border-color: #fff; }
+
+        .hero-stats {
+            position: absolute;
+            bottom: 60px;
+            left: 64px;
+            display: flex;
+            gap: 56px;
+        }
+        .stat-num {
+            font-size: 40px;
+            font-weight: 900;
+            color: #CC0000;
+            line-height: 1;
+        }
+        .stat-lbl {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #555;
+            margin-top: 6px;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 48px;
+            right: 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #444;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .scroll-bar {
+            width: 1px;
+            height: 56px;
+            background: linear-gradient(to bottom, #CC0000, transparent);
+        }
+
+        /* ── SECTION COMMON ── */
+        .section { padding: 100px 64px; }
+
+        .sec-head { text-align: center; margin-bottom: 64px; }
+        .sec-eyebrow {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #CC0000;
+            margin-bottom: 14px;
+        }
+        .sec-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+        .sec-sub {
+            color: #555;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-top: 14px;
+        }
+
+        /* ── CATEGORY GRID ── */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+        }
+
+        .cat-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #141414;
+            min-height: 280px;
+            display: flex;
+        }
+
+        .cat-card.wide {
+            grid-column: span 2;
+            min-height: 360px;
+        }
+
+        .card-bg {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.6s ease;
+        }
+        .cat-card:hover .card-bg { transform: scale(1.06); }
+
+        .card-dark {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+        }
+
+        .card-glyph {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            opacity: 0.08;
+        }
+        .cat-card.wide .card-glyph { font-size: 160px; }
+
+        .card-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 28px 32px;
+        }
+        .card-tag {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #CC0000;
+            margin-bottom: 8px;
+        }
+        .card-name {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .cat-card.wide .card-name { font-size: 36px; }
+        .card-meta {
+            font-size: 11px;
+            color: #777;
+            letter-spacing: 0.5px;
+        }
+
+        .card-arr {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .cat-card:hover .card-arr {
+            background: #CC0000;
+            border-color: #CC0000;
+        }
+
+        /* ── BESTSELLERS ── */
+        .prod-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .prod-card {
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .prod-card:hover {
+            border-color: rgba(204,0,0,0.5);
+            transform: translateY(-5px);
+        }
+
+        .prod-thumb {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #1C1C1C, #262626);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            position: relative;
+            overflow: hidden;
+        }
+        .prod-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center bottom, rgba(204,0,0,0.08), transparent 70%);
+        }
+
+        .prod-info { padding: 20px; }
+        .prod-cat {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #CC0000;
+            margin-bottom: 7px;
+        }
+        .prod-name {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.25;
+        }
+        .prod-mats {
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 18px;
+        }
+        .prod-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .prod-price {
+            font-size: 19px;
+            font-weight: 900;
+            color: #CC0000;
+        }
+        .prod-link {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+        .prod-link:hover { color: #fff; }
+
+        /* ── MATERIALS ── */
+        .mat-section {
+            background: #101010;
+            padding: 100px 64px;
+        }
+        .mat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 64px;
+        }
+        .mat-card {
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            padding: 48px 36px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .mat-card:hover { border-color: rgba(204,0,0,0.4); }
+
+        .mat-icon {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #222, #1A1A1A);
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .mat-name {
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+        .mat-desc {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.75;
+        }
+
+        /* ── CUSTOM SECTION ── */
+        .custom-section {
+            padding: 100px 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .custom-text .sec-eyebrow,
+        .custom-text .sec-title { text-align: left; }
+        .custom-text .sec-title {
+            font-size: 56px;
+            margin-bottom: 24px;
+        }
+        .custom-text p {
+            color: #777;
+            line-height: 1.85;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .custom-opts {
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .custom-opt {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 3px;
+            font-size: 13px;
+            color: #AAA;
+            letter-spacing: 0.5px;
+        }
+        .opt-dot {
+            width: 7px;
+            height: 7px;
+            background: #CC0000;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .custom-visual {
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 96px;
+            position: relative;
+            overflow: hidden;
+        }
+        .custom-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(204,0,0,0.12), transparent 70%);
+        }
+
+        /* ── TRUST BAR ── */
+        .trust-bar {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: #0F0F0F;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        .trust-item {
+            padding: 52px 40px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+        .trust-item:last-child { border-right: none; }
+        .trust-ico { font-size: 26px; margin-bottom: 14px; }
+        .trust-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .trust-desc { font-size: 12px; color: #555; line-height: 1.5; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #080808;
+            padding: 88px 64px 44px;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 64px;
+        }
+        .footer-logo {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 16px;
+        }
+        .footer-logo span { color: #CC0000; }
+        .footer-desc {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+        .footer-h {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            color: #444;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.25s;
+        }
+        .footer-links a:hover { color: #fff; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copy { color: #333; font-size: 12px; }
+        .footer-social { display: flex; gap: 12px; }
+        .soc-link {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #555;
+            text-decoration: none;
+            transition: border-color 0.25s, color 0.25s;
+        }
+        .soc-link:hover { border-color: #CC0000; color: #CC0000; }
+    </style>
+</head>
+<body>
+
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <div class="logo">CORVETTE<span>LAB</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Steering Wheels</a></li>
+            <li><a href="#">Shift Knobs</a></li>
+            <li><a href="#">Handbrake</a></li>
+            <li><a href="#">Emblems</a></li>
+            <li><a href="#">Horn Pads</a></li>
+            <li><a href="#">Side Skirts</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="#">🔍</a>
+            <a href="#" class="cart-btn">Cart (0)</a>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid-lines"></div>
+
+        <div class="hero-content">
+            <div class="eyebrow">Premium Corvette Accessories · USA</div>
+            <h1 class="hero-title">
+                BUILT FOR<br>THE <span class="red">CORVETTE</span>
+            </h1>
+            <p class="hero-sub">
+                Handcrafted in Carbon Fiber · Nappa Leather · Alcantara®<br>
+                Custom made for every Corvette generation
+            </p>
+            <div class="hero-cta">
+                <a href="#" class="btn-primary">Shop All Products</a>
+                <a href="#" class="btn-ghost">View Categories</a>
+            </div>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <div class="stat-num">11+</div>
+                <div class="stat-lbl">Steering Wheel Configs</div>
+            </div>
+            <div>
+                <div class="stat-num">6</div>
+                <div class="stat-lbl">Product Categories</div>
+            </div>
+            <div>
+                <div class="stat-num">100%</div>
+                <div class="stat-lbl">Handcrafted</div>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-bar"></div>
+            Scroll
+        </div>
+    </section>
+
+    <!-- ── CATEGORIES ── -->
+    <section class="section" style="padding-bottom: 0;">
+        <div class="sec-head">
+            <div class="sec-eyebrow">Product Categories</div>
+            <h2 class="sec-title">Everything Your Corvette Deserves</h2>
+            <p class="sec-sub">From the steering wheel to the side skirts — crafted to perfection</p>
+        </div>
+
+        <div class="cat-grid">
+            <!-- WIDE -->
+            <div class="cat-card wide">
+                <div class="card-bg" style="background: linear-gradient(135deg, #1A0808, #2E0E0E);"></div>
+                <div class="card-dark"></div>
+                <div class="card-glyph">🏎️</div>
+                <div class="card-body">
+                    <div class="card-tag">Most Popular</div>
+                    <div class="card-name">Steering Wheels</div>
+                    <div class="card-meta">11 configurations · Carbon · Nappa · Alcantara · Custom anatomy</div>
+                </div>
+                <div class="card-arr">→</div>
+            </div>
+
+            <div class="cat-card">
+                <div class="card-bg" style="background: linear-gradient(135deg, #0A0A1C, #10102E);"></div>
+                <div class="card-dark"></div>
+                <div class="card-glyph">⚙️</div>
+                <div class="card-body">
+                    <div class="card-tag">Custom</div>
+                    <div class="card-name">Shift Knobs</div>
+                    <div class="card-meta">5 styles · Ball · Tall · Standard · Drift</div>
+                </div>
+                <div class="card-arr">→</div>
+            </div>
+
+            <div class="cat-card">
+                <div class="card-bg" style="background: linear-gradient(135deg, #0A1A0A, #102410);"></div>
+                <div class="card-dark"></div>
+                <div class="card-glyph">🎯</div>
+                <div class="card-body">
+                    <div class="card-tag">Performance</div>
+                    <div class="card-name">Handbrake</div>
+                    <div class="card-meta">Carbon · Leather · Alcantara · Button</div>
+                </div>
+                <div class="card-arr">→</div>
+            </div>
+
+            <div class="cat-card">
+                <div class="card-bg" style="background: linear-gradient(135deg, #181208, #241A08);"></div>
+                <div class="card-dark"></div>
+                <div class="card-glyph">⭐</div>
+                <div class="card-body">
+                    <div class="card-tag">Signature</div>
+                    <div class="card-name">Emblems</div>
+                    <div class="card-meta">Z06 · ZR1 · Racing · Punisher · Skull · Flags</div>
+                </div>
+                <div class="card-arr">→</div>
+            </div>
+
+            <div class="cat-card">
+                <div class="card-bg" style="background: linear-gradient(135deg, #180818, #240E24);"></div>
+                <div class="card-dark"></div>
+                <div class="card-glyph">🎛️</div>
+                <div class="card-body">
+                    <div class="card-tag">Interior</div>
+                    <div class="card-name">Horn Pads</div>
+                    <div class="card-meta">Round & T-shape · Nappa · Alcantara · Mix</div>
+                </div>
+                <div class="card-arr">→</div>
+            </div>
+
+            <div class="cat-card">
+                <div class="card-bg" style="background: linear-gradient(135deg, #101010, #1E1E1E);"></div>
+                <div class="card-dark"></div>
+                <div class="card-glyph">🚗</div>
+                <div class="card-body">
+                    <div class="card-tag">Exterior</div>
+                    <div class="card-name">Side Skirts</div>
+                    <div class="card-meta">Carbon Fiber · Gloss & Matte · Custom decal</div>
+                </div>
+                <div class="card-arr">→</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── BESTSELLERS ── -->
+    <section class="section">
+        <div class="sec-head">
+            <div class="sec-eyebrow">Bestsellers</div>
+            <h2 class="sec-title">Most Wanted</h2>
+            <p class="sec-sub">Top configurations chosen by Corvette enthusiasts</p>
+        </div>
+
+        <div class="prod-grid">
+            <div class="prod-card">
+                <div class="prod-thumb">🏎️</div>
+                <div class="prod-info">
+                    <div class="prod-cat">Steering Wheel</div>
+                    <div class="prod-name">Gloss Carbon + Alcantara</div>
+                    <div class="prod-mats">Carbon fiber · Alcantara grip · Custom thread</div>
+                    <div class="prod-foot">
+                        <div class="prod-price">From $599</div>
+                        <a href="#" class="prod-link">Configure →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prod-card">
+                <div class="prod-thumb">⚙️</div>
+                <div class="prod-info">
+                    <div class="prod-cat">Shift Knob</div>
+                    <div class="prod-name">Ball Knob · Full Carbon</div>
+                    <div class="prod-mats">Carbon fiber · Custom numeral color</div>
+                    <div class="prod-foot">
+                        <div class="prod-price">From $249</div>
+                        <a href="#" class="prod-link">Configure →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prod-card">
+                <div class="prod-thumb">🎛️</div>
+                <div class="prod-info">
+                    <div class="prod-cat">Shift Pattern</div>
+                    <div class="prod-name">Carbon Shift Cap</div>
+                    <div class="prod-mats">ZR1 · Z06 · 10 numeral color options</div>
+                    <div class="prod-foot">
+                        <div class="prod-price">From $89</div>
+                        <a href="#" class="prod-link">Configure →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prod-card">
+                <div class="prod-thumb">⭐</div>
+                <div class="prod-info">
+                    <div class="prod-cat">Emblem</div>
+                    <div class="prod-name">Carbon Steering Emblem</div>
+                    <div class="prod-mats">Corvette Racing · Punisher · Skull · Flags</div>
+                    <div class="prod-foot">
+                        <div class="prod-price">From $149</div>
+                        <a href="#" class="prod-link">Configure →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── MATERIALS ── -->
+    <section class="mat-section">
+        <div class="sec-head">
+            <div class="sec-eyebrow">Our Materials</div>
+            <h2 class="sec-title">Crafted Without Compromise</h2>
+            <p class="sec-sub">Only the finest materials go into every build</p>
+        </div>
+
+        <div class="mat-grid">
+            <div class="mat-card">
+                <div class="mat-icon">◼</div>
+                <div class="mat-name">Carbon Fiber</div>
+                <div class="mat-desc">Aircraft-grade carbon in gloss and matte finish. Available in multiple colors: black, red, blue, gold, silver. Woven to last.</div>
+            </div>
+            <div class="mat-card">
+                <div class="mat-icon">◻</div>
+                <div class="mat-name">Nappa Leather</div>
+                <div class="mat-desc">Premium full-grain Nappa leather — smooth or perforated. Supple to the touch, engineered for years of daily driving. Any thread color.</div>
+            </div>
+            <div class="mat-card">
+                <div class="mat-icon">▣</div>
+                <div class="mat-name">Alcantara®</div>
+                <div class="mat-desc">Genuine Alcantara® — the same material used in Ferrari and Lamborghini. Superior grip at speed, unmatched tactile feel.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CUSTOMIZATION ── -->
+    <section class="custom-section">
+        <div class="custom-text">
+            <div class="sec-eyebrow">Made Your Way</div>
+            <h2 class="sec-title">FULLY CUSTOM.<br>EVERY TIME.</h2>
+            <p>Every product is built to order. You choose the material combination, carbon color, gloss or matte finish, and thread color. We build it exactly to spec.</p>
+            <p>No generic shelf products. No off-the-shelf compromises. Just your Corvette, your way.</p>
+            <div class="custom-opts">
+                <div class="custom-opt"><div class="opt-dot"></div>Carbon color: Black · Red · Blue · Gold · Silver</div>
+                <div class="custom-opt"><div class="opt-dot"></div>Carbon finish: Gloss or Matte — your choice</div>
+                <div class="custom-opt"><div class="opt-dot"></div>Thread color: Any color — matched to your interior</div>
+                <div class="custom-opt"><div class="opt-dot"></div>Anatomy modification included on all steering wheels</div>
+                <div class="custom-opt"><div class="opt-dot"></div>Decal options on Tall Knob & Side Skirts</div>
+            </div>
+        </div>
+
+        <div class="custom-visual">🏎️</div>
+    </section>
+
+    <!-- ── TRUST BAR ── -->
+    <div class="trust-bar">
+        <div class="trust-item">
+            <div class="trust-ico">✦</div>
+            <div class="trust-title">Handcrafted</div>
+            <div class="trust-desc">Every piece hand-built by skilled artisans</div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-ico">◉</div>
+            <div class="trust-title">Corvette-Specific</div>
+            <div class="trust-desc">Designed exclusively for Corvette fitment</div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-ico">◈</div>
+            <div class="trust-title">Free US Shipping</div>
+            <div class="trust-desc">Delivered anywhere in the continental USA</div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-ico">◆</div>
+            <div class="trust-title">Built to Order</div>
+            <div class="trust-desc">Your exact spec, every single time</div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-logo">CORVETTE<span>LAB</span></div>
+                <div class="footer-desc">Premium handcrafted accessories for Chevrolet Corvette enthusiasts across the USA. Carbon fiber, Nappa leather, and Alcantara® — built to your exact specifications, every time.</div>
+            </div>
+            <div>
+                <div class="footer-h">Products</div>
+                <ul class="footer-links">
+                    <li><a href="#">Steering Wheels</a></li>
+                    <li><a href="#">Horn Pads</a></li>
+                    <li><a href="#">Emblems</a></li>
+                    <li><a href="#">Shift Knobs</a></li>
+                    <li><a href="#">Handbrake</a></li>
+                    <li><a href="#">Side Skirts</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-h">Company</div>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">How It's Made</a></li>
+                    <li><a href="#">Reviews</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-h">Support</div>
+                <ul class="footer-links">
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2024 CorvetteeLab. All rights reserved. Not affiliated with General Motors or Chevrolet.</div>
+            <div class="footer-social">
+                <a href="#" class="soc-link">ig</a>
+                <a href="#" class="soc-link">fb</a>
+                <a href="#" class="soc-link">yt</a>
+                <a href="#" class="soc-link">tt</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

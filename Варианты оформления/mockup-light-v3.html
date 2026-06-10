@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VETTE CRAFT — Light V3: Ultra Minimal Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #FFFFFF;
+      --bg2:   #F8F8F6;
+      --bg3:   #F2F2F0;
+      --text:  #111111;
+      --mid:   #666666;
+      --muted: #ABABAB;
+      --acc:   #C8102E;
+      --dark:  #111111;
+      --bd:    #E5E5E5;
+      --bd2:   #CCCCCC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+    /* ── NAV ── */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bd);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 48px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-cg { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: .02em; }
+    .logo-cg em { color: var(--acc); font-style: italic; }
+    .nav-cg { display: flex; gap: 32px; list-style: none; }
+    .nav-cg a { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; transition: color .2s; }
+    .nav-cg a:hover { color: var(--text); }
+    .nav-r-cg { display: flex; align-items: center; gap: 16px; }
+    .ni-cg { width: 36px; height: 36px; border: 1px solid var(--bd); border-radius: 6px; background: none; color: var(--mid); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; }
+    .ni-cg:hover { border-color: var(--bd2); color: var(--text); }
+    .cart-cg { display: flex; align-items: center; gap: 7px; padding: 0 16px; height: 36px; border: 1.5px solid var(--text); border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; background: none; color: var(--text); transition: all .2s; }
+    .cart-cg:hover { background: var(--text); color: var(--bg); }
+    .ham-cg { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+    .ham-cg span { width: 20px; height: 1.5px; background: var(--text); display: block; }
+
+    /* ── HERO (centered gallery) ── */
+    .hero-cg {
+      min-height: 90vh; display: flex; align-items: center; justify-content: center;
+      padding: 100px 48px; background: var(--bg); text-align: center;
+    }
+    .hero-cg-inner { max-width: 700px; width: 100%; }
+    .hero-cg-label {
+      font-size: 10px; letter-spacing: .32em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 52px; display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .hero-cg-label::before, .hero-cg-label::after { content: ''; display: block; width: 28px; height: 1px; background: var(--bd2); }
+    .hero-prod-cg { width: clamp(220px, 36vw, 420px); margin: 0 auto 52px; }
+    .hero-h1-cg {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: clamp(52px, 7vw, 92px); line-height: .98;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .hero-h1-cg em { color: var(--acc); font-style: italic; }
+    .hero-p-cg { font-size: 15.5px; color: var(--mid); line-height: 1.8; margin-bottom: 36px; font-weight: 300; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .hero-p-cg strong { color: var(--text); font-weight: 500; }
+    .hero-btns-cg { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-fill { padding: 13px 32px; background: var(--text); color: #fff; border: none; border-radius: 3px; font-size: 13px; font-weight: 600; letter-spacing: .05em; cursor: pointer; transition: all .18s; }
+    .btn-fill:hover { background: #222; transform: translateY(-1px); }
+    .btn-bord { padding: 13px 32px; background: transparent; color: var(--text); border: 1.5px solid var(--bd2); border-radius: 3px; font-size: 13px; font-weight: 600; letter-spacing: .05em; cursor: pointer; transition: all .18s; }
+    .btn-bord:hover { border-color: var(--text); }
+    /* Rating below hero */
+    .hero-rating { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 36px; }
+    .hr-stars { color: var(--acc); font-size: 14px; letter-spacing: 2px; }
+    .hr-txt { font-size: 12px; color: var(--muted); }
+
+    /* ── MATERIALS TEXT STRIP ── */
+    .mat-strip {
+      border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd);
+      background: var(--bg2);
+    }
+    .mat-strip-inner {
+      max-width: 1280px; margin: 0 auto; padding: 22px 48px;
+      display: flex; align-items: center; justify-content: center; gap: 0;
+    }
+    .ms-item {
+      font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600;
+      color: var(--mid); letter-spacing: .04em; padding: 0 36px;
+      border-right: 1px solid var(--bd);
+    }
+    .ms-item:last-child { border-right: none; }
+    .ms-item strong { color: var(--text); font-weight: 700; }
+
+    /* ── CATEGORIES — clean white cards ── */
+    .cat-cg-section { background: var(--bg); }
+    .cat-cg-head { padding: 88px 0 48px; }
+    .cat-cg-eye { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); font-weight: 600; margin-bottom: 10px; }
+    .cat-cg-h { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(30px,4vw,50px); color: var(--text); }
+    .cat-cg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--bd); border: 1px solid var(--bd); }
+    .cm {
+      background: var(--bg); padding: 36px 32px 28px; cursor: pointer;
+      position: relative; overflow: hidden; transition: background .2s;
+      display: flex; flex-direction: column; min-height: 160px;
+    }
+    .cm:hover { background: var(--bg2); }
+    .cm-n { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 700; color: var(--bd); line-height: 1; margin-bottom: 14px; transition: color .2s; }
+    .cm:hover .cm-n { color: var(--bd2); }
+    .cm-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; letter-spacing: .01em; }
+    .cm-sub { font-size: 12px; color: var(--muted); }
+    .cm-arr { position: absolute; bottom: 20px; right: 24px; font-size: 18px; color: var(--bd2); opacity: 0; transform: translateX(-6px); transition: all .22s; }
+    .cm:hover .cm-arr { opacity: 1; transform: translateX(0); color: var(--text); }
+    .cat-cg-bot { height: 88px; }
+
+    /* ── PRODUCTS — horizontal landscape cards ── */
+    .prod-cg-section { background: var(--bg2); border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd); }
+    .prod-cg-head { padding: 88px 0 48px; display: flex; align-items: flex-end; justify-content: space-between; }
+    .prod-cg-eye { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); font-weight: 600; margin-bottom: 10px; }
+    .prod-cg-h { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(30px,4vw,50px); color: var(--text); }
+    .prod-cg-link { font-size: 12px; color: var(--text); font-weight: 600; border-bottom: 1px solid var(--bd2); padding-bottom: 2px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; transition: border-color .2s; }
+    .prod-cg-link:hover { border-color: var(--text); }
+    .prod-h-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .phc {
+      display: grid; grid-template-columns: 200px 1fr;
+      background: var(--bg); border: 1px solid var(--bd);
+      overflow: hidden; cursor: pointer; transition: border-color .22s, box-shadow .22s;
+    }
+    .phc:hover { border-color: var(--bd2); box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+    .phc-img {
+      background: var(--bg3); display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .phc-img svg { opacity: .3; }
+    .phc-badge {
+      position: absolute; top: 12px; left: 0; padding: 4px 10px;
+      background: var(--text); color: var(--bg);
+      font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .phc-body { padding: 24px; display: flex; flex-direction: column; }
+    .phc-cat { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .phc-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
+    .phc-desc { font-size: 13px; color: var(--mid); line-height: 1.65; margin-bottom: 14px; flex: 1; }
+    .phc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .phc-chip { padding: 4px 10px; border: 1px solid var(--bd); font-size: 11px; color: var(--mid); border-radius: 100px; }
+    .phc-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--bd); }
+    .phc-price { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--text); }
+    .phc-price .fr { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400; color: var(--muted); margin-right: 3px; }
+    .phc-cta { padding: 9px 18px; background: var(--acc); color: #fff; border: none; font-size: 12px; font-weight: 600; letter-spacing: .04em; cursor: pointer; transition: background .18s; border-radius: 3px; }
+    .phc-cta:hover { background: #A50D25; }
+    /* bottom spacer */
+    .prod-cg-bot { height: 88px; }
+
+    /* ── STATS (large centered) ── */
+    .stats-cg { border-top: 1px solid var(--bd); }
+    .stats-cg-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: stretch;
+    }
+    .scg {
+      flex: 1; padding: 72px 32px; text-align: center;
+      border-right: 1px solid var(--bd); background: var(--bg);
+    }
+    .scg:last-child { border-right: none; }
+    .scg-n {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700;
+      font-size: 60px; line-height: 1; color: var(--text); margin-bottom: 10px;
+    }
+    .scg-l { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── FEATURED FULL-STRIP (dark, different) ── */
+    .feat-strip { background: #111; }
+    .feat-inner {
+      max-width: 1280px; margin: 0 auto; padding: 88px 48px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .feat-vis { display: flex; justify-content: center; }
+    .feat-frame {
+      width: 100%; max-width: 420px; aspect-ratio: 1;
+      background: #1A1A1A; border-radius: 8px; border: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    }
+    .feat-frame::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .feat-frame svg { position: relative; z-index: 1; }
+    .feat-text-label { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); font-weight: 600; margin-bottom: 20px; }
+    .feat-h { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(36px,4.5vw,60px); line-height: 1.06; color: #F0EDE6; margin-bottom: 20px; }
+    .feat-h em { font-style: italic; color: var(--acc); }
+    .feat-p { font-size: 14.5px; color: #777; line-height: 1.8; margin-bottom: 28px; font-weight: 300; }
+    .feat-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .feat-spec { padding: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 4px; }
+    .feat-spec-label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #555; margin-bottom: 4px; }
+    .feat-spec-val { font-size: 14px; font-weight: 500; color: #ccc; }
+    .feat-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-acc { padding: 13px 30px; background: var(--acc); color: #fff; border: none; border-radius: 3px; font-size: 13px; font-weight: 600; letter-spacing: .04em; cursor: pointer; transition: all .18s; }
+    .btn-acc:hover { background: #A50D25; }
+    .btn-ghost-wh { padding: 13px 30px; background: transparent; color: #ccc; border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .18s; }
+    .btn-ghost-wh:hover { border-color: rgba(255,255,255,.4); color: #fff; }
+
+    /* ── TESTIMONIAL (single centered pullquote) ── */
+    .tc-section { padding: 120px 48px; text-align: center; background: var(--bg); }
+    .tc-sep { width: 48px; height: 1px; background: var(--bd); margin: 0 auto 40px; }
+    .tc-stars { font-size: 17px; letter-spacing: 4px; color: var(--acc); margin-bottom: 30px; }
+    .tc-text {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
+      font-size: clamp(22px, 3vw, 38px); line-height: 1.45; color: var(--text);
+      max-width: 860px; margin: 0 auto 30px;
+    }
+    .tc-author { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .tc-car { font-size: 11px; letter-spacing: .1em; color: var(--acc); margin-top: 4px; }
+    .tc-sep2 { width: 48px; height: 1px; background: var(--bd); margin: 40px auto 0; }
+    .tc-all { display: inline-block; margin-top: 48px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); border-bottom: 1px solid var(--bd2); padding-bottom: 2px; cursor: pointer; transition: color .2s; }
+    .tc-all:hover { color: var(--text); }
+
+    /* ── NEWSLETTER (minimal) ── */
+    .nl-section { background: var(--bg2); border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd); }
+    .nl-inner { max-width: 600px; margin: 0 auto; padding: 88px 48px; text-align: center; }
+    .nl-eye { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); font-weight: 600; margin-bottom: 16px; }
+    .nl-h { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: clamp(28px,4vw,46px); color: var(--text); margin-bottom: 14px; line-height: 1.1; }
+    .nl-h em { font-style: italic; }
+    .nl-p { font-size: 14px; color: var(--mid); margin-bottom: 32px; line-height: 1.65; }
+    .nl-form { display: flex; border: 1.5px solid var(--bd2); border-radius: 4px; overflow: hidden; max-width: 420px; margin: 0 auto 14px; }
+    .nl-inp { flex: 1; padding: 14px 18px; border: none; font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); outline: none; }
+    .nl-inp::placeholder { color: var(--muted); }
+    .nl-sub { padding: 14px 22px; background: var(--text); color: var(--bg); border: none; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; transition: background .18s; white-space: nowrap; }
+    .nl-sub:hover { background: #222; }
+    .nl-note { font-size: 11.5px; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { background: #111; }
+    .foot-cg {
+      max-width: 1280px; margin: 0 auto; padding: 64px 48px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px;
+    }
+    .foot-cg-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: #555; margin-bottom: 14px; }
+    .foot-cg-logo em { color: var(--acc); font-style: italic; }
+    .foot-cg-desc { font-size: 13px; color: #333; line-height: 1.75; max-width: 250px; margin-bottom: 22px; }
+    .foot-cg-soc { display: flex; gap: 8px; }
+    .scg-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.09); background: none; color: #444; cursor: pointer; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all .2s; }
+    .scg-btn:hover { border-color: var(--acc); color: var(--acc); }
+    .foot-cg-ch { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #444; margin-bottom: 16px; }
+    .foot-cg-cl { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .foot-cg-cl a { font-size: 13px; color: #2E2E2E; transition: color .2s; }
+    .foot-cg-cl a:hover { color: #888; }
+    .foot-cg-bot { max-width: 1280px; margin: 0 auto; padding: 20px 48px; border-top: 1px solid rgba(255,255,255,.04); display: flex; align-items: center; justify-content: space-between; }
+    .foot-cg-bot p { font-size: 11.5px; color: #2A2A2A; }
+    .pay-cg { display: flex; gap: 7px; }
+    .pic { width: 42px; height: 24px; border: 1px solid rgba(255,255,255,.08); font-size: 9px; font-weight: 800; color: #3A3A3A; display: flex; align-items: center; justify-content: center; border-radius: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) { .prod-h-grid { grid-template-columns: 1fr; } .foot-cg { grid-template-columns: 1fr 1fr; } .foot-cg > div:first-child { grid-column: span 2; } }
+    @media (max-width: 900px) { .cat-cg-grid { grid-template-columns: repeat(2,1fr); } .feat-inner { grid-template-columns: 1fr; } .stats-cg-inner { flex-wrap: wrap; } .scg { min-width: 50%; border-right: 1px solid var(--bd); border-bottom: 1px solid var(--bd); } .scg:nth-child(2n) { border-right: none; } }
+    @media (max-width: 768px) {
+      .nav-inner { padding: 0 24px; }
+      .nav-cg { display: none; }
+      .ham-cg { display: flex; }
+      .hero-cg { padding: 72px 24px; }
+      .wrap, .feat-inner { padding-left: 24px; padding-right: 24px; }
+      .mat-strip-inner { padding: 18px 24px; flex-wrap: wrap; justify-content: center; gap: 6px; }
+      .ms-item { border-right: none; padding: 4px 16px; }
+      .cat-cg-section .wrap { padding-left: 24px; padding-right: 24px; }
+      .cat-cg-grid { grid-template-columns: 1fr; }
+      .prod-cg-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .phc { grid-template-columns: 1fr; }
+      .phc-img { height: 200px; }
+      .tc-section { padding: 80px 24px; }
+      .nl-inner { padding: 64px 24px; }
+      .nl-form { flex-direction: column; border-radius: 4px; }
+      .nl-inp { border-radius: 4px 4px 0 0; }
+      .nl-sub { border-radius: 0 0 4px 4px; }
+      .foot-cg { grid-template-columns: 1fr; padding: 40px 24px; }
+      .foot-cg > div:first-child { grid-column: span 1; }
+      .foot-cg-bot { padding: 18px 24px; flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="nav-inner">
+    <div class="logo-cg">Vette <em>Craft</em></div>
+    <ul class="nav-cg">
+      <li><a href="#">Steering Wheels</a></li>
+      <li><a href="#">Shift Knobs</a></li>
+      <li><a href="#">Handbrakes</a></li>
+      <li><a href="#">Emblems</a></li>
+      <li><a href="#">Custom</a></li>
+    </ul>
+    <div class="nav-r-cg">
+      <button class="ni-cg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="cart-cg">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Bag (0)
+      </button>
+      <button class="ham-cg"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO — centered gallery composition -->
+<section class="hero-cg">
+  <div class="hero-cg-inner">
+    <div class="hero-cg-label">Handmade Corvette Accessories · C5 · C6 · C7 · C8</div>
+
+    <!-- Large centered product -->
+    <div class="hero-prod-cg">
+      <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- rim - neutral on white -->
+        <circle cx="250" cy="250" r="218" fill="none" stroke="#E0E0E0" stroke-width="30"/>
+        <!-- leather sections in red -->
+        <circle cx="250" cy="250" r="218" fill="none" stroke="#C8102E" stroke-width="30" stroke-dasharray="100 244" opacity=".5"/>
+        <circle cx="250" cy="250" r="218" fill="none" stroke="#C8102E" stroke-width="30" stroke-dasharray="100 244" stroke-dashoffset="-344" opacity=".5"/>
+        <!-- subtle stitching dots -->
+        <circle cx="250" cy="250" r="196" fill="none" stroke="#E8E8E8" stroke-width="1" stroke-dasharray="3 12"/>
+        <!-- inner ring -->
+        <circle cx="250" cy="250" r="175" fill="none" stroke="#EBEBEB" stroke-width="1"/>
+        <!-- spokes -->
+        <line x1="250" y1="250" x2="250" y2="45" stroke="#DEDEDE" stroke-width="18" stroke-linecap="round"/>
+        <line x1="250" y1="250" x2="78" y2="380" stroke="#DEDEDE" stroke-width="18" stroke-linecap="round"/>
+        <line x1="250" y1="250" x2="422" y2="380" stroke="#DEDEDE" stroke-width="18" stroke-linecap="round"/>
+        <!-- hub -->
+        <circle cx="250" cy="250" r="38" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="2"/>
+        <circle cx="250" cy="250" r="22" fill="#C8102E" opacity=".8"/>
+        <circle cx="250" cy="250" r="9" fill="#fff"/>
+        <!-- paddle shifters subtle -->
+        <rect x="168" y="241" width="30" height="14" rx="5" fill="#F0F0F0" stroke="#E0E0E0" stroke-width="1.5"/>
+        <rect x="302" y="241" width="30" height="14" rx="5" fill="#F0F0F0" stroke="#E0E0E0" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <h1 class="hero-h1-cg">
+      Handcrafted<br>
+      <em>for Your Corvette</em>
+    </h1>
+    <p class="hero-p-cg">
+      Premium interior accessories made by hand from <strong>Nappa leather</strong>,
+      <strong>genuine Alcantara</strong>, and <strong>carbon fiber</strong>.
+      Tailored to your exact specification.
+    </p>
+    <div class="hero-btns-cg">
+      <button class="btn-fill">Shop Collection</button>
+      <button class="btn-bord">Configure Yours →</button>
+    </div>
+
+    <div class="hero-rating">
+      <span class="hr-stars">★★★★★</span>
+      <span class="hr-txt">4.9 / 5 · Verified by 200+ owners</span>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS STRIP -->
+<div class="mat-strip">
+  <div class="mat-strip-inner">
+    <div class="ms-item"><strong>Carbon Fiber</strong> — Gloss &amp; Matte</div>
+    <div class="ms-item"><strong>Nappa Leather</strong> — Italian Full-Grain</div>
+    <div class="ms-item"><strong>Alcantara®</strong> — Genuine Racing Grade</div>
+  </div>
+</div>
+
+<!-- CATEGORIES — clean white grid, no heavy backgrounds -->
+<section class="cat-cg-section">
+  <div class="wrap">
+    <div class="cat-cg-head">
+      <div class="cat-cg-eye">Browse By Product</div>
+      <div class="cat-cg-h">Our Collection</div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:0;">
+    <div class="cat-cg-grid">
+      <div class="cm">
+        <div class="cm-n">01</div>
+        <div class="cm-name">Steering Wheels</div>
+        <div class="cm-sub">11 configurations · Carbon, Nappa, Alcantara</div>
+        <span class="cm-arr">→</span>
+      </div>
+      <div class="cm">
+        <div class="cm-n">02</div>
+        <div class="cm-name">Shift Knobs</div>
+        <div class="cm-sub">5 types · Standard, Ball, Tall, Cover</div>
+        <span class="cm-arr">→</span>
+      </div>
+      <div class="cm">
+        <div class="cm-n">03</div>
+        <div class="cm-name">Handbrakes</div>
+        <div class="cm-sub">Grip · Cover · Button</div>
+        <span class="cm-arr">→</span>
+      </div>
+      <div class="cm">
+        <div class="cm-n">04</div>
+        <div class="cm-name">Horn Pads</div>
+        <div class="cm-sub">Round &amp; T-Shaped · Leather or Alcantara</div>
+        <span class="cm-arr">→</span>
+      </div>
+      <div class="cm">
+        <div class="cm-n">05</div>
+        <div class="cm-name">SW Emblems</div>
+        <div class="cm-sub">Z06 · ZR1 · Corvette Racing · Custom</div>
+        <span class="cm-arr">→</span>
+      </div>
+      <div class="cm">
+        <div class="cm-n">06</div>
+        <div class="cm-name">Side Skirts</div>
+        <div class="cm-sub">Carbon fiber · Gloss or Matte · Custom decal</div>
+        <span class="cm-arr">→</span>
+      </div>
+    </div>
+    <div class="cat-cg-bot"></div>
+  </div>
+</section>
+
+<!-- PRODUCTS — horizontal landscape cards (2-col, image left, text right) -->
+<section class="prod-cg-section">
+  <div class="wrap">
+    <div class="prod-cg-head">
+      <div>
+        <div class="prod-cg-eye">Most Popular</div>
+        <div class="prod-cg-h">Featured Products</div>
+      </div>
+      <a class="prod-cg-link" href="#">Full Catalog →</a>
+    </div>
+    <div class="prod-h-grid">
+
+      <!-- Product 1 -->
+      <div class="phc">
+        <div class="phc-img">
+          <div class="phc-badge">Bestseller</div>
+          <svg width="90" height="90" viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="160" fill="none" stroke="#D0D0D0" stroke-width="22"/>
+            <circle cx="200" cy="200" r="160" fill="none" stroke="#C8102E" stroke-width="22" stroke-dasharray="76 180" opacity=".5"/>
+            <line x1="200" y1="200" x2="200" y2="48" stroke="#D8D8D8" stroke-width="11" stroke-linecap="round"/>
+            <line x1="200" y1="200" x2="66" y2="292" stroke="#D8D8D8" stroke-width="11" stroke-linecap="round"/>
+            <line x1="200" y1="200" x2="334" y2="292" stroke="#D8D8D8" stroke-width="11" stroke-linecap="round"/>
+            <circle cx="200" cy="200" r="28" fill="#EBEBEB"/><circle cx="200" cy="200" r="14" fill="#C8102E" opacity=".75"/>
+          </svg>
+        </div>
+        <div class="phc-body">
+          <div class="phc-cat">Steering Wheel</div>
+          <div class="phc-name">Carbon + Nappa Leather Wrap</div>
+          <p class="phc-desc">Hand-stitched with aerospace carbon inserts and premium full-grain Nappa leather. Custom thread color included.</p>
+          <div class="phc-chips">
+            <span class="phc-chip">Gloss Carbon</span>
+            <span class="phc-chip">Matte Carbon</span>
+            <span class="phc-chip">+ Alcantara</span>
+          </div>
+          <div class="phc-foot">
+            <div class="phc-price"><span class="fr">from </span>$480</div>
+            <button class="phc-cta">Configure →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="phc">
+        <div class="phc-img">
+          <svg width="76" height="92" viewBox="0 0 200 240">
+            <ellipse cx="100" cy="60" rx="52" ry="44" fill="none" stroke="#D0D0D0" stroke-width="10"/>
+            <ellipse cx="100" cy="60" rx="52" ry="44" fill="none" stroke="#C8102E" stroke-width="10" stroke-dasharray="55 120" opacity=".5"/>
+            <rect x="88" y="102" width="24" height="80" rx="9" fill="none" stroke="#D0D0D0" stroke-width="10"/>
+            <line x1="100" y1="182" x2="100" y2="220" stroke="#D0D0D0" stroke-width="12" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="phc-body">
+          <div class="phc-cat">Shift Knob</div>
+          <div class="phc-name">Tall Drift-Style Shift Knob</div>
+          <p class="phc-desc">Extended grip in drift style — carbon top with leather or Alcantara body. Custom color sticker option available.</p>
+          <div class="phc-chips">
+            <span class="phc-chip">Carbon/Leather</span>
+            <span class="phc-chip">Carbon/Alcantara</span>
+            <span class="phc-chip">Full Carbon</span>
+          </div>
+          <div class="phc-foot">
+            <div class="phc-price"><span class="fr">from </span>$220</div>
+            <button class="phc-cta">Configure →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="phc">
+        <div class="phc-img">
+          <svg width="82" height="82" viewBox="0 0 200 200">
+            <rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#D0D0D0" stroke-width="10"/>
+            <rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#C8102E" stroke-width="10" stroke-dasharray="72 168" opacity=".5"/>
+            <circle cx="100" cy="18" r="11" fill="none" stroke="#D0D0D0" stroke-width="8"/>
+            <rect x="38" y="135" width="124" height="18" rx="9" fill="none" stroke="#D0D0D0" stroke-width="8"/>
+          </svg>
+        </div>
+        <div class="phc-body">
+          <div class="phc-cat">Handbrake</div>
+          <div class="phc-name">Carbon + Alcantara Handbrake</div>
+          <p class="phc-desc">Carbon fiber inserts on a leather or Alcantara-wrapped grip. Available with cover and carbon button add-on.</p>
+          <div class="phc-chips">
+            <span class="phc-chip">Carbon/Leather</span>
+            <span class="phc-chip">Carbon/Alcantara</span>
+            <span class="phc-chip">+ Cover</span>
+          </div>
+          <div class="phc-foot">
+            <div class="phc-price"><span class="fr">from </span>$185</div>
+            <button class="phc-cta">Configure →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="phc">
+        <div class="phc-img">
+          <svg width="90" height="90" viewBox="0 0 200 200">
+            <polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#D0D0D0" stroke-width="10"/>
+            <polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#C8102E" stroke-width="10" stroke-dasharray="65 165" opacity=".5"/>
+            <text x="100" y="118" font-size="34" fill="#CCCCCC" text-anchor="middle" font-weight="900" font-family="sans-serif">ZR1</text>
+          </svg>
+        </div>
+        <div class="phc-body">
+          <div class="phc-cat">SW Emblem</div>
+          <div class="phc-name">Custom Carbon Wheel Emblem</div>
+          <p class="phc-desc">Z06, ZR1, Corvette Racing, or custom design. Gloss or matte carbon with multi-color options available.</p>
+          <div class="phc-chips">
+            <span class="phc-chip">Z06</span>
+            <span class="phc-chip">ZR1</span>
+            <span class="phc-chip">Racing</span>
+            <span class="phc-chip">Custom</span>
+          </div>
+          <div class="phc-foot">
+            <div class="phc-price"><span class="fr">from </span>$95</div>
+            <button class="phc-cta">Configure →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="prod-cg-bot"></div>
+  </div>
+</section>
+
+<!-- STATS — large centered numbers -->
+<div class="stats-cg">
+  <div class="stats-cg-inner">
+    <div class="scg"><div class="scg-n">500+</div><div class="scg-l">Orders Completed</div></div>
+    <div class="scg"><div class="scg-n">100%</div><div class="scg-l">Handcrafted</div></div>
+    <div class="scg"><div class="scg-n">4.9 ★</div><div class="scg-l">Customer Rating</div></div>
+    <div class="scg"><div class="scg-n">C5–C8</div><div class="scg-l">All Generations</div></div>
+  </div>
+</div>
+
+<!-- FEATURED (dark strip, different from rest) -->
+<div class="feat-strip">
+  <div class="feat-inner">
+    <div class="feat-vis">
+      <div class="feat-frame">
+        <svg width="72%" height="72%" viewBox="0 0 500 500">
+          <circle cx="250" cy="250" r="218" fill="none" stroke="#1E1E1E" stroke-width="28"/>
+          <circle cx="250" cy="250" r="218" fill="none" stroke="#C8102E" stroke-width="28" stroke-dasharray="100 244" opacity=".65"/>
+          <circle cx="250" cy="250" r="218" fill="none" stroke="#C8102E" stroke-width="28" stroke-dasharray="100 244" stroke-dashoffset="-344" opacity=".65"/>
+          <line x1="250" y1="250" x2="250" y2="45" stroke="#1E1E1E" stroke-width="17" stroke-linecap="round"/>
+          <line x1="250" y1="250" x2="78" y2="380" stroke="#1E1E1E" stroke-width="17" stroke-linecap="round"/>
+          <line x1="250" y1="250" x2="422" y2="380" stroke="#1E1E1E" stroke-width="17" stroke-linecap="round"/>
+          <line x1="250" y1="250" x2="250" y2="45" stroke="#303030" stroke-width="4" stroke-linecap="round"/>
+          <line x1="250" y1="250" x2="78" y2="380" stroke="#303030" stroke-width="4" stroke-linecap="round"/>
+          <line x1="250" y1="250" x2="422" y2="380" stroke="#303030" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="250" cy="250" r="36" fill="#141414" stroke="#252525" stroke-width="2"/>
+          <circle cx="250" cy="250" r="22" fill="#C8102E" opacity=".9"/>
+          <circle cx="250" cy="250" r="9" fill="#080808"/>
+          <rect x="168" y="241" width="30" height="14" rx="5" fill="#1A1A1A" stroke="#2A2A2A" stroke-width="1.5"/>
+          <rect x="302" y="241" width="30" height="14" rx="5" fill="#1A1A1A" stroke="#2A2A2A" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div class="feat-text-label">Custom Configuration</div>
+      <h2 class="feat-h">
+        Your Wheel,<br>
+        <em>Your Rules</em>
+      </h2>
+      <p class="feat-p">Choose the carbon finish, leather type, and thread color. Mix and match — there are over 60 combinations for the steering wheel alone. We've never built two identical pieces.</p>
+      <div class="feat-specs">
+        <div class="feat-spec"><div class="feat-spec-label">Carbon Type</div><div class="feat-spec-val">Gloss or Matte</div></div>
+        <div class="feat-spec"><div class="feat-spec-label">Material</div><div class="feat-spec-val">Nappa / Alcantara</div></div>
+        <div class="feat-spec"><div class="feat-spec-label">Thread Colors</div><div class="feat-spec-val">12+ Options</div></div>
+        <div class="feat-spec"><div class="feat-spec-label">Delivery</div><div class="feat-spec-val">~12–14 days</div></div>
+      </div>
+      <div class="feat-btns">
+        <button class="btn-acc">Configure Now</button>
+        <button class="btn-ghost-wh">Learn More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL — single centered pullquote -->
+<section class="tc-section">
+  <div class="tc-sep"></div>
+  <div class="tc-stars">★★★★★</div>
+  <p class="tc-text">
+    "I've owned four Corvettes. This is the first time I've had an interior that actually looks better than the car deserved. The Nappa leather and red Alcantara combination on the steering wheel is extraordinary."
+  </p>
+  <div class="tc-author">MIKE R.</div>
+  <div class="tc-car">2023 Corvette C8 Z06 · Verified Buyer</div>
+  <div class="tc-sep2"></div>
+  <a class="tc-all" href="#">Read all reviews →</a>
+</section>
+
+<!-- NEWSLETTER — minimal -->
+<section class="nl-section">
+  <div class="nl-inner">
+    <div class="nl-eye">Stay in the Loop</div>
+    <h2 class="nl-h">Join the <em>Corvette</em> Community</h2>
+    <p class="nl-p">New builds, material releases, and subscriber-only discounts. Two to three emails per month — never spam.</p>
+    <div class="nl-form">
+      <input class="nl-inp" type="email" placeholder="your@email.com">
+      <button class="nl-sub">Subscribe</button>
+    </div>
+    <p class="nl-note">2,400+ Corvette owners already subscribed. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-cg">
+    <div>
+      <div class="foot-cg-logo">Vette <em>Craft</em></div>
+      <p class="foot-cg-desc">Premium handmade interior accessories for every Chevrolet Corvette generation. Built to order, shipped across the United States.</p>
+      <div class="foot-cg-soc">
+        <button class="scg-btn">ig</button><button class="scg-btn">fb</button>
+        <button class="scg-btn">yt</button><button class="scg-btn">in</button>
+      </div>
+    </div>
+    <div><div class="foot-cg-ch">Products</div><ul class="foot-cg-cl"><li><a href="#">Steering Wheels</a></li><li><a href="#">Shift Knobs</a></li><li><a href="#">Handbrakes</a></li><li><a href="#">Horn Pads</a></li><li><a href="#">Emblems</a></li><li><a href="#">Side Skirts</a></li></ul></div>
+    <div><div class="foot-cg-ch">Info</div><ul class="foot-cg-cl"><li><a href="#">About Us</a></li><li><a href="#">Materials</a></li><li><a href="#">Custom Orders</a></li><li><a href="#">FAQ</a></li></ul></div>
+    <div><div class="foot-cg-ch">Support</div><ul class="foot-cg-cl"><li><a href="#">Shipping</a></li><li><a href="#">Track Order</a></li><li><a href="#">Contact</a></li><li><a href="#">Warranty</a></li></ul></div>
+  </div>
+  <div class="foot-cg-bot">
+    <p>© 2025 Vette Craft · Not affiliated with General Motors or Chevrolet.</p>
+    <div class="pay-cg"><div class="pic">VISA</div><div class="pic">MC</div><div class="pic">AMEX</div><div class="pic">PP</div></div>
+  </div>
+</footer>
+
+</body>
+</html>

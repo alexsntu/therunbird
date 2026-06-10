@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VETTE CRAFT — Dark V3: Cinematic Brutalist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #000000;
+      --bg1:   #080808;
+      --bg2:   #0E0E0E;
+      --w:     #F0F0F0;
+      --mid:   #555;
+      --dim:   #282828;
+      --acc:   #E31010;
+      --bd:    rgba(255,255,255,.07);
+      --bd2:   rgba(255,255,255,.14);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--w); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      background: rgba(0,0,0,.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bd);
+    }
+    .nav-logo { font-family: 'Oswald', sans-serif; font-size: 22px; letter-spacing: .14em; font-weight: 700; }
+    .nav-logo em { color: var(--acc); font-style: normal; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--mid); transition: color .2s; }
+    .nav-links a:hover { color: var(--w); }
+    .nav-r { display: flex; align-items: center; gap: 12px; }
+    .nav-cart-v3 {
+      height: 36px; padding: 0 20px;
+      border: 1px solid var(--w); color: var(--w); background: none;
+      font-family: 'Oswald', sans-serif; font-size: 15px; letter-spacing: .1em;
+      cursor: pointer; transition: all .2s;
+    }
+    .nav-cart-v3:hover { background: var(--w); color: var(--bg); }
+    .hamburger-v3 { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+    .hamburger-v3 span { width: 22px; height: 1.5px; background: var(--w); display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg); overflow: hidden; padding-top: 60px;
+    }
+    /* Grid background */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 88px 88px;
+    }
+    /* Diagonal red slash */
+    .slash {
+      position: absolute; width: 1px; height: 180%;
+      background: linear-gradient(to bottom, transparent 0%, var(--acc) 25%, var(--acc) 75%, transparent 100%);
+      transform: rotate(14deg);
+      right: 32%; top: -40%; opacity: .7; pointer-events: none;
+    }
+    /* Second slash, thinner */
+    .slash2 {
+      position: absolute; width: 1px; height: 180%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(227,16,16,.3) 25%, rgba(227,16,16,.3) 75%, transparent 100%);
+      transform: rotate(14deg);
+      right: calc(32% - 10px); top: -40%; pointer-events: none;
+    }
+    /* Product centered */
+    .hero-prod {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -54%);
+      width: clamp(280px, 38vw, 460px);
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-prod svg { width: 100%; height: 100%; }
+    /* Corner label */
+    .hero-corner {
+      position: absolute; top: 80px; right: 40px;
+      font-family: 'Oswald', sans-serif; font-size: 11px;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--mid);
+      display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+    }
+    .hero-corner-num { font-size: 40px; font-weight: 700; color: var(--dim); line-height: 1; }
+    /* Vertical text right side */
+    .hero-vert {
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%) rotate(90deg);
+      font-size: 9.5px; letter-spacing: .3em; color: rgba(255,255,255,.14);
+      text-transform: uppercase; white-space: nowrap; pointer-events: none;
+    }
+    /* Bottom-left text block */
+    .hero-text {
+      position: absolute; bottom: 80px; left: 40px; right: 45%;
+      z-index: 2;
+    }
+    .hero-tag {
+      font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--acc); font-weight: 600; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--acc); }
+    .hero-h1 {
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-size: clamp(48px, 7vw, 96px); line-height: .92;
+      text-transform: uppercase; letter-spacing: .02em;
+      margin-bottom: 22px;
+    }
+    .hero-h1 .red { color: var(--acc); }
+    .hero-p { font-size: 14px; line-height: 1.7; color: var(--mid); max-width: 340px; margin-bottom: 28px; font-weight: 300; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-red {
+      padding: 13px 32px; background: var(--acc); color: #fff;
+      border: none; font-family: 'Oswald', sans-serif; font-size: 16px;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s;
+    }
+    .btn-red:hover { background: #FF2020; transform: translateX(2px); }
+    .btn-line {
+      padding: 13px 32px; background: transparent; color: var(--w);
+      border: 1px solid var(--bd2); font-family: 'Oswald', sans-serif; font-size: 16px;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s;
+    }
+    .btn-line:hover { border-color: var(--w); }
+    /* Generation line at bottom-right */
+    .hero-gen {
+      position: absolute; bottom: 80px; right: 40px;
+      display: flex; gap: 0; border: 1px solid var(--bd2);
+    }
+    .gen-btn {
+      padding: 8px 16px; font-family: 'Oswald', sans-serif; font-size: 14px;
+      letter-spacing: .06em; color: var(--dim); background: none; border: none;
+      border-right: 1px solid var(--bd); cursor: pointer; transition: all .18s;
+    }
+    .gen-btn:last-child { border-right: none; }
+    .gen-btn:hover { color: var(--w); background: rgba(255,255,255,.05); }
+    .gen-btn.on { color: var(--acc); background: rgba(227,16,16,.08); }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      overflow: hidden; background: var(--bg1);
+      border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd);
+      padding: 13px 0;
+    }
+    .ticker-inner {
+      display: flex; white-space: nowrap; width: max-content;
+      animation: tick 30s linear infinite;
+    }
+    .ticker-inner:hover { animation-play-state: paused; }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-inner span {
+      font-family: 'Oswald', sans-serif; font-size: 13px;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--dim); padding: 0 36px;
+    }
+    .ticker-inner span.t-acc { color: var(--acc); }
+
+    /* ── CATEGORY TABLE ── */
+    .cat-section { background: var(--bg1); }
+    .cat-header {
+      max-width: 1440px; margin: 0 auto; padding: 72px 40px 36px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .cat-eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); margin-bottom: 10px; font-weight: 600; }
+    .cat-title { font-family: 'Oswald', sans-serif; font-size: clamp(32px,4vw,52px); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+    .cat-all { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); border-bottom: 1px solid var(--mid); padding-bottom: 2px; transition: color .2s; cursor: pointer; white-space: nowrap; }
+    .cat-all:hover { color: var(--w); border-color: var(--w); }
+    .cat-table { max-width: 1440px; margin: 0 auto; }
+    .cat-row {
+      display: grid;
+      grid-template-columns: 56px 1fr auto auto 56px;
+      align-items: center; gap: 24px; padding: 20px 40px;
+      border-top: 1px solid var(--bd);
+      cursor: pointer; transition: background .18s; position: relative;
+      overflow: hidden;
+    }
+    .cat-row:last-child { border-bottom: 1px solid var(--bd); }
+    .cat-row::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 0; background: var(--acc); opacity: .06;
+      transition: width .3s ease;
+    }
+    .cat-row:hover::before { width: 100%; }
+    .cat-row:hover .cat-arr { opacity: 1; color: var(--acc); }
+    .cr-num { font-family: 'Oswald', sans-serif; font-size: 13px; color: var(--acc); font-weight: 400; }
+    .cr-name { font-family: 'Oswald', sans-serif; font-size: 24px; font-weight: 600; color: var(--w); letter-spacing: .03em; }
+    .cr-count { font-size: 12px; color: var(--mid); white-space: nowrap; }
+    .cr-mats { font-size: 11.5px; color: var(--dim); letter-spacing: .03em; text-align: right; white-space: nowrap; }
+    .cat-arr { font-size: 20px; color: var(--mid); opacity: 0; transition: all .2s; text-align: center; }
+    .cat-bottom { max-width: 1440px; margin: 0 auto; padding: 0 40px 72px; }
+
+    /* ── PRODUCTS HORIZONTAL SCROLL ── */
+    .prod-section { background: var(--bg); }
+    .prod-head {
+      max-width: 1440px; margin: 0 auto; padding: 72px 40px 40px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .prod-eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); margin-bottom: 10px; font-weight: 600; }
+    .prod-title { font-family: 'Oswald', sans-serif; font-size: clamp(32px,4vw,52px); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+    .scroll-hint { font-size: 12px; color: var(--mid); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .scroll-hint svg { color: var(--acc); }
+    .h-scroll {
+      display: flex; gap: 16px; overflow-x: auto; padding: 0 40px 48px;
+      scrollbar-width: thin; scrollbar-color: var(--acc) transparent;
+    }
+    .h-scroll::-webkit-scrollbar { height: 2px; }
+    .h-scroll::-webkit-scrollbar-track { background: transparent; }
+    .h-scroll::-webkit-scrollbar-thumb { background: var(--acc); }
+    .hc {
+      flex: 0 0 300px; background: var(--bg2); border: 1px solid var(--bd);
+      display: flex; flex-direction: column; overflow: hidden; cursor: pointer;
+      transition: border-color .22s, transform .22s;
+    }
+    .hc:hover { border-color: var(--acc); transform: translateY(-4px); }
+    .hc-img {
+      height: 240px; background: #080808; display: flex;
+      align-items: center; justify-content: center; position: relative;
+      overflow: hidden;
+    }
+    .hc-img::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hc-img svg { position: relative; z-index: 1; opacity: .35; }
+    .hc-tag {
+      position: absolute; top: 12px; left: 0; padding: 4px 12px;
+      background: var(--acc); font-size: 10px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; color: #fff;
+    }
+    .hc-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+    .hc-cat { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mid); margin-bottom: 6px; }
+    .hc-name { font-family: 'Oswald', sans-serif; font-size: 19px; font-weight: 600; color: var(--w); letter-spacing: .03em; margin-bottom: 4px; }
+    .hc-var { font-size: 12px; color: var(--mid); margin-bottom: auto; padding-bottom: 16px; }
+    .hc-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--bd); }
+    .hc-price { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 600; color: var(--w); }
+    .hc-price .fr { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--mid); font-weight: 400; margin-right: 2px; }
+    .hc-add { width: 34px; height: 34px; background: var(--acc); border: none; color: #fff; cursor: pointer; font-size: 18px; transition: background .2s; display: flex; align-items: center; justify-content: center; }
+    .hc-add:hover { background: #FF2020; }
+    /* End fade */
+    .scroll-end { flex: 0 0 40px; }
+
+    /* ── QUOTE SECTION ── */
+    .quote-section {
+      position: relative; overflow: hidden;
+      padding: 120px 40px; text-align: center;
+      background: var(--bg1); border-top: 1px solid var(--bd);
+    }
+    .quote-mark {
+      position: absolute; font-family: 'Oswald', sans-serif; font-size: 240px;
+      line-height: 1; color: var(--acc); opacity: .06;
+      top: -20px; left: 20px; pointer-events: none; user-select: none;
+    }
+    .quote-mark-r {
+      position: absolute; font-family: 'Oswald', sans-serif; font-size: 240px;
+      line-height: 1; color: var(--acc); opacity: .06;
+      bottom: -60px; right: 20px; pointer-events: none; user-select: none; transform: rotate(180deg);
+    }
+    .quote-stars { font-size: 20px; letter-spacing: 4px; color: var(--acc); margin-bottom: 24px; }
+    .quote-text {
+      font-family: 'Oswald', sans-serif; font-weight: 400;
+      font-size: clamp(22px, 3.5vw, 42px); line-height: 1.3;
+      color: var(--w); max-width: 920px; margin: 0 auto 32px;
+      font-style: italic;
+    }
+    .quote-author { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc); }
+    .quote-divider { width: 48px; height: 1px; background: var(--acc); margin: 24px auto 0; }
+
+    /* ── CTA ── */
+    .cta-section {
+      position: relative; overflow: hidden;
+      background: var(--acc); padding: 100px 40px;
+    }
+    .cta-bg-text {
+      position: absolute; font-family: 'Oswald', sans-serif; font-size: clamp(120px,18vw,220px);
+      color: rgba(0,0,0,.12); top: 50%; left: 50%; transform: translate(-50%,-50%);
+      white-space: nowrap; pointer-events: none; font-weight: 700; letter-spacing: -.01em;
+    }
+    .cta-inner-v3 { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; }
+    .cta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+    .cta-left .cta-tag { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: rgba(0,0,0,.5); font-weight: 700; margin-bottom: 14px; }
+    .cta-left .cta-h { font-family: 'Oswald', sans-serif; font-size: clamp(44px,7vw,88px); font-weight: 700; color: #000; line-height: .9; text-transform: uppercase; }
+    .cta-left .cta-h em { font-style: italic; opacity: .75; }
+    .cta-right { display: flex; flex-direction: column; gap: 14px; max-width: 400px; }
+    .cta-right p { font-size: 15px; color: rgba(0,0,0,.65); line-height: 1.7; }
+    .cta-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+    .btn-black { padding: 14px 36px; background: #000; color: var(--acc); border: none; font-family: 'Oswald', sans-serif; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+    .btn-black:hover { background: #111; transform: translateY(-2px); }
+    .btn-wline { padding: 14px 36px; background: transparent; color: #000; border: 2px solid rgba(0,0,0,.3); font-family: 'Oswald', sans-serif; font-size: 17px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+    .btn-wline:hover { border-color: #000; }
+
+    /* ── FOOTER ── */
+    footer { background: #000; border-top: 1px solid var(--bd); }
+    .foot-inner {
+      max-width: 1440px; margin: 0 auto; padding: 56px 40px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+    }
+    .foot-logo-v3 { font-family: 'Oswald', sans-serif; font-size: 26px; letter-spacing: .12em; font-weight: 700; margin-bottom: 14px; }
+    .foot-logo-v3 em { color: var(--acc); font-style: normal; }
+    .foot-desc { font-size: 13px; color: #333; line-height: 1.75; max-width: 250px; margin-bottom: 24px; }
+    .foot-soc { display: flex; gap: 9px; }
+    .fsv3 { width: 34px; height: 34px; border: 1px solid var(--bd2); background: none; color: #444; cursor: pointer; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+    .fsv3:hover { border-color: var(--acc); color: var(--acc); }
+    .foot-ch { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #444; margin-bottom: 18px; }
+    .foot-cl { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .foot-cl a { font-size: 13px; color: #2E2E2E; transition: color .2s; }
+    .foot-cl a:hover { color: #888; }
+    .foot-bot { max-width: 1440px; margin: 0 auto; padding: 18px 40px; border-top: 1px solid rgba(255,255,255,.04); display: flex; align-items: center; justify-content: space-between; }
+    .foot-bot p { font-size: 11.5px; color: #2A2A2A; }
+    .pay-r { display: flex; gap: 7px; }
+    .piv3 { width: 42px; height: 24px; border: 1px solid var(--bd); background: none; font-size: 9px; font-weight: 800; color: #3A3A3A; display: flex; align-items: center; justify-content: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-text { right: 5%; bottom: 60px; }
+      .hero-gen { right: 20px; bottom: 24px; }
+      .cat-row { grid-template-columns: 44px 1fr auto 40px; }
+      .cr-mats { display: none; }
+      .foot-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .foot-inner > div:first-child { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger-v3 { display: flex; }
+      .hero-text { left: 20px; right: 5%; bottom: 100px; }
+      .hero-gen { display: none; }
+      .hero-corner { display: none; }
+      .cat-header { padding: 48px 20px 28px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .cat-row { padding: 18px 20px; gap: 16px; }
+      .prod-head { padding: 48px 20px 28px; flex-direction: column; align-items: flex-start; gap: 12px; }
+      .h-scroll { padding: 0 20px 36px; }
+      .cta-section { padding: 70px 20px; }
+      .cta-row { flex-direction: column; }
+      .foot-inner { grid-template-columns: 1fr; padding: 40px 20px; }
+      .foot-inner > div:first-child { grid-column: span 1; }
+      .foot-bot { padding: 18px 20px; flex-direction: column; gap: 10px; }
+      .hc { flex: 0 0 260px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VETTE<em>·</em>CRAFT</div>
+  <ul class="nav-links">
+    <li><a href="#">Steering</a></li>
+    <li><a href="#">Shift Knobs</a></li>
+    <li><a href="#">Handbrakes</a></li>
+    <li><a href="#">Emblems</a></li>
+    <li><a href="#">Custom</a></li>
+  </ul>
+  <div class="nav-r">
+    <button class="nav-cart-v3">CART (0)</button>
+    <button class="hamburger-v3"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="slash"></div>
+  <div class="slash2"></div>
+
+  <!-- Product centered, floating on grid -->
+  <div class="hero-prod">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <!-- outer rim -->
+      <circle cx="250" cy="250" r="218" fill="none" stroke="#1A1A1A" stroke-width="32"/>
+      <!-- leather sections in red -->
+      <circle cx="250" cy="250" r="218" fill="none" stroke="#E31010" stroke-width="32" stroke-dasharray="100 244" opacity=".6"/>
+      <circle cx="250" cy="250" r="218" fill="none" stroke="#E31010" stroke-width="32" stroke-dasharray="100 244" stroke-dashoffset="-344" opacity=".6"/>
+      <!-- rim highlights -->
+      <circle cx="250" cy="250" r="218" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2" stroke-dasharray="4 12"/>
+      <!-- inner ring -->
+      <circle cx="250" cy="250" r="180" fill="none" stroke="#111" stroke-width="1"/>
+      <!-- spokes -->
+      <line x1="250" y1="250" x2="250" y2="45" stroke="#1A1A1A" stroke-width="18" stroke-linecap="round"/>
+      <line x1="250" y1="250" x2="78" y2="380" stroke="#1A1A1A" stroke-width="18" stroke-linecap="round"/>
+      <line x1="250" y1="250" x2="422" y2="380" stroke="#1A1A1A" stroke-width="18" stroke-linecap="round"/>
+      <!-- spoke edge highlight -->
+      <line x1="250" y1="250" x2="250" y2="45" stroke="#303030" stroke-width="5" stroke-linecap="round"/>
+      <line x1="250" y1="250" x2="78" y2="380" stroke="#303030" stroke-width="5" stroke-linecap="round"/>
+      <line x1="250" y1="250" x2="422" y2="380" stroke="#303030" stroke-width="5" stroke-linecap="round"/>
+      <!-- hub -->
+      <circle cx="250" cy="250" r="38" fill="#0D0D0D" stroke="#222" stroke-width="2"/>
+      <circle cx="250" cy="250" r="24" fill="#E31010" opacity=".9"/>
+      <circle cx="250" cy="250" r="10" fill="#0A0A0A"/>
+      <!-- paddle shifters -->
+      <rect x="168" y="240" width="32" height="16" rx="5" fill="#111" stroke="#2A2A2A" stroke-width="1.5"/>
+      <rect x="300" y="240" width="32" height="16" rx="5" fill="#111" stroke="#2A2A2A" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- Section number / top right badge -->
+  <div class="hero-corner">
+    <div class="hero-corner-num">01</div>
+    <div>FEATURED PIECE</div>
+    <div style="color:var(--acc);margin-top:6px;font-size:10px;">MADE TO ORDER</div>
+  </div>
+
+  <!-- Vertical side text -->
+  <div class="hero-vert">HAND-BUILT · NAPPA · ALCANTARA · CARBON FIBER · CORVETTE</div>
+
+  <!-- Bottom-left text -->
+  <div class="hero-text">
+    <div class="hero-tag">Handcrafted Corvette Accessories</div>
+    <h1 class="hero-h1">
+      THE ART OF<br>
+      <span class="red">CORVETTE</span><br>
+      INTERIOR
+    </h1>
+    <p class="hero-p">Carbon fiber. Nappa leather. Alcantara. Every piece made to your exact configuration — zero compromises.</p>
+    <div class="hero-btns">
+      <button class="btn-red">Shop Now</button>
+      <button class="btn-line">Configure →</button>
+    </div>
+  </div>
+
+  <!-- Gen selector bottom-right -->
+  <div class="hero-gen">
+    <button class="gen-btn">C5</button>
+    <button class="gen-btn">C6</button>
+    <button class="gen-btn">C7</button>
+    <button class="gen-btn on">C8</button>
+  </div>
+</section>
+
+<!-- TICKER MARQUEE -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>CARBON FIBER</span><span class="t-acc">·</span>
+    <span>NAPPA LEATHER</span><span class="t-acc">·</span>
+    <span>ALCANTARA®</span><span class="t-acc">·</span>
+    <span>HANDMADE</span><span class="t-acc">·</span>
+    <span>C5 · C6 · C7 · C8</span><span class="t-acc">·</span>
+    <span>MADE TO ORDER</span><span class="t-acc">·</span>
+    <span>FREE US SHIPPING</span><span class="t-acc">·</span>
+    <span>GLOSS &amp; MATTE CARBON</span><span class="t-acc">·</span>
+    <!-- duplicate for seamless loop -->
+    <span>CARBON FIBER</span><span class="t-acc">·</span>
+    <span>NAPPA LEATHER</span><span class="t-acc">·</span>
+    <span>ALCANTARA®</span><span class="t-acc">·</span>
+    <span>HANDMADE</span><span class="t-acc">·</span>
+    <span>C5 · C6 · C7 · C8</span><span class="t-acc">·</span>
+    <span>MADE TO ORDER</span><span class="t-acc">·</span>
+    <span>FREE US SHIPPING</span><span class="t-acc">·</span>
+    <span>GLOSS &amp; MATTE CARBON</span><span class="t-acc">·</span>
+  </div>
+</div>
+
+<!-- CATEGORY TABLE -->
+<section class="cat-section">
+  <div class="cat-header">
+    <div>
+      <div class="cat-eyebrow">Browse by Product</div>
+      <div class="cat-title">Our Collection</div>
+    </div>
+    <a class="cat-all" href="#">All Products →</a>
+  </div>
+  <div class="cat-table">
+    <div class="cat-row">
+      <span class="cr-num">01</span>
+      <span class="cr-name">STEERING WHEELS</span>
+      <span class="cr-count">11 configurations</span>
+      <span class="cr-mats">Carbon · Nappa · Alcantara</span>
+      <span class="cat-arr">→</span>
+    </div>
+    <div class="cat-row">
+      <span class="cr-num">02</span>
+      <span class="cr-name">SHIFT KNOBS</span>
+      <span class="cr-count">5 types · multiple finishes</span>
+      <span class="cr-mats">Carbon · Nappa · Alcantara</span>
+      <span class="cat-arr">→</span>
+    </div>
+    <div class="cat-row">
+      <span class="cr-num">03</span>
+      <span class="cr-name">HANDBRAKES</span>
+      <span class="cr-count">Grip · Cover · Button</span>
+      <span class="cr-mats">Carbon · Leather · Alcantara</span>
+      <span class="cat-arr">→</span>
+    </div>
+    <div class="cat-row">
+      <span class="cr-num">04</span>
+      <span class="cr-name">HORN PADS</span>
+      <span class="cr-count">Round &amp; T-Shaped</span>
+      <span class="cr-mats">Nappa · Alcantara</span>
+      <span class="cat-arr">→</span>
+    </div>
+    <div class="cat-row">
+      <span class="cr-num">05</span>
+      <span class="cr-name">SW EMBLEMS</span>
+      <span class="cr-count">Z06 · ZR1 · Racing · Custom</span>
+      <span class="cr-mats">Gloss &amp; Matte Carbon</span>
+      <span class="cat-arr">→</span>
+    </div>
+    <div class="cat-row">
+      <span class="cr-num">06</span>
+      <span class="cr-name">SIDE SKIRTS</span>
+      <span class="cr-count">Carbon fiber · Custom decal</span>
+      <span class="cr-mats">Gloss · Matte · Color Options</span>
+      <span class="cat-arr">→</span>
+    </div>
+  </div>
+  <div class="cat-bottom"></div>
+</section>
+
+<!-- PRODUCTS — HORIZONTAL SCROLL -->
+<section class="prod-section">
+  <div class="prod-head">
+    <div>
+      <div class="prod-eyebrow">Most Popular</div>
+      <div class="prod-title">Featured Products</div>
+    </div>
+    <div class="scroll-hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      Scroll to explore
+    </div>
+  </div>
+
+  <div class="h-scroll">
+    <!-- Card 1 -->
+    <div class="hc">
+      <div class="hc-img">
+        <div class="hc-tag">Bestseller</div>
+        <svg width="130" height="130" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="165" fill="none" stroke="#222" stroke-width="22"/>
+          <circle cx="200" cy="200" r="165" fill="none" stroke="#E31010" stroke-width="22" stroke-dasharray="78 186" opacity=".65"/>
+          <line x1="200" y1="200" x2="200" y2="44" stroke="#1E1E1E" stroke-width="11" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="64" y2="296" stroke="#1E1E1E" stroke-width="11" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="336" y2="296" stroke="#1E1E1E" stroke-width="11" stroke-linecap="round"/>
+          <circle cx="200" cy="200" r="28" fill="#111"/><circle cx="200" cy="200" r="14" fill="#E31010" opacity=".8"/>
+        </svg>
+      </div>
+      <div class="hc-body">
+        <div class="hc-cat">Steering Wheel</div>
+        <div class="hc-name">Carbon + Nappa Leather Wrap</div>
+        <div class="hc-var">Gloss Carbon · Custom Thread</div>
+        <div class="hc-foot">
+          <div class="hc-price"><span class="fr">from </span>$480</div>
+          <button class="hc-add"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="hc">
+      <div class="hc-img">
+        <div class="hc-tag">New</div>
+        <svg width="90" height="110" viewBox="0 0 200 240">
+          <ellipse cx="100" cy="60" rx="52" ry="44" fill="none" stroke="#222" stroke-width="10"/>
+          <ellipse cx="100" cy="60" rx="52" ry="44" fill="none" stroke="#E31010" stroke-width="10" stroke-dasharray="55 120" opacity=".65"/>
+          <rect x="88" y="102" width="24" height="80" rx="9" fill="none" stroke="#222" stroke-width="10"/>
+          <line x1="100" y1="182" x2="100" y2="220" stroke="#1E1E1E" stroke-width="12" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="hc-body">
+        <div class="hc-cat">Shift Knob</div>
+        <div class="hc-name">Drift-Style Tall Shift Knob</div>
+        <div class="hc-var">Carbon / Alcantara / Leather</div>
+        <div class="hc-foot">
+          <div class="hc-price"><span class="fr">from </span>$220</div>
+          <button class="hc-add"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="hc">
+      <div class="hc-img">
+        <svg width="90" height="90" viewBox="0 0 200 200">
+          <rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#222" stroke-width="10"/>
+          <rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#E31010" stroke-width="10" stroke-dasharray="72 168" opacity=".65"/>
+          <circle cx="100" cy="18" r="11" fill="none" stroke="#222" stroke-width="8"/>
+          <rect x="38" y="135" width="124" height="18" rx="9" fill="none" stroke="#222" stroke-width="8"/>
+        </svg>
+      </div>
+      <div class="hc-body">
+        <div class="hc-cat">Handbrake</div>
+        <div class="hc-name">Carbon + Alcantara Grip</div>
+        <div class="hc-var">Matte Carbon · Red Stitch</div>
+        <div class="hc-foot">
+          <div class="hc-price"><span class="fr">from </span>$185</div>
+          <button class="hc-add"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="hc">
+      <div class="hc-img">
+        <div class="hc-tag">Custom</div>
+        <svg width="100" height="100" viewBox="0 0 200 200">
+          <polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#222" stroke-width="10"/>
+          <polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#E31010" stroke-width="10" stroke-dasharray="66 166" opacity=".65"/>
+          <text x="100" y="118" font-size="36" fill="#333" text-anchor="middle" font-weight="900" font-family="sans-serif">ZR1</text>
+        </svg>
+      </div>
+      <div class="hc-body">
+        <div class="hc-cat">SW Emblem</div>
+        <div class="hc-name">ZR1 Carbon Steering Emblem</div>
+        <div class="hc-var">Gloss or Matte · Multiple Colors</div>
+        <div class="hc-foot">
+          <div class="hc-price"><span class="fr">from </span>$95</div>
+          <button class="hc-add"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="hc">
+      <div class="hc-img">
+        <svg width="60" height="60" viewBox="0 0 200 200">
+          <ellipse cx="100" cy="70" rx="76" ry="52" fill="none" stroke="#222" stroke-width="10"/>
+          <ellipse cx="100" cy="70" rx="76" ry="52" fill="none" stroke="#E31010" stroke-width="10" stroke-dasharray="62 148" opacity=".65"/>
+          <line x1="30" y1="70" x2="170" y2="70" stroke="#222" stroke-width="6" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="hc-body">
+        <div class="hc-cat">Horn Pad</div>
+        <div class="hc-name">Nappa Leather Horn Pad</div>
+        <div class="hc-var">Round · T-Shape · Custom Thread</div>
+        <div class="hc-foot">
+          <div class="hc-price"><span class="fr">from </span>$85</div>
+          <button class="hc-add"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-end"></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-mark">"</div>
+  <div class="quote-mark-r">"</div>
+  <div class="quote-stars">★★★★★</div>
+  <p class="quote-text">"My Z06 interior looks better than anything you could buy from a dealership or aftermarket catalog. The carbon and Alcantara combination is absolutely flawless."</p>
+  <div class="quote-author">JASON K. &nbsp;·&nbsp; 2023 CORVETTE C8 Z06 &nbsp;·&nbsp; VERIFIED BUYER</div>
+  <div class="quote-divider"></div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg-text">CONFIGURE</div>
+  <div class="cta-inner-v3">
+    <div class="cta-row">
+      <div class="cta-left">
+        <div class="cta-tag">Ready to Build?</div>
+        <div class="cta-h">MAKE IT<br><em>YOURS.</em></div>
+      </div>
+      <div class="cta-right">
+        <p>Every piece starts with your exact preferences. Choose your material, carbon finish, and thread color. We build it by hand and ship it to your door.</p>
+        <div class="cta-btns">
+          <button class="btn-black">START CUSTOM ORDER</button>
+          <button class="btn-wline">BROWSE CATALOG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-logo-v3">VETTE<em>·</em>CRAFT</div>
+      <p class="foot-desc">Premium handmade interior accessories for Chevrolet Corvette owners. Every piece built to order — carbon fiber, Nappa leather, Alcantara.</p>
+      <div class="foot-soc">
+        <button class="fsv3">ig</button><button class="fsv3">fb</button><button class="fsv3">yt</button><button class="fsv3">in</button>
+      </div>
+    </div>
+    <div><div class="foot-ch">Products</div><ul class="foot-cl"><li><a href="#">Steering Wheels</a></li><li><a href="#">Shift Knobs</a></li><li><a href="#">Handbrakes</a></li><li><a href="#">Horn Pads</a></li><li><a href="#">Emblems</a></li><li><a href="#">Side Skirts</a></li></ul></div>
+    <div><div class="foot-ch">Info</div><ul class="foot-cl"><li><a href="#">About Us</a></li><li><a href="#">Materials</a></li><li><a href="#">Custom Orders</a></li><li><a href="#">FAQ</a></li></ul></div>
+    <div><div class="foot-ch">Support</div><ul class="foot-cl"><li><a href="#">Shipping</a></li><li><a href="#">Track Order</a></li><li><a href="#">Contact</a></li><li><a href="#">Warranty</a></li></ul></div>
+  </div>
+  <div class="foot-bot">
+    <p>© 2025 Vette Craft · Not affiliated with General Motors or Chevrolet.</p>
+    <div class="pay-r"><div class="piv3">VISA</div><div class="piv3">MC</div><div class="piv3">AMEX</div><div class="piv3">PP</div></div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.gen-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.gen-btn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+    });
+  });
+</script>
+</body>
+</html>

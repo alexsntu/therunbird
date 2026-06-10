@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VETTE CRAFT — Light V2: American Heritage Craft</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #F3EDE3;
+      --bg-card:  #FFFFFF;
+      --bg-sect:  #EDE6D8;
+      --bg-dark:  #1A1510;
+      --text:     #1A1510;
+      --mid:      #6B6258;
+      --muted:    #A09890;
+      --accent:   #B87A12;
+      --a-dim:    rgba(184,122,18,.09);
+      --a-bord:   rgba(184,122,18,.26);
+      --red:      #C8102E;
+      --border:   rgba(26,21,16,.1);
+      --bord2:    rgba(26,21,16,.18);
+      --shadow:   0 8px 48px rgba(0,0,0,.12);
+      --scard:    0 2px 20px rgba(0,0,0,.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* === UTILITIES === */
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 96px 40px; }
+    .sec-eye { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+    .sec-h { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(32px,4.5vw,58px); color: var(--text); line-height: 1.08; }
+
+    /* === NAV === */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(243,237,227,.96);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav {
+      max-width: 1440px; margin: 0 auto; padding: 0 40px;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-s { display: flex; flex-direction: column; line-height: 1; cursor: pointer; }
+    .logo-sn { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 22px; color: var(--text); letter-spacing: .01em; }
+    .logo-sn em { color: var(--accent); font-style: italic; }
+    .logo-st { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; color: var(--mid); transition: color .2s;
+      position: relative; padding-bottom: 3px;
+    }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-r { display: flex; align-items: center; gap: 10px; }
+    .ni-l {
+      width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--border);
+      background: none; color: var(--mid); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all .2s;
+    }
+    .ni-l:hover { border-color: var(--accent); color: var(--accent); }
+    .nav-cart-l {
+      height: 38px; padding: 0 20px; background: var(--text); color: var(--bg);
+      border: none; border-radius: 6px; font-size: 13px; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all .2s;
+    }
+    .nav-cart-l:hover { background: #2A2218; transform: translateY(-1px); }
+    .hamburger-l { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger-l span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; display: block; }
+
+    /* === HERO === */
+    .hero-l {
+      background: var(--bg); min-height: 88vh;
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .hero-l-deco {
+      position: absolute; right: -4%; top: -10%; bottom: -10%;
+      width: 42%;
+      background: var(--bg-sect); border-radius: 0 0 0 0;
+      pointer-events: none;
+    }
+    .hero-l-inner {
+      max-width: 1440px; margin: 0 auto; padding: 80px 40px;
+      display: grid; grid-template-columns: 55% 45%; gap: 60px;
+      align-items: center; width: 100%; position: relative; z-index: 1;
+    }
+    .hero-l-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 28px;
+    }
+    .hero-l-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+    .hero-l-h1 {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(50px,6vw,88px); line-height: 1.04;
+      color: var(--text); margin-bottom: 24px;
+    }
+    .hero-l-h1 em { color: var(--accent); font-style: italic; display: block; }
+    .hero-l-p { font-size: 16px; line-height: 1.8; color: var(--mid); max-width: 460px; margin-bottom: 40px; font-weight: 300; }
+    .hero-l-p strong { color: var(--text); font-weight: 600; }
+    .hero-l-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-dark-l {
+      padding: 15px 38px; background: var(--text); color: var(--bg);
+      border: none; border-radius: 4px; font-weight: 700; font-size: 14px;
+      letter-spacing: .04em; cursor: pointer; transition: all .2s;
+    }
+    .btn-dark-l:hover { background: #2A2218; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,21,16,.2); }
+    .btn-outline-l {
+      padding: 15px 38px; background: transparent; color: var(--text);
+      border: 1.5px solid var(--bord2); border-radius: 4px;
+      font-weight: 600; font-size: 14px; cursor: pointer; transition: all .2s;
+    }
+    .btn-outline-l:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-l-mats { display: flex; align-items: center; gap: 16px; margin-top: 36px; }
+    .hero-l-mats span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
+    .mat-dot { width: 28px; height: 28px; border-radius: 6px; }
+    .md-cf { background: #1a1a1a; background-image: repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 50%),repeating-linear-gradient(-45deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,transparent 1px,transparent 50%); background-size: 5px 5px; }
+    .md-np { background: linear-gradient(135deg,#5C3A2A 0%,#3E2318 100%); }
+    .md-al { background: linear-gradient(135deg,#2E2E2E 0%,#1C1C1C 100%); }
+
+    /* hero visual */
+    .hero-l-vis { position: relative; display: flex; justify-content: center; }
+    .hero-l-frame {
+      width: 100%; max-width: 460px;
+      background: var(--bg-card); border-radius: 12px;
+      border: 1px solid var(--border); overflow: hidden;
+      box-shadow: var(--shadow); position: relative;
+    }
+    .hlf-top {
+      aspect-ratio: 1; background: #EDE6D8; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hlf-info { padding: 22px; }
+    .hlf-cat { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .hlf-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .hlf-var { font-size: 13px; color: var(--mid); margin-bottom: 16px; }
+    .hlf-foot { display: flex; align-items: center; justify-content: space-between; }
+    .hlf-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: var(--accent); }
+    .hlf-price .fr { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 400; color: var(--muted); margin-right: 4px; }
+    .hlf-btn { padding: 10px 20px; background: var(--text); color: var(--bg); border: none; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; }
+    .hlf-btn:hover { background: #2A2218; }
+    .hero-badge-float {
+      position: absolute; top: 20px; right: -12px;
+      background: var(--accent); color: #fff;
+      padding: 8px 14px; border-radius: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      box-shadow: var(--scard);
+    }
+
+    /* === TRUST STRIP === */
+    .trust-strip {
+      background: var(--bg-dark); border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .trust-inner {
+      max-width: 1440px; margin: 0 auto; padding: 0 40px;
+      display: grid; grid-template-columns: repeat(5,1fr);
+    }
+    .trust-item {
+      padding: 22px 16px; text-align: center; display: flex;
+      align-items: center; justify-content: center; gap: 10px;
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { color: var(--accent); flex-shrink: 0; }
+    .trust-text { font-size: 12.5px; font-weight: 500; color: #ccc; text-align: left; line-height: 1.4; }
+
+    /* === BENTO CATEGORIES === */
+    .bento-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 320px 200px; gap: 10px;
+    }
+    .bc { position: relative; overflow: hidden; cursor: pointer; border-radius: 8px; background: var(--bg-dark); }
+    .bc:first-child { grid-row: span 2; }
+    .bc-bg { position: absolute; inset: 0; transition: transform .5s ease; }
+    .bc:hover .bc-bg { transform: scale(1.05); }
+    .bc-sw  { background: linear-gradient(145deg,#1C1C1C,#0A0A0A); }
+    .bc-sk  { background: linear-gradient(145deg,#1E170E,#100A05); }
+    .bc-hb  { background: linear-gradient(145deg,#1C0F12,#0E0608); }
+    .bc-hp  { background: linear-gradient(145deg,#0F1622,#080C18); }
+    .bc-em  { background: linear-gradient(145deg,#1C1708,#0E0D04); }
+    .bc-cf-tex {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(45deg,rgba(255,255,255,.011) 0,rgba(255,255,255,.011) 1px,transparent 1px,transparent 50%),repeating-linear-gradient(-45deg,rgba(255,255,255,.011) 0,rgba(255,255,255,.011) 1px,transparent 1px,transparent 50%);
+      background-size: 7px 7px;
+    }
+    .bc-grad { position: absolute; inset: 0; background: linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.1) 55%,transparent 100%); }
+    .bc-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-58%); opacity: .12; transition: opacity .3s; }
+    .bc:hover .bc-icon { opacity: .2; }
+    .bc-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; z-index: 2; }
+    .bc-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: #F0F0F0; margin-bottom: 3px; }
+    .bc-sub { font-size: 11px; color: var(--accent); letter-spacing: .06em; }
+    .bc-arr { position: absolute; right: 18px; bottom: 22px; z-index: 3; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; opacity: 0; transform: translateX(-6px); transition: all .25s; }
+    .bc:hover .bc-arr { opacity: 1; transform: translateX(0); }
+
+    /* === MATERIALS (LIGHT) === */
+    .mat-l-section { background: var(--bg-card); }
+    .mat-l-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--border); }
+    .mat-l-item { padding: 52px 44px; border-right: 1px solid var(--border); transition: background .2s; }
+    .mat-l-item:last-child { border-right: none; }
+    .mat-l-item:hover { background: var(--bg); }
+    .mat-l-swatch { width: 64px; height: 64px; border-radius: 14px; margin-bottom: 24px; }
+    .mls-cf { background: #1a1a1a; background-image: repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 1px,transparent 1px,transparent 50%),repeating-linear-gradient(-45deg,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 1px,transparent 1px,transparent 50%); background-size: 6px 6px; border: 1px solid rgba(0,0,0,.1); }
+    .mls-np { background: linear-gradient(135deg,#5C3A2A,#3E2318 50%,#6B4538); }
+    .mls-al { background: linear-gradient(135deg,#2E2E2E,#1C1C1C); }
+    .mat-l-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .mat-l-orig { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+    .mat-l-desc { font-size: 14px; color: var(--mid); line-height: 1.8; }
+
+    /* === EDITORIAL PRODUCTS === */
+    .edit-prod-section { background: var(--bg); }
+    .edit-featured {
+      display: grid; grid-template-columns: 3fr 2fr; gap: 60px;
+      align-items: center; margin-bottom: 60px; padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .edit-featured.rev { grid-template-columns: 2fr 3fr; }
+    .edit-featured.rev .ef-img { order: 2; }
+    .edit-featured.rev .ef-text { order: 1; }
+    .ef-img {
+      aspect-ratio: 4/3; background: var(--bg-sect); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; border: 1px solid var(--border);
+    }
+    .ef-img-icon { opacity: .25; }
+    .ef-img-tag {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--text); color: var(--bg);
+      padding: 5px 12px; border-radius: 4px;
+      font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    }
+    .ef-text {}
+    .ef-cat { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .ef-name { font-family: 'Playfair Display', serif; font-size: clamp(24px,3vw,38px); font-weight: 900; color: var(--text); line-height: 1.12; margin-bottom: 16px; }
+    .ef-desc { font-size: 14px; color: var(--mid); line-height: 1.8; margin-bottom: 24px; }
+    .ef-configs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .ef-chip { padding: 6px 12px; border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--mid); }
+    .ef-foot { display: flex; align-items: center; gap: 20px; }
+    .ef-price { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 800; color: var(--text); }
+    .ef-price .ef-fr { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); font-weight: 400; margin-right: 4px; }
+    .ef-cta {
+      padding: 12px 28px; background: var(--accent); color: #fff;
+      border: none; border-radius: 5px; font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: all .2s;
+    }
+    .ef-cta:hover { background: #9A6410; transform: translateY(-1px); }
+    .ef-link { font-size: 13px; color: var(--accent); font-weight: 600; border-bottom: 1px solid var(--accent); padding-bottom: 1px; cursor: pointer; }
+
+    /* small product grid under editorial */
+    .small-prod-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .spc {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden; cursor: pointer;
+      transition: all .25s;
+    }
+    .spc:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--scard); }
+    .spi { aspect-ratio: 1; background: var(--bg-sect); display: flex; align-items: center; justify-content: center; position: relative; }
+    .spb { padding: 14px; }
+    .spb-cat { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+    .spb-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .spb-var { font-size: 12px; color: var(--mid); margin-bottom: 14px; }
+    .spb-foot { display: flex; align-items: center; justify-content: space-between; }
+    .spb-price { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text); }
+    .spb-price .fr { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--muted); font-weight: 400; margin-right: 2px; }
+    .spb-add { width: 34px; height: 34px; border-radius: 6px; background: var(--text); border: none; cursor: pointer; color: var(--bg); display: flex; align-items: center; justify-content: center; transition: all .2s; }
+    .spb-add:hover { background: #2A2218; transform: scale(1.07); }
+
+    /* === CRAFT STORY SECTION (dark) === */
+    .craft-section { background: var(--bg-dark); }
+    .craft-inner {
+      max-width: 1440px; margin: 0 auto; padding: 96px 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .craft-label { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 20px; }
+    .craft-h { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(36px,4.5vw,60px); color: #F0EDE6; line-height: 1.08; margin-bottom: 24px; }
+    .craft-h em { color: var(--accent); font-style: italic; }
+    .craft-p { font-size: 15px; color: #888; line-height: 1.85; margin-bottom: 20px; font-weight: 300; }
+    .craft-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+    .cs-item { padding: 22px; background: rgba(255,255,255,.04); border-radius: 8px; border: 1px solid rgba(255,255,255,.07); }
+    .cs-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+    .cs-lbl { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: .1em; }
+    .craft-visual { position: relative; }
+    .craft-vis-main { background: #111; border-radius: 12px; padding: 48px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.06); }
+    .craft-vis-tag {
+      position: absolute; bottom: -16px; left: 24px; right: 24px;
+      background: var(--accent); color: #fff;
+      border-radius: 8px; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cvt-title { font-weight: 700; font-size: 14px; }
+    .cvt-sub { font-size: 12px; opacity: .75; margin-top: 2px; }
+    .cvt-time { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; }
+
+    /* === REVIEWS === */
+    .reviews-l-section { background: var(--bg-sect); }
+    .rev-l-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .rlc {
+      background: var(--bg-card); border-radius: 10px; padding: 28px;
+      border: 1px solid var(--border); transition: box-shadow .2s;
+    }
+    .rlc:hover { box-shadow: var(--scard); }
+    .rlc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+    .rlc-stars { color: var(--accent); font-size: 16px; letter-spacing: 2px; }
+    .rlc-verified { font-size: 10.5px; color: #5B9F4B; font-weight: 600; letter-spacing: .05em; }
+    .rlc-text { font-size: 14px; color: var(--mid); line-height: 1.8; font-style: italic; margin-bottom: 20px; }
+    .rlc-auth { display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .rlc-av { width: 40px; height: 40px; border-radius: 50%; background: var(--a-dim); border: 1px solid var(--a-bord); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .rlc-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .rlc-car { font-size: 11px; color: var(--accent); letter-spacing: .05em; }
+
+    /* === NEWSLETTER === */
+    .newsletter-section { background: var(--accent); }
+    .newsletter-inner { max-width: 1440px; margin: 0 auto; padding: 80px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .nl-h { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(28px,4vw,48px); color: #fff; line-height: 1.1; margin-bottom: 12px; }
+    .nl-h em { font-style: italic; }
+    .nl-p { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.7; }
+    .nl-form { display: flex; flex-direction: column; gap: 12px; }
+    .nl-form-row { display: flex; }
+    .nl-input {
+      flex: 1; padding: 14px 20px; border: none; border-radius: 5px 0 0 5px;
+      font-size: 14px; font-family: 'Inter', sans-serif; color: var(--text);
+      background: #fff; outline: none;
+    }
+    .nl-input::placeholder { color: var(--muted); }
+    .nl-submit {
+      padding: 14px 22px; background: var(--text); color: #fff;
+      border: none; border-radius: 0 5px 5px 0; font-size: 13px; font-weight: 700;
+      letter-spacing: .05em; cursor: pointer; transition: background .2s; white-space: nowrap;
+    }
+    .nl-submit:hover { background: #2A2218; }
+    .nl-note { font-size: 12px; color: rgba(255,255,255,.6); }
+    .nl-community { display: flex; align-items: center; gap: 12px; }
+    .nl-avatars { display: flex; }
+    .nl-av { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--accent); background: var(--bg-sect); margin-right: -8px; font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: var(--text); }
+    .nl-join { font-size: 13px; color: rgba(255,255,255,.8); font-weight: 500; }
+
+    /* === FOOTER (LIGHT) === */
+    footer-l {}
+    .foot-l { background: var(--bg-dark); }
+    .foot-l-main {
+      max-width: 1440px; margin: 0 auto; padding: 64px 40px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+    }
+    .foot-l-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: #666; margin-bottom: 14px; }
+    .foot-l-logo em { color: var(--accent); font-style: italic; }
+    .foot-l-desc { font-size: 14px; color: #3A3A3A; line-height: 1.75; max-width: 260px; margin-bottom: 24px; }
+    .foot-l-soc { display: flex; gap: 9px; }
+    .flsb { width: 36px; height: 36px; border-radius: 8px; border: 1px solid rgba(255,255,255,.09); background: none; color: #444; cursor: pointer; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+    .flsb:hover { border-color: var(--accent); color: var(--accent); }
+    .foot-l-ch { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #444; margin-bottom: 18px; }
+    .foot-l-cl { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .foot-l-cl a { font-size: 14px; color: #3A3A3A; transition: color .2s; }
+    .foot-l-cl a:hover { color: #888; }
+    .foot-l-bot {
+      max-width: 1440px; margin: 0 auto; padding: 20px 40px;
+      border-top: 1px solid rgba(255,255,255,.04);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .foot-l-bot p { font-size: 12px; color: #333; }
+    .pay-row-l { display: flex; gap: 7px; }
+    .pay-ic-l { width: 44px; height: 26px; border-radius: 4px; background: rgba(255,255,255,.05); font-size: 9px; font-weight: 800; color: #555; display: flex; align-items: center; justify-content: center; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) { .small-prod-grid { grid-template-columns: repeat(2,1fr); } .foot-l-main { grid-template-columns: 1fr 1fr; gap: 40px; } .foot-l-main > div:first-child { grid-column: span 2; } .newsletter-inner { grid-template-columns: 1fr; gap: 40px; } }
+    @media (max-width: 900px) { .bento-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; } .bc:first-child { grid-row: auto; grid-column: span 2; } .mat-l-grid { grid-template-columns: 1fr; } .mat-l-item { border-right: none; border-bottom: 1px solid var(--border); } .mat-l-item:last-child { border-bottom: none; } .rev-l-grid { grid-template-columns: 1fr; } .craft-inner { grid-template-columns: 1fr; } .edit-featured { grid-template-columns: 1fr; } .edit-featured.rev .ef-img, .edit-featured.rev .ef-text { order: unset; } .trust-inner { grid-template-columns: 1fr 1fr; } .trust-item:nth-child(5) { border-right: none; } }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 60px; }
+      .nav-links { display: none; } .hamburger-l { display: flex; }
+      .hero-l-inner { grid-template-columns: 1fr; padding: 50px 20px; }
+      .hero-l-deco { display: none; }
+      .hero-l-vis { max-width: 320px; margin: 0 auto; }
+      .wrap { padding: 60px 20px; }
+      .craft-inner { padding: 60px 20px; gap: 40px; }
+      .trust-inner { grid-template-columns: 1fr; padding: 0 20px; }
+      .trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+      .trust-item:last-child { border-bottom: none; }
+      .newsletter-inner { padding: 60px 20px; }
+      .nl-form-row { flex-direction: column; }
+      .nl-input { border-radius: 5px; }
+      .nl-submit { border-radius: 5px; }
+      .foot-l-main { grid-template-columns: 1fr; padding: 40px 20px; }
+      .foot-l-main > div:first-child { grid-column: span 1; }
+      .foot-l-bot { padding: 18px 20px; flex-direction: column; gap: 12px; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .bc:first-child { grid-column: span 1; }
+    }
+    @media (max-width: 480px) { .small-prod-grid { grid-template-columns: 1fr; } .craft-stats { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <div class="logo-s">
+      <span class="logo-sn">Vette <em>Craft</em></span>
+      <span class="logo-st">Handmade Corvette Accessories</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Steering Wheels</a></li>
+      <li><a href="#">Shift Knobs</a></li>
+      <li><a href="#">Handbrakes</a></li>
+      <li><a href="#">Emblems</a></li>
+      <li><a href="#">Custom Order</a></li>
+    </ul>
+    <div class="nav-r">
+      <button class="ni-l">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="ni-l">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="nav-cart-l">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Bag (0)
+      </button>
+      <button class="hamburger-l"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero-l">
+  <div class="hero-l-deco"></div>
+  <div class="hero-l-inner">
+    <div>
+      <div class="hero-l-eyebrow">Handcrafted to Order</div>
+      <h1 class="hero-l-h1">
+        Built for<br>
+        <em>America's</em><br>
+        Finest Sports<br>
+        Car
+      </h1>
+      <p class="hero-l-p">
+        Premium interior accessories handmade for every Chevrolet Corvette.
+        <strong>Genuine Nappa leather</strong>, <strong>Alcantara</strong>, and <strong>carbon fiber</strong>
+        — cut, wrapped, and stitched by hand for your exact specification.
+      </p>
+      <div class="hero-l-btns">
+        <button class="btn-dark-l">Shop Collection</button>
+        <button class="btn-outline-l">Configure Yours →</button>
+      </div>
+      <div class="hero-l-mats">
+        <span>Materials:</span>
+        <div class="mat-dot md-cf" title="Carbon Fiber"></div>
+        <div class="mat-dot md-np" title="Nappa Leather"></div>
+        <div class="mat-dot md-al" title="Alcantara"></div>
+      </div>
+    </div>
+
+    <div class="hero-l-vis">
+      <div class="hero-badge-float">C5 · C6 · C7 · C8</div>
+      <div class="hero-l-frame">
+        <div class="hlf-top">
+          <svg width="65%" height="65%" viewBox="0 0 400 400">
+            <circle cx="200" cy="200" r="168" fill="none" stroke="#C8B898" stroke-width="26"/>
+            <circle cx="200" cy="200" r="168" fill="none" stroke="#5C3A2A" stroke-width="26" stroke-dasharray="85 196" opacity=".7"/>
+            <circle cx="200" cy="200" r="168" fill="none" stroke="#5C3A2A" stroke-width="26" stroke-dasharray="85 196" stroke-dashoffset="-281" opacity=".7"/>
+            <line x1="200" y1="200" x2="200" y2="40" stroke="#D0C8B8" stroke-width="13" stroke-linecap="round"/>
+            <line x1="200" y1="200" x2="62" y2="302" stroke="#D0C8B8" stroke-width="13" stroke-linecap="round"/>
+            <line x1="200" y1="200" x2="338" y2="302" stroke="#D0C8B8" stroke-width="13" stroke-linecap="round"/>
+            <circle cx="200" cy="200" r="32" fill="#EDE6D8" stroke="#D0C8B8" stroke-width="2"/>
+            <circle cx="200" cy="200" r="18" fill="#B87A12" opacity=".85"/>
+            <circle cx="200" cy="200" r="8" fill="#7A5208"/>
+            <rect x="136" y="192" width="26" height="14" rx="5" fill="#E5DDD0" stroke="#C8B898" stroke-width="1.5"/>
+            <rect x="238" y="192" width="26" height="14" rx="5" fill="#E5DDD0" stroke="#C8B898" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="hlf-info">
+          <div class="hlf-cat">Steering Wheel · Bestseller</div>
+          <div class="hlf-name">Carbon + Nappa Leather Wrap</div>
+          <div class="hlf-var">Gloss Carbon · Cognac Leather · Amber Thread</div>
+          <div class="hlf-foot">
+            <div class="hlf-price"><span class="fr">from</span>$480</div>
+            <button class="hlf-btn">Configure →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+      <div class="trust-text">Handmade<br>to Order</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="trust-text">Fits C5–C8<br>Corvette</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+      <div class="trust-text">Free US Shipping<br>on orders $300+</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="trust-text">Craft Quality<br>Guarantee</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <div class="trust-text">Secure<br>Checkout</div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES BENTO -->
+<div class="wrap" style="padding-bottom:88px;">
+  <div style="margin-bottom:52px;">
+    <div class="sec-eye">Browse By Category</div>
+    <div class="sec-h">Our Collection</div>
+  </div>
+  <div class="bento-grid">
+    <div class="bc">
+      <div class="bc-bg bc-sw"></div><div class="bc-cf-tex"></div><div class="bc-grad"></div>
+      <div class="bc-icon">
+        <svg width="180" height="180" viewBox="0 0 400 400"><circle cx="200" cy="200" r="172" fill="none" stroke="#fff" stroke-width="22"/><line x1="200" y1="200" x2="200" y2="36" stroke="#fff" stroke-width="11" stroke-linecap="round"/><line x1="200" y1="200" x2="58" y2="306" stroke="#fff" stroke-width="11" stroke-linecap="round"/><line x1="200" y1="200" x2="342" y2="306" stroke="#fff" stroke-width="11" stroke-linecap="round"/><circle cx="200" cy="200" r="30" fill="#fff"/></svg>
+      </div>
+      <div class="bc-info"><div class="bc-name">Steering Wheels</div><div class="bc-sub">11 configurations · Carbon, Nappa, Alcantara</div></div>
+      <div class="bc-arr">→</div>
+    </div>
+    <div class="bc">
+      <div class="bc-bg bc-sk"></div><div class="bc-cf-tex"></div><div class="bc-grad"></div>
+      <div class="bc-icon"><svg width="80" height="80" viewBox="0 0 200 200"><ellipse cx="100" cy="55" rx="50" ry="40" fill="none" stroke="#fff" stroke-width="10"/><rect x="90" y="93" width="20" height="68" rx="8" fill="none" stroke="#fff" stroke-width="10"/></svg></div>
+      <div class="bc-info"><div class="bc-name">Shift Knobs</div><div class="bc-sub">5 types · Standard, Ball, Tall</div></div>
+      <div class="bc-arr">→</div>
+    </div>
+    <div class="bc">
+      <div class="bc-bg bc-hb"></div><div class="bc-cf-tex"></div><div class="bc-grad"></div>
+      <div class="bc-icon"><svg width="80" height="80" viewBox="0 0 200 200"><rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#fff" stroke-width="10"/><circle cx="100" cy="18" r="11" fill="none" stroke="#fff" stroke-width="8"/><rect x="38" y="135" width="124" height="18" rx="9" fill="none" stroke="#fff" stroke-width="8"/></svg></div>
+      <div class="bc-info"><div class="bc-name">Handbrakes</div><div class="bc-sub">Grip · Cover · Button</div></div>
+      <div class="bc-arr">→</div>
+    </div>
+    <div class="bc">
+      <div class="bc-bg bc-hp"></div><div class="bc-cf-tex"></div><div class="bc-grad"></div>
+      <div class="bc-icon"><svg width="80" height="60" viewBox="0 0 200 140"><ellipse cx="100" cy="70" rx="76" ry="50" fill="none" stroke="#fff" stroke-width="10"/></svg></div>
+      <div class="bc-info"><div class="bc-name">Horn Pads</div><div class="bc-sub">Round & T-Shaped</div></div>
+      <div class="bc-arr">→</div>
+    </div>
+    <div class="bc">
+      <div class="bc-bg bc-em"></div><div class="bc-cf-tex"></div><div class="bc-grad"></div>
+      <div class="bc-icon"><svg width="80" height="80" viewBox="0 0 200 200"><polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#fff" stroke-width="10"/></svg></div>
+      <div class="bc-info"><div class="bc-name">SW Emblems</div><div class="bc-sub">Z06 · ZR1 · Racing</div></div>
+      <div class="bc-arr">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- MATERIALS -->
+<div class="mat-l-section">
+  <div class="wrap" style="padding-bottom:0;padding-top:0;">
+    <div style="padding:88px 0 52px;">
+      <div class="sec-eye">What We Use</div>
+      <div class="sec-h">Premium Materials</div>
+    </div>
+  </div>
+  <div class="mat-l-grid">
+    <div class="mat-l-item">
+      <div class="mat-l-swatch mls-cf"></div>
+      <div class="mat-l-name">Carbon Fiber</div>
+      <div class="mat-l-orig">Gloss · Matte · Color Options</div>
+      <p class="mat-l-desc">Aerospace-grade 2×2 twill weave carbon fiber. Available in gloss or matte lacquer finish and a range of colors — classic black, red, blue, gold tint, and more.</p>
+    </div>
+    <div class="mat-l-item">
+      <div class="mat-l-swatch mls-np"></div>
+      <div class="mat-l-name">Nappa Leather</div>
+      <div class="mat-l-orig">Full-Grain Italian · Smooth or Perforated</div>
+      <p class="mat-l-desc">Buttery full-grain Nappa leather sourced from Italy. The same quality used in European luxury sports cars. Available smooth or perforated with custom thread color choices.</p>
+    </div>
+    <div class="mat-l-item">
+      <div class="mat-l-swatch mls-al"></div>
+      <div class="mat-l-name">Alcantara®</div>
+      <div class="mat-l-orig">Genuine · Racing-Grade Suede</div>
+      <p class="mat-l-desc">The preferred material of Formula 1 teams and exotic car manufacturers. Superior grip, minimal glare, and a premium tactile feel that lasts far longer than natural suede.</p>
+    </div>
+  </div>
+  <div style="height:88px;"></div>
+</div>
+
+<!-- EDITORIAL PRODUCTS -->
+<div class="edit-prod-section">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;">
+      <div><div class="sec-eye">Hand-Picked</div><div class="sec-h">Featured Products</div></div>
+      <a href="#" style="color:var(--accent);font-size:13px;font-weight:600;border-bottom:1px solid var(--accent);padding-bottom:2px;">Full Catalog →</a>
+    </div>
+
+    <!-- Featured 1: Steering Wheel -->
+    <div class="edit-featured">
+      <div class="ef-img">
+        <svg class="ef-img-icon" width="50%" height="50%" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#C8B898" stroke-width="24"/>
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#B87A12" stroke-width="24" stroke-dasharray="82 196" opacity=".65"/>
+          <line x1="200" y1="200" x2="200" y2="40" stroke="#C8B898" stroke-width="12" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="62" y2="302" stroke="#C8B898" stroke-width="12" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="338" y2="302" stroke="#C8B898" stroke-width="12" stroke-linecap="round"/>
+          <circle cx="200" cy="200" r="30" fill="#D0C8B8"/>
+        </svg>
+        <div class="ef-img-tag">Most Popular</div>
+      </div>
+      <div class="ef-text">
+        <div class="ef-cat">Steering Wheel</div>
+        <div class="ef-name">Carbon + Nappa Leather Custom Wrap</div>
+        <p class="ef-desc">Our flagship product. Crafted with aerospace-grade carbon fiber inserts and premium full-grain Nappa leather. Each piece is sewn by hand and takes 3–4 days to complete.</p>
+        <div class="ef-configs">
+          <span class="ef-chip">Gloss Carbon</span><span class="ef-chip">Matte Carbon</span>
+          <span class="ef-chip">Smooth Leather</span><span class="ef-chip">Perforated</span>
+          <span class="ef-chip">+ Alcantara</span>
+        </div>
+        <div class="ef-foot">
+          <div class="ef-price"><span class="ef-fr">from</span>$480</div>
+          <button class="ef-cta">Configure & Order</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured 2: Shift Knob Set -->
+    <div class="edit-featured rev">
+      <div class="ef-img">
+        <svg class="ef-img-icon" width="40%" height="40%" viewBox="0 0 200 200">
+          <ellipse cx="100" cy="55" rx="50" ry="40" fill="none" stroke="#C8B898" stroke-width="9"/>
+          <ellipse cx="100" cy="55" rx="50" ry="40" fill="none" stroke="#B87A12" stroke-width="9" stroke-dasharray="55 115" opacity=".65"/>
+          <rect x="90" y="93" width="20" height="68" rx="8" fill="none" stroke="#C8B898" stroke-width="9"/>
+          <line x1="100" y1="161" x2="100" y2="188" stroke="#C8B898" stroke-width="11" stroke-linecap="round"/>
+        </svg>
+        <div class="ef-img-tag">5 Types Available</div>
+      </div>
+      <div class="ef-text">
+        <div class="ef-cat">Shift Knob Collection</div>
+        <div class="ef-name">Premium Shift Knob — All Types</div>
+        <p class="ef-desc">From the standard gear knob to the drift-style tall version and carbon ball. Every type is available in carbon + leather, full Alcantara, or mixed combinations.</p>
+        <div class="ef-configs">
+          <span class="ef-chip">Standard</span><span class="ef-chip">Ball Knob</span>
+          <span class="ef-chip">Tall / Drift</span><span class="ef-chip">Cover</span>
+          <span class="ef-chip">Shift Pattern Cap</span>
+        </div>
+        <div class="ef-foot">
+          <div class="ef-price"><span class="ef-fr">from</span>$120</div>
+          <button class="ef-cta">Shop Shift Knobs</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Small grid -->
+    <div class="small-prod-grid">
+      <div class="spc">
+        <div class="spi"><svg width="70" height="70" viewBox="0 0 200 200"><rect x="72" y="20" width="56" height="110" rx="16" fill="none" stroke="#B87A12" stroke-width="9" opacity=".5"/><circle cx="100" cy="18" r="11" fill="none" stroke="#C8B898" stroke-width="7"/><rect x="38" y="135" width="124" height="18" rx="9" fill="none" stroke="#C8B898" stroke-width="7"/></svg></div>
+        <div class="spb"><div class="spb-cat">Handbrake</div><div class="spb-name">Carbon + Alcantara Grip</div><div class="spb-var">Matte Carbon · Custom Thread</div><div class="spb-foot"><div class="spb-price"><span class="fr">from</span>$185</div><button class="spb-add"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div>
+      </div>
+      <div class="spc">
+        <div class="spi"><svg width="70" height="70" viewBox="0 0 200 200"><ellipse cx="100" cy="70" rx="76" ry="50" fill="none" stroke="#C8B898" stroke-width="8" opacity=".5"/><ellipse cx="100" cy="70" rx="76" ry="50" fill="none" stroke="#B87A12" stroke-width="8" stroke-dasharray="60 140" opacity=".65"/></svg></div>
+        <div class="spb"><div class="spb-cat">Horn Pad</div><div class="spb-name">Nappa Leather Horn Pad</div><div class="spb-var">Round & T-Shape · Leather or Alcantara</div><div class="spb-foot"><div class="spb-price"><span class="fr">from</span>$85</div><button class="spb-add"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div>
+      </div>
+      <div class="spc">
+        <div class="spi"><svg width="80" height="80" viewBox="0 0 200 200"><polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#C8B898" stroke-width="9" opacity=".5"/><polygon points="100,18 184,65 184,135 100,182 16,135 16,65" fill="none" stroke="#B87A12" stroke-width="9" stroke-dasharray="65 165" opacity=".65"/><text x="100" y="118" font-size="34" fill="#C8B898" text-anchor="middle" font-weight="900" font-family="sans-serif" opacity=".5">ZR1</text></svg></div>
+        <div class="spb"><div class="spb-cat">SW Emblem</div><div class="spb-name">ZR1 Carbon Emblem</div><div class="spb-var">Gloss or Matte · Color options</div><div class="spb-foot"><div class="spb-price"><span class="fr">from</span>$95</div><button class="spb-add"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div>
+      </div>
+      <div class="spc">
+        <div class="spi"><svg width="120" height="50" viewBox="0 0 280 90"><path d="M14 45 Q70 22 140 28 Q210 34 266 14" fill="none" stroke="#C8B898" stroke-width="10" stroke-linecap="round" opacity=".5"/><path d="M14 58 Q70 38 140 44 Q210 50 266 32" fill="none" stroke="#B87A12" stroke-width="6" stroke-linecap="round" opacity=".5"/></svg></div>
+        <div class="spb"><div class="spb-cat">Side Skirts</div><div class="spb-name">Carbon Fiber Side Skirts</div><div class="spb-var">Gloss or Matte · Custom color</div><div class="spb-foot"><div class="spb-price"><span class="fr">from</span>$420</div><button class="spb-add"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE CRAFT (dark section) -->
+<div class="craft-section">
+  <div class="craft-inner">
+    <div>
+      <div class="craft-label">About the Process</div>
+      <h2 class="craft-h">Every Piece <em>Handmade,</em><br>Every Time</h2>
+      <p class="craft-p">We don't use machines for the stitching. Each steering wheel wrap, shift knob, and handbrake grip is cut by hand from full material sheets, wrapped carefully around the original part, and sewn with a hand needle or awl.</p>
+      <p class="craft-p">Lead time is 10–14 business days because quality takes time. We'd rather take longer and deliver something that lasts years than rush a piece that fails in months.</p>
+      <div class="craft-stats">
+        <div class="cs-item"><div class="cs-num">500+</div><div class="cs-lbl">Orders Completed</div></div>
+        <div class="cs-item"><div class="cs-num">14<span style="font-size:22px;">days</span></div><div class="cs-lbl">Avg. Lead Time</div></div>
+        <div class="cs-item"><div class="cs-num">4.9★</div><div class="cs-lbl">Customer Rating</div></div>
+        <div class="cs-item"><div class="cs-num">C5–C8</div><div class="cs-lbl">All Generations</div></div>
+      </div>
+    </div>
+
+    <div class="craft-visual">
+      <div class="craft-vis-main">
+        <svg width="72%" height="72%" viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#1E1E1E" stroke-width="28"/>
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#B87A12" stroke-width="28" stroke-dasharray="88 196" opacity=".7"/>
+          <circle cx="200" cy="200" r="168" fill="none" stroke="#B87A12" stroke-width="28" stroke-dasharray="88 196" stroke-dashoffset="-284" opacity=".7"/>
+          <line x1="200" y1="200" x2="200" y2="40" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="62" y2="302" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="338" y2="302" stroke="#1E1E1E" stroke-width="14" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="200" y2="40" stroke="#2E2E2E" stroke-width="4" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="62" y2="302" stroke="#2E2E2E" stroke-width="4" stroke-linecap="round"/>
+          <line x1="200" y1="200" x2="338" y2="302" stroke="#2E2E2E" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="200" cy="200" r="32" fill="#141414" stroke="#2A2A2A" stroke-width="2"/>
+          <circle cx="200" cy="200" r="18" fill="#B87A12" opacity=".8"/>
+          <circle cx="200" cy="200" r="8" fill="#0A0A0A"/>
+          <rect x="136" y="192" width="26" height="14" rx="5" fill="#1C1C1C" stroke="#333" stroke-width="1.5"/>
+          <rect x="238" y="192" width="26" height="14" rx="5" fill="#1C1C1C" stroke="#333" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="craft-vis-tag" style="position:relative;margin-top:24px;">
+        <div>
+          <div class="cvt-title">Made to Your Specification</div>
+          <div class="cvt-sub">Carbon Fiber · Nappa Leather · Custom Thread</div>
+        </div>
+        <div class="cvt-time">~12 days</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="reviews-l-section">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px;">
+      <div><div class="sec-eye">Customer Stories</div><div class="sec-h">What Owners Say</div></div>
+      <div style="font-size:13px;color:var(--mid);">Verified purchases only ·&nbsp;<span style="color:var(--accent);font-weight:600;">★ 4.9 / 5</span></div>
+    </div>
+    <div class="rev-l-grid">
+      <div class="rlc">
+        <div class="rlc-top"><div class="rlc-stars">★★★★★</div><div class="rlc-verified">✓ Verified Buyer</div></div>
+        <p class="rlc-text">"Incredible quality — my C8 interior looks like something you'd see in a show car. The Nappa leather steering wheel feels amazing after months of use. Worth every penny."</p>
+        <div class="rlc-auth"><div class="rlc-av">M</div><div><div class="rlc-name">Mike R.</div><div class="rlc-car">2023 Corvette C8 Stingray · Z51</div></div></div>
+      </div>
+      <div class="rlc">
+        <div class="rlc-top"><div class="rlc-stars">★★★★★</div><div class="rlc-verified">✓ Verified Buyer</div></div>
+        <p class="rlc-text">"Ordered the full interior set. The attention to detail is extraordinary — every stitch is perfect. I had questions during the order and they responded same-day. Exceptional customer service."</p>
+        <div class="rlc-auth"><div class="rlc-av">S</div><div><div class="rlc-name">Sarah K.</div><div class="rlc-car">2021 Corvette C8 · Rapid Blue</div></div></div>
+      </div>
+      <div class="rlc">
+        <div class="rlc-top"><div class="rlc-stars">★★★★★</div><div class="rlc-verified">✓ Verified Buyer</div></div>
+        <p class="rlc-text">"I drive a Z06 and was worried the fitment might be off. Perfect fit, first time. The carbon and Alcantara combo looks more expensive than my entire aftermarket setup combined."</p>
+        <div class="rlc-auth"><div class="rlc-av">J</div><div><div class="rlc-name">Jason K.</div><div class="rlc-car">2023 Corvette C8 Z06 · Carbon pkg</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-section">
+  <div class="newsletter-inner">
+    <div>
+      <h2 class="nl-h">Join the<br><em>Vette Craft</em><br>Community</h2>
+      <p class="nl-p">Get first access to new products, build showcases, installation guides, and exclusive subscriber discounts. No spam — ever.</p>
+      <div class="nl-community" style="margin-top:24px;">
+        <div class="nl-avatars">
+          <div class="nl-av">M</div><div class="nl-av">S</div><div class="nl-av">D</div><div class="nl-av">J</div>
+        </div>
+        <div class="nl-join">2,400+ Corvette owners subscribed</div>
+      </div>
+    </div>
+    <div class="nl-form">
+      <div class="nl-form-row">
+        <input class="nl-input" type="email" placeholder="Your email address">
+        <button class="nl-submit">Subscribe →</button>
+      </div>
+      <p class="nl-note">No spam. Unsubscribe any time. Usually 2–3 emails per month.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot-l">
+  <div class="foot-l-main">
+    <div>
+      <div class="foot-l-logo">Vette <em>Craft</em></div>
+      <p class="foot-l-desc">Premium handmade interior accessories for Chevrolet Corvette owners. Every piece built to order from genuine Nappa leather, Alcantara, and carbon fiber.</p>
+      <div class="foot-l-soc">
+        <button class="flsb">ig</button><button class="flsb">fb</button>
+        <button class="flsb">yt</button><button class="flsb">in</button>
+      </div>
+    </div>
+    <div><div class="foot-l-ch">Products</div><ul class="foot-l-cl"><li><a href="#">Steering Wheels</a></li><li><a href="#">Shift Knobs</a></li><li><a href="#">Handbrakes</a></li><li><a href="#">Horn Pads</a></li><li><a href="#">Emblems</a></li><li><a href="#">Side Skirts</a></li></ul></div>
+    <div><div class="foot-l-ch">Information</div><ul class="foot-l-cl"><li><a href="#">About Us</a></li><li><a href="#">Materials Guide</a></li><li><a href="#">Custom Orders</a></li><li><a href="#">Installation</a></li><li><a href="#">FAQ</a></li></ul></div>
+    <div><div class="foot-l-ch">Support</div><ul class="foot-l-cl"><li><a href="#">Shipping & Returns</a></li><li><a href="#">Track Order</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Warranty</a></li></ul></div>
+  </div>
+  <div class="foot-l-bot">
+    <p>© 2025 Vette Craft. All rights reserved. · Not affiliated with General Motors or Chevrolet Corporation.</p>
+    <div class="pay-row-l"><div class="pay-ic-l">VISA</div><div class="pay-ic-l">MC</div><div class="pay-ic-l">AMEX</div><div class="pay-ic-l">PP</div></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -22,6 +22,43 @@ This skill helps create professional, consistent YouTube banners for Torah lesso
 - White text for subtitles and author information
 - "ДМИТРИЙ КАЛАШНИК" name plate at the bottom
 
+## ⚠️ КРИТИЧНЫЕ ПРАВИЛА
+
+### 1️⃣ ЛОГОТИП КАНАЛА - ТОЛЬКО ОРИГИНАЛЬНЫЙ!
+
+**ОБЯЗАТЕЛЬНОЕ ПРАВИЛО**: На всех баннерах ДОЛЖЕН быть только оригинальный логотип канала БНЕЙ НОАХ!
+
+**Оригинальный логотип**:
+- Путь: `C:\Users\Алекс\.cursor\projects\c-Users-Documents-Carbon-cursor/assets/c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_cbbb5115f1f052b82ffc2da929f98d82_images_Screenshot1-b89ff80f-9fce-4c13-968f-f20380b3a2ec.png`
+- Описание: Круглое лого с Звездой Давида, символом בני נח, синяя и кремовая цветовая схема, черный контур
+- Дизайн: בני נח символ в центре, Звезда Давида на фоне, профессиональный стиль
+
+**Требования**:
+- ✅ Использовать ТОЛЬКО оригинальный логотип
+- ✅ НЕ создавать новые логотипы
+- ✅ НЕ использовать сгенерированные логотипы
+- ✅ Сохранять оригинальные цвета и дизайн
+- ✅ Не применять фильтры к логотипу
+
+### 2️⃣ ФОТО ДМИТРИЯ КАЛАШНИКА
+
+**ОБЯЗАТЕЛЬНОЕ ПРАВИЛО**: На всех баннерах ДОЛЖНО быть только оригинальное фото Дмитрия Калашника!
+
+**Доступные фото оригинала**:
+- `C:\Users\Алекс\.cursor\projects\c-Users-Documents-Carbon-cursor/assets/c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_cbbb5115f1f052b82ffc2da929f98d82_images_MK1_0393-ec88ed56-6a76-4d56-8f8b-2bcb3848f879.png`
+- `C:\Users\Алекс\.cursor\projects\c-Users-Documents-Carbon-cursor/assets/c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_cbbb5115f1f052b82ffc2da929f98d82_images_MK1_0393-2-e4b02614-90c7-4790-ad41-d7c103a59f84.png` (с красивым фоном библиотеки)
+- `C:\Users\Алекс\.cursor\projects\c-Users-Documents-Carbon-cursor/assets/c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_cbbb5115f1f052b82ffc2da929f98d82_images_MK1_0398-b0ca2c64-f658-4a10-adbe-b2e67b9986eb.png`
+- `C:\Users\Алекс\.cursor\projects\c-Users-Documents-Carbon-cursor/assets/c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_cbbb5115f1f052b82ffc2da929f98d82_images_MK1_0390-3d57f498-0a88-47dd-86f2-94b6ad46cac8.png`
+- `C:\Users\Алекс\.cursor\projects\c-Users-Documents-Carbon-cursor/assets/c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_cbbb5115f1f052b82ffc2da929f98d82_images_MK1_0384-a46294ff-308c-42f9-8d3c-467232a4f36c.png`
+
+**Требования**:
+- ✅ Использовать ТОЛЬКО эти реальные фото
+- ✅ НЕ создавать портреты из описания
+- ✅ НЕ использовать сгенерированные изображения лиц
+- ✅ Сохранять оригинальное качество и тон
+- ✅ Не применять фильтры или эффекты
+- ✅ Не менять размеры непропорционально
+
 ## Creating a Banner
 
 ### Essential Information to Gather
