@@ -224,11 +224,11 @@
     }
     .hero-p strong { color: #bbb; font-weight: 500; }
 
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 0; }
     .btn-gold {
       padding: 15px 38px;
       background: var(--accent); color: #000;
-      border: none; border-radius: 4px;
+      border: none; border-radius: 11px;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 17px; font-weight: 800; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer;
@@ -242,7 +242,7 @@
     .btn-ghost {
       padding: 15px 38px; background: transparent;
       color: #C8C8C8; border: 1px solid rgba(255,255,255,.18);
-      border-radius: 4px;
+      border-radius: 11px;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 17px; font-weight: 700; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer;
@@ -287,6 +287,7 @@
       border: 1px solid rgba(200,168,76,.13);
       position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
+      flex: 1;
     }
     .hero-card-img {
       width: 100%; height: auto; display: block;
@@ -638,15 +639,17 @@
     ══════════════════════════════════════ */
     .cta-band {
       position: relative; overflow: hidden;
-      background: #050505; text-align: center;
+      background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.png') center / cover no-repeat;
+      text-align: center;
       padding: 68px 48px;
     }
     .cta-glow {
       position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(var(--accent-rgb),.16) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 30% at 15% 50%, rgba(var(--accent-rgb),.08) 0%, transparent 100%),
-        radial-gradient(ellipse 40% 30% at 85% 50%, rgba(var(--accent-rgb),.08) 0%, transparent 100%);
+        linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(var(--accent-rgb),.18) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 15% 50%, rgba(var(--accent-rgb),.10) 0%, transparent 100%),
+        radial-gradient(ellipse 40% 30% at 85% 50%, rgba(var(--accent-rgb),.10) 0%, transparent 100%);
     }
     .cta-cf {
       position: absolute; inset: 0;
@@ -976,6 +979,17 @@
       padding-bottom: 24px;
     }
 
+    /* Review dots */
+    .rev-dots { display: none; }
+    .rev-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.2); transition: all .3s;
+    }
+    .rev-dot-active {
+      width: 20px; border-radius: 3px;
+      background: var(--accent);
+    }
+
     /* Mobile nav open state */
     @keyframes menuSlide {
       from { opacity: 0; transform: translateY(-8px); }
@@ -1046,23 +1060,121 @@
       .hero-h1 { font-size: clamp(38px, 12vw, 58px); line-height: .92; flex-direction: row; flex-wrap: wrap; gap: 0 .22em; align-items: baseline; justify-content: center; }
       .hero-h1 .h1-feel, .hero-h1 .h1-the, .hero-h1 .h1-drive { align-self: auto; }
       .hero-p { margin-left: auto; margin-right: auto; }
-      .hero-btns { justify-content: center; }
+      .hero-btns { justify-content: center; flex-wrap: nowrap; gap: 10px; }
+      .btn-gold, .btn-ghost { padding: 13px 20px; font-size: 15px; flex: 1; }
       .hero-stats { justify-content: center; }
       .stats-inner { grid-template-columns: repeat(2,1fr); padding: 0 20px; }
       .sstat:nth-child(2) { border-right: none; }
-      .wrap, .wrap-tight { padding: 64px 20px; }
-      .cat-grid { grid-template-columns: 1fr; }
+      .wrap, .wrap-tight { padding: 15px 20px; }
+      .cat-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        background: var(--bg);
+        padding: 0;
+      }
       .cat-card:first-child { grid-column: span 1; }
-      .cat-card { min-height: 220px; }
+      .cat-card {
+        min-height: 220px;
+        box-shadow: 0 8px 36px rgba(200,168,76,.38), 0 0 18px rgba(200,168,76,.18), 0 2px 8px rgba(0,0,0,.6);
+      }
       .cta-band { padding: 76px 20px; }
       .why-grid { grid-template-columns: 1fr; }
       .why-item { border-right: none !important; padding: 32px 20px; }
-      .foot-main { grid-template-columns: 1fr; padding: 44px 20px; }
+
+      /* Reviews — horizontal swipe carousel */
+      .reviews-section { overflow: hidden; }
+      .reviews-section .sec-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .rev-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding-bottom: 20px;
+        scrollbar-width: none;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .rev-grid::-webkit-scrollbar { display: none; }
+      .rev-card {
+        width: calc(100vw - 72px);
+        min-width: 0;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .rev-quote { overflow-wrap: break-word; }
+      .rev-car { white-space: normal; line-height: 1.4; }
+      .rev-dots {
+        display: flex !important;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 20px;
+      }
+
+      .foot-main {
+        grid-template-columns: 1fr;
+        padding: 24px 20px 8px;
+        gap: 0;
+      }
+      .foot-about {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 24px;
+        margin-bottom: 4px;
+        text-align: center;
+      }
+      .foot-about p { margin: 0 auto; }
+      .foot-logo { margin: 0 auto; }
       .foot-ghost { display: none; }
+
+      /* Compact badges — all 4 in one row */
+      .foot-badges { gap: 5px; flex-wrap: nowrap; justify-content: center; }
+      .foot-badge { font-size: 8.5px; padding: 4px 8px; letter-spacing: .07em; white-space: nowrap; }
+
+      /* Compact social buttons */
+      .foot-socials { gap: 6px; flex-wrap: nowrap; margin-top: 16px; justify-content: center; }
+      .soc-btn { padding: 0 10px; height: 30px; font-size: 9px; gap: 5px; flex: 1; justify-content: center; }
+
+      /* Footer accordion */
+      .foot-nav-col { border-bottom: 1px solid var(--border); }
+      .foot-nav-col .foot-col-h {
+        cursor: pointer;
+        position: relative;
+        display: block;
+        text-align: center;
+        margin-bottom: 0;
+        padding: 16px 32px;
+        border-bottom: none;
+        font-size: 15px;
+      }
+      .foot-nav-col .foot-col-h::after {
+        content: '+';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        font-weight: 300;
+        color: var(--accent);
+        font-family: 'Inter', sans-serif;
+        transition: transform .28s;
+      }
+      .foot-nav-col.open .foot-col-h::after { transform: translateY(-50%) rotate(45deg); }
+      .foot-nav-col .foot-links {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .3s;
+        padding-bottom: 0;
+        text-align: center;
+      }
+      .foot-nav-col.open .foot-links { max-height: 300px; padding-bottom: 16px; }
+      .foot-links a { font-size: 14px; }
+
       .foot-divider { padding: 0 20px; }
-      .foot-bottom { padding: 18px 20px; flex-direction: column; text-align: center; }
-      .foot-bottom-left { flex-direction: column; gap: 6px; }
-      .foot-socials { flex-wrap: wrap; }
+      .foot-bottom { padding: 16px 20px; flex-direction: column; text-align: center; gap: 10px; }
+      .foot-bottom-left { flex-direction: column; gap: 4px; }
+      .pay-icons { justify-content: center; }
     }
   </style>
 </head>
@@ -1166,7 +1278,7 @@
     <!-- Visual -->
     <div class="hero-visual">
       <div class="hero-card">
-        <img class="hero-card-img" src="../Баннера для главной/corvette_wheel_hero33.png" alt="Custom Carbon + Nappa Corvette Steering Wheel">
+        <img class="hero-card-img" src="https://therunbird.com/images/MainPAge/hero1.png" alt="Custom Carbon + Nappa Corvette Steering Wheel">
       </div>
       <div class="hero-card-label">
         <div>
@@ -1205,8 +1317,8 @@
     <!-- Steering Wheels (large) -->
     <div class="cat-card c-sw">
       <div class="cat-hover-line"></div>
-      <img class="cat-img cat-img-desktop" src="../Баннера для главной/corvette_wheel_hero4455.png" alt="Steering Wheels">
-      <img class="cat-img cat-img-mobile"  src="../Баннера для главной/corvette_wheel_hero44.png"   alt="Steering Wheels">
+      <img class="cat-img cat-img-desktop" src="https://therunbird.com/images/MainPAge/corvette_wheel-pc.png" alt="Steering Wheels">
+      <img class="cat-img cat-img-mobile"  src="https://therunbird.com/images/MainPAge/corvette_wheel-mob.png"   alt="Steering Wheels">
       <div class="cat-info">
         <div class="cat-name">Steering Wheels</div>
         <div class="cat-sub">11 configurations · Carbon · Nappa · Alcantara</div>
@@ -1218,7 +1330,7 @@
     <!-- Shift Knobs -->
     <div class="cat-card c-sk">
       <div class="cat-hover-line"></div>
-      <img class="cat-img" src="../Баннера для главной/Generated_image45.png" alt="Shift Knobs">
+      <img class="cat-img" src="https://therunbird.com/images/MainPAge/shift-knobs.png" alt="Shift Knobs">
       <div class="cat-info">
         <div class="cat-name">Shift Knobs</div>
         <div class="cat-sub">5 styles · Standard · Ball · Tall · Drift</div>
@@ -1230,7 +1342,7 @@
     <!-- Handbrakes -->
     <div class="cat-card c-hb">
       <div class="cat-hover-line"></div>
-      <img class="cat-img" src="../Баннера для главной/Generated_image45282.png" alt="Handbrakes">
+      <img class="cat-img" src="https://therunbird.com/images/MainPAge/handbrakes.png" alt="Handbrakes">
       <div class="cat-info">
         <div class="cat-name">Handbrakes</div>
         <div class="cat-sub">Grip · Cover · Button · 8 material options</div>
@@ -1242,7 +1354,7 @@
     <!-- Horn Pads -->
     <div class="cat-card c-hp">
       <div class="cat-hover-line"></div>
-      <img class="cat-img" src="../Баннера для главной/Horn-pads.png" alt="Horn Pads">
+      <img class="cat-img" src="https://therunbird.com/images/MainPAge/Horn-pads.png" alt="Horn Pads">
       <div class="cat-info">
         <div class="cat-name">Horn Pads</div>
         <div class="cat-sub">Round &amp; T-shaped · Leather · Alcantara</div>
@@ -1254,7 +1366,7 @@
     <!-- Emblems -->
     <div class="cat-card c-em">
       <div class="cat-hover-line"></div>
-      <img class="cat-img" src="../Баннера для главной/SW-emblems.png" alt="SW Emblems">
+      <img class="cat-img" src="https://therunbird.com/images/MainPAge/SW-emblems.png" alt="SW Emblems">
       <div class="cat-info">
         <div class="cat-name">SW Emblems</div>
         <div class="cat-sub">Z06 · ZR1 · Racing · Punisher · Carbon base</div>
@@ -1266,7 +1378,7 @@
     <!-- Side Skirts -->
     <div class="cat-card c-ss">
       <div class="cat-hover-line"></div>
-      <img class="cat-img" src="../Баннера для главной/side-skirts.png" alt="Side Skirts">
+      <img class="cat-img" src="https://therunbird.com/images/MainPAge/side-skirts.png" alt="Side Skirts">
       <div class="cat-info">
         <div class="cat-name">Side Skirts</div>
         <div class="cat-sub">Carbon Fiber · Gloss or Matte · Custom decal</div>
@@ -1337,19 +1449,19 @@
   </div>
   <div class="mat-grid">
     <div class="mat-item">
-      <img class="mat-img" src="../Баннера для главной/Carbon.png" alt="Carbon Fiber">
+      <img class="mat-img" src="https://therunbird.com/images/MainPAge/Carbon.png" alt="Carbon Fiber">
       <div class="mat-name">Carbon Fiber</div>
       <div class="mat-origin">Gloss · Matte · Multiple Colors Available</div>
       <p class="mat-desc">Aerospace-grade carbon fiber with a distinctive 2×2 twill weave. Gloss or matte lacquer, available in black, red, blue, gold, and silver — matched to your Corvette's style.</p>
     </div>
     <div class="mat-item">
-      <img class="mat-img" src="../Баннера для главной/leather2.png" alt="Nappa Leather">
+      <img class="mat-img" src="https://therunbird.com/images/MainPAge/leather.png" alt="Nappa Leather">
       <div class="mat-name">Nappa Leather</div>
       <div class="mat-origin">Full-Grain Italian · Smooth or Perforated</div>
       <p class="mat-desc">Buttery full-grain Nappa leather — the same quality used in high-end European sport cars. Smooth or perforated, with your choice of contrast thread color.</p>
     </div>
     <div class="mat-item">
-      <img class="mat-img" src="../Баннера для главной/Alcantara.png" alt="Alcantara">
+      <img class="mat-img" src="https://therunbird.com/images/MainPAge/Alcantara.png" alt="Alcantara">
       <div class="mat-name">Alcantara®</div>
       <div class="mat-origin">Genuine Alcantara® · Racing-Grade Suede</div>
       <p class="mat-desc">The material of choice for Formula 1 steering wheels and exotic interiors. Alcantara® offers superior grip, minimal glare, and an unmatched tactile feel at speed.</p>
@@ -1369,21 +1481,21 @@
 
     <div class="proc-item">
       <div class="proc-num">01</div>
-      <img class="proc-img" src="../Баннера для главной/1-step.png" alt="Configure">
+      <img class="proc-img" src="https://therunbird.com/images/MainPAge/1-step.png" alt="Configure">
       <div class="proc-title">Configure</div>
       <p class="proc-desc">Select your product, material combination, carbon finish, and thread color. Each option is laid out clearly — no guesswork, no surprises.</p>
     </div>
 
     <div class="proc-item">
       <div class="proc-num">02</div>
-      <img class="proc-img" src="../Баннера для главной/handcraft.png" alt="Handcrafted">
+      <img class="proc-img" src="https://therunbird.com/images/MainPAge/handcraft.png" alt="Handcrafted">
       <div class="proc-title">Handcrafted</div>
       <p class="proc-desc">Your piece is cut, wrapped, and hand-stitched by our craftsmen. Made to order — never mass-produced. Production time: 10–14 business days.</p>
     </div>
 
     <div class="proc-item">
       <div class="proc-num">03</div>
-      <img class="proc-img" src="../Баннера для главной/Delivery.png" alt="Delivered">
+      <img class="proc-img" src="https://therunbird.com/images/MainPAge/Delivery.png" alt="Delivered">
       <div class="proc-title">Delivered</div>
       <p class="proc-desc">Carefully packaged and shipped directly to your door anywhere in the US. Includes an installation guide and material care card.</p>
     </div>
@@ -1454,6 +1566,14 @@
       </div>
 
     </div>
+
+    <!-- Mobile scroll dots -->
+    <div class="rev-dots" style="display:none;">
+      <span class="rev-dot rev-dot-active"></span>
+      <span class="rev-dot"></span>
+      <span class="rev-dot"></span>
+    </div>
+
   </div>
 </div>
 
@@ -1586,7 +1706,7 @@
       </div>
     </div>
 
-    <div>
+    <div class="foot-nav-col">
       <div class="foot-col-h">Products</div>
       <ul class="foot-links">
         <li><a href="#">Steering Wheels</a></li>
@@ -1598,7 +1718,7 @@
       </ul>
     </div>
 
-    <div>
+    <div class="foot-nav-col">
       <div class="foot-col-h">Information</div>
       <ul class="foot-links">
         <li><a href="#">About Us</a></li>
@@ -1609,7 +1729,7 @@
       </ul>
     </div>
 
-    <div>
+    <div class="foot-nav-col">
       <div class="foot-col-h">Support</div>
       <ul class="foot-links">
         <li><a href="#">Shipping & Returns</a></li>
@@ -1653,6 +1773,25 @@
       burger.classList.remove('active');
     });
   });
+
+  // Footer accordion (mobile)
+  document.querySelectorAll('.foot-nav-col .foot-col-h').forEach(heading => {
+    heading.addEventListener('click', () => {
+      heading.closest('.foot-nav-col').classList.toggle('open');
+    });
+  });
+
+  // Reviews carousel dots
+  const revGrid = document.querySelector('.rev-grid');
+  const revDots = document.querySelectorAll('.rev-dot');
+  if (revGrid && revDots.length) {
+    revGrid.addEventListener('scroll', () => {
+      const idx = Math.round(revGrid.scrollLeft / revGrid.offsetWidth);
+      revDots.forEach((d, i) => {
+        d.classList.toggle('rev-dot-active', i === idx);
+      });
+    }, { passive: true });
+  }
 
   // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn => {
