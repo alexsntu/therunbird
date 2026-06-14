@@ -122,8 +122,8 @@
        HERO
     ══════════════════════════════════════ */
     .hero {
-      position: relative; min-height: 92vh;
-      display: flex; align-items: center;
+      position: relative;
+      display: flex; align-items: flex-start;
       background: #080808; overflow: hidden;
     }
     .hero-glow {
@@ -174,7 +174,7 @@
     .hero-inner {
       position: relative; z-index: 2;
       max-width: 1440px; margin: 0 auto; width: 100%;
-      padding: 80px 48px;
+      padding: 36px 48px 64px;
       display: grid; grid-template-columns: 1fr 1.35fr;
       gap: 48px; align-items: stretch;
     }
@@ -365,8 +365,8 @@
     /* ══════════════════════════════════════
        SECTION COMMONS
     ══════════════════════════════════════ */
-    .wrap { max-width: 1440px; margin: 0 auto; padding: 92px 48px; }
-    .wrap-tight { max-width: 1440px; margin: 0 auto; padding: 72px 48px; }
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 56px 48px; }
+    .wrap-tight { max-width: 1440px; margin: 0 auto; padding: 36px 48px; }
 
     .sec-head {
       display: flex; align-items: flex-end;
@@ -575,7 +575,7 @@
     .proc-section { background: var(--bg-el); }
     .proc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
     .proc-item {
-      padding: 60px 52px;
+      padding: 36px 44px;
       border-right: 1px solid var(--border);
       position: relative;
     }
@@ -639,7 +639,7 @@
     .cta-band {
       position: relative; overflow: hidden;
       background: #050505; text-align: center;
-      padding: 110px 48px;
+      padding: 68px 48px;
     }
     .cta-glow {
       position: absolute; inset: 0; pointer-events: none;
@@ -840,7 +840,191 @@
       .cat-card:first-child { grid-row: auto; grid-column: span 2; }
       .foot-main { grid-template-columns: 1fr 1fr; gap: 40px; }
       .foot-ghost { font-size: 120px; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .why-item:nth-child(3n) { border-right: 1px solid var(--border); }
+      .why-item:nth-child(2n) { border-right: none; }
+      .rev-grid { grid-template-columns: 1fr; gap: 16px; }
     }
+    /* ══════════════════════════════════════
+       WHY RUNBIRD
+    ══════════════════════════════════════ */
+    .why-section { background: var(--bg); border-top: 1px solid var(--border); }
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+    .why-item {
+      padding: 44px 52px;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      position: relative; overflow: hidden;
+      transition: background .25s;
+    }
+    .why-item:nth-child(3n) { border-right: none; }
+    .why-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: left; transition: transform .35s;
+    }
+    .why-item:hover::before { transform: scaleX(1); }
+    .why-item:hover { background: rgba(200,168,76,.03); }
+    .why-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: .22em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 18px;
+    }
+    .why-tag-line { width: 22px; height: 1px; background: var(--accent); }
+    .why-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 22px; text-transform: uppercase;
+      color: var(--text); letter-spacing: .02em; margin-bottom: 12px;
+    }
+    .why-desc { font-size: 14px; color: var(--text2); line-height: 1.72; }
+
+    /* ══════════════════════════════════════
+       REVIEWS
+    ══════════════════════════════════════ */
+    .reviews-section {
+      background: var(--bg-el);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .rev-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 28px 24px;
+      display: flex; flex-direction: column;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .rev-card:hover {
+      border-color: var(--accent-b);
+      box-shadow: 0 8px 32px rgba(200,168,76,.07);
+    }
+    .rev-stars { color: var(--accent); font-size: 13px; letter-spacing: 3px; margin-bottom: 16px; }
+    .rev-quote {
+      font-size: 14px; color: #999; line-height: 1.82;
+      font-style: italic; flex: 1; margin-bottom: 22px; position: relative;
+    }
+    .rev-quote::before {
+      content: '"'; color: var(--accent); font-size: 36px; font-style: normal;
+      line-height: .5; display: block; margin-bottom: 12px;
+      font-family: 'Barlow Condensed'; font-weight: 900;
+    }
+    .rev-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+    .rev-author { display: flex; align-items: center; gap: 14px; }
+    .rev-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      background: var(--accent-dim); border: 1px solid var(--accent-b);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed'; font-weight: 800; font-size: 15px; color: var(--accent);
+    }
+    .rev-name { font-size: 13.5px; font-weight: 600; color: var(--text); }
+    .rev-car { font-size: 11px; color: var(--accent); letter-spacing: .08em; text-transform: uppercase; margin-top: 3px; }
+
+    /* ══════════════════════════════════════
+       CATEGORY PRICE
+    ══════════════════════════════════════ */
+    .cat-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px; font-weight: 800;
+      color: var(--accent); margin-top: 7px;
+      letter-spacing: .03em;
+      text-shadow: 0 0 14px rgba(200,168,76,.4);
+    }
+    .cat-card:first-child .cat-price { font-size: 20px; }
+
+    /* ══════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════ */
+    .faq-section {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+      padding: 24px 0; background: none; border: none; cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px; font-weight: 700; letter-spacing: .03em;
+      text-transform: uppercase; color: var(--text);
+      text-align: left; transition: color .2s;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-item.open .faq-q { color: var(--accent); }
+    .faq-icon {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      border: 1px solid var(--border-s);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 300; color: var(--accent);
+      font-family: 'Inter', sans-serif; font-style: normal;
+      transition: transform .3s, background .2s, border-color .2s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--accent-dim); border-color: var(--accent-b);
+    }
+    .faq-a {
+      font-size: 14.5px; color: var(--text2); line-height: 1.82;
+      max-height: 0; overflow: hidden;
+      transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s;
+      padding-bottom: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+
+    /* Mobile nav open state */
+    @keyframes menuSlide {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .nav-links.open {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 62px; left: 0; right: 0;
+      background: rgba(6,6,6,.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 8px 0 16px;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,.6);
+      z-index: 299;
+      animation: menuSlide .22s ease both;
+    }
+    .nav-links.open li {
+      border-bottom: 1px solid rgba(255,255,255,.045);
+    }
+    .nav-links.open li:last-child { border-bottom: none; }
+    .nav-links.open a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      font-size: 13px; letter-spacing: .1em;
+      color: #888;
+      transition: color .18s, background .18s, padding-left .18s;
+    }
+    .nav-links.open a::after { content: none; }
+    .nav-links.open a::before {
+      content: none;
+    }
+    .nav-links.open a:hover {
+      color: var(--text);
+      background: rgba(200,168,76,.05);
+      padding-left: 30px;
+    }
+    .nav-links.open li:first-child a {
+      color: var(--accent);
+    }
+    /* Hamburger → X анимация */
+    .hamburger span { transition: transform .28s cubic-bezier(.77,0,.175,1), opacity .2s; }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     @media (max-width: 768px) {
       .nav-inner { padding: 0 20px; height: 62px; }
       .nav-links { display: none; }
@@ -871,6 +1055,8 @@
       .cat-card:first-child { grid-column: span 1; }
       .cat-card { min-height: 220px; }
       .cta-band { padding: 76px 20px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-item { border-right: none !important; padding: 32px 20px; }
       .foot-main { grid-template-columns: 1fr; padding: 44px 20px; }
       .foot-ghost { display: none; }
       .foot-divider { padding: 0 20px; }
@@ -884,7 +1070,7 @@
 
 <!-- ══ ANNOUNCEMENT BAR ══ -->
 <div class="ann">
-  ✦ &nbsp; Handmade to Order &nbsp; ✦ &nbsp; Fits All Corvette Generations: C5 · C6 · C7 · C8 &nbsp; ✦ &nbsp; Free US Shipping on Orders $300+ &nbsp; ✦
+  ✦ &nbsp; Handmade to Order &nbsp; ✦ &nbsp; Fits All Corvette Generations: C5 · C6 · C7 · C8 &nbsp; ✦
 </div>
 
 <!-- ══ HEADER ══ -->
@@ -942,7 +1128,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Bag (0)
       </button>
-      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="hamburger" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -1017,70 +1203,127 @@
   <div class="cat-grid">
 
     <!-- Steering Wheels (large) -->
-    <div class="cat-card">
+    <div class="cat-card c-sw">
       <div class="cat-hover-line"></div>
       <img class="cat-img cat-img-desktop" src="../Баннера для главной/corvette_wheel_hero4455.png" alt="Steering Wheels">
       <img class="cat-img cat-img-mobile"  src="../Баннера для главной/corvette_wheel_hero44.png"   alt="Steering Wheels">
       <div class="cat-info">
         <div class="cat-name">Steering Wheels</div>
         <div class="cat-sub">11 configurations · Carbon · Nappa · Alcantara</div>
+        <div class="cat-price">from $380</div>
       </div>
       <div class="cat-arr">→</div>
     </div>
 
     <!-- Shift Knobs -->
-    <div class="cat-card">
+    <div class="cat-card c-sk">
       <div class="cat-hover-line"></div>
       <img class="cat-img" src="../Баннера для главной/Generated_image45.png" alt="Shift Knobs">
       <div class="cat-info">
         <div class="cat-name">Shift Knobs</div>
         <div class="cat-sub">5 styles · Standard · Ball · Tall · Drift</div>
+        <div class="cat-price">from $175</div>
       </div>
       <div class="cat-arr">→</div>
     </div>
 
     <!-- Handbrakes -->
-    <div class="cat-card">
+    <div class="cat-card c-hb">
       <div class="cat-hover-line"></div>
       <img class="cat-img" src="../Баннера для главной/Generated_image45282.png" alt="Handbrakes">
       <div class="cat-info">
         <div class="cat-name">Handbrakes</div>
         <div class="cat-sub">Grip · Cover · Button · 8 material options</div>
+        <div class="cat-price">from $160</div>
       </div>
       <div class="cat-arr">→</div>
     </div>
 
     <!-- Horn Pads -->
-    <div class="cat-card">
+    <div class="cat-card c-hp">
       <div class="cat-hover-line"></div>
       <img class="cat-img" src="../Баннера для главной/Horn-pads.png" alt="Horn Pads">
       <div class="cat-info">
         <div class="cat-name">Horn Pads</div>
-        <div class="cat-sub">Round & T-shaped · Leather · Alcantara</div>
+        <div class="cat-sub">Round &amp; T-shaped · Leather · Alcantara</div>
+        <div class="cat-price">from $115</div>
       </div>
       <div class="cat-arr">→</div>
     </div>
 
     <!-- Emblems -->
-    <div class="cat-card">
+    <div class="cat-card c-em">
       <div class="cat-hover-line"></div>
       <img class="cat-img" src="../Баннера для главной/SW-emblems.png" alt="SW Emblems">
       <div class="cat-info">
         <div class="cat-name">SW Emblems</div>
         <div class="cat-sub">Z06 · ZR1 · Racing · Punisher · Carbon base</div>
+        <div class="cat-price">from $85</div>
       </div>
       <div class="cat-arr">→</div>
     </div>
 
     <!-- Side Skirts -->
-    <div class="cat-card">
+    <div class="cat-card c-ss">
       <div class="cat-hover-line"></div>
       <img class="cat-img" src="../Баннера для главной/side-skirts.png" alt="Side Skirts">
       <div class="cat-info">
         <div class="cat-name">Side Skirts</div>
         <div class="cat-sub">Carbon Fiber · Gloss or Matte · Custom decal</div>
+        <div class="cat-price">from $260</div>
       </div>
       <div class="cat-arr">→</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ WHY RUNBIRD ══ -->
+<div class="why-section">
+  <div class="wrap" style="padding-bottom: 0;">
+    <div class="sec-head" style="margin-bottom: 0;">
+      <div>
+        <div class="sec-eyebrow">Why Choose RunBird</div>
+        <div class="sec-title">Built Different</div>
+      </div>
+    </div>
+  </div>
+  <div class="why-grid">
+
+    <div class="why-item">
+      <div class="why-tag"><span class="why-tag-line"></span>01</div>
+      <div class="why-title">Made to Order</div>
+      <p class="why-desc">Every piece is built from scratch for your specific order. No stock, no warehouse — just craftsmanship on demand, every time.</p>
+    </div>
+
+    <div class="why-item">
+      <div class="why-tag"><span class="why-tag-line"></span>02</div>
+      <div class="why-title">Precision Fit</div>
+      <p class="why-desc">Engineered specifically for Corvette C5, C6, C7, and C8 generations. Drop-in installation — no modifications, no guesswork.</p>
+    </div>
+
+    <div class="why-item">
+      <div class="why-tag"><span class="why-tag-line"></span>03</div>
+      <div class="why-title">Premium Materials Only</div>
+      <p class="why-desc">Aerospace carbon fiber, full-grain Italian Nappa leather, and genuine Alcantara® — the same materials found in exotic supercars.</p>
+    </div>
+
+    <div class="why-item">
+      <div class="why-tag"><span class="why-tag-line"></span>04</div>
+      <div class="why-title">10–14 Day Turnaround</div>
+      <p class="why-desc">From order confirmation to your door — fast production without cutting corners. Tracking updates sent at every stage.</p>
+    </div>
+
+    <div class="why-item">
+      <div class="why-tag"><span class="why-tag-line"></span>05</div>
+      <div class="why-title">Fully Configurable</div>
+      <p class="why-desc">Choose your material, carbon finish (gloss or matte), color, and thread. Every detail is yours to decide — built to your exact spec.</p>
+    </div>
+
+    <div class="why-item">
+      <div class="why-tag"><span class="why-tag-line"></span>06</div>
+      <div class="why-title">Direct from Workshop</div>
+      <p class="why-desc">No distributors, no markups. We build it, we ship it. Better quality control and honest pricing — straight from our craftsmen to you.</p>
     </div>
 
   </div>
@@ -1112,7 +1355,7 @@
       <p class="mat-desc">The material of choice for Formula 1 steering wheels and exotic interiors. Alcantara® offers superior grip, minimal glare, and an unmatched tactile feel at speed.</p>
     </div>
   </div>
-  <div style="height: 60px;"></div>
+  <div style="height: 16px;"></div>
 </div>
 
 <!-- ══ PROCESS ══ -->
@@ -1121,7 +1364,7 @@
     <div class="sec-eyebrow">How It Works</div>
     <div class="sec-title" style="margin-bottom: 0;">From Order to Delivery</div>
   </div>
-  <div style="height: 28px;"></div>
+  <div style="height: 8px;"></div>
   <div class="proc-grid">
 
     <div class="proc-item">
@@ -1146,7 +1389,127 @@
     </div>
 
   </div>
-  <div style="height: 68px;"></div>
+  <div style="height: 28px;"></div>
+</div>
+
+<!-- ══ REVIEWS ══ -->
+<div class="reviews-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">Customer Reviews</div>
+        <div class="sec-title">What Corvette Owners Say</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div style="text-align:right;">
+          <div style="font-family:'Barlow Condensed'; font-size:52px; font-weight:900; color:var(--accent); line-height:1;">4.9</div>
+          <div style="color:var(--accent); font-size:14px; letter-spacing:4px; margin-top:2px;">★★★★★</div>
+        </div>
+        <div style="border-left:1px solid var(--border); padding-left:16px;">
+          <div style="font-size:12px; color:var(--text2); text-transform:uppercase; letter-spacing:.08em;">Based on</div>
+          <div style="font-family:'Barlow Condensed'; font-size:22px; font-weight:800; color:var(--text);">500+ Orders</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-grid">
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">Best upgrade I've done to my C7. The carbon + Alcantara combo feels exactly like a factory option — except better. Grip is incredible, fitment was perfect out of the box.</p>
+        <div class="rev-divider"></div>
+        <div class="rev-author">
+          <div class="rev-avatar">MR</div>
+          <div>
+            <div class="rev-name">Michael R.</div>
+            <div class="rev-car">C7 Z06 · Steering Wheel</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">Ordered the gloss carbon shift knob for my C8. The finish quality is insane — better than I expected from the photos. Shipped in 12 days and the packaging was incredibly premium.</p>
+        <div class="rev-divider"></div>
+        <div class="rev-author">
+          <div class="rev-avatar">JT</div>
+          <div>
+            <div class="rev-name">James T.</div>
+            <div class="rev-car">C8 Stingray · Shift Knob</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">Picked up the handbrake and horn pad set. The stitching is immaculate — you can tell this was made by someone who actually cares. My ZR1 interior finally looks the part.</p>
+        <div class="rev-divider"></div>
+        <div class="rev-author">
+          <div class="rev-avatar">DK</div>
+          <div>
+            <div class="rev-name">David K.</div>
+            <div class="rev-car">C6 ZR1 · Handbrake + Horn Pad</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAQ ══ -->
+<div class="faq-section">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom: 36px;">
+      <div>
+        <div class="sec-eyebrow">Got Questions</div>
+        <div class="sec-title">Frequently Asked</div>
+      </div>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q">
+          How long does production take?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">All products are handmade to order. Production time is 10–14 business days from order confirmation. You'll receive a tracking number as soon as your order ships, with updates at every stage.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Will this fit my Corvette?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Our accessories are designed specifically for Chevrolet Corvette generations C5 (1997–2004), C6 (2005–2013), C7 (2014–2019), and C8 (2020–present). Each product page lists exact fitment. Installation requires no permanent modifications — everything is a direct bolt-on or slip-on.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          How do I choose the right configuration?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Browse each product page where all material options are shown with photos. Carbon finish (gloss or matte), carbon color, leather type, and thread color are all selectable. If you're unsure — contact us. We're happy to recommend a configuration based on your Corvette's interior and your preferences.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          What is your return policy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Since every piece is custom-made to your exact spec, we cannot accept returns on configured orders. However, if your item arrives damaged or doesn't match your order specifications, we will remake it at no cost. We stand behind every stitch.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          Do you ship internationally?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Currently we ship within the United States only, with free shipping on all orders. International shipping to Canada, Europe, and Australia is planned — sign up to our newsletter to be notified when it launches.</div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- ══ CTA BAND ══ -->
@@ -1276,5 +1639,30 @@
   </div>
 </footer>
 
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    burger.classList.toggle('active');
+  });
+  // Закрываем меню при клике на ссылку
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      burger.classList.remove('active');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
 </body>
 </html>

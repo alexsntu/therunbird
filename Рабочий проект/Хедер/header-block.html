@@ -1,0 +1,63 @@
+<!--
+  RunBird — Header Block для CS-Cart
+  Зависимость: rb-theme.css (подключён в теме CS-Cart)
+-->
+
+<!-- ══ ANNOUNCEMENT BAR ══ -->
+<div class="rb-ann-bar">
+  ✦ &nbsp; Handmade to Order &nbsp; ✦ &nbsp; Fits All Corvette Generations: C5 · C6 · C7 · C8 &nbsp; ✦ &nbsp; Free US Shipping on Orders $300+ &nbsp; ✦
+</div>
+
+<!-- ══ NAV (div вместо header — избегаем конфликта с тегом CS-Cart) ══ -->
+<div class="rb-header">
+  <div class="rb-nav-inner">
+
+    <!-- Логотип -->
+    <a href="/" class="rb-logo-wrap" aria-label="RunBird — Home">
+      <img
+        src="https://therunbird.com/images/ab__webp/logos/8/%D0%9B%D0%BE%D0%B3%D0%BE_%D0%B4%D0%B8%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D1%80_%D0%91_3x_png.webp"
+        alt="RunBird"
+        class="rb-nav-logo"
+        width="180"
+        height="71"
+      >
+    </a>
+
+    <!-- Навигационные ссылки -->
+    <ul class="rb-nav-links">
+      <li><a href="/steering-wheels/">Steering Wheels</a></li>
+      <li><a href="/shift-knobs/">Shift Knobs</a></li>
+      <li><a href="/handbrakes/">Handbrakes</a></li>
+      <li><a href="/horn-pads/">Horn Pads</a></li>
+      <li><a href="/emblems/">Emblems</a></li>
+      <li><a href="/custom-order/">Custom Order</a></li>
+    </ul>
+
+    <!-- Правая часть: иконки + корзина -->
+    <div class="rb-nav-right">
+      <button class="rb-icon-btn" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <button class="rb-icon-btn" aria-label="Account">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </button>
+      <a href="/cart/" class="rb-cart-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        Bag (0)
+      </a>
+      <button class="rb-hamburger" aria-label="Menu" onclick="document.querySelector('.rb-nav-links').classList.toggle('rb-nav-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</div>

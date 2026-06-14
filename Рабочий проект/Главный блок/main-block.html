@@ -1,0 +1,336 @@
+<!--
+  RunBird — Main Content Block для CS-Cart (главная страница)
+  Размещение: Design > Blocks > создать HTML-блок > вставить этот код
+  Зависимость: rb-theme.css (подключён в теме CS-Cart)
+  Содержит: Hero · Stats · Categories · Materials · Process · CTA
+  
+  ЗАМЕНИТЕ src у изображений на URL с сервера когда загрузите картинки.
+  Отмечено комментарием: <!-- IMG: имя_файла.png -->
+-->
+
+<!-- ══ HERO ══ -->
+<section class="rb-hero">
+  <div class="rb-hero-glow"></div>
+  <div class="rb-hero-rays"></div>
+  <div class="rb-cf rb-hero-cf"></div>
+
+  <div class="rb-hero-inner">
+
+    <!-- Левая колонка: текст -->
+    <div class="rb-hero-copy">
+
+      <div class="rb-badge" style="margin-bottom:32px;">
+        <span class="rb-badge-dot"></span>
+        Built for Every Corvette Generation · C5–C8
+      </div>
+
+      <h1 class="rb-hero-h1">
+        <span class="rb-h1-feel">Feel</span>
+        <span class="rb-h1-the">The</span>
+        <span class="rb-h1-drive">Drive</span>
+      </h1>
+
+      <p class="rb-hero-p">
+        Premium handmade interior accessories tailored to your Corvette.
+        <strong>Carbon fiber</strong>, <strong>Nappa leather</strong>, and genuine
+        <strong>Alcantara®</strong> — all custom configured to your exact spec.
+      </p>
+
+      <div style="flex:1;"></div>
+
+      <div class="rb-hero-btns">
+        <a href="/products/" class="rb-btn">Shop Collection</a>
+        <a href="/custom-order/" class="rb-btn-ghost">Configure Yours →</a>
+      </div>
+    </div>
+
+    <!-- Правая колонка: визуал -->
+    <div class="rb-hero-visual">
+      <div class="rb-hero-card">
+        <!-- IMG: corvette_wheel_hero33.png -->
+        <img
+          class="rb-hero-card-img"
+          src="REPLACE_WITH_SERVER_URL/corvette_wheel_hero33.png"
+          alt="Custom Carbon + Nappa Corvette Steering Wheel"
+          width="800" height="800"
+        >
+        <div class="rb-hero-card-glow"></div>
+      </div>
+      <div class="rb-hero-card-label">
+        <div>
+          <div class="rb-label-title">Carbon + Nappa Steering Wheel</div>
+          <div class="rb-label-sub">Gloss Carbon · Nappa Leather · Custom Thread</div>
+        </div>
+        <div class="rb-label-price">$520</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="rb-stats">
+  <div class="rb-stats-inner">
+    <div class="rb-stat"><div class="rb-stat-n">500+</div><div class="rb-stat-l">Orders Completed</div></div>
+    <div class="rb-stat"><div class="rb-stat-n">100%</div><div class="rb-stat-l">Handcrafted</div></div>
+    <div class="rb-stat"><div class="rb-stat-n">4.9★</div><div class="rb-stat-l">Customer Rating</div></div>
+    <div class="rb-stat"><div class="rb-stat-n">C5–C8</div><div class="rb-stat-l">All Generations</div></div>
+  </div>
+</div>
+
+<!-- ══ CATEGORIES ══ -->
+<div class="rb-section">
+  <div class="rb-wrap">
+    <div class="rb-sec-head">
+      <div>
+        <span class="rb-eyebrow">Browse By Category</span>
+        <div class="rb-title">Our Collection</div>
+      </div>
+      <a href="/products/" class="rb-link">All Products →</a>
+    </div>
+
+    <div class="rb-cat-grid">
+
+      <!-- Steering Wheels (большая карточка — 2 строки) -->
+      <a href="/steering-wheels/" class="rb-cat-card rb-c-sw">
+        <div class="rb-cat-hover-line"></div>
+        <div class="rb-cat-bg">
+          <!-- IMG: corvette_wheel_hero4455.png -->
+          <img
+            class="rb-cat-img"
+            src="REPLACE_WITH_SERVER_URL/corvette_wheel_hero4455.png"
+            alt="Steering Wheels"
+          >
+        </div>
+        <div class="rb-cat-grad"></div>
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Steering Wheels</div>
+          <div class="rb-cat-sub">11 configurations · Carbon · Nappa · Alcantara</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Shift Knobs -->
+      <a href="/shift-knobs/" class="rb-cat-card rb-c-sk">
+        <div class="rb-cat-hover-line"></div>
+        <div class="rb-cat-bg">
+          <!-- IMG: Generated_image45.png -->
+          <img
+            class="rb-cat-img"
+            src="REPLACE_WITH_SERVER_URL/Generated_image45.png"
+            alt="Shift Knobs"
+          >
+        </div>
+        <div class="rb-cat-grad"></div>
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Shift Knobs</div>
+          <div class="rb-cat-sub">5 styles · Standard · Ball · Tall · Drift</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Handbrakes -->
+      <a href="/handbrakes/" class="rb-cat-card rb-c-hb">
+        <div class="rb-cat-hover-line"></div>
+        <div class="rb-cat-bg">
+          <!-- IMG: Generated_image45282.png -->
+          <img
+            class="rb-cat-img"
+            src="REPLACE_WITH_SERVER_URL/Generated_image45282.png"
+            alt="Handbrakes"
+          >
+        </div>
+        <div class="rb-cat-grad"></div>
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Handbrakes</div>
+          <div class="rb-cat-sub">Grip · Cover · Button · 8 material options</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Horn Pads -->
+      <a href="/horn-pads/" class="rb-cat-card rb-c-hp">
+        <div class="rb-cat-hover-line"></div>
+        <div class="rb-cat-bg">
+          <!-- IMG: Horn-pads.png -->
+          <img
+            class="rb-cat-img"
+            src="REPLACE_WITH_SERVER_URL/Horn-pads.png"
+            alt="Horn Pads"
+          >
+        </div>
+        <div class="rb-cat-grad"></div>
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Horn Pads</div>
+          <div class="rb-cat-sub">Round &amp; T-shaped · Leather · Alcantara</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Emblems -->
+      <a href="/emblems/" class="rb-cat-card rb-c-em">
+        <div class="rb-cat-hover-line"></div>
+        <div class="rb-cat-bg">
+          <!-- IMG: SW-emblems.png -->
+          <img
+            class="rb-cat-img"
+            src="REPLACE_WITH_SERVER_URL/SW-emblems.png"
+            alt="SW Emblems"
+          >
+        </div>
+        <div class="rb-cat-grad"></div>
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">SW Emblems</div>
+          <div class="rb-cat-sub">Z06 · ZR1 · Racing · Punisher · Carbon base</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Side Skirts -->
+      <a href="/side-skirts/" class="rb-cat-card rb-c-ss">
+        <div class="rb-cat-hover-line"></div>
+        <div class="rb-cat-bg">
+          <!-- IMG: side-skirts.png -->
+          <img
+            class="rb-cat-img"
+            src="REPLACE_WITH_SERVER_URL/side-skirts.png"
+            alt="Side Skirts"
+          >
+        </div>
+        <div class="rb-cat-grad"></div>
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Side Skirts</div>
+          <div class="rb-cat-sub">Carbon Fiber · Gloss or Matte · Custom decal</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ MATERIALS ══ -->
+<div class="rb-section-elevated">
+  <div class="rb-wrap">
+    <span class="rb-eyebrow">What We Use</span>
+    <div class="rb-title" style="margin-bottom:52px;">Premium Materials</div>
+  </div>
+  <div class="rb-mat-grid">
+
+    <div class="rb-mat-item">
+      <!-- IMG: Carbon.png -->
+      <img
+        class="rb-mat-img"
+        src="REPLACE_WITH_SERVER_URL/Carbon.png"
+        alt="Carbon Fiber"
+        loading="lazy"
+      >
+      <div class="rb-mat-name">Carbon Fiber</div>
+      <div class="rb-mat-origin">Gloss · Matte · Multiple Colors Available</div>
+      <p class="rb-mat-desc">Aerospace-grade carbon fiber with a distinctive 2×2 twill weave. Gloss or matte lacquer, available in black, red, blue, gold, and silver — matched to your Corvette's style.</p>
+    </div>
+
+    <div class="rb-mat-item">
+      <!-- IMG: leather2.png -->
+      <img
+        class="rb-mat-img"
+        src="REPLACE_WITH_SERVER_URL/leather2.png"
+        alt="Nappa Leather"
+        loading="lazy"
+      >
+      <div class="rb-mat-name">Nappa Leather</div>
+      <div class="rb-mat-origin">Full-Grain Italian · Smooth or Perforated</div>
+      <p class="rb-mat-desc">Buttery full-grain Nappa leather — the same quality used in high-end European sport cars. Smooth or perforated, with your choice of contrast thread color.</p>
+    </div>
+
+    <div class="rb-mat-item">
+      <!-- IMG: Alcantara.png -->
+      <img
+        class="rb-mat-img"
+        src="REPLACE_WITH_SERVER_URL/Alcantara.png"
+        alt="Alcantara"
+        loading="lazy"
+      >
+      <div class="rb-mat-name">Alcantara®</div>
+      <div class="rb-mat-origin">Genuine Alcantara® · Racing-Grade Suede</div>
+      <p class="rb-mat-desc">The material of choice for Formula 1 steering wheels and exotic interiors. Alcantara® offers superior grip, minimal glare, and an unmatched tactile feel at speed.</p>
+    </div>
+
+  </div>
+  <div style="height:60px;"></div>
+</div>
+
+<!-- ══ PROCESS ══ -->
+<div class="rb-section-elevated">
+  <div class="rb-wrap">
+    <span class="rb-eyebrow">How It Works</span>
+    <div class="rb-title" style="margin-bottom:36px;">From Order to Delivery</div>
+  </div>
+  <div class="rb-proc-grid">
+
+    <div class="rb-proc-item">
+      <div class="rb-proc-num">01</div>
+      <!-- IMG: 1-step.png -->
+      <img
+        class="rb-proc-img"
+        src="REPLACE_WITH_SERVER_URL/1-step.png"
+        alt="Configure"
+        loading="lazy"
+      >
+      <div class="rb-proc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </div>
+      <div class="rb-proc-title">Configure</div>
+      <p class="rb-proc-desc">Select your product, material combination, carbon finish, and thread color. Each option is laid out clearly — no guesswork, no surprises.</p>
+    </div>
+
+    <div class="rb-proc-item">
+      <div class="rb-proc-num">02</div>
+      <!-- IMG: handcraft.png -->
+      <img
+        class="rb-proc-img"
+        src="REPLACE_WITH_SERVER_URL/handcraft.png"
+        alt="Handcrafted"
+        loading="lazy"
+      >
+      <div class="rb-proc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+      </div>
+      <div class="rb-proc-title">Handcrafted</div>
+      <p class="rb-proc-desc">Your piece is cut, wrapped, and hand-stitched by our craftsmen. Made to order — never mass-produced. Production time: 10–14 business days.</p>
+    </div>
+
+    <div class="rb-proc-item">
+      <div class="rb-proc-num">03</div>
+      <!-- IMG: Delivery.png -->
+      <img
+        class="rb-proc-img"
+        src="REPLACE_WITH_SERVER_URL/Delivery.png"
+        alt="Delivered"
+        loading="lazy"
+      >
+      <div class="rb-proc-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="rb-proc-title">Delivered</div>
+      <p class="rb-proc-desc">Carefully packaged and shipped directly to your door anywhere in the US. Includes an installation guide and material care card.</p>
+    </div>
+
+  </div>
+  <div style="height:68px;"></div>
+</div>
+
+<!-- ══ CTA BAND ══ -->
+<section class="rb-cta">
+  <div class="rb-cta-glow"></div>
+  <div class="rb-cta-cf rb-cf"></div>
+  <div class="rb-cta-inner">
+    <div class="rb-eyebrow">Ready to Upgrade Your Corvette?</div>
+    <h2 class="rb-title-xl" style="margin-bottom:20px;">Make It<br><em>Yours</em></h2>
+    <p class="rb-body" style="max-width:560px;margin:0 auto 44px;">Every piece starts with your preferences. Choose your Corvette generation, material, carbon finish, and thread color — we'll craft it to your exact spec.</p>
+    <div class="rb-cta-btns">
+      <a href="/custom-order/" class="rb-btn">Start Custom Order</a>
+      <a href="/products/" class="rb-btn-ghost">Browse Full Catalog</a>
+    </div>
+  </div>
+</section>
