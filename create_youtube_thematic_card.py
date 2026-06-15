@@ -189,9 +189,9 @@ def wrap_text(text: str, char_width: int = 35) -> list:
 
 if __name__ == "__main__":
     thematic_card = create_thematic_card(
-        main_question="Почему важно не вмешиваться\nв споры? Спорить = ночевать?",
-        subtitle="Мусар от Рава Друка",
-        source="Глава Шлах",
-        output_filename="youtube_thematic_lesson_not_interfering_in_disputes.png"
+        main_question="Современная нейробиология\nи секрет Красной Коровы!",
+        subtitle="Рав Йонатан Сакс",
+        source="Недельная глава Хукат",
+        output_filename="youtube_thematic_lesson_neurobiology_red_cow.png"
     )
     print("Generated:", thematic_card)
