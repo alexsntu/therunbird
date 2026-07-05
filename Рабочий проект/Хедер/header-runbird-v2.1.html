@@ -27,6 +27,9 @@
 }
 #rb-header button {
   outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: transparent !important;
 }
 
 /* ── CSS tokens ── */
@@ -74,6 +77,7 @@
 
 /* ── Nav bar ── */
 #rb-header .rb-nav {
+  position: relative !important;
   border-bottom: 1px solid var(--rb-border) !important;
   background: rgba(8,8,8,.97) !important;
   backdrop-filter: blur(18px);
@@ -478,13 +482,11 @@
 #rb-header .rb-nav-links.open {
   display: flex !important;
   flex-direction: column !important;
-  position: fixed !important;
-  top: 104px !important;
+  position: absolute !important;
+  top: 100% !important;
   left: 0 !important;
   right: 0 !important;
-  background: rgba(6,6,6,.98) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
+  background: #060606 !important;
   padding: 8px 0 16px !important;
   gap: 0 !important;
   border-bottom: 1px solid var(--rb-border) !important;
@@ -517,14 +519,84 @@
   background: rgba(200,168,76,.05) !important;
   padding-left: 30px !important;
 }
-#rb-header .rb-nav-links.open li:first-child a {
+#rb-header .rb-nav-links.open li.rb-cat-first a {
   color: var(--rb-accent) !important;
+}
+
+/* ── Mobile-only menu items: search + account (hidden everywhere else) ──
+   Visually set apart from plain category links: tinted gold background,
+   icon always gold (not gray-until-hover like category links), so they
+   read as "quick actions" rather than blending into the nav list. */
+#rb-header .rb-mnav-search,
+#rb-header .rb-mnav-account {
+  display: none !important;
+}
+#rb-header .rb-nav-links.open .rb-mnav-search,
+#rb-header .rb-nav-links.open .rb-mnav-account {
+  display: block !important;
+  background: rgba(200,168,76,.05) !important;
+}
+#rb-header .rb-nav-links.open .rb-mnav-search {
+  border-bottom: 1px solid rgba(200,168,76,.18) !important;
+}
+#rb-header .rb-nav-links.open .rb-mnav-account {
+  border-top: 1px solid rgba(200,168,76,.18) !important;
+  border-bottom: none !important;
+}
+#rb-header .rb-mnav-search-btn,
+#rb-header .rb-nav-links.open a.rb-mnav-account-link {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  padding: 16px 24px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  transition: background .18s, padding-left .18s !important;
+}
+#rb-header .rb-mnav-search-btn svg,
+#rb-header .rb-nav-links.open a.rb-mnav-account-link svg {
+  flex-shrink: 0 !important;
+  color: var(--rb-accent) !important;
+}
+#rb-header .rb-mnav-search-btn:hover,
+#rb-header .rb-nav-links.open a.rb-mnav-account-link:hover {
+  background: rgba(200,168,76,.1) !important;
+  padding-left: 30px !important;
+}
+/* Secondary account links (Orders / Wish List / Comparison List) —
+   lighter weight than the primary My Account / Sign In link above them. */
+#rb-header .rb-nav-links.open a.rb-mnav-account-sub {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: #999 !important;
+  padding: 13px 24px !important;
+  border-top: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-header .rb-nav-links.open a.rb-mnav-account-sub svg {
+  opacity: .8 !important;
+}
+#rb-header .rb-nav-links.open a.rb-mnav-account-sub:hover {
+  color: var(--rb-text) !important;
+  padding-left: 30px !important;
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
   #rb-header {
-    height: 96px !important;
+    height: var(--rb-header-h, 96px) !important;
   }
   #rb-header .rb-nav-inner {
     padding: 0 16px !important;
@@ -563,8 +635,407 @@
   #rb-header .rb-icon-btn {
     display: none !important;
   }
-  #rb-header .rb-nav-links.open {
-    top: 96px !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   Native CS-Cart mini-cart (Cart Content block, placed at
+   top of layout) — hide native trigger row, restyle +
+   reposition the dropdown panel under our .rb-cart-btn.
+   NOT scoped under #rb-header — native block lives outside it.
+   Desktop/tablet only (min-width:769px): on mobile the same
+   elements are reused by UniTheme2's sticky bottom nav panel,
+   so we leave them fully native there.
+════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+[id^="cart_status_"] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
+  z-index: 100001 !important;
+}
+[id^="cart_status_"] > [id^="sw_dropdown_"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.ty-dropdown-box__content--cart {
+  position: fixed !important;
+  top: 112px !important;
+  right: max(48px, calc((100vw - 1440px) / 2 + 48px)) !important;
+  left: auto !important;
+  width: 390px !important;
+  max-width: calc(100vw - 32px) !important;
+  margin: 0 !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.22) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(200,168,76,.05) !important;
+  z-index: 100000 !important;
+  padding: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #F0F0F0 !important;
+  overflow: hidden !important;
+}
+.ty-dropdown-box__content--cart * { box-sizing: border-box !important; }
+.ty-dropdown-box__content--cart.hidden { display: none !important; }
+.ty-dropdown-box__content--cart .ut2-popup-box-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 16px 12px !important;
+  border-bottom: 1px solid rgba(200,168,76,.1) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: #F0F0F0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-btn-close {
+  width: 24px !important; height: 24px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  color: #666 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 11px !important;
+  transition: border-color .18s, color .18s !important;
+}
+.ty-dropdown-box__content--cart .ut2-btn-close:hover {
+  border-color: rgba(255,255,255,.3) !important;
+  color: #F0F0F0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-added-products {
+  max-height: 320px !important;
+  overflow-y: auto !important;
+  padding: 4px 0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-added-products__itself-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+.ty-dropdown-box__content--cart .product-pict {
+  flex-shrink: 0 !important;
+  width: 56px !important; height: 56px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #161616 !important;
+}
+.ty-dropdown-box__content--cart .product-pict img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.ty-dropdown-box__content--cart .desc {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+.ty-dropdown-box__content--cart .product-name a {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #F0F0F0 !important;
+  line-height: 1.35 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.ty-dropdown-box__content--cart .product-name a:hover {
+  color: #C8A84C !important;
+}
+.ty-dropdown-box__content--cart .mix-quantity-x-price {
+  font-size: 12px !important;
+  color: #808080 !important;
+  margin-top: 4px !important;
+  display: block !important;
+}
+.ty-dropdown-box__content--cart .mix-quantity-x-price .unit-price {
+  color: #C8A84C !important;
+  font-weight: 600 !important;
+}
+.ty-dropdown-box__content--cart .ut2-minicart__rm-btn a {
+  width: 26px !important; height: 26px !important;
+  border-radius: 6px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  color: #555 !important;
+  transition: color .18s, background .18s !important;
+  flex-shrink: 0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-minicart__rm-btn a:hover {
+  color: #ff6b6b !important;
+  background: rgba(255,80,80,.08) !important;
+}
+.ty-dropdown-box__content--cart .cart_subtotal {
+  padding: 12px 16px !important;
+  border-top: 1px solid rgba(255,255,255,.04) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  font-size: 12.5px !important;
+}
+.ty-dropdown-box__content--cart .ut2-cart_subtotal__caption {
+  color: #808080 !important;
+}
+.ty-dropdown-box__content--cart .ut2-cart_subtotal__data {
+  color: #F0F0F0 !important;
+  font-weight: 600 !important;
+}
+.ty-dropdown-box__content--cart .ut2-cart_subtotal__data strong {
+  color: #C8A84C !important;
+}
+.ty-dropdown-box__content--cart .cart_buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+  padding: 4px 16px 16px !important;
+}
+.ty-dropdown-box__content--cart .cart_buttons .ty-btn {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  height: 40px !important;
+  min-width: 0 !important;
+  padding: 0 10px !important;
+  border-radius: 7px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  gap: 5px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__outline {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  color: #C8C8C8 !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__outline:hover {
+  border-color: rgba(255,255,255,.32) !important;
+  color: #F0F0F0 !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__primary {
+  background: #C8A84C !important;
+  border: none !important;
+  color: #000 !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__primary:hover {
+  background: #D9BA62 !important;
+}
+} /* end @media (min-width: 769px) — cart */
+
+/* ══════════════════════════════════════════════════════
+   Native CS-Cart search block — native toggle link hidden
+   (its inline onclick walks to the wrong sibling), panel
+   restyled + driven by our own .rb-search-open class.
+   NOT scoped under #rb-header — native block lives outside it.
+   Unlike cart, this styling applies at ALL widths: our mobile
+   hamburger menu has its own "Search" item that opens this same
+   panel via .rb-search-open (see script below), so it needs to
+   look right on mobile too. Only the native top-bar toggle link
+   is hidden desktop-only, since the bottom sticky panel on mobile
+   still needs its own native trigger icon visible.
+════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  .ut2-btn-search { display: none !important; }
+}
+.ty-search-block {
+  position: fixed !important;
+  top: 104px !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  background: rgba(6,6,6,.98) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(200,168,76,.22) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
+  z-index: 100000 !important;
+  padding: 22px 48px !important;
+  display: none !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.ty-search-block * { box-sizing: border-box !important; }
+.ty-search-block.rb-search-open {
+  display: block !important;
+}
+.ty-search-block form {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+}
+.ty-search-block__input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 46px !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: 8px !important;
+  padding: 0 16px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 15px !important;
+  color: #F0F0F0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color .18s !important;
+}
+.ty-search-block__input::placeholder { color: #555 !important; }
+.ty-search-block__input:focus { border-color: rgba(200,168,76,.38) !important; }
+.ty-search-magnifier {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  width: 46px !important;
+  height: 46px !important;
+  flex-shrink: 0 !important;
+  background: #C8A84C !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: #000 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  cursor: pointer !important;
+  transition: background .18s !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.ty-search-magnifier:hover { background: #D9BA62 !important; }
+.ty-search-block .rb-search-close {
+  width: 46px !important;
+  height: 46px !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 8px !important;
+  color: #888 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 15px !important;
+  transition: border-color .18s, color .18s !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.ty-search-block .rb-search-close:hover {
+  border-color: rgba(255,255,255,.32) !important;
+  color: #F0F0F0 !important;
+}
+
+/* ── Live search results (third-party module: #esqs_container / .ty-search-item) ── */
+.ty-search-block .esqs-container {
+  position: absolute !important;
+  top: calc(100% + 12px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  max-height: 420px !important;
+  overflow-y: auto !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.18) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.7) !important;
+  padding: 6px !important;
+}
+.ty-search-block .cm-search-spinner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+}
+.ty-search-block .cm-search-spinner img {
+  width: 28px !important;
+  height: 28px !important;
+  opacity: .6 !important;
+}
+.ty-search-block .ecl-live-search-category {
+  padding: 10px 12px 6px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #C8A84C !important;
+}
+.ty-search-block .ty-search-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px !important;
+  padding: 12px !important;
+  border-radius: 10px !important;
+  transition: background .16s !important;
+}
+.ty-search-block .ty-search-item:hover {
+  background: rgba(200,168,76,.06) !important;
+}
+.ty-search-block .ty-search-item__picture {
+  flex-shrink: 0 !important;
+  width: 96px !important;
+  height: 96px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #161616 !important;
+}
+.ty-search-block .ty-search-item__picture img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.ty-search-block .ty-search-item__information {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+.ty-search-block .ty-search-item__title a {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #F0F0F0 !important;
+  display: block !important;
+  line-height: 1.35 !important;
+}
+.ty-search-block .ty-search-item__title a:hover { color: #C8A84C !important; }
+.ty-search-block .ty-search-item__product-code {
+  font-size: 13px !important;
+  color: #666 !important;
+  display: block !important;
+  margin-top: 4px !important;
+}
+.ty-search-block .ty-search-item__price {
+  flex-shrink: 0 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #C8A84C !important;
+}
+@media (max-width: 768px) {
+  .ty-search-block {
+    top: var(--rb-header-h, 96px) !important;
+    padding: 16px !important;
+  }
+  .ty-search-block form {
+    gap: 8px !important;
+  }
+  .ty-search-block .ty-search-item__picture {
+    width: 64px !important;
+    height: 64px !important;
   }
 }
 {/literal}
@@ -617,17 +1088,48 @@
 
         <!-- Nav links -->
         <ul class="rb-nav-links" id="rb-nav-links">
-          <li><a href="https://therunbird.com/steering-wheels/">Steering Wheels</a></li>
+          <li class="rb-mnav-search">
+            <button type="button" class="rb-mnav-search-btn" id="rb-mnav-search-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Search</span>
+            </button>
+          </li>
+          <li class="rb-cat-first"><a href="https://therunbird.com/steering-wheels/">Steering Wheels</a></li>
           <li><a href="https://therunbird.com/shift-knobs/">Shift Knobs</a></li>
           <li><a href="https://therunbird.com/handbrakes/">Handbrakes</a></li>
           <li><a href="https://therunbird.com/horn-pads/">Horn Pads</a></li>
           <li><a href="https://therunbird.com/steering-wheel-emblems/">Emblems</a></li>
           <li><a href="https://therunbird.com/custom-order/">Custom Order</a></li>
+          <li class="rb-mnav-account">
+            {if $auth.user_id}
+            <a href="index.php?dispatch=profiles.update" class="rb-mnav-account-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>My Account</span>
+            </a>
+            {else}
+            <a href="index.php?dispatch=auth.login_form" class="rb-mnav-account-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Sign In / Account</span>
+            </a>
+            {/if}
+            <a href="index.php?dispatch=orders.search" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>Orders</span>
+            </a>
+            <a href="index.php?dispatch=wishlist.view" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>Wish List</span>
+            </a>
+            <a href="index.php?dispatch=product_features.compare" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Comparison List</span>
+            </a>
+          </li>
         </ul>
 
         <!-- Nav right -->
         <div class="rb-nav-right">
-          <button class="rb-icon-btn" aria-label="Search">
+          <button class="rb-icon-btn" id="rb-search-btn" aria-label="Search">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
 
@@ -732,56 +1234,103 @@
 {literal}
 (function() {
 
+  /* ── Реальная высота шапки (announcement-бар может переноситься на
+     2 строки на узких экранах) — синхронизируем со спейсером/меню/
+     панелями через CSS-переменную, вместо захардкоженного значения. */
+  function rbSyncHeaderHeight() {
+    var fixedWrap = document.querySelector('#rb-header .rb-fixed-wrap');
+    if (!fixedWrap) return;
+    var h = Math.ceil(fixedWrap.getBoundingClientRect().height);
+    if (h > 0) {
+      document.documentElement.style.setProperty('--rb-header-h', h + 'px');
+    }
+  }
+  rbSyncHeaderHeight();
+  window.addEventListener('resize', rbSyncHeaderHeight);
+  window.addEventListener('load', rbSyncHeaderHeight);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(rbSyncHeaderHeight);
+  }
+
   /* ── Hamburger menu ── */
   var burger   = document.getElementById('rb-burger');
   var navLinks = document.getElementById('rb-nav-links');
   if (burger && navLinks) {
     burger.addEventListener('click', function() {
-      navLinks.classList.toggle('open');
-      burger.classList.toggle('active');
+      var isOpen = navLinks.classList.toggle('open');
+      burger.classList.toggle('active', isOpen);
+      /* На случай если панель поиска осталась открытой (rb-search-open) с
+         прошлого раза — у неё z-index выше меню, и она "просвечивает"
+         поверх свежеоткрытого меню. Всегда сбрасываем при переключении. */
+      document.querySelectorAll('.ty-search-block').forEach(function(b) {
+        b.classList.remove('rb-search-open');
+      });
+      /* Блокируем скролл страницы под открытым меню — иначе фон
+         прокручивается сквозь fixed-оверлей меню. */
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
     navLinks.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', function() {
         navLinks.classList.remove('open');
         burger.classList.remove('active');
+        document.body.style.overflow = '';
       });
+    });
+
+    /* ── Кнопка "Menu" в нижней sticky-панели CS-Cart ──
+       Перехватываем клик на этапе capture (до нативного обработчика
+       .cm-external-trigger темы) и открываем НАШЕ меню вместо родного. */
+    var stickyMenuIcon = document.querySelector('.ut2-icon-outline-menu');
+    var stickyMenuLink = stickyMenuIcon ? stickyMenuIcon.closest('a') : null;
+    if (stickyMenuLink) {
+      stickyMenuLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        burger.click();
+      }, true);
+    }
+  }
+
+  /* ── Пункт "Search" в мобильном меню гамбургера ──
+     Открываем ту же панель .ty-search-block, что и десктопная кнопка
+     поиска (см. класс rb-search-open ниже) — теперь она стилизована
+     и на мобильном тоже. Нативный тогл .ut2-btn-search НЕ используем:
+     его onclick содержит $(this).parent().next(), что по нашему
+     порядку блоков в Layout указывает на #rb-header, а не на панель
+     поиска, и вдобавок класс view, который он ставит, ни на что
+     не влияет в нашей стилизации. */
+  var mnavSearchBtn = document.getElementById('rb-mnav-search-btn');
+  if (mnavSearchBtn) {
+    mnavSearchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (navLinks && burger) {
+        navLinks.classList.remove('open');
+        burger.classList.remove('active');
+      }
+      document.body.style.overflow = '';
+      var blocks = document.querySelectorAll('.ty-search-block');
+      blocks.forEach(function(b) { b.classList.add('rb-search-open'); });
+      var firstInput = blocks.length ? blocks[0].querySelector('.ty-search-block__input') : null;
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus(); }, 50);
+      }
     });
   }
 
-  /* ── Cart ── */
+  /* ── Cart ──
+     Открытие/закрытие полностью отдано нативному CS-Cart виджету
+     (cm-combination) — он сам управляет классом .hidden, позицией
+     и закрытием по клику вне (data-ca-external-click-id). Наша кнопка
+     просто эмулирует клик по нативному тогглу; сам вид/позиция панели
+     переопределены в CSS выше (.ty-dropdown-box__content--cart). */
   var rbCartBtn = document.getElementById('rb-cart-btn');
   if (rbCartBtn) {
     rbCartBtn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-
-      /* Если дропдаун уже загружен в DOM — управляем напрямую */
-      var cartDrop = document.querySelector('.ty-dropdown-box__content--cart');
-      if (cartDrop) {
-        var isOpen = cartDrop.classList.contains('js_open');
-        if (isOpen) {
-          cartDrop.style.display = 'none';
-          cartDrop.classList.remove('js_open');
-        } else {
-          cartDrop.style.display = 'block';
-          cartDrop.classList.add('js_open');
-          setTimeout(function() {
-            document.addEventListener('click', function rbCloseCart(ev) {
-              if (!cartDrop.contains(ev.target) && ev.target !== rbCartBtn) {
-                cartDrop.style.display = 'none';
-                cartDrop.classList.remove('js_open');
-                document.removeEventListener('click', rbCloseCart);
-              }
-            });
-          }, 0);
-        }
-        return;
-      }
-
-      /* Дропдаун ещё не загружен (AJAX) — кликаем нативный toggle CS-Cart */
-      var cartToggle = document.querySelector('.ut2-top-cart-content .ty-dropdown-box__title')
-                    || document.querySelector('.ut2-top-cart-content .cm-combination')
-                    || document.querySelector('[id^="sw_dropdown_"]');
+      var cartToggle = document.querySelector('[id^="sw_dropdown_"]');
       if (cartToggle) {
         cartToggle.dispatchEvent(new MouseEvent('click', {
           bubbles: true, cancelable: true, view: window
@@ -800,6 +1349,77 @@
       ourCount.textContent = nativeCount.textContent;
     }
   }).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+  /* ── Search ──
+     Нативный toggle-линк (.ut2-btn-search) не используем — его инлайновый
+     onclick лезет к соседнему по DOM блоку (.parent().next()), а в нашем
+     layout это наш собственный #rb-header. Вместо этого сами открываем/
+     закрываем .ty-search-block через свой класс rb-search-open, форма и
+     live-search подсказки внутри — родные CS-Cart, не трогаем. */
+  var rbSearchBtn  = document.getElementById('rb-search-btn');
+  var searchBlocks = document.querySelectorAll('.ty-search-block');
+  if (rbSearchBtn && searchBlocks.length) {
+    /* На странице может быть больше одного .ty-search-block (тот же
+       родной блок переиспользуется мобильной sticky-панелью) — поэтому
+       обрабатываем ВСЕ найденные экземпляры одинаково, а не только первый. */
+    searchBlocks.forEach(function(searchBlock) {
+      var searchInput = searchBlock.querySelector('.ty-search-block__input');
+      if (searchInput && !searchInput.placeholder) {
+        searchInput.placeholder = 'Search products...';
+      }
+
+      /* Родная форма не содержит кнопки закрытия — добавляем свою рядом с лупой */
+      var searchForm = searchBlock.querySelector('form') || searchBlock;
+      if (!searchForm.querySelector('.rb-search-close')) {
+        var closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'rb-search-close';
+        closeBtn.setAttribute('aria-label', 'Close search');
+        closeBtn.innerHTML = '&#10005;';
+        searchForm.appendChild(closeBtn);
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeAllSearch();
+        });
+      }
+    });
+
+    function openAllSearch() {
+      searchBlocks.forEach(function(b) { b.classList.add('rb-search-open'); });
+      rbSearchBtn.classList.add('active');
+      var firstInput = searchBlocks[0].querySelector('.ty-search-block__input');
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus(); }, 50);
+      }
+    }
+    function closeAllSearch() {
+      searchBlocks.forEach(function(b) { b.classList.remove('rb-search-open'); });
+      rbSearchBtn.classList.remove('active');
+    }
+    function isSearchOpen() {
+      var open = false;
+      searchBlocks.forEach(function(b) { if (b.classList.contains('rb-search-open')) open = true; });
+      return open;
+    }
+
+    rbSearchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isSearchOpen()) { closeAllSearch(); } else { openAllSearch(); }
+    });
+    document.addEventListener('click', function(e) {
+      if (!isSearchOpen()) return;
+      var insideAny = false;
+      searchBlocks.forEach(function(b) { if (b.contains(e.target)) insideAny = true; });
+      if (!insideAny && e.target !== rbSearchBtn && !rbSearchBtn.contains(e.target)) {
+        closeAllSearch();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeAllSearch();
+    });
+  }
 
   /* ── Account dropdown ── */
   var accBtn   = document.getElementById('rb-acc-btn');
