@@ -32,6 +32,18 @@
   background: transparent !important;
 }
 
+/* ── Fix native theme header wrapper ──
+   UniTheme2 wraps our block in <div class="tygh-header header-grid light-header-v2">
+   hardcoded to height:70px. That clips our spacer (#rb-header, needs 104px for
+   ann-bar + nav) down to 70px of reserved flow space, so every page's content
+   starts ~34px too early and hides under our fixed header. Force the native
+   wrapper to size to our real header height instead. */
+.tygh-header.header-grid {
+  height: auto !important;
+  min-height: var(--rb-header-h, 104px) !important;
+  overflow: visible !important;
+}
+
 /* ── CSS tokens ── */
 #rb-header {
   --rb-accent:     #C8A84C;
