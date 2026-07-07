@@ -1,0 +1,195 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 3: Why Choose RunBird
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-why — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-why,
+#rb-why *,
+#rb-why *::before,
+#rb-why *::after {
+  box-sizing: border-box !important;
+}
+
+/* ── CSS tokens ── */
+#rb-why {
+  --rb-bg:      #080808;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WRAP + SECTION HEAD
+══════════════════════════════════════ */
+#rb-why .rb-why-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-why .rb-sec-head {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 16px !important;
+}
+#rb-why .rb-sec-eyebrow {
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-why .rb-sec-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WHY GRID
+══════════════════════════════════════ */
+#rb-why .rb-why-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+}
+#rb-why .rb-why-item {
+  padding: 26px 40px !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: background .25s !important;
+}
+#rb-why .rb-why-item:nth-child(3n) { border-right: none !important; }
+#rb-why .rb-why-item::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important;
+  transform: scaleX(0) !important; transform-origin: left !important; transition: transform .35s !important;
+}
+#rb-why .rb-why-item:hover::before { transform: scaleX(1) !important; }
+#rb-why .rb-why-item:hover { background: rgba(200,168,76,.03) !important; }
+#rb-why .rb-why-tag {
+  display: inline-flex !important; align-items: center !important; gap: 10px !important;
+  font-size: 10px !important; font-weight: 700 !important; letter-spacing: .22em !important;
+  color: var(--rb-accent) !important; text-transform: uppercase !important; margin-bottom: 12px !important;
+}
+#rb-why .rb-why-tag-line { width: 22px !important; height: 1px !important; background: var(--rb-accent) !important; }
+#rb-why .rb-why-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 22px !important; text-transform: uppercase !important;
+  color: var(--rb-text) !important; letter-spacing: .02em !important; margin-bottom: 8px !important;
+}
+#rb-why .rb-why-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.72 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-why .rb-why-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-why .rb-why-grid { grid-template-columns: 1fr 1fr !important; }
+  #rb-why .rb-why-item:nth-child(3n) { border-right: 1px solid var(--rb-border) !important; }
+  #rb-why .rb-why-item:nth-child(2n) { border-right: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-why .rb-why-wrap { padding: 15px 20px 0 !important; }
+  #rb-why .rb-sec-title { font-size: 30px !important; }
+  #rb-why .rb-why-grid { grid-template-columns: 1fr !important; }
+  #rb-why .rb-why-item { border-right: none !important; padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-why">
+  <div class="rb-why-wrap">
+    <div class="rb-sec-head">
+      <div>
+        <div class="rb-sec-eyebrow">Why Choose RunBird</div>
+        <h2 class="rb-sec-title">Built Different</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="rb-why-grid">
+
+    <div class="rb-why-item">
+      <div class="rb-why-tag"><span class="rb-why-tag-line"></span>01</div>
+      <div class="rb-why-title">Made to Order</div>
+      <p class="rb-why-desc">Every piece is built from scratch for your specific order. No stock, no warehouse — just craftsmanship on demand, every time.</p>
+    </div>
+
+    <div class="rb-why-item">
+      <div class="rb-why-tag"><span class="rb-why-tag-line"></span>02</div>
+      <div class="rb-why-title">Precision Fit</div>
+      <p class="rb-why-desc">Engineered specifically for Corvette C5, C6, C7, and C8 generations. Drop-in installation — no modifications, no guesswork.</p>
+    </div>
+
+    <div class="rb-why-item">
+      <div class="rb-why-tag"><span class="rb-why-tag-line"></span>03</div>
+      <div class="rb-why-title">Premium Materials Only</div>
+      <p class="rb-why-desc">Aerospace carbon fiber, full-grain Italian Nappa leather, and genuine Alcantara&reg; — the same materials found in exotic supercars.</p>
+    </div>
+
+    <div class="rb-why-item">
+      <div class="rb-why-tag"><span class="rb-why-tag-line"></span>04</div>
+      <div class="rb-why-title">10&ndash;14 Day Turnaround</div>
+      <p class="rb-why-desc">From order confirmation to your door — fast production without cutting corners. Tracking updates sent at every stage.</p>
+    </div>
+
+    <div class="rb-why-item">
+      <div class="rb-why-tag"><span class="rb-why-tag-line"></span>05</div>
+      <div class="rb-why-title">Fully Configurable</div>
+      <p class="rb-why-desc">Choose your material, carbon finish (gloss or matte), color, and thread. Every detail is yours to decide — built to your exact spec.</p>
+    </div>
+
+    <div class="rb-why-item">
+      <div class="rb-why-tag"><span class="rb-why-tag-line"></span>06</div>
+      <div class="rb-why-title">Direct from Workshop</div>
+      <p class="rb-why-desc">No distributors, no markups. We build it, we ship it. Better quality control and honest pricing — straight from our craftsmen to you.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-width block. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay intact.
+  var el = document.getElementById('rb-why');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

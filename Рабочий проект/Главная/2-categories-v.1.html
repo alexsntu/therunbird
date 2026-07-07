@@ -1,0 +1,317 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 2: Browse by Category
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-categories — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-categories,
+#rb-categories *,
+#rb-categories *::before,
+#rb-categories *::after {
+  box-sizing: border-box !important;
+}
+#rb-categories a {
+  text-decoration: none !important;
+}
+
+/* ── CSS tokens ── */
+#rb-categories {
+  --rb-bg:         #080808;
+  --rb-bg-card:    #111111;
+  --rb-accent:     #C8A84C;
+  --rb-accent-rgb: 200,168,76;
+  --rb-accent-h:   #D9BA62;
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WRAP + SECTION HEAD
+══════════════════════════════════════ */
+#rb-categories .rb-cat-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px !important;
+}
+#rb-categories .rb-sec-head {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  margin-bottom: 56px !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+}
+#rb-categories .rb-sec-eyebrow {
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-categories .rb-sec-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(34px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+#rb-categories .rb-sec-link {
+  color: var(--rb-accent) !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: .07em !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid var(--rb-accent) !important;
+  padding-bottom: 2px !important;
+  transition: opacity .2s !important;
+  white-space: nowrap !important;
+}
+#rb-categories .rb-sec-link:hover { opacity: .65 !important; }
+
+/* ══════════════════════════════════════
+   CATEGORY GRID
+══════════════════════════════════════ */
+#rb-categories .rb-cat-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  grid-template-rows: repeat(2, 286px) !important;
+  gap: 3px !important;
+}
+#rb-categories .rb-cat-card {
+  position: relative !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  background: #111 !important;
+  display: block !important;
+  transition: box-shadow .35s !important;
+}
+#rb-categories .rb-cat-card:hover {
+  box-shadow: inset 0 0 60px rgba(200,168,76,.07), 0 0 40px rgba(200,168,76,.08) !important;
+}
+#rb-categories .rb-cat-card:first-child { grid-row: span 2 !important; }
+#rb-categories .rb-cat-card::before {
+  content: '' !important; position: absolute !important; inset: 0 !important; z-index: 1 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.011) 0, rgba(255,255,255,.011) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.011) 0, rgba(255,255,255,.011) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 7px 7px !important;
+}
+#rb-categories .rb-cat-card::after {
+  content: '' !important; position: absolute !important; inset: 0 !important; z-index: 2 !important;
+  background: linear-gradient(to top,
+    rgba(0,0,0,.92) 0%,
+    rgba(0,0,0,.72) 28%,
+    rgba(0,0,0,.18) 55%,
+    transparent 100%) !important;
+}
+#rb-categories .rb-c-sw { background: linear-gradient(148deg, #1C1818 0%, #0C0A0A 100%) !important; }
+#rb-categories .rb-c-sk { background: linear-gradient(148deg, #1E1709 0%, #110D05 100%) !important; }
+#rb-categories .rb-c-hb { background: linear-gradient(148deg, #1C1009 0%, #0E0805 100%) !important; }
+#rb-categories .rb-c-hp { background: linear-gradient(148deg, #0F1422 0%, #09101A 100%) !important; }
+#rb-categories .rb-c-em { background: linear-gradient(148deg, #1A1608 0%, #0E0C04 100%) !important; }
+#rb-categories .rb-c-ss { background: linear-gradient(148deg, #14111C 0%, #0A0912 100%) !important; }
+
+#rb-categories .rb-cat-img {
+  position: absolute !important; inset: 0 !important;
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: right top !important;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94) !important;
+  display: block !important;
+}
+#rb-categories .rb-cat-card:hover .rb-cat-img { transform: scale(1.07) !important; }
+#rb-categories .rb-cat-img-mobile { display: none !important; }
+
+#rb-categories .rb-cat-info {
+  position: absolute !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+  z-index: 4 !important; padding: 24px 26px !important;
+}
+#rb-categories .rb-cat-name {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 700 !important; font-size: 22px !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  letter-spacing: .04em !important; margin-bottom: 5px !important;
+}
+#rb-categories .rb-cat-card:first-child .rb-cat-name { font-size: 32px !important; }
+#rb-categories .rb-cat-sub { font-size: 11.5px !important; color: var(--rb-accent) !important; letter-spacing: .06em !important; }
+#rb-categories .rb-cat-price {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 800 !important;
+  color: var(--rb-accent) !important; margin-top: 7px !important;
+  letter-spacing: .03em !important;
+  text-shadow: 0 0 14px rgba(200,168,76,.4) !important;
+}
+#rb-categories .rb-cat-card:first-child .rb-cat-price { font-size: 20px !important; }
+
+#rb-categories .rb-cat-arr {
+  position: absolute !important; right: 22px !important; bottom: 28px !important; z-index: 5 !important;
+  width: 34px !important; height: 34px !important; border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,.22) !important; color: #fff !important;
+  display: flex !important; align-items: center !important; justify-content: center !important; font-size: 15px !important;
+  opacity: 0 !important; transform: translateX(-10px) !important;
+  transition: opacity .28s, transform .28s !important;
+}
+#rb-categories .rb-cat-card:hover .rb-cat-arr { opacity: 1 !important; transform: translateX(0) !important; }
+#rb-categories .rb-cat-card > .rb-cat-hover-line {
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important; z-index: 6 !important;
+  transform: scaleX(0) !important; transition: transform .35s !important;
+  transform-origin: left !important;
+}
+#rb-categories .rb-cat-card:hover > .rb-cat-hover-line { transform: scaleX(1) !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-categories .rb-cat-wrap { padding: 56px 32px !important; }
+}
+@media (max-width: 900px) {
+  #rb-categories .rb-cat-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+  #rb-categories .rb-cat-card:first-child { grid-row: auto !important; grid-column: span 2 !important; }
+}
+@media (max-width: 768px) {
+  #rb-categories .rb-cat-wrap { padding: 15px 20px 44px !important; }
+  #rb-categories .rb-sec-head { margin-bottom: 32px !important; flex-wrap: nowrap !important; }
+  #rb-categories .rb-sec-title { font-size: 30px !important; }
+  #rb-categories .rb-cat-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    background: var(--rb-bg) !important;
+    padding: 0 !important;
+  }
+  #rb-categories .rb-cat-card:first-child { grid-column: span 1 !important; }
+  #rb-categories .rb-cat-card {
+    width: 100% !important;
+    height: 260px !important;
+    box-shadow: 0 8px 36px rgba(200,168,76,.38), 0 0 18px rgba(200,168,76,.18), 0 2px 8px rgba(0,0,0,.6) !important;
+  }
+  #rb-categories .rb-cat-img-desktop { display: none !important; }
+  #rb-categories .rb-cat-img-mobile { display: block !important; object-fit: cover !important; object-position: top center !important; }
+}
+</style>
+
+<div id="rb-categories">
+  <div class="rb-cat-wrap">
+
+    <div class="rb-sec-head">
+      <div>
+        <div class="rb-sec-eyebrow">Browse By Category</div>
+        <h2 class="rb-sec-title">Our Collection</h2>
+      </div>
+      <a href="https://therunbird.com/all-products/" class="rb-sec-link">All Products →</a>
+    </div>
+
+    <div class="rb-cat-grid">
+
+      <!-- Steering Wheels (large) -->
+      <a href="https://therunbird.com/steering-wheels/" class="rb-cat-card rb-c-sw">
+        <div class="rb-cat-hover-line"></div>
+        <img class="rb-cat-img rb-cat-img-desktop" src="https://therunbird.com/images/MainPAge/corvette_wheel-pc.png" alt="Steering Wheels">
+        <img class="rb-cat-img rb-cat-img-mobile"  src="https://therunbird.com/images/MainPAge/corvette_wheel-mob.png" alt="Steering Wheels">
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Steering Wheels</div>
+          <div class="rb-cat-sub">11 configurations · Carbon · Nappa · Alcantara</div>
+          <div class="rb-cat-price">from $380</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Shift Knobs -->
+      <a href="https://therunbird.com/shift-knobs/" class="rb-cat-card rb-c-sk">
+        <div class="rb-cat-hover-line"></div>
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/shift-knobs.png" alt="Shift Knobs">
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Shift Knobs</div>
+          <div class="rb-cat-sub">5 styles · Standard · Ball · Tall · Drift</div>
+          <div class="rb-cat-price">from $175</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Handbrakes -->
+      <a href="https://therunbird.com/handbrakes/" class="rb-cat-card rb-c-hb">
+        <div class="rb-cat-hover-line"></div>
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/handbrakes.png" alt="Handbrakes">
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Handbrakes</div>
+          <div class="rb-cat-sub">Grip · Cover · Button · 8 material options</div>
+          <div class="rb-cat-price">from $160</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Horn Pads -->
+      <a href="https://therunbird.com/horn-pads/" class="rb-cat-card rb-c-hp">
+        <div class="rb-cat-hover-line"></div>
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/Horn-pads.png" alt="Horn Pads">
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Horn Pads</div>
+          <div class="rb-cat-sub">Round &amp; T-shaped · Leather · Alcantara</div>
+          <div class="rb-cat-price">from $115</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- SW Emblems -->
+      <a href="https://therunbird.com/steering-wheel-emblems/" class="rb-cat-card rb-c-em">
+        <div class="rb-cat-hover-line"></div>
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/SW-emblems.png" alt="SW Emblems">
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">SW Emblems</div>
+          <div class="rb-cat-sub">Z06 · ZR1 · Racing · Punisher · Carbon base</div>
+          <div class="rb-cat-price">from $85</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+      <!-- Side Skirts -->
+      <a href="https://therunbird.com/side-skirts/" class="rb-cat-card rb-c-ss">
+        <div class="rb-cat-hover-line"></div>
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/side-skirts.png" alt="Side Skirts">
+        <div class="rb-cat-info">
+          <div class="rb-cat-name">Side Skirts</div>
+          <div class="rb-cat-sub">Carbon Fiber · Gloss or Matte · Custom decal</div>
+          <div class="rb-cat-price">from $260</div>
+        </div>
+        <div class="rb-cat-arr">→</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-bleed section. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay
+  // intact; a block in the middle of the page has no business zeroing its ancestors' spacing.
+  var el = document.getElementById('rb-categories');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

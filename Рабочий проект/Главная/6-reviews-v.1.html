@@ -1,0 +1,302 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 6: Customer Reviews
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-reviews — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-reviews,
+#rb-reviews *,
+#rb-reviews *::before,
+#rb-reviews *::after {
+  box-sizing: border-box !important;
+}
+
+/* ── CSS tokens ── */
+#rb-reviews {
+  --rb-bg-elevated: #161616;
+  --rb-bg-card:     #111111;
+  --rb-accent:      #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:        #F0F0F0;
+  --rb-text2:       #808080;
+  --rb-border:      rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg-elevated) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WRAP + SECTION HEAD
+══════════════════════════════════════ */
+#rb-reviews .rb-rev-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-reviews .rb-sec-head {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+  margin-bottom: 32px !important;
+}
+#rb-reviews .rb-sec-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-reviews .rb-sec-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+#rb-reviews .rb-rev-rating {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+#rb-reviews .rb-rev-score-wrap { text-align: right !important; }
+#rb-reviews .rb-rev-score {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 48px !important; font-weight: 900 !important;
+  color: var(--rb-accent) !important; line-height: 1 !important;
+}
+#rb-reviews .rb-rev-stars-top {
+  color: var(--rb-accent) !important; font-size: 13px !important; letter-spacing: 4px !important; margin-top: 2px !important;
+}
+#rb-reviews .rb-rev-based {
+  border-left: 1px solid var(--rb-border) !important;
+  padding-left: 16px !important;
+}
+#rb-reviews .rb-rev-based-label {
+  font-size: 11px !important; color: var(--rb-text2) !important;
+  text-transform: uppercase !important; letter-spacing: .08em !important;
+}
+#rb-reviews .rb-rev-based-value {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 20px !important; font-weight: 800 !important; color: var(--rb-text) !important;
+}
+
+/* ══════════════════════════════════════
+   REVIEW CARDS
+══════════════════════════════════════ */
+#rb-reviews .rb-rev-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  gap: 20px !important;
+}
+#rb-reviews .rb-rev-card {
+  background: var(--rb-bg-card) !important;
+  border: 1px solid var(--rb-border) !important; border-radius: 14px !important;
+  padding: 24px 24px 20px !important;
+  display: flex !important; flex-direction: column !important;
+  transition: border-color .25s, box-shadow .25s !important;
+}
+#rb-reviews .rb-rev-card:hover {
+  border-color: var(--rb-accent-b) !important;
+  box-shadow: 0 8px 32px rgba(200,168,76,.07) !important;
+}
+#rb-reviews .rb-rev-stars { color: var(--rb-accent) !important; font-size: 13px !important; letter-spacing: 3px !important; margin-bottom: 14px !important; }
+#rb-reviews .rb-rev-quote {
+  font-size: 14px !important; color: #999 !important; line-height: 1.82 !important;
+  font-style: italic !important; flex: 1 !important; margin-bottom: 18px !important; position: relative !important;
+}
+#rb-reviews .rb-rev-quote::before {
+  content: '"' !important; color: var(--rb-accent) !important; font-size: 36px !important; font-style: normal !important;
+  line-height: .5 !important; display: block !important; margin-bottom: 10px !important;
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 900 !important;
+}
+#rb-reviews .rb-rev-divider { height: 1px !important; background: var(--rb-border) !important; margin-bottom: 18px !important; }
+#rb-reviews .rb-rev-author { display: flex !important; flex-direction: row !important; align-items: center !important; gap: 14px !important; }
+#rb-reviews .rb-rev-avatar {
+  width: 42px !important; height: 42px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  background: var(--rb-accent-dim) !important; border: 1px solid var(--rb-accent-b) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 800 !important; font-size: 15px !important; color: var(--rb-accent) !important;
+}
+#rb-reviews .rb-rev-name { font-size: 13.5px !important; font-weight: 600 !important; color: var(--rb-text) !important; }
+#rb-reviews .rb-rev-car { font-size: 11px !important; color: var(--rb-accent) !important; letter-spacing: .08em !important; text-transform: uppercase !important; margin-top: 3px !important; }
+
+/* ══════════════════════════════════════
+   MOBILE CAROUSEL DOTS (hidden on desktop)
+══════════════════════════════════════ */
+#rb-reviews .rb-rev-dots { display: none !important; }
+#rb-reviews .rb-rev-dot {
+  width: 6px !important; height: 6px !important; border-radius: 50% !important;
+  background: rgba(255,255,255,.2) !important; transition: all .3s !important;
+}
+#rb-reviews .rb-rev-dot-active { width: 20px !important; border-radius: 3px !important; background: var(--rb-accent) !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-reviews .rb-rev-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 900px) {
+  #rb-reviews .rb-rev-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+}
+@media (max-width: 768px) {
+  #rb-reviews .rb-rev-wrap { padding: 15px 20px 32px !important; }
+  #rb-reviews .rb-sec-title { font-size: 30px !important; }
+  #rb-reviews { overflow: hidden !important; }
+  #rb-reviews .rb-sec-head { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; margin-bottom: 20px !important; }
+
+  /* Horizontal swipe carousel */
+  #rb-reviews .rb-rev-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 12px !important;
+    padding-bottom: 20px !important;
+    scrollbar-width: none !important;
+    width: 100% !important;
+  }
+  #rb-reviews .rb-rev-grid::-webkit-scrollbar { display: none !important; }
+  #rb-reviews .rb-rev-card {
+    width: calc(100vw - 72px) !important;
+    min-width: 0 !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start !important;
+    overflow: hidden !important;
+  }
+  #rb-reviews .rb-rev-quote { overflow-wrap: break-word !important; }
+  #rb-reviews .rb-rev-car { white-space: normal !important; line-height: 1.4 !important; }
+  #rb-reviews .rb-rev-dots {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin-top: 4px !important;
+  }
+}
+</style>
+
+<div id="rb-reviews">
+  <div class="rb-rev-wrap">
+
+    <div class="rb-sec-head">
+      <div>
+        <div class="rb-sec-eyebrow">Customer Reviews</div>
+        <h2 class="rb-sec-title">What Corvette Owners Say</h2>
+      </div>
+      <div class="rb-rev-rating">
+        <div class="rb-rev-score-wrap">
+          <div class="rb-rev-score">4.9</div>
+          <div class="rb-rev-stars-top">★★★★★</div>
+        </div>
+        <div class="rb-rev-based">
+          <div class="rb-rev-based-label">Based on</div>
+          <div class="rb-rev-based-value">500+ Orders</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rb-rev-grid">
+
+      <div class="rb-rev-card">
+        <div class="rb-rev-stars">★★★★★</div>
+        <p class="rb-rev-quote">Best upgrade I've done to my C7. The carbon + Alcantara combo feels exactly like a factory option — except better. Grip is incredible, fitment was perfect out of the box.</p>
+        <div class="rb-rev-divider"></div>
+        <div class="rb-rev-author">
+          <div class="rb-rev-avatar">MR</div>
+          <div>
+            <div class="rb-rev-name">Michael R.</div>
+            <div class="rb-rev-car">C7 Z06 · Steering Wheel</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rb-rev-card">
+        <div class="rb-rev-stars">★★★★★</div>
+        <p class="rb-rev-quote">Ordered the gloss carbon shift knob for my C8. The finish quality is insane — better than I expected from the photos. Shipped in 12 days and the packaging was incredibly premium.</p>
+        <div class="rb-rev-divider"></div>
+        <div class="rb-rev-author">
+          <div class="rb-rev-avatar">JT</div>
+          <div>
+            <div class="rb-rev-name">James T.</div>
+            <div class="rb-rev-car">C8 Stingray · Shift Knob</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rb-rev-card">
+        <div class="rb-rev-stars">★★★★★</div>
+        <p class="rb-rev-quote">Picked up the handbrake and horn pad set. The stitching is immaculate — you can tell this was made by someone who actually cares. My ZR1 interior finally looks the part.</p>
+        <div class="rb-rev-divider"></div>
+        <div class="rb-rev-author">
+          <div class="rb-rev-avatar">DK</div>
+          <div>
+            <div class="rb-rev-name">David K.</div>
+            <div class="rb-rev-car">C6 ZR1 · Handbrake + Horn Pad</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile scroll dots -->
+    <div class="rb-rev-dots">
+      <span class="rb-rev-dot rb-rev-dot-active"></span>
+      <span class="rb-rev-dot"></span>
+      <span class="rb-rev-dot"></span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-width block. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay intact.
+  var el = document.getElementById('rb-reviews');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  // Mobile carousel dots — sync active dot to horizontal scroll position of .rb-rev-grid
+  var revGrid = document.querySelector('#rb-reviews .rb-rev-grid');
+  var revDots = document.querySelectorAll('#rb-reviews .rb-rev-dot');
+  if (revGrid && revDots.length) {
+    revGrid.addEventListener('scroll', function() {
+      var idx = Math.round(revGrid.scrollLeft / revGrid.offsetWidth);
+      revDots.forEach(function(d, i) {
+        d.classList.toggle('rb-rev-dot-active', i === idx);
+      });
+    }, { passive: true });
+  }
+})();
+</script>

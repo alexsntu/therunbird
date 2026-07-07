@@ -1,0 +1,160 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 8: CTA Band (Make It Yours)
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-cta — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-cta,
+#rb-cta *,
+#rb-cta *::before,
+#rb-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-cta a { text-decoration: none !important; }
+#rb-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* ── CSS tokens ── */
+#rb-cta {
+  --rb-accent:      #C8A84C;
+  --rb-accent-rgb:  200,168,76;
+  --rb-accent-h:    #D9BA62;
+  --rb-text:        #F0F0F0;
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+
+  /* This section needs a true edge-to-edge background image + glows,
+     so it breaks out of UniTheme2's container like the hero block does. */
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.png') center / cover no-repeat !important;
+  padding: 68px 48px !important;
+}
+
+#rb-cta .rb-cta-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(var(--rb-accent-rgb),.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 50%, rgba(var(--rb-accent-rgb),.10) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 50%, rgba(var(--rb-accent-rgb),.10) 0%, transparent 100%) !important;
+}
+#rb-cta .rb-cta-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 9px 9px !important;
+}
+#rb-cta .rb-cta-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 720px !important; margin: 0 auto !important;
+}
+#rb-cta .rb-cta-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .24em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 22px !important;
+}
+#rb-cta .rb-cta-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(48px, 7vw, 84px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: .92 !important; margin: 0 0 20px !important;
+}
+#rb-cta .rb-cta-h em {
+  color: var(--rb-accent) !important; font-style: italic !important;
+  text-shadow: 0 0 40px rgba(200,168,76,.5) !important;
+}
+#rb-cta .rb-cta-p {
+  color: #999 !important; font-size: 15.5px !important; font-weight: 300 !important;
+  line-height: 1.72 !important; margin: 0 auto 44px !important; max-width: 560px !important;
+}
+#rb-cta .rb-cta-btns {
+  display: flex !important; flex-direction: row !important;
+  gap: 14px !important; justify-content: center !important; flex-wrap: wrap !important;
+}
+#rb-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #000 !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s, box-shadow .2s !important;
+  box-shadow: 0 4px 24px rgba(200,168,76,.35) !important;
+}
+#rb-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+  box-shadow: 0 10px 40px rgba(var(--rb-accent-rgb),.55) !important;
+}
+#rb-cta .rb-btn-ghost {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important; background: transparent !important;
+  color: #C8C8C8 !important; border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: border-color .2s, background .2s !important;
+}
+#rb-cta .rb-btn-ghost:hover { border-color: rgba(255,255,255,.42) !important; background: rgba(255,255,255,.05) !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-cta { padding: 56px 20px !important; }
+  #rb-cta .rb-cta-btns { flex-wrap: nowrap !important; gap: 10px !important; }
+  #rb-cta .rb-btn-gold, #rb-cta .rb-btn-ghost { padding: 13px 20px !important; font-size: 15px !important; flex: 1 !important; }
+}
+</style>
+
+<div id="rb-cta">
+  <div class="rb-cta-glow"></div>
+  <div class="rb-cta-cf"></div>
+  <div class="rb-cta-inner">
+    <span class="rb-cta-eye">Ready to Upgrade Your Corvette?</span>
+    <h2 class="rb-cta-h">Make It<br><em>Yours</em></h2>
+    <p class="rb-cta-p">Every piece starts with your preferences. Choose your Corvette generation, material, carbon finish, and thread color — we'll craft it to your exact spec.</p>
+    <div class="rb-cta-btns">
+      <a href="https://therunbird.com/custom-order/" class="rb-btn-gold">Start Custom Order</a>
+      <a href="https://therunbird.com/all-products/" class="rb-btn-ghost">Browse Full Catalog</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-bleed section. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay intact.
+  var el = document.getElementById('rb-cta');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

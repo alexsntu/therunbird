@@ -1,0 +1,189 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 5: How It Works (Process)
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-proc — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-proc,
+#rb-proc *,
+#rb-proc *::before,
+#rb-proc *::after {
+  box-sizing: border-box !important;
+}
+
+/* ── CSS tokens ── */
+#rb-proc {
+  --rb-bg-elevated: #161616;
+  --rb-accent:      #C8A84C;
+  --rb-text:        #F0F0F0;
+  --rb-text2:       #808080;
+  --rb-border:      rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg-elevated) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WRAP + SECTION HEAD
+══════════════════════════════════════ */
+#rb-proc .rb-proc-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-proc .rb-sec-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-proc .rb-sec-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   PROCESS GRID
+══════════════════════════════════════ */
+#rb-proc .rb-proc-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  gap: 0 !important;
+  padding-top: 20px !important;
+}
+#rb-proc .rb-proc-item {
+  padding: 28px 40px !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+}
+#rb-proc .rb-proc-item:last-child { border-right: none !important; }
+#rb-proc .rb-proc-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 44px !important; font-weight: 900 !important;
+  color: rgba(255,255,255,.08) !important;
+  line-height: 1 !important; margin-bottom: 10px !important;
+  user-select: none !important;
+}
+#rb-proc .rb-proc-img {
+  width: 100% !important; height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important; object-position: center !important;
+  border-radius: 14px !important; margin-bottom: 20px !important; display: block !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+  transition: transform .4s ease, box-shadow .4s ease !important;
+}
+#rb-proc .rb-proc-item:hover .rb-proc-img {
+  transform: scale(1.02) !important;
+  box-shadow: 0 8px 32px rgba(200,168,76,.15) !important;
+}
+#rb-proc .rb-proc-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 24px !important;
+  text-transform: uppercase !important; letter-spacing: .04em !important;
+  color: var(--rb-text) !important; margin-bottom: 10px !important;
+}
+#rb-proc .rb-proc-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.78 !important;
+  margin: 0 !important;
+}
+#rb-proc .rb-proc-item:not(:last-child)::after {
+  content: '→' !important;
+  position: absolute !important; top: 48px !important; right: -14px !important;
+  width: 28px !important; height: 28px !important; z-index: 10 !important;
+  background: var(--rb-bg-elevated) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 12px !important; color: var(--rb-accent) !important;
+  line-height: 28px !important; text-align: center !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-proc .rb-proc-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-proc .rb-proc-grid { grid-template-columns: 1fr !important; }
+  #rb-proc .rb-proc-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-proc .rb-proc-item:last-child { border-bottom: none !important; }
+  #rb-proc .rb-proc-item:not(:last-child)::after { display: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-proc .rb-proc-wrap { padding: 15px 20px 0 !important; }
+  #rb-proc .rb-sec-title { font-size: 30px !important; }
+  #rb-proc .rb-proc-grid { padding-top: 8px !important; }
+  #rb-proc .rb-proc-item { padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-proc">
+  <div class="rb-proc-wrap">
+    <span class="rb-sec-eyebrow">How It Works</span>
+    <h2 class="rb-sec-title">From Order to Delivery</h2>
+  </div>
+
+  <div class="rb-proc-grid">
+
+    <div class="rb-proc-item">
+      <div class="rb-proc-num">01</div>
+      <img class="rb-proc-img" src="https://therunbird.com/images/MainPAge/1-step.png" alt="Configure">
+      <div class="rb-proc-title">Configure</div>
+      <p class="rb-proc-desc">Select your product, material combination, carbon finish, and thread color. Each option is laid out clearly — no guesswork, no surprises.</p>
+    </div>
+
+    <div class="rb-proc-item">
+      <div class="rb-proc-num">02</div>
+      <img class="rb-proc-img" src="https://therunbird.com/images/MainPAge/handcraft.png" alt="Handcrafted">
+      <div class="rb-proc-title">Handcrafted</div>
+      <p class="rb-proc-desc">Your piece is cut, wrapped, and hand-stitched by our craftsmen. Made to order — never mass-produced. Production time: 10–14 business days.</p>
+    </div>
+
+    <div class="rb-proc-item">
+      <div class="rb-proc-num">03</div>
+      <img class="rb-proc-img" src="https://therunbird.com/images/MainPAge/Delivery.png" alt="Delivered">
+      <div class="rb-proc-title">Delivered</div>
+      <p class="rb-proc-desc">Carefully packaged and shipped directly to your door anywhere in the US. Includes an installation guide and material care card.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-width block. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay intact.
+  var el = document.getElementById('rb-proc');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

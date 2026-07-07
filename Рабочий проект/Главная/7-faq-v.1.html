@@ -1,0 +1,208 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 7: FAQ (Got Questions)
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-faq — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-faq,
+#rb-faq *,
+#rb-faq *::before,
+#rb-faq *::after {
+  box-sizing: border-box !important;
+}
+#rb-faq button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* ── CSS tokens ── */
+#rb-faq {
+  --rb-bg:        #080808;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WRAP + SECTION HEAD
+══════════════════════════════════════ */
+#rb-faq .rb-faq-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-faq .rb-sec-head { display: block !important; margin-bottom: 24px !important; }
+#rb-faq .rb-sec-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-faq .rb-sec-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   FAQ ACCORDION
+══════════════════════════════════════ */
+#rb-faq .rb-faq-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-faq .rb-faq-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-faq .rb-faq-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 22px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 19px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-faq .rb-faq-q:hover { color: var(--rb-accent) !important; }
+#rb-faq .rb-faq-item.open .rb-faq-q { color: var(--rb-accent) !important; }
+#rb-faq .rb-faq-icon {
+  width: 32px !important; height: 32px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 18px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-faq .rb-faq-item.open .rb-faq-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-faq .rb-faq-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important;
+}
+#rb-faq .rb-faq-item.open .rb-faq-a { max-height: 300px !important; padding-bottom: 22px !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-faq .rb-faq-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-faq .rb-faq-wrap { padding: 15px 20px 32px !important; }
+  #rb-faq .rb-sec-title { font-size: 30px !important; }
+  #rb-faq .rb-faq-q { font-size: 16px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-faq">
+  <div class="rb-faq-wrap">
+
+    <div class="rb-sec-head">
+      <div class="rb-sec-eyebrow">Got Questions</div>
+      <h2 class="rb-sec-title">Frequently Asked</h2>
+    </div>
+
+    <div class="rb-faq-list">
+
+      <div class="rb-faq-item">
+        <button class="rb-faq-q" type="button">
+          How long does production take?
+          <span class="rb-faq-icon">+</span>
+        </button>
+        <p class="rb-faq-a">All products are handmade to order. Production time is 10–14 business days from order confirmation. You'll receive a tracking number as soon as your order ships, with updates at every stage.</p>
+      </div>
+
+      <div class="rb-faq-item">
+        <button class="rb-faq-q" type="button">
+          Will this fit my Corvette?
+          <span class="rb-faq-icon">+</span>
+        </button>
+        <p class="rb-faq-a">Our accessories are designed specifically for Chevrolet Corvette generations C5 (1997–2004), C6 (2005–2013), C7 (2014–2019), and C8 (2020–present). Each product page lists exact fitment. Installation requires no permanent modifications — everything is a direct bolt-on or slip-on.</p>
+      </div>
+
+      <div class="rb-faq-item">
+        <button class="rb-faq-q" type="button">
+          How do I choose the right configuration?
+          <span class="rb-faq-icon">+</span>
+        </button>
+        <p class="rb-faq-a">Browse each product page where all material options are shown with photos. Carbon finish (gloss or matte), carbon color, leather type, and thread color are all selectable. If you're unsure — contact us. We're happy to recommend a configuration based on your Corvette's interior and your preferences.</p>
+      </div>
+
+      <div class="rb-faq-item">
+        <button class="rb-faq-q" type="button">
+          What is your return policy?
+          <span class="rb-faq-icon">+</span>
+        </button>
+        <p class="rb-faq-a">Since every piece is custom-made to your exact spec, we cannot accept returns on configured orders. However, if your item arrives damaged or doesn't match your order specifications, we will remake it at no cost. We stand behind every stitch.</p>
+      </div>
+
+      <div class="rb-faq-item">
+        <button class="rb-faq-q" type="button">
+          Do you ship internationally?
+          <span class="rb-faq-icon">+</span>
+        </button>
+        <p class="rb-faq-a">Currently we ship within the United States only, with free shipping on all orders. International shipping to Canada, Europe, and Australia is planned — sign up to our newsletter to be notified when it launches.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-width block. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay intact.
+  var el = document.getElementById('rb-faq');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  // FAQ accordion — only one item open at a time
+  document.querySelectorAll('#rb-faq .rb-faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-faq .rb-faq-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
