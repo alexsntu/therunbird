@@ -1,15 +1,8 @@
-<!-- ══════════════════════════════════════════════════════
-     RunBird — Header Block v2.1
-     CS-Cart > Design > Layouts > Html+Smarty block (Header area)
-     Cache: DISABLED (block contains auth state via Smarty)
-     All styles scoped under #rb-header — no conflict with UniTheme2
-════════════════════════════════════════════════════════ -->
 
 <style>
 {literal}
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
 
-/* ── Reset Bootstrap/UniTheme2 inside our block ── */
 #rb-header,
 #rb-header *,
 #rb-header *::before,
@@ -32,17 +25,6 @@
   background: transparent !important;
 }
 
-/* ── Fix native theme header wrapper ──
-   UniTheme2 wraps our block in <div class="tygh-header header-grid light-header v2">
-   (4 classes). It's a CSS GRID container on mobile with its own fixed row height
-   (measured live: 56px) — our #rb-header spacer becomes a GRID ITEM inside it
-   instead of a normal full-width block, so it gets squeezed to width:0 in a
-   narrow auto column and vertically centered in that 56px row (confirmed via
-   getBoundingClientRect: top:-29px = -(114-56)/2). A 2-class selector here
-   (.tygh-header.header-grid) loses to the theme's actual 4-class rule on
-   specificity alone — !important on both sides doesn't matter, specificity
-   decides first. Matching all 4 classes + forcing display:block kills the
-   grid placement so #rb-header flows as a normal block again. */
 .tygh-header.header-grid.light-header.v2 {
   display: block !important;
   height: auto !important;
@@ -50,7 +32,6 @@
   overflow: visible !important;
 }
 
-/* ── CSS tokens ── */
 #rb-header {
   --rb-accent:     #C8A84C;
   --rb-accent-h:   #D9BA62;
@@ -69,7 +50,6 @@
   padding: 0 !important;
 }
 
-/* ── Fixed wrapper ── */
 #rb-header .rb-fixed-wrap {
   position: fixed !important;
   top: 0 !important;
@@ -78,7 +58,6 @@
   z-index: 99999 !important;
 }
 
-/* ── Announcement bar ── */
 #rb-header .rb-ann {
   background: var(--rb-accent) !important;
   color: #000 !important;
@@ -93,7 +72,6 @@
   line-height: 1.4 !important;
 }
 
-/* ── Nav bar ── */
 #rb-header .rb-nav {
   position: relative !important;
   border-bottom: 1px solid var(--rb-border) !important;
@@ -102,7 +80,6 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-/* ── Nav inner ── */
 #rb-header .rb-nav-inner {
   max-width: 1440px !important;
   margin: 0 auto !important;
@@ -114,7 +91,6 @@
   gap: 32px !important;
 }
 
-/* ── Logo ── */
 #rb-header .rb-logo-wrap {
   display: flex !important;
   align-items: center !important;
@@ -130,7 +106,6 @@
   fill: var(--rb-logo) !important;
 }
 
-/* ── Nav links ── */
 #rb-header .rb-nav-links {
   display: flex !important;
   gap: 28px !important;
@@ -163,7 +138,6 @@
   width: 100% !important;
 }
 
-/* ── Nav right ── */
 #rb-header .rb-nav-right {
   display: flex !important;
   align-items: center !important;
@@ -171,7 +145,6 @@
   flex-shrink: 0 !important;
 }
 
-/* ── Icon buttons ── */
 #rb-header .rb-icon-btn {
   width: 38px !important;
   height: 38px !important;
@@ -201,12 +174,10 @@
   display: block !important;
 }
 
-/* ── Account dropdown wrapper ── */
 #rb-header .rb-acc-wrap {
   position: relative !important;
 }
 
-/* ── Account dropdown panel ── */
 #rb-header .rb-acc-drop {
   position: absolute !important;
   top: calc(100% + 10px) !important;
@@ -229,7 +200,6 @@
   pointer-events: auto !important;
 }
 
-/* Dropdown header row */
 #rb-header .rb-acc-drop-head {
   display: flex !important;
   align-items: center !important;
@@ -262,7 +232,6 @@
   color: var(--rb-text) !important;
 }
 
-/* Logged-in greeting */
 #rb-header .rb-acc-drop-user {
   padding: 10px 16px !important;
   font-size: 12px !important;
@@ -276,7 +245,6 @@
   font-weight: 600 !important;
 }
 
-/* Dropdown nav links */
 #rb-header .rb-acc-drop-links {
   padding: 6px 0 !important;
   border-bottom: 1px solid rgba(255,255,255,.04) !important;
@@ -309,7 +277,6 @@
   opacity: .9 !important;
 }
 
-/* Track order section */
 #rb-header .rb-acc-track {
   padding: 12px 16px !important;
   border-bottom: 1px solid rgba(255,255,255,.04) !important;
@@ -362,7 +329,6 @@
   background: rgba(200,168,76,.22) !important;
 }
 
-/* Auth buttons (guest) */
 #rb-header .rb-acc-btns {
   display: flex !important;
   gap: 8px !important;
@@ -409,7 +375,6 @@
   color: var(--rb-text) !important;
 }
 
-/* Sign out link (logged in) */
 #rb-header .rb-acc-btn-out {
   display: flex !important;
   align-items: center !important;
@@ -432,7 +397,6 @@
   color: #ff6b6b !important;
 }
 
-/* ── Cart button ── */
 #rb-header .rb-cart-btn {
   height: 38px !important;
   padding: 0 22px !important;
@@ -462,7 +426,6 @@
   flex-shrink: 0 !important;
 }
 
-/* ── Hamburger ── */
 #rb-header .rb-hamburger {
   display: none !important;
   flex-direction: column !important;
@@ -492,7 +455,6 @@
   transform: translateY(-7px) rotate(-45deg) !important;
 }
 
-/* ── Mobile menu open state ── */
 @keyframes rb-menuSlide {
   from { opacity: 0; transform: translateY(-8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -541,10 +503,6 @@
   color: var(--rb-accent) !important;
 }
 
-/* ── Mobile-only menu items: search + account (hidden everywhere else) ──
-   Visually set apart from plain category links: tinted gold background,
-   icon always gold (not gray-until-hover like category links), so they
-   read as "quick actions" rather than blending into the nav list. */
 #rb-header .rb-mnav-search,
 #rb-header .rb-mnav-account {
   display: none !important;
@@ -592,8 +550,7 @@
   background: rgba(200,168,76,.1) !important;
   padding-left: 30px !important;
 }
-/* Secondary account links (Orders / Wish List / Comparison List) —
-   lighter weight than the primary My Account / Sign In link above them. */
+
 #rb-header .rb-nav-links.open a.rb-mnav-account-sub {
   font-size: 13px !important;
   font-weight: 400 !important;
@@ -611,7 +568,6 @@
   padding-left: 30px !important;
 }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
   #rb-header {
     height: var(--rb-header-h, 96px) !important;
@@ -655,15 +611,6 @@
   }
 }
 
-/* ══════════════════════════════════════════════════════
-   Native CS-Cart mini-cart (Cart Content block, placed at
-   top of layout) — hide native trigger row, restyle +
-   reposition the dropdown panel under our .rb-cart-btn.
-   NOT scoped under #rb-header — native block lives outside it.
-   Desktop/tablet only (min-width:769px): on mobile the same
-   elements are reused by UniTheme2's sticky bottom nav panel,
-   so we leave them fully native there.
-════════════════════════════════════════════════════════ */
 @media (min-width: 769px) {
 [id^="cart_status_"] {
   position: fixed !important;
@@ -851,18 +798,8 @@
 .ty-dropdown-box__content--cart .ty-btn__primary:hover {
   background: #D9BA62 !important;
 }
-} /* end @media (min-width: 769px) — cart */
+}
 
-/* Mobile: the cart panel stays fully native (see comment above), but its
-   native `top:56px` assumes the theme's own default 56px mobile header.
-   Ours is taller and dynamic (announcement bar can wrap to 2 lines) — reuse
-   the same --rb-header-h var the JS below already syncs, so the panel's top
-   edge (title bar + close button) clears our fixed header instead of
-   rendering underneath it (confirmed via getBoundingClientRect: native
-   top:56px vs real header height 114px left 58px of the panel hidden). */
-/* Only when opened via OUR top #rb-cart-btn (see .rb-cart-top-pos toggle in
-   script below) — the exact same panel is reused by CS-Cart's native bottom
-   sticky nav Cart icon, which must keep its own native mobile position. */
 @media (max-width: 768px) {
   .ty-dropdown-box__content--cart.rb-cart-top-pos {
     top: calc(var(--rb-header-h, 96px) + 10px) !important;
@@ -872,18 +809,6 @@
   }
 }
 
-/* ══════════════════════════════════════════════════════
-   Native CS-Cart search block — native toggle link hidden
-   (its inline onclick walks to the wrong sibling), panel
-   restyled + driven by our own .rb-search-open class.
-   NOT scoped under #rb-header — native block lives outside it.
-   Unlike cart, this styling applies at ALL widths: our mobile
-   hamburger menu has its own "Search" item that opens this same
-   panel via .rb-search-open (see script below), so it needs to
-   look right on mobile too. Only the native top-bar toggle link
-   is hidden desktop-only, since the bottom sticky panel on mobile
-   still needs its own native trigger icon visible.
-════════════════════════════════════════════════════════ */
 @media (min-width: 769px) {
   .ut2-btn-search { display: none !important; }
 }
@@ -977,7 +902,6 @@
   color: #F0F0F0 !important;
 }
 
-/* ── Live search results (third-party module: #esqs_container / .ty-search-item) ── */
 .ty-search-block .esqs-container {
   position: absolute !important;
   top: calc(100% + 12px) !important;
@@ -1080,19 +1004,15 @@
 
 <div id="rb-header">
 
-  <!-- Fixed wrapper — breaks out of any theme container -->
   <div class="rb-fixed-wrap">
 
-    <!-- ══ Announcement bar ══ -->
     <div class="rb-ann">
       ✦ &nbsp; Handmade to Order &nbsp; ✦ &nbsp; Fits All Corvette Generations: C5 · C6 · C7 · C8 &nbsp; ✦
     </div>
 
-    <!-- ══ Nav ══ -->
     <div class="rb-nav">
       <div class="rb-nav-inner">
 
-        <!-- Logo -->
         <a href="/" class="rb-logo-wrap" aria-label="RunBird">
           <svg class="rb-logo-svg" viewBox="0 0 272.43 107.57" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M185.58,69.08c-9.31,20.17-40.69,28.79-57.39,17.33-.09-.06-.05-.21,.06-.21,5.66-.28,12.26-.06,18.64-1.16,8.23-1.42,15.05-6.04,20.23-12.58,2.08-2.62,4.17-3.67,7.4-3.44,3.52,.25,7.07,.06,11.06,.06"/>
@@ -1123,7 +1043,6 @@
           </svg>
         </a>
 
-        <!-- Nav links -->
         <ul class="rb-nav-links" id="rb-nav-links">
           <li class="rb-mnav-search">
             <button type="button" class="rb-mnav-search-btn" id="rb-mnav-search-btn">
@@ -1164,13 +1083,11 @@
           </li>
         </ul>
 
-        <!-- Nav right -->
         <div class="rb-nav-right">
           <button class="rb-icon-btn" id="rb-search-btn" aria-label="Search">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
 
-          <!-- Account dropdown -->
           <div class="rb-acc-wrap">
             <button class="rb-icon-btn" id="rb-acc-btn" aria-label="Account" aria-expanded="false">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -1248,8 +1165,8 @@
               {/if}
               {/nocache}
 
-            </div><!-- end .rb-acc-drop -->
-          </div><!-- end .rb-acc-wrap -->
+            </div>
+          </div>
 
           <button class="rb-cart-btn" id="rb-cart-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -1263,17 +1180,14 @@
       </div>
     </div>
 
-  </div><!-- end .rb-fixed-wrap -->
+  </div>
 
-</div><!-- end #rb-header -->
+</div>
 
 <script>
 {literal}
 (function() {
 
-  /* ── Реальная высота шапки (announcement-бар может переноситься на
-     2 строки на узких экранах) — синхронизируем со спейсером/меню/
-     панелями через CSS-переменную, вместо захардкоженного значения. */
   function rbSyncHeaderHeight() {
     var fixedWrap = document.querySelector('#rb-header .rb-fixed-wrap');
     if (!fixedWrap) return;
@@ -1289,21 +1203,17 @@
     document.fonts.ready.then(rbSyncHeaderHeight);
   }
 
-  /* ── Hamburger menu ── */
   var burger   = document.getElementById('rb-burger');
   var navLinks = document.getElementById('rb-nav-links');
   if (burger && navLinks) {
     burger.addEventListener('click', function() {
       var isOpen = navLinks.classList.toggle('open');
       burger.classList.toggle('active', isOpen);
-      /* На случай если панель поиска осталась открытой (rb-search-open) с
-         прошлого раза — у неё z-index выше меню, и она "просвечивает"
-         поверх свежеоткрытого меню. Всегда сбрасываем при переключении. */
+
       document.querySelectorAll('.ty-search-block').forEach(function(b) {
         b.classList.remove('rb-search-open');
       });
-      /* Блокируем скролл страницы под открытым меню — иначе фон
-         прокручивается сквозь fixed-оверлей меню. */
+
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
     navLinks.querySelectorAll('a').forEach(function(link) {
@@ -1314,9 +1224,6 @@
       });
     });
 
-    /* ── Кнопка "Menu" в нижней sticky-панели CS-Cart ──
-       Перехватываем клик на этапе capture (до нативного обработчика
-       .cm-external-trigger темы) и открываем НАШЕ меню вместо родного. */
     var stickyMenuIcon = document.querySelector('.ut2-icon-outline-menu');
     var stickyMenuLink = stickyMenuIcon ? stickyMenuIcon.closest('a') : null;
     if (stickyMenuLink) {
@@ -1329,14 +1236,6 @@
     }
   }
 
-  /* ── Пункт "Search" в мобильном меню гамбургера ──
-     Открываем ту же панель .ty-search-block, что и десктопная кнопка
-     поиска (см. класс rb-search-open ниже) — теперь она стилизована
-     и на мобильном тоже. Нативный тогл .ut2-btn-search НЕ используем:
-     его onclick содержит $(this).parent().next(), что по нашему
-     порядку блоков в Layout указывает на #rb-header, а не на панель
-     поиска, и вдобавок класс view, который он ставит, ни на что
-     не влияет в нашей стилизации. */
   var mnavSearchBtn = document.getElementById('rb-mnav-search-btn');
   if (mnavSearchBtn) {
     mnavSearchBtn.addEventListener('click', function(e) {
@@ -1356,18 +1255,6 @@
     });
   }
 
-  /* ── Cart ──
-     Открытие/закрытие полностью отдано нативному CS-Cart виджету
-     (cm-combination) — он сам управляет классом .hidden, позицией
-     и закрытием по клику вне (data-ca-external-click-id). Наша кнопка
-     просто эмулирует клик по нативному тогглу; сам вид/позиция панели
-     переопределены в CSS выше (.ty-dropdown-box__content--cart). */
-  /* Mobile-only repositioning (see .rb-cart-top-pos in CSS above) must apply
-     ONLY when the panel is opened via our #rb-cart-btn, not via CS-Cart's
-     native bottom sticky nav Cart icon (same shared panel element, native
-     mobile position must stay untouched there). Track intent with a flag,
-     apply/clear the class on the panel's own open/close (.hidden toggle) so
-     a later native open starts clean regardless of how the previous one closed. */
   var rbCartPanel = document.querySelector('.ty-dropdown-box__content--cart');
   var rbCartWantsTopPos = false;
   if (rbCartPanel) {
@@ -1398,7 +1285,6 @@
     });
   }
 
-  /* ── Счётчик корзины: синхронизация при AJAX обновлениях ── */
   new MutationObserver(function() {
     var nativeCount = document.querySelector('.ty-minicart-count');
     var ourCount    = document.getElementById('rb-cart-count');
@@ -1407,25 +1293,16 @@
     }
   }).observe(document.body, { childList: true, subtree: true, characterData: true });
 
-  /* ── Search ──
-     Нативный toggle-линк (.ut2-btn-search) не используем — его инлайновый
-     onclick лезет к соседнему по DOM блоку (.parent().next()), а в нашем
-     layout это наш собственный #rb-header. Вместо этого сами открываем/
-     закрываем .ty-search-block через свой класс rb-search-open, форма и
-     live-search подсказки внутри — родные CS-Cart, не трогаем. */
   var rbSearchBtn  = document.getElementById('rb-search-btn');
   var searchBlocks = document.querySelectorAll('.ty-search-block');
   if (rbSearchBtn && searchBlocks.length) {
-    /* На странице может быть больше одного .ty-search-block (тот же
-       родной блок переиспользуется мобильной sticky-панелью) — поэтому
-       обрабатываем ВСЕ найденные экземпляры одинаково, а не только первый. */
+
     searchBlocks.forEach(function(searchBlock) {
       var searchInput = searchBlock.querySelector('.ty-search-block__input');
       if (searchInput && !searchInput.placeholder) {
         searchInput.placeholder = 'Search products...';
       }
 
-      /* Родная форма не содержит кнопки закрытия — добавляем свою рядом с лупой */
       var searchForm = searchBlock.querySelector('form') || searchBlock;
       if (!searchForm.querySelector('.rb-search-close')) {
         var closeBtn = document.createElement('button');
@@ -1478,7 +1355,6 @@
     });
   }
 
-  /* ── Account dropdown ── */
   var accBtn   = document.getElementById('rb-acc-btn');
   var accDrop  = document.getElementById('rb-acc-drop');
   var accClose = document.getElementById('rb-acc-close');
@@ -1508,13 +1384,11 @@
     });
   }
 
-  /* Close on outside click */
   document.addEventListener('click', function(e) {
     var wrap = accBtn.closest('.rb-acc-wrap');
     if (wrap && !wrap.contains(e.target)) closeAcc();
   });
 
-  /* Close on Escape */
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeAcc();
   });
