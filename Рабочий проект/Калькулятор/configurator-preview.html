@@ -1,0 +1,621 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Steering Wheel Configurator (PREVIEW)
+     Локальный превью-файл для дизайн-итераций.
+     Мок-цена/мок-корзина — реальная интеграция с product_id=350
+     (native selects option_350_26..34 + fn_change_options) — следующий шаг,
+     после утверждения визуала и зон callout-линий.
+     Зоны на фото (OPTIONS.*.zone) измерены по реальным пикселям
+     SteeringWheel-C6.png (алгоритм: сканирование alpha-канала по колонкам) —
+     first-pass, поправить если пользователь пришлёт разметку с метками.
+════════════════════════════════════════════════════════ -->
+<div id="rb-config">
+
+  <div class="rb-cfg-head">
+    <div class="rb-cfg-eyebrow">Build your own</div>
+    <h2 class="rb-cfg-title">Corvette C6 Custom Steering Wheel</h2>
+    <p class="rb-cfg-sub">Choose every option below — the diagram shows exactly where it applies.</p>
+  </div>
+
+  <!-- ══ Диаграмма: большое фото слева, все опции (включая Shape) справа ══ -->
+  <div class="rb-cfg-stage">
+
+    <div class="rb-cfg-imgwrap">
+      <svg class="rb-cfg-lines" preserveAspectRatio="none"></svg>
+      <div class="rb-cfg-imgbox">
+        <img src="https://therunbird.com/images/Calculator/SteeringWheel-C6.png" alt="Corvette C6 Custom Steering Wheel" draggable="false">
+      </div>
+      <div class="rb-cfg-marks"></div>
+    </div>
+
+    <div class="rb-cfg-col rb-cfg-col--r">
+      <div class="rb-cfg-col-intro">Select &amp; configure your steering wheel design</div>
+      <div class="rb-cfg-card" data-zone="shape"></div>
+      <div class="rb-cfg-card" data-zone="grips"></div>
+      <div class="rb-cfg-card" data-zone="topSection"></div>
+      <div class="rb-cfg-card" data-zone="bottomSection"></div>
+      <div class="rb-cfg-card" data-zone="spokes"></div>
+      <div class="rb-cfg-card" data-zone="stitchingColor"></div>
+      <div class="rb-cfg-card" data-zone="centerMark"></div>
+      <div class="rb-cfg-card" data-zone="logo"></div>
+    </div>
+
+  </div>
+
+  <!-- ══ Итог: цена + добавить в корзину ══ -->
+  <div class="rb-cfg-summary">
+    <div class="rb-cfg-price">
+      <span class="rb-cfg-price-label">Total price</span>
+      <span class="rb-cfg-price-value"><span class="rb-cfg-price-cur">$</span><span id="rb-cfg-price-num">765</span><sup>.00</sup></span>
+    </div>
+    <button class="rb-cfg-add" id="rb-cfg-add-btn">Add to cart</button>
+  </div>
+
+  <!-- ══ Галерея готовых работ ══ -->
+  <div class="rb-cfg-gallery">
+    <div class="rb-cfg-gal-head">Recent builds</div>
+    <div class="rb-cfg-gal-track">
+      <div class="rb-cfg-gal-item rb-cfg-gal-ph">Photo</div>
+      <div class="rb-cfg-gal-item rb-cfg-gal-ph">Photo</div>
+      <div class="rb-cfg-gal-item rb-cfg-gal-ph">Photo</div>
+      <div class="rb-cfg-gal-item rb-cfg-gal-ph">Photo</div>
+      <div class="rb-cfg-gal-item rb-cfg-gal-ph">Photo</div>
+      <div class="rb-cfg-gal-item rb-cfg-gal-ph">Photo</div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+#rb-config{
+  --rb-accent:   #C8A84C;
+  --rb-accent-h: #D9BA62;
+  --rb-accent-b: rgba(200,168,76,.28);
+  --rb-bg:       #0C0C0C;
+  --rb-bg2:      #060606;
+  --rb-text:     #F0F0F0;
+  --rb-text2:    #808080;
+  --rb-border:   rgba(255,255,255,.08);
+  --rb-border-s: rgba(255,255,255,.16);
+  --rb-card-bg:  #131313;
+
+  background: var(--rb-bg);
+  color: var(--rb-text);
+  font-family: 'Inter', sans-serif;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 56px 24px 72px;
+  box-sizing: border-box;
+}
+#rb-config *{ box-sizing: border-box; }
+
+/* ── Head ── */
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:36px; }
+#rb-config .rb-cfg-eyebrow{
+  font-family:'Barlow Condensed', sans-serif; letter-spacing:.2em; text-transform:uppercase;
+  color: var(--rb-accent); font-size:13px; font-weight:600; margin-bottom:8px;
+}
+#rb-config .rb-cfg-title{ font-size:clamp(24px,4vw,38px); margin:0 0 8px; font-weight:700; letter-spacing:-.01em; }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:14px; margin:0; }
+
+/* ── Info tooltip (used inline in the Shape row head) ── */
+#rb-config .rb-cfg-info{ position:relative; display:inline-flex; cursor:help; margin-left:6px; vertical-align:middle; }
+#rb-config .rb-cfg-info-ico{
+  width:15px; height:15px; border-radius:50%; border:1px solid var(--rb-text2); color:var(--rb-text2);
+  font-size:10px; font-style:italic; display:flex; align-items:center; justify-content:center; font-family:Georgia,serif;
+}
+#rb-config .rb-cfg-info:hover .rb-cfg-info-ico, #rb-config .rb-cfg-info:focus .rb-cfg-info-ico{
+  border-color:var(--rb-accent); color:var(--rb-accent);
+}
+#rb-config .rb-cfg-info-tip{
+  position:absolute; top:calc(100% + 10px); left:0; transform:none;
+  width:260px; background:#161616; border:1px solid var(--rb-border-s); border-radius:8px;
+  padding:10px 12px; font-size:12px; line-height:1.5; font-weight:400; text-transform:none;
+  letter-spacing:normal; color:var(--rb-text2); opacity:0; pointer-events:none; transition:opacity .15s;
+  box-shadow:0 8px 24px rgba(0,0,0,.4); z-index:8;
+}
+#rb-config .rb-cfg-info:hover .rb-cfg-info-tip, #rb-config .rb-cfg-info:focus .rb-cfg-info-tip{ opacity:1; }
+
+/* ── Chips (shared: plain options + color options) ── */
+#rb-config .rb-cfg-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+#rb-config .rb-chip{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--rb-border-s); background:transparent; color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:12.5px; padding:7px 13px; border-radius:999px;
+  cursor:pointer; transition:.15s; white-space:nowrap;
+}
+#rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
+#rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
+#rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
+#rb-config .rb-chip.is-active .rb-chip-price{ opacity:.7; }
+#rb-config .rb-swatch-dot{
+  width:13px; height:13px; border-radius:50%; display:inline-block; margin-right:8px; flex:none;
+  outline:1px solid var(--rb-border-s); outline-offset:1px;
+}
+
+/* ── Stage layout ── */
+#rb-config .rb-cfg-stage{
+  display:grid; grid-template-columns: minmax(360px,1.4fr) minmax(300px,380px);
+  gap:28px; align-items:center; justify-content:center; position:relative; margin-bottom:40px;
+}
+#rb-config .rb-cfg-col{ display:flex; flex-direction:column; gap:16px; position:relative; z-index:2; }
+#rb-config .rb-cfg-col-intro{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
+}
+#rb-config .rb-cfg-lines{
+  position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:4;
+}
+#rb-config .rb-cfg-lines line{ stroke:var(--rb-accent); stroke-width:1.2; opacity:0; transition:opacity .15s; }
+#rb-config .rb-cfg-lines line.is-active{ opacity:.95; }
+#rb-config .rb-cfg-lines circle{ fill:var(--rb-accent); opacity:0; transition:opacity .15s; }
+#rb-config .rb-cfg-lines circle.is-active{ opacity:1; }
+
+#rb-config .rb-cfg-imgwrap{ position:relative; }
+#rb-config .rb-cfg-imgbox{
+  position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.16), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.05), transparent 60%),
+    linear-gradient(180deg, #141414 0%, #0a0a0a 70%, #050505 100%);
+  border:1px solid var(--rb-border);
+}
+#rb-config .rb-cfg-imgbox::after{
+  content:''; position:absolute; left:8%; right:8%; bottom:6%; height:14%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+  z-index:1; pointer-events:none;
+}
+#rb-config .rb-cfg-imgbox img{
+  position:relative; z-index:2; width:88%; height:88%; object-fit:contain;
+  margin:6% auto 0; display:block; filter:drop-shadow(0 18px 24px rgba(0,0,0,.55));
+}
+
+/* ── On-photo callout labels: only visible while that option is active ── */
+#rb-config .rb-cfg-marks{ position:absolute; inset:0; z-index:5; pointer-events:none; }
+#rb-config .rb-cfg-mark{
+  position:absolute; transform:translate(-50%,-150%);
+  background:rgba(14,14,14,.92); border:1px solid var(--rb-accent-b); color:var(--rb-text);
+  font-size:11px; font-family:'Inter',sans-serif; padding:4px 10px; border-radius:6px; white-space:nowrap;
+  opacity:0; transition:opacity .15s; box-shadow:0 6px 16px rgba(0,0,0,.45);
+}
+#rb-config .rb-cfg-mark.is-active{ opacity:1; }
+
+/* ── Callout cards (collapsed dropdown-rows) ── */
+#rb-config .rb-cfg-card{
+  border:1px solid var(--rb-border); background:var(--rb-card-bg); border-radius:10px;
+  padding:0; overflow:visible; transition:border-color .15s, background .15s;
+}
+#rb-config .rb-cfg-card.is-active{ border-color:var(--rb-accent-b); background:#171512; }
+#rb-config .rb-cfg-card-head{
+  display:flex; align-items:center; gap:10px; padding:12px 14px; cursor:pointer; user-select:none;
+}
+#rb-config .rb-cfg-card-head-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
+  font-size:13.5px; font-weight:600; flex:none; display:flex; align-items:center;
+}
+#rb-config .rb-cfg-card-head-val{
+  margin-left:auto; display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--rb-text2);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1 1 auto; justify-content:flex-end;
+}
+#rb-config .rb-cfg-card-head-swatch{ width:13px; height:13px; border-radius:50%; flex:none; outline:1px solid var(--rb-border-s); outline-offset:1px; }
+#rb-config .rb-cfg-card-chevron{ flex:none; color:var(--rb-text2); font-size:10px; transition:transform .2s; }
+#rb-config .rb-cfg-card.is-open .rb-cfg-card-chevron{ transform:rotate(180deg); color:var(--rb-accent); }
+#rb-config .rb-cfg-card-body{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+#rb-config .rb-cfg-card.is-open .rb-cfg-card-body{ max-height:460px; }
+#rb-config .rb-cfg-card-body-in{ padding:0 14px 14px; }
+#rb-config .rb-cfg-card .rb-cfg-sub-label{ font-size:11px; color:var(--rb-text2); margin:10px 0 6px; text-transform:uppercase; letter-spacing:.04em; }
+#rb-config .rb-cfg-card .rb-cfg-sub-label:first-child{ margin-top:0; }
+#rb-config .rb-cfg-finish-block.is-disabled{ opacity:.4; pointer-events:none; }
+
+/* ── Summary ── */
+#rb-config .rb-cfg-summary{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  border:1px solid var(--rb-border-s); border-radius:14px; padding:20px 26px; background:var(--rb-card-bg);
+  margin-bottom:64px;
+}
+#rb-config .rb-cfg-price-label{ display:block; font-size:12px; color:var(--rb-text2); margin-bottom:4px; }
+#rb-config .rb-cfg-price-value{ font-family:'Barlow Condensed', sans-serif; font-size:32px; font-weight:700; }
+#rb-config .rb-cfg-price-cur{ font-size:20px; opacity:.7; margin-right:1px; }
+#rb-config .rb-cfg-add{
+  background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:15px 34px;
+  font-family:'Barlow Condensed', sans-serif; font-size:16px; font-weight:700; letter-spacing:.03em;
+  text-transform:uppercase; cursor:pointer; transition:.15s;
+}
+#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
+
+/* ── Gallery ── */
+#rb-config .rb-cfg-gal-head{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
+  font-size:18px; font-weight:600; margin-bottom:16px; text-align:center;
+}
+#rb-config .rb-cfg-gal-track{ display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+#rb-config .rb-cfg-gal-ph{
+  aspect-ratio:1/1; border-radius:10px; border:1px dashed var(--rb-border-s);
+  display:flex; align-items:center; justify-content:center; color:var(--rb-text2); font-size:12px;
+  background:#101010;
+}
+
+@media (max-width: 980px){
+  #rb-config .rb-cfg-stage{ grid-template-columns:1fr; }
+  #rb-config .rb-cfg-lines{ display:none; }
+  #rb-config .rb-cfg-marks{ display:none; }
+  #rb-config .rb-cfg-gal-track{ grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width: 560px){
+  #rb-config .rb-cfg-gal-track{ grid-template-columns:repeat(2,1fr); }
+}
+</style>
+
+<script>
+(function(){
+  // ────────────────────────────────────────────────────────
+  // CONFIG — единственное место, где нужно поправить зоны/цены,
+  // когда придёт размеченное фото. x/y — проценты внутри картинки
+  // (измерены по alpha-каналу SteeringWheel-C6.png, first-pass).
+  // ────────────────────────────────────────────────────────
+  var BASE_PRICE = 765.00;
+
+  var OPTIONS = {
+    shape: {
+      label: 'Shape', zone: null,
+      info: 'F1-shape flattens both the top <em>and</em> the bottom of the rim (like an F1 wheel). D-shape flattens only the bottom. The diagram shows the standard D-shape.',
+      values: [
+        { v:'d',  label:'D-shape',  price:0 },
+        { v:'f1', label:'F1-shape', price:330 }
+      ]
+    },
+    grips: {
+      label:'Grips', zone:{ x:9, y:51 },
+      values:[
+        { v:'plain', label:'Plain leather', price:0 },
+        { v:'perf',  label:'Perforated leather', price:0 },
+        { v:'alc',   label:'Alcantara', price:0 }
+      ]
+    },
+    topSection: {
+      label:'Top section', zone:{ x:28, y:13 },
+      values:[
+        { v:'alc',  label:'Alcantara', price:0 },
+        { v:'perf', label:'Perforated leather', price:0 },
+        { v:'plain',label:'Plain leather', price:0 },
+        { v:'cf',   label:'Carbon fiber', price:220 }
+      ]
+    },
+    bottomSection: {
+      label:'Bottom section', zone:{ x:30, y:87 },
+      values:[
+        { v:'alc',  label:'Alcantara', price:0 },
+        { v:'perf', label:'Perforated leather', price:0 },
+        { v:'plain',label:'Plain leather', price:0 },
+        { v:'cf',   label:'Carbon fiber', price:220 }
+      ]
+    },
+    spokes: {
+      label:'CF spoke covers', zone:{ x:66, y:52 },
+      isSpokesGroup:true,
+      values:[ // Add CF spoke covers
+        { v:'no',  label:'No', price:0 },
+        { v:'yes', label:'Yes', price:165 }
+      ],
+      finish:[ // CF finish — active only if spoke covers = yes
+        { v:'gloss', label:'Gloss', price:0 },
+        { v:'matte', label:'Matte / Satin', price:0 }
+      ]
+    },
+    stitchingColor: {
+      label:'Stitching color', zone:{ x:74, y:15 }, isColor:true,
+      values:[
+        { v:'black',  label:'Black',  price:0, hex:'#1a1a1a' },
+        { v:'white',  label:'White',  price:0, hex:'#f5f5f5' },
+        { v:'red',    label:'Red',    price:0, hex:'#c81e1e' },
+        { v:'blue',   label:'Blue',   price:0, hex:'#1e4fc8' },
+        { v:'yellow', label:'Yellow', price:0, hex:'#e8c31e' },
+        { v:'orange', label:'Orange', price:0, hex:'#e06b1e' },
+        { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90' },
+        { v:'other',  label:'Other (specify in comments)', price:0, other:true }
+      ]
+    },
+    centerMark: {
+      label:'Center mark (top)', zone:{ x:50, y:8 }, isColor:true,
+      values:[
+        { v:'none',   label:'No center mark', price:0, none:true },
+        { v:'red',    label:'Red',    price:0, hex:'#c81e1e' },
+        { v:'blue',   label:'Blue',   price:0, hex:'#1e4fc8' },
+        { v:'orange', label:'Orange', price:0, hex:'#e06b1e' },
+        { v:'yellow', label:'Yellow', price:0, hex:'#e8c31e' },
+        { v:'green',  label:'Green',  price:0, hex:'#2e8b3f' },
+        { v:'white',  label:'White',  price:0, hex:'#f5f5f5' },
+        { v:'black',  label:'Black',  price:0, hex:'#1a1a1a' },
+        { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90' },
+        { v:'cf',     label:'Carbon fiber (leather top only)', price:55, cf:true },
+        { v:'other',  label:'Other (specify in comments)', price:0, other:true }
+      ]
+    },
+    logo: {
+      label:'Logo (bottom)', zone:{ x:50, y:49 },
+      values:[
+        { v:'none', label:'No logo', price:0 },
+        { v:'z06c6', label:'Z06 (C6)', price:0 },
+        { v:'z06c7', label:'Z06 (C7)', price:0 },
+        { v:'zr1a', label:'ZR1 (2010-11)', price:0 },
+        { v:'zr1b', label:'ZR1 (2012-13)', price:0 },
+        { v:'z51', label:'Z51', price:0 },
+        { v:'gs', label:'Grand Sport', price:0 },
+        { v:'zr6x', label:'ZR6X', price:0 },
+        { v:'zr8x', label:'ZR8X', price:0 },
+        { v:'flags', label:'Corvette flags (C6)', price:0 },
+        { v:'other', label:'Other (specify in comments)', price:0 }
+      ]
+    }
+  };
+
+  var state = {}; // optKey -> selected value object (+ .finish for spokes)
+  Object.keys(OPTIONS).forEach(function(k){
+    state[k] = OPTIONS[k].values[0];
+    if (OPTIONS[k].finish) state[k+'__finish'] = OPTIONS[k].finish[0];
+  });
+
+  var root = document.getElementById('rb-config');
+  var cards = root.querySelectorAll('.rb-cfg-card');
+  var svg = root.querySelector('.rb-cfg-lines');
+  var marksLayer = root.querySelector('.rb-cfg-marks');
+
+  function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
+
+  function swatchFill(val){
+    if (val.none) return 'repeating-linear-gradient(45deg,#2a2a2a,#2a2a2a 3px,#1a1a1a 3px,#1a1a1a 6px)';
+    if (val.other) return '#1a1a1a';
+    if (val.cf) return 'repeating-linear-gradient(45deg,#1c1c1e,#1c1c1e 2px,#2c2c2f 2px,#2c2c2f 4px)';
+    return val.hex;
+  }
+
+  function buildChipGroup(container, optKey, valuesKey){
+    valuesKey = valuesKey || 'values';
+    var opt = OPTIONS[optKey];
+    var wrap = document.createElement('div');
+    wrap.className = 'rb-cfg-chips';
+    wrap.dataset.opt = optKey; wrap.dataset.vk = valuesKey;
+    opt[valuesKey].forEach(function(val){
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'rb-chip';
+      var html = '';
+      if (opt.isColor){
+        html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
+      }
+      html += '<span class="rb-chip-txt">'+val.label+'</span>';
+      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
+      el.innerHTML = html;
+
+      var sKey = valuesKey === 'finish' ? optKey+'__finish' : optKey;
+      if (state[sKey] === val) el.classList.add('is-active');
+      el.addEventListener('click', function(){
+        state[sKey] = val;
+        Array.prototype.forEach.call(wrap.children, function(c){ c.classList.remove('is-active'); });
+        el.classList.add('is-active');
+        if (optKey === 'spokes' && valuesKey === 'values'){ updateSpokesFinishState(); }
+        updateHeadVal(optKey);
+        recalcPrice();
+        // ── TODO CS-Cart hook: здесь вызвать native select.value = val.csOptionId
+        // и fn_change_options('350','350', csOptId) для реального товара.
+        if (optKey !== 'spokes'){
+          var ownCard = wrap.closest('.rb-cfg-card');
+          if (ownCard){
+            ownCard.classList.remove('is-open');
+            setActiveZone(ownCard.dataset.zone, false);
+            scheduleLayout();
+          }
+        }
+      });
+      wrap.appendChild(el);
+    });
+    container.appendChild(wrap);
+  }
+
+  function updateSpokesFinishState(){
+    var finishCard = root.querySelector('.rb-cfg-card[data-zone="spokes"] [data-vk="finish"]');
+    var isYes = state.spokes.v === 'yes';
+    finishCard && finishCard.closest('.rb-cfg-finish-block') &&
+      finishCard.closest('.rb-cfg-finish-block').classList.toggle('is-disabled', !isYes);
+  }
+
+  function updateHeadVal(optKey){
+    var opt = OPTIONS[optKey];
+    var cardZone = opt.isSpokesGroup ? 'spokes' : optKey;
+    var card = root.querySelector('.rb-cfg-card[data-zone="'+cardZone+'"]');
+    if (card){
+      var valEl = card.querySelector('.rb-cfg-card-head-val[data-val="'+cardZone+'"]');
+      if (valEl){
+        valEl.innerHTML = '';
+        if (opt.isSpokesGroup){
+          var covers = state.spokes, finish = state.spokes__finish;
+          var txt = covers.label + (covers.v === 'yes' ? ' · ' + finish.label : '');
+          valEl.appendChild(document.createTextNode(txt));
+        } else if (opt.isColor){
+          var v = state[optKey];
+          var dot = document.createElement('span');
+          dot.className = 'rb-cfg-card-head-swatch';
+          dot.style.background = swatchFill(v);
+          valEl.appendChild(dot);
+          valEl.appendChild(document.createTextNode(v.label));
+        } else {
+          valEl.appendChild(document.createTextNode(state[optKey].label));
+        }
+      }
+    }
+    updateMarkText(optKey);
+  }
+
+  function updateMarkText(optKey){
+    var opt = OPTIONS[optKey];
+    if (!opt.zone) return;
+    var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+optKey+'"]');
+    if (!mark) return;
+    var valText;
+    if (opt.isSpokesGroup){
+      var covers = state.spokes, finish = state.spokes__finish;
+      valText = covers.label + (covers.v === 'yes' ? ' · ' + finish.label : '');
+    } else {
+      valText = state[optKey].label;
+    }
+    mark.textContent = opt.label + ': ' + valText;
+  }
+
+  function headRow(labelText, dataVal, infoHtml){
+    var head = document.createElement('div');
+    head.className = 'rb-cfg-card-head';
+    head.tabIndex = 0;
+    var infoSpan = infoHtml
+      ? '<span class="rb-cfg-info" tabindex="0" onclick="event.stopPropagation()"><span class="rb-cfg-info-ico">i</span><span class="rb-cfg-info-tip">'+infoHtml+'</span></span>'
+      : '';
+    head.innerHTML =
+      '<span class="rb-cfg-card-head-label">'+labelText+infoSpan+'</span>'+
+      '<span class="rb-cfg-card-head-val" data-val="'+dataVal+'"></span>'+
+      '<span class="rb-cfg-card-chevron">▾</span>';
+    return head;
+  }
+
+  function toggleCard(card){
+    var zone = card.dataset.zone;
+    var wasOpen = card.classList.contains('is-open');
+    cards.forEach(function(c){
+      c.classList.remove('is-open');
+      setActiveZone(c.dataset.zone, false);
+    });
+    if (!wasOpen){
+      card.classList.add('is-open');
+      setActiveZone(zone, true);
+    }
+    scheduleLayout();
+  }
+
+  var layoutTimer;
+  function scheduleLayout(){
+    clearTimeout(layoutTimer);
+    layoutTimer = setTimeout(layoutLines, 260);
+  }
+
+  cards.forEach(function(card){
+    var zone = card.dataset.zone;
+    var body = document.createElement('div');
+    body.className = 'rb-cfg-card-body';
+    var inner = document.createElement('div');
+    inner.className = 'rb-cfg-card-body-in';
+    body.appendChild(inner);
+
+    var head;
+    if (zone === 'spokes'){
+      head = headRow(OPTIONS.spokes.label, 'spokes');
+      var subA = document.createElement('div'); subA.className='rb-cfg-sub-label'; subA.textContent='Add CF spoke covers';
+      inner.appendChild(subA);
+      buildChipGroup(inner, 'spokes', 'values');
+      var fb = document.createElement('div'); fb.className='rb-cfg-finish-block';
+      var subB = document.createElement('div'); subB.className='rb-cfg-sub-label'; subB.textContent='CF finish (if applicable)';
+      fb.appendChild(subB);
+      buildChipGroup(fb, 'spokes', 'finish');
+      inner.appendChild(fb);
+      updateSpokesFinishState();
+    } else {
+      var opt = OPTIONS[zone];
+      head = headRow(opt.label, zone, opt.info);
+      buildChipGroup(inner, zone);
+    }
+
+    card.appendChild(head);
+    card.appendChild(body);
+    head.addEventListener('click', function(){ toggleCard(card); });
+    head.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleCard(card); }
+    });
+    // быстрый превью-хайлайт при наведении на закрытую строку (не открывая её)
+    head.addEventListener('mouseenter', function(){ if (!card.classList.contains('is-open')) setActiveZone(zone, true); });
+    head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone(zone, false); });
+  });
+
+  // ── On-photo mark labels: один div на зону, процентная позиция ──
+  Object.keys(OPTIONS).forEach(function(key){
+    var opt = OPTIONS[key];
+    if (!opt.zone) return;
+    var m = document.createElement('div');
+    m.className = 'rb-cfg-mark';
+    m.style.left = opt.zone.x + '%';
+    m.style.top = opt.zone.y + '%';
+    m.dataset.zone = key;
+    marksLayer.appendChild(m);
+  });
+
+  Object.keys(OPTIONS).forEach(function(k){ updateHeadVal(k); });
+
+  // ── Callout-линии: считаем позиции пиксельно (dot на фото → строка справа) ──
+  function layoutLines(){
+    svg.innerHTML = '';
+    var imgBox = root.querySelector('.rb-cfg-imgbox');
+    var stage = root.querySelector('.rb-cfg-stage');
+    var stageRect = stage.getBoundingClientRect();
+    var imgRect = imgBox.getBoundingClientRect();
+
+    Object.keys(OPTIONS).forEach(function(key){
+      var opt = OPTIONS[key];
+      if (!opt.zone) return;
+
+      var card = root.querySelector('.rb-cfg-card[data-zone="' + (opt.isSpokesGroup ? 'spokes' : key) + '"]');
+      if (!card) return;
+      var dotX = imgRect.left - stageRect.left + imgRect.width * opt.zone.x/100;
+      var dotY = imgRect.top - stageRect.top + imgRect.height * opt.zone.y/100;
+      var cardRect = card.getBoundingClientRect();
+      var cardX = cardRect.left - stageRect.left + (cardRect.left < imgRect.left ? cardRect.width : 0);
+      var cardY = cardRect.top - stageRect.top + Math.min(cardRect.height, 44)/2;
+
+      var ns = 'http://www.w3.org/2000/svg';
+      var line = document.createElementNS(ns,'line');
+      line.setAttribute('x1', dotX); line.setAttribute('y1', dotY);
+      line.setAttribute('x2', cardX); line.setAttribute('y2', cardY);
+      line.dataset.zone = key;
+      svg.appendChild(line);
+
+      var circle = document.createElementNS(ns,'circle');
+      circle.setAttribute('cx', dotX); circle.setAttribute('cy', dotY); circle.setAttribute('r', 4);
+      circle.dataset.zone = key;
+      svg.appendChild(circle);
+
+      // layoutLines rebuilds the svg from scratch (needs fresh pixel coords on
+      // resize/reflow) — without this, re-running it while a zone is active
+      // (e.g. the 260ms post-toggle relayout) silently wipes the highlight.
+      if (key === currentActiveZone){
+        line.classList.add('is-active');
+        circle.classList.add('is-active');
+      }
+    });
+  }
+
+  var currentActiveZone = null;
+  function setActiveZone(zone, active){
+    currentActiveZone = active ? zone : (currentActiveZone === zone ? null : currentActiveZone);
+    root.querySelectorAll('[data-zone="'+zone+'"]').forEach(function(el){
+      el.classList.toggle('is-active', active);
+    });
+  }
+
+  function recalcPrice(){
+    var total = BASE_PRICE;
+    Object.keys(OPTIONS).forEach(function(key){
+      var opt = OPTIONS[key];
+      if (opt.isSpokesGroup){
+        total += state[key].price || 0;
+        total += state[key+'__finish'] ? (state[key+'__finish'].price||0) : 0;
+      } else {
+        total += state[key].price || 0;
+      }
+    });
+    document.getElementById('rb-cfg-price-num').textContent = total.toFixed(2).split('.')[0];
+  }
+
+  window.addEventListener('resize', layoutLines);
+  window.addEventListener('load', layoutLines);
+  setTimeout(layoutLines, 50);
+  recalcPrice();
+
+  document.getElementById('rb-cfg-add-btn').addEventListener('click', function(){
+    alert('Preview only — real Add to cart will submit the native CS-Cart product options for #350.');
+  });
+})();
+</script>
