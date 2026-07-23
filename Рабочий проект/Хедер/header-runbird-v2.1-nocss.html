@@ -1,0 +1,453 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Header Block v2.1
+     CS-Cart > Design > Layouts > Html+Smarty block (Header area)
+     Cache: DISABLED (block contains auth state via Smarty)
+     All styles scoped under #rb-header — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<!-- CSS moved to Рабочий проект\rb-work.css — loaded site-wide via CS-Cart theme's custom CSS, no <link> needed here -->
+
+<div id="rb-header">
+
+  <!-- Fixed wrapper — breaks out of any theme container -->
+  <div class="rb-fixed-wrap">
+
+    <!-- ══ Announcement bar ══ -->
+    <div class="rb-ann">
+      ✦ &nbsp; Handmade to Order &nbsp; ✦ &nbsp; Exclusively Crafted for the C6 Corvette &nbsp; ✦
+    </div>
+
+    <!-- ══ Nav ══ -->
+    <div class="rb-nav">
+      <div class="rb-nav-inner">
+
+        <!-- Logo -->
+        <a href="/" class="rb-logo-wrap" aria-label="RunBird">
+          <svg class="rb-logo-svg" viewBox="0 0 272.43 107.57" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M185.58,69.08c-9.31,20.17-40.69,28.79-57.39,17.33-.09-.06-.05-.21,.06-.21,5.66-.28,12.26-.06,18.64-1.16,8.23-1.42,15.05-6.04,20.23-12.58,2.08-2.62,4.17-3.67,7.4-3.44,3.52,.25,7.07,.06,11.06,.06"/>
+            <path d="M156.61,77.46c-12.73,10.05-35.05,6.34-46.25-7.8-.17-.22,0-.53,.28-.51,5.95,.33,11.22-1.27,16.45,3.33,8.34,7.35,18.59,8.05,29.52,4.98"/>
+            <path d="M135.84,30.14c-1.89-.16-9.32-.13-10.57,.06-2.42,6.15-4.86,12.35-7.3,18.55-.09,0-.18-.03-.27-.04-.1-.35-.22-.7-.29-1.06-.66-3.08-1.31-6.17-1.97-9.25-.37-1.75-.76-3.49-1.12-5.24-.41-2.03-1.74-3.19-3.89-3.12-1.68,.06-3.36,0-5.05,0h-3.05c-.27,.63-.54,1.19-.77,1.77-1.74,4.4-3.48,8.79-5.21,13.19-2.08,5.28-4.15,10.56-6.23,15.84-.17,.42-.45,.83-.28,1.32,1.93,.17,9.24,.13,10.49-.08,.61-1.56,1.25-3.17,1.88-4.78,.64-1.61,1.27-3.23,1.91-4.84,.64-1.61,1.25-3.24,1.92-4.83,.66-1.59,1.16-3.24,2.04-4.97,.18,.66,.32,1.11,.42,1.57,1.1,5.03,2.19,10.06,3.29,15.09,.08,.36,.15,.72,.26,1.07,.35,1.12,1.12,1.75,2.3,1.84,.37,.03,.74,.02,1.1,.02h7.73c.2-.46,.39-.83,.54-1.22,3.97-10.01,7.94-20.02,11.91-30.04,.1-.27,.14-.56,.2-.86"/>
+            <path d="M227.21,48.65c4.35-1.79,7.09-4.92,7.98-9.61,.68-3.59-.79-6.83-4.65-8.23-.15-.05-.3-.09-.45-.14-1.46-.47-2.96-.65-4.5-.64-6.04,.01-12.09,0-18.13,0h-1.08c-.26,.59-.49,1.06-.68,1.54-1,2.48-2,4.97-2.99,7.45-2.87,7.22-5.74,14.44-8.6,21.67-.18,.46-.56,.9-.32,1.45,1.83,.15,9.16,.12,10.49-.05,.17-.38,.37-.8,.54-1.23,1.25-3.12,2.49-6.24,3.75-9.36,.21-.52,.3-1.13,.79-1.5h4.14c.25,.55,.49,1.07,.71,1.6,1.18,2.81,2.34,5.62,3.52,8.43,.16,.39,.32,.78,.51,1.15,.35,.72,.88,1.08,1.75,1.06,2.89-.05,5.78,0,8.67-.02,.23,0,.53,.09,.75-.36-1.69-4.01-3.64-8-5.4-12.15,.44-.16,.78-.29,1.12-.4,.7-.23,1.42-.4,2.09-.68m-7.96-4.11c-.86,.21-1.76,.3-2.64,.32-1.67,.05-3.35,0-5.15,0,.28-1.45,2.58-7.44,3.66-9.6,.31-.04,.66-.1,1.02-.11,1.15-.02,2.31-.04,3.46,0,.68,.02,1.36,.09,2.02,.24,1.62,.36,2.49,1.48,2.5,3.15,0,2.84-1.94,5.29-4.87,5.99"/>
+            <path d="M272.33,39.03c-.36-3.48-2.11-5.98-5.32-7.42-.52-.24-1.07-.44-1.61-.62-1.91-.6-3.86-.96-5.88-.95-4.62,.02-9.25,0-13.87,.01-.36,0-.71,.05-1,.07-.74,1.32-11.48,28.04-12.61,31.36-.06,.19-.06,.4-.1,.71,.58,.02,1.09,.06,1.6,.06h14.66c1.94,0,3.88-.04,5.82-.28,4.94-.6,9.15-2.62,12.51-6.3,2.88-3.14,4.54-6.9,5.5-11.01,.43-1.86,.5-3.75,.3-5.64m-11.16,5.46c-.7,2.48-1.73,4.84-3,7.08-.31,.55-.67,1.07-1.05,1.57-1.86,2.43-4.27,3.84-7.37,3.94-1.47,.05-2.94,.02-4.41,0-.14,0-.27-.1-.44-.16,0-.18-.04-.34,0-.47,2.73-6.98,5.47-13.96,8.16-20.83,.77-.45,1.47-.27,2.14-.29,.68-.02,1.36,.04,2.04,.06,.81,.03,1.54,.32,2.23,.7,1.24,.67,1.95,1.71,2.15,3.11,.25,1.8,.02,3.56-.46,5.29"/>
+            <path d="M95.96,30.1h-10.51c-.32,.74-.62,1.4-.89,2.08-2.64,6.64-5.27,13.28-7.91,19.92-.21,.54-.41,1.09-.67,1.6-.86,1.65-2.09,2.9-3.94,3.4-1.44,.39-2.92,.41-4.38,.08-1.84-.41-2.84-1.86-2.6-3.74,.07-.52,.21-1.03,.37-1.53,.29-.9,.61-1.79,.95-2.67,2.31-5.92,4.63-11.84,6.93-17.77,.17-.42,.49-.82,.33-1.37h-10.48c-.36,.82-.75,1.62-1.07,2.44-1.58,4.01-3.14,8.02-4.71,12.04-.69,1.76-1.38,3.52-2.05,5.29-.64,1.69-.99,3.43-.89,5.25,.12,2.06,.96,3.74,2.53,5.07,.93,.79,1.96,1.45,3.14,1.75,1.42,.37,2.86,.76,4.31,.9,3.36,.32,6.72,.3,10.06-.27,2.24-.39,4.39-1.05,6.36-2.21,3.12-1.84,5.17-4.57,6.48-7.89,2.82-7.13,5.63-14.27,8.43-21.41,.11-.27,.13-.58,.2-.94"/>
+            <path d="M199.34,30.06h-9.92c-.6,.96-.98,1.94-1.36,2.91-1.22,3.07-2.43,6.14-3.66,9.22-2.44,6.14-4.89,12.28-7.33,18.43-.19,.48-.33,.97-.49,1.48,1.36,.23,9.47,.24,10.84,0,4.19-10.58,8.39-21.2,12.63-31.91-.32-.05-.51-.12-.7-.12"/>
+            <path d="M121.95,20.5c3.27,.21,5.38-.75,7.48-3.13,5.24-5.95,12.13-10.16,20.44-11.45,6.17-.96,12.55-.81,18.09-1.03,.32-.01,.43-.44,.15-.61-16.94-9.8-47.75-2.04-57.19,15.92l.39,.24c3.81-.01,7.25-.16,10.64,.06"/>
+            <path d="M176.17,35.59c4.12-2.93,6.14-6.96,5.91-12.03-.03-.68-.14-1.34-.32-1.97-.04-.13-.08-.26-.12-.39-.02-.08-.05-.16-.08-.24-2.23-6.82-10.53-11.15-19.55-12.3-7.84-1-16.22,.39-21.59,4.63,2.18-.61,4.33-.97,6.44-1.11h0s.25-.03,.68-.04c1.58-.07,3.13,0,4.66,.21,.93,.1,1.92,.25,2.96,.47,.37,.08,.75,.17,1.13,.27,2.7,.69,5.53,1.86,7.81,3.84,1.74,1.51,3.17,3.49,3.97,6.09h0c.26,.58,.43,1.23,.49,1.96,.44,5.36-3.53,9.94-8.91,10.18-1.68,.08-3.36,.03-5.05,.02-.19,0-.37-.09-.65-.16,.62-1.98,1.46-3.79,2.15-5.65,.69-1.85,2.59-6.63,3.06-8.58-1.9-.43-9.44,.75-13.91,2.02-.66,.74-1.99,4.69-2.36,5.62-2.41,6.11-4.82,12.21-7.24,18.32-1.84,4.64-3.69,9.27-5.51,13.92-.18,.47-.55,.92-.34,1.53,.35,.02,.72,.06,1.08,.06,9.41,0,18.82,0,28.24,0,2.81,0,5.55-.52,8.14-1.62,5.79-2.46,9.05-6.83,9.61-13.12,.23-2.56-.32-4.94-2.2-6.83-.7-.7-1.55-1.24-2.35-1.84-.33-.24-.69-.44-1.15-.73,.52-.2,.91-.32,1.28-.51,1.26-.65,2.6-1.19,3.74-2.01m-12.87,11.79c-.16,1.31-.51,2.58-1.14,3.75-1.77,3.27-4.49,5.06-8.24,5.13-2.47,.05-4.94,0-7.4,0-.26,0-.52-.03-.9-.06,.46-1.79,1.24-3.38,1.85-5.04,.62-1.67,1.3-3.32,1.95-4.98s1.29-3.31,1.97-5.08h6.78c.31,0,.62,.07,.93,.13,3.33,.7,4.58,2.98,4.2,6.13"/>
+            <path d="M262.87,71.67c-14.54,.02-66.27,.15-72.9,.17-.41,0-.79,.23-.99,.58l-2.74,4.9c-.24,.43,.06,.97,.56,.97,7.58,0,46.67-.05,72.71-.05,.45,0,.84-.27,1.01-.68l2.99-4.93c.18-.46-.14-.95-.63-.95"/>
+            <path d="M49.94,78.24h60.61c.32,0,.49-.37,.28-.61l-4.26-5.17c-.4-.49-.99-.77-1.62-.77-7.25-.01-51.88-.11-52.83-.24-2.16-.3-3.67-1.5-4.46-3.53-.29-.73-.51-1.49-.69-2.26-1.38-5.78-2.74-11.55-4.1-17.33-.21-.91-.42-1.83-.61-2.66,.11-.15,.14-.21,.18-.22,.48-.2,.96-.39,1.45-.58,4.54-1.73,8.34-4.43,11.07-8.51,2.36-3.52,3.6-7.36,3.05-11.63-.52-4.08-2.47-7.21-6.26-9.04-.57-.27-1.15-.52-1.73-.76-4.5-1.87-9.39-1.92-14.17-1.96-2.68-.02-5.37,.09-8.03,.44-7.57,1.01-14.91,2.91-22.03,5.59-.56,.21-.97,.5-1.24,.98h0s-3.81,7.68-3.17,7.91c.37-.08,.57-.09,.75-.16,.83-.32,1.66-.65,2.49-.98,7.25-2.83,14.59-5.34,22.38-6.3,2.88-.36,5.75-.61,8.65-.44,1.82,.11,3.58,.52,5.17,1.56,1.12,.73,1.93,1.87,2.3,3.15,.36,1.23,.45,2.48,.24,3.76-.29,1.83-.96,3.5-1.88,5.08-.63,1.09-1.4,2.08-2.32,2.94-3.66,3.42-7.53,3.69-11.44,3.63-.29,0-.62,.1-.91-.28,.14-.39,.28-.83,.45-1.26,1.68-4.25,3.37-8.5,5.04-12.76,.18-.46,.56-.9,.31-1.57-1.04,.07-2.09,.08-3.12,.22-3.43,.49-6.81,1.25-10.17,2.13-1.19,.32-1.97,.89-2.34,2.05-.08,.25-.21,.48-.3,.73-3.66,9.17-7.31,18.35-10.98,27.53-1.75,4.39-3.52,8.78-5.27,13.17-.19,.47-.52,.93-.4,1.49,1.14,.19,11.87,.25,14.11,.07,.29-.67,.61-1.38,.9-2.11,2.76-6.99,5.51-13.98,8.28-20.97,.23-.57,.32-1.22,.89-1.67,1.5,0,3.01-.14,4.54,.09,.1,.3,.19,.54,.24,.79,.64,2.87,1.27,5.74,1.91,8.62,1.03,4.67,2.06,9.34,3.09,14.01,.25,1.14,.66,2.22,1.21,3.24,1.17,2.14,2.9,3.55,5.31,4.11,1.44,.33,2.9,.48,4.38,.48"/>
+            <g>
+              <path d="M44.15,101.27h9.49l-.37,1.38h-7.66l-.39,1.45h6.97l-.37,1.38h-6.97l-.56,2.1h-1.83l1.68-6.3Z"/>
+              <path d="M59.06,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+              <path d="M74.19,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+              <path d="M89.32,101.27h1.83l-1.31,4.92h6.35l-.37,1.38h-8.17l1.68-6.3Z"/>
+              <path d="M113.13,102.65h-4.28l.37-1.38h10.38l-.37,1.38h-4.28l-1.32,4.92h-1.82l1.31-4.92Z"/>
+              <path d="M124.84,101.27h1.83l-.64,2.39h7.02l.64-2.39h1.83l-1.69,6.3h-1.82l.68-2.54h-7.02l-.67,2.54h-1.83l1.68-6.3Z"/>
+              <path d="M141.66,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+              <path d="M164.02,101.27h6.26c2.35,0,3.66,.96,3.66,2.74,0,1.98-1.74,3.56-4.62,3.56h-6.99l1.69-6.3Zm8,2.87c0-1-.59-1.49-1.94-1.49h-4.6l-.95,3.55h4.69c1.8,0,2.81-.95,2.81-2.05Z"/>
+              <path d="M180.45,101.27h6.9c1.53,0,2.41,.67,2.41,1.91,0,1.44-1.33,2.25-3.17,2.32l2.17,2.07h-2.24l-2.08-1.97h-3.31l-.53,1.97h-1.83l1.68-6.3Zm1.48,1.31l-.45,1.71h5c.96,0,1.41-.36,1.41-.95,0-.5-.33-.76-1.04-.76h-4.92Z"/>
+              <path d="M195.98,101.27h1.83l-1.68,6.3h-1.83l1.68-6.3Z"/>
+              <path d="M207.17,106.07l4.95-4.8h2.23l-6.52,6.3h-1.88l-3.14-6.3h2l2.36,4.8Z"/>
+              <path d="M219.37,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+            </g>
+          </svg>
+        </a>
+
+        <!-- Nav links -->
+        <ul class="rb-nav-links" id="rb-nav-links">
+          <li class="rb-mnav-search">
+            <button type="button" class="rb-mnav-search-btn" id="rb-mnav-search-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Search</span>
+            </button>
+          </li>
+          <li class="rb-cat-first"><a href="https://therunbird.com/steering-wheels/">Steering Wheels</a></li>
+          <li><a href="https://therunbird.com/shift-knobs/">Shift Knobs</a></li>
+          <li><a href="https://therunbird.com/handbrakes/">Handbrakes</a></li>
+          <li><a href="https://therunbird.com/horn-pads/">Horn Pads</a></li>
+          <li><a href="https://therunbird.com/steering-wheel-emblems/">Emblems</a></li>
+          <li><a href="https://therunbird.com/custom-order/">Custom Order</a></li>
+          <li class="rb-mnav-account">
+            {if $auth.user_id}
+            <a href="index.php?dispatch=profiles.update" class="rb-mnav-account-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>My Account</span>
+            </a>
+            {else}
+            <a href="index.php?dispatch=auth.login_form" class="rb-mnav-account-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Sign In / Account</span>
+            </a>
+            {/if}
+            <a href="index.php?dispatch=orders.search" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>Orders</span>
+            </a>
+            <a href="index.php?dispatch=wishlist.view" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>Wish List</span>
+            </a>
+            <a href="index.php?dispatch=product_features.compare" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Comparison List</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Nav right -->
+        <div class="rb-nav-right">
+          <button class="rb-icon-btn" id="rb-search-btn" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+
+          <!-- Account dropdown -->
+          <div class="rb-acc-wrap">
+            <button class="rb-icon-btn" id="rb-acc-btn" aria-label="Account" aria-expanded="false">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
+
+            <div class="rb-acc-drop" id="rb-acc-drop">
+
+              {nocache}
+              {if $auth.user_id}
+
+              {* LOGGED IN STATE *}
+              <div class="rb-acc-drop-head">
+                <span class="rb-acc-drop-title">My Account</span>
+                <button class="rb-acc-drop-close" id="rb-acc-close" aria-label="Close">&#10005;</button>
+              </div>
+              <div class="rb-acc-drop-user">
+                Welcome back, <strong>{$auth.firstname}</strong>
+              </div>
+              <div class="rb-acc-drop-links">
+                <a href="index.php?dispatch=profiles.update">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Profile
+                </a>
+                <a href="index.php?dispatch=orders.search">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  Orders
+                </a>
+                <a href="index.php?dispatch=wishlist.view">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  Wish List
+                </a>
+                <a href="index.php?dispatch=product_features.compare">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  Comparison List
+                </a>
+              </div>
+              <a href="index.php?dispatch=auth.logout" class="rb-acc-btn-out">Sign Out</a>
+
+              {else}
+
+              {* GUEST STATE *}
+              <div class="rb-acc-drop-head">
+                <span class="rb-acc-drop-title">My Account</span>
+                <button class="rb-acc-drop-close" id="rb-acc-close" aria-label="Close">&#10005;</button>
+              </div>
+              <div class="rb-acc-drop-links">
+                <a href="index.php?dispatch=orders.search">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  Orders
+                </a>
+                <a href="index.php?dispatch=wishlist.view">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  Wish List
+                </a>
+                <a href="index.php?dispatch=product_features.compare">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  Comparison List
+                </a>
+              </div>
+              <div class="rb-acc-track">
+                <span class="rb-acc-track-label">Track my order(s)</span>
+                <form action="index.php" method="get" class="rb-acc-track-form">
+                  <input type="hidden" name="dispatch" value="orders.search">
+                  <input type="text" name="search[b_email]" placeholder="Order ID / E-mail" class="rb-acc-track-input" autocomplete="email">
+                  <button type="submit" class="rb-acc-track-submit" aria-label="Track">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </button>
+                </form>
+              </div>
+              <div class="rb-acc-btns">
+                <a href="index.php?dispatch=auth.login_form" class="rb-acc-btn-sign">Sign In</a>
+                <a href="index.php?dispatch=profiles.add" class="rb-acc-btn-reg">Register</a>
+              </div>
+
+              {/if}
+              {/nocache}
+
+            </div><!-- end .rb-acc-drop -->
+          </div><!-- end .rb-acc-wrap -->
+
+          <button class="rb-cart-btn" id="rb-cart-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Bag (<span id="rb-cart-count">{$cart.amount|default:0}</span>)
+          </button>
+          <button class="rb-hamburger" id="rb-burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end .rb-fixed-wrap -->
+
+</div><!-- end #rb-header -->
+
+<script>
+{literal}
+(function() {
+
+  /* ── Реальная высота шапки (announcement-бар может переноситься на
+     2 строки на узких экранах) — синхронизируем со спейсером/меню/
+     панелями через CSS-переменную, вместо захардкоженного значения. */
+  function rbSyncHeaderHeight() {
+    var fixedWrap = document.querySelector('#rb-header .rb-fixed-wrap');
+    if (!fixedWrap) return;
+    var h = Math.ceil(fixedWrap.getBoundingClientRect().height);
+    if (h > 0) {
+      document.documentElement.style.setProperty('--rb-header-h', h + 'px');
+    }
+  }
+  rbSyncHeaderHeight();
+  window.addEventListener('resize', rbSyncHeaderHeight);
+  window.addEventListener('load', rbSyncHeaderHeight);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(rbSyncHeaderHeight);
+  }
+
+  /* ── Hamburger menu ── */
+  var burger   = document.getElementById('rb-burger');
+  var navLinks = document.getElementById('rb-nav-links');
+  if (burger && navLinks) {
+    burger.addEventListener('click', function() {
+      var isOpen = navLinks.classList.toggle('open');
+      burger.classList.toggle('active', isOpen);
+      /* На случай если панель поиска осталась открытой (rb-search-open) с
+         прошлого раза — у неё z-index выше меню, и она "просвечивает"
+         поверх свежеоткрытого меню. Всегда сбрасываем при переключении. */
+      document.querySelectorAll('.ty-search-block').forEach(function(b) {
+        b.classList.remove('rb-search-open');
+      });
+      /* Блокируем скролл страницы под открытым меню — иначе фон
+         прокручивается сквозь fixed-оверлей меню. */
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        burger.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ── Кнопка "Menu" в нижней sticky-панели CS-Cart ──
+       Перехватываем клик на этапе capture (до нативного обработчика
+       .cm-external-trigger темы) и открываем НАШЕ меню вместо родного. */
+    var stickyMenuIcon = document.querySelector('.ut2-icon-outline-menu');
+    var stickyMenuLink = stickyMenuIcon ? stickyMenuIcon.closest('a') : null;
+    if (stickyMenuLink) {
+      stickyMenuLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        burger.click();
+      }, true);
+    }
+  }
+
+  /* ── Пункт "Search" в мобильном меню гамбургера ──
+     Открываем ту же панель .ty-search-block, что и десктопная кнопка
+     поиска (см. класс rb-search-open ниже) — теперь она стилизована
+     и на мобильном тоже. Нативный тогл .ut2-btn-search НЕ используем:
+     его onclick содержит $(this).parent().next(), что по нашему
+     порядку блоков в Layout указывает на #rb-header, а не на панель
+     поиска, и вдобавок класс view, который он ставит, ни на что
+     не влияет в нашей стилизации. */
+  var mnavSearchBtn = document.getElementById('rb-mnav-search-btn');
+  if (mnavSearchBtn) {
+    mnavSearchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (navLinks && burger) {
+        navLinks.classList.remove('open');
+        burger.classList.remove('active');
+      }
+      document.body.style.overflow = '';
+      var blocks = document.querySelectorAll('.ty-search-block');
+      blocks.forEach(function(b) { b.classList.add('rb-search-open'); });
+      var firstInput = blocks.length ? blocks[0].querySelector('.ty-search-block__input') : null;
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus(); }, 50);
+      }
+    });
+  }
+
+  /* ── Cart ──
+     Открытие/закрытие полностью отдано нативному CS-Cart виджету
+     (cm-combination) — он сам управляет классом .hidden, позицией
+     и закрытием по клику вне (data-ca-external-click-id). Наша кнопка
+     просто эмулирует клик по нативному тогглу; сам вид/позиция панели
+     переопределены в CSS выше (.ty-dropdown-box__content--cart). */
+  /* Mobile-only repositioning (see .rb-cart-top-pos in CSS above) must apply
+     ONLY when the panel is opened via our #rb-cart-btn, not via CS-Cart's
+     native bottom sticky nav Cart icon (same shared panel element, native
+     mobile position must stay untouched there). Track intent with a flag,
+     apply/clear the class on the panel's own open/close (.hidden toggle) so
+     a later native open starts clean regardless of how the previous one closed. */
+  var rbCartPanel = document.querySelector('.ty-dropdown-box__content--cart');
+  var rbCartWantsTopPos = false;
+  if (rbCartPanel) {
+    new MutationObserver(function() {
+      if (rbCartPanel.classList.contains('hidden')) {
+        rbCartPanel.classList.remove('rb-cart-top-pos');
+      } else if (rbCartWantsTopPos) {
+        rbCartPanel.classList.add('rb-cart-top-pos');
+        rbCartWantsTopPos = false;
+      }
+    }).observe(rbCartPanel, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  var rbCartBtn = document.getElementById('rb-cart-btn');
+  if (rbCartBtn) {
+    rbCartBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      rbCartWantsTopPos = true;
+      var cartToggle = document.querySelector('[id^="sw_dropdown_"]');
+      if (cartToggle) {
+        cartToggle.dispatchEvent(new MouseEvent('click', {
+          bubbles: true, cancelable: true, view: window
+        }));
+      } else {
+        window.location.href = '/cart/';
+      }
+    });
+  }
+
+  /* ── Счётчик корзины: синхронизация при AJAX обновлениях ── */
+  new MutationObserver(function() {
+    var nativeCount = document.querySelector('.ty-minicart-count');
+    var ourCount    = document.getElementById('rb-cart-count');
+    if (nativeCount && ourCount && nativeCount.textContent !== ourCount.textContent) {
+      ourCount.textContent = nativeCount.textContent;
+    }
+  }).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+  /* ── Search ──
+     Нативный toggle-линк (.ut2-btn-search) не используем — его инлайновый
+     onclick лезет к соседнему по DOM блоку (.parent().next()), а в нашем
+     layout это наш собственный #rb-header. Вместо этого сами открываем/
+     закрываем .ty-search-block через свой класс rb-search-open, форма и
+     live-search подсказки внутри — родные CS-Cart, не трогаем. */
+  var rbSearchBtn  = document.getElementById('rb-search-btn');
+  var searchBlocks = document.querySelectorAll('.ty-search-block');
+  if (rbSearchBtn && searchBlocks.length) {
+    /* На странице может быть больше одного .ty-search-block (тот же
+       родной блок переиспользуется мобильной sticky-панелью) — поэтому
+       обрабатываем ВСЕ найденные экземпляры одинаково, а не только первый. */
+    searchBlocks.forEach(function(searchBlock) {
+      var searchInput = searchBlock.querySelector('.ty-search-block__input');
+      if (searchInput && !searchInput.placeholder) {
+        searchInput.placeholder = 'Search products...';
+      }
+
+      /* Родная форма не содержит кнопки закрытия — добавляем свою рядом с лупой */
+      var searchForm = searchBlock.querySelector('form') || searchBlock;
+      if (!searchForm.querySelector('.rb-search-close')) {
+        var closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'rb-search-close';
+        closeBtn.setAttribute('aria-label', 'Close search');
+        closeBtn.innerHTML = '&#10005;';
+        searchForm.appendChild(closeBtn);
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeAllSearch();
+        });
+      }
+    });
+
+    function openAllSearch() {
+      searchBlocks.forEach(function(b) { b.classList.add('rb-search-open'); });
+      rbSearchBtn.classList.add('active');
+      var firstInput = searchBlocks[0].querySelector('.ty-search-block__input');
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus(); }, 50);
+      }
+    }
+    function closeAllSearch() {
+      searchBlocks.forEach(function(b) { b.classList.remove('rb-search-open'); });
+      rbSearchBtn.classList.remove('active');
+    }
+    function isSearchOpen() {
+      var open = false;
+      searchBlocks.forEach(function(b) { if (b.classList.contains('rb-search-open')) open = true; });
+      return open;
+    }
+
+    rbSearchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isSearchOpen()) { closeAllSearch(); } else { openAllSearch(); }
+    });
+    document.addEventListener('click', function(e) {
+      if (!isSearchOpen()) return;
+      var insideAny = false;
+      searchBlocks.forEach(function(b) { if (b.contains(e.target)) insideAny = true; });
+      if (!insideAny && e.target !== rbSearchBtn && !rbSearchBtn.contains(e.target)) {
+        closeAllSearch();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeAllSearch();
+    });
+  }
+
+  /* ── Account dropdown ── */
+  var accBtn   = document.getElementById('rb-acc-btn');
+  var accDrop  = document.getElementById('rb-acc-drop');
+  var accClose = document.getElementById('rb-acc-close');
+
+  if (!accBtn || !accDrop) return;
+
+  function openAcc() {
+    accDrop.classList.add('open');
+    accBtn.classList.add('active');
+    accBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeAcc() {
+    accDrop.classList.remove('open');
+    accBtn.classList.remove('active');
+    accBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  accBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    accDrop.classList.contains('open') ? closeAcc() : openAcc();
+  });
+
+  if (accClose) {
+    accClose.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeAcc();
+    });
+  }
+
+  /* Close on outside click */
+  document.addEventListener('click', function(e) {
+    var wrap = accBtn.closest('.rb-acc-wrap');
+    if (wrap && !wrap.contains(e.target)) closeAcc();
+  });
+
+  /* Close on Escape */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAcc();
+  });
+
+})();
+{/literal}
+</script>
