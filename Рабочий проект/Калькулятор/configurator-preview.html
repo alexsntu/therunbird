@@ -73,6 +73,31 @@
         </div>
         <div class="rb-cfg-summary-hint" id="rb-cfg-summary-hint">Select every option above to add this build to your cart.</div>
       </div>
+
+      <!-- ══ Кросс-сейл: приглашаем сразу докупить остальные категории —
+           высота ряда на ПК подгоняется JS'ом (alignCrossSell(), вызывается
+           из layoutLines()) под нижний край блока фото слева. ══ -->
+      <div class="rb-cfg-crosssell">
+        <div class="rb-cfg-crosssell-head">Shop More Accessories</div>
+        <div class="rb-cfg-crosssell-grid" id="rb-cfg-crosssell-grid">
+          <a href="https://therunbird.com/shift-knobs/" class="rb-cfg-cs-card">
+            <img src="https://therunbird.com/images/MainPAge/shift-knobs.png" alt="Shift Knobs" loading="lazy">
+            <span class="rb-cfg-cs-name">Shift Knobs</span>
+          </a>
+          <a href="https://therunbird.com/handbrakes/" class="rb-cfg-cs-card">
+            <img src="https://therunbird.com/images/MainPAge/handbrakes.png" alt="Handbrakes" loading="lazy">
+            <span class="rb-cfg-cs-name">Handbrakes</span>
+          </a>
+          <a href="https://therunbird.com/horn-pads/" class="rb-cfg-cs-card">
+            <img src="https://therunbird.com/images/MainPAge/Horn-pads.png" alt="Horn Pads" loading="lazy">
+            <span class="rb-cfg-cs-name">Horn Pads</span>
+          </a>
+          <a href="https://therunbird.com/steering-wheel-emblems/" class="rb-cfg-cs-card">
+            <img src="https://therunbird.com/images/MainPAge/SW-emblems.png" alt="SW Emblems" loading="lazy">
+            <span class="rb-cfg-cs-name">SW Emblems</span>
+          </a>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -421,6 +446,44 @@
 #rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
 #rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
 
+/* ── Cross-sell row: 4 other categories, right under the price block.
+   Height on desktop is set inline by alignCrossSell() (JS) to land flush
+   with the bottom of the photo column; aspect-ratio below is only the
+   pre-JS/mobile fallback. ── */
+#rb-config .rb-cfg-crosssell{ margin-top:16px; }
+#rb-config .rb-cfg-crosssell-head{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:10px;
+}
+#rb-config .rb-cfg-crosssell-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+}
+#rb-config .rb-cfg-cs-card{
+  position:relative; display:block; aspect-ratio:3/4; border-radius:10px; overflow:hidden;
+  border:1px solid var(--rb-border); background:#111; text-decoration:none; transition:border-color .2s;
+}
+#rb-config .rb-cfg-cs-card:hover{ border-color:var(--rb-accent-b); }
+#rb-config .rb-cfg-cs-card img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top;
+  transition:transform .5s;
+}
+#rb-config .rb-cfg-cs-card:hover img{ transform:scale(1.06); }
+/* Desktop only: shift the visible crop of each category photo 35px to the
+   right (subtracting from the x anchor moves the crop window rightward
+   within the source image — see object-position math). */
+@media (min-width: 981px){
+  #rb-config .rb-cfg-cs-card img{ object-position: calc(50% + 35px) top; }
+}
+#rb-config .rb-cfg-cs-card::after{
+  content:''; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 55%, transparent 100%);
+}
+#rb-config .rb-cfg-cs-name{
+  position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 10px;
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.03em;
+  font-size:16px; font-weight:700; color:var(--rb-text);
+}
+
 /* ── Gallery: горизонтальная лента, фирменный градиентный фон под каждым PNG
    (та же "рецептура", что у .rb-cfg-imgbox) + SVG-водяной знак логотипа ── */
 #rb-config .rb-cfg-gal-head{
@@ -510,6 +573,8 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 }
 @media (max-width: 640px){
   #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
+  #rb-config .rb-cfg-crosssell-grid{ grid-template-columns:1fr 1fr; }
+  #rb-config .rb-cfg-cs-card{ aspect-ratio:4/3; }
 }
 @media (max-width: 700px){
   #rb-config .rb-cfg-gal-nav{ display:none; }
@@ -1054,6 +1119,24 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
         circle.classList.add('is-active');
       }
     });
+
+    alignCrossSell(imgWrap);
+  }
+
+  // Cross-sell row height (desktop only): stretches the 4-tile row so its
+  // bottom edge lands flush with the bottom of the photo column. Grid's
+  // default align-content is "stretch", so setting an explicit pixel height
+  // on the grid container is enough — the single row (and the cards inside,
+  // stretch by default too) fill it automatically.
+  var crossSellGrid = document.getElementById('rb-cfg-crosssell-grid');
+  function alignCrossSell(imgWrap){
+    if (!crossSellGrid) return;
+    if (window.innerWidth <= 980){
+      crossSellGrid.style.height = '';
+      return;
+    }
+    var h = imgWrap.getBoundingClientRect().bottom - crossSellGrid.getBoundingClientRect().top;
+    crossSellGrid.style.height = Math.max(h, 90) + 'px';
   }
 
   var currentActiveZone = null;
