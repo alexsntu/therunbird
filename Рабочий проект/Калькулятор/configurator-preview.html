@@ -343,6 +343,14 @@
 @media (max-width: 980px){
   #rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
 }
+@media (max-width: 480px){
+  /* Узкие телефоны: label+цена+кнопка в одну строку тесно — кнопке нужно
+     чуть меньше паддинга/шрифта, чтобы текст остался в одну строку (nowrap
+     уже задан выше) и не выпирал за пределы пилюли. */
+  #rb-config .rb-cfg-summary-row{ gap:8px; }
+  #rb-config .rb-cfg-add{ padding:11px 18px; font-size:13px; }
+  #rb-config .rb-cfg-price-value{ font-size:26px; }
+}
 
 /* ── Callout cards (collapsed dropdown-rows) ── */
 #rb-config .rb-cfg-card{
@@ -403,7 +411,7 @@
 #rb-config .rb-cfg-add{
   background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:13px 28px;
   font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:700; letter-spacing:.03em;
-  text-transform:uppercase; cursor:pointer; transition:.15s; flex:none;
+  text-transform:uppercase; cursor:pointer; transition:.15s; flex:none; white-space:nowrap;
 }
 #rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
 #rb-config .rb-cfg-add:disabled{
