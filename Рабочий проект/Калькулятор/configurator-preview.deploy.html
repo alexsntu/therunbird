@@ -1,20 +1,3 @@
-<!-- ══════════════════════════════════════════════════════
-     RunBird — Steering Wheel Configurator (product_id=350)
-     Этот файл — то, что будет размещено на продакшене (CS-Cart HTML-блок,
-     показ только на странице товара #350).
-     Реальная интеграция подключена: клик по чипу/свотчу пишет .value в
-     настоящий native <select id="option_350_XX"> и дёргает fn_change_options —
-     цена/остатки/корзина считаются нативно движком CS-Cart, мы её только
-     читаем обратно (см. syncNative() / syncPriceFromNative() в скрипте).
-     На живой странице нативный блок "опции + цена + qty + Add to cart"
-     скрыт (см. CSS в конце <style>) — наш rb-cfg-summary его заменяет.
-     Открытый локально в браузере БЕЗ живой CS-Cart-страницы файл продолжает
-     работать как чистое превью (нативных select'ов нет — syncNative() тихо
-     no-op, recalcPrice() считает мок-цену, кнопка показывает alert).
-     Зоны на фото (OPTIONS.*.zone) измерены по реальным пикселям
-     SteeringWheel-C6.png (алгоритм: сканирование alpha-канала по колонкам) —
-     first-pass, поправить если пользователь пришлёт разметку с метками.
-════════════════════════════════════════════════════════ -->
 <div id="rb-config" class="rb-cfg-shape-pending">
 <div class="rb-cfg-inner">
 
@@ -23,31 +6,21 @@
     <p class="rb-cfg-sub">Choose every option below — the diagram shows exactly where it applies.</p>
   </div>
 
-  <!-- ══ Мобильный "шаг 1": визуальный выбор Shape двумя фото — Shape меняет
-       саму фотографию руля, поэтому логично выбрать его до остального гида.
-       Видна только на мобильном/планшете и только пока Shape не выбран
-       (см. .rb-cfg-shape-pending, переключается в updateStepMarks()). ══ -->
-  <div class="rb-cfg-shape-gate">
+    <div class="rb-cfg-shape-gate">
     <div class="rb-cfg-shape-gate-head">Step 1 — choose your wheel shape</div>
     <div class="rb-cfg-shape-gate-grid" id="rb-cfg-shape-gate-grid"></div>
   </div>
 
-  <!-- ══ Диаграмма: большое фото слева, все опции (включая Shape) справа ══ -->
-  <div class="rb-cfg-stage">
+    <div class="rb-cfg-stage">
 
     <div class="rb-cfg-imgwrap">
       <svg class="rb-cfg-lines" preserveAspectRatio="none"></svg>
       <div class="rb-cfg-imgbox">
         <img src="https://therunbird.com/images/Calculator/SteeringWheel-C6.png" alt="Corvette C6 Custom Steering Wheel" draggable="false">
       </div>
-      <!-- Мобильная подсказка поверх фото — видна, пока остался хоть один
-           невыбранный шаг (см. updateStepMarks()); скрывается сама, когда всё выбрано. -->
-      <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint">Select appearance</div>
+            <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint">Select appearance</div>
       <div class="rb-cfg-marks"></div>
-      <!-- Мобильная замена callout-линий (там сложная гео"метрия фото+опции в один
-           столбец не читается) — по одной подсказке-точке за раз на текущий
-           невыбранный шаг; тап скроллит и открывает нужную карточку опции. -->
-      <div class="rb-cfg-step-marks" id="rb-cfg-step-marks"></div>
+            <div class="rb-cfg-step-marks" id="rb-cfg-step-marks"></div>
       <p class="rb-cfg-img-caption">This is a schematic mockup to show where each option applies — not the final finish. We'll send you a realistic render of your actual wheel before we start building it.</p>
     </div>
 
@@ -64,8 +37,7 @@
         <div class="rb-cfg-card" data-zone="logo"></div>
       </div>
 
-      <!-- ══ Итог: одна строка label→цена→кнопка, прижата вправо, ширина = сетке опций ══ -->
-      <div class="rb-cfg-summary" id="rb-cfg-summary">
+            <div class="rb-cfg-summary" id="rb-cfg-summary">
         <div class="rb-cfg-summary-row">
           <span class="rb-cfg-price-label">Total price</span>
           <span class="rb-cfg-price-value"><span class="rb-cfg-price-cur">$</span><span id="rb-cfg-price-num">765</span></span>
@@ -77,9 +49,7 @@
 
   </div>
 
-  <!-- Логотип-водяной знак определён один раз (symbol) и переиспользуется через
-       <use> в каждой карточке галереи ниже — не дублирует path-данные 11 раз. -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="rb-logo-mark" viewBox="0 0 272.43 107.57">
       <path d="M185.58,69.08c-9.31,20.17-40.69,28.79-57.39,17.33-.09-.06-.05-.21,.06-.21,5.66-.28,12.26-.06,18.64-1.16,8.23-1.42,15.05-6.04,20.23-12.58,2.08-2.62,4.17-3.67,7.4-3.44,3.52,.25,7.07,.06,11.06,.06"/>
       <path d="M156.61,77.46c-12.73,10.05-35.05,6.34-46.25-7.8-.17-.22,0-.53,.28-.51,5.95,.33,11.22-1.27,16.45,3.33,8.34,7.35,18.59,8.05,29.52,4.98"/>
@@ -109,9 +79,7 @@
     </symbol>
   </svg>
 
-  <!-- ══ Галерея готовых работ: реальные фото (PNG без фона) + наш фирменный
-       градиентный фон (как у главного фото) + водяной знак логотипа ══ -->
-  <div class="rb-cfg-gallery">
+    <div class="rb-cfg-gallery">
     <div class="rb-cfg-gal-head">Recent builds</div>
     <div class="rb-cfg-gal-row">
       <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--prev" id="rb-cfg-gal-prev" aria-label="Scroll left">‹</button>
@@ -132,9 +100,7 @@
     </div>
   </div>
 
-  <!-- ══ Лайтбокс галереи: открывается по клику на фото, закрытие по крестику/фону/Esc,
-       стрелки-навигация (десктоп) переключают между 11 фото ══ -->
-  <div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
+    <div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
     <button type="button" class="rb-cfg-lb-close" id="rb-cfg-lb-close" aria-label="Close">✕</button>
     <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-prev" id="rb-cfg-lb-prev" aria-label="Previous photo">‹</button>
     <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom steering wheel build — full size">
@@ -160,9 +126,7 @@
   background: var(--rb-bg);
   color: var(--rb-text);
   font-family: 'Inter', sans-serif;
-  /* Фон full-bleed на всю ширину вьюпорта (контейнер CS-Cart у'же страницы) —
-     а содержимое centered/capped внутри .rb-cfg-inner (max-width:1370px), см. ниже.
-     translateX(-50%) центрирует корректно независимо от факт. ширины родителя. */
+
   width: 100vw;
   position: relative;
   left: 50%;
@@ -176,12 +140,10 @@
   box-sizing: border-box;
 }
 
-/* ── Head ── */
 #rb-config .rb-cfg-head{ text-align:center; margin-bottom:14px; }
 #rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
 #rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
 
-/* ── Info tooltip (used inline in the Shape row head) ── */
 #rb-config .rb-cfg-info{ position:relative; display:inline-flex; cursor:help; margin-left:6px; vertical-align:middle; }
 #rb-config .rb-cfg-info-ico{
   width:15px; height:15px; border-radius:50%; border:1px solid var(--rb-text2); color:var(--rb-text2);
@@ -199,7 +161,6 @@
 }
 #rb-config .rb-cfg-info:hover .rb-cfg-info-tip, #rb-config .rb-cfg-info:focus .rb-cfg-info-tip{ opacity:1; }
 
-/* ── Chips (shared: plain options + color options) ── */
 #rb-config .rb-cfg-chips{ display:flex; flex-wrap:wrap; gap:8px; }
 #rb-config .rb-chip{
   display:inline-flex; align-items:center;
@@ -216,9 +177,6 @@
   outline:1px solid var(--rb-border-s); outline-offset:1px;
 }
 
-/* ── Mobile shape-gate: визуальный выбор Shape (2 фото) до остального гида.
-   На десктопе не показывается никогда; на мобильном — пока не выбран Shape
-   (см. правила видимости внутри @media max-width:980px ниже). ── */
 #rb-config .rb-cfg-shape-gate{ display:none; margin-bottom:28px; }
 #rb-config .rb-cfg-shape-gate-head{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
@@ -248,16 +206,13 @@
 }
 #rb-config .rb-cfg-shape-gate-price{ font-size:11.5px; color:var(--rb-text2); }
 
-/* ── Stage layout ── */
 #rb-config .rb-cfg-stage{
   display:grid; grid-template-columns: minmax(360px,660px) minmax(460px,560px);
   gap:36px; align-items:start; justify-content:center; position:relative; margin-bottom:32px;
   max-width:1240px; margin-left:auto; margin-right:auto;
 }
 #rb-config .rb-cfg-col{ display:flex; flex-direction:column; gap:16px; position:relative; z-index:2; }
-/* minmax(0,1fr), не просто 1fr — иначе карточка с длинным текстом (напр. "BOTTOM
-   SECTION") не сжимается до колонки, а раздвигает всю grid-дорожку шире, и сетка
-   опций визуально вылезает правее заявленной ширины колонки (расхождение с summary). */
+
 #rb-config .rb-cfg-cards-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px 16px; width:100%; box-sizing:border-box; }
 #rb-config .rb-cfg-col-intro{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
@@ -293,7 +248,6 @@
   margin:6% auto 0; display:block; filter:drop-shadow(0 18px 24px rgba(0,0,0,.55));
 }
 
-/* ── On-photo callout labels: only visible while that option is active ── */
 #rb-config .rb-cfg-marks{ position:absolute; inset:0; z-index:5; pointer-events:none; }
 #rb-config .rb-cfg-mark{
   position:absolute; transform:translate(-50%,-150%);
@@ -303,10 +257,6 @@
 }
 #rb-config .rb-cfg-mark.is-active{ opacity:1; }
 
-/* ── Mobile step-marks: одна пульсирующая точка-подсказка на фото — только
-   на текущий невыбранный шаг (см. updateStepMarks() в JS); tap → скролл + open
-   нужной карточки. Слой включается только на мобильном/планшете (media query
-   ниже) — на десктопе работает обычная система линий/подписей. ── */
 #rb-config .rb-cfg-step-marks{ position:absolute; inset:0; z-index:6; display:none; }
 #rb-config .rb-cfg-step-mark{
   position:absolute; transform:translate(-50%,-50%); display:none;
@@ -332,7 +282,6 @@
   #rb-config .rb-cfg-step-mark-dot{ animation:none; }
 }
 
-/* Баннер-подсказка поверх фото (мобильный гид) — видна пока !isComplete() */
 #rb-config .rb-cfg-photo-hint{
   display:none; position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:7;
   background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent);
@@ -344,7 +293,6 @@
   #rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
 }
 
-/* ── Callout cards (collapsed dropdown-rows) ── */
 #rb-config .rb-cfg-card{
   border:1px solid var(--rb-border); background:var(--rb-card-bg); border-radius:10px;
   padding:0; overflow:visible; transition:border-color .15s, background .15s;
@@ -381,15 +329,12 @@
 #rb-config .rb-cfg-card .rb-cfg-sub-label:first-child{ margin-top:0; }
 #rb-config .rb-cfg-finish-block.is-disabled{ opacity:.4; pointer-events:none; }
 
-/* ── Summary (внутри правой колонки, сразу под опциями) ── */
 #rb-config .rb-cfg-summary{
   display:flex; flex-direction:column; gap:10px;
   border:1px solid var(--rb-border-s); border-radius:14px; padding:16px 20px; background:var(--rb-card-bg);
   margin-top:6px; width:100%; box-sizing:border-box;
 }
-/* Grid, не flex: 3 колонки гарантируют, что цена математически по центру ВСЕГО
-   блока независимо от того, шире label или кнопка — flex space-between/justify-end
-   этого не даёт (центр съезжает вслед за шириной соседних элементов). */
+
 #rb-config .rb-cfg-summary-row{
   display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px;
 }
@@ -413,8 +358,6 @@
 #rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
 #rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
 
-/* ── Gallery: горизонтальная лента, фирменный градиентный фон под каждым PNG
-   (та же "рецептура", что у .rb-cfg-imgbox) + SVG-водяной знак логотипа ── */
 #rb-config .rb-cfg-gal-head{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
   font-size:18px; font-weight:600; margin-bottom:16px; text-align:center;
@@ -454,11 +397,6 @@
 #rb-config .rb-cfg-gal-nav--prev{ left:4px; }
 #rb-config .rb-cfg-gal-nav--next{ right:4px; }
 
-/* ── Lightbox: fullscreen просмотр фото из галереи.
-   ВАЖНО: скрипт переносит #rb-cfg-lightbox в document.body (см. JS) — поэтому эти
-   правила НЕ префиксуются "#rb-config " (там элемента больше нет) и не используют
-   var(--rb-accent) и т.п. (custom properties #rb-config тоже не наследуются телом
-   после переноса) — цвета продублированы буквально. ── */
 .rb-cfg-lightbox{
   position:fixed; inset:0; z-index:99999; background:rgba(4,4,4,.96);
   display:none; align-items:center; justify-content:center; padding:32px; box-sizing:border-box;
@@ -482,8 +420,6 @@
 .rb-cfg-lb-prev{ left:24px; }
 .rb-cfg-lb-next{ right:24px; }
 
-/* Блокировка скролла фона под лайтбоксом (см. lockPageScroll() в JS) — html
-   тоже нужен overflow:hidden, иначе iOS Safari всё равно даёт "потянуть" фон. */
 html.rb-cfg-scroll-lock, body.rb-cfg-scroll-lock{ overflow:hidden !important; }
 body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
@@ -492,9 +428,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   #rb-config .rb-cfg-lines{ display:none; }
   #rb-config .rb-cfg-marks{ display:none; }
   #rb-config .rb-cfg-step-marks{ display:block; }
-  /* Пока Shape не выбран: показываем только shape-gate, прячем обычную
-     диаграмму+опции+итог. Как только Shape выбран (JS снимает класс
-     .rb-cfg-shape-pending) — наоборот. */
+
   #rb-config.rb-cfg-shape-pending .rb-cfg-shape-gate{ display:block; }
   #rb-config.rb-cfg-shape-pending .rb-cfg-imgwrap,
   #rb-config.rb-cfg-shape-pending .rb-cfg-cards-grid,
@@ -505,20 +439,11 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 }
 @media (max-width: 700px){
   #rb-config .rb-cfg-gal-nav{ display:none; }
-  /* Стрелки листания лайтбокса — только на ПК; на мобильном свайп/тач неудобны рядом с краями экрана.
-     Без "#rb-config " — лайтбокс к этому моменту уже перенесён в document.body. */
+
   .rb-cfg-lb-nav{ display:none; }
   .rb-cfg-lb-img{ max-width:94vw; }
 }
 
-/* ── Прячем нативный блок CS-Cart на странице товара #350 — наш rb-cfg-summary
-   выше его заменяет визуально. Сами select'ы/кнопка остаются в DOM и работают
-   "под капотом" (драйвятся через syncNative()/fn_change_options в скрипте ниже).
-   Селекторы НЕ трогают .ut2-pb__sticky-add-to-cart (плавающая панель при скролле) —
-   она использует другие классы-обёртки и продолжает жить своей жизнью.
-   .ut2-pb__title — нативный H1 с названием товара: прячем, чтобы на странице
-   остался только один H1 — наш rb-cfg-title (иначе было бы два H1 с почти
-   одинаковым текстом, что плохо для SEO/доступности). ── */
 #option_350_AOC,
 .ut2-pb__price-wrap,
 .ut2-pb__button,
@@ -527,18 +452,9 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
 <script>
 (function(){
-  // ────────────────────────────────────────────────────────
-  // CONFIG — единственное место, где нужно поправить зоны/цены,
-  // когда придёт размеченное фото. x/y — проценты внутри картинки
-  // (измерены по alpha-каналу SteeringWheel-C6.png, first-pass).
-  // ────────────────────────────────────────────────────────
+
   var BASE_PRICE = 765.00;
 
-  // csOptId = CS-Cart product option id (option_350_<id>), cs = <option value="..."> id
-  // на реальной странице товара #350 (см. Рабочий проект\Калькулятор\product-page.html).
-  // zone.px/py = координаты точки-указателя в ПИКСЕЛЯХ исходного файла
-  // SteeringWheel-C6.png (натуральный размер 800×800) — правьте эти два числа,
-  // если пришлёте координаты по картинке, открытой в любом просмотрщике/редакторе.
   var OPTIONS = {
     shape: {
       label: 'Shape', zone: null, csOptId: 26,
@@ -577,11 +493,11 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     spokes: {
       label:'CF spoke covers', zone:{ px:668, py:414 },
       isSpokesGroup:true, csOptId: 27, finishCsOptId: 28,
-      values:[ // Add CF spoke covers
+      values:[
         { v:'no',  label:'No', price:0, cs:183 },
         { v:'yes', label:'Yes', price:165, cs:184 }
       ],
-      finish:[ // CF finish — active only if spoke covers = yes
+      finish:[
         { v:'gloss', label:'Gloss', price:0, cs:185 },
         { v:'matte', label:'Matte / Satin', price:0, cs:186 }
       ]
@@ -635,9 +551,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
   var PRODUCT_ID = '350';
 
-  // Ничего не выбрано по умолчанию — покупатель обязан явно выбрать каждую
-  // опцию, иначе Add to cart остаётся заблокированной (см. isComplete()).
-  var state = {}; // optKey -> selected value object (+ .finish for spokes), null = не выбрано
+  var state = {};
   Object.keys(OPTIONS).forEach(function(k){
     state[k] = null;
     if (OPTIONS[k].finish) state[k+'__finish'] = null;
@@ -652,10 +566,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
   function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
 
-  // Shape = F1-shape меняет саму фотографию руля (другая геометрия обода —
-  // на схематичном фото одну картинку под обе формы не показать, см. инфо-тултип
-  // у Shape). Зоны опций (px/py) НЕ пересчитаны под новое фото — по договорённости
-  // с пользователем, координаты трогаем позже отдельно, если понадобится.
   function updateShapeImage(){
     var val = state.shape;
     var newSrc = (val && val.img) ? val.img : DEFAULT_WHEEL_IMG;
@@ -674,13 +584,11 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     return val.hex;
   }
 
-  // Драйвим настоящий CS-Cart <select id="option_350_XX"> из нашего чипа —
-  // цена/остатки/корзина считаются нативно движком, мы ничего не считаем сами.
   function syncNative(optKey, valuesKey, val){
     var opt = OPTIONS[optKey];
     var csOptId = (valuesKey === 'finish') ? opt.finishCsOptId : opt.csOptId;
     var sel = document.getElementById('option_' + PRODUCT_ID + '_' + csOptId);
-    if (!sel) return; // локальный превью-файл без живой страницы CS-Cart
+    if (!sel) return;
     sel.value = String(val.cs);
     if (typeof fn_change_options === 'function'){
       fn_change_options(PRODUCT_ID, PRODUCT_ID, String(csOptId));
@@ -697,7 +605,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
       var el = document.createElement('button');
       el.type = 'button';
       el.className = 'rb-chip';
-      el.dataset.val = val.v; // используется shape-gate'ом ниже, чтобы найти чип и переиспользовать его click-логику
+      el.dataset.val = val.v;
       var html = '';
       if (opt.isColor){
         html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
@@ -719,9 +627,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
         updateCompletionUI();
         updateStepMarks();
         syncNative(optKey, valuesKey, val);
-        // Закрываем карточку и (на мобильном) скроллим обратно к фото, только когда
-        // ОПЦИЯ ЦЕЛИКОМ отвечена — для spokes это значит "covers=no" ИЛИ
-        // "covers=yes и finish тоже выбран", не после первого клика по covers.
+
         if (isOptSelected(optKey)){
           var ownCard = wrap.closest('.rb-cfg-card');
           if (ownCard){
@@ -730,10 +636,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
             scheduleLayout();
           }
           if (window.matchMedia('(max-width: 980px)').matches){
-            // ждём конца transition закрытия карточки (.25s), чтобы скролл
-            // не дёргался поверх ещё сворачивающейся карточки.
-            // Если это была ПОСЛЕДНЯЯ опция — дальше скроллить некуда на фото
-            // (там больше нет точки-подсказки), едем сразу к цене/Add to cart.
+
             var scrollTarget = isComplete() ? '.rb-cfg-summary' : '.rb-cfg-imgwrap';
             setTimeout(function(){
               var el = root.querySelector(scrollTarget);
@@ -754,8 +657,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
       finishCard.closest('.rb-cfg-finish-block').classList.toggle('is-disabled', !isYes);
   }
 
-  // Опция считается выбранной, только когда покупатель реально кликнул по
-  // значению; для spoke covers дополнительно требуется finish, если covers = yes.
   function isOptSelected(optKey){
     var opt = OPTIONS[optKey];
     if (opt.isSpokesGroup){
@@ -778,14 +679,12 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     btn.disabled = !complete;
   }
 
-  // Порядок мобильного гида — только опции с точкой на фото (Shape без zone,
-  // у неё нет физической точки на картинке, пропускаем).
   var STEP_ZONE_ORDER = ['grips','topSection','bottomSection','spokes','stitchingColor','centerMark','logo'];
   function currentStepZone(){
     for (var i=0; i<STEP_ZONE_ORDER.length; i++){
       if (!isOptSelected(STEP_ZONE_ORDER[i])) return STEP_ZONE_ORDER[i];
     }
-    return null; // всё выбрано
+    return null;
   }
   function updateStepMarks(){
     var current = currentStepZone();
@@ -794,8 +693,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     });
     var hint = document.getElementById('rb-cfg-photo-hint');
     if (hint) hint.classList.toggle('is-visible', !!current);
-    // Мобильный "шаг 1": пока Shape не выбран — показываем только shape-gate,
-    // прячем обычную диаграмму/опции/итог (см. CSS @media max-width:980px).
+
     root.classList.toggle('rb-cfg-shape-pending', !state.shape);
   }
 
@@ -924,15 +822,11 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     head.addEventListener('keydown', function(e){
       if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleCard(card); }
     });
-    // быстрый превью-хайлайт при наведении на закрытую строку (не открывая её)
+
     head.addEventListener('mouseenter', function(){ if (!card.classList.contains('is-open')) setActiveZone(zone, true); });
     head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone(zone, false); });
   });
 
-  // ── Mobile shape-gate: 2 фото-кнопки (D-shape/F1-shape), сгенерированные из
-  // OPTIONS.shape.values — клик переиспользует уже готовый чип внутри карточки
-  // Shape (находим его по data-val), так что вся логика (цена/фото/native/шаги)
-  // не дублируется, а срабатывает ровно как обычный клик по чипу.
   var shapeGateGrid = document.getElementById('rb-cfg-shape-gate-grid');
   OPTIONS.shape.values.forEach(function(val){
     var btn = document.createElement('button');
@@ -950,7 +844,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     shapeGateGrid.appendChild(btn);
   });
 
-  // ── On-photo mark labels: один div на зону, позиция в px — считает layoutLines() ──
   Object.keys(OPTIONS).forEach(function(key){
     var opt = OPTIONS[key];
     if (!opt.zone) return;
@@ -960,8 +853,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     marksLayer.appendChild(m);
   });
 
-  // ── Mobile step-marks: по одной пульсирующей точке на зону, видна только та,
-  // что совпадает с currentStepZone() (см. updateStepMarks()). Tap — скролл + open.
   var stepMarksLayer = root.querySelector('.rb-cfg-step-marks');
   STEP_ZONE_ORDER.forEach(function(key){
     var opt = OPTIONS[key];
@@ -975,8 +866,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
       var card = root.querySelector('.rb-cfg-card[data-zone="'+cardZone+'"]');
       if (!card) return;
       if (!card.classList.contains('is-open')) toggleCard(card);
-      // ждём конца CSS-transition раскрытия карточки (.25s), иначе scrollIntoView
-      // целится в ещё не раскрывшуюся (низкую) высоту и промахивается мимо центра.
+
       setTimeout(function(){ card.scrollIntoView({ behavior:'smooth', block:'center' }); }, 270);
     });
     stepMarksLayer.appendChild(btn);
@@ -985,16 +875,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   Object.keys(OPTIONS).forEach(function(k){ updateHeadVal(k); });
   updateStepMarks();
 
-  // ── Callout-линии: считаем позиции пиксельно (dot на фото → строка справа) ──
-  // Система координат — .rb-cfg-imgwrap (это реальный positioned-родитель SVG
-  // и .rb-cfg-marks, см. CSS), а не .rb-cfg-stage: если правая колонка выше/ниже
-  // левой, эти рамки не совпадают и точки съезжали по вертикали.
-  // Точка zone.px/py берётся с getBoundingClientRect() настоящего <img> —
-  // он уже учитывает отступы (width/height:88%, margin:6%), в отличие от рамки
-  // .rb-cfg-imgbox, которая больше самой картинки.
-  // F1-shape показывает другое фото (SW11.png) — у части опций точка на нём
-  // физически в другом месте, поэтому для них заведён отдельный zoneF1; если
-  // его нет у опции, точка не меняется между D-shape/F1-shape.
   function getActiveZone(opt){
     if (state.shape && state.shape.v === 'f1' && opt.zoneF1) return opt.zoneF1;
     return opt.zone;
@@ -1038,9 +918,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
       var stepMark = stepMarksLayer.querySelector('.rb-cfg-step-mark[data-zone="'+key+'"]');
       if (stepMark){ stepMark.style.left = dotX + 'px'; stepMark.style.top = dotY + 'px'; }
 
-      // layoutLines rebuilds the svg from scratch (needs fresh pixel coords on
-      // resize/reflow) — without this, re-running it while a zone is active
-      // (e.g. the 260ms post-toggle relayout) silently wipes the highlight.
       if (key === currentActiveZone){
         line.classList.add('is-active');
         circle.classList.add('is-active');
@@ -1076,9 +953,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   recalcPrice();
   updateCompletionUI();
 
-  // ── Реальная цена: recalcPrice() выше — мгновенный оптимистичный подсчёт
-  // на клиенте; как только CS-Cart отвечает на fn_change_options и обновляет
-  // [id="sec_discounted_price_350"], подтягиваем настоящую цену поверх мока.
   function readNativePrice(){
     var node = document.querySelector('[id="sec_discounted_price_350"]');
     if (!node) return null;
@@ -1105,18 +979,8 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     );
   }
 
-  // Этот блок живёт НЕ на самой странице товара (вставлен в описание категории
-  // "Steering wheels"), а не в CS-Cart дерево — нет ни нативных select'ов, ни
-  // #button_cart_350, ни окружающей <form>. syncNative()/readNativePrice() выше
-  // остаются как no-op fallback на случай, если когда-нибудь блок всё же
-  // окажется на реальной странице товара — а реальное добавление в корзину
-  // отсюда собираем сами: строим настоящую форму с полями, которые CS-Cart
-  // ожидает от checkout.add (те же имена полей/классы, что у родной формы на
-  // https://therunbird.com/steering-wheels/corvette-c6-custom-steering-wheel/),
-  // и сабмитим её. security_hash берём из глобального Tygh (он есть на этой
-  // странице — проверено вручную), т.к. CS-Cart отклонит запрос без него (CSRF).
   document.getElementById('rb-cfg-add-btn').addEventListener('click', function(){
-    if (!isComplete()) return; // кнопка и так disabled, но на всякий случай
+    if (!isComplete()) return;
 
     var securityHash = (window.Tygh && Tygh.security_hash) ? Tygh.security_hash : '';
     if (!securityHash){
@@ -1156,8 +1020,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
       }
     });
 
-    // Настоящая кнопка submit (не form.submit() — этот метод НЕ дёргает событие
-    // 'submit', на которое подписан cm-ajax; реальный клик по submit-кнопке дёргает).
     var submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.name = 'dispatch[checkout.add..' + PRODUCT_ID + ']';
@@ -1169,8 +1031,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     submitBtn.click();
   });
 
-  // ── Лента галереи: стрелки скроллят трек по частям (сейчас единственный способ
-  // листать было хватать нижний scrollbar/тащить мышью — не очевидно).
   var galTrack = document.getElementById('rb-cfg-gal-track');
   document.getElementById('rb-cfg-gal-prev').addEventListener('click', function(){
     galTrack.scrollBy({ left: -Math.round(galTrack.clientWidth * 0.8), behavior: 'smooth' });
@@ -1179,12 +1039,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     galTrack.scrollBy({ left: Math.round(galTrack.clientWidth * 0.8), behavior: 'smooth' });
   });
 
-  // ── Галерея: fullscreen лайтбокс по клику на фото, стрелки-навигация (десктоп),
-  // клавиатура (Esc/←/→), клик по тёмному фону закрывает.
-  // Лайтбокс переносится в document.body: #rb-config использует transform для
-  // full-bleed фона, а transform на предке превращает position:fixed у потомка
-  // в "прибитый" к ЭТОМУ предку, а не к реальному вьюпорту (баг из CSS-спеки) —
-  // из-за этого лайтбокс не растягивался на весь экран и съезжал при скролле.
   var galItems = Array.prototype.slice.call(root.querySelectorAll('.rb-cfg-gal-item'));
   var galSrcs = galItems.map(function(item){ return item.querySelector('img').getAttribute('src'); });
   var lightbox = document.getElementById('rb-cfg-lightbox');
@@ -1192,10 +1046,6 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   var lbImg = document.getElementById('rb-cfg-lb-img');
   var lbIndex = 0;
 
-  // Блокировка скролла фоновой страницы, пока лайтбокс открыт — просто
-  // overflow:hidden на body ненадёжен на iOS Safari (страница всё равно
-  // "резинится"/скроллится под пальцем), поэтому фиксируем body с отрицательным
-  // top на текущую позицию скролла и возвращаем её обратно при закрытии.
   var scrollLockY = 0;
   function lockPageScroll(){
     scrollLockY = window.scrollY || document.documentElement.scrollTop || 0;
