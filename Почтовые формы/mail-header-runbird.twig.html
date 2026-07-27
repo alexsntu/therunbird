@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ company_name }}: Message title</title>
+  <style type="text/css">
+    /* ==========================================================
+       RunBird mail palette (light theme)
+       bg outer:      #F4F1EA
+       bg card:       #FFFFFF
+       bg footer:     #FAF7F0
+       border:        #E5E0D5
+       text:          #1A1A1A
+       text secondary:#767676
+       accent (gold): #B8973E   -- darkened for AA contrast on white
+       title bar bg:  #141414   -- matches site's dark header band
+       title bar text:#F0F0F0
+       Note: styles live here (header). Footer template reuses these
+       classes, so header + footer must always be deployed together.
+       ========================================================== */
+
+    #outlook a {
+      padding: 0;
+    }
+
+    body {
+      width: 100% !important;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #F4F1EA;
+    }
+
+    img {
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
+
+    a {
+      outline: none;
+    }
+
+    a img {
+      border: none;
+    }
+
+    .image_fix {
+      display: block;
+    }
+
+    .rb-mail-announce > td {
+      background-color: #0C0C0C;
+      padding: 8px 20px;
+      text-align: center;
+      color: #C8A84C !important;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .message-header {
+      background-color: #141414;
+    }
+
+    .message-header > td {
+      padding: 22px 30px 18px 30px;
+    }
+
+    .message-header__title {
+      background-color: #141414;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .message-header__title > td {
+      padding: 20px 30px;
+    }
+
+    .message-header__title h1 {
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: #F0F0F0;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+    }
+
+    .message-title > td,
+    .message-body > td {
+      padding: 30px;
+    }
+
+    .message-footer > td {
+      padding: 24px 30px;
+      background-color: #FAF7F0;
+    }
+
+    .message-copyright > td {
+      padding: 14px 30px 18px;
+    }
+
+    .message-header td,
+    .message-title td,
+    .message-body th, .message-body td,
+    .message-footer th, .message-footer td,
+    .message-copyright th, .message-copyright td {
+      color: #1A1A1A;
+      font-size: 15px;
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+    }
+
+    .message-footer {
+      border-top: 1px solid #E5E0D5;
+    }
+
+    .message-body table th,
+    .message-footer table th {
+      text-transform: uppercase;
+      border-bottom: 1px solid #E5E0D5;
+      text-align: left;
+    }
+
+    .message-body table td,
+    .message-footer table td {
+      padding: 5px;
+    }
+
+    .message-footer table th{
+        border: none;
+    }
+
+    .message-footer td {
+      color: #767676;
+    }
+
+    .footer-contact__title {
+      margin: 0px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: 14px !important;
+      font-weight: 600;
+      color: #B8973E !important;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+    }
+
+    .footer-social__title {
+      margin: 0px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: 14px !important;
+      font-weight: 600;
+      color: #B8973E !important;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+    }
+
+    .message-footer table td.footer-social td {
+      padding: 0px;
+      padding-right: 10px;
+    }
+
+    /* ---- Extended footer content (brand info, nav, badges, payments) ---- */
+
+    .rb-mail-eyebrow {
+      color: #B8973E;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 0 0 6px 0;
+    }
+
+    .rb-mail-desc {
+      color: #767676;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0 0 14px 0;
+    }
+
+    .rb-mail-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      margin: 0 6px 6px 0;
+      border: 1px solid #E5E0D5;
+      font-size: 11px;
+      color: #767676;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+
+    .rb-mail-badge.gold {
+      border-color: #B8973E;
+      color: #B8973E;
+    }
+
+    .rb-mail-nav-col-h {
+      color: #1A1A1A;
+      font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin: 0 0 10px 0;
+    }
+
+    .rb-mail-nav-links {
+      font-size: 13px;
+      line-height: 2;
+      color: #767676;
+    }
+
+    .rb-mail-nav-links a {
+      color: #767676;
+      text-decoration: none;
+    }
+
+    .rb-mail-divider td {
+      border-top: 1px solid #E5E0D5;
+      font-size: 0;
+      line-height: 0;
+      padding: 0 !important;
+    }
+
+    .rb-mail-soc-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 0 0 8px 6px;
+      border: 1px solid #E5E0D5;
+      font-size: 12px;
+      color: #1A1A1A;
+      text-decoration: none;
+    }
+
+    .rb-mail-pay-ic {
+      display: inline-block;
+      padding: 4px 8px;
+      margin-left: 6px;
+      border: 1px solid #E5E0D5;
+      font-size: 10px;
+      color: #767676;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .rb-mail-disclaimer {
+      color: #999999;
+      font-size: 11px;
+    }
+
+    .email-preview{
+      display:none;
+      font-size:1px;
+      color:#333333;
+      line-height:1px;
+      max-height:0px;
+      max-width:0px;
+      opacity:0;
+      overflow:hidden;
+    }
+
+    .with-subline {
+      color: #1A1A1A;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1em;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E5E0D5;
+    }
+
+    p {
+      margin: 1em 0;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      color: #1A1A1A;
+    }
+
+    h1 a,h2 a,h3 a,h4 a,h5 a,h6 a {
+      color: #B8973E;
+    }
+
+    h1 a:active,h2 a:active,h3 a:active,h4 a:active,h5 a:active,h6 a:active {
+      color: #8C6F2A;
+    }
+
+    h1 a:visited,h2 a:visited,h3 a:visited,h4 a:visited,h5 a:visited,h6 a:visited {
+      color: #8C6F2A;
+    }
+
+    table td,
+    table th {
+      border-collapse: collapse;
+    }
+
+    table {
+      border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+
+    address {
+      margin: 0px;
+      font-style: normal;
+      color: #767676;
+    }
+
+    .content-wrapper {
+      border: 1px solid #E5E0D5;
+      background-color: #FFFFFF;
+    }
+
+    .copyright td {
+      padding: 10px 0 0 0;
+      padding-bottom: 0 !important;
+      color: #767676;
+      font-size: 12px;
+    }
+
+    a {
+      color: #B8973E;
+    }
+
+    {% if language_direction == "rtl" %}
+
+    .ty-email-footer {
+      text-align: center !important;
+    }
+
+    .ty-email-footer-social-buttons {
+      text-align: center !important;
+    }
+
+    .ty-email-footer-right-part {
+      text-align: center !important;
+      float: left !important;
+    }
+
+    .ty-email-footer-left-part {
+      text-align: center !important;
+      float: right !important;
+    }
+
+    {% endif %}
+
+  </style>
+</head>
+
+<body>
+    <style>
+
+      @media only screen and (max-device-width: 480px){
+        .content-wrapper{width: 100% !important; border: 1px solid #E5E0D5 !important; }
+
+        .message-header > td,
+        .message-title > td,
+        .message-body > td,
+        .message-footer > td,
+        .message-copyright > td {
+          padding: 10px !important;
+        }
+
+        .message-header td,
+        .message-title td,
+        .message-body th, .message-body td,
+        .message-footer th, .message-footer td,
+        .message-copyright th, .message-copyright td {
+          font-size: 16px !important;
+        }
+      }
+
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {}
+
+      @media only screen and (-webkit-min-device-pixel-ratio: 2) {}
+
+      @media only screen and (-webkit-device-pixel-ratio:.75) {}
+
+      @media only screen and (-webkit-device-pixel-ratio:1) {}
+
+      @media only screen and (-webkit-device-pixel-ratio:1.5) {}
+    </style>
+  <!-- Targeting Windows Mobile -->
+  <!--[if IEMobile 7]>
+  <style type="text/css">
+
+  </style>
+  <![endif]-->
+
+  <!--[if gte mso 9]>
+    <style>
+        /* Target Outlook 2007 and 2010 */
+    </style>
+  <![endif]-->
+  <table class="main-wrapper" cellpadding="0" cellspacing="0" width="100%" bgcolor="#F4F1EA" style="background-color: #F4F1EA" dir="{{ language_direction }}">
+    <tr>
+      <td style="padding: 40px 10px 40px 10px;">
+        <table class="content-wrapper" cellpadding="0" cellspacing="0" align="center" width="600">
+          <tr class="rb-mail-announce">
+            <td>
+              &#10022;&nbsp; Handmade to Order &nbsp;&#10022;&nbsp; Exclusively Crafted for the C6 Corvette &nbsp;&#10022;
+            </td>
+          </tr>
+          <tr class="message-header">
+            <td align="center">
+              <table cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="center"><a href="{{ storefront_data.url }}"><img src="{{logos.mail.image.image_path}}" alt="{{ company_data.company_name }}" width="{{logos.mail.image.image_x}}" height="{{logos.mail.image.image_y}}" style="width: auto; max-width: 200px; max-height: 80px;" /></a></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% if title %}
+          <tr class="message-header__title">
+            <td>
+              <h1>{{title}}</h1>
+            </td>
+          </tr>
+          {% endif %}
+
+          <tr class="message-body">
+
+<td>

@@ -1,0 +1,66 @@
+</td>
+
+</tr>
+
+<tr class="message-footer">
+<td>
+<table class="info ty-email-footer-left-part" width="250" align="left">
+  <tr>
+    <th class="footer-contact__title ty-email-footer" style="text-align: center;">
+      {{ __("contact_information") }}
+    </th>
+  </tr>
+  <tr>
+    <td class="ty-email-footer" style="text-align: center;">
+      <address>{{ company_data.company_address }}, {{ company_data.company_city }}</address>
+    </td>
+  </tr>
+</table>
+
+<table class="info ty-email-footer-right-part" width="250" align="right">
+  <tr>
+    <th class="footer-social__title ty-email-footer" style="text-align: center;">
+      {{ __("get_social") }}
+    </th>
+  </tr>
+  <tr>
+    <td class="ty-email-footer-social-buttons footer-social">
+      <table cellspacing="0" cellpadding="0" align="center">
+        <tr>
+          <td>
+            <a href="http://www.facebook.com"><img width="30" height="30" src="design/themes/responsive/mail/media/images/social/facebook.png"></a>
+          </td>
+          <td>
+            <a href="https://twitter.com"><img width="30" height="30" src="design/themes/responsive/mail/media/images/social/twitter.png"></a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td>
+</tr>
+{% if company_data.company_name %}
+<tr class="message-copyright">
+<td>
+<table class="copyright" width="100%">
+<tr>
+  <td>
+    &copy;&nbsp;{{ company_data.company_name }}
+  </td>
+  <td align="right">
+    {{ __("customer_text_letter_footer") }}
+  </td>
+</tr>
+</table>
+</td>
+</tr>
+{% endif %}
+</table>
+<!-- content-wrapper -->
+</td>
+</tr>
+</table>
+<!-- main-wrapper -->
+</body>
+</html>

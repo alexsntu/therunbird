@@ -1,0 +1,152 @@
+</td>
+
+</tr>
+
+<tr class="message-footer">
+<td>
+
+<!-- ══ About / brand block ══ -->
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+      <p class="rb-mail-eyebrow">Feel the Drive</p>
+      <p class="rb-mail-desc">Premium handmade interior accessories for C6 Corvette owners. Crafted to order using carbon fiber, Nappa leather, and genuine Alcantara&reg;. Ships across the United States.</p>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="rb-mail-badge gold">Handmade</td>
+          <td width="6"></td>
+          <td class="rb-mail-badge">C6 Only</td>
+          <td width="6"></td>
+          <td class="rb-mail-badge">USA Shipping</td>
+          <td width="6"></td>
+          <td class="rb-mail-badge">Made to Order</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="rb-mail-divider" style="margin: 20px 0;">
+  <tr><td>&nbsp;</td></tr>
+</table>
+
+<!-- ══ Nav columns ══ -->
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="34%" valign="top">
+      <div class="rb-mail-nav-col-h">Products</div>
+      <div class="rb-mail-nav-links">
+        <a href="https://therunbird.com/steering-wheels/">Steering Wheels</a><br>
+        <a href="https://therunbird.com/shift-knobs/">Shift Knobs</a><br>
+        <a href="https://therunbird.com/handbrakes/">Handbrakes</a><br>
+        <a href="https://therunbird.com/horn-pads/">Horn Pads</a><br>
+        <a href="https://therunbird.com/steering-wheel-emblems/">SW Emblems</a><br>
+        <a href="https://therunbird.com/side-skirts/">Side Skirts</a>
+      </div>
+    </td>
+    <td width="33%" valign="top">
+      <div class="rb-mail-nav-col-h">Information</div>
+      <div class="rb-mail-nav-links">
+        <a href="https://therunbird.com/">About Us</a><br>
+        <a href="https://therunbird.com/">Materials Guide</a><br>
+        <a href="https://therunbird.com/">Custom Orders</a><br>
+        <a href="https://therunbird.com/">Installation Help</a><br>
+        <a href="https://therunbird.com/">FAQ</a>
+      </div>
+    </td>
+    <td width="33%" valign="top">
+      <div class="rb-mail-nav-col-h">Support</div>
+      <div class="rb-mail-nav-links">
+        <a href="https://therunbird.com/">Shipping &amp; Returns</a><br>
+        <a href="https://therunbird.com/">Track Order</a><br>
+        <a href="https://therunbird.com/">Contact Us</a><br>
+        <a href="https://therunbird.com/">Warranty</a><br>
+        <a href="https://therunbird.com/">Privacy Policy</a>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="rb-mail-divider" style="margin: 20px 0;">
+  <tr><td>&nbsp;</td></tr>
+</table>
+
+<!-- ══ Contact / social (native CS-Cart footer fields, kept dynamic) ══ -->
+<table class="info ty-email-footer-left-part" width="250" align="left">
+  <tr>
+    <th class="footer-contact__title ty-email-footer" style="text-align: center;">
+      {{ __("contact_information") }}
+    </th>
+  </tr>
+  <tr>
+    <td class="ty-email-footer" style="text-align: center;">
+      <address>{{ company_data.company_address }}, {{ company_data.company_city }}</address>
+    </td>
+  </tr>
+</table>
+
+<table class="info ty-email-footer-right-part" width="250" align="right">
+  <tr>
+    <th class="footer-social__title ty-email-footer" style="text-align: center;">
+      {{ __("get_social") }}
+    </th>
+  </tr>
+  <tr>
+    <td class="ty-email-footer-social-buttons footer-social" style="text-align: center;">
+      <table cellspacing="0" cellpadding="0" align="center">
+        <tr>
+          <td><a class="rb-mail-soc-btn" href="#">Instagram</a></td>
+          <td><a class="rb-mail-soc-btn" href="#">YouTube</a></td>
+          <td><a class="rb-mail-soc-btn" href="#">Facebook</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="rb-mail-divider" style="margin: 24px 0 16px;">
+  <tr><td>&nbsp;</td></tr>
+</table>
+
+<!-- ══ Payment icons ══ -->
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="rb-mail-pay-ic">Visa</td>
+          <td class="rb-mail-pay-ic">Mastercard</td>
+          <td class="rb-mail-pay-ic">Amex</td>
+          <td class="rb-mail-pay-ic">PayPal</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</td>
+</tr>
+{% if company_data.company_name %}
+<tr class="message-copyright">
+<td>
+<table class="copyright" width="100%">
+<tr>
+  <td>
+    &copy;&nbsp;{{ company_data.company_name }} &middot; All rights reserved &middot; <span class="rb-mail-disclaimer">Not affiliated with General Motors or Chevrolet</span>
+  </td>
+  <td align="right">
+    {{ __("customer_text_letter_footer") }}
+  </td>
+</tr>
+</table>
+</td>
+</tr>
+{% endif %}
+</table>
+<!-- content-wrapper -->
+</td>
+</tr>
+</table>
+<!-- main-wrapper -->
+</body>
+</html>
