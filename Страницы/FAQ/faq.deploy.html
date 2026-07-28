@@ -1,0 +1,1016 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-faq-hero,
+#rb-faq-hero *,
+#rb-faq-hero *::before,
+#rb-faq-hero *::after {
+  box-sizing: border-box !important;
+}
+#rb-faq-hero a { text-decoration: none !important; }
+
+#rb-faq-hero {
+  --rb-bg:         #080808;
+  --rb-accent:     #C8A84C;
+  --rb-accent-b:   rgba(200,168,76,.28);
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  overflow: hidden !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-faq-hero .rb-fh-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(200,168,76,.14) 0%, transparent 65%) !important;
+}
+#rb-faq-hero .rb-fh-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+
+#rb-faq-hero .rb-fh-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 56px !important;
+  text-align: center !important;
+}
+#rb-faq-hero .rb-fh-eyebrow {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .18em !important; text-transform: uppercase !important;
+  margin-bottom: 26px !important;
+  background: rgba(200,168,76,.06) !important;
+}
+#rb-faq-hero .rb-fh-h1 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(36px, 5.4vw, 64px) !important;
+  line-height: .98 !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  margin: 0 0 22px !important;
+}
+#rb-faq-hero .rb-fh-h1 em {
+  color: var(--rb-accent) !important;
+  font-style: italic !important;
+  text-shadow: 0 0 30px rgba(200,168,76,.45) !important;
+}
+#rb-faq-hero .rb-fh-p {
+  font-size: 15.5px !important;
+  color: #999 !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+  max-width: 620px !important;
+  margin: 0 auto 40px !important;
+}
+#rb-faq-hero .rb-fh-p strong { color: #ccc !important; font-weight: 500 !important; }
+
+#rb-faq-hero .rb-fh-chips {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-faq-hero .rb-fh-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 11px 22px !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  border-radius: 100px !important;
+  background: rgba(255,255,255,.03) !important;
+  color: #C8C8C8 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  transition: border-color .2s, color .2s, background .2s !important;
+}
+#rb-faq-hero .rb-fh-chip:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-text) !important;
+  background: rgba(200,168,76,.07) !important;
+}
+
+@media (max-width: 768px) {
+  #rb-faq-hero .rb-fh-inner { padding: 48px 20px 40px !important; }
+  #rb-faq-hero .rb-fh-chips { gap: 8px !important; }
+  #rb-faq-hero .rb-fh-chip { padding: 9px 16px !important; font-size: 13px !important; }
+}
+</style>
+
+<div id="rb-faq-hero">
+  <div class="rb-fh-glow"></div>
+  <div class="rb-fh-cf"></div>
+  <div class="rb-fh-inner">
+    <span class="rb-fh-eyebrow">Frequently Asked Questions</span>
+    <h1 class="rb-fh-h1">Got Questions?<br><em>We've Got Answers.</em></h1>
+    <p class="rb-fh-p">
+      Everything you need to know about ordering, shipping, materials, installation, and returns.
+      Can't find what you're looking for? Our support team is one message away.
+    </p>
+    <div class="rb-fh-chips">
+      <a href="#orders" class="rb-fh-chip">Orders &amp; Customization</a>
+      <a href="#shipping" class="rb-fh-chip">Shipping &amp; Delivery</a>
+      <a href="#fit" class="rb-fh-chip">Materials &amp; Fit</a>
+      <a href="#returns" class="rb-fh-chip">Returns &amp; Warranty</a>
+    </div>
+  </div>
+</div>
+
+<style>
+#rb-faqc-orders,
+#rb-faqc-orders *,
+#rb-faqc-orders *::before,
+#rb-faqc-orders *::after {
+  box-sizing: border-box !important;
+}
+#rb-faqc-orders button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-faqc-orders {
+  --rb-bg:        #0C0C0C;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-faqc-orders .rb-fc1-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px !important;
+}
+#rb-faqc-orders .rb-fc1-head { display: flex !important; align-items: center !important; gap: 14px !important; margin-bottom: 24px !important; }
+#rb-faqc-orders .rb-fc1-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  color: #000 !important; background: var(--rb-accent) !important;
+  width: 30px !important; height: 30px !important; border-radius: 8px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+#rb-faqc-orders .rb-fc1-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-faqc-orders .rb-fc1-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-faqc-orders .rb-fc1-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-faqc-orders .rb-fc1-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 20px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 18px !important; font-weight: 700 !important; letter-spacing: .02em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-faqc-orders .rb-fc1-q:hover { color: var(--rb-accent) !important; }
+#rb-faqc-orders .rb-fc1-item.open .rb-fc1-q { color: var(--rb-accent) !important; }
+#rb-faqc-orders .rb-fc1-icon {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 17px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-faqc-orders .rb-fc1-item.open .rb-fc1-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-faqc-orders .rb-fc1-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important; max-width: 760px !important;
+}
+#rb-faqc-orders .rb-fc1-item.open .rb-fc1-a { max-height: 300px !important; padding-bottom: 20px !important; }
+
+@media (max-width: 1024px) {
+  #rb-faqc-orders .rb-fc1-wrap { padding: 48px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-faqc-orders .rb-fc1-wrap { padding: 32px 20px !important; }
+  #rb-faqc-orders .rb-fc1-title { font-size: 24px !important; }
+  #rb-faqc-orders .rb-fc1-q { font-size: 15px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-faqc-orders">
+  <a id="orders"></a>
+  <div class="rb-fc1-wrap">
+
+    <div class="rb-fc1-head">
+      <span class="rb-fc1-num">01</span>
+      <h2 class="rb-fc1-title">Orders &amp; Customization</h2>
+    </div>
+
+    <div class="rb-fc1-list">
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          How long does production take?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">All products are handmade to order — nothing is pulled from a warehouse. Production takes 7&ndash;14 business days from order confirmation, and you'll get tracking updates as your build moves through each stage.</p>
+      </div>
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          How do I choose the right configuration?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">Each product page shows every material, finish, and color option with photos. If you're unsure what will look best in your interior, contact us — we're happy to recommend a combination based on your Corvette's existing colors and trim.</p>
+      </div>
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          Can I request a custom color or combination that isn't listed?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">Often, yes. Since every piece is built by hand in our own workshop, we can usually accommodate custom thread colors or unlisted material pairings. Send us a message with what you have in mind before placing your order.</p>
+      </div>
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          Can I change or cancel my order after placing it?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">Contact us as soon as possible. If production hasn't started yet, we can usually adjust the spec or cancel the order. Once cutting and stitching are underway on your specific piece, changes are no longer possible.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-faqc-orders');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-faqc-orders .rb-fc1-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-fc1-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-faqc-orders .rb-fc1-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<style>
+#rb-faqc-ship,
+#rb-faqc-ship *,
+#rb-faqc-ship *::before,
+#rb-faqc-ship *::after {
+  box-sizing: border-box !important;
+}
+#rb-faqc-ship button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-faqc-ship {
+  --rb-bg:        #080808;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-faqc-ship .rb-fc2-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px !important;
+}
+#rb-faqc-ship .rb-fc2-head { display: flex !important; align-items: center !important; gap: 14px !important; margin-bottom: 24px !important; }
+#rb-faqc-ship .rb-fc2-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  color: #000 !important; background: var(--rb-accent) !important;
+  width: 30px !important; height: 30px !important; border-radius: 8px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+#rb-faqc-ship .rb-fc2-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-faqc-ship .rb-fc2-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-faqc-ship .rb-fc2-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-faqc-ship .rb-fc2-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 20px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 18px !important; font-weight: 700 !important; letter-spacing: .02em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-faqc-ship .rb-fc2-q:hover { color: var(--rb-accent) !important; }
+#rb-faqc-ship .rb-fc2-item.open .rb-fc2-q { color: var(--rb-accent) !important; }
+#rb-faqc-ship .rb-fc2-icon {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 17px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-faqc-ship .rb-fc2-item.open .rb-fc2-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-faqc-ship .rb-fc2-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important; max-width: 760px !important;
+}
+#rb-faqc-ship .rb-fc2-item.open .rb-fc2-a { max-height: 300px !important; padding-bottom: 20px !important; }
+
+@media (max-width: 1024px) {
+  #rb-faqc-ship .rb-fc2-wrap { padding: 48px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-faqc-ship .rb-fc2-wrap { padding: 32px 20px !important; }
+  #rb-faqc-ship .rb-fc2-title { font-size: 24px !important; }
+  #rb-faqc-ship .rb-fc2-q { font-size: 15px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-faqc-ship">
+  <a id="shipping"></a>
+  <div class="rb-fc2-wrap">
+
+    <div class="rb-fc2-head">
+      <span class="rb-fc2-num">02</span>
+      <h2 class="rb-fc2-title">Shipping &amp; Delivery</h2>
+    </div>
+
+    <div class="rb-fc2-list">
+
+      <div class="rb-fc2-item">
+        <button class="rb-fc2-q" type="button">
+          Where do you ship?
+          <span class="rb-fc2-icon">+</span>
+        </button>
+        <p class="rb-fc2-a">We ship across North America — anywhere in the United States and Canada. Enter your address at checkout and shipping options for your location will be shown automatically.</p>
+      </div>
+
+      <div class="rb-fc2-item">
+        <button class="rb-fc2-q" type="button">
+          How much does shipping cost?
+          <span class="rb-fc2-icon">+</span>
+        </button>
+        <p class="rb-fc2-a">Shipping cost is calculated at checkout based on your location and the size of your order, before you pay.</p>
+      </div>
+
+      <div class="rb-fc2-item">
+        <button class="rb-fc2-q" type="button">
+          How long does delivery take after production?
+          <span class="rb-fc2-icon">+</span>
+        </button>
+        <p class="rb-fc2-a">Once your build leaves our workshop, transit time depends on your location — typically a few business days within North America. You'll receive a tracking number as soon as it ships.</p>
+      </div>
+
+      <div class="rb-fc2-item">
+        <button class="rb-fc2-q" type="button">
+          How do I track my order?
+          <span class="rb-fc2-icon">+</span>
+        </button>
+        <p class="rb-fc2-a">You'll get a tracking number by email the moment your order ships. You can also look up any order using the Track Order tool in the site header or footer.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-faqc-ship');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-faqc-ship .rb-fc2-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-fc2-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-faqc-ship .rb-fc2-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<style>
+#rb-faqc-fit,
+#rb-faqc-fit *,
+#rb-faqc-fit *::before,
+#rb-faqc-fit *::after {
+  box-sizing: border-box !important;
+}
+#rb-faqc-fit a { text-decoration: none !important; }
+#rb-faqc-fit button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-faqc-fit {
+  --rb-bg:        #0C0C0C;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-faqc-fit .rb-fc3-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px !important;
+}
+#rb-faqc-fit .rb-fc3-head { display: flex !important; align-items: center !important; gap: 14px !important; margin-bottom: 24px !important; }
+#rb-faqc-fit .rb-fc3-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  color: #000 !important; background: var(--rb-accent) !important;
+  width: 30px !important; height: 30px !important; border-radius: 8px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+#rb-faqc-fit .rb-fc3-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-faqc-fit .rb-fc3-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-faqc-fit .rb-fc3-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-faqc-fit .rb-fc3-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 20px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 18px !important; font-weight: 700 !important; letter-spacing: .02em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-faqc-fit .rb-fc3-q:hover { color: var(--rb-accent) !important; }
+#rb-faqc-fit .rb-fc3-item.open .rb-fc3-q { color: var(--rb-accent) !important; }
+#rb-faqc-fit .rb-fc3-icon {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 17px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-faqc-fit .rb-fc3-item.open .rb-fc3-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-faqc-fit .rb-fc3-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important; max-width: 760px !important;
+}
+#rb-faqc-fit .rb-fc3-item.open .rb-fc3-a { max-height: 320px !important; padding-bottom: 20px !important; }
+#rb-faqc-fit .rb-fc3-a a { color: var(--rb-accent) !important; font-weight: 600 !important; }
+#rb-faqc-fit .rb-fc3-a a:hover { text-decoration: underline !important; }
+
+@media (max-width: 1024px) {
+  #rb-faqc-fit .rb-fc3-wrap { padding: 48px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-faqc-fit .rb-fc3-wrap { padding: 32px 20px !important; }
+  #rb-faqc-fit .rb-fc3-title { font-size: 24px !important; }
+  #rb-faqc-fit .rb-fc3-q { font-size: 15px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-faqc-fit">
+  <a id="fit"></a>
+  <div class="rb-fc3-wrap">
+
+    <div class="rb-fc3-head">
+      <span class="rb-fc3-num">03</span>
+      <h2 class="rb-fc3-title">Materials &amp; Fit</h2>
+    </div>
+
+    <div class="rb-fc3-list">
+
+      <div class="rb-fc3-item">
+        <button class="rb-fc3-q" type="button">
+          What materials do you use?
+          <span class="rb-fc3-icon">+</span>
+        </button>
+        <p class="rb-fc3-a">Exactly three: aerospace carbon fiber, full-grain Nappa leather, and genuine Alcantara&reg;. No vinyl, no synthetic substitutes. See our <a href="https://therunbird.com/materials-guide/">Materials Guide</a> for a full breakdown of each one, plus how to care for it.</p>
+      </div>
+
+      <div class="rb-fc3-item">
+        <button class="rb-fc3-q" type="button">
+          Which Corvette does this fit?
+          <span class="rb-fc3-icon">+</span>
+        </button>
+        <p class="rb-fc3-a">Our accessories are designed specifically for the Chevrolet Corvette C6 (2005&ndash;2013), across Coupe, Convertible, Z06, Grand Sport, and ZR1 trims. Each product page lists exact fitment.</p>
+      </div>
+
+      <div class="rb-fc3-item">
+        <button class="rb-fc3-q" type="button">
+          Will installation require any modifications?
+          <span class="rb-fc3-icon">+</span>
+        </button>
+        <p class="rb-fc3-a">No. Every piece bolts, threads, or clips onto the exact factory mounting point of the part it replaces — no cutting, drilling, or rewiring. See our <a href="https://therunbird.com/installation-help/">Installation Help</a> page for the full walkthrough, by product.</p>
+      </div>
+
+      <div class="rb-fc3-item">
+        <button class="rb-fc3-q" type="button">
+          How do I take care of my material once it's installed?
+          <span class="rb-fc3-icon">+</span>
+        </button>
+        <p class="rb-fc3-a">Each material has its own care routine — carbon fiber, Nappa leather, and Alcantara&reg; all need different cleaning products and habits. Full instructions are in our <a href="https://therunbird.com/materials-guide/#care">Materials Guide</a>, and a care card ships in every box.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-faqc-fit');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-faqc-fit .rb-fc3-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-fc3-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-faqc-fit .rb-fc3-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<style>
+#rb-faqc-ret,
+#rb-faqc-ret *,
+#rb-faqc-ret *::before,
+#rb-faqc-ret *::after {
+  box-sizing: border-box !important;
+}
+#rb-faqc-ret button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-faqc-ret {
+  --rb-bg:        #080808;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-faqc-ret .rb-fc4-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px !important;
+}
+#rb-faqc-ret .rb-fc4-head { display: flex !important; align-items: center !important; gap: 14px !important; margin-bottom: 24px !important; }
+#rb-faqc-ret .rb-fc4-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  color: #000 !important; background: var(--rb-accent) !important;
+  width: 30px !important; height: 30px !important; border-radius: 8px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+#rb-faqc-ret .rb-fc4-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-faqc-ret .rb-fc4-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-faqc-ret .rb-fc4-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-faqc-ret .rb-fc4-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 20px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 18px !important; font-weight: 700 !important; letter-spacing: .02em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-faqc-ret .rb-fc4-q:hover { color: var(--rb-accent) !important; }
+#rb-faqc-ret .rb-fc4-item.open .rb-fc4-q { color: var(--rb-accent) !important; }
+#rb-faqc-ret .rb-fc4-icon {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 17px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-faqc-ret .rb-fc4-item.open .rb-fc4-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-faqc-ret .rb-fc4-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important; max-width: 760px !important;
+}
+#rb-faqc-ret .rb-fc4-item.open .rb-fc4-a { max-height: 300px !important; padding-bottom: 20px !important; }
+
+@media (max-width: 1024px) {
+  #rb-faqc-ret .rb-fc4-wrap { padding: 48px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-faqc-ret .rb-fc4-wrap { padding: 32px 20px !important; }
+  #rb-faqc-ret .rb-fc4-title { font-size: 24px !important; }
+  #rb-faqc-ret .rb-fc4-q { font-size: 15px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-faqc-ret">
+  <a id="returns"></a>
+  <div class="rb-fc4-wrap">
+
+    <div class="rb-fc4-head">
+      <span class="rb-fc4-num">04</span>
+      <h2 class="rb-fc4-title">Returns, Warranty &amp; Support</h2>
+    </div>
+
+    <div class="rb-fc4-list">
+
+      <div class="rb-fc4-item">
+        <button class="rb-fc4-q" type="button">
+          What is your return policy?
+          <span class="rb-fc4-icon">+</span>
+        </button>
+        <p class="rb-fc4-a">Since every piece is custom-made to your exact spec, we can't accept returns on configured orders. If your item arrives damaged or doesn't match what you ordered, we'll remake it at no cost.</p>
+      </div>
+
+      <div class="rb-fc4-item">
+        <button class="rb-fc4-q" type="button">
+          What if my item arrives damaged?
+          <span class="rb-fc4-icon">+</span>
+        </button>
+        <p class="rb-fc4-a">Contact us with your order number and photos of the damage as soon as you notice it. We'll sort out a remake or replacement — you won't be left with a damaged part.</p>
+      </div>
+
+      <div class="rb-fc4-item">
+        <button class="rb-fc4-q" type="button">
+          Do you offer a warranty?
+          <span class="rb-fc4-icon">+</span>
+        </button>
+        <p class="rb-fc4-a">We stand behind every piece we build. If something fails due to a manufacturing defect rather than wear and tear, contact us and we'll make it right.</p>
+      </div>
+
+      <div class="rb-fc4-item">
+        <button class="rb-fc4-q" type="button">
+          How do I contact support?
+          <span class="rb-fc4-icon">+</span>
+        </button>
+        <p class="rb-fc4-a">Reach out through our Contact Us page with your order number and question — our team built these parts by hand, so we can usually help right away.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-faqc-ret');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-faqc-ret .rb-fc4-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-fc4-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-faqc-ret .rb-fc4-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<style>
+#rb-faq-cta,
+#rb-faq-cta *,
+#rb-faq-cta *::before,
+#rb-faq-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-faq-cta a { text-decoration: none !important; }
+#rb-faq-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-faq-cta {
+  --rb-accent:      #C8A84C;
+  --rb-accent-rgb:  200,168,76;
+  --rb-accent-h:    #D9BA62;
+  --rb-text:        #F0F0F0;
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.png') center / cover no-repeat !important;
+  padding: 68px 48px !important;
+}
+
+#rb-faq-cta .rb-fct-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(var(--rb-accent-rgb),.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 50%, rgba(var(--rb-accent-rgb),.10) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 50%, rgba(var(--rb-accent-rgb),.10) 0%, transparent 100%) !important;
+}
+#rb-faq-cta .rb-fct-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 9px 9px !important;
+}
+#rb-faq-cta .rb-fct-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 720px !important; margin: 0 auto !important;
+}
+#rb-faq-cta .rb-fct-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .24em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 22px !important;
+}
+#rb-faq-cta .rb-fct-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(40px, 6vw, 76px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: .96 !important; margin: 0 0 20px !important;
+}
+#rb-faq-cta .rb-fct-h em {
+  color: var(--rb-accent) !important; font-style: italic !important;
+  text-shadow: 0 0 40px rgba(200,168,76,.5) !important;
+}
+#rb-faq-cta .rb-fct-p {
+  color: #999 !important; font-size: 15.5px !important; font-weight: 300 !important;
+  line-height: 1.72 !important; margin: 0 auto 44px !important; max-width: 560px !important;
+}
+#rb-faq-cta .rb-fct-btns {
+  display: flex !important; flex-direction: row !important;
+  gap: 14px !important; justify-content: center !important; flex-wrap: wrap !important;
+}
+#rb-faq-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #000 !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s, box-shadow .2s !important;
+  box-shadow: 0 4px 24px rgba(200,168,76,.35) !important;
+}
+#rb-faq-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+  box-shadow: 0 10px 40px rgba(var(--rb-accent-rgb),.55) !important;
+}
+#rb-faq-cta .rb-btn-ghost {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important; background: transparent !important;
+  color: #C8C8C8 !important; border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: border-color .2s, background .2s !important;
+}
+#rb-faq-cta .rb-btn-ghost:hover { border-color: rgba(255,255,255,.42) !important; background: rgba(255,255,255,.05) !important; }
+
+@media (max-width: 768px) {
+  #rb-faq-cta { padding: 56px 20px !important; }
+  #rb-faq-cta .rb-fct-btns { flex-wrap: nowrap !important; gap: 10px !important; }
+  #rb-faq-cta .rb-btn-gold, #rb-faq-cta .rb-btn-ghost { padding: 13px 20px !important; font-size: 15px !important; flex: 1 !important; }
+}
+</style>
+
+<div id="rb-faq-cta">
+  <div class="rb-fct-glow"></div>
+  <div class="rb-fct-cf"></div>
+  <div class="rb-fct-inner">
+    <span class="rb-fct-eye">Still Have Questions?</span>
+    <h2 class="rb-fct-h">Talk To<br><em>A Human</em></h2>
+    <p class="rb-fct-p">No bots, no scripts — just the people who build your parts. Send us your question and we'll get back to you.</p>
+    <div class="rb-fct-btns">
+      <a href="https://therunbird.com/contact-us/" class="rb-btn-gold">Contact Support</a>
+      <a href="https://therunbird.com/custom-order/" class="rb-btn-ghost">Start Custom Order</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-faq-cta');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

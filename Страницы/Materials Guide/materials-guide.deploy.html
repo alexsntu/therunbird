@@ -1,0 +1,1006 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-mg-hero,
+#rb-mg-hero *,
+#rb-mg-hero *::before,
+#rb-mg-hero *::after {
+  box-sizing: border-box !important;
+}
+#rb-mg-hero a { text-decoration: none !important; }
+
+#rb-mg-hero {
+  --rb-bg:         #080808;
+  --rb-accent:     #C8A84C;
+  --rb-accent-b:   rgba(200,168,76,.28);
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  overflow: hidden !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-mg-hero .rb-mgh-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(200,168,76,.14) 0%, transparent 65%) !important;
+}
+#rb-mg-hero .rb-mgh-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+
+#rb-mg-hero .rb-mgh-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 56px !important;
+  text-align: center !important;
+}
+#rb-mg-hero .rb-mgh-eyebrow {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .18em !important; text-transform: uppercase !important;
+  margin-bottom: 26px !important;
+  background: rgba(200,168,76,.06) !important;
+}
+#rb-mg-hero .rb-mgh-h1 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(36px, 5.4vw, 64px) !important;
+  line-height: .98 !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  margin: 0 0 22px !important;
+}
+#rb-mg-hero .rb-mgh-h1 em {
+  color: var(--rb-accent) !important;
+  font-style: italic !important;
+  text-shadow: 0 0 30px rgba(200,168,76,.45) !important;
+}
+#rb-mg-hero .rb-mgh-p {
+  font-size: 15.5px !important;
+  color: #999 !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+  max-width: 620px !important;
+  margin: 0 auto 40px !important;
+}
+#rb-mg-hero .rb-mgh-p strong { color: #ccc !important; font-weight: 500 !important; }
+
+#rb-mg-hero .rb-mgh-chips {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-mg-hero .rb-mgh-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 11px 22px !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  border-radius: 100px !important;
+  background: rgba(255,255,255,.03) !important;
+  color: #C8C8C8 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  transition: border-color .2s, color .2s, background .2s !important;
+}
+#rb-mg-hero .rb-mgh-chip-dot {
+  width: 7px !important; height: 7px !important; border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+#rb-mg-hero .rb-mgh-chip:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-text) !important;
+  background: rgba(200,168,76,.07) !important;
+}
+
+@media (max-width: 768px) {
+  #rb-mg-hero .rb-mgh-inner { padding: 48px 20px 40px !important; }
+  #rb-mg-hero .rb-mgh-chips { gap: 8px !important; }
+  #rb-mg-hero .rb-mgh-chip { padding: 9px 16px !important; font-size: 13px !important; }
+}
+</style>
+
+<div id="rb-mg-hero">
+  <div class="rb-mgh-glow"></div>
+  <div class="rb-mgh-cf"></div>
+  <div class="rb-mgh-inner">
+    <span class="rb-mgh-eyebrow">Materials Guide</span>
+    <h1 class="rb-mgh-h1">Three Materials.<br><em>Zero Compromise.</em></h1>
+    <p class="rb-mgh-p">
+      Every RunBird piece is built from exactly three materials — <strong>aerospace carbon fiber</strong>,
+      <strong>full-grain Nappa leather</strong>, and <strong>genuine Alcantara&reg;</strong>. No vinyl,
+      no synthetic substitutes. Here's what each one is, where it comes from, and how to keep it looking new.
+    </p>
+    <div class="rb-mgh-chips">
+      <a href="#carbon-fiber" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#3a3a3a;box-shadow:0 0 0 1px rgba(255,255,255,.2) inset"></span>Carbon Fiber</a>
+      <a href="#nappa-leather" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#8a5a34"></span>Nappa Leather</a>
+      <a href="#alcantara" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#4a4a52"></span>Alcantara&reg;</a>
+      <a href="#care" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#C8A84C"></span>Care Guide</a>
+    </div>
+  </div>
+</div>
+
+<style>
+#rb-mg-carbon,
+#rb-mg-carbon *,
+#rb-mg-carbon *::before,
+#rb-mg-carbon *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-carbon {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-carbon .rb-mgc-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+#rb-mg-carbon .rb-mgc-visual { position: relative !important; }
+#rb-mg-carbon .rb-mgc-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-mg-carbon .rb-mgc-swatches { display: flex !important; gap: 10px !important; margin-top: 18px !important; }
+#rb-mg-carbon .rb-mgc-sw {
+  width: 34px !important; height: 34px !important; border-radius: 50% !important;
+  border: 2px solid rgba(255,255,255,.15) !important;
+  flex-shrink: 0 !important;
+}
+
+#rb-mg-carbon .rb-mgc-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  color: var(--rb-accent) !important; margin-bottom: 12px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-carbon .rb-mgc-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+#rb-mg-carbon .rb-mgc-p {
+  font-size: 15px !important; color: #999 !important; line-height: 1.8 !important;
+  margin: 0 0 16px !important; font-weight: 300 !important;
+}
+#rb-mg-carbon .rb-mgc-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-mg-carbon .rb-mgc-p:last-of-type { margin-bottom: 24px !important; }
+
+#rb-mg-carbon .rb-mgc-specs {
+  border-top: 1px solid var(--rb-border) !important;
+  padding-top: 18px !important;
+}
+#rb-mg-carbon .rb-mgc-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-mg-carbon .rb-mgc-spec-row:last-child { border-bottom: none !important; }
+#rb-mg-carbon .rb-mgc-spec-k {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--rb-text2) !important; flex-shrink: 0 !important;
+}
+#rb-mg-carbon .rb-mgc-spec-v {
+  font-size: 13.5px !important; color: var(--rb-text) !important; text-align: right !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-mg-carbon .rb-mgc-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-carbon .rb-mgc-wrap { grid-template-columns: 1fr !important; }
+  #rb-mg-carbon .rb-mgc-visual { order: -1 !important; max-width: 460px !important; margin: 0 auto !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-carbon .rb-mgc-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-mg-carbon .rb-mgc-title { font-size: 30px !important; }
+  #rb-mg-carbon .rb-mgc-spec-row { text-align: left !important; }
+  #rb-mg-carbon .rb-mgc-swatches { justify-content: center !important; }
+}
+</style>
+
+<div id="rb-mg-carbon">
+  <a id="carbon-fiber"></a>
+  <div class="rb-mgc-wrap">
+
+    <div class="rb-mgc-visual">
+      <img class="rb-mgc-img" src="https://therunbird.com/images/MainPAge/Carbon.png" alt="Aerospace-grade carbon fiber with 2x2 twill weave">
+      <div class="rb-mgc-swatches">
+        <span class="rb-mgc-sw" style="background:#0c0c0c" title="Black"></span>
+        <span class="rb-mgc-sw" style="background:#7a1414" title="Red"></span>
+        <span class="rb-mgc-sw" style="background:#16305c" title="Blue"></span>
+        <span class="rb-mgc-sw" style="background:#C8A84C" title="Gold"></span>
+        <span class="rb-mgc-sw" style="background:#9a9a9a" title="Silver"></span>
+      </div>
+    </div>
+
+    <div class="rb-mgc-copy">
+      <div class="rb-mgc-num">Material 01</div>
+      <h2 class="rb-mgc-title">Carbon Fiber</h2>
+      <p class="rb-mgc-p">
+        Aerospace-grade carbon fiber, laid up in a distinctive <strong>2&times;2 twill weave</strong> — the
+        same pattern-and-weight class used in motorsport and aircraft interiors. It's stiff, lightweight,
+        and shows a deep, dimensional pattern under light instead of a flat print.
+      </p>
+      <p class="rb-mgc-p">
+        Every carbon piece is finished with multiple coats of lacquer and wet-sanded by hand between coats,
+        then buffed to either a deep gloss or a low-glare matte — your choice.
+      </p>
+      <div class="rb-mgc-specs">
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Weave</span>
+          <span class="rb-mgc-spec-v">2&times;2 Twill</span>
+        </div>
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Finish</span>
+          <span class="rb-mgc-spec-v">Gloss or Matte</span>
+        </div>
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Colors</span>
+          <span class="rb-mgc-spec-v">Black, Red, Blue, Gold, Silver</span>
+        </div>
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Used On</span>
+          <span class="rb-mgc-spec-v">Steering wheels, shift knobs, handbrakes, side skirts</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-carbon');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-mg-leather,
+#rb-mg-leather *,
+#rb-mg-leather *::before,
+#rb-mg-leather *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-leather {
+  --rb-bg:      #080808;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-leather .rb-mgl-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+#rb-mg-leather .rb-mgl-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  color: var(--rb-accent) !important; margin-bottom: 12px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-leather .rb-mgl-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+#rb-mg-leather .rb-mgl-p {
+  font-size: 15px !important; color: #999 !important; line-height: 1.8 !important;
+  margin: 0 0 16px !important; font-weight: 300 !important;
+}
+#rb-mg-leather .rb-mgl-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-mg-leather .rb-mgl-p:last-of-type { margin-bottom: 24px !important; }
+
+#rb-mg-leather .rb-mgl-specs {
+  border-top: 1px solid var(--rb-border) !important;
+  padding-top: 18px !important;
+}
+#rb-mg-leather .rb-mgl-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-mg-leather .rb-mgl-spec-row:last-child { border-bottom: none !important; }
+#rb-mg-leather .rb-mgl-spec-k {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--rb-text2) !important; flex-shrink: 0 !important;
+}
+#rb-mg-leather .rb-mgl-spec-v {
+  font-size: 13.5px !important; color: var(--rb-text) !important; text-align: right !important;
+}
+
+#rb-mg-leather .rb-mgl-visual { position: relative !important; }
+#rb-mg-leather .rb-mgl-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-mg-leather .rb-mgl-swatches { display: flex !important; gap: 10px !important; margin-top: 18px !important; }
+#rb-mg-leather .rb-mgl-sw {
+  width: 34px !important; height: 34px !important; border-radius: 50% !important;
+  border: 2px solid rgba(255,255,255,.15) !important;
+  flex-shrink: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-mg-leather .rb-mgl-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-leather .rb-mgl-wrap { grid-template-columns: 1fr !important; }
+  #rb-mg-leather .rb-mgl-visual { order: -1 !important; max-width: 460px !important; margin: 0 auto !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-leather .rb-mgl-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-mg-leather .rb-mgl-title { font-size: 30px !important; }
+  #rb-mg-leather .rb-mgl-spec-row { text-align: left !important; }
+  #rb-mg-leather .rb-mgl-swatches { justify-content: center !important; }
+}
+</style>
+
+<div id="rb-mg-leather">
+  <a id="nappa-leather"></a>
+  <div class="rb-mgl-wrap">
+
+    <div class="rb-mgl-copy">
+      <div class="rb-mgl-num">Material 02</div>
+      <h2 class="rb-mgl-title">Nappa Leather</h2>
+      <p class="rb-mgl-p">
+        Full-grain Nappa leather — the same quality tier used in high-end European sport car interiors.
+        Nappa is tanned to stay soft rather than stiff, so it wraps cleanly around tight curves like a
+        steering wheel rim without wrinkling or cracking over time.
+      </p>
+      <p class="rb-mgl-p">
+        Available <strong>smooth</strong> or <strong>perforated</strong> for extra grip and breathability,
+        and hand-stitched with a contrast thread color of your choice.
+      </p>
+      <div class="rb-mgl-specs">
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Grade</span>
+          <span class="rb-mgl-spec-v">Full-Grain Nappa</span>
+        </div>
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Texture</span>
+          <span class="rb-mgl-spec-v">Smooth or Perforated</span>
+        </div>
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Stitching</span>
+          <span class="rb-mgl-spec-v">Hand-stitched, any thread color</span>
+        </div>
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Used On</span>
+          <span class="rb-mgl-spec-v">Steering wheels, shift knobs, horn pads, handbrakes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rb-mgl-visual">
+      <img class="rb-mgl-img" src="https://therunbird.com/images/MainPAge/leather.png" alt="Full-grain Nappa leather, smooth and perforated finishes">
+      <div class="rb-mgl-swatches">
+        <span class="rb-mgl-sw" style="background:#0c0c0c" title="Black"></span>
+        <span class="rb-mgl-sw" style="background:#3a2418" title="Brown"></span>
+        <span class="rb-mgl-sw" style="background:#8f8578" title="Beige"></span>
+        <span class="rb-mgl-sw" style="background:#7a1414" title="Red"></span>
+        <span class="rb-mgl-sw" style="background:#f0f0f0" title="Custom thread"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-leather');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-mg-alc,
+#rb-mg-alc *,
+#rb-mg-alc *::before,
+#rb-mg-alc *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-alc {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-alc .rb-mga-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+#rb-mg-alc .rb-mga-visual { position: relative !important; }
+#rb-mg-alc .rb-mga-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-mg-alc .rb-mga-badge {
+  position: absolute !important;
+  right: -18px !important;
+  bottom: -18px !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.28) !important;
+  border-radius: 14px !important;
+  padding: 14px 20px !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+}
+
+#rb-mg-alc .rb-mga-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  color: var(--rb-accent) !important; margin-bottom: 12px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-alc .rb-mga-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+#rb-mg-alc .rb-mga-p {
+  font-size: 15px !important; color: #999 !important; line-height: 1.8 !important;
+  margin: 0 0 16px !important; font-weight: 300 !important;
+}
+#rb-mg-alc .rb-mga-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-mg-alc .rb-mga-p:last-of-type { margin-bottom: 24px !important; }
+
+#rb-mg-alc .rb-mga-specs {
+  border-top: 1px solid var(--rb-border) !important;
+  padding-top: 18px !important;
+}
+#rb-mg-alc .rb-mga-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-mg-alc .rb-mga-spec-row:last-child { border-bottom: none !important; }
+#rb-mg-alc .rb-mga-spec-k {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--rb-text2) !important; flex-shrink: 0 !important;
+}
+#rb-mg-alc .rb-mga-spec-v {
+  font-size: 13.5px !important; color: var(--rb-text) !important; text-align: right !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-mg-alc .rb-mga-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-alc .rb-mga-wrap { grid-template-columns: 1fr !important; }
+  #rb-mg-alc .rb-mga-visual { order: -1 !important; max-width: 460px !important; margin: 0 auto !important; }
+  #rb-mg-alc .rb-mga-badge { right: 16px !important; bottom: -14px !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-alc .rb-mga-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-mg-alc .rb-mga-title { font-size: 30px !important; }
+  #rb-mg-alc .rb-mga-spec-row { text-align: left !important; }
+  #rb-mg-alc .rb-mga-badge { right: 50% !important; transform: translateX(50%) !important; }
+}
+</style>
+
+<div id="rb-mg-alc">
+  <a id="alcantara"></a>
+  <div class="rb-mga-wrap">
+
+    <div class="rb-mga-visual">
+      <img class="rb-mga-img" src="https://therunbird.com/images/MainPAge/Alcantara.png" alt="Genuine Alcantara racing-grade suede">
+      <div class="rb-mga-badge">F1-Grade Feel</div>
+    </div>
+
+    <div class="rb-mga-copy">
+      <div class="rb-mga-num">Material 03</div>
+      <h2 class="rb-mga-title">Alcantara&reg;</h2>
+      <p class="rb-mga-p">
+        Genuine Alcantara&reg; — the material of choice for Formula 1 steering wheels and exotic car
+        interiors. It's a suede-like microfiber that grips your hands far better than leather, especially
+        under hard cornering or in the heat.
+      </p>
+      <p class="rb-mga-p">
+        It also cuts glare under direct sunlight, which matters more than it sounds like on a wheel rim or
+        dash you're staring past all day. We use it on its own or mixed with Nappa for a two-tone grip zone.
+      </p>
+      <div class="rb-mga-specs">
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Type</span>
+          <span class="rb-mga-spec-v">Genuine Alcantara&reg; Microfiber</span>
+        </div>
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Feel</span>
+          <span class="rb-mga-spec-v">Suede-like, high-grip, low-glare</span>
+        </div>
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Combinations</span>
+          <span class="rb-mga-spec-v">Solo or mixed with Nappa leather</span>
+        </div>
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Used On</span>
+          <span class="rb-mga-spec-v">Steering wheels, shift knobs, horn pads</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-alc');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-mg-care,
+#rb-mg-care *,
+#rb-mg-care *::before,
+#rb-mg-care *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-care {
+  --rb-bg:      #080808;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-care .rb-mgr-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-mg-care .rb-mgr-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-care .rb-mgr-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-mg-care .rb-mgr-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  margin-top: 20px !important;
+}
+#rb-mg-care .rb-mgr-item {
+  padding: 30px 40px 40px !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+}
+#rb-mg-care .rb-mgr-item:last-child { border-right: none !important; }
+#rb-mg-care .rb-mgr-item::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important;
+  transform: scaleX(0) !important; transform-origin: left !important; transition: transform .35s !important;
+}
+#rb-mg-care .rb-mgr-item:hover::before { transform: scaleX(1) !important; }
+#rb-mg-care .rb-mgr-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 22px !important; text-transform: uppercase !important;
+  color: var(--rb-text) !important; letter-spacing: .02em !important; margin-bottom: 18px !important;
+}
+#rb-mg-care .rb-mgr-list { margin: 0 !important; padding: 0 !important; list-style: none !important; }
+#rb-mg-care .rb-mgr-list li {
+  display: flex !important;
+  gap: 10px !important;
+  font-size: 13.5px !important;
+  color: var(--rb-text2) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 12px !important;
+}
+#rb-mg-care .rb-mgr-list li:last-child { margin-bottom: 0 !important; }
+#rb-mg-care .rb-mgr-list li::before {
+  content: '✓' !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+}
+#rb-mg-care .rb-mgr-list li.rb-mgr-dont::before {
+  content: '✕' !important;
+  color: #a45050 !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-mg-care .rb-mgr-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-care .rb-mgr-grid { grid-template-columns: 1fr !important; }
+  #rb-mg-care .rb-mgr-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-mg-care .rb-mgr-item:last-child { border-bottom: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-care .rb-mgr-wrap { padding: 15px 20px 0 !important; }
+  #rb-mg-care .rb-mgr-title { font-size: 30px !important; }
+  #rb-mg-care .rb-mgr-item { padding: 24px 20px 30px !important; }
+}
+</style>
+
+<div id="rb-mg-care">
+  <a id="care"></a>
+  <div class="rb-mgr-wrap">
+    <span class="rb-mgr-eyebrow">Keep It Looking New</span>
+    <h2 class="rb-mgr-title">Care Guide</h2>
+  </div>
+
+  <div class="rb-mgr-grid">
+
+    <div class="rb-mgr-item">
+      <div class="rb-mgr-item-title">Carbon Fiber</div>
+      <ul class="rb-mgr-list">
+        <li>Wipe with a soft microfiber cloth and a little water or mild glass cleaner</li>
+        <li>Add a UV-protectant wax every few months to keep the gloss from dulling</li>
+        <li class="rb-mgr-dont">Don't use abrasive pads or ammonia-based cleaners</li>
+        <li class="rb-mgr-dont">Don't scrape ice or debris off directly — it can dull the lacquer</li>
+      </ul>
+    </div>
+
+    <div class="rb-mgr-item">
+      <div class="rb-mgr-item-title">Nappa Leather</div>
+      <ul class="rb-mgr-list">
+        <li>Wipe down with a damp microfiber cloth to remove dust and oils</li>
+        <li>Use a proper leather conditioner every 1&ndash;2 months to keep it supple</li>
+        <li>Keep it out of direct sun when parked to prevent fading and drying</li>
+        <li class="rb-mgr-dont">Don't use household cleaners, alcohol, or baby wipes</li>
+      </ul>
+    </div>
+
+    <div class="rb-mgr-item">
+      <div class="rb-mgr-item-title">Alcantara&reg;</div>
+      <ul class="rb-mgr-list">
+        <li>Brush lightly with a soft suede brush to lift the nap and remove dust</li>
+        <li>Blot spills immediately with a dry cloth — don't rub</li>
+        <li>For deeper cleaning, use a dedicated Alcantara&reg; cleaner and let it air-dry</li>
+        <li class="rb-mgr-dont">Don't soak it or use leather conditioner on it</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-care');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-mg-cta,
+#rb-mg-cta *,
+#rb-mg-cta *::before,
+#rb-mg-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-mg-cta a { text-decoration: none !important; }
+#rb-mg-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-mg-cta {
+  --rb-accent:      #C8A84C;
+  --rb-accent-rgb:  200,168,76;
+  --rb-accent-h:    #D9BA62;
+  --rb-text:        #F0F0F0;
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.png') center / cover no-repeat !important;
+  padding: 68px 48px !important;
+  border-top: 1px solid rgba(255,255,255,.07) !important;
+}
+
+#rb-mg-cta .rb-mgt-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(var(--rb-accent-rgb),.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 50%, rgba(var(--rb-accent-rgb),.10) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 50%, rgba(var(--rb-accent-rgb),.10) 0%, transparent 100%) !important;
+}
+#rb-mg-cta .rb-mgt-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 9px 9px !important;
+}
+#rb-mg-cta .rb-mgt-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 720px !important; margin: 0 auto !important;
+}
+#rb-mg-cta .rb-mgt-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .24em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 22px !important;
+}
+#rb-mg-cta .rb-mgt-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(40px, 6vw, 76px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: .96 !important; margin: 0 0 20px !important;
+}
+#rb-mg-cta .rb-mgt-h em {
+  color: var(--rb-accent) !important; font-style: italic !important;
+  text-shadow: 0 0 40px rgba(200,168,76,.5) !important;
+}
+#rb-mg-cta .rb-mgt-p {
+  color: #999 !important; font-size: 15.5px !important; font-weight: 300 !important;
+  line-height: 1.72 !important; margin: 0 auto 44px !important; max-width: 560px !important;
+}
+#rb-mg-cta .rb-mgt-btns {
+  display: flex !important; flex-direction: row !important;
+  gap: 14px !important; justify-content: center !important; flex-wrap: wrap !important;
+}
+#rb-mg-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #000 !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s, box-shadow .2s !important;
+  box-shadow: 0 4px 24px rgba(200,168,76,.35) !important;
+}
+#rb-mg-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+  box-shadow: 0 10px 40px rgba(var(--rb-accent-rgb),.55) !important;
+}
+#rb-mg-cta .rb-btn-ghost {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important; background: transparent !important;
+  color: #C8C8C8 !important; border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: border-color .2s, background .2s !important;
+}
+#rb-mg-cta .rb-btn-ghost:hover { border-color: rgba(255,255,255,.42) !important; background: rgba(255,255,255,.05) !important; }
+
+@media (max-width: 768px) {
+  #rb-mg-cta { padding: 56px 20px !important; }
+  #rb-mg-cta .rb-mgt-btns { flex-wrap: nowrap !important; gap: 10px !important; }
+  #rb-mg-cta .rb-btn-gold, #rb-mg-cta .rb-btn-ghost { padding: 13px 20px !important; font-size: 15px !important; flex: 1 !important; }
+}
+</style>
+
+<div id="rb-mg-cta">
+  <div class="rb-mgt-glow"></div>
+  <div class="rb-mgt-cf"></div>
+  <div class="rb-mgt-inner">
+    <span class="rb-mgt-eye">Now You Know The Materials</span>
+    <h2 class="rb-mgt-h">Pick Your<br><em>Combination</em></h2>
+    <p class="rb-mgt-p">Mix carbon fiber, Nappa leather, and Alcantara&reg; however you want — every material, finish, and thread color is yours to choose.</p>
+    <div class="rb-mgt-btns">
+      <a href="https://therunbird.com/custom-order/" class="rb-btn-gold">Start Custom Order</a>
+      <a href="https://therunbird.com/all-products/" class="rb-btn-ghost">Browse Full Catalog</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-cta');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
