@@ -1,0 +1,201 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Warranty Block 4: FAQ
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Warranty page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-wty-faq — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-wty-faq,
+#rb-wty-faq *,
+#rb-wty-faq *::before,
+#rb-wty-faq *::after {
+  box-sizing: border-box !important;
+}
+#rb-wty-faq a { text-decoration: none !important; }
+#rb-wty-faq button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-wty-faq {
+  --rb-bg:        #080808;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-wty-faq .rb-wf-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-wty-faq .rb-wf-head { display: block !important; margin-bottom: 24px !important; }
+#rb-wty-faq .rb-wf-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-wty-faq .rb-wf-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-wty-faq .rb-wf-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-wty-faq .rb-wf-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-wty-faq .rb-wf-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 22px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 19px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-wty-faq .rb-wf-q:hover { color: var(--rb-accent) !important; }
+#rb-wty-faq .rb-wf-item.open .rb-wf-q { color: var(--rb-accent) !important; }
+#rb-wty-faq .rb-wf-icon {
+  width: 32px !important; height: 32px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 18px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-wty-faq .rb-wf-item.open .rb-wf-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-wty-faq .rb-wf-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important;
+}
+#rb-wty-faq .rb-wf-item.open .rb-wf-a { max-height: 300px !important; padding-bottom: 22px !important; }
+#rb-wty-faq .rb-wf-a a { color: var(--rb-accent) !important; font-weight: 600 !important; }
+#rb-wty-faq .rb-wf-a a:hover { text-decoration: underline !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-wty-faq .rb-wf-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-wty-faq .rb-wf-wrap { padding: 15px 20px 32px !important; }
+  #rb-wty-faq .rb-wf-title { font-size: 30px !important; }
+  #rb-wty-faq .rb-wf-q { font-size: 16px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-wty-faq">
+  <a id="faq"></a>
+  <div class="rb-wf-wrap">
+
+    <div class="rb-wf-head">
+      <div class="rb-wf-eyebrow">Got Questions</div>
+      <h2 class="rb-wf-title">Warranty FAQ</h2>
+    </div>
+
+    <div class="rb-wf-list">
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          How long does the warranty last?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">12 months from the day your order is delivered. It covers workmanship and material defects — not wear and tear from normal use.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          Does it cover my leather softening or fading over time?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">No — that's normal wear, not a defect. Following the care routine in our <a href="https://therunbird.com/materials-guide/#care">Materials Guide</a> will help slow it down and keep your piece looking its best.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          I installed it myself and now something's wrong — is that covered?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">If the problem is a genuine defect in how the piece was built, yes — installing it yourself doesn't void that. If the issue was caused by how it was installed, that falls outside the warranty. See our <a href="https://therunbird.com/installation-help/">Installation Help</a> guide for the correct process.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          What if my order arrived damaged in shipping?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">That's handled separately from this warranty — see our <a href="https://therunbird.com/shipping-and-returns/">Shipping &amp; Returns</a> page for how we handle damage that happens in transit.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          What do I need to file a claim?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">Your order number, clear photos of the issue, and a short description of what's wrong. Contact our support team and we'll take it from there.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-wty-faq');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-wty-faq .rb-wf-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-wf-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-wty-faq .rb-wf-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>

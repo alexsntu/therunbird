@@ -1,0 +1,85 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Privacy Policy Block 3: CTA Band (Questions About Your Data?)
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Privacy Policy page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-pp-cta — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-pp-cta,
+#rb-pp-cta *,
+#rb-pp-cta *::before,
+#rb-pp-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-pp-cta a { text-decoration: none !important; }
+#rb-pp-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-pp-cta {
+  --rb-accent:      #C8A84C;
+  --rb-accent-h:    #D9BA62;
+  --rb-text:        #F0F0F0;
+  --rb-text2:       #808080;
+  --rb-border:      rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: #080808 !important;
+  border-top: 1px solid var(--rb-border) !important;
+  text-align: center !important;
+  padding: 64px 48px !important;
+  margin: 0 !important;
+}
+
+#rb-pp-cta .rb-ppc-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .22em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 16px !important;
+}
+#rb-pp-cta .rb-ppc-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(28px, 4vw, 42px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: 1.05 !important; margin: 0 0 16px !important;
+}
+#rb-pp-cta .rb-ppc-p {
+  color: #999 !important; font-size: 14.5px !important; font-weight: 300 !important;
+  line-height: 1.7 !important; margin: 0 auto 32px !important; max-width: 480px !important;
+}
+#rb-pp-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #000 !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 16px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s !important;
+  box-shadow: 0 4px 24px rgba(200,168,76,.3) !important;
+}
+#rb-pp-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-pp-cta { padding: 48px 20px !important; }
+}
+</style>
+
+<div id="rb-pp-cta">
+  <span class="rb-ppc-eye">Still Have Questions?</span>
+  <h2 class="rb-ppc-h">Ask Us About Your Data</h2>
+  <p class="rb-ppc-p">Want to know what we have, ask us to delete it, or anything else — reach out and we'll respond directly, no automated runaround.</p>
+  <a href="https://therunbird.com/contact-us/" class="rb-btn-gold">Contact Support</a>
+</div>

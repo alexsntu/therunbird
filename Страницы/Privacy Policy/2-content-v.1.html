@@ -1,0 +1,318 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Privacy Policy Block 2: Policy Content
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Privacy Policy page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-pp-body — no conflict with UniTheme2
+
+     NOTE: This is a plain-language template reflecting how RunBird actually
+     handles data today (per owner: only built-in CS-Cart store analytics, no
+     ad pixels; data shared only with the shipping carrier to deliver orders;
+     payment details are entered directly with the payment provider and not
+     stored/shared by RunBird; US/Canada operations, CCPA + general principles,
+     no GDPR). It is NOT a substitute for review by a qualified attorney —
+     have counsel confirm this before relying on it as your binding policy,
+     especially if data practices change (new analytics/ad tools, new
+     countries served, a payment processor that routes card data through
+     RunBird's own servers, etc).
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-pp-body,
+#rb-pp-body *,
+#rb-pp-body *::before,
+#rb-pp-body *::after {
+  box-sizing: border-box !important;
+}
+#rb-pp-body a { text-decoration: none !important; }
+
+#rb-pp-body {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#rb-pp-body .rb-ppb-wrap {
+  max-width: 780px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 88px !important;
+}
+
+#rb-pp-body .rb-ppb-section {
+  padding-top: 44px !important;
+  scroll-margin-top: 24px !important;
+}
+#rb-pp-body .rb-ppb-section:first-child { padding-top: 0 !important; }
+
+#rb-pp-body .rb-ppb-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+#rb-pp-body .rb-ppb-h2 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 26px !important;
+  text-transform: uppercase !important;
+  letter-spacing: .01em !important;
+  color: var(--rb-text) !important;
+  line-height: 1.1 !important;
+  margin: 0 0 16px !important;
+}
+#rb-pp-body .rb-ppb-p {
+  font-size: 14.5px !important;
+  color: #a8a8a8 !important;
+  line-height: 1.85 !important;
+  margin: 0 0 16px !important;
+  font-weight: 300 !important;
+}
+#rb-pp-body .rb-ppb-p:last-child { margin-bottom: 0 !important; }
+#rb-pp-body .rb-ppb-p strong { color: #d8d8d8 !important; font-weight: 500 !important; }
+#rb-pp-body .rb-ppb-p a { color: var(--rb-accent) !important; font-weight: 600 !important; }
+#rb-pp-body .rb-ppb-p a:hover { text-decoration: underline !important; }
+
+#rb-pp-body .rb-ppb-list {
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+#rb-pp-body .rb-ppb-list li {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: flex-start !important;
+  font-size: 14.5px !important;
+  color: #a8a8a8 !important;
+  line-height: 1.72 !important;
+  margin-bottom: 10px !important;
+  font-weight: 300 !important;
+}
+#rb-pp-body .rb-ppb-list li:last-child { margin-bottom: 0 !important; }
+#rb-pp-body .rb-ppb-list li::before {
+  content: '' !important;
+  width: 5px !important; height: 5px !important;
+  border-radius: 50% !important;
+  background: var(--rb-accent) !important;
+  flex-shrink: 0 !important;
+  margin-top: 8px !important;
+}
+#rb-pp-body .rb-ppb-list strong { color: #d8d8d8 !important; font-weight: 500 !important; }
+
+#rb-pp-body .rb-ppb-callout {
+  margin-top: 20px !important;
+  padding: 18px 22px !important;
+  border-left: 2px solid var(--rb-accent) !important;
+  background: rgba(200,168,76,.05) !important;
+  border-radius: 0 10px 10px 0 !important;
+}
+#rb-pp-body .rb-ppb-callout p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #ccc !important;
+  line-height: 1.7 !important;
+}
+
+#rb-pp-body .rb-ppb-divider {
+  height: 1px !important;
+  background: var(--rb-border) !important;
+  margin-top: 44px !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-pp-body .rb-ppb-wrap { padding: 48px 20px 56px !important; }
+  #rb-pp-body .rb-ppb-h2 { font-size: 21px !important; }
+  #rb-pp-body .rb-ppb-section { padding-top: 34px !important; }
+}
+</style>
+
+<div id="rb-pp-body">
+  <div class="rb-ppb-wrap">
+
+    <!-- 1. Information We Collect -->
+    <div class="rb-ppb-section" id="collect">
+      <span class="rb-ppb-num">01</span>
+      <h2 class="rb-ppb-h2">Information We Collect</h2>
+      <p class="rb-ppb-p">When you place an order, create an account, or contact us, we collect the information needed to build, ship, and support that order:</p>
+      <ul class="rb-ppb-list">
+        <li><strong>Contact details</strong> — name, email address, phone number</li>
+        <li><strong>Shipping &amp; billing address</strong> — to deliver your order and process payment</li>
+        <li><strong>Order details</strong> — the products, configurations, and materials you choose</li>
+        <li><strong>Account information</strong> — if you create an account, your login and order history</li>
+        <li><strong>Support &amp; warranty communication</strong> — messages, photos, or details you send us for a claim or question</li>
+      </ul>
+      <p class="rb-ppb-p">
+        Payment card information you enter at checkout is sent directly to our payment provider to process
+        the transaction — we don't receive or store your full card number.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 2. How We Use Your Information -->
+    <div class="rb-ppb-section" id="use">
+      <span class="rb-ppb-num">02</span>
+      <h2 class="rb-ppb-h2">How We Use Your Information</h2>
+      <p class="rb-ppb-p">We use your information only to run the business you're interacting with:</p>
+      <ul class="rb-ppb-list">
+        <li>Process, build, and ship your order</li>
+        <li>Send you order confirmations, production updates, photo approval requests, and tracking information</li>
+        <li>Respond to support, installation, and warranty requests</li>
+        <li>Maintain your account, if you create one</li>
+        <li>Understand overall site traffic and usage, in aggregate, to improve the site</li>
+      </ul>
+      <p class="rb-ppb-p">We don't use your information to build advertising profiles, and we don't sell it.</p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 3. Cookies & Site Analytics -->
+    <div class="rb-ppb-section" id="cookies">
+      <span class="rb-ppb-num">03</span>
+      <h2 class="rb-ppb-h2">Cookies &amp; Site Analytics</h2>
+      <p class="rb-ppb-p">
+        Our site uses cookies that are necessary for it to function — keeping items in your cart, remembering
+        you're logged in, and completing checkout. We also use our store platform's built-in analytics to
+        understand overall traffic (like which pages are visited and how many orders come through).
+      </p>
+      <p class="rb-ppb-p">
+        We don't use third-party advertising trackers or pixels (like Meta Pixel or Google Ads) — nothing on
+        this site is set up to build ad-targeting profiles of you.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 4. How We Share Your Information -->
+    <div class="rb-ppb-section" id="share">
+      <span class="rb-ppb-num">04</span>
+      <h2 class="rb-ppb-h2">Who We Share It With</h2>
+      <p class="rb-ppb-p">
+        We keep this short because our answer is short: <strong>we share your name and shipping address with
+        the carrier that delivers your order — and no one else.</strong>
+      </p>
+      <ul class="rb-ppb-list">
+        <li>We do not sell your personal information to anyone, for any reason</li>
+        <li>We do not share your data with marketing or advertising partners</li>
+        <li>Payment details you enter are handled directly by our payment provider to process your transaction — we don't pass your card data to any other party</li>
+      </ul>
+      <div class="rb-ppb-callout">
+        <p>The only exception is if we're legally required to disclose information — for example, in response to a valid court order.</p>
+      </div>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 5. Data Retention -->
+    <div class="rb-ppb-section" id="retention">
+      <span class="rb-ppb-num">05</span>
+      <h2 class="rb-ppb-h2">How Long We Keep It</h2>
+      <p class="rb-ppb-p">
+        We keep your order and account information for as long as needed to fulfill your order, support any
+        warranty claim, and meet our own legal and accounting obligations. If you'd like your data deleted
+        sooner, see <a href="#rights">Your Privacy Rights</a> below.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 6. Your Privacy Rights -->
+    <div class="rb-ppb-section" id="rights">
+      <span class="rb-ppb-num">06</span>
+      <h2 class="rb-ppb-h2">Your Privacy Rights</h2>
+      <p class="rb-ppb-p">
+        We ship within the United States and Canada, and this policy is written for customers there.
+        California residents in particular have rights under the California Consumer Privacy Act (CCPA),
+        and we apply the same principles to all our customers regardless of state:
+      </p>
+      <ul class="rb-ppb-list">
+        <li><strong>Right to know</strong> — ask what personal information we hold about you</li>
+        <li><strong>Right to delete</strong> — ask us to delete your personal information, subject to our order and legal record-keeping needs</li>
+        <li><strong>Right to opt out of sale</strong> — not applicable here, since we don't sell personal information to begin with</li>
+        <li><strong>Right to correct</strong> — ask us to fix inaccurate information on your account</li>
+      </ul>
+      <p class="rb-ppb-p">To exercise any of these rights, contact us using the details in <a href="#contact">Contact Us</a> below.</p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 7. Security -->
+    <div class="rb-ppb-section" id="security">
+      <span class="rb-ppb-num">07</span>
+      <h2 class="rb-ppb-h2">Security</h2>
+      <p class="rb-ppb-p">
+        We take reasonable steps to protect the information you share with us. That said, no method of
+        transmission or storage online is 100% secure, and we can't guarantee absolute security.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 8. Children's Privacy -->
+    <div class="rb-ppb-section" id="children">
+      <span class="rb-ppb-num">08</span>
+      <h2 class="rb-ppb-h2">Children's Privacy</h2>
+      <p class="rb-ppb-p">
+        Our site is not directed at children, and we don't knowingly collect personal information from
+        anyone under 13. If you believe a child has provided us with personal information, contact us and
+        we'll remove it.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 9. Changes To This Policy -->
+    <div class="rb-ppb-section" id="changes">
+      <span class="rb-ppb-num">09</span>
+      <h2 class="rb-ppb-h2">Changes To This Policy</h2>
+      <p class="rb-ppb-p">
+        If we change how we handle your information, we'll update this page and change the effective date
+        at the top. We encourage you to check back occasionally.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 10. Contact Us -->
+    <div class="rb-ppb-section" id="contact">
+      <span class="rb-ppb-num">10</span>
+      <h2 class="rb-ppb-h2">Contact Us</h2>
+      <p class="rb-ppb-p">
+        Questions about this policy, or want to exercise any of the rights above? Reach out through our
+        <a href="https://therunbird.com/contact-us/">Contact Us</a> page and we'll get back to you.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-pp-body');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

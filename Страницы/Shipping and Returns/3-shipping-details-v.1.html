@@ -1,0 +1,163 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Shipping & Returns Block 3: Shipping Details
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Shipping & Returns page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-sr-ship — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-sr-ship,
+#rb-sr-ship *,
+#rb-sr-ship *::before,
+#rb-sr-ship *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-sr-ship {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-sr-ship .rb-sd-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-sr-ship .rb-sd-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-sr-ship .rb-sd-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-sr-ship .rb-sd-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+}
+#rb-sr-ship .rb-sd-item {
+  padding: 26px 40px !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: background .25s !important;
+}
+#rb-sr-ship .rb-sd-item:nth-child(3n) { border-right: none !important; }
+#rb-sr-ship .rb-sd-item::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important;
+  transform: scaleX(0) !important; transform-origin: left !important; transition: transform .35s !important;
+}
+#rb-sr-ship .rb-sd-item:hover::before { transform: scaleX(1) !important; }
+#rb-sr-ship .rb-sd-item:hover { background: rgba(200,168,76,.03) !important; }
+#rb-sr-ship .rb-sd-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 22px !important; text-transform: uppercase !important;
+  color: var(--rb-text) !important; letter-spacing: .02em !important; margin-bottom: 8px !important;
+}
+#rb-sr-ship .rb-sd-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.72 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-sr-ship .rb-sd-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-sr-ship .rb-sd-grid { grid-template-columns: 1fr 1fr !important; }
+  #rb-sr-ship .rb-sd-item:nth-child(3n) { border-right: 1px solid var(--rb-border) !important; }
+  #rb-sr-ship .rb-sd-item:nth-child(2n) { border-right: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-sr-ship .rb-sd-wrap { padding: 15px 20px 0 !important; }
+  #rb-sr-ship .rb-sd-title { font-size: 30px !important; }
+  #rb-sr-ship .rb-sd-grid { grid-template-columns: 1fr !important; }
+  #rb-sr-ship .rb-sd-item { border-right: none !important; padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-sr-ship">
+  <a id="shipping"></a>
+  <div class="rb-sd-wrap">
+    <span class="rb-sd-eyebrow">The Details</span>
+    <h2 class="rb-sd-title">Shipping Details</h2>
+  </div>
+
+  <div class="rb-sd-grid">
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Where We Ship</div>
+      <p class="rb-sd-desc">Anywhere in North America — the United States and Canada. Enter your address at checkout to see it confirmed.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Shipping Cost</div>
+      <p class="rb-sd-desc">Calculated at checkout based on your location and order size, before you pay — no surprises later.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Nothing Ships Early</div>
+      <p class="rb-sd-desc">Your order only ships after production is finished and you've approved the photos we send you.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Tracking Number</div>
+      <p class="rb-sd-desc">Sent to your email the moment your package leaves our workshop, so you can follow it the whole way.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Status Updates</div>
+      <p class="rb-sd-desc">We keep you informed at every stage — from photo approval to shipped to delivered — not just a single tracking link.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Careful Packaging</div>
+      <p class="rb-sd-desc">Every piece is packaged to protect its finish in transit, and arrives with an installation guide and material care card.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-ship');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

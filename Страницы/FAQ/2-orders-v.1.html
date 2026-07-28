@@ -1,0 +1,188 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — FAQ Block 2: Orders & Customization
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, FAQ page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-faqc-orders — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-faqc-orders,
+#rb-faqc-orders *,
+#rb-faqc-orders *::before,
+#rb-faqc-orders *::after {
+  box-sizing: border-box !important;
+}
+#rb-faqc-orders button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-faqc-orders {
+  --rb-bg:        #0C0C0C;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-faqc-orders .rb-fc1-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px !important;
+}
+#rb-faqc-orders .rb-fc1-head { display: flex !important; align-items: center !important; gap: 14px !important; margin-bottom: 24px !important; }
+#rb-faqc-orders .rb-fc1-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  color: #000 !important; background: var(--rb-accent) !important;
+  width: 30px !important; height: 30px !important; border-radius: 8px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+#rb-faqc-orders .rb-fc1-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-faqc-orders .rb-fc1-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-faqc-orders .rb-fc1-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-faqc-orders .rb-fc1-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 20px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 18px !important; font-weight: 700 !important; letter-spacing: .02em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-faqc-orders .rb-fc1-q:hover { color: var(--rb-accent) !important; }
+#rb-faqc-orders .rb-fc1-item.open .rb-fc1-q { color: var(--rb-accent) !important; }
+#rb-faqc-orders .rb-fc1-icon {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 17px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-faqc-orders .rb-fc1-item.open .rb-fc1-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-faqc-orders .rb-fc1-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important; max-width: 760px !important;
+}
+#rb-faqc-orders .rb-fc1-item.open .rb-fc1-a { max-height: 300px !important; padding-bottom: 20px !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-faqc-orders .rb-fc1-wrap { padding: 48px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-faqc-orders .rb-fc1-wrap { padding: 32px 20px !important; }
+  #rb-faqc-orders .rb-fc1-title { font-size: 24px !important; }
+  #rb-faqc-orders .rb-fc1-q { font-size: 15px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-faqc-orders">
+  <a id="orders"></a>
+  <div class="rb-fc1-wrap">
+
+    <div class="rb-fc1-head">
+      <span class="rb-fc1-num">01</span>
+      <h2 class="rb-fc1-title">Orders &amp; Customization</h2>
+    </div>
+
+    <div class="rb-fc1-list">
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          How long does production take?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">All products are handmade to order — nothing is pulled from a warehouse. Production takes 7&ndash;14 business days from order confirmation, and you'll get tracking updates as your build moves through each stage.</p>
+      </div>
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          How do I choose the right configuration?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">Each product page shows every material, finish, and color option with photos. If you're unsure what will look best in your interior, contact us — we're happy to recommend a combination based on your Corvette's existing colors and trim.</p>
+      </div>
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          Can I request a custom color or combination that isn't listed?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">Often, yes. Since every piece is built by hand in our own workshop, we can usually accommodate custom thread colors or unlisted material pairings. Send us a message with what you have in mind before placing your order.</p>
+      </div>
+
+      <div class="rb-fc1-item">
+        <button class="rb-fc1-q" type="button">
+          Can I change or cancel my order after placing it?
+          <span class="rb-fc1-icon">+</span>
+        </button>
+        <p class="rb-fc1-a">Contact us as soon as possible. If production hasn't started yet, we can usually adjust the spec or cancel the order. Once cutting and stitching are underway on your specific piece, changes are no longer possible.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-faqc-orders');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-faqc-orders .rb-fc1-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-fc1-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-faqc-orders .rb-fc1-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>

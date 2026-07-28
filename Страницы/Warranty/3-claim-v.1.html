@@ -1,0 +1,165 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Warranty Block 3: How To File A Claim
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Warranty page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-wty-claim — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-wty-claim,
+#rb-wty-claim *,
+#rb-wty-claim *::before,
+#rb-wty-claim *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-wty-claim {
+  --rb-bg-elevated: #161616;
+  --rb-accent:      #C8A84C;
+  --rb-text:        #F0F0F0;
+  --rb-text2:       #808080;
+  --rb-border:      rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg-elevated) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-wty-claim .rb-wcl-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-wty-claim .rb-wcl-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-wty-claim .rb-wcl-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-wty-claim .rb-wcl-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  gap: 0 !important;
+  padding-top: 20px !important;
+}
+#rb-wty-claim .rb-wcl-item {
+  padding: 28px 40px !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+}
+#rb-wty-claim .rb-wcl-item:last-child { border-right: none !important; }
+#rb-wty-claim .rb-wcl-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 44px !important; font-weight: 900 !important;
+  color: rgba(255,255,255,.08) !important;
+  line-height: 1 !important; margin-bottom: 10px !important;
+  user-select: none !important;
+}
+#rb-wty-claim .rb-wcl-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 24px !important;
+  text-transform: uppercase !important; letter-spacing: .04em !important;
+  color: var(--rb-text) !important; margin-bottom: 10px !important;
+}
+#rb-wty-claim .rb-wcl-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.78 !important;
+  margin: 0 !important;
+}
+#rb-wty-claim .rb-wcl-item:not(:last-child)::after {
+  content: '→' !important;
+  position: absolute !important; top: 44px !important; right: -14px !important;
+  width: 28px !important; height: 28px !important; z-index: 10 !important;
+  background: var(--rb-bg-elevated) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 12px !important; color: var(--rb-accent) !important;
+  line-height: 28px !important; text-align: center !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-wty-claim .rb-wcl-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-wty-claim .rb-wcl-grid { grid-template-columns: 1fr !important; }
+  #rb-wty-claim .rb-wcl-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-wty-claim .rb-wcl-item:last-child { border-bottom: none !important; }
+  #rb-wty-claim .rb-wcl-item:not(:last-child)::after { display: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-wty-claim .rb-wcl-wrap { padding: 15px 20px 0 !important; }
+  #rb-wty-claim .rb-wcl-title { font-size: 30px !important; }
+  #rb-wty-claim .rb-wcl-grid { padding-top: 8px !important; }
+  #rb-wty-claim .rb-wcl-item { padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-wty-claim">
+  <a id="claim"></a>
+  <div class="rb-wcl-wrap">
+    <span class="rb-wcl-eyebrow">If Something's Wrong</span>
+    <h2 class="rb-wcl-title">How To File A Claim</h2>
+  </div>
+
+  <div class="rb-wcl-grid">
+
+    <div class="rb-wcl-item">
+      <div class="rb-wcl-num">01</div>
+      <div class="rb-wcl-item-title">Contact Us</div>
+      <p class="rb-wcl-desc">Send us your order number along with photos and a short description of the issue — the more detail, the faster we can help.</p>
+    </div>
+
+    <div class="rb-wcl-item">
+      <div class="rb-wcl-num">02</div>
+      <div class="rb-wcl-item-title">We Review It</div>
+      <p class="rb-wcl-desc">Our team compares what you're seeing against how that piece was built and our workmanship standards to confirm it's covered.</p>
+    </div>
+
+    <div class="rb-wcl-item">
+      <div class="rb-wcl-num">03</div>
+      <div class="rb-wcl-item-title">We Make It Right</div>
+      <p class="rb-wcl-desc">If it's a covered defect, we'll repair, remake, or replace your piece at no cost — whatever fixes it properly.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-wty-claim');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

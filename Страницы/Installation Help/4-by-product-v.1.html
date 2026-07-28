@@ -1,0 +1,187 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Installation Help Block 4: Notes By Product
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Installation Help page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-ins-prod — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-ins-prod,
+#rb-ins-prod *,
+#rb-ins-prod *::before,
+#rb-ins-prod *::after {
+  box-sizing: border-box !important;
+}
+#rb-ins-prod a { text-decoration: none !important; }
+
+#rb-ins-prod {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-ins-prod .rb-ip-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-ins-prod .rb-ip-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-ins-prod .rb-ip-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-ins-prod .rb-ip-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+}
+#rb-ins-prod .rb-ip-item {
+  padding: 26px 40px !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: background .25s !important;
+}
+#rb-ins-prod .rb-ip-item:nth-child(3n) { border-right: none !important; }
+#rb-ins-prod .rb-ip-item::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important;
+  transform: scaleX(0) !important; transform-origin: left !important; transition: transform .35s !important;
+}
+#rb-ins-prod .rb-ip-item:hover::before { transform: scaleX(1) !important; }
+#rb-ins-prod .rb-ip-item:hover { background: rgba(200,168,76,.03) !important; }
+#rb-ins-prod .rb-ip-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 22px !important; text-transform: uppercase !important;
+  color: var(--rb-text) !important; letter-spacing: .02em !important; margin-bottom: 10px !important;
+}
+#rb-ins-prod .rb-ip-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.72 !important;
+  margin: 0 0 14px !important;
+}
+#rb-ins-prod .rb-ip-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+}
+#rb-ins-prod .rb-ip-tag::before {
+  content: '' !important;
+  width: 6px !important; height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--rb-accent) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-ins-prod .rb-ip-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-ins-prod .rb-ip-grid { grid-template-columns: 1fr 1fr !important; }
+  #rb-ins-prod .rb-ip-item:nth-child(3n) { border-right: 1px solid var(--rb-border) !important; }
+  #rb-ins-prod .rb-ip-item:nth-child(2n) { border-right: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-ins-prod .rb-ip-wrap { padding: 15px 20px 0 !important; }
+  #rb-ins-prod .rb-ip-title { font-size: 30px !important; }
+  #rb-ins-prod .rb-ip-grid { grid-template-columns: 1fr !important; }
+  #rb-ins-prod .rb-ip-item { border-right: none !important; padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-ins-prod">
+  <a id="by-product"></a>
+  <div class="rb-ip-wrap">
+    <span class="rb-ip-eyebrow">By Product</span>
+    <h2 class="rb-ip-title">What To Expect, Per Part</h2>
+  </div>
+
+  <div class="rb-ip-grid">
+
+    <div class="rb-ip-item">
+      <div class="rb-ip-item-title">Steering Wheels</div>
+      <p class="rb-ip-desc">Mounts to your factory steering column using your original hardware. Your airbag, horn, and steering-column controls transfer over and keep working exactly as before.</p>
+      <span class="rb-ip-tag">Direct Bolt-On</span>
+    </div>
+
+    <div class="rb-ip-item">
+      <div class="rb-ip-item-title">Shift Knobs</div>
+      <p class="rb-ip-desc">Threads onto your factory shifter rod in place of the stock knob — same thread, same fit. No adapters needed.</p>
+      <span class="rb-ip-tag">Direct Thread-On</span>
+    </div>
+
+    <div class="rb-ip-item">
+      <div class="rb-ip-item-title">Handbrakes</div>
+      <p class="rb-ip-desc">Replaces the factory handbrake lever or cover on the same mounting hardware, keeping full handbrake function intact.</p>
+      <span class="rb-ip-tag">Direct Bolt-On</span>
+    </div>
+
+    <div class="rb-ip-item">
+      <div class="rb-ip-item-title">Horn Pads</div>
+      <p class="rb-ip-desc">Snaps into the factory horn pad location on your steering wheel — same clips, same button feel, same horn function.</p>
+      <span class="rb-ip-tag">Direct Clip-In</span>
+    </div>
+
+    <div class="rb-ip-item">
+      <div class="rb-ip-item-title">Steering Wheel Emblems</div>
+      <p class="rb-ip-desc">Drops into the factory emblem recess on your steering wheel or horn pad — no adhesive workarounds, just a clean factory-style fit.</p>
+      <span class="rb-ip-tag">Direct Drop-In</span>
+    </div>
+
+    <div class="rb-ip-item">
+      <div class="rb-ip-item-title">Side Skirts</div>
+      <p class="rb-ip-desc">Mounts using your Corvette's existing side skirt hardware and clips — same mounting points as the factory or your current skirts.</p>
+      <span class="rb-ip-tag">Direct Bolt-On</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-ins-prod');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

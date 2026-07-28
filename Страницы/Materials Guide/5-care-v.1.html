@@ -1,0 +1,178 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Materials Guide Block 5: Care & Maintenance
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Materials Guide page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-mg-care — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-mg-care,
+#rb-mg-care *,
+#rb-mg-care *::before,
+#rb-mg-care *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-care {
+  --rb-bg:      #080808;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-care .rb-mgr-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-mg-care .rb-mgr-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-care .rb-mgr-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-mg-care .rb-mgr-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  margin-top: 20px !important;
+}
+#rb-mg-care .rb-mgr-item {
+  padding: 30px 40px 40px !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+}
+#rb-mg-care .rb-mgr-item:last-child { border-right: none !important; }
+#rb-mg-care .rb-mgr-item::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important;
+  transform: scaleX(0) !important; transform-origin: left !important; transition: transform .35s !important;
+}
+#rb-mg-care .rb-mgr-item:hover::before { transform: scaleX(1) !important; }
+#rb-mg-care .rb-mgr-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 22px !important; text-transform: uppercase !important;
+  color: var(--rb-text) !important; letter-spacing: .02em !important; margin-bottom: 18px !important;
+}
+#rb-mg-care .rb-mgr-list { margin: 0 !important; padding: 0 !important; list-style: none !important; }
+#rb-mg-care .rb-mgr-list li {
+  display: flex !important;
+  gap: 10px !important;
+  font-size: 13.5px !important;
+  color: var(--rb-text2) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 12px !important;
+}
+#rb-mg-care .rb-mgr-list li:last-child { margin-bottom: 0 !important; }
+#rb-mg-care .rb-mgr-list li::before {
+  content: '✓' !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+}
+#rb-mg-care .rb-mgr-list li.rb-mgr-dont::before {
+  content: '✕' !important;
+  color: #a45050 !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-mg-care .rb-mgr-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-care .rb-mgr-grid { grid-template-columns: 1fr !important; }
+  #rb-mg-care .rb-mgr-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-mg-care .rb-mgr-item:last-child { border-bottom: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-care .rb-mgr-wrap { padding: 15px 20px 0 !important; }
+  #rb-mg-care .rb-mgr-title { font-size: 30px !important; }
+  #rb-mg-care .rb-mgr-item { padding: 24px 20px 30px !important; }
+}
+</style>
+
+<div id="rb-mg-care">
+  <a id="care"></a>
+  <div class="rb-mgr-wrap">
+    <span class="rb-mgr-eyebrow">Keep It Looking New</span>
+    <h2 class="rb-mgr-title">Care Guide</h2>
+  </div>
+
+  <div class="rb-mgr-grid">
+
+    <div class="rb-mgr-item">
+      <div class="rb-mgr-item-title">Carbon Fiber</div>
+      <ul class="rb-mgr-list">
+        <li>Wipe with a soft microfiber cloth and a little water or mild glass cleaner</li>
+        <li>Add a UV-protectant wax every few months to keep the gloss from dulling</li>
+        <li class="rb-mgr-dont">Don't use abrasive pads or ammonia-based cleaners</li>
+        <li class="rb-mgr-dont">Don't scrape ice or debris off directly — it can dull the lacquer</li>
+      </ul>
+    </div>
+
+    <div class="rb-mgr-item">
+      <div class="rb-mgr-item-title">Nappa Leather</div>
+      <ul class="rb-mgr-list">
+        <li>Wipe down with a damp microfiber cloth to remove dust and oils</li>
+        <li>Use a proper leather conditioner every 1&ndash;2 months to keep it supple</li>
+        <li>Keep it out of direct sun when parked to prevent fading and drying</li>
+        <li class="rb-mgr-dont">Don't use household cleaners, alcohol, or baby wipes</li>
+      </ul>
+    </div>
+
+    <div class="rb-mgr-item">
+      <div class="rb-mgr-item-title">Alcantara&reg;</div>
+      <ul class="rb-mgr-list">
+        <li>Brush lightly with a soft suede brush to lift the nap and remove dust</li>
+        <li>Blot spills immediately with a dry cloth — don't rub</li>
+        <li>For deeper cleaning, use a dedicated Alcantara&reg; cleaner and let it air-dry</li>
+        <li class="rb-mgr-dont">Don't soak it or use leather conditioner on it</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-care');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

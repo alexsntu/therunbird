@@ -1,0 +1,206 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Installation Help Block 5: FAQ
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Installation Help page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-ins-faq — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-ins-faq,
+#rb-ins-faq *,
+#rb-ins-faq *::before,
+#rb-ins-faq *::after {
+  box-sizing: border-box !important;
+}
+#rb-ins-faq button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-ins-faq {
+  --rb-bg:        #080808;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-ins-faq .rb-inf-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-ins-faq .rb-inf-head { display: block !important; margin-bottom: 24px !important; }
+#rb-ins-faq .rb-inf-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-ins-faq .rb-inf-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-ins-faq .rb-inf-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-ins-faq .rb-inf-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-ins-faq .rb-inf-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 22px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 19px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-ins-faq .rb-inf-q:hover { color: var(--rb-accent) !important; }
+#rb-ins-faq .rb-inf-item.open .rb-inf-q { color: var(--rb-accent) !important; }
+#rb-ins-faq .rb-inf-icon {
+  width: 32px !important; height: 32px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 18px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-ins-faq .rb-inf-item.open .rb-inf-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-ins-faq .rb-inf-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important;
+}
+#rb-ins-faq .rb-inf-item.open .rb-inf-a { max-height: 300px !important; padding-bottom: 22px !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-ins-faq .rb-inf-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-ins-faq .rb-inf-wrap { padding: 15px 20px 32px !important; }
+  #rb-ins-faq .rb-inf-title { font-size: 30px !important; }
+  #rb-ins-faq .rb-inf-q { font-size: 16px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-ins-faq">
+  <a id="faq"></a>
+  <div class="rb-inf-wrap">
+
+    <div class="rb-inf-head">
+      <div class="rb-inf-eyebrow">Got Questions</div>
+      <h2 class="rb-inf-title">Installation FAQ</h2>
+    </div>
+
+    <div class="rb-inf-list">
+
+      <div class="rb-inf-item">
+        <button class="rb-inf-q" type="button">
+          Will I need to modify my Corvette to install this?
+          <span class="rb-inf-icon">+</span>
+        </button>
+        <p class="rb-inf-a">No. Every RunBird accessory is built to replace a specific factory part at its original mounting point. There's no cutting, drilling, or permanent modification involved — it's a direct swap.</p>
+      </div>
+
+      <div class="rb-inf-item">
+        <button class="rb-inf-q" type="button">
+          Do I need any special tools?
+          <span class="rb-inf-icon">+</span>
+        </button>
+        <p class="rb-inf-a">Most installs only need basic hand tools — the same ones you'd use to remove the factory part in the first place. Your step-by-step guide lists exactly what's needed for your specific product.</p>
+      </div>
+
+      <div class="rb-inf-item">
+        <button class="rb-inf-q" type="button">
+          Will my airbag, horn, or controls still work after installing a new steering wheel?
+          <span class="rb-inf-icon">+</span>
+        </button>
+        <p class="rb-inf-a">Yes. Our steering wheels are built to accept your factory airbag, horn, and steering-column controls, so everything keeps working exactly as it did before — nothing is bypassed or rewired.</p>
+      </div>
+
+      <div class="rb-inf-item">
+        <button class="rb-inf-q" type="button">
+          Can I install it myself, or do I need a professional?
+          <span class="rb-inf-icon">+</span>
+        </button>
+        <p class="rb-inf-a">Most customers install their own parts at home using the included guide — it's the same process as removing and refitting a factory part. If you'd rather have it done professionally, any shop familiar with your Corvette's generation can handle it.</p>
+      </div>
+
+      <div class="rb-inf-item">
+        <button class="rb-inf-q" type="button">
+          What's included in the box?
+          <span class="rb-inf-icon">+</span>
+        </button>
+        <p class="rb-inf-a">Your RunBird part, a step-by-step installation guide specific to that product, and a material care card. Any small hardware unique to the part is included as well.</p>
+      </div>
+
+      <div class="rb-inf-item">
+        <button class="rb-inf-q" type="button">
+          What if I get stuck during installation?
+          <span class="rb-inf-icon">+</span>
+        </button>
+        <p class="rb-inf-a">Reach out to our support team with your order number and a photo or description of where you're stuck — we'll walk you through it. We build these parts, so we know exactly how they go on.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-ins-faq');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-ins-faq .rb-inf-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-inf-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-ins-faq .rb-inf-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>

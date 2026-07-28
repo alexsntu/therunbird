@@ -1,0 +1,189 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Materials Guide Block 3: Nappa Leather
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Materials Guide page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-mg-leather — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-mg-leather,
+#rb-mg-leather *,
+#rb-mg-leather *::before,
+#rb-mg-leather *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-leather {
+  --rb-bg:      #080808;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-leather .rb-mgl-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+/* ── Copy side ── */
+#rb-mg-leather .rb-mgl-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  color: var(--rb-accent) !important; margin-bottom: 12px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-leather .rb-mgl-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+#rb-mg-leather .rb-mgl-p {
+  font-size: 15px !important; color: #999 !important; line-height: 1.8 !important;
+  margin: 0 0 16px !important; font-weight: 300 !important;
+}
+#rb-mg-leather .rb-mgl-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-mg-leather .rb-mgl-p:last-of-type { margin-bottom: 24px !important; }
+
+#rb-mg-leather .rb-mgl-specs {
+  border-top: 1px solid var(--rb-border) !important;
+  padding-top: 18px !important;
+}
+#rb-mg-leather .rb-mgl-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-mg-leather .rb-mgl-spec-row:last-child { border-bottom: none !important; }
+#rb-mg-leather .rb-mgl-spec-k {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--rb-text2) !important; flex-shrink: 0 !important;
+}
+#rb-mg-leather .rb-mgl-spec-v {
+  font-size: 13.5px !important; color: var(--rb-text) !important; text-align: right !important;
+}
+
+/* ── Visual side ── */
+#rb-mg-leather .rb-mgl-visual { position: relative !important; }
+#rb-mg-leather .rb-mgl-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-mg-leather .rb-mgl-swatches { display: flex !important; gap: 10px !important; margin-top: 18px !important; }
+#rb-mg-leather .rb-mgl-sw {
+  width: 34px !important; height: 34px !important; border-radius: 50% !important;
+  border: 2px solid rgba(255,255,255,.15) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-mg-leather .rb-mgl-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-leather .rb-mgl-wrap { grid-template-columns: 1fr !important; }
+  #rb-mg-leather .rb-mgl-visual { order: -1 !important; max-width: 460px !important; margin: 0 auto !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-leather .rb-mgl-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-mg-leather .rb-mgl-title { font-size: 30px !important; }
+  #rb-mg-leather .rb-mgl-spec-row { text-align: left !important; }
+  #rb-mg-leather .rb-mgl-swatches { justify-content: center !important; }
+}
+</style>
+
+<div id="rb-mg-leather">
+  <a id="nappa-leather"></a>
+  <div class="rb-mgl-wrap">
+
+    <!-- Copy (left on desktop — alternates with Carbon Fiber above) -->
+    <div class="rb-mgl-copy">
+      <div class="rb-mgl-num">Material 02</div>
+      <h2 class="rb-mgl-title">Nappa Leather</h2>
+      <p class="rb-mgl-p">
+        Full-grain Nappa leather — the same quality tier used in high-end European sport car interiors.
+        Nappa is tanned to stay soft rather than stiff, so it wraps cleanly around tight curves like a
+        steering wheel rim without wrinkling or cracking over time.
+      </p>
+      <p class="rb-mgl-p">
+        Available <strong>smooth</strong> or <strong>perforated</strong> for extra grip and breathability,
+        and hand-stitched with a contrast thread color of your choice.
+      </p>
+      <div class="rb-mgl-specs">
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Grade</span>
+          <span class="rb-mgl-spec-v">Full-Grain Nappa</span>
+        </div>
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Texture</span>
+          <span class="rb-mgl-spec-v">Smooth or Perforated</span>
+        </div>
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Stitching</span>
+          <span class="rb-mgl-spec-v">Hand-stitched, any thread color</span>
+        </div>
+        <div class="rb-mgl-spec-row">
+          <span class="rb-mgl-spec-k">Used On</span>
+          <span class="rb-mgl-spec-v">Steering wheels, shift knobs, horn pads, handbrakes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div class="rb-mgl-visual">
+      <img class="rb-mgl-img" src="https://therunbird.com/images/MainPAge/leather.png" alt="Full-grain Nappa leather, smooth and perforated finishes">
+      <div class="rb-mgl-swatches">
+        <span class="rb-mgl-sw" style="background:#0c0c0c" title="Black"></span>
+        <span class="rb-mgl-sw" style="background:#3a2418" title="Brown"></span>
+        <span class="rb-mgl-sw" style="background:#8f8578" title="Beige"></span>
+        <span class="rb-mgl-sw" style="background:#7a1414" title="Red"></span>
+        <span class="rb-mgl-sw" style="background:#f0f0f0" title="Custom thread"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-leather');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

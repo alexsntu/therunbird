@@ -1,0 +1,189 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Materials Guide Block 2: Carbon Fiber
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Materials Guide page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-mg-carbon — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-mg-carbon,
+#rb-mg-carbon *,
+#rb-mg-carbon *::before,
+#rb-mg-carbon *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-carbon {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-carbon .rb-mgc-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+/* ── Visual side ── */
+#rb-mg-carbon .rb-mgc-visual { position: relative !important; }
+#rb-mg-carbon .rb-mgc-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-mg-carbon .rb-mgc-swatches { display: flex !important; gap: 10px !important; margin-top: 18px !important; }
+#rb-mg-carbon .rb-mgc-sw {
+  width: 34px !important; height: 34px !important; border-radius: 50% !important;
+  border: 2px solid rgba(255,255,255,.15) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── Copy side ── */
+#rb-mg-carbon .rb-mgc-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  color: var(--rb-accent) !important; margin-bottom: 12px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-carbon .rb-mgc-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+#rb-mg-carbon .rb-mgc-p {
+  font-size: 15px !important; color: #999 !important; line-height: 1.8 !important;
+  margin: 0 0 16px !important; font-weight: 300 !important;
+}
+#rb-mg-carbon .rb-mgc-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-mg-carbon .rb-mgc-p:last-of-type { margin-bottom: 24px !important; }
+
+#rb-mg-carbon .rb-mgc-specs {
+  border-top: 1px solid var(--rb-border) !important;
+  padding-top: 18px !important;
+}
+#rb-mg-carbon .rb-mgc-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-mg-carbon .rb-mgc-spec-row:last-child { border-bottom: none !important; }
+#rb-mg-carbon .rb-mgc-spec-k {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--rb-text2) !important; flex-shrink: 0 !important;
+}
+#rb-mg-carbon .rb-mgc-spec-v {
+  font-size: 13.5px !important; color: var(--rb-text) !important; text-align: right !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-mg-carbon .rb-mgc-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-carbon .rb-mgc-wrap { grid-template-columns: 1fr !important; }
+  #rb-mg-carbon .rb-mgc-visual { order: -1 !important; max-width: 460px !important; margin: 0 auto !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-carbon .rb-mgc-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-mg-carbon .rb-mgc-title { font-size: 30px !important; }
+  #rb-mg-carbon .rb-mgc-spec-row { text-align: left !important; }
+  #rb-mg-carbon .rb-mgc-swatches { justify-content: center !important; }
+}
+</style>
+
+<div id="rb-mg-carbon">
+  <a id="carbon-fiber"></a>
+  <div class="rb-mgc-wrap">
+
+    <!-- Visual -->
+    <div class="rb-mgc-visual">
+      <img class="rb-mgc-img" src="https://therunbird.com/images/MainPAge/Carbon.png" alt="Aerospace-grade carbon fiber with 2x2 twill weave">
+      <div class="rb-mgc-swatches">
+        <span class="rb-mgc-sw" style="background:#0c0c0c" title="Black"></span>
+        <span class="rb-mgc-sw" style="background:#7a1414" title="Red"></span>
+        <span class="rb-mgc-sw" style="background:#16305c" title="Blue"></span>
+        <span class="rb-mgc-sw" style="background:#C8A84C" title="Gold"></span>
+        <span class="rb-mgc-sw" style="background:#9a9a9a" title="Silver"></span>
+      </div>
+    </div>
+
+    <!-- Copy -->
+    <div class="rb-mgc-copy">
+      <div class="rb-mgc-num">Material 01</div>
+      <h2 class="rb-mgc-title">Carbon Fiber</h2>
+      <p class="rb-mgc-p">
+        Aerospace-grade carbon fiber, laid up in a distinctive <strong>2&times;2 twill weave</strong> — the
+        same pattern-and-weight class used in motorsport and aircraft interiors. It's stiff, lightweight,
+        and shows a deep, dimensional pattern under light instead of a flat print.
+      </p>
+      <p class="rb-mgc-p">
+        Every carbon piece is finished with multiple coats of lacquer and wet-sanded by hand between coats,
+        then buffed to either a deep gloss or a low-glare matte — your choice.
+      </p>
+      <div class="rb-mgc-specs">
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Weave</span>
+          <span class="rb-mgc-spec-v">2&times;2 Twill</span>
+        </div>
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Finish</span>
+          <span class="rb-mgc-spec-v">Gloss or Matte</span>
+        </div>
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Colors</span>
+          <span class="rb-mgc-spec-v">Black, Red, Blue, Gold, Silver</span>
+        </div>
+        <div class="rb-mgc-spec-row">
+          <span class="rb-mgc-spec-k">Used On</span>
+          <span class="rb-mgc-spec-v">Steering wheels, shift knobs, handbrakes, side skirts</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-carbon');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

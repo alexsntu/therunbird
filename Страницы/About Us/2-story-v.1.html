@@ -1,0 +1,197 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — About Us Block 2: Our Story
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, About Us page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-ab-story — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-ab-story,
+#rb-ab-story *,
+#rb-ab-story *::before,
+#rb-ab-story *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-ab-story {
+  --rb-bg:      #080808;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#rb-ab-story .rb-as-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 88px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+/* ── Copy side ── */
+#rb-ab-story .rb-as-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-ab-story .rb-as-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.04 !important;
+  margin: 0 0 24px !important;
+}
+#rb-ab-story .rb-as-p {
+  font-size: 15px !important;
+  color: #999 !important;
+  line-height: 1.8 !important;
+  margin: 0 0 18px !important;
+  font-weight: 300 !important;
+}
+#rb-ab-story .rb-as-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-ab-story .rb-as-p:last-of-type { margin-bottom: 0 !important; }
+
+#rb-ab-story .rb-as-quote {
+  margin-top: 28px !important;
+  padding: 20px 24px !important;
+  border-left: 2px solid var(--rb-accent) !important;
+  background: rgba(200,168,76,.05) !important;
+  border-radius: 0 10px 10px 0 !important;
+}
+#rb-ab-story .rb-as-quote p {
+  margin: 0 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  color: var(--rb-text) !important;
+  line-height: 1.4 !important;
+}
+
+/* ── Visual side ── */
+#rb-ab-story .rb-as-visual { position: relative !important; }
+#rb-ab-story .rb-as-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/5 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-ab-story .rb-as-badge {
+  position: absolute !important;
+  left: -20px !important;
+  bottom: -20px !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.28) !important;
+  border-radius: 14px !important;
+  padding: 16px 22px !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
+}
+#rb-ab-story .rb-as-badge-n {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 30px !important;
+  font-weight: 900 !important;
+  color: var(--rb-accent) !important;
+  line-height: 1 !important;
+}
+#rb-ab-story .rb-as-badge-l {
+  font-size: 10.5px !important;
+  color: var(--rb-text2) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .09em !important;
+  margin-top: 4px !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-ab-story .rb-as-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-ab-story .rb-as-wrap { grid-template-columns: 1fr !important; }
+  #rb-ab-story .rb-as-visual { order: -1 !important; max-width: 420px !important; margin: 0 auto !important; }
+  #rb-ab-story .rb-as-badge { left: 16px !important; bottom: -16px !important; padding: 12px 18px !important; }
+}
+@media (max-width: 768px) {
+  #rb-ab-story .rb-as-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-ab-story .rb-as-title { font-size: 30px !important; }
+  #rb-ab-story .rb-as-quote { text-align: left !important; }
+  #rb-ab-story .rb-as-badge { left: 50% !important; transform: translateX(-50%) !important; bottom: -14px !important; }
+}
+</style>
+
+<div id="rb-ab-story">
+  <div class="rb-as-wrap">
+
+    <!-- Copy -->
+    <div class="rb-as-copy">
+      <span class="rb-as-eyebrow">Why We Started</span>
+      <h2 class="rb-as-title">A Workshop, Not A Warehouse</h2>
+      <p class="rb-as-p">
+        RunBird started in 2015 out of frustration — we couldn't find Corvette interior parts that actually
+        felt right. Everything on the market was either generic, poorly fitted, or mass-produced overseas.
+        So we set up our own workshop and started making the parts ourselves.
+      </p>
+      <p class="rb-as-p">
+        Every order that comes in is built from scratch, by hand, for that one customer. We don't keep a
+        warehouse of finished pieces waiting to ship — we cut, wrap, and stitch <strong>after</strong> you
+        order, in the exact material, color, and thread you chose.
+      </p>
+      <p class="rb-as-p">
+        That's slower than pulling something off a shelf. It's also the only way we know to make something
+        that actually feels custom.
+      </p>
+      <div class="rb-as-quote">
+        <p>&ldquo;No two RunBird pieces are ever exactly the same — because no two orders are.&rdquo;</p>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div class="rb-as-visual">
+      <!-- Placeholder — replace with a real workshop photo -->
+      <img class="rb-as-img" src="https://therunbird.com/images/MainPAge/1-step.png" alt="RunBird workshop — hand-cutting materials for a custom Corvette build">
+      <div class="rb-as-badge">
+        <div class="rb-as-badge-n">2015</div>
+        <div class="rb-as-badge-l">Our Workshop Opened</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-ab-story');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

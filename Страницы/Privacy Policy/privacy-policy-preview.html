@@ -1,0 +1,2680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy :: RunBird</title>
+<meta name="description" content="What personal information RunBird collects, how it's used, who it's shared with (only the shipping carrier), and your privacy rights as a US or Canadian customer.">
+<style>
+  html { background:#080808; }
+  body { margin: 0; background: #080808; font-family: 'Inter', sans-serif; }
+</style>
+</head>
+<body class="desktop-screen user-is-guest">
+
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Header Block v2.1
+     CS-Cart > Design > Layouts > Html+Smarty block (Header area)
+     Cache: DISABLED (block contains auth state via Smarty)
+     All styles scoped under #rb-header — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-header,
+#rb-header *,
+#rb-header *::before,
+#rb-header *::after {
+  box-sizing: border-box !important;
+}
+#rb-header ul,
+#rb-header li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-header a {
+  text-decoration: none !important;
+}
+#rb-header button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: transparent !important;
+}
+
+/* ── Fix native theme header wrapper ──
+   UniTheme2 wraps our block in <div class="tygh-header header-grid light-header v2">
+   (4 classes). It's a CSS GRID container on mobile with its own fixed row height
+   (measured live: 56px) — our #rb-header spacer becomes a GRID ITEM inside it
+   instead of a normal full-width block, so it gets squeezed to width:0 in a
+   narrow auto column and vertically centered in that 56px row (confirmed via
+   getBoundingClientRect: top:-29px = -(114-56)/2). A 2-class selector here
+   (.tygh-header.header-grid) loses to the theme's actual 4-class rule on
+   specificity alone — !important on both sides doesn't matter, specificity
+   decides first. Matching all 4 classes + forcing display:block kills the
+   grid placement so #rb-header flows as a normal block again. */
+.tygh-header.header-grid.light-header.v2 {
+  display: block !important;
+  height: auto !important;
+  min-height: var(--rb-header-h, 104px) !important;
+  overflow: visible !important;
+}
+
+/* ── CSS tokens ── */
+#rb-header {
+  --rb-accent:     #C8A84C;
+  --rb-accent-h:   #D9BA62;
+  --rb-accent-b:   rgba(200,168,76,.28);
+  --rb-logo:       #f1ebdb;
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+  --rb-border-s:   rgba(255,255,255,.14);
+
+  display: block !important;
+  height: 104px !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ── Fixed wrapper ── */
+#rb-header .rb-fixed-wrap {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 99999 !important;
+}
+
+/* ── Announcement bar ── */
+#rb-header .rb-ann {
+  background: var(--rb-accent) !important;
+  color: #000 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  padding: 9px 16px !important;
+  display: block !important;
+  line-height: 1.4 !important;
+}
+
+/* ── Nav bar ── */
+#rb-header .rb-nav {
+  position: relative !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+  background: rgba(8,8,8,.97) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* ── Nav inner ── */
+#rb-header .rb-nav-inner {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 48px !important;
+  height: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 32px !important;
+}
+
+/* ── Logo ── */
+#rb-header .rb-logo-wrap {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  color: inherit !important;
+}
+#rb-header .rb-logo-svg {
+  height: 52px !important;
+  width: auto !important;
+  display: block !important;
+}
+#rb-header .rb-logo-svg path {
+  fill: var(--rb-logo) !important;
+}
+
+/* ── Nav links ── */
+#rb-header .rb-nav-links {
+  display: flex !important;
+  gap: 28px !important;
+}
+#rb-header .rb-nav-links a {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text2) !important;
+  transition: color .2s !important;
+  position: relative !important;
+  white-space: nowrap !important;
+}
+#rb-header .rb-nav-links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -4px !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 1px !important;
+  background: var(--rb-accent) !important;
+  transition: width .2s !important;
+}
+#rb-header .rb-nav-links a:hover {
+  color: var(--rb-text) !important;
+}
+#rb-header .rb-nav-links a:hover::after {
+  width: 100% !important;
+}
+
+/* ── Nav right ── */
+#rb-header .rb-nav-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── Icon buttons ── */
+#rb-header .rb-icon-btn {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--rb-border) !important;
+  background: transparent !important;
+  color: var(--rb-text2) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: border-color .2s, color .2s !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  line-height: 1 !important;
+}
+#rb-header .rb-icon-btn:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-accent) !important;
+}
+#rb-header .rb-icon-btn.active {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-accent) !important;
+  background: rgba(200,168,76,.08) !important;
+}
+#rb-header .rb-icon-btn svg {
+  display: block !important;
+}
+
+/* ── Account dropdown wrapper ── */
+#rb-header .rb-acc-wrap {
+  position: relative !important;
+}
+
+/* ── Account dropdown panel ── */
+#rb-header .rb-acc-drop {
+  position: absolute !important;
+  top: calc(100% + 10px) !important;
+  right: 0 !important;
+  width: 280px !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.22) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(200,168,76,.05) !important;
+  z-index: 100000 !important;
+  opacity: 0 !important;
+  transform: translateY(-8px) !important;
+  pointer-events: none !important;
+  transition: opacity .2s ease, transform .2s ease !important;
+  overflow: hidden !important;
+}
+#rb-header .rb-acc-drop.open {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* Dropdown header row */
+#rb-header .rb-acc-drop-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 16px 12px !important;
+  border-bottom: 1px solid rgba(200,168,76,.1) !important;
+}
+#rb-header .rb-acc-drop-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+}
+#rb-header .rb-acc-drop-close {
+  width: 24px !important; height: 24px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  background: transparent !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 13px !important; line-height: 1 !important;
+  transition: border-color .18s, color .18s !important;
+  padding: 0 !important; box-shadow: none !important;
+}
+#rb-header .rb-acc-drop-close:hover {
+  border-color: rgba(255,255,255,.3) !important;
+  color: var(--rb-text) !important;
+}
+
+/* Logged-in greeting */
+#rb-header .rb-acc-drop-user {
+  padding: 10px 16px !important;
+  font-size: 12px !important;
+  color: #555 !important;
+  font-family: 'Inter', sans-serif !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+  line-height: 1.4 !important;
+}
+#rb-header .rb-acc-drop-user strong {
+  color: var(--rb-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Dropdown nav links */
+#rb-header .rb-acc-drop-links {
+  padding: 6px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-header .rb-acc-drop-links a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+  padding: 10px 16px !important;
+  font-size: 13.5px !important;
+  color: #888 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  transition: color .16s, background .16s, padding-left .16s !important;
+  white-space: nowrap !important;
+}
+#rb-header .rb-acc-drop-links a svg {
+  color: var(--rb-accent) !important;
+  opacity: .55 !important;
+  flex-shrink: 0 !important;
+  transition: opacity .16s !important;
+  display: block !important;
+}
+#rb-header .rb-acc-drop-links a:hover {
+  color: var(--rb-text) !important;
+  background: rgba(200,168,76,.045) !important;
+  padding-left: 22px !important;
+}
+#rb-header .rb-acc-drop-links a:hover svg {
+  opacity: .9 !important;
+}
+
+/* Track order section */
+#rb-header .rb-acc-track {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-header .rb-acc-track-label {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #444 !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+#rb-header .rb-acc-track-form {
+  display: flex !important;
+  gap: 6px !important;
+}
+#rb-header .rb-acc-track-input {
+  flex: 1 !important;
+  height: 34px !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  border-radius: 6px !important;
+  padding: 0 11px !important;
+  font-size: 12px !important;
+  color: var(--rb-text) !important;
+  font-family: 'Inter', sans-serif !important;
+  outline: none !important;
+  transition: border-color .18s !important;
+  box-shadow: none !important;
+}
+#rb-header .rb-acc-track-input::placeholder { color: #444 !important; }
+#rb-header .rb-acc-track-input:focus {
+  border-color: rgba(200,168,76,.38) !important;
+}
+#rb-header .rb-acc-track-submit {
+  width: 34px !important; height: 34px !important;
+  background: rgba(200,168,76,.1) !important;
+  border: 1px solid rgba(200,168,76,.28) !important;
+  border-radius: 6px !important;
+  color: var(--rb-accent) !important;
+  cursor: pointer !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+  transition: background .18s !important;
+  padding: 0 !important; box-shadow: none !important;
+}
+#rb-header .rb-acc-track-submit:hover {
+  background: rgba(200,168,76,.22) !important;
+}
+
+/* Auth buttons (guest) */
+#rb-header .rb-acc-btns {
+  display: flex !important;
+  gap: 8px !important;
+  padding: 12px 16px 16px !important;
+}
+#rb-header .rb-acc-btn-sign {
+  flex: 1 !important;
+  height: 36px !important;
+  background: var(--rb-accent) !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: 7px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 14px !important; font-weight: 800 !important; letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  transition: background .18s !important;
+  text-decoration: none !important;
+  box-shadow: none !important; line-height: 1 !important;
+}
+#rb-header .rb-acc-btn-sign:hover {
+  background: var(--rb-accent-h) !important;
+  color: #000 !important;
+}
+#rb-header .rb-acc-btn-reg {
+  flex: 1 !important;
+  height: 36px !important;
+  background: transparent !important;
+  color: var(--rb-text2) !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  border-radius: 7px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 14px !important; font-weight: 700 !important; letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  transition: border-color .18s, color .18s !important;
+  text-decoration: none !important;
+  box-shadow: none !important; line-height: 1 !important;
+}
+#rb-header .rb-acc-btn-reg:hover {
+  border-color: rgba(255,255,255,.32) !important;
+  color: var(--rb-text) !important;
+}
+
+/* Sign out link (logged in) */
+#rb-header .rb-acc-btn-out {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 4px 16px 14px !important;
+  height: 34px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 7px !important;
+  color: #555 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 700 !important; letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: border-color .18s, color .18s !important;
+  text-decoration: none !important;
+}
+#rb-header .rb-acc-btn-out:hover {
+  border-color: rgba(255,80,80,.35) !important;
+  color: #ff6b6b !important;
+}
+
+/* ── Cart button ── */
+#rb-header .rb-cart-btn {
+  height: 38px !important;
+  padding: 0 22px !important;
+  background: var(--rb-accent) !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: background .2s, transform .15s !important;
+  box-shadow: none !important;
+  line-height: 1 !important;
+}
+#rb-header .rb-cart-btn:hover {
+  background: var(--rb-accent-h) !important;
+  transform: translateY(-1px) !important;
+}
+#rb-header .rb-cart-btn svg {
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── Hamburger ── */
+#rb-header .rb-hamburger {
+  display: none !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  padding: 6px !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#rb-header .rb-hamburger span {
+  width: 22px !important;
+  height: 2px !important;
+  background: var(--rb-text) !important;
+  border-radius: 2px !important;
+  display: block !important;
+  transition: transform .28s cubic-bezier(.77,0,.175,1), opacity .2s !important;
+}
+#rb-header .rb-hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg) !important;
+}
+#rb-header .rb-hamburger.active span:nth-child(2) {
+  opacity: 0 !important;
+  transform: scaleX(0) !important;
+}
+#rb-header .rb-hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg) !important;
+}
+
+/* ── Mobile menu open state ── */
+@keyframes rb-menuSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#rb-header .rb-nav-links.open {
+  display: flex !important;
+  flex-direction: column !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: #060606 !important;
+  padding: 8px 0 16px !important;
+  gap: 0 !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,.6) !important;
+  z-index: 99998 !important;
+  animation: rb-menuSlide .22s ease both !important;
+}
+#rb-header .rb-nav-links.open li {
+  border-bottom: 1px solid rgba(255,255,255,.045) !important;
+}
+#rb-header .rb-nav-links.open li:last-child {
+  border-bottom: none !important;
+}
+#rb-header .rb-nav-links.open a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 16px 24px !important;
+  font-size: 13px !important;
+  letter-spacing: .1em !important;
+  color: #888 !important;
+  transition: color .18s, background .18s, padding-left .18s !important;
+}
+#rb-header .rb-nav-links.open a::after {
+  content: none !important;
+  display: none !important;
+}
+#rb-header .rb-nav-links.open a:hover {
+  color: var(--rb-text) !important;
+  background: rgba(200,168,76,.05) !important;
+  padding-left: 30px !important;
+}
+#rb-header .rb-nav-links.open li.rb-cat-first a {
+  color: var(--rb-accent) !important;
+}
+
+/* ── Mobile-only menu items: search + account (hidden everywhere else) ──
+   Visually set apart from plain category links: tinted gold background,
+   icon always gold (not gray-until-hover like category links), so they
+   read as "quick actions" rather than blending into the nav list. */
+#rb-header .rb-mnav-search,
+#rb-header .rb-mnav-account {
+  display: none !important;
+}
+#rb-header .rb-nav-links.open .rb-mnav-search,
+#rb-header .rb-nav-links.open .rb-mnav-account {
+  display: block !important;
+  background: rgba(200,168,76,.05) !important;
+}
+#rb-header .rb-nav-links.open .rb-mnav-search {
+  border-bottom: 1px solid rgba(200,168,76,.18) !important;
+}
+#rb-header .rb-nav-links.open .rb-mnav-account {
+  border-top: 1px solid rgba(200,168,76,.18) !important;
+  border-bottom: none !important;
+}
+#rb-header .rb-mnav-search-btn,
+#rb-header .rb-nav-links.open a.rb-mnav-account-link {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  padding: 16px 24px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  transition: background .18s, padding-left .18s !important;
+}
+#rb-header .rb-mnav-search-btn svg,
+#rb-header .rb-nav-links.open a.rb-mnav-account-link svg {
+  flex-shrink: 0 !important;
+  color: var(--rb-accent) !important;
+}
+#rb-header .rb-mnav-search-btn:hover,
+#rb-header .rb-nav-links.open a.rb-mnav-account-link:hover {
+  background: rgba(200,168,76,.1) !important;
+  padding-left: 30px !important;
+}
+/* Secondary account links (Orders / Wish List / Comparison List) —
+   lighter weight than the primary My Account / Sign In link above them. */
+#rb-header .rb-nav-links.open a.rb-mnav-account-sub {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: #999 !important;
+  padding: 13px 24px !important;
+  border-top: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-header .rb-nav-links.open a.rb-mnav-account-sub svg {
+  opacity: .8 !important;
+}
+#rb-header .rb-nav-links.open a.rb-mnav-account-sub:hover {
+  color: var(--rb-text) !important;
+  padding-left: 30px !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  #rb-header {
+    height: var(--rb-header-h, 96px) !important;
+  }
+  #rb-header .rb-nav-inner {
+    padding: 0 16px !important;
+    height: 62px !important;
+    position: relative !important;
+    justify-content: space-between !important;
+  }
+  #rb-header .rb-logo-wrap {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 2 !important;
+  }
+  #rb-header .rb-logo-svg {
+    height: 40px !important;
+  }
+  #rb-header .rb-nav-links {
+    display: none !important;
+  }
+  #rb-header .rb-nav-right {
+    width: 100% !important;
+    justify-content: space-between !important;
+    gap: 0 !important;
+  }
+  #rb-header .rb-hamburger {
+    display: flex !important;
+    order: -1 !important;
+  }
+  #rb-header .rb-cart-btn {
+    display: flex !important;
+    padding: 0 14px !important;
+    font-size: 13px !important;
+    height: 34px !important;
+  }
+  #rb-header .rb-icon-btn {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Native CS-Cart mini-cart (Cart Content block, placed at
+   top of layout) — hide native trigger row, restyle +
+   reposition the dropdown panel under our .rb-cart-btn.
+   NOT scoped under #rb-header — native block lives outside it.
+   Desktop/tablet only (min-width:769px): on mobile the same
+   elements are reused by UniTheme2's sticky bottom nav panel,
+   so we leave them fully native there.
+════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+[id^="cart_status_"] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
+  z-index: 100001 !important;
+}
+[id^="cart_status_"] > [id^="sw_dropdown_"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.ty-dropdown-box__content--cart {
+  position: fixed !important;
+  top: 112px !important;
+  right: max(48px, calc((100vw - 1440px) / 2 + 48px)) !important;
+  left: auto !important;
+  width: 390px !important;
+  max-width: calc(100vw - 32px) !important;
+  margin: 0 !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.22) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(200,168,76,.05) !important;
+  z-index: 100000 !important;
+  padding: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #F0F0F0 !important;
+  overflow: hidden !important;
+}
+.ty-dropdown-box__content--cart * { box-sizing: border-box !important; }
+.ty-dropdown-box__content--cart.hidden { display: none !important; }
+.ty-dropdown-box__content--cart .ut2-popup-box-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 14px 16px 12px !important;
+  border-bottom: 1px solid rgba(200,168,76,.1) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: #F0F0F0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-btn-close {
+  width: 24px !important; height: 24px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  color: #666 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 11px !important;
+  transition: border-color .18s, color .18s !important;
+}
+.ty-dropdown-box__content--cart .ut2-btn-close:hover {
+  border-color: rgba(255,255,255,.3) !important;
+  color: #F0F0F0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-added-products {
+  max-height: 320px !important;
+  overflow-y: auto !important;
+  padding: 4px 0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-added-products__itself-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+.ty-dropdown-box__content--cart .product-pict {
+  flex-shrink: 0 !important;
+  width: 56px !important; height: 56px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #161616 !important;
+}
+.ty-dropdown-box__content--cart .product-pict img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.ty-dropdown-box__content--cart .desc {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+.ty-dropdown-box__content--cart .product-name a {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #F0F0F0 !important;
+  line-height: 1.35 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.ty-dropdown-box__content--cart .product-name a:hover {
+  color: #C8A84C !important;
+}
+.ty-dropdown-box__content--cart .mix-quantity-x-price {
+  font-size: 12px !important;
+  color: #808080 !important;
+  margin-top: 4px !important;
+  display: block !important;
+}
+.ty-dropdown-box__content--cart .mix-quantity-x-price .unit-price {
+  color: #C8A84C !important;
+  font-weight: 600 !important;
+}
+.ty-dropdown-box__content--cart .ut2-minicart__rm-btn a {
+  width: 26px !important; height: 26px !important;
+  border-radius: 6px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  color: #555 !important;
+  transition: color .18s, background .18s !important;
+  flex-shrink: 0 !important;
+}
+.ty-dropdown-box__content--cart .ut2-minicart__rm-btn a:hover {
+  color: #ff6b6b !important;
+  background: rgba(255,80,80,.08) !important;
+}
+.ty-dropdown-box__content--cart .cart_subtotal {
+  padding: 12px 16px !important;
+  border-top: 1px solid rgba(255,255,255,.04) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  font-size: 12.5px !important;
+}
+.ty-dropdown-box__content--cart .ut2-cart_subtotal__caption {
+  color: #808080 !important;
+}
+.ty-dropdown-box__content--cart .ut2-cart_subtotal__data {
+  color: #F0F0F0 !important;
+  font-weight: 600 !important;
+}
+.ty-dropdown-box__content--cart .ut2-cart_subtotal__data strong {
+  color: #C8A84C !important;
+}
+.ty-dropdown-box__content--cart .cart_buttons {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+  padding: 4px 16px 16px !important;
+}
+.ty-dropdown-box__content--cart .cart_buttons .ty-btn {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  height: 40px !important;
+  min-width: 0 !important;
+  padding: 0 10px !important;
+  border-radius: 7px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  gap: 5px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__outline {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  color: #C8C8C8 !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__outline:hover {
+  border-color: rgba(255,255,255,.32) !important;
+  color: #F0F0F0 !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__primary {
+  background: #C8A84C !important;
+  border: none !important;
+  color: #000 !important;
+}
+.ty-dropdown-box__content--cart .ty-btn__primary:hover {
+  background: #D9BA62 !important;
+}
+} /* end @media (min-width: 769px) — cart */
+
+/* Mobile: the cart panel stays fully native (see comment above), but its
+   native `top:56px` assumes the theme's own default 56px mobile header.
+   Ours is taller and dynamic (announcement bar can wrap to 2 lines) — reuse
+   the same --rb-header-h var the JS below already syncs, so the panel's top
+   edge (title bar + close button) clears our fixed header instead of
+   rendering underneath it (confirmed via getBoundingClientRect: native
+   top:56px vs real header height 114px left 58px of the panel hidden). */
+/* Only when opened via OUR top #rb-cart-btn (see .rb-cart-top-pos toggle in
+   script below) — the exact same panel is reused by CS-Cart's native bottom
+   sticky nav Cart icon, which must keep its own native mobile position. */
+@media (max-width: 768px) {
+  .ty-dropdown-box__content--cart.rb-cart-top-pos {
+    top: calc(var(--rb-header-h, 96px) + 10px) !important;
+    left: 5px !important;
+    right: 5px !important;
+    width: auto !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   Native CS-Cart search block — native toggle link hidden
+   (its inline onclick walks to the wrong sibling), panel
+   restyled + driven by our own .rb-search-open class.
+   NOT scoped under #rb-header — native block lives outside it.
+   Unlike cart, this styling applies at ALL widths: our mobile
+   hamburger menu has its own "Search" item that opens this same
+   panel via .rb-search-open (see script below), so it needs to
+   look right on mobile too. Only the native top-bar toggle link
+   is hidden desktop-only, since the bottom sticky panel on mobile
+   still needs its own native trigger icon visible.
+════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  .ut2-btn-search { display: none !important; }
+}
+.ty-search-block {
+  position: fixed !important;
+  top: 104px !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  background: rgba(6,6,6,.98) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(200,168,76,.22) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
+  z-index: 100000 !important;
+  padding: 22px 48px !important;
+  display: none !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.ty-search-block * { box-sizing: border-box !important; }
+.ty-search-block.rb-search-open {
+  display: block !important;
+}
+.ty-search-block form {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+}
+.ty-search-block__input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 46px !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: 8px !important;
+  padding: 0 16px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 15px !important;
+  color: #F0F0F0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color .18s !important;
+}
+.ty-search-block__input::placeholder { color: #555 !important; }
+.ty-search-block__input:focus { border-color: rgba(200,168,76,.38) !important; }
+.ty-search-magnifier {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  width: 46px !important;
+  height: 46px !important;
+  flex-shrink: 0 !important;
+  background: #C8A84C !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: #000 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  cursor: pointer !important;
+  transition: background .18s !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.ty-search-magnifier:hover { background: #D9BA62 !important; }
+.ty-search-block .rb-search-close {
+  width: 46px !important;
+  height: 46px !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 8px !important;
+  color: #888 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 15px !important;
+  transition: border-color .18s, color .18s !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.ty-search-block .rb-search-close:hover {
+  border-color: rgba(255,255,255,.32) !important;
+  color: #F0F0F0 !important;
+}
+
+/* ── Live search results (third-party module: #esqs_container / .ty-search-item) ── */
+.ty-search-block .esqs-container {
+  position: absolute !important;
+  top: calc(100% + 12px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  max-height: 420px !important;
+  overflow-y: auto !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.18) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.7) !important;
+  padding: 6px !important;
+}
+.ty-search-block .cm-search-spinner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+}
+.ty-search-block .cm-search-spinner img {
+  width: 28px !important;
+  height: 28px !important;
+  opacity: .6 !important;
+}
+.ty-search-block .ecl-live-search-category {
+  padding: 10px 12px 6px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #C8A84C !important;
+}
+.ty-search-block .ty-search-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 18px !important;
+  padding: 12px !important;
+  border-radius: 10px !important;
+  transition: background .16s !important;
+}
+.ty-search-block .ty-search-item:hover {
+  background: rgba(200,168,76,.06) !important;
+}
+.ty-search-block .ty-search-item__picture {
+  flex-shrink: 0 !important;
+  width: 96px !important;
+  height: 96px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  background: #161616 !important;
+}
+.ty-search-block .ty-search-item__picture img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.ty-search-block .ty-search-item__information {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+.ty-search-block .ty-search-item__title a {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #F0F0F0 !important;
+  display: block !important;
+  line-height: 1.35 !important;
+}
+.ty-search-block .ty-search-item__title a:hover { color: #C8A84C !important; }
+.ty-search-block .ty-search-item__product-code {
+  font-size: 13px !important;
+  color: #666 !important;
+  display: block !important;
+  margin-top: 4px !important;
+}
+.ty-search-block .ty-search-item__price {
+  flex-shrink: 0 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #C8A84C !important;
+}
+@media (max-width: 768px) {
+  .ty-search-block {
+    top: var(--rb-header-h, 96px) !important;
+    padding: 16px !important;
+  }
+  .ty-search-block form {
+    gap: 8px !important;
+  }
+  .ty-search-block .ty-search-item__picture {
+    width: 64px !important;
+    height: 64px !important;
+  }
+}
+
+</style>
+
+<div id="rb-header">
+
+  <!-- Fixed wrapper — breaks out of any theme container -->
+  <div class="rb-fixed-wrap">
+
+    <!-- ══ Announcement bar ══ -->
+    <div class="rb-ann">
+      ✦ &nbsp; Handmade to Order &nbsp; ✦ &nbsp; Exclusively Crafted for the C6 Corvette &nbsp; ✦
+    </div>
+
+    <!-- ══ Nav ══ -->
+    <div class="rb-nav">
+      <div class="rb-nav-inner">
+
+        <!-- Logo -->
+        <a href="/" class="rb-logo-wrap" aria-label="RunBird">
+          <svg class="rb-logo-svg" viewBox="0 0 272.43 107.57" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M185.58,69.08c-9.31,20.17-40.69,28.79-57.39,17.33-.09-.06-.05-.21,.06-.21,5.66-.28,12.26-.06,18.64-1.16,8.23-1.42,15.05-6.04,20.23-12.58,2.08-2.62,4.17-3.67,7.4-3.44,3.52,.25,7.07,.06,11.06,.06"/>
+            <path d="M156.61,77.46c-12.73,10.05-35.05,6.34-46.25-7.8-.17-.22,0-.53,.28-.51,5.95,.33,11.22-1.27,16.45,3.33,8.34,7.35,18.59,8.05,29.52,4.98"/>
+            <path d="M135.84,30.14c-1.89-.16-9.32-.13-10.57,.06-2.42,6.15-4.86,12.35-7.3,18.55-.09,0-.18-.03-.27-.04-.1-.35-.22-.7-.29-1.06-.66-3.08-1.31-6.17-1.97-9.25-.37-1.75-.76-3.49-1.12-5.24-.41-2.03-1.74-3.19-3.89-3.12-1.68,.06-3.36,0-5.05,0h-3.05c-.27,.63-.54,1.19-.77,1.77-1.74,4.4-3.48,8.79-5.21,13.19-2.08,5.28-4.15,10.56-6.23,15.84-.17,.42-.45,.83-.28,1.32,1.93,.17,9.24,.13,10.49-.08,.61-1.56,1.25-3.17,1.88-4.78,.64-1.61,1.27-3.23,1.91-4.84,.64-1.61,1.25-3.24,1.92-4.83,.66-1.59,1.16-3.24,2.04-4.97,.18,.66,.32,1.11,.42,1.57,1.1,5.03,2.19,10.06,3.29,15.09,.08,.36,.15,.72,.26,1.07,.35,1.12,1.12,1.75,2.3,1.84,.37,.03,.74,.02,1.1,.02h7.73c.2-.46,.39-.83,.54-1.22,3.97-10.01,7.94-20.02,11.91-30.04,.1-.27,.14-.56,.2-.86"/>
+            <path d="M227.21,48.65c4.35-1.79,7.09-4.92,7.98-9.61,.68-3.59-.79-6.83-4.65-8.23-.15-.05-.3-.09-.45-.14-1.46-.47-2.96-.65-4.5-.64-6.04,.01-12.09,0-18.13,0h-1.08c-.26,.59-.49,1.06-.68,1.54-1,2.48-2,4.97-2.99,7.45-2.87,7.22-5.74,14.44-8.6,21.67-.18,.46-.56,.9-.32,1.45,1.83,.15,9.16,.12,10.49-.05,.17-.38,.37-.8,.54-1.23,1.25-3.12,2.49-6.24,3.75-9.36,.21-.52,.3-1.13,.79-1.5h4.14c.25,.55,.49,1.07,.71,1.6,1.18,2.81,2.34,5.62,3.52,8.43,.16,.39,.32,.78,.51,1.15,.35,.72,.88,1.08,1.75,1.06,2.89-.05,5.78,0,8.67-.02,.23,0,.53,.09,.75-.36-1.69-4.01-3.64-8-5.4-12.15,.44-.16,.78-.29,1.12-.4,.7-.23,1.42-.4,2.09-.68m-7.96-4.11c-.86,.21-1.76,.3-2.64,.32-1.67,.05-3.35,0-5.15,0,.28-1.45,2.58-7.44,3.66-9.6,.31-.04,.66-.1,1.02-.11,1.15-.02,2.31-.04,3.46,0,.68,.02,1.36,.09,2.02,.24,1.62,.36,2.49,1.48,2.5,3.15,0,2.84-1.94,5.29-4.87,5.99"/>
+            <path d="M272.33,39.03c-.36-3.48-2.11-5.98-5.32-7.42-.52-.24-1.07-.44-1.61-.62-1.91-.6-3.86-.96-5.88-.95-4.62,.02-9.25,0-13.87,.01-.36,0-.71,.05-1,.07-.74,1.32-11.48,28.04-12.61,31.36-.06,.19-.06,.4-.1,.71,.58,.02,1.09,.06,1.6,.06h14.66c1.94,0,3.88-.04,5.82-.28,4.94-.6,9.15-2.62,12.51-6.3,2.88-3.14,4.54-6.9,5.5-11.01,.43-1.86,.5-3.75,.3-5.64m-11.16,5.46c-.7,2.48-1.73,4.84-3,7.08-.31,.55-.67,1.07-1.05,1.57-1.86,2.43-4.27,3.84-7.37,3.94-1.47,.05-2.94,.02-4.41,0-.14,0-.27-.1-.44-.16,0-.18-.04-.34,0-.47,2.73-6.98,5.47-13.96,8.16-20.83,.77-.45,1.47-.27,2.14-.29,.68-.02,1.36,.04,2.04,.06,.81,.03,1.54,.32,2.23,.7,1.24,.67,1.95,1.71,2.15,3.11,.25,1.8,.02,3.56-.46,5.29"/>
+            <path d="M95.96,30.1h-10.51c-.32,.74-.62,1.4-.89,2.08-2.64,6.64-5.27,13.28-7.91,19.92-.21,.54-.41,1.09-.67,1.6-.86,1.65-2.09,2.9-3.94,3.4-1.44,.39-2.92,.41-4.38,.08-1.84-.41-2.84-1.86-2.6-3.74,.07-.52,.21-1.03,.37-1.53,.29-.9,.61-1.79,.95-2.67,2.31-5.92,4.63-11.84,6.93-17.77,.17-.42,.49-.82,.33-1.37h-10.48c-.36,.82-.75,1.62-1.07,2.44-1.58,4.01-3.14,8.02-4.71,12.04-.69,1.76-1.38,3.52-2.05,5.29-.64,1.69-.99,3.43-.89,5.25,.12,2.06,.96,3.74,2.53,5.07,.93,.79,1.96,1.45,3.14,1.75,1.42,.37,2.86,.76,4.31,.9,3.36,.32,6.72,.3,10.06-.27,2.24-.39,4.39-1.05,6.36-2.21,3.12-1.84,5.17-4.57,6.48-7.89,2.82-7.13,5.63-14.27,8.43-21.41,.11-.27,.13-.58,.2-.94"/>
+            <path d="M199.34,30.06h-9.92c-.6,.96-.98,1.94-1.36,2.91-1.22,3.07-2.43,6.14-3.66,9.22-2.44,6.14-4.89,12.28-7.33,18.43-.19,.48-.33,.97-.49,1.48,1.36,.23,9.47,.24,10.84,0,4.19-10.58,8.39-21.2,12.63-31.91-.32-.05-.51-.12-.7-.12"/>
+            <path d="M121.95,20.5c3.27,.21,5.38-.75,7.48-3.13,5.24-5.95,12.13-10.16,20.44-11.45,6.17-.96,12.55-.81,18.09-1.03,.32-.01,.43-.44,.15-.61-16.94-9.8-47.75-2.04-57.19,15.92l.39,.24c3.81-.01,7.25-.16,10.64,.06"/>
+            <path d="M176.17,35.59c4.12-2.93,6.14-6.96,5.91-12.03-.03-.68-.14-1.34-.32-1.97-.04-.13-.08-.26-.12-.39-.02-.08-.05-.16-.08-.24-2.23-6.82-10.53-11.15-19.55-12.3-7.84-1-16.22,.39-21.59,4.63,2.18-.61,4.33-.97,6.44-1.11h0s.25-.03,.68-.04c1.58-.07,3.13,0,4.66,.21,.93,.1,1.92,.25,2.96,.47,.37,.08,.75,.17,1.13,.27,2.7,.69,5.53,1.86,7.81,3.84,1.74,1.51,3.17,3.49,3.97,6.09h0c.26,.58,.43,1.23,.49,1.96,.44,5.36-3.53,9.94-8.91,10.18-1.68,.08-3.36,.03-5.05,.02-.19,0-.37-.09-.65-.16,.62-1.98,1.46-3.79,2.15-5.65,.69-1.85,2.59-6.63,3.06-8.58-1.9-.43-9.44,.75-13.91,2.02-.66,.74-1.99,4.69-2.36,5.62-2.41,6.11-4.82,12.21-7.24,18.32-1.84,4.64-3.69,9.27-5.51,13.92-.18,.47-.55,.92-.34,1.53,.35,.02,.72,.06,1.08,.06,9.41,0,18.82,0,28.24,0,2.81,0,5.55-.52,8.14-1.62,5.79-2.46,9.05-6.83,9.61-13.12,.23-2.56-.32-4.94-2.2-6.83-.7-.7-1.55-1.24-2.35-1.84-.33-.24-.69-.44-1.15-.73,.52-.2,.91-.32,1.28-.51,1.26-.65,2.6-1.19,3.74-2.01m-12.87,11.79c-.16,1.31-.51,2.58-1.14,3.75-1.77,3.27-4.49,5.06-8.24,5.13-2.47,.05-4.94,0-7.4,0-.26,0-.52-.03-.9-.06,.46-1.79,1.24-3.38,1.85-5.04,.62-1.67,1.3-3.32,1.95-4.98s1.29-3.31,1.97-5.08h6.78c.31,0,.62,.07,.93,.13,3.33,.7,4.58,2.98,4.2,6.13"/>
+            <path d="M262.87,71.67c-14.54,.02-66.27,.15-72.9,.17-.41,0-.79,.23-.99,.58l-2.74,4.9c-.24,.43,.06,.97,.56,.97,7.58,0,46.67-.05,72.71-.05,.45,0,.84-.27,1.01-.68l2.99-4.93c.18-.46-.14-.95-.63-.95"/>
+            <path d="M49.94,78.24h60.61c.32,0,.49-.37,.28-.61l-4.26-5.17c-.4-.49-.99-.77-1.62-.77-7.25-.01-51.88-.11-52.83-.24-2.16-.3-3.67-1.5-4.46-3.53-.29-.73-.51-1.49-.69-2.26-1.38-5.78-2.74-11.55-4.1-17.33-.21-.91-.42-1.83-.61-2.66,.11-.15,.14-.21,.18-.22,.48-.2,.96-.39,1.45-.58,4.54-1.73,8.34-4.43,11.07-8.51,2.36-3.52,3.6-7.36,3.05-11.63-.52-4.08-2.47-7.21-6.26-9.04-.57-.27-1.15-.52-1.73-.76-4.5-1.87-9.39-1.92-14.17-1.96-2.68-.02-5.37,.09-8.03,.44-7.57,1.01-14.91,2.91-22.03,5.59-.56,.21-.97,.5-1.24,.98h0s-3.81,7.68-3.17,7.91c.37-.08,.57-.09,.75-.16,.83-.32,1.66-.65,2.49-.98,7.25-2.83,14.59-5.34,22.38-6.3,2.88-.36,5.75-.61,8.65-.44,1.82,.11,3.58,.52,5.17,1.56,1.12,.73,1.93,1.87,2.3,3.15,.36,1.23,.45,2.48,.24,3.76-.29,1.83-.96,3.5-1.88,5.08-.63,1.09-1.4,2.08-2.32,2.94-3.66,3.42-7.53,3.69-11.44,3.63-.29,0-.62,.1-.91-.28,.14-.39,.28-.83,.45-1.26,1.68-4.25,3.37-8.5,5.04-12.76,.18-.46,.56-.9,.31-1.57-1.04,.07-2.09,.08-3.12,.22-3.43,.49-6.81,1.25-10.17,2.13-1.19,.32-1.97,.89-2.34,2.05-.08,.25-.21,.48-.3,.73-3.66,9.17-7.31,18.35-10.98,27.53-1.75,4.39-3.52,8.78-5.27,13.17-.19,.47-.52,.93-.4,1.49,1.14,.19,11.87,.25,14.11,.07,.29-.67,.61-1.38,.9-2.11,2.76-6.99,5.51-13.98,8.28-20.97,.23-.57,.32-1.22,.89-1.67,1.5,0,3.01-.14,4.54,.09,.1,.3,.19,.54,.24,.79,.64,2.87,1.27,5.74,1.91,8.62,1.03,4.67,2.06,9.34,3.09,14.01,.25,1.14,.66,2.22,1.21,3.24,1.17,2.14,2.9,3.55,5.31,4.11,1.44,.33,2.9,.48,4.38,.48"/>
+            <g>
+              <path d="M44.15,101.27h9.49l-.37,1.38h-7.66l-.39,1.45h6.97l-.37,1.38h-6.97l-.56,2.1h-1.83l1.68-6.3Z"/>
+              <path d="M59.06,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+              <path d="M74.19,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+              <path d="M89.32,101.27h1.83l-1.31,4.92h6.35l-.37,1.38h-8.17l1.68-6.3Z"/>
+              <path d="M113.13,102.65h-4.28l.37-1.38h10.38l-.37,1.38h-4.28l-1.32,4.92h-1.82l1.31-4.92Z"/>
+              <path d="M124.84,101.27h1.83l-.64,2.39h7.02l.64-2.39h1.83l-1.69,6.3h-1.82l.68-2.54h-7.02l-.67,2.54h-1.83l1.68-6.3Z"/>
+              <path d="M141.66,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+              <path d="M164.02,101.27h6.26c2.35,0,3.66,.96,3.66,2.74,0,1.98-1.74,3.56-4.62,3.56h-6.99l1.69-6.3Zm8,2.87c0-1-.59-1.49-1.94-1.49h-4.6l-.95,3.55h4.69c1.8,0,2.81-.95,2.81-2.05Z"/>
+              <path d="M180.45,101.27h6.9c1.53,0,2.41,.67,2.41,1.91,0,1.44-1.33,2.25-3.17,2.32l2.17,2.07h-2.24l-2.08-1.97h-3.31l-.53,1.97h-1.83l1.68-6.3Zm1.48,1.31l-.45,1.71h5c.96,0,1.41-.36,1.41-.95,0-.5-.33-.76-1.04-.76h-4.92Z"/>
+              <path d="M195.98,101.27h1.83l-1.68,6.3h-1.83l1.68-6.3Z"/>
+              <path d="M207.17,106.07l4.95-4.8h2.23l-6.52,6.3h-1.88l-3.14-6.3h2l2.36,4.8Z"/>
+              <path d="M219.37,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+            </g>
+          </svg>
+        </a>
+
+        <!-- Nav links -->
+        <ul class="rb-nav-links" id="rb-nav-links">
+          <li class="rb-mnav-search">
+            <button type="button" class="rb-mnav-search-btn" id="rb-mnav-search-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Search</span>
+            </button>
+          </li>
+          <li class="rb-cat-first"><a href="https://therunbird.com/steering-wheels/">Steering Wheels</a></li>
+          <li><a href="https://therunbird.com/shift-knobs/">Shift Knobs</a></li>
+          <li><a href="https://therunbird.com/handbrakes/">Handbrakes</a></li>
+          <li><a href="https://therunbird.com/horn-pads/">Horn Pads</a></li>
+          <li><a href="https://therunbird.com/steering-wheel-emblems/">Emblems</a></li>
+          <li><a href="https://therunbird.com/custom-order/">Custom Order</a></li>
+          <li class="rb-mnav-account">
+            
+            <a href="index.php?dispatch=auth.login_form" class="rb-mnav-account-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Sign In / Account</span>
+            </a>
+            
+            <a href="index.php?dispatch=orders.search" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>Orders</span>
+            </a>
+            <a href="index.php?dispatch=wishlist.view" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>Wish List</span>
+            </a>
+            <a href="index.php?dispatch=product_features.compare" class="rb-mnav-account-link rb-mnav-account-sub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Comparison List</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Nav right -->
+        <div class="rb-nav-right">
+          <button class="rb-icon-btn" id="rb-search-btn" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+
+          <!-- Account dropdown -->
+          <div class="rb-acc-wrap">
+            <button class="rb-icon-btn" id="rb-acc-btn" aria-label="Account" aria-expanded="false">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
+
+            <div class="rb-acc-drop" id="rb-acc-drop">
+
+              
+              
+
+              {* GUEST STATE *}
+              <div class="rb-acc-drop-head">
+                <span class="rb-acc-drop-title">My Account</span>
+                <button class="rb-acc-drop-close" id="rb-acc-close" aria-label="Close">&#10005;</button>
+              </div>
+              <div class="rb-acc-drop-links">
+                <a href="index.php?dispatch=orders.search">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  Orders
+                </a>
+                <a href="index.php?dispatch=wishlist.view">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  Wish List
+                </a>
+                <a href="index.php?dispatch=product_features.compare">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  Comparison List
+                </a>
+              </div>
+              <div class="rb-acc-track">
+                <span class="rb-acc-track-label">Track my order(s)</span>
+                <form action="index.php" method="get" class="rb-acc-track-form">
+                  <input type="hidden" name="dispatch" value="orders.search">
+                  <input type="text" name="search[b_email]" placeholder="Order ID / E-mail" class="rb-acc-track-input" autocomplete="email">
+                  <button type="submit" class="rb-acc-track-submit" aria-label="Track">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </button>
+                </form>
+              </div>
+              <div class="rb-acc-btns">
+                <a href="index.php?dispatch=auth.login_form" class="rb-acc-btn-sign">Sign In</a>
+                <a href="index.php?dispatch=profiles.add" class="rb-acc-btn-reg">Register</a>
+              </div>
+
+              
+              
+
+            </div><!-- end .rb-acc-drop -->
+          </div><!-- end .rb-acc-wrap -->
+
+          <button class="rb-cart-btn" id="rb-cart-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Bag (<span id="rb-cart-count">0</span>)
+          </button>
+          <button class="rb-hamburger" id="rb-burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end .rb-fixed-wrap -->
+
+</div><!-- end #rb-header -->
+
+<script>
+
+(function() {
+
+  /* ── Реальная высота шапки (announcement-бар может переноситься на
+     2 строки на узких экранах) — синхронизируем со спейсером/меню/
+     панелями через CSS-переменную, вместо захардкоженного значения. */
+  function rbSyncHeaderHeight() {
+    var fixedWrap = document.querySelector('#rb-header .rb-fixed-wrap');
+    if (!fixedWrap) return;
+    var h = Math.ceil(fixedWrap.getBoundingClientRect().height);
+    if (h > 0) {
+      document.documentElement.style.setProperty('--rb-header-h', h + 'px');
+    }
+  }
+  rbSyncHeaderHeight();
+  window.addEventListener('resize', rbSyncHeaderHeight);
+  window.addEventListener('load', rbSyncHeaderHeight);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(rbSyncHeaderHeight);
+  }
+
+  /* ── Hamburger menu ── */
+  var burger   = document.getElementById('rb-burger');
+  var navLinks = document.getElementById('rb-nav-links');
+  if (burger && navLinks) {
+    burger.addEventListener('click', function() {
+      var isOpen = navLinks.classList.toggle('open');
+      burger.classList.toggle('active', isOpen);
+      /* На случай если панель поиска осталась открытой (rb-search-open) с
+         прошлого раза — у неё z-index выше меню, и она "просвечивает"
+         поверх свежеоткрытого меню. Всегда сбрасываем при переключении. */
+      document.querySelectorAll('.ty-search-block').forEach(function(b) {
+        b.classList.remove('rb-search-open');
+      });
+      /* Блокируем скролл страницы под открытым меню — иначе фон
+         прокручивается сквозь fixed-оверлей меню. */
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        burger.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ── Кнопка "Menu" в нижней sticky-панели CS-Cart ──
+       Перехватываем клик на этапе capture (до нативного обработчика
+       .cm-external-trigger темы) и открываем НАШЕ меню вместо родного. */
+    var stickyMenuIcon = document.querySelector('.ut2-icon-outline-menu');
+    var stickyMenuLink = stickyMenuIcon ? stickyMenuIcon.closest('a') : null;
+    if (stickyMenuLink) {
+      stickyMenuLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        burger.click();
+      }, true);
+    }
+  }
+
+  /* ── Пункт "Search" в мобильном меню гамбургера ──
+     Открываем ту же панель .ty-search-block, что и десктопная кнопка
+     поиска (см. класс rb-search-open ниже) — теперь она стилизована
+     и на мобильном тоже. Нативный тогл .ut2-btn-search НЕ используем:
+     его onclick содержит $(this).parent().next(), что по нашему
+     порядку блоков в Layout указывает на #rb-header, а не на панель
+     поиска, и вдобавок класс view, который он ставит, ни на что
+     не влияет в нашей стилизации. */
+  var mnavSearchBtn = document.getElementById('rb-mnav-search-btn');
+  if (mnavSearchBtn) {
+    mnavSearchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (navLinks && burger) {
+        navLinks.classList.remove('open');
+        burger.classList.remove('active');
+      }
+      document.body.style.overflow = '';
+      var blocks = document.querySelectorAll('.ty-search-block');
+      blocks.forEach(function(b) { b.classList.add('rb-search-open'); });
+      var firstInput = blocks.length ? blocks[0].querySelector('.ty-search-block__input') : null;
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus(); }, 50);
+      }
+    });
+  }
+
+  /* ── Cart ──
+     Открытие/закрытие полностью отдано нативному CS-Cart виджету
+     (cm-combination) — он сам управляет классом .hidden, позицией
+     и закрытием по клику вне (data-ca-external-click-id). Наша кнопка
+     просто эмулирует клик по нативному тогглу; сам вид/позиция панели
+     переопределены в CSS выше (.ty-dropdown-box__content--cart). */
+  /* Mobile-only repositioning (see .rb-cart-top-pos in CSS above) must apply
+     ONLY when the panel is opened via our #rb-cart-btn, not via CS-Cart's
+     native bottom sticky nav Cart icon (same shared panel element, native
+     mobile position must stay untouched there). Track intent with a flag,
+     apply/clear the class on the panel's own open/close (.hidden toggle) so
+     a later native open starts clean regardless of how the previous one closed. */
+  var rbCartPanel = document.querySelector('.ty-dropdown-box__content--cart');
+  var rbCartWantsTopPos = false;
+  if (rbCartPanel) {
+    new MutationObserver(function() {
+      if (rbCartPanel.classList.contains('hidden')) {
+        rbCartPanel.classList.remove('rb-cart-top-pos');
+      } else if (rbCartWantsTopPos) {
+        rbCartPanel.classList.add('rb-cart-top-pos');
+        rbCartWantsTopPos = false;
+      }
+    }).observe(rbCartPanel, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  var rbCartBtn = document.getElementById('rb-cart-btn');
+  if (rbCartBtn) {
+    rbCartBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      rbCartWantsTopPos = true;
+      var cartToggle = document.querySelector('[id^="sw_dropdown_"]');
+      if (cartToggle) {
+        cartToggle.dispatchEvent(new MouseEvent('click', {
+          bubbles: true, cancelable: true, view: window
+        }));
+      } else {
+        window.location.href = '/cart/';
+      }
+    });
+  }
+
+  /* ── Счётчик корзины: синхронизация при AJAX обновлениях ── */
+  new MutationObserver(function() {
+    var nativeCount = document.querySelector('.ty-minicart-count');
+    var ourCount    = document.getElementById('rb-cart-count');
+    if (nativeCount && ourCount && nativeCount.textContent !== ourCount.textContent) {
+      ourCount.textContent = nativeCount.textContent;
+    }
+  }).observe(document.body, { childList: true, subtree: true, characterData: true });
+
+  /* ── Search ──
+     Нативный toggle-линк (.ut2-btn-search) не используем — его инлайновый
+     onclick лезет к соседнему по DOM блоку (.parent().next()), а в нашем
+     layout это наш собственный #rb-header. Вместо этого сами открываем/
+     закрываем .ty-search-block через свой класс rb-search-open, форма и
+     live-search подсказки внутри — родные CS-Cart, не трогаем. */
+  var rbSearchBtn  = document.getElementById('rb-search-btn');
+  var searchBlocks = document.querySelectorAll('.ty-search-block');
+  if (rbSearchBtn && searchBlocks.length) {
+    /* На странице может быть больше одного .ty-search-block (тот же
+       родной блок переиспользуется мобильной sticky-панелью) — поэтому
+       обрабатываем ВСЕ найденные экземпляры одинаково, а не только первый. */
+    searchBlocks.forEach(function(searchBlock) {
+      var searchInput = searchBlock.querySelector('.ty-search-block__input');
+      if (searchInput && !searchInput.placeholder) {
+        searchInput.placeholder = 'Search products...';
+      }
+
+      /* Родная форма не содержит кнопки закрытия — добавляем свою рядом с лупой */
+      var searchForm = searchBlock.querySelector('form') || searchBlock;
+      if (!searchForm.querySelector('.rb-search-close')) {
+        var closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'rb-search-close';
+        closeBtn.setAttribute('aria-label', 'Close search');
+        closeBtn.innerHTML = '&#10005;';
+        searchForm.appendChild(closeBtn);
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeAllSearch();
+        });
+      }
+    });
+
+    function openAllSearch() {
+      searchBlocks.forEach(function(b) { b.classList.add('rb-search-open'); });
+      rbSearchBtn.classList.add('active');
+      var firstInput = searchBlocks[0].querySelector('.ty-search-block__input');
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus(); }, 50);
+      }
+    }
+    function closeAllSearch() {
+      searchBlocks.forEach(function(b) { b.classList.remove('rb-search-open'); });
+      rbSearchBtn.classList.remove('active');
+    }
+    function isSearchOpen() {
+      var open = false;
+      searchBlocks.forEach(function(b) { if (b.classList.contains('rb-search-open')) open = true; });
+      return open;
+    }
+
+    rbSearchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isSearchOpen()) { closeAllSearch(); } else { openAllSearch(); }
+    });
+    document.addEventListener('click', function(e) {
+      if (!isSearchOpen()) return;
+      var insideAny = false;
+      searchBlocks.forEach(function(b) { if (b.contains(e.target)) insideAny = true; });
+      if (!insideAny && e.target !== rbSearchBtn && !rbSearchBtn.contains(e.target)) {
+        closeAllSearch();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeAllSearch();
+    });
+  }
+
+  /* ── Account dropdown ── */
+  var accBtn   = document.getElementById('rb-acc-btn');
+  var accDrop  = document.getElementById('rb-acc-drop');
+  var accClose = document.getElementById('rb-acc-close');
+
+  if (!accBtn || !accDrop) return;
+
+  function openAcc() {
+    accDrop.classList.add('open');
+    accBtn.classList.add('active');
+    accBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeAcc() {
+    accDrop.classList.remove('open');
+    accBtn.classList.remove('active');
+    accBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  accBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    accDrop.classList.contains('open') ? closeAcc() : openAcc();
+  });
+
+  if (accClose) {
+    accClose.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeAcc();
+    });
+  }
+
+  /* Close on outside click */
+  document.addEventListener('click', function(e) {
+    var wrap = accBtn.closest('.rb-acc-wrap');
+    if (wrap && !wrap.contains(e.target)) closeAcc();
+  });
+
+  /* Close on Escape */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAcc();
+  });
+
+})();
+
+</script>
+
+
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Privacy Policy Block 1: Hero
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, top of Privacy Policy page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-pp-hero — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-pp-hero,
+#rb-pp-hero *,
+#rb-pp-hero *::before,
+#rb-pp-hero *::after {
+  box-sizing: border-box !important;
+}
+#rb-pp-hero a { text-decoration: none !important; }
+
+#rb-pp-hero {
+  --rb-bg:         #080808;
+  --rb-accent:     #C8A84C;
+  --rb-accent-b:   rgba(200,168,76,.28);
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-pp-hero .rb-pph-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(200,168,76,.14) 0%, transparent 65%) !important;
+}
+#rb-pp-hero .rb-pph-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+
+#rb-pp-hero .rb-pph-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 56px !important;
+  text-align: center !important;
+}
+#rb-pp-hero .rb-pph-eyebrow {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .18em !important; text-transform: uppercase !important;
+  margin-bottom: 26px !important;
+  background: rgba(200,168,76,.06) !important;
+}
+#rb-pp-hero .rb-pph-h1 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(34px, 5vw, 58px) !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  margin: 0 0 22px !important;
+}
+#rb-pp-hero .rb-pph-p {
+  font-size: 15.5px !important;
+  color: #999 !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+  max-width: 640px !important;
+  margin: 0 auto 18px !important;
+}
+#rb-pp-hero .rb-pph-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-pp-hero .rb-pph-updated {
+  font-size: 12px !important;
+  color: #555 !important;
+  letter-spacing: .04em !important;
+  margin: 0 0 36px !important;
+}
+
+/* ── Quick nav chips ── */
+#rb-pp-hero .rb-pph-chips {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-pp-hero .rb-pph-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 11px 22px !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  border-radius: 100px !important;
+  background: rgba(255,255,255,.03) !important;
+  color: #C8C8C8 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  transition: border-color .2s, color .2s, background .2s !important;
+}
+#rb-pp-hero .rb-pph-chip:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-text) !important;
+  background: rgba(200,168,76,.07) !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-pp-hero .rb-pph-inner { padding: 48px 20px 40px !important; }
+  #rb-pp-hero .rb-pph-chips { gap: 8px !important; }
+  #rb-pp-hero .rb-pph-chip { padding: 9px 16px !important; font-size: 13px !important; }
+}
+</style>
+
+<div id="rb-pp-hero">
+  <div class="rb-pph-glow"></div>
+  <div class="rb-pph-cf"></div>
+  <div class="rb-pph-inner">
+    <span class="rb-pph-eyebrow">Privacy Policy</span>
+    <h1 class="rb-pph-h1">Your Data, In Plain Language</h1>
+    <p class="rb-pph-p">
+      We collect what we need to build and ship your order, and <strong>we don't sell your information</strong>.
+      Here's exactly what we collect, how we use it, and who — if anyone — we share it with.
+    </p>
+    <p class="rb-pph-updated">Effective Date: July 28, 2026</p>
+    <div class="rb-pph-chips">
+      <a href="#collect" class="rb-pph-chip">What We Collect</a>
+      <a href="#share" class="rb-pph-chip">Who We Share It With</a>
+      <a href="#rights" class="rb-pph-chip">Your Rights</a>
+      <a href="#contact" class="rb-pph-chip">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Privacy Policy Block 2: Policy Content
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Privacy Policy page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-pp-body — no conflict with UniTheme2
+
+     NOTE: This is a plain-language template reflecting how RunBird actually
+     handles data today (per owner: only built-in CS-Cart store analytics, no
+     ad pixels; data shared only with the shipping carrier to deliver orders;
+     payment details are entered directly with the payment provider and not
+     stored/shared by RunBird; US/Canada operations, CCPA + general principles,
+     no GDPR). It is NOT a substitute for review by a qualified attorney —
+     have counsel confirm this before relying on it as your binding policy,
+     especially if data practices change (new analytics/ad tools, new
+     countries served, a payment processor that routes card data through
+     RunBird's own servers, etc).
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-pp-body,
+#rb-pp-body *,
+#rb-pp-body *::before,
+#rb-pp-body *::after {
+  box-sizing: border-box !important;
+}
+#rb-pp-body a { text-decoration: none !important; }
+
+#rb-pp-body {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#rb-pp-body .rb-ppb-wrap {
+  max-width: 780px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 88px !important;
+}
+
+#rb-pp-body .rb-ppb-section {
+  padding-top: 44px !important;
+  scroll-margin-top: 24px !important;
+}
+#rb-pp-body .rb-ppb-section:first-child { padding-top: 0 !important; }
+
+#rb-pp-body .rb-ppb-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+#rb-pp-body .rb-ppb-h2 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 26px !important;
+  text-transform: uppercase !important;
+  letter-spacing: .01em !important;
+  color: var(--rb-text) !important;
+  line-height: 1.1 !important;
+  margin: 0 0 16px !important;
+}
+#rb-pp-body .rb-ppb-p {
+  font-size: 14.5px !important;
+  color: #a8a8a8 !important;
+  line-height: 1.85 !important;
+  margin: 0 0 16px !important;
+  font-weight: 300 !important;
+}
+#rb-pp-body .rb-ppb-p:last-child { margin-bottom: 0 !important; }
+#rb-pp-body .rb-ppb-p strong { color: #d8d8d8 !important; font-weight: 500 !important; }
+#rb-pp-body .rb-ppb-p a { color: var(--rb-accent) !important; font-weight: 600 !important; }
+#rb-pp-body .rb-ppb-p a:hover { text-decoration: underline !important; }
+
+#rb-pp-body .rb-ppb-list {
+  margin: 0 0 16px !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+#rb-pp-body .rb-ppb-list li {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: flex-start !important;
+  font-size: 14.5px !important;
+  color: #a8a8a8 !important;
+  line-height: 1.72 !important;
+  margin-bottom: 10px !important;
+  font-weight: 300 !important;
+}
+#rb-pp-body .rb-ppb-list li:last-child { margin-bottom: 0 !important; }
+#rb-pp-body .rb-ppb-list li::before {
+  content: '' !important;
+  width: 5px !important; height: 5px !important;
+  border-radius: 50% !important;
+  background: var(--rb-accent) !important;
+  flex-shrink: 0 !important;
+  margin-top: 8px !important;
+}
+#rb-pp-body .rb-ppb-list strong { color: #d8d8d8 !important; font-weight: 500 !important; }
+
+#rb-pp-body .rb-ppb-callout {
+  margin-top: 20px !important;
+  padding: 18px 22px !important;
+  border-left: 2px solid var(--rb-accent) !important;
+  background: rgba(200,168,76,.05) !important;
+  border-radius: 0 10px 10px 0 !important;
+}
+#rb-pp-body .rb-ppb-callout p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #ccc !important;
+  line-height: 1.7 !important;
+}
+
+#rb-pp-body .rb-ppb-divider {
+  height: 1px !important;
+  background: var(--rb-border) !important;
+  margin-top: 44px !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-pp-body .rb-ppb-wrap { padding: 48px 20px 56px !important; }
+  #rb-pp-body .rb-ppb-h2 { font-size: 21px !important; }
+  #rb-pp-body .rb-ppb-section { padding-top: 34px !important; }
+}
+</style>
+
+<div id="rb-pp-body">
+  <div class="rb-ppb-wrap">
+
+    <!-- 1. Information We Collect -->
+    <div class="rb-ppb-section" id="collect">
+      <span class="rb-ppb-num">01</span>
+      <h2 class="rb-ppb-h2">Information We Collect</h2>
+      <p class="rb-ppb-p">When you place an order, create an account, or contact us, we collect the information needed to build, ship, and support that order:</p>
+      <ul class="rb-ppb-list">
+        <li><strong>Contact details</strong> — name, email address, phone number</li>
+        <li><strong>Shipping &amp; billing address</strong> — to deliver your order and process payment</li>
+        <li><strong>Order details</strong> — the products, configurations, and materials you choose</li>
+        <li><strong>Account information</strong> — if you create an account, your login and order history</li>
+        <li><strong>Support &amp; warranty communication</strong> — messages, photos, or details you send us for a claim or question</li>
+      </ul>
+      <p class="rb-ppb-p">
+        Payment card information you enter at checkout is sent directly to our payment provider to process
+        the transaction — we don't receive or store your full card number.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 2. How We Use Your Information -->
+    <div class="rb-ppb-section" id="use">
+      <span class="rb-ppb-num">02</span>
+      <h2 class="rb-ppb-h2">How We Use Your Information</h2>
+      <p class="rb-ppb-p">We use your information only to run the business you're interacting with:</p>
+      <ul class="rb-ppb-list">
+        <li>Process, build, and ship your order</li>
+        <li>Send you order confirmations, production updates, photo approval requests, and tracking information</li>
+        <li>Respond to support, installation, and warranty requests</li>
+        <li>Maintain your account, if you create one</li>
+        <li>Understand overall site traffic and usage, in aggregate, to improve the site</li>
+      </ul>
+      <p class="rb-ppb-p">We don't use your information to build advertising profiles, and we don't sell it.</p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 3. Cookies & Site Analytics -->
+    <div class="rb-ppb-section" id="cookies">
+      <span class="rb-ppb-num">03</span>
+      <h2 class="rb-ppb-h2">Cookies &amp; Site Analytics</h2>
+      <p class="rb-ppb-p">
+        Our site uses cookies that are necessary for it to function — keeping items in your cart, remembering
+        you're logged in, and completing checkout. We also use our store platform's built-in analytics to
+        understand overall traffic (like which pages are visited and how many orders come through).
+      </p>
+      <p class="rb-ppb-p">
+        We don't use third-party advertising trackers or pixels (like Meta Pixel or Google Ads) — nothing on
+        this site is set up to build ad-targeting profiles of you.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 4. How We Share Your Information -->
+    <div class="rb-ppb-section" id="share">
+      <span class="rb-ppb-num">04</span>
+      <h2 class="rb-ppb-h2">Who We Share It With</h2>
+      <p class="rb-ppb-p">
+        We keep this short because our answer is short: <strong>we share your name and shipping address with
+        the carrier that delivers your order — and no one else.</strong>
+      </p>
+      <ul class="rb-ppb-list">
+        <li>We do not sell your personal information to anyone, for any reason</li>
+        <li>We do not share your data with marketing or advertising partners</li>
+        <li>Payment details you enter are handled directly by our payment provider to process your transaction — we don't pass your card data to any other party</li>
+      </ul>
+      <div class="rb-ppb-callout">
+        <p>The only exception is if we're legally required to disclose information — for example, in response to a valid court order.</p>
+      </div>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 5. Data Retention -->
+    <div class="rb-ppb-section" id="retention">
+      <span class="rb-ppb-num">05</span>
+      <h2 class="rb-ppb-h2">How Long We Keep It</h2>
+      <p class="rb-ppb-p">
+        We keep your order and account information for as long as needed to fulfill your order, support any
+        warranty claim, and meet our own legal and accounting obligations. If you'd like your data deleted
+        sooner, see <a href="#rights">Your Privacy Rights</a> below.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 6. Your Privacy Rights -->
+    <div class="rb-ppb-section" id="rights">
+      <span class="rb-ppb-num">06</span>
+      <h2 class="rb-ppb-h2">Your Privacy Rights</h2>
+      <p class="rb-ppb-p">
+        We ship within the United States and Canada, and this policy is written for customers there.
+        California residents in particular have rights under the California Consumer Privacy Act (CCPA),
+        and we apply the same principles to all our customers regardless of state:
+      </p>
+      <ul class="rb-ppb-list">
+        <li><strong>Right to know</strong> — ask what personal information we hold about you</li>
+        <li><strong>Right to delete</strong> — ask us to delete your personal information, subject to our order and legal record-keeping needs</li>
+        <li><strong>Right to opt out of sale</strong> — not applicable here, since we don't sell personal information to begin with</li>
+        <li><strong>Right to correct</strong> — ask us to fix inaccurate information on your account</li>
+      </ul>
+      <p class="rb-ppb-p">To exercise any of these rights, contact us using the details in <a href="#contact">Contact Us</a> below.</p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 7. Security -->
+    <div class="rb-ppb-section" id="security">
+      <span class="rb-ppb-num">07</span>
+      <h2 class="rb-ppb-h2">Security</h2>
+      <p class="rb-ppb-p">
+        We take reasonable steps to protect the information you share with us. That said, no method of
+        transmission or storage online is 100% secure, and we can't guarantee absolute security.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 8. Children's Privacy -->
+    <div class="rb-ppb-section" id="children">
+      <span class="rb-ppb-num">08</span>
+      <h2 class="rb-ppb-h2">Children's Privacy</h2>
+      <p class="rb-ppb-p">
+        Our site is not directed at children, and we don't knowingly collect personal information from
+        anyone under 13. If you believe a child has provided us with personal information, contact us and
+        we'll remove it.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 9. Changes To This Policy -->
+    <div class="rb-ppb-section" id="changes">
+      <span class="rb-ppb-num">09</span>
+      <h2 class="rb-ppb-h2">Changes To This Policy</h2>
+      <p class="rb-ppb-p">
+        If we change how we handle your information, we'll update this page and change the effective date
+        at the top. We encourage you to check back occasionally.
+      </p>
+    </div>
+
+    <div class="rb-ppb-divider"></div>
+
+    <!-- 10. Contact Us -->
+    <div class="rb-ppb-section" id="contact">
+      <span class="rb-ppb-num">10</span>
+      <h2 class="rb-ppb-h2">Contact Us</h2>
+      <p class="rb-ppb-p">
+        Questions about this policy, or want to exercise any of the rights above? Reach out through our
+        <a href="https://therunbird.com/contact-us/">Contact Us</a> page and we'll get back to you.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-pp-body');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Privacy Policy Block 3: CTA Band (Questions About Your Data?)
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Privacy Policy page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-pp-cta — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-pp-cta,
+#rb-pp-cta *,
+#rb-pp-cta *::before,
+#rb-pp-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-pp-cta a { text-decoration: none !important; }
+#rb-pp-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-pp-cta {
+  --rb-accent:      #C8A84C;
+  --rb-accent-h:    #D9BA62;
+  --rb-text:        #F0F0F0;
+  --rb-text2:       #808080;
+  --rb-border:      rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: #080808 !important;
+  border-top: 1px solid var(--rb-border) !important;
+  text-align: center !important;
+  padding: 64px 48px !important;
+  margin: 0 !important;
+}
+
+#rb-pp-cta .rb-ppc-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .22em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 16px !important;
+}
+#rb-pp-cta .rb-ppc-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(28px, 4vw, 42px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: 1.05 !important; margin: 0 0 16px !important;
+}
+#rb-pp-cta .rb-ppc-p {
+  color: #999 !important; font-size: 14.5px !important; font-weight: 300 !important;
+  line-height: 1.7 !important; margin: 0 auto 32px !important; max-width: 480px !important;
+}
+#rb-pp-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #000 !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 16px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s !important;
+  box-shadow: 0 4px 24px rgba(200,168,76,.3) !important;
+}
+#rb-pp-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-pp-cta { padding: 48px 20px !important; }
+}
+</style>
+
+<div id="rb-pp-cta">
+  <span class="rb-ppc-eye">Still Have Questions?</span>
+  <h2 class="rb-ppc-h">Ask Us About Your Data</h2>
+  <p class="rb-ppc-p">Want to know what we have, ask us to delete it, or anything else — reach out and we'll respond directly, no automated runaround.</p>
+  <a href="https://therunbird.com/contact-us/" class="rb-btn-gold">Contact Support</a>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Footer Block
+     Place in CS-Cart > Design > Layouts > HTML block (Footer area)
+     All styles are scoped under #rb-footer — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-footer,
+#rb-footer *,
+#rb-footer *::before,
+#rb-footer *::after {
+  box-sizing: border-box !important;
+}
+#rb-footer ul,
+#rb-footer li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-footer a {
+  text-decoration: none !important;
+}
+#rb-footer button {
+  outline: none !important;
+}
+
+/* ── Hide UniTheme2 native footer elements (siblings, not our container) ── */
+footer.ty-footer,
+.ty-footer,
+#footer,
+.footer-wrapper {
+  display: none !important;
+}
+
+/* ── Neutralize the parent container (.ty-footer-grid) own styles ── */
+.ty-footer-grid {
+  background: transparent !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  min-height: 0 !important;
+}
+
+/* ── CSS tokens ── */
+#rb-footer {
+  --rb-accent:     #C8A84C;
+  --rb-accent-h:   #D9BA62;
+  --rb-accent-b:   rgba(200,168,76,.28);
+  --rb-accent-dim: rgba(200,168,76,.12);
+  --rb-logo:       #f1ebdb;
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+  --rb-bg-card:    #111111;
+  display: block !important;
+  background: #030303 !important;
+  font-family: 'Inter', sans-serif !important;
+
+  /* Break out of UniTheme2 Bootstrap container — force full viewport width */
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+/* ── Racing stripe + checkered top ── */
+#rb-footer .rb-foot-stripe {
+  height: 5px !important;
+  min-height: 5px !important;
+  background: #C8A84C !important;
+  display: block !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+#rb-footer .rb-foot-checker {
+  height: 20px !important;
+  min-height: 20px !important;
+  background-color: #070707 !important;
+  background-image:
+    linear-gradient(45deg, rgba(200,168,76,.22) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(200,168,76,.22) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(200,168,76,.22) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(200,168,76,.22) 75%) !important;
+  background-size: 20px 20px !important;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px !important;
+  display: block !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── Ghost tagline ── */
+#rb-footer .rb-foot-ghost {
+  position: absolute !important;
+  right: -10px !important;
+  top: 60px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 200px !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  color: rgba(255,255,255,.018) !important;
+  text-transform: uppercase !important;
+  letter-spacing: -.02em !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+
+/* ── Main footer grid ── */
+#rb-footer .rb-foot-main {
+  position: relative !important;
+  z-index: 1 !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 56px 48px 48px !important;
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1fr 1fr !important;
+  gap: 64px !important;
+}
+
+/* ── Logo column ── */
+#rb-footer .rb-foot-logo {
+  height: 42px !important;
+  width: auto !important;
+  margin-bottom: 10px !important;
+  display: block !important;
+}
+#rb-footer .rb-foot-logo path {
+  fill: var(--rb-logo) !important;
+}
+#rb-footer .rb-foot-tagline {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  font-style: italic !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  margin-bottom: 20px !important;
+  display: block !important;
+}
+#rb-footer .rb-foot-about p {
+  font-size: 13px !important;
+  color: #787878 !important;
+  line-height: 1.82 !important;
+  max-width: 270px !important;
+  margin: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Racing badges ── */
+#rb-footer .rb-foot-badges {
+  display: flex !important;
+  gap: 8px !important;
+  margin-top: 24px !important;
+  flex-wrap: wrap !important;
+}
+#rb-footer .rb-foot-badge {
+  padding: 5px 13px !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: 3px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #777 !important;
+  background: rgba(255,255,255,.03) !important;
+  transition: all .2s !important;
+  cursor: default !important;
+  font-family: 'Inter', sans-serif !important;
+  line-height: 1.4 !important;
+}
+#rb-footer .rb-foot-badge:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-accent) !important;
+}
+#rb-footer .rb-foot-badge.gold {
+  border-color: rgba(200,168,76,.4) !important;
+  color: var(--rb-accent) !important;
+  background: rgba(200,168,76,.06) !important;
+}
+
+/* ── Social buttons ── */
+#rb-footer .rb-foot-socials {
+  display: flex !important;
+  gap: 8px !important;
+  margin-top: 22px !important;
+}
+#rb-footer .rb-soc-btn {
+  height: 36px !important;
+  padding: 0 16px !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255,255,255,.11) !important;
+  color: #888 !important;
+  background: rgba(255,255,255,.03) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  transition: all .2s !important;
+  font-family: 'Inter', sans-serif !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+#rb-footer .rb-soc-btn svg {
+  opacity: .7 !important;
+  transition: opacity .2s !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+#rb-footer .rb-soc-btn:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-accent) !important;
+  background: rgba(200,168,76,.06) !important;
+}
+#rb-footer .rb-soc-btn:hover svg {
+  opacity: 1 !important;
+}
+
+/* ── Nav columns ── */
+#rb-footer .rb-foot-col-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  margin-bottom: 22px !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid rgba(200,168,76,.18) !important;
+  display: block !important;
+}
+#rb-footer .rb-foot-links {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+#rb-footer .rb-foot-links a {
+  font-size: 13.5px !important;
+  color: #888 !important;
+  transition: color .18s !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+#rb-footer .rb-foot-links a::before {
+  content: '›' !important;
+  color: var(--rb-accent) !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  opacity: 0 !important;
+  transform: translateX(-6px) !important;
+  transition: opacity .18s, transform .18s !important;
+}
+#rb-footer .rb-foot-links a:hover {
+  color: #E8E8E8 !important;
+}
+#rb-footer .rb-foot-links a:hover::before {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* ── Divider ── */
+#rb-footer .rb-foot-divider {
+  position: relative !important;
+  z-index: 1 !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 48px !important;
+}
+#rb-footer .rb-foot-divider-line {
+  height: 1px !important;
+  background: linear-gradient(to right, transparent, rgba(200,168,76,.3) 20%, rgba(200,168,76,.3) 80%, transparent) !important;
+}
+
+/* ── Bottom bar ── */
+#rb-footer .rb-foot-bottom {
+  position: relative !important;
+  z-index: 1 !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 20px 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-footer .rb-foot-bottom-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+#rb-footer .rb-foot-copy {
+  font-size: 11.5px !important;
+  color: #555 !important;
+  letter-spacing: .02em !important;
+  font-family: 'Inter', sans-serif !important;
+}
+#rb-footer .rb-foot-site {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  opacity: .7 !important;
+}
+#rb-footer .rb-pay-icons {
+  display: flex !important;
+  gap: 7px !important;
+  align-items: center !important;
+}
+#rb-footer .rb-pay-ic {
+  height: 24px !important;
+  padding: 0 9px !important;
+  border-radius: 3px !important;
+  background: rgba(255,255,255,.05) !important;
+  border: 1px solid rgba(255,255,255,.09) !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  color: #777 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  #rb-footer .rb-foot-main {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+  }
+  #rb-footer .rb-foot-ghost {
+    font-size: 120px !important;
+  }
+}
+@media (max-width: 768px) {
+  #rb-footer .rb-foot-main {
+    grid-template-columns: 1fr !important;
+    padding: 24px 20px 8px !important;
+    gap: 0 !important;
+  }
+  #rb-footer .rb-foot-about {
+    border-bottom: 1px solid var(--rb-border) !important;
+    padding-bottom: 24px !important;
+    margin-bottom: 4px !important;
+    text-align: center !important;
+  }
+  #rb-footer .rb-foot-about p {
+    margin: 0 auto !important;
+  }
+  #rb-footer .rb-foot-logo {
+    margin: 0 auto !important;
+  }
+  #rb-footer .rb-foot-ghost {
+    display: none !important;
+  }
+  #rb-footer .rb-foot-badges {
+    gap: 5px !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+  }
+  #rb-footer .rb-foot-badge {
+    font-size: 8.5px !important;
+    padding: 4px 8px !important;
+    letter-spacing: .07em !important;
+    white-space: nowrap !important;
+  }
+  #rb-footer .rb-foot-socials {
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+    margin-top: 16px !important;
+    justify-content: center !important;
+  }
+  #rb-footer .rb-soc-btn {
+    padding: 0 10px !important;
+    height: 30px !important;
+    font-size: 9px !important;
+    gap: 5px !important;
+    flex: 1 !important;
+    justify-content: center !important;
+  }
+
+  /* Footer accordion on mobile */
+  #rb-footer .rb-foot-nav-col {
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-footer .rb-foot-nav-col .rb-foot-col-h {
+    cursor: pointer !important;
+    position: relative !important;
+    display: block !important;
+    text-align: center !important;
+    margin-bottom: 0 !important;
+    padding: 16px 32px !important;
+    border-bottom: none !important;
+    font-size: 15px !important;
+  }
+  #rb-footer .rb-foot-nav-col .rb-foot-col-h::after {
+    content: '+' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 22px !important;
+    font-weight: 300 !important;
+    color: var(--rb-accent) !important;
+    font-family: 'Inter', sans-serif !important;
+    transition: transform .28s !important;
+  }
+  #rb-footer .rb-foot-nav-col.open .rb-foot-col-h::after {
+    transform: translateY(-50%) rotate(45deg) !important;
+  }
+  #rb-footer .rb-foot-nav-col .rb-foot-links {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .3s !important;
+    padding-bottom: 0 !important;
+    text-align: center !important;
+  }
+  #rb-footer .rb-foot-nav-col.open .rb-foot-links {
+    max-height: 300px !important;
+    padding-bottom: 16px !important;
+  }
+  #rb-footer .rb-foot-links a {
+    font-size: 14px !important;
+    justify-content: center !important;
+  }
+  #rb-footer .rb-foot-divider {
+    padding: 0 20px !important;
+  }
+  #rb-footer .rb-foot-bottom {
+    padding: 16px 20px !important;
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 10px !important;
+  }
+  #rb-footer .rb-foot-bottom-left {
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+  #rb-footer .rb-pay-icons {
+    justify-content: center !important;
+  }
+}
+</style>
+
+<div id="rb-footer">
+
+  <!-- ══ Racing stripe ══ -->
+  <div class="rb-foot-stripe"></div>
+  <div class="rb-foot-checker"></div>
+
+  <!-- Ghost text -->
+  <div class="rb-foot-ghost">FEEL THE DRIVE</div>
+
+  <!-- ══ Main grid ══ -->
+  <div class="rb-foot-main">
+
+    <!-- Logo column -->
+    <div class="rb-foot-about">
+      <svg class="rb-foot-logo" viewBox="0 0 272.43 107.57" xmlns="http://www.w3.org/2000/svg" aria-label="RunBird">
+        <path d="M185.58,69.08c-9.31,20.17-40.69,28.79-57.39,17.33-.09-.06-.05-.21,.06-.21,5.66-.28,12.26-.06,18.64-1.16,8.23-1.42,15.05-6.04,20.23-12.58,2.08-2.62,4.17-3.67,7.4-3.44,3.52,.25,7.07,.06,11.06,.06"/>
+        <path d="M156.61,77.46c-12.73,10.05-35.05,6.34-46.25-7.8-.17-.22,0-.53,.28-.51,5.95,.33,11.22-1.27,16.45,3.33,8.34,7.35,18.59,8.05,29.52,4.98"/>
+        <path d="M135.84,30.14c-1.89-.16-9.32-.13-10.57,.06-2.42,6.15-4.86,12.35-7.3,18.55-.09,0-.18-.03-.27-.04-.1-.35-.22-.7-.29-1.06-.66-3.08-1.31-6.17-1.97-9.25-.37-1.75-.76-3.49-1.12-5.24-.41-2.03-1.74-3.19-3.89-3.12-1.68,.06-3.36,0-5.05,0h-3.05c-.27,.63-.54,1.19-.77,1.77-1.74,4.4-3.48,8.79-5.21,13.19-2.08,5.28-4.15,10.56-6.23,15.84-.17,.42-.45,.83-.28,1.32,1.93,.17,9.24,.13,10.49-.08,.61-1.56,1.25-3.17,1.88-4.78,.64-1.61,1.27-3.23,1.91-4.84,.64-1.61,1.25-3.24,1.92-4.83,.66-1.59,1.16-3.24,2.04-4.97,.18,.66,.32,1.11,.42,1.57,1.1,5.03,2.19,10.06,3.29,15.09,.08,.36,.15,.72,.26,1.07,.35,1.12,1.12,1.75,2.3,1.84,.37,.03,.74,.02,1.1,.02h7.73c.2-.46,.39-.83,.54-1.22,3.97-10.01,7.94-20.02,11.91-30.04,.1-.27,.14-.56,.2-.86"/>
+        <path d="M227.21,48.65c4.35-1.79,7.09-4.92,7.98-9.61,.68-3.59-.79-6.83-4.65-8.23-.15-.05-.3-.09-.45-.14-1.46-.47-2.96-.65-4.5-.64-6.04,.01-12.09,0-18.13,0h-1.08c-.26,.59-.49,1.06-.68,1.54-1,2.48-2,4.97-2.99,7.45-2.87,7.22-5.74,14.44-8.6,21.67-.18,.46-.56,.9-.32,1.45,1.83,.15,9.16,.12,10.49-.05,.17-.38,.37-.8,.54-1.23,1.25-3.12,2.49-6.24,3.75-9.36,.21-.52,.3-1.13,.79-1.5h4.14c.25,.55,.49,1.07,.71,1.6,1.18,2.81,2.34,5.62,3.52,8.43,.16,.39,.32,.78,.51,1.15,.35,.72,.88,1.08,1.75,1.06,2.89-.05,5.78,0,8.67-.02,.23,0,.53,.09,.75-.36-1.69-4.01-3.64-8-5.4-12.15,.44-.16,.78-.29,1.12-.4,.7-.23,1.42-.4,2.09-.68m-7.96-4.11c-.86,.21-1.76,.3-2.64,.32-1.67,.05-3.35,0-5.15,0,.28-1.45,2.58-7.44,3.66-9.6,.31-.04,.66-.1,1.02-.11,1.15-.02,2.31-.04,3.46,0,.68,.02,1.36,.09,2.02,.24,1.62,.36,2.49,1.48,2.5,3.15,0,2.84-1.94,5.29-4.87,5.99"/>
+        <path d="M272.33,39.03c-.36-3.48-2.11-5.98-5.32-7.42-.52-.24-1.07-.44-1.61-.62-1.91-.6-3.86-.96-5.88-.95-4.62,.02-9.25,0-13.87,.01-.36,0-.71,.05-1,.07-.74,1.32-11.48,28.04-12.61,31.36-.06,.19-.06,.4-.1,.71,.58,.02,1.09,.06,1.6,.06h14.66c1.94,0,3.88-.04,5.82-.28,4.94-.6,9.15-2.62,12.51-6.3,2.88-3.14,4.54-6.9,5.5-11.01,.43-1.86,.5-3.75,.3-5.64m-11.16,5.46c-.7,2.48-1.73,4.84-3,7.08-.31,.55-.67,1.07-1.05,1.57-1.86,2.43-4.27,3.84-7.37,3.94-1.47,.05-2.94,.02-4.41,0-.14,0-.27-.1-.44-.16,0-.18-.04-.34,0-.47,2.73-6.98,5.47-13.96,8.16-20.83,.77-.45,1.47-.27,2.14-.29,.68-.02,1.36,.04,2.04,.06,.81,.03,1.54,.32,2.23,.7,1.24,.67,1.95,1.71,2.15,3.11,.25,1.8,.02,3.56-.46,5.29"/>
+        <path d="M95.96,30.1h-10.51c-.32,.74-.62,1.4-.89,2.08-2.64,6.64-5.27,13.28-7.91,19.92-.21,.54-.41,1.09-.67,1.6-.86,1.65-2.09,2.9-3.94,3.4-1.44,.39-2.92,.41-4.38,.08-1.84-.41-2.84-1.86-2.6-3.74,.07-.52,.21-1.03,.37-1.53,.29-.9,.61-1.79,.95-2.67,2.31-5.92,4.63-11.84,6.93-17.77,.17-.42,.49-.82,.33-1.37h-10.48c-.36,.82-.75,1.62-1.07,2.44-1.58,4.01-3.14,8.02-4.71,12.04-.69,1.76-1.38,3.52-2.05,5.29-.64,1.69-.99,3.43-.89,5.25,.12,2.06,.96,3.74,2.53,5.07,.93,.79,1.96,1.45,3.14,1.75,1.42,.37,2.86,.76,4.31,.9,3.36,.32,6.72,.3,10.06-.27,2.24-.39,4.39-1.05,6.36-2.21,3.12-1.84,5.17-4.57,6.48-7.89,2.82-7.13,5.63-14.27,8.43-21.41,.11-.27,.13-.58,.2-.94"/>
+        <path d="M199.34,30.06h-9.92c-.6,.96-.98,1.94-1.36,2.91-1.22,3.07-2.43,6.14-3.66,9.22-2.44,6.14-4.89,12.28-7.33,18.43-.19,.48-.33,.97-.49,1.48,1.36,.23,9.47,.24,10.84,0,4.19-10.58,8.39-21.2,12.63-31.91-.32-.05-.51-.12-.7-.12"/>
+        <path d="M121.95,20.5c3.27,.21,5.38-.75,7.48-3.13,5.24-5.95,12.13-10.16,20.44-11.45,6.17-.96,12.55-.81,18.09-1.03,.32-.01,.43-.44,.15-.61-16.94-9.8-47.75-2.04-57.19,15.92l.39,.24c3.81-.01,7.25-.16,10.64,.06"/>
+        <path d="M176.17,35.59c4.12-2.93,6.14-6.96,5.91-12.03-.03-.68-.14-1.34-.32-1.97-.04-.13-.08-.26-.12-.39-.02-.08-.05-.16-.08-.24-2.23-6.82-10.53-11.15-19.55-12.3-7.84-1-16.22,.39-21.59,4.63,2.18-.61,4.33-.97,6.44-1.11h0s.25-.03,.68-.04c1.58-.07,3.13,0,4.66,.21,.93,.1,1.92,.25,2.96,.47,.37,.08,.75,.17,1.13,.27,2.7,.69,5.53,1.86,7.81,3.84,1.74,1.51,3.17,3.49,3.97,6.09h0c.26,.58,.43,1.23,.49,1.96,.44,5.36-3.53,9.94-8.91,10.18-1.68,.08-3.36,.03-5.05,.02-.19,0-.37-.09-.65-.16,.62-1.98,1.46-3.79,2.15-5.65,.69-1.85,2.59-6.63,3.06-8.58-1.9-.43-9.44,.75-13.91,2.02-.66,.74-1.99,4.69-2.36,5.62-2.41,6.11-4.82,12.21-7.24,18.32-1.84,4.64-3.69,9.27-5.51,13.92-.18,.47-.55,.92-.34,1.53,.35,.02,.72,.06,1.08,.06,9.41,0,18.82,0,28.24,0,2.81,0,5.55-.52,8.14-1.62,5.79-2.46,9.05-6.83,9.61-13.12,.23-2.56-.32-4.94-2.2-6.83-.7-.7-1.55-1.24-2.35-1.84-.33-.24-.69-.44-1.15-.73,.52-.2,.91-.32,1.28-.51,1.26-.65,2.6-1.19,3.74-2.01m-12.87,11.79c-.16,1.31-.51,2.58-1.14,3.75-1.77,3.27-4.49,5.06-8.24,5.13-2.47,.05-4.94,0-7.4,0-.26,0-.52-.03-.9-.06,.46-1.79,1.24-3.38,1.85-5.04,.62-1.67,1.3-3.32,1.95-4.98s1.29-3.31,1.97-5.08h6.78c.31,0,.62,.07,.93,.13,3.33,.7,4.58,2.98,4.2,6.13"/>
+        <path d="M262.87,71.67c-14.54,.02-66.27,.15-72.9,.17-.41,0-.79,.23-.99,.58l-2.74,4.9c-.24,.43,.06,.97,.56,.97,7.58,0,46.67-.05,72.71-.05,.45,0,.84-.27,1.01-.68l2.99-4.93c.18-.46-.14-.95-.63-.95"/>
+        <path d="M49.94,78.24h60.61c.32,0,.49-.37,.28-.61l-4.26-5.17c-.4-.49-.99-.77-1.62-.77-7.25-.01-51.88-.11-52.83-.24-2.16-.3-3.67-1.5-4.46-3.53-.29-.73-.51-1.49-.69-2.26-1.38-5.78-2.74-11.55-4.1-17.33-.21-.91-.42-1.83-.61-2.66,.11-.15,.14-.21,.18-.22,.48-.2,.96-.39,1.45-.58,4.54-1.73,8.34-4.43,11.07-8.51,2.36-3.52,3.6-7.36,3.05-11.63-.52-4.08-2.47-7.21-6.26-9.04-.57-.27-1.15-.52-1.73-.76-4.5-1.87-9.39-1.92-14.17-1.96-2.68-.02-5.37,.09-8.03,.44-7.57,1.01-14.91,2.91-22.03,5.59-.56,.21-.97,.5-1.24,.98h0s-3.81,7.68-3.17,7.91c.37-.08,.57-.09,.75-.16,.83-.32,1.66-.65,2.49-.98,7.25-2.83,14.59-5.34,22.38-6.3,2.88-.36,5.75-.61,8.65-.44,1.82,.11,3.58,.52,5.17,1.56,1.12,.73,1.93,1.87,2.3,3.15,.36,1.23,.45,2.48,.24,3.76-.29,1.83-.96,3.5-1.88,5.08-.63,1.09-1.4,2.08-2.32,2.94-3.66,3.42-7.53,3.69-11.44,3.63-.29,0-.62,.1-.91-.28,.14-.39,.28-.83,.45-1.26,1.68-4.25,3.37-8.5,5.04-12.76,.18-.46,.56-.9,.31-1.57-1.04,.07-2.09,.08-3.12,.22-3.43,.49-6.81,1.25-10.17,2.13-1.19,.32-1.97,.89-2.34,2.05-.08,.25-.21,.48-.3,.73-3.66,9.17-7.31,18.35-10.98,27.53-1.75,4.39-3.52,8.78-5.27,13.17-.19,.47-.52,.93-.4,1.49,1.14,.19,11.87,.25,14.11,.07,.29-.67,.61-1.38,.9-2.11,2.76-6.99,5.51-13.98,8.28-20.97,.23-.57,.32-1.22,.89-1.67,1.5,0,3.01-.14,4.54,.09,.1,.3,.19,.54,.24,.79,.64,2.87,1.27,5.74,1.91,8.62,1.03,4.67,2.06,9.34,3.09,14.01,.25,1.14,.66,2.22,1.21,3.24,1.17,2.14,2.9,3.55,5.31,4.11,1.44,.33,2.9,.48,4.38,.48"/>
+        <g>
+          <path d="M44.15,101.27h9.49l-.37,1.38h-7.66l-.39,1.45h6.97l-.37,1.38h-6.97l-.56,2.1h-1.83l1.68-6.3Z"/>
+          <path d="M59.06,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+          <path d="M74.19,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+          <path d="M89.32,101.27h1.83l-1.31,4.92h6.35l-.37,1.38h-8.17l1.68-6.3Z"/>
+          <path d="M113.13,102.65h-4.28l.37-1.38h10.38l-.37,1.38h-4.28l-1.32,4.92h-1.82l1.31-4.92Z"/>
+          <path d="M124.84,101.27h1.83l-.64,2.39h7.02l.64-2.39h1.83l-1.69,6.3h-1.82l.68-2.54h-7.02l-.67,2.54h-1.83l1.68-6.3Z"/>
+          <path d="M141.66,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+          <path d="M164.02,101.27h6.26c2.35,0,3.66,.96,3.66,2.74,0,1.98-1.74,3.56-4.62,3.56h-6.99l1.69-6.3Zm8,2.87c0-1-.59-1.49-1.94-1.49h-4.6l-.95,3.55h4.69c1.8,0,2.81-.95,2.81-2.05Z"/>
+          <path d="M180.45,101.27h6.9c1.53,0,2.41,.67,2.41,1.91,0,1.44-1.33,2.25-3.17,2.32l2.17,2.07h-2.24l-2.08-1.97h-3.31l-.53,1.97h-1.83l1.68-6.3Zm1.48,1.31l-.45,1.71h5c.96,0,1.41-.36,1.41-.95,0-.5-.33-.76-1.04-.76h-4.92Z"/>
+          <path d="M195.98,101.27h1.83l-1.68,6.3h-1.83l1.68-6.3Z"/>
+          <path d="M207.17,106.07l4.95-4.8h2.23l-6.52,6.3h-1.88l-3.14-6.3h2l2.36,4.8Z"/>
+          <path d="M219.37,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+        </g>
+      </svg>
+      <span class="rb-foot-tagline">Feel the Drive</span>
+      <p>Premium handmade interior accessories for C6 Corvette owners. Crafted to order using carbon fiber, Nappa leather, and genuine Alcantara®. Ships across North America.</p>
+      <div class="rb-foot-badges">
+        <span class="rb-foot-badge gold">Handmade</span>
+        <span class="rb-foot-badge">C6 Only</span>
+        <span class="rb-foot-badge">N. America Shipping</span>
+        <span class="rb-foot-badge">Made to Order</span>
+      </div>
+      <div class="rb-foot-socials">
+        <button class="rb-soc-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </button>
+        <button class="rb-soc-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </button>
+        <button class="rb-soc-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </button>
+      </div>
+    </div>
+
+    <!-- Products column -->
+    <div class="rb-foot-nav-col">
+      <div class="rb-foot-col-h">Products</div>
+      <ul class="rb-foot-links">
+        <li><a href="https://therunbird.com/steering-wheels/">Steering Wheels</a></li>
+        <li><a href="https://therunbird.com/shift-knobs/">Shift Knobs</a></li>
+        <li><a href="https://therunbird.com/handbrakes/">Handbrakes</a></li>
+        <li><a href="https://therunbird.com/horn-pads/">Horn Pads</a></li>
+        <li><a href="https://therunbird.com/steering-wheel-emblems/">SW Emblems</a></li>
+        <li><a href="https://therunbird.com/side-skirts/">Side Skirts</a></li>
+      </ul>
+    </div>
+
+    <!-- Information column -->
+    <div class="rb-foot-nav-col">
+      <div class="rb-foot-col-h">Information</div>
+      <ul class="rb-foot-links">
+        <li><a href="../About Us/about-us-preview.html">About Us</a></li>
+        <li><a href="../Materials Guide/materials-guide-preview.html">Materials Guide</a></li>
+        <li><a href="#">Custom Orders</a></li>
+        <li><a href="../Installation Help/installation-help-preview.html">Installation Help</a></li>
+        <li><a href="../FAQ/faq-preview.html">FAQ</a></li>
+      </ul>
+    </div>
+
+    <!-- Support column -->
+    <div class="rb-foot-nav-col">
+      <div class="rb-foot-col-h">Support</div>
+      <ul class="rb-foot-links">
+        <li><a href="../Shipping and Returns/shipping-returns-preview.html">Shipping &amp; Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="../Warranty/warranty-preview.html">Warranty</a></li>
+        <li><a href="privacy-policy-preview.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ══ Divider ══ -->
+  <div class="rb-foot-divider">
+    <div class="rb-foot-divider-line"></div>
+  </div>
+
+  <!-- ══ Bottom bar ══ -->
+  <div class="rb-foot-bottom">
+    <div class="rb-foot-bottom-left">
+      <span class="rb-foot-site">TheRunBird.com</span>
+      <span class="rb-foot-copy">© 2026 RunBird · All rights reserved · Not affiliated with General Motors or Chevrolet</span>
+    </div>
+    <div class="rb-pay-icons">
+      <div class="rb-pay-ic">Visa</div>
+      <div class="rb-pay-ic">MC</div>
+      <div class="rb-pay-ic">Amex</div>
+      <div class="rb-pay-ic">PayPal</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Footer accordion (mobile)
+  document.querySelectorAll('#rb-footer .rb-foot-nav-col .rb-foot-col-h').forEach(function(heading) {
+    heading.addEventListener('click', function() {
+      heading.closest('.rb-foot-nav-col').classList.toggle('open');
+    });
+  });
+
+  // Neutralize background/padding of all ancestor containers up to <body>
+  // so no theme wrapper shows a gray strip around our footer
+  var el = document.getElementById('rb-footer');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent.style.setProperty('padding-top', '0', 'important');
+      parent.style.setProperty('padding-bottom', '0', 'important');
+      parent.style.setProperty('margin-top', '0', 'important');
+      parent.style.setProperty('margin-bottom', '0', 'important');
+      parent.style.setProperty('border-top', 'none', 'important');
+      parent.style.setProperty('border-bottom', 'none', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+
+</body>
+</html>

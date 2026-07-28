@@ -1,0 +1,198 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Shipping & Returns Block 5: FAQ
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Shipping & Returns page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-sr-faq — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-sr-faq,
+#rb-sr-faq *,
+#rb-sr-faq *::before,
+#rb-sr-faq *::after {
+  box-sizing: border-box !important;
+}
+#rb-sr-faq button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-sr-faq {
+  --rb-bg:        #0C0C0C;
+  --rb-accent:    #C8A84C;
+  --rb-accent-dim:  rgba(200,168,76,.12);
+  --rb-accent-b:    rgba(200,168,76,.28);
+  --rb-text:      #F0F0F0;
+  --rb-text2:     #808080;
+  --rb-border:    rgba(255,255,255,.07);
+  --rb-border-s:  rgba(255,255,255,.14);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-sr-faq .rb-sf-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-sr-faq .rb-sf-head { display: block !important; margin-bottom: 24px !important; }
+#rb-sr-faq .rb-sf-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-sr-faq .rb-sf-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-sr-faq .rb-sf-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-sr-faq .rb-sf-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-sr-faq .rb-sf-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 22px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 19px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-sr-faq .rb-sf-q:hover { color: var(--rb-accent) !important; }
+#rb-sr-faq .rb-sf-item.open .rb-sf-q { color: var(--rb-accent) !important; }
+#rb-sr-faq .rb-sf-icon {
+  width: 32px !important; height: 32px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 18px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-sr-faq .rb-sf-item.open .rb-sf-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-sr-faq .rb-sf-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important;
+}
+#rb-sr-faq .rb-sf-item.open .rb-sf-a { max-height: 300px !important; padding-bottom: 22px !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-sr-faq .rb-sf-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-sr-faq .rb-sf-wrap { padding: 15px 20px 32px !important; }
+  #rb-sr-faq .rb-sf-title { font-size: 30px !important; }
+  #rb-sr-faq .rb-sf-q { font-size: 16px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-sr-faq">
+  <a id="faq"></a>
+  <div class="rb-sf-wrap">
+
+    <div class="rb-sf-head">
+      <div class="rb-sf-eyebrow">Got Questions</div>
+      <h2 class="rb-sf-title">Shipping &amp; Returns FAQ</h2>
+    </div>
+
+    <div class="rb-sf-list">
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          What if I don't like the photo you send me?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">Reply to that email and let us know what's off. If it doesn't match what you ordered, we'll fix it before it ships — that's exactly what the photo approval step is for.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          What if I don't respond to the photo email?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">We'll follow up before shipping. If your piece matches your order exactly and we don't hear back after reasonable attempts to reach you, we'll go ahead and ship it as configured.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          Can I request changes after seeing the photo?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">If it doesn't match your original order, yes — we'll correct it at no cost. Requesting a completely different configuration at that stage may involve rebuilding the piece; contact us and we'll talk through the options.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          My tracking hasn't updated in a few days — is that normal?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">Carrier scans can lag, especially crossing into Canada or over a weekend. If it's been more than a few business days with no movement, contact us with your order number and we'll look into it.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          How do I start a damage or defect claim?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">Contact us with your order number and photos of the issue as soon as you notice it. We'll review it and arrange a free remake or replacement.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-faq');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-sr-faq .rb-sf-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-sf-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-sr-faq .rb-sf-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>

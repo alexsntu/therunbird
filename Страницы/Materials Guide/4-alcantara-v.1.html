@@ -1,0 +1,195 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Materials Guide Block 4: Alcantara®
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Materials Guide page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-mg-alc — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-mg-alc,
+#rb-mg-alc *,
+#rb-mg-alc *::before,
+#rb-mg-alc *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-mg-alc {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-mg-alc .rb-mga-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+/* ── Visual side ── */
+#rb-mg-alc .rb-mga-visual { position: relative !important; }
+#rb-mg-alc .rb-mga-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-mg-alc .rb-mga-badge {
+  position: absolute !important;
+  right: -18px !important;
+  bottom: -18px !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.28) !important;
+  border-radius: 14px !important;
+  padding: 14px 20px !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+}
+
+/* ── Copy side ── */
+#rb-mg-alc .rb-mga-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 13px !important; font-weight: 800 !important;
+  letter-spacing: .22em !important; text-transform: uppercase !important;
+  color: var(--rb-accent) !important; margin-bottom: 12px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-mg-alc .rb-mga-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.02 !important;
+  margin: 0 0 20px !important;
+}
+#rb-mg-alc .rb-mga-p {
+  font-size: 15px !important; color: #999 !important; line-height: 1.8 !important;
+  margin: 0 0 16px !important; font-weight: 300 !important;
+}
+#rb-mg-alc .rb-mga-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-mg-alc .rb-mga-p:last-of-type { margin-bottom: 24px !important; }
+
+#rb-mg-alc .rb-mga-specs {
+  border-top: 1px solid var(--rb-border) !important;
+  padding-top: 18px !important;
+}
+#rb-mg-alc .rb-mga-spec-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.04) !important;
+}
+#rb-mg-alc .rb-mga-spec-row:last-child { border-bottom: none !important; }
+#rb-mg-alc .rb-mga-spec-k {
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; color: var(--rb-text2) !important; flex-shrink: 0 !important;
+}
+#rb-mg-alc .rb-mga-spec-v {
+  font-size: 13.5px !important; color: var(--rb-text) !important; text-align: right !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-mg-alc .rb-mga-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-mg-alc .rb-mga-wrap { grid-template-columns: 1fr !important; }
+  #rb-mg-alc .rb-mga-visual { order: -1 !important; max-width: 460px !important; margin: 0 auto !important; }
+  #rb-mg-alc .rb-mga-badge { right: 16px !important; bottom: -14px !important; }
+}
+@media (max-width: 768px) {
+  #rb-mg-alc .rb-mga-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-mg-alc .rb-mga-title { font-size: 30px !important; }
+  #rb-mg-alc .rb-mga-spec-row { text-align: left !important; }
+  #rb-mg-alc .rb-mga-badge { right: 50% !important; transform: translateX(50%) !important; }
+}
+</style>
+
+<div id="rb-mg-alc">
+  <a id="alcantara"></a>
+  <div class="rb-mga-wrap">
+
+    <!-- Visual -->
+    <div class="rb-mga-visual">
+      <img class="rb-mga-img" src="https://therunbird.com/images/MainPAge/Alcantara.png" alt="Genuine Alcantara racing-grade suede">
+      <div class="rb-mga-badge">F1-Grade Feel</div>
+    </div>
+
+    <!-- Copy -->
+    <div class="rb-mga-copy">
+      <div class="rb-mga-num">Material 03</div>
+      <h2 class="rb-mga-title">Alcantara&reg;</h2>
+      <p class="rb-mga-p">
+        Genuine Alcantara&reg; — the material of choice for Formula 1 steering wheels and exotic car
+        interiors. It's a suede-like microfiber that grips your hands far better than leather, especially
+        under hard cornering or in the heat.
+      </p>
+      <p class="rb-mga-p">
+        It also cuts glare under direct sunlight, which matters more than it sounds like on a wheel rim or
+        dash you're staring past all day. We use it on its own or mixed with Nappa for a two-tone grip zone.
+      </p>
+      <div class="rb-mga-specs">
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Type</span>
+          <span class="rb-mga-spec-v">Genuine Alcantara&reg; Microfiber</span>
+        </div>
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Feel</span>
+          <span class="rb-mga-spec-v">Suede-like, high-grip, low-glare</span>
+        </div>
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Combinations</span>
+          <span class="rb-mga-spec-v">Solo or mixed with Nappa leather</span>
+        </div>
+        <div class="rb-mga-spec-row">
+          <span class="rb-mga-spec-k">Used On</span>
+          <span class="rb-mga-spec-v">Steering wheels, shift knobs, horn pads</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-mg-alc');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

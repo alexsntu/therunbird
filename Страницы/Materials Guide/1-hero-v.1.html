@@ -1,0 +1,150 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Materials Guide Block 1: Hero
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, top of Materials Guide page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-mg-hero — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-mg-hero,
+#rb-mg-hero *,
+#rb-mg-hero *::before,
+#rb-mg-hero *::after {
+  box-sizing: border-box !important;
+}
+#rb-mg-hero a { text-decoration: none !important; }
+
+#rb-mg-hero {
+  --rb-bg:         #080808;
+  --rb-accent:     #C8A84C;
+  --rb-accent-b:   rgba(200,168,76,.28);
+  --rb-text:       #F0F0F0;
+  --rb-text2:      #808080;
+  --rb-border:     rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-mg-hero .rb-mgh-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(200,168,76,.14) 0%, transparent 65%) !important;
+}
+#rb-mg-hero .rb-mgh-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+
+#rb-mg-hero .rb-mgh-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 56px !important;
+  text-align: center !important;
+}
+#rb-mg-hero .rb-mgh-eyebrow {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .18em !important; text-transform: uppercase !important;
+  margin-bottom: 26px !important;
+  background: rgba(200,168,76,.06) !important;
+}
+#rb-mg-hero .rb-mgh-h1 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(36px, 5.4vw, 64px) !important;
+  line-height: .98 !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  margin: 0 0 22px !important;
+}
+#rb-mg-hero .rb-mgh-h1 em {
+  color: var(--rb-accent) !important;
+  font-style: italic !important;
+  text-shadow: 0 0 30px rgba(200,168,76,.45) !important;
+}
+#rb-mg-hero .rb-mgh-p {
+  font-size: 15.5px !important;
+  color: #999 !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+  max-width: 620px !important;
+  margin: 0 auto 40px !important;
+}
+#rb-mg-hero .rb-mgh-p strong { color: #ccc !important; font-weight: 500 !important; }
+
+/* ── Quick nav chips ── */
+#rb-mg-hero .rb-mgh-chips {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-mg-hero .rb-mgh-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 11px 22px !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  border-radius: 100px !important;
+  background: rgba(255,255,255,.03) !important;
+  color: #C8C8C8 !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  transition: border-color .2s, color .2s, background .2s !important;
+}
+#rb-mg-hero .rb-mgh-chip-dot {
+  width: 7px !important; height: 7px !important; border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+#rb-mg-hero .rb-mgh-chip:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-text) !important;
+  background: rgba(200,168,76,.07) !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+  #rb-mg-hero .rb-mgh-inner { padding: 48px 20px 40px !important; }
+  #rb-mg-hero .rb-mgh-chips { gap: 8px !important; }
+  #rb-mg-hero .rb-mgh-chip { padding: 9px 16px !important; font-size: 13px !important; }
+}
+</style>
+
+<div id="rb-mg-hero">
+  <div class="rb-mgh-glow"></div>
+  <div class="rb-mgh-cf"></div>
+  <div class="rb-mgh-inner">
+    <span class="rb-mgh-eyebrow">Materials Guide</span>
+    <h1 class="rb-mgh-h1">Three Materials.<br><em>Zero Compromise.</em></h1>
+    <p class="rb-mgh-p">
+      Every RunBird piece is built from exactly three materials — <strong>aerospace carbon fiber</strong>,
+      <strong>full-grain Nappa leather</strong>, and <strong>genuine Alcantara&reg;</strong>. No vinyl,
+      no synthetic substitutes. Here's what each one is, where it comes from, and how to keep it looking new.
+    </p>
+    <div class="rb-mgh-chips">
+      <a href="#carbon-fiber" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#3a3a3a;box-shadow:0 0 0 1px rgba(255,255,255,.2) inset"></span>Carbon Fiber</a>
+      <a href="#nappa-leather" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#8a5a34"></span>Nappa Leather</a>
+      <a href="#alcantara" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#4a4a52"></span>Alcantara&reg;</a>
+      <a href="#care" class="rb-mgh-chip"><span class="rb-mgh-chip-dot" style="background:#C8A84C"></span>Care Guide</a>
+    </div>
+  </div>
+</div>

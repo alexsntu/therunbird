@@ -1,0 +1,210 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Installation Help Block 2: Built For A Direct Swap
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, Installation Help page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-ins-fit — no conflict with UniTheme2
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-ins-fit,
+#rb-ins-fit *,
+#rb-ins-fit *::before,
+#rb-ins-fit *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-ins-fit {
+  --rb-bg:      #0C0C0C;
+  --rb-accent:  #C8A84C;
+  --rb-text:    #F0F0F0;
+  --rb-text2:   #808080;
+  --rb-border:  rgba(255,255,255,.07);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-ins-fit .rb-if-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+  align-items: center !important;
+}
+
+/* ── Copy side ── */
+#rb-ins-fit .rb-if-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 0 18px rgba(200,168,76,.5) !important;
+}
+#rb-ins-fit .rb-if-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 3.6vw, 48px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1.04 !important;
+  margin: 0 0 24px !important;
+}
+#rb-ins-fit .rb-if-p {
+  font-size: 15px !important;
+  color: #999 !important;
+  line-height: 1.8 !important;
+  margin: 0 0 18px !important;
+  font-weight: 300 !important;
+}
+#rb-ins-fit .rb-if-p strong { color: #ccc !important; font-weight: 500 !important; }
+#rb-ins-fit .rb-if-p:last-of-type { margin-bottom: 0 !important; }
+
+#rb-ins-fit .rb-if-checks {
+  margin-top: 28px !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+#rb-ins-fit .rb-if-checks li {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: flex-start !important;
+  font-size: 14px !important;
+  color: #bbb !important;
+  line-height: 1.6 !important;
+  margin-bottom: 14px !important;
+}
+#rb-ins-fit .rb-if-checks li:last-child { margin-bottom: 0 !important; }
+#rb-ins-fit .rb-if-checks li::before {
+  content: '✓' !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+  width: 18px !important; height: 18px !important;
+  border: 1px solid rgba(200,168,76,.35) !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 11px !important;
+  margin-top: 1px !important;
+}
+
+/* ── Visual side ── */
+#rb-ins-fit .rb-if-visual { position: relative !important; }
+#rb-ins-fit .rb-if-img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/5 !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(200,168,76,.15) !important;
+}
+#rb-ins-fit .rb-if-badge {
+  position: absolute !important;
+  left: -20px !important;
+  bottom: -20px !important;
+  background: #0C0C0C !important;
+  border: 1px solid rgba(200,168,76,.28) !important;
+  border-radius: 14px !important;
+  padding: 16px 22px !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
+}
+#rb-ins-fit .rb-if-badge-n {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 900 !important;
+  color: var(--rb-accent) !important;
+  line-height: 1 !important;
+}
+#rb-ins-fit .rb-if-badge-l {
+  font-size: 10.5px !important;
+  color: var(--rb-text2) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .09em !important;
+  margin-top: 4px !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-ins-fit .rb-if-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-ins-fit .rb-if-wrap { grid-template-columns: 1fr !important; }
+  #rb-ins-fit .rb-if-visual { order: -1 !important; max-width: 420px !important; margin: 0 auto !important; }
+  #rb-ins-fit .rb-if-badge { left: 16px !important; bottom: -16px !important; padding: 12px 18px !important; }
+}
+@media (max-width: 768px) {
+  #rb-ins-fit .rb-if-wrap { padding: 48px 20px !important; text-align: center !important; }
+  #rb-ins-fit .rb-if-title { font-size: 30px !important; }
+  #rb-ins-fit .rb-if-checks { text-align: left !important; }
+  #rb-ins-fit .rb-if-badge { left: 50% !important; transform: translateX(-50%) !important; bottom: -14px !important; }
+}
+</style>
+
+<div id="rb-ins-fit">
+  <a id="direct-fit"></a>
+  <div class="rb-if-wrap">
+
+    <!-- Copy -->
+    <div class="rb-if-copy">
+      <span class="rb-if-eyebrow">How It Fits</span>
+      <h2 class="rb-if-title">Built For A Direct Swap</h2>
+      <p class="rb-if-p">
+        We only make accessories that <strong>replace a factory part with one of our own</strong> — never
+        an add-on that gets taped, zip-tied, or wedged into place. Every RunBird piece is measured against
+        the original factory part it's replacing, so it lands on the exact same mounting point using the
+        same hardware.
+      </p>
+      <p class="rb-if-p">
+        That means no cutting, no drilling, and no rewiring. Your factory functions — horn, controls,
+        clips, connectors — carry over and keep working exactly as they did before. Nothing to improvise,
+        nothing left over when you're done.
+      </p>
+      <ul class="rb-if-checks">
+        <li>Mounts to your Corvette's original factory hardware and mounting points</li>
+        <li>No cutting, drilling, or permanent modification required</li>
+        <li>Fully reversible — remove it and your factory part goes right back on</li>
+        <li>Every order ships with a step-by-step guide for that exact part</li>
+      </ul>
+    </div>
+
+    <!-- Visual -->
+    <div class="rb-if-visual">
+      <!-- Placeholder — replace with a real fitment/install photo -->
+      <img class="rb-if-img" src="https://therunbird.com/images/MainPAge/handcraft.png" alt="RunBird accessory test-fitted before shipping">
+      <div class="rb-if-badge">
+        <div class="rb-if-badge-n">1:1</div>
+        <div class="rb-if-badge-l">Factory Mounting Point</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-ins-fit');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
