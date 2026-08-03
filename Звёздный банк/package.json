@@ -1,0 +1,14 @@
+{
+  "name": "zvezdny-bank",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Семейная система мотивации детей: задания -> звёзды -> деньги",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.2.0"
+  }
+}
