@@ -2,13 +2,13 @@
 <div class="rb-cfg-inner">
 
   <div class="rb-cfg-head">
-    <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 Custom Shift Knob</h1>
-    <p class="rb-cfg-sub">Pick your shift knob, then choose every option below — the diagram shows exactly where it applies.</p>
-    <button type="button" class="rb-cfg-change-type" id="rb-cfg-change-type" hidden>↺ Choose a different shift knob</button>
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 Custom E-Brake</h1>
+    <p class="rb-cfg-sub">Pick your e-brake accessory, then choose every option below — the diagram shows exactly where it applies.</p>
+    <button type="button" class="rb-cfg-change-type" id="rb-cfg-change-type" hidden>↺ Choose a different accessory</button>
   </div>
 
   <div class="rb-cfg-shape-gate">
-    <div class="rb-cfg-shape-gate-head">Step 1 — choose your shift knob</div>
+    <div class="rb-cfg-shape-gate-head">Step 1 — choose your e-brake accessory</div>
     <div class="rb-cfg-shape-gate-grid" id="rb-cfg-shape-gate-grid"></div>
   </div>
 
@@ -17,7 +17,7 @@
     <div class="rb-cfg-imgwrap">
       <svg class="rb-cfg-lines" preserveAspectRatio="none"></svg>
       <div class="rb-cfg-imgbox">
-        <img src="" alt="Corvette C6 Custom Shift Knob" draggable="false">
+        <img src="" alt="Corvette C6 Custom E-Brake" draggable="false">
       </div>
       <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint">Select appearance</div>
       <div class="rb-cfg-marks"></div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="rb-cfg-col rb-cfg-col--r">
-      <div class="rb-cfg-col-intro">Select &amp; configure your shift knob design</div>
+      <div class="rb-cfg-col-intro">Select &amp; configure your e-brake accessory</div>
       <div class="rb-cfg-cards-grid" id="rb-cfg-cards-grid"></div>
 
       <div class="rb-cfg-summary" id="rb-cfg-summary">
@@ -41,9 +41,9 @@
       <div class="rb-cfg-crosssell">
         <div class="rb-cfg-crosssell-head">Shop More Accessories</div>
         <div class="rb-cfg-crosssell-grid" id="rb-cfg-crosssell-grid">
-          <a href="https://therunbird.com/handbrakes/" class="rb-cfg-cs-card">
-            <img src="https://therunbird.com/images/MainPAge/handbrakes.png" alt="Handbrakes" loading="lazy">
-            <span class="rb-cfg-cs-name">Handbrakes</span>
+          <a href="https://therunbird.com/shift-knobs/" class="rb-cfg-cs-card">
+            <img src="https://therunbird.com/images/MainPAge/shift-knobs.png" alt="Shift Knobs" loading="lazy">
+            <span class="rb-cfg-cs-name">Shift Knobs</span>
           </a>
           <a href="https://therunbird.com/horn-pads/" class="rb-cfg-cs-card">
             <img src="https://therunbird.com/images/MainPAge/Horn-pads.png" alt="Horn Pads" loading="lazy">
@@ -131,7 +131,7 @@
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
   font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin-bottom:14px;
 }
-#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; max-width:1080px; margin:0 auto; }
+#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:820px; margin:0 auto; }
 #rb-config .rb-cfg-shape-gate-opt{
   background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
   display:flex; flex-direction:column; align-items:center; gap:8px; transition:border-color .15s;
@@ -343,12 +343,14 @@
   #rb-config .rb-cfg-lines{ display:none; }
   #rb-config .rb-cfg-marks{ display:none; }
   #rb-config .rb-cfg-step-marks{ display:block; }
-  #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr; max-width:420px; }
+  #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr 1fr; max-width:520px; }
 }
 @media (max-width: 640px){
   #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
   #rb-config .rb-cfg-crosssell-grid{ grid-template-columns:1fr 1fr; }
   #rb-config .rb-cfg-cs-card{ aspect-ratio:4/3; }
+  #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr; gap:14px; max-width:340px; }
+  #rb-config .rb-cfg-shape-gate-opt:nth-child(3){ grid-column:1 / -1; max-width:calc(50% - 7px); margin:0 auto; }
 }
 
 </style>
@@ -356,190 +358,100 @@
 <script>
 (function(){
 
+  var STITCHING_COLOR_VALUES = [
+    { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
+    { v:'white',    label:'White',    price:0, hex:'#f5f5f5', cs:199 },
+    { v:'red',      label:'Red',      price:0, hex:'#c81e1e', cs:200 },
+    { v:'blue',     label:'Blue',     price:0, hex:'#1e4fc8', cs:201 },
+    { v:'yellow',   label:'Yellow',   price:0, hex:'#e8c31e', cs:202 },
+    { v:'orange',   label:'Orange',   price:0, hex:'#e06b1e', cs:203 },
+    { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
+    { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
+  ];
+  var FINISH_TOP_STYLE_VALUES = [
+    { v:'gloss', label:'Gloss', price:0, cs:270 },
+    { v:'matte', label:'Matte', price:0, cs:271 }
+  ];
+
   var PRODUCT_VARIANTS = {
-    classic: {
-      id:'351', label:'Classic', name:'Corvette C6 Classic Shift Knob Manual (6-Speed) and CF Top Cap', priceFrom:170.00, basePrice:170.00,
-      thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_Classic_Shift_Knob_Manual__6-Speed__and_CF_Top_Cap_invn-pg_png.webp',
-      img:'https://therunbird.com/images/detailed/9/Corvette_C6_Classic_Shift_Knob_Manual__6-Speed__and_CF_Top_Cap_invn-pg.png',
+
+    knobBoot: {
+      id:'355', label:'Knob Boot', name:'Corvette C6 E-Brake Knob Boot', priceFrom:65.00, basePrice:65.00,
+      thumb:'https://therunbird.com/images/Calculator/Handle/cover.png',
+      img:'https://therunbird.com/images/Calculator/Handle/cover.png',
       options: {
-        backPart: { label:'Back (facing armrest)', zone:{px:451,py:618}, csOptId:35,
+        gripMaterial: { label:'Grip material', zone:{px:464,py:449}, csOptId:47,
           values:[
-            { v:'leather', label:'Leather', price:0, cs:228 },
-            { v:'perf',    label:'Perforated Leather', price:0, cs:229 },
-            { v:'alc',     label:'Alcantara', price:0, cs:230 },
-            { v:'carbon',  label:'Carbon', price:35, cs:231 }
+            { v:'leather',       label:'Leather', price:0, cs:275 },
+            { v:'alcantara',     label:'Alcantara', price:0, cs:276 },
+            { v:'leatherAlc',    label:'Leather + Alcantara', price:0, cs:277 },
+            { v:'texturedLeather', label:'Textured leather', price:0, cs:278 }
           ]},
-        frontPart: { label:'Front (facing center console)', zone:{px:647,py:565}, csOptId:36,
+        stitchingColor: { label:'Stitching color', zone:{px:401,py:256}, csOptId:32, isColor:true,
+          values: STITCHING_COLOR_VALUES.slice() },
+        shiftPattern: { label:'Shift pattern', csOptId:48,
           values:[
-            { v:'leather', label:'Leather', price:0, cs:232 },
-            { v:'perf',    label:'Perforated Leather', price:0, cs:233 },
-            { v:'alc',     label:'Alcantara', price:0, cs:234 }
-          ]},
-        styleTopCap: { label:'Style top cap', zone:{px:965,py:632}, csOptId:38,
-          values:[
-            { v:'blackCarbon',    label:'Black carbon',    price:20, cs:238 },
-            { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:239 },
-            { v:'redCarbon',      label:'Red carbon',      price:20, cs:240 },
-            { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:241 },
-            { v:'alutex',         label:'Alutex',          price:20, cs:242 },
-            { v:'custom',         label:'Custom',          price:0,  cs:243 }
-          ]},
-        topCapFinish: { label:'Top cap finish', zone:{px:992,py:526}, csOptId:39,
-          values:[
-            { v:'matte', label:'Matte', price:0, cs:245 },
-            { v:'gloss', label:'Gloss', price:0, cs:244 }
-          ]},
-        shiftLogo: { label:'Shift pattern logo', zone:{px:897,py:591}, csOptId:40,
-          values:[
-            { v:'blueZR1',   label:'Blue ZR1',   price:0, cs:246 },
-            { v:'greyZ06',   label:'Grey Z06',   price:0, cs:247 },
-            { v:'chromeZR1', label:'Chrome ZR1', price:0, cs:248 },
-            { v:'custom',    label:'Custom (your logo)', price:0, cs:249 }
-          ]},
-        shiftColor: { label:'Shift pattern color', zone:{px:915,py:522}, csOptId:41, isColor:true,
-          values:[
-            { v:'red',    label:'Red',      price:0, hex:'#c81e1e', cs:250 },
-            { v:'blue',   label:'Blue',     price:0, hex:'#1e4fc8', cs:251 },
-            { v:'grey',   label:'Grey',     price:0, hex:'#8a8d90', cs:252 },
-            { v:'white',  label:'White',    price:0, hex:'#f5f5f5', cs:253 },
-            { v:'yellow', label:'Yellow',   price:0, hex:'#e8c31e', cs:254 },
-            { v:'no',     label:'No',       price:0, none:true, cs:255 },
-            { v:'bluev2', label:'Blue v.2', price:0, hex:'#3d6ad1', cs:256 }
+            { v:'automatic', label:'Automatic', price:0, cs:279 },
+            { v:'manual',    label:'Manual (6-Speed)', price:0, cs:280 }
           ]}
       }
     },
 
-    ball: {
-      id:'352', label:'Ball', name:'Corvette C6 BALL Shift Knob Manual (6-Speed)', priceFrom:250.00, basePrice:250.00,
-      thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_BALL_Shift_Knob_Manual__6-Speed__png.webp',
-      img:'https://therunbird.com/images/detailed/9/Corvette_C6_BALL_Shift_Knob_Manual__6-Speed_.png',
+    handle: {
+      id:'356', label:'Handle + CF Button', name:'Corvette C6 E-Brake Handle and CF Button', priceFrom:195.00, basePrice:195.00,
+      thumb:'https://therunbird.com/images/Calculator/Handle/handle.png',
+      img:'https://therunbird.com/images/Calculator/Handle/handle.png',
       options: {
-        bottomPart: { label:'Bottom part', zone:{px:529,py:705}, csOptId:42,
+        topSection: { label:'Top section e-brake', zone:{px:446,py:348}, csOptId:49,
           values:[
-            { v:'leather', label:'Leather', price:0, cs:257 },
-            { v:'perf',    label:'Perforated Leather', price:0, cs:272 },
-            { v:'alc',     label:'Alcantara', price:0, cs:259 }
+            { v:'leather',   label:'Leather', price:0, cs:281 },
+            { v:'perf',      label:'Perforated Leather', price:0, cs:282 },
+            { v:'alcantara', label:'Alcantara', price:0, cs:283 }
           ]},
-        styleTopCap: { label:'Style top cap', zone:{px:980,py:684}, csOptId:38,
+        bottomSection: { label:'Bottom section e-brake', zone:{px:385,py:453}, csOptId:50,
           values:[
-            { v:'blackCarbon',    label:'Black carbon',    price:20, cs:238 },
-            { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:239 },
-            { v:'redCarbon',      label:'Red carbon',      price:20, cs:240 },
-            { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:241 },
-            { v:'alutex',         label:'Alutex',          price:20, cs:242 },
-            { v:'custom',         label:'Custom',          price:0,  cs:243 }
+            { v:'leather',   label:'Leather', price:0, cs:284 },
+            { v:'perf',      label:'Perforated Leather', price:0, cs:285 },
+            { v:'alcantara', label:'Alcantara', price:0, cs:286 },
+            { v:'carbon',    label:'Carbon', price:55, cs:287 }
           ]},
-        topCapFinish: { label:'Top cap finish', zone:{px:972,py:640}, csOptId:39,
+        carbonStyle: { label:'Carbon style', zone:{px:219,py:357}, csOptId:51, gatedBy:{ key:'bottomSection', equals:'carbon' },
           values:[
-            { v:'matte', label:'Matte', price:0, cs:245 },
-            { v:'gloss', label:'Gloss', price:0, cs:244 }
+            { v:'blackCarbon',    label:'Black carbon',    price:0, cs:288 },
+            { v:'redCarbon',      label:'Red carbon',      price:0, cs:289 },
+            { v:'blueCarbon',     label:'Blue carbon',     price:0, cs:290 },
+            { v:'titaniumCarbon', label:'Titanium carbon', price:0, cs:291 },
+            { v:'alutex',         label:'Alutex',          price:0, cs:292 }
           ]},
-        shiftLogo: { label:'Shift pattern logo', zone:{px:895,py:719}, csOptId:40,
+        finishTopStyle: { label:'Finish top style', zone:{px:219,py:357}, csOptId:45, gatedBy:{ key:'bottomSection', equals:'carbon' },
+          values: FINISH_TOP_STYLE_VALUES.slice() },
+        stitchingColor: { label:'Stitching color', zone:{px:455,py:308}, csOptId:32, isColor:true,
+          values: STITCHING_COLOR_VALUES.slice() },
+        addCarbonButton: { label:'Add carbon fiber button', zone:{px:130,py:605}, csOptId:52,
           values:[
-            { v:'blueZR1',   label:'Blue ZR1',   price:0, cs:246 },
-            { v:'greyZ06',   label:'Grey Z06',   price:0, cs:247 },
-            { v:'chromeZR1', label:'Chrome ZR1', price:0, cs:248 },
-            { v:'custom',    label:'Custom (your logo)', price:0, cs:249 }
-          ]},
-        shiftColor: { label:'Shift pattern color', zone:{px:911,py:651}, csOptId:41, isColor:true,
-          values:[
-            { v:'red',    label:'Red',      price:0, hex:'#c81e1e', cs:250 },
-            { v:'blue',   label:'Blue',     price:0, hex:'#1e4fc8', cs:251 },
-            { v:'grey',   label:'Grey',     price:0, hex:'#8a8d90', cs:252 },
-            { v:'white',  label:'White',    price:0, hex:'#f5f5f5', cs:253 },
-            { v:'yellow', label:'Yellow',   price:0, hex:'#e8c31e', cs:254 },
-            { v:'no',     label:'No',       price:0, none:true, cs:255 },
-            { v:'bluev2', label:'Blue v.2', price:0, hex:'#3d6ad1', cs:256 }
+            { v:'yes', label:'Yes', price:50, cs:293 },
+            { v:'no',  label:'No',  price:0,  cs:294 }
           ]}
       }
     },
 
-    drift: {
-      id:'353', label:'Drift', name:'Corvette C6 DRIFT Shift Knob Manual (6-Speed)', priceFrom:220.00, basePrice:220.00,
-      thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_DRIFT_Shift_Knob_Manual__6-Speed__ociu-ky_png.webp',
-      img:'https://therunbird.com/images/detailed/9/Corvette_C6_DRIFT_Shift_Knob_Manual__6-Speed__ociu-ky.png',
+    button: {
+      id:'357', label:'Handle Button', name:'Corvette C6 E-Brake Handle Button', priceFrom:50.00, basePrice:50.00,
+      thumb:'https://therunbird.com/images/Calculator/Handle/CF-button.png',
+      img:'https://therunbird.com/images/Calculator/Handle/CF-button.png',
       options: {
-        bottomPart: { label:'Bottom part', zone:{px:526,py:722}, csOptId:46,
+        style: { label:'Style', csOptId:53,
           values:[
-            { v:'leather', label:'Leather', price:0, cs:273 },
-            { v:'alc',     label:'Alcantara', price:0, cs:274 }
+            { v:'black',  label:'Black', price:0, cs:295 },
+            { v:'carbon', label:'Carbon', price:10, cs:296 }
           ]},
-        upperPart: { label:'Upper part', zone:{px:603,py:371}, csOptId:43,
-          values:[
-            { v:'leather', label:'Leather', price:0, cs:260 },
-            { v:'alc',     label:'Alcantara', price:0, cs:261 },
-            { v:'carbon',  label:'Carbon', price:40, cs:262 }
-          ]},
-        stitchingColor: { label:'Stitching color', zone:{px:534,py:408}, csOptId:32, isColor:true,
-          values:[
-            { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
-            { v:'white',    label:'White',    price:0, hex:'#f5f5f5', cs:199 },
-            { v:'red',      label:'Red',      price:0, hex:'#c81e1e', cs:200 },
-            { v:'blue',     label:'Blue',     price:0, hex:'#1e4fc8', cs:201 },
-            { v:'yellow',   label:'Yellow',   price:0, hex:'#e8c31e', cs:202 },
-            { v:'orange',   label:'Orange',   price:0, hex:'#e06b1e', cs:203 },
-            { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
-            { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
-          ]},
-        carbonTopStyle: { label:'Carbon top style', zone:{px:608,py:155}, csOptId:44,
-          values:[
-            { v:'blackMatte',     label:'Black matte',     price:0,  cs:263 },
-            { v:'blackCarbon',    label:'Black carbon',    price:20, cs:264 },
-            { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:265 },
-            { v:'redCarbon',      label:'Red carbon',      price:20, cs:266 },
-            { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:267 },
-            { v:'alutex',         label:'Alutex',          price:25, cs:268 },
-            { v:'custom',         label:'Custom',          price:30, cs:269 }
-          ]},
-        finishTopStyle: { label:'Finish top style', zone:{px:909,py:390}, csOptId:45,
-          values:[
-            { v:'gloss', label:'Gloss', price:0, cs:270 },
-            { v:'matte', label:'Matte', price:0, cs:271 }
-          ]}
-      }
-    },
-
-    cap: {
-      id:'354', label:'Top Cap Only', name:'Corvette C6 Classic Shift Top Cap', priceFrom:55.00, basePrice:55.00,
-      thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/Corvette_C6_Classic_Shift_Top_Cap6.png',
-      img:'https://therunbird.com/images/detailed/9/Corvette_C6_Classic_Shift_Top_Cap6.png',
-      options: {
-        styleTopCap: { label:'Style top cap', zone:{px:797,py:628}, csOptId:38,
-          values:[
-            { v:'blackCarbon',    label:'Black carbon',    price:20, cs:238 },
-            { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:239 },
-            { v:'redCarbon',      label:'Red carbon',      price:20, cs:240 },
-            { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:241 },
-            { v:'alutex',         label:'Alutex',          price:20, cs:242 },
-            { v:'custom',         label:'Custom',          price:0,  cs:243 }
-          ]},
-        topCapFinish: { label:'Top cap finish', zone:{px:884,py:418}, csOptId:39,
-          values:[
-            { v:'matte', label:'Matte', price:0, cs:245 },
-            { v:'gloss', label:'Gloss', price:0, cs:244 }
-          ]},
-        shiftLogo: { label:'Shift pattern logo', zone:{px:527,py:515}, csOptId:40,
-          values:[
-            { v:'blueZR1',   label:'Blue ZR1',   price:0, cs:246 },
-            { v:'greyZ06',   label:'Grey Z06',   price:0, cs:247 },
-            { v:'chromeZR1', label:'Chrome ZR1', price:0, cs:248 },
-            { v:'custom',    label:'Custom (your logo)', price:0, cs:249 }
-          ]},
-        shiftColor: { label:'Shift pattern color', zone:{px:723,py:291}, csOptId:41, isColor:true,
-          values:[
-            { v:'red',    label:'Red',      price:0, hex:'#c81e1e', cs:250 },
-            { v:'blue',   label:'Blue',     price:0, hex:'#1e4fc8', cs:251 },
-            { v:'grey',   label:'Grey',     price:0, hex:'#8a8d90', cs:252 },
-            { v:'white',  label:'White',    price:0, hex:'#f5f5f5', cs:253 },
-            { v:'yellow', label:'Yellow',   price:0, hex:'#e8c31e', cs:254 },
-            { v:'no',     label:'No',       price:0, none:true, cs:255 },
-            { v:'bluev2', label:'Blue v.2', price:0, hex:'#3d6ad1', cs:256 }
-          ]}
+        finishTopStyle: { label:'Finish top style', csOptId:45,
+          values: FINISH_TOP_STYLE_VALUES.slice() }
       }
     }
   };
 
-  var VARIANT_ORDER = ['classic','ball','drift','cap'];
+  var VARIANT_ORDER = ['handle','knobBoot','button'];
 
   var root = document.getElementById('rb-config');
   var svg = root.querySelector('.rb-cfg-lines');
@@ -565,6 +477,15 @@
 
   function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
   function fmtBase(p){ return '$'+Math.round(p); }
+
+  // ---- gating: an option can require another option in the SAME variant to
+  // hold a specific value before it is shown (e.g. "Carbon style" only shows
+  // once "Bottom section e-brake" is set to "Carbon"). ----
+  function gateOpen(opt){
+    if (!opt.gatedBy) return true;
+    var gateVal = state[opt.gatedBy.key];
+    return !!(gateVal && gateVal.v === opt.gatedBy.equals);
+  }
 
   // ---- live price hydration from CS-Cart ----
   // This block is a landing page, not the product page, so there is no native
@@ -671,11 +592,7 @@
 
   function isOptSelected(key){
     var opt = CURRENT.options[key];
-    if (opt.gatedBy){
-      var gateVal = state[opt.gatedBy];
-      if (!gateVal || gateVal.v !== 'yes') return true;
-      return !!state[key];
-    }
+    if (!gateOpen(opt)) return true;
     return !!state[key];
   }
   function isComplete(){
@@ -692,10 +609,7 @@
     for (var i=0; i<keys.length; i++){
       var key = keys[i];
       var opt = CURRENT.options[key];
-      if (opt.gatedBy){
-        var gateVal = state[opt.gatedBy];
-        if (!gateVal || gateVal.v !== 'yes') continue;
-      }
+      if (!gateOpen(opt)) continue;
       if (!isOptSelected(key)) return key;
     }
     return null;
@@ -744,8 +658,7 @@
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
       if (!opt.gatedBy) return;
-      var gateVal = state[opt.gatedBy];
-      var show = !!(gateVal && gateVal.v === 'yes');
+      var show = gateOpen(opt);
       var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
       if (card) card.classList.toggle('is-gated-off', !show);
       var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
@@ -780,7 +693,7 @@
         el.classList.add('is-active');
 
         updateHeadVal(key);
-        if (opt.isGate) applyGateVisibility();
+        applyGateVisibility();
         recalcPrice();
         updateCompletionUI();
         updateStepMarks();
@@ -895,10 +808,7 @@
     var total = BASE_PRICE;
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
-      if (opt.gatedBy){
-        var gateVal = state[opt.gatedBy];
-        if (!gateVal || gateVal.v !== 'yes') return;
-      }
+      if (!gateOpen(opt)) return;
       total += (state[key] && state[key].price) || 0;
     });
     priceNumEl.textContent = total.toFixed(2).split('.')[0];
@@ -916,10 +826,7 @@
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
       if (!opt.zone) return;
-      if (opt.gatedBy){
-        var gateVal = state[opt.gatedBy];
-        if (!gateVal || gateVal.v !== 'yes') return;
-      }
+      if (!gateOpen(opt)) return;
       var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
       if (!card) return;
       var dotX = imgRect.left - wrapRect.left + imgRect.width * (opt.zone.px / imgEl.naturalWidth);
@@ -995,7 +902,7 @@
     buildCards();
     buildStepMarks();
     applyGateVisibility();
-    document.dispatchEvent(new CustomEvent('rb-shiftknob-variant', { detail:{ key:key } }));
+    document.dispatchEvent(new CustomEvent('rb-handbrake-variant', { detail:{ key:key } }));
 
     root.classList.remove('rb-cfg-shape-pending');
     changeTypeBtn.hidden = false;
@@ -1091,10 +998,7 @@
     addField('product_data[' + PRODUCT_ID + '][amount]', '1');
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
-      if (opt.gatedBy){
-        var gateVal = state[opt.gatedBy];
-        if (!gateVal || gateVal.v !== 'yes') return;
-      }
+      if (!gateOpen(opt)) return;
       addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
     });
 
