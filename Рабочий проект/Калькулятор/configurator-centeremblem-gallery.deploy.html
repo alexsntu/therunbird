@@ -28,7 +28,7 @@
   </symbol>
 </svg>
 
-<div class="rb-cfg-gallery" id="rb-cfg-gallery" style="display:none">
+<div class="rb-cfg-gallery" id="rb-cfg-gallery">
   <div class="rb-cfg-gal-head">Recent builds</div>
   <div class="rb-cfg-gal-row">
     <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--prev" id="rb-cfg-gal-prev" aria-label="Scroll left">‹</button>
@@ -40,7 +40,7 @@
 <div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
   <button type="button" class="rb-cfg-lb-close" id="rb-cfg-lb-close" aria-label="Close">✕</button>
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-prev" id="rb-cfg-lb-prev" aria-label="Previous photo">‹</button>
-  <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom airbag cover build — full size">
+  <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom center emblem build — full size">
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-next" id="rb-cfg-lb-next" aria-label="Next photo">›</button>
 </div>
 
@@ -60,7 +60,12 @@
   font-size:18px; font-weight:600; margin-bottom:16px; text-align:center;
 }
 #rb-cfg-gallery .rb-cfg-gal-track{
-  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity; justify-content:center;
+  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity;
+  /* Centers the strip when it's short enough to fit without scrolling
+     (e.g. only 4 photos) instead of hugging the left edge with a big gap
+     on the right; once it overflows, this has no effect and it scrolls
+     normally from the left like before. */
+  justify-content:center;
 }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar{ height:6px; }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-track{ background:transparent; }
@@ -69,13 +74,16 @@
   position:relative; flex:0 0 auto; width:clamp(150px,17vw,210px); aspect-ratio:1/1;
   border-radius:14px; overflow:hidden; border:1px solid var(--rb-border); scroll-snap-align:start;
   cursor:zoom-in; transition:border-color .15s;
+  /* Lighter than the usual brand gradient on purpose — these emblems are
+     black carbon fiber, so the near-black studio background used elsewhere
+     made them disappear. */
   background:
     radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
     radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
     linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
 }
 #rb-cfg-gallery .rb-cfg-gal-item img{
-  position:absolute; inset:0; margin:auto; width:82%; height:82%; object-fit:contain;
+  position:absolute; inset:0; margin:auto; width:78%; height:78%; object-fit:contain;
   filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
 }
 #rb-cfg-gallery .rb-cfg-gal-watermark{
@@ -130,39 +138,23 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 <script>
 (function(){
 
-  // Fill these in per design when photos are ready — same keys as the configurator block
-  // (shield / circle / tee — matches DESIGN_OPTION values in configurator-airbagcover.deploy.html).
-  var GALLERY_DATA = {
-    shield: [],
-    circle: [],
-    tee: []
-  };
+  var GALLERY_SRCS = [
+    'https://therunbird.com/images/Calculator/Center%20Emblem/Z06.png',
+    'https://therunbird.com/images/Calculator/Center%20Emblem/ZR1.png',
+    'https://therunbird.com/images/Calculator/Center%20Emblem/panisher.png',
+    'https://therunbird.com/images/Calculator/Center%20Emblem/skulls.png'
+  ];
 
-  var gallerySection = document.getElementById('rb-cfg-gallery');
   var galTrack = document.getElementById('rb-cfg-gal-track');
-  var galSrcs = [];
 
-  function renderGallery(key){
-    galTrack.innerHTML = '';
-    galSrcs = GALLERY_DATA[key] || [];
-    if (!galSrcs.length){
-      gallerySection.style.display = 'none';
-      return;
-    }
-    gallerySection.style.display = '';
-    galSrcs.forEach(function(src, i){
-      var item = document.createElement('div');
-      item.className = 'rb-cfg-gal-item';
-      item.innerHTML =
-        '<img src="'+src+'" alt="Custom airbag cover build" loading="lazy">'+
-        '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
-      item.addEventListener('click', function(){ openLightbox(i); });
-      galTrack.appendChild(item);
-    });
-  }
-
-  document.addEventListener('rb-airbagcover-design', function(e){
-    renderGallery(e.detail && e.detail.key);
+  GALLERY_SRCS.forEach(function(src, i){
+    var item = document.createElement('div');
+    item.className = 'rb-cfg-gal-item';
+    item.innerHTML =
+      '<img src="'+src+'" alt="Custom center emblem build" loading="lazy">'+
+      '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
+    item.addEventListener('click', function(){ openLightbox(i); });
+    galTrack.appendChild(item);
   });
 
   document.getElementById('rb-cfg-gal-prev').addEventListener('click', function(){
@@ -193,7 +185,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
   function openLightbox(i){
     lbIndex = i;
-    lbImg.src = galSrcs[lbIndex];
+    lbImg.src = GALLERY_SRCS[lbIndex];
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     lockPageScroll();
@@ -204,8 +196,8 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     unlockPageScroll();
   }
   function lbShift(delta){
-    lbIndex = (lbIndex + delta + galSrcs.length) % galSrcs.length;
-    lbImg.src = galSrcs[lbIndex];
+    lbIndex = (lbIndex + delta + GALLERY_SRCS.length) % GALLERY_SRCS.length;
+    lbImg.src = GALLERY_SRCS[lbIndex];
   }
 
   document.getElementById('rb-cfg-lb-close').addEventListener('click', closeLightbox);

@@ -28,7 +28,7 @@
   </symbol>
 </svg>
 
-<div class="rb-cfg-gallery" id="rb-cfg-gallery" style="display:none">
+<div class="rb-cfg-gallery" id="rb-cfg-gallery">
   <div class="rb-cfg-gal-head">Recent builds</div>
   <div class="rb-cfg-gal-row">
     <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--prev" id="rb-cfg-gal-prev" aria-label="Scroll left">‹</button>
@@ -40,7 +40,7 @@
 <div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
   <button type="button" class="rb-cfg-lb-close" id="rb-cfg-lb-close" aria-label="Close">✕</button>
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-prev" id="rb-cfg-lb-prev" aria-label="Previous photo">‹</button>
-  <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom airbag cover build — full size">
+  <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom steering wheel build — full size">
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-next" id="rb-cfg-lb-next" aria-label="Next photo">›</button>
 </div>
 
@@ -60,7 +60,8 @@
   font-size:18px; font-weight:600; margin-bottom:16px; text-align:center;
 }
 #rb-cfg-gallery .rb-cfg-gal-track{
-  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity; justify-content:center;
+  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity;
+  justify-content:center;
 }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar{ height:6px; }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-track{ background:transparent; }
@@ -130,39 +131,30 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 <script>
 (function(){
 
-  // Fill these in per design when photos are ready — same keys as the configurator block
-  // (shield / circle / tee — matches DESIGN_OPTION values in configurator-airbagcover.deploy.html).
-  var GALLERY_DATA = {
-    shield: [],
-    circle: [],
-    tee: []
-  };
+  var GALLERY_SRCS = [
+    'https://therunbird.com/images/Calculator/Prew-SW/SW1.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW2.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW3.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW4.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW5.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW6.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW7.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW8.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW9.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW10.png',
+    'https://therunbird.com/images/Calculator/Prew-SW/SW11.png'
+  ];
 
-  var gallerySection = document.getElementById('rb-cfg-gallery');
   var galTrack = document.getElementById('rb-cfg-gal-track');
-  var galSrcs = [];
 
-  function renderGallery(key){
-    galTrack.innerHTML = '';
-    galSrcs = GALLERY_DATA[key] || [];
-    if (!galSrcs.length){
-      gallerySection.style.display = 'none';
-      return;
-    }
-    gallerySection.style.display = '';
-    galSrcs.forEach(function(src, i){
-      var item = document.createElement('div');
-      item.className = 'rb-cfg-gal-item';
-      item.innerHTML =
-        '<img src="'+src+'" alt="Custom airbag cover build" loading="lazy">'+
-        '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
-      item.addEventListener('click', function(){ openLightbox(i); });
-      galTrack.appendChild(item);
-    });
-  }
-
-  document.addEventListener('rb-airbagcover-design', function(e){
-    renderGallery(e.detail && e.detail.key);
+  GALLERY_SRCS.forEach(function(src, i){
+    var item = document.createElement('div');
+    item.className = 'rb-cfg-gal-item';
+    item.innerHTML =
+      '<img src="'+src+'" alt="Custom steering wheel build" loading="lazy">'+
+      '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
+    item.addEventListener('click', function(){ openLightbox(i); });
+    galTrack.appendChild(item);
   });
 
   document.getElementById('rb-cfg-gal-prev').addEventListener('click', function(){
@@ -193,7 +185,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
   function openLightbox(i){
     lbIndex = i;
-    lbImg.src = galSrcs[lbIndex];
+    lbImg.src = GALLERY_SRCS[lbIndex];
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     lockPageScroll();
@@ -204,8 +196,8 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     unlockPageScroll();
   }
   function lbShift(delta){
-    lbIndex = (lbIndex + delta + galSrcs.length) % galSrcs.length;
-    lbImg.src = galSrcs[lbIndex];
+    lbIndex = (lbIndex + delta + GALLERY_SRCS.length) % GALLERY_SRCS.length;
+    lbImg.src = GALLERY_SRCS[lbIndex];
   }
 
   document.getElementById('rb-cfg-lb-close').addEventListener('click', closeLightbox);

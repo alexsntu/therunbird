@@ -1,0 +1,75 @@
+<div id="rb-crosssell">
+  <div class="rb-crosssell-head">Shop More Accessories</div>
+  <div class="rb-crosssell-grid">
+    <a href="https://therunbird.com/shift-knobs/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/shift-knobs.png" alt="Shift Knobs" loading="lazy">
+      <span class="rb-crosssell-name">Shift Knobs</span>
+    </a>
+    <a href="https://therunbird.com/handbrakes/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/handbrakes.png" alt="Handbrakes" loading="lazy">
+      <span class="rb-crosssell-name">Handbrakes</span>
+    </a>
+    <a href="https://therunbird.com/horn-pads/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/Horn-pads.png" alt="Horn Pads" loading="lazy">
+      <span class="rb-crosssell-name">Horn Pads</span>
+    </a>
+    <a href="https://therunbird.com/steering-wheel-emblems/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/SW-emblems.png" alt="SW Emblems" loading="lazy">
+      <span class="rb-crosssell-name">SW Emblems</span>
+    </a>
+    <a href="https://therunbird.com/side-skirts/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/side-skirts.png" alt="Side Skirts" loading="lazy">
+      <span class="rb-crosssell-name">Side Skirts</span>
+    </a>
+  </div>
+</div>
+
+<style>
+#rb-crosssell{
+  --rb-accent:   #C8A84C;
+  --rb-accent-b: rgba(200,168,76,.28);
+  --rb-text:     #F0F0F0;
+  --rb-border:   rgba(255,255,255,.08);
+  font-family:'Inter', sans-serif; color:var(--rb-text);
+  max-width:1370px; margin:0 auto; padding:24px clamp(20px,4vw,56px);
+  box-sizing:border-box;
+}
+#rb-crosssell *{ box-sizing:border-box; }
+#rb-crosssell .rb-crosssell-head{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:14px; text-align:center;
+}
+/* Desktop: fixed 250x250 squares in one row, centered — not a stretchy
+   fraction grid, so tiles stay square and consistent-sized regardless of
+   how many sit in the row. */
+#rb-crosssell .rb-crosssell-grid{
+  display:grid; grid-template-columns:repeat(5, 250px); gap:14px; justify-content:center;
+}
+#rb-crosssell .rb-crosssell-card{
+  position:relative; display:block; aspect-ratio:1/1; border-radius:10px; overflow:hidden;
+  border:1px solid var(--rb-border); background:#111; text-decoration:none; transition:border-color .2s;
+}
+#rb-crosssell .rb-crosssell-card:hover{ border-color:var(--rb-accent-b); }
+#rb-crosssell .rb-crosssell-card img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top;
+  transition:transform .5s;
+}
+#rb-crosssell .rb-crosssell-card:hover img{ transform:scale(1.06); }
+#rb-crosssell .rb-crosssell-card::after{
+  content:''; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 55%, transparent 100%);
+}
+#rb-crosssell .rb-crosssell-name{
+  position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 10px;
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.03em;
+  font-size:16px; font-weight:700; color:var(--rb-text);
+}
+
+/* Mobile: 3 columns so 5 tiles wrap into 2 rows (3 + 2) instead of a single
+   long row or an odd leftover on its own row. Square via aspect-ratio, size
+   follows the column width rather than a fixed 250px. */
+@media (max-width: 900px){
+  #rb-crosssell .rb-crosssell-grid{ grid-template-columns:repeat(3, 1fr); }
+  #rb-crosssell .rb-crosssell-name{ font-size:14px; }
+}
+</style>
