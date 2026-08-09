@@ -106,7 +106,9 @@
 #rb-categories .rb-cat-card:hover {
   box-shadow: inset 0 0 60px rgba(200,168,76,.07), 0 0 40px rgba(200,168,76,.08) !important;
 }
-#rb-categories .rb-cat-card:first-child { grid-row: span 2 !important; }
+@media (min-width: 901px) {
+  #rb-categories .rb-c-ss { grid-column: 1 !important; grid-row: 2 !important; }
+}
 #rb-categories .rb-cat-card::before {
   content: '' !important; position: absolute !important; inset: 0 !important; z-index: 1 !important;
   background-image:
@@ -149,7 +151,6 @@
   color: var(--rb-text) !important; text-transform: uppercase !important;
   letter-spacing: .04em !important; margin-bottom: 5px !important;
 }
-#rb-categories .rb-cat-card:first-child .rb-cat-name { font-size: 32px !important; }
 #rb-categories .rb-cat-sub { font-size: 11.5px !important; color: var(--rb-accent) !important; letter-spacing: .06em !important; }
 #rb-categories .rb-cat-price {
   font-family: 'Barlow Condensed', sans-serif !important;
@@ -158,8 +159,6 @@
   letter-spacing: .03em !important;
   text-shadow: 0 0 14px rgba(200,168,76,.4) !important;
 }
-#rb-categories .rb-cat-card:first-child .rb-cat-price { font-size: 20px !important; }
-
 #rb-categories .rb-cat-arr {
   position: absolute !important; right: 22px !important; bottom: 28px !important; z-index: 5 !important;
   width: 34px !important; height: 34px !important; border-radius: 50% !important;
@@ -185,6 +184,7 @@
 }
 @media (max-width: 900px) {
   #rb-categories .rb-cat-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+  #rb-categories .rb-cat-card { min-height: 260px !important; }
   #rb-categories .rb-cat-card:first-child { grid-row: auto !important; grid-column: span 2 !important; }
 }
 @media (max-width: 768px) {
@@ -224,12 +224,12 @@
       <!-- Steering Wheels (large) -->
       <a href="https://therunbird.com/steering-wheels/" class="rb-cat-card rb-c-sw">
         <div class="rb-cat-hover-line"></div>
-        <img class="rb-cat-img rb-cat-img-desktop" src="https://therunbird.com/images/MainPAge/corvette_wheel-pc.png" alt="Steering Wheels">
-        <img class="rb-cat-img rb-cat-img-mobile"  src="https://therunbird.com/images/MainPAge/corvette_wheel-mob.png" alt="Steering Wheels">
+        <img class="rb-cat-img rb-cat-img-desktop" src="https://therunbird.com/images/MainPAge/runbird_wheel_hero-mob.png" alt="Steering Wheels">
+        <img class="rb-cat-img rb-cat-img-mobile"  src="https://therunbird.com/images/MainPAge/runbird_wheel_hero-mob.png" alt="Steering Wheels">
         <div class="rb-cat-info">
           <div class="rb-cat-name">Steering Wheels</div>
           <div class="rb-cat-sub">11 configurations · Carbon · Nappa · Alcantara</div>
-          <div class="rb-cat-price">from $380</div>
+          <div class="rb-cat-price">from $765</div>
         </div>
         <div class="rb-cat-arr">→</div>
       </a>
@@ -237,11 +237,11 @@
       <!-- Shift Knobs -->
       <a href="https://therunbird.com/shift-knobs/" class="rb-cat-card rb-c-sk">
         <div class="rb-cat-hover-line"></div>
-        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/shift-knobs.png" alt="Shift Knobs">
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/runbird_shiftknob_cat.png" alt="Shift Knobs">
         <div class="rb-cat-info">
           <div class="rb-cat-name">Shift Knobs</div>
           <div class="rb-cat-sub">5 styles · Standard · Ball · Tall · Drift</div>
-          <div class="rb-cat-price">from $175</div>
+          <div class="rb-cat-price">from $170</div>
         </div>
         <div class="rb-cat-arr">→</div>
       </a>
@@ -249,11 +249,11 @@
       <!-- Handbrakes -->
       <a href="https://therunbird.com/handbrakes/" class="rb-cat-card rb-c-hb">
         <div class="rb-cat-hover-line"></div>
-        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/handbrakes.png" alt="Handbrakes">
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/runbird_handbrake_handle-cat.png" alt="Handbrakes">
         <div class="rb-cat-info">
           <div class="rb-cat-name">Handbrakes</div>
           <div class="rb-cat-sub">Grip · Cover · Button · 8 material options</div>
-          <div class="rb-cat-price">from $160</div>
+          <div class="rb-cat-price">from $195</div>
         </div>
         <div class="rb-cat-arr">→</div>
       </a>
@@ -261,11 +261,11 @@
       <!-- Horn Pads -->
       <a href="https://therunbird.com/horn-pads/" class="rb-cat-card rb-c-hp">
         <div class="rb-cat-hover-line"></div>
-        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/Horn-pads.png" alt="Horn Pads">
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/runbird_airbag_shield_cat.png" alt="Horn Pads">
         <div class="rb-cat-info">
           <div class="rb-cat-name">Horn Pads</div>
           <div class="rb-cat-sub">Round &amp; T-shaped · Leather · Alcantara</div>
-          <div class="rb-cat-price">from $115</div>
+          <div class="rb-cat-price">from $355</div>
         </div>
         <div class="rb-cat-arr">→</div>
       </a>
@@ -273,21 +273,21 @@
       <!-- SW Emblems -->
       <a href="https://therunbird.com/steering-wheel-emblems/" class="rb-cat-card rb-c-em">
         <div class="rb-cat-hover-line"></div>
-        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/SW-emblems.png" alt="SW Emblems">
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/runbird_emblems_cat.png" alt="SW Emblems">
         <div class="rb-cat-info">
           <div class="rb-cat-name">SW Emblems</div>
           <div class="rb-cat-sub">Z06 · ZR1 · Racing · Punisher · Carbon base</div>
-          <div class="rb-cat-price">from $85</div>
+          <div class="rb-cat-price">from $75</div>
         </div>
         <div class="rb-cat-arr">→</div>
       </a>
 
-      <!-- Side Skirts -->
+      <!-- Door Sill Plates -->
       <a href="https://therunbird.com/side-skirts/" class="rb-cat-card rb-c-ss">
         <div class="rb-cat-hover-line"></div>
-        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/side-skirts.png" alt="Side Skirts">
+        <img class="rb-cat-img" src="https://therunbird.com/images/MainPAge/runbird_sill_v3_cat.png" alt="Door Sill Plates">
         <div class="rb-cat-info">
-          <div class="rb-cat-name">Side Skirts</div>
+          <div class="rb-cat-name">Door Sill Plates</div>
           <div class="rb-cat-sub">Carbon Fiber · Gloss or Matte · Custom decal</div>
           <div class="rb-cat-price">from $260</div>
         </div>

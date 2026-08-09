@@ -109,7 +109,7 @@
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
   font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin-bottom:14px;
 }
-#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; max-width:1080px; margin:0 auto; }
+#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; max-width:1080px; margin:0 auto; }
 #rb-config .rb-cfg-shape-gate-opt{
   background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
   display:flex; flex-direction:column; align-items:center; gap:8px; transition:border-color .15s;
@@ -294,6 +294,7 @@
   #rb-config .rb-cfg-marks{ display:none; }
   #rb-config .rb-cfg-step-marks{ display:block; }
   #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr; max-width:420px; }
+  #rb-config .rb-cfg-shape-gate-opt:nth-child(5){ grid-column:1 / -1; max-width:calc(50% - 8px); margin:0 auto; }
 }
 @media (max-width: 640px){
   #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
@@ -484,10 +485,41 @@
             { v:'bluev2', label:'Blue v.2', price:0, hex:'#3d6ad1', cs:256 }
           ]}
       }
+    },
+
+    boot: {
+      id:'359', label:'Boot', name:'Corvette C6 Shift Knob Boot', priceFrom:55.00, basePrice:55.00,
+      thumb:'https://therunbird.com/images/detailed/9/11.jpg',
+      img:'https://therunbird.com/images/Calculator/Handle/cover.png',
+      options: {
+        gripMaterial: { label:'Grip material', zone:{px:456,py:412}, csOptId:47,
+          values:[
+            { v:'leather',    label:'Leather', price:0, cs:275 },
+            { v:'alc',        label:'Alcantara', price:0, cs:276 },
+            { v:'leatherAlc', label:'Leather + Alcantara', price:0, cs:277 },
+            { v:'textured',   label:'Textured leather', price:0, cs:278 }
+          ]},
+        stitchingColor: { label:'Stitching color', zone:{px:396,py:380}, csOptId:32, isColor:true,
+          values:[
+            { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
+            { v:'white',    label:'White',    price:0, hex:'#f5f5f5', cs:199 },
+            { v:'red',      label:'Red',      price:0, hex:'#c81e1e', cs:200 },
+            { v:'blue',     label:'Blue',     price:0, hex:'#1e4fc8', cs:201 },
+            { v:'yellow',   label:'Yellow',   price:0, hex:'#e8c31e', cs:202 },
+            { v:'orange',   label:'Orange',   price:0, hex:'#e06b1e', cs:203 },
+            { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
+            { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
+          ]},
+        shiftPattern: { label:'Shift pattern', csOptId:48,
+          values:[
+            { v:'auto',   label:'Automatic', price:0, cs:279 },
+            { v:'manual', label:'Manual (6-Speed)', price:0, cs:280 }
+          ]}
+      }
     }
   };
 
-  var VARIANT_ORDER = ['classic','ball','drift','cap'];
+  var VARIANT_ORDER = ['classic','ball','drift','cap','boot'];
 
   var root = document.getElementById('rb-config');
   var svg = root.querySelector('.rb-cfg-lines');
@@ -815,6 +847,7 @@
   function buildStepMarks(){
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
+      if (!opt.zone) return;
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'rb-cfg-step-mark';
