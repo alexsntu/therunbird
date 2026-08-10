@@ -6,16 +6,26 @@
      or with other RunBird blocks (#rb-categories, #rb-custom-order, etc.)
 
      FORM MECHANISM: this reuses CS-Cart's native "Pages > Feedback form" (page_id=30,
-     https://therunbird.com/contact-uss/) verbatim — same action URL, same hidden fields
-     (fake, page_id, customer_email, security_hash) and same form_values[] field IDs:
+     https://therunbird.com/contact-uss/) — same action URL, same form_values[] field IDs:
        form_values[1]  = Full Name
        form_values[2]  = Email      (paired with hidden customer_email=2, the reply-to field)
        form_values[10] = Phone
        form_values[3]  = Comment (Body)
-     security_hash below was read directly off the live page source on 2026-08-10 and is
-     static across requests/sessions (not a per-session CSRF nonce), so it's safe to hardcode.
-     If submissions ever stop arriving, view-source the live form at
-     https://therunbird.com/contact-uss/ and copy the fresh security_hash value here.
+
+     security_hash is NOT hardcoded (and no longer sent at all): it turned out to be a
+     per-request/session nonce (confirmed 2026-08-10 by fetching the live page repeatedly —
+     the value differs every time), so any hardcoded value goes stale immediately and CS-Cart
+     silently drops the submission. Verified by direct curl POST omitting security_hash
+     entirely: CS-Cart accepted it (302 redirect to /contact-uss/?sent=Y, the same success
+     signal the native form produces). This mirrors a known-working reference implementation
+     (maxmobiles.ru CS-Cart feedback-form widget) which also omits security_hash.
+
+     Also fixed: dispatch[pages.send_form] must be its own hidden <input>, not just a
+     name/value on the <button>. new FormData(form) (used below for the fetch() submit)
+     does NOT include submit-button name/value pairs unless the button is passed as the
+     FormData submitter argument — so with dispatch only on the button, the POST body never
+     actually contained dispatch[pages.send_form], and CS-Cart had no idea this was a form
+     submission at all. This was the primary reason no emails arrived.
 
      UX: submission is fire-and-forget — we POST via fetch() and do NOT wait for or read
      the response; the "request received" confirmation is shown immediately, client-side.
@@ -193,6 +203,48 @@
 }
 #rb-contact-us .rb-cu-field.rb-cu-err .rb-cu-err-msg { display: block !important; }
 
+/* Captcha (3-number pick) */
+#rb-contact-us .rb-cu-cap-wrap {
+  background: var(--rb-bg-field) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 8px !important;
+  padding: 14px 16px !important;
+  transition: border-color .18s, box-shadow .18s !important;
+}
+#rb-contact-us .rb-cu-cap-q {
+  font-size: 13px !important; color: var(--rb-text2) !important; font-weight: 500 !important;
+  margin: 0 0 12px !important;
+}
+#rb-contact-us .rb-cu-cap-q strong { color: var(--rb-accent) !important; }
+#rb-contact-us .rb-cu-cap-btns { display: flex !important; gap: 10px !important; }
+#rb-contact-us .rb-cu-cap-btn {
+  flex: 1 !important; padding: 12px 8px !important;
+  border: 1.5px solid var(--rb-border) !important; border-radius: 8px !important;
+  background: var(--rb-bg-card) !important; font-size: 18px !important; font-weight: 700 !important;
+  color: var(--rb-text) !important; cursor: pointer !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: border-color .18s, background .18s, color .18s !important;
+}
+#rb-contact-us .rb-cu-cap-btn:hover {
+  border-color: var(--rb-accent) !important; color: var(--rb-accent) !important;
+  background: rgba(200,168,76,.06) !important;
+}
+#rb-contact-us .rb-cu-cap-btn.rb-cu-cap-correct {
+  border-color: #34c759 !important; background: rgba(52,199,89,.10) !important; color: #34c759 !important;
+}
+#rb-contact-us .rb-cu-cap-btn.rb-cu-cap-wrong {
+  border-color: var(--rb-error) !important; background: rgba(224,100,90,.08) !important;
+  color: var(--rb-error) !important; animation: rb-cu-shake .3s ease !important;
+}
+@keyframes rb-cu-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+#rb-contact-us .rb-cu-field.rb-cu-err .rb-cu-cap-wrap {
+  border-color: var(--rb-error) !important; box-shadow: 0 0 0 3px rgba(224,100,90,.12) !important;
+}
+
 #rb-contact-us .rb-cu-submit {
   width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 9px !important;
   background: var(--rb-accent) !important; color: #000 !important; border: none !important;
@@ -300,7 +352,7 @@
             <input type="hidden" name="fake" value="1" />
             <input type="hidden" name="page_id" value="30" />
             <input type="hidden" name="customer_email" value="2" />
-            <input type="hidden" name="security_hash" value="4bfe809dea5fd2ba6afb7e2a869065fc" />
+            <input type="hidden" name="dispatch[pages.send_form]" value="Submit" />
 
             <div class="rb-cu-field" data-field="name">
               <label class="rb-cu-label" for="rb-cu-name">Your Full Name <span>*</span></label>
@@ -316,7 +368,7 @@
 
             <div class="rb-cu-field" data-field="phone">
               <label class="rb-cu-label" for="rb-cu-phone">Your Phone <span>*</span></label>
-              <input id="rb-cu-phone" type="tel" name="form_values[10]" placeholder="+1 (555) 000-0000" autocomplete="tel" />
+              <input id="rb-cu-phone" type="tel" name="form_values[10]" placeholder="+1 (555) 000-0000" autocomplete="tel" maxlength="18" />
               <div class="rb-cu-err-msg">Please enter your phone number.</div>
             </div>
 
@@ -326,7 +378,20 @@
               <div class="rb-cu-err-msg">Please enter a short message.</div>
             </div>
 
-            <button type="submit" class="rb-cu-submit" name="dispatch[pages.send_form]" value="Submit">Send Message</button>
+            <div class="rb-cu-field rb-cu-cap-field" id="rb-cu-cap-field">
+              <label class="rb-cu-label">Security Check <span>*</span></label>
+              <div class="rb-cu-cap-wrap">
+                <p class="rb-cu-cap-q" id="rb-cu-cap-q"></p>
+                <div class="rb-cu-cap-btns" id="rb-cu-cap-btns">
+                  <button type="button" class="rb-cu-cap-btn" data-idx="0"></button>
+                  <button type="button" class="rb-cu-cap-btn" data-idx="1"></button>
+                  <button type="button" class="rb-cu-cap-btn" data-idx="2"></button>
+                </div>
+              </div>
+              <div class="rb-cu-err-msg">Please click the correct number.</div>
+            </div>
+
+            <button type="submit" class="rb-cu-submit">Send Message</button>
             <p class="rb-cu-fine">By submitting, you agree to be contacted by RunBird regarding your inquiry.</p>
           </form>
         </div>
@@ -356,9 +421,74 @@
   var validators = {
     name:    function(v) { return v.trim().length > 1; },
     email:   function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); },
-    phone:   function(v) { return v.trim().length > 4; },
+    phone:   function(v) { return v.replace(/\D/g, '').length === 10; },
     comment: function(v) { return v.trim().length > 4; }
   };
+
+  // US phone mask: formats digits as "+1 (XXX) XXX-XXXX" while typing.
+  var phoneInput = document.getElementById('rb-cu-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      var digits = phoneInput.value.replace(/\D/g, '');
+      if (digits.charAt(0) === '1') digits = digits.slice(1);
+      digits = digits.slice(0, 10);
+
+      var out = '';
+      if (digits.length > 0) out = '+1 (' + digits.slice(0, 3);
+      if (digits.length >= 3) out += ')';
+      if (digits.length > 3) out += ' ' + digits.slice(3, 6);
+      if (digits.length >= 6) out += '-' + digits.slice(6, 10);
+
+      phoneInput.value = out;
+    });
+  }
+
+  // Captcha: pick the button showing a given number, out of 3 choices.
+  var capField    = document.getElementById('rb-cu-cap-field');
+  var capQ        = document.getElementById('rb-cu-cap-q');
+  var capBtnsWrap = document.getElementById('rb-cu-cap-btns');
+  var capBtns     = capBtnsWrap.querySelectorAll('.rb-cu-cap-btn');
+  var capCorrect  = null;
+  var capSolved   = false;
+
+  function generateCaptcha() {
+    var nums = [];
+    while (nums.length < 3) {
+      var n = Math.floor(Math.random() * 89) + 10;
+      if (nums.indexOf(n) === -1) nums.push(n);
+    }
+    nums.sort(function() { return Math.random() - 0.5; });
+    capCorrect = nums[Math.floor(Math.random() * 3)];
+    capSolved  = false;
+
+    capQ.innerHTML = 'Click the number <strong>' + capCorrect + '</strong>:';
+    Array.prototype.forEach.call(capBtns, function(btn, i) {
+      btn.textContent = nums[i];
+      btn.dataset.num = nums[i];
+      btn.className   = 'rb-cu-cap-btn';
+    });
+    capField.classList.remove('rb-cu-err');
+  }
+
+  capBtnsWrap.addEventListener('click', function(e) {
+    var btn = e.target.closest('.rb-cu-cap-btn');
+    if (!btn) return;
+    var val = parseInt(btn.dataset.num, 10);
+
+    Array.prototype.forEach.call(capBtns, function(b) { b.className = 'rb-cu-cap-btn'; });
+    capField.classList.remove('rb-cu-err');
+
+    if (val === capCorrect) {
+      btn.classList.add('rb-cu-cap-correct');
+      capSolved = true;
+    } else {
+      btn.classList.add('rb-cu-cap-wrong');
+      capSolved = false;
+      setTimeout(generateCaptcha, 900);
+    }
+  });
+
+  generateCaptcha();
 
   function validate() {
     var ok = true;
@@ -369,6 +499,10 @@
       field.classList.toggle('rb-cu-err', !valid);
       if (!valid) ok = false;
     });
+    if (!capSolved) {
+      capField.classList.add('rb-cu-err');
+      ok = false;
+    }
     return ok;
   }
 
@@ -382,6 +516,11 @@
     fetch(form.action, { method: 'POST', body: fd }).catch(function() {});
 
     root.classList.add('rb-cu-sent');
+
+    var succTitle = root.querySelector('.rb-cu-succ-t');
+    if (succTitle) {
+      succTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   });
 
   var againBtn = document.getElementById('rb-cu-again');
@@ -391,6 +530,7 @@
       Array.prototype.forEach.call(form.querySelectorAll('.rb-cu-err'), function(f) {
         f.classList.remove('rb-cu-err');
       });
+      generateCaptcha();
       root.classList.remove('rb-cu-sent');
     });
   }
