@@ -365,10 +365,11 @@
       { v:'tee',    label:'Tee',    price:0, cs:299, desc:'Top & side stitch, open bottom', icon:designIconSVG('tee') }
     ]};
 
-  // Tee uses its own product photo and its own zone coordinates (measured
-  // against that photo) — Shield and Circle share the default photo/zones.
+  // Tee and Circle each use their own product photo and zone coordinates
+  // (measured against that photo) — Shield uses the default photo/zones.
   var PHOTO_DEFAULT = 'https://therunbird.com/images/detailed/9/Shield1_p1uj-h0.png';
   var PHOTO_TEE = 'https://therunbird.com/images/detailed/9/tee1_jicw-7c.png';
+  var PHOTO_CIRCLE = 'https://therunbird.com/images/Calculator/Airbag%20cover/pad-circle.png';
   var ZONE_DEFAULT = {
     leatherMaterial:    {px:720,py:277},
     stitchingColor:     {px:660,py:256},
@@ -384,6 +385,14 @@
     styleCenterEmblem:  {px:438,py:363},
     finishTopStyle:     {px:426,py:348},
     designCenterEmblem: {px:415,py:333}
+  };
+  var ZONE_CIRCLE = {
+    leatherMaterial:    {px:667,py:294},
+    stitchingColor:     {px:566,py:290},
+    centerEmblemAdd:    {px:400,py:300},
+    styleCenterEmblem:  {px:441,py:379},
+    finishTopStyle:     {px:437,py:289},
+    designCenterEmblem: {px:435,py:351}
   };
 
   var PRODUCT = {
@@ -947,8 +956,9 @@
     changeTypeBtn.hidden = false;
     document.dispatchEvent(new CustomEvent('rb-airbagcover-design', { detail:{ key:val.v } }));
 
-    applyZones(val.v === 'tee' ? ZONE_TEE : ZONE_DEFAULT);
-    var photo = val.v === 'tee' ? PHOTO_TEE : PHOTO_DEFAULT;
+    var zoneMap = val.v === 'tee' ? ZONE_TEE : (val.v === 'circle' ? ZONE_CIRCLE : ZONE_DEFAULT);
+    applyZones(zoneMap);
+    var photo = val.v === 'tee' ? PHOTO_TEE : (val.v === 'circle' ? PHOTO_CIRCLE : PHOTO_DEFAULT);
     if (wheelImgEl.getAttribute('src') !== photo){
       var onPhotoLoad = function(){
         wheelImgEl.removeEventListener('load', onPhotoLoad);

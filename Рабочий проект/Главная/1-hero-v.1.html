@@ -219,19 +219,22 @@
 }
 
 #rb-hero .rb-hero-card-label {
-  display: flex !important; align-items: center !important; justify-content: space-between !important;
   margin-top: 12px !important;
   background: rgba(255,255,255,.04) !important;
   border: 1px solid rgba(200,168,76,.2) !important; border-radius: 11px !important;
-  padding: 13px 18px !important;
+  padding: 16px 20px !important;
 }
-#rb-hero .rb-label-title { font-size: 13px !important; font-weight: 600 !important; color: var(--rb-text) !important; }
-#rb-hero .rb-label-sub { font-size: 11px !important; color: var(--rb-accent) !important; margin-top: 2px !important; }
-#rb-hero .rb-label-price {
+#rb-hero .rb-label-title {
   font-family: 'Barlow Condensed', sans-serif !important;
-  font-size: 26px !important; font-weight: 800 !important; color: var(--rb-accent) !important;
-  white-space: nowrap !important;
+  font-size: 16px !important; font-weight: 800 !important; letter-spacing: .02em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  margin-bottom: 6px !important;
 }
+#rb-hero .rb-label-sub {
+  font-size: 13px !important; line-height: 1.55 !important; font-weight: 300 !important;
+  color: #999 !important;
+}
+#rb-hero .rb-label-sub strong { color: #ccc !important; font-weight: 500 !important; }
 
 /* ══════════════════════════════════════
    STATS STRIP
@@ -338,14 +341,11 @@
       <!-- Visual -->
       <div class="rb-hero-visual">
         <div class="rb-hero-card">
-          <img class="rb-hero-card-img" src="https://therunbird.com/images/MainPAge/runbird_wheel_hero.png" alt="Custom Carbon + Nappa Corvette Steering Wheel">
+          <img class="rb-hero-card-img" src="https://therunbird.com/images/MainPAge/55image.jpg" alt="RunBird Corvette Accessories">
         </div>
         <div class="rb-hero-card-label">
-          <div>
-            <div class="rb-label-title">Carbon + Nappa Steering Wheel</div>
-            <div class="rb-label-sub">Gloss Carbon · Nappa Leather · Custom Thread</div>
-          </div>
-          <div class="rb-label-price">$1315</div>
+          <div class="rb-label-title">Made By Hand, Not By Machine</div>
+          <div class="rb-label-sub">Every panel is hand-laid, hand-stitched, and hand-finished in <strong>carbon fiber</strong>, <strong>Nappa leather</strong>, and genuine <strong>Alcantara&reg;</strong> — worked by our own craftsmen, piece by piece.</div>
         </div>
       </div>
 
