@@ -358,7 +358,7 @@
     return '<svg viewBox="0 0 800 800" class="rb-cfg-design-icon" aria-hidden="true">'+DI_OUTLINE+stitchMarkup+'</svg>';
   }
 
-  var DESIGN_OPTION = { label:'Design Airbag Cover', csOptId:54,
+  var DESIGN_OPTION = { label:'Stitch Design', csOptId:54,
     values:[
       { v:'shield', label:'Shield', price:0, cs:297, desc:'Full outline stitch', icon:designIconSVG('shield') },
       { v:'circle', label:'Circle', price:0, cs:298, desc:'Stitch ring around emblem', icon:designIconSVG('circle') },
@@ -628,6 +628,21 @@
     updateMarkText(key);
   }
 
+  function updateDesignHeadVal(){
+    var card = root.querySelector('.rb-cfg-card[data-zone="designCover"]');
+    if (!card) return;
+    card.classList.toggle('is-picked', !!state.designCover);
+    var valEl = card.querySelector('.rb-cfg-card-head-val');
+    if (valEl){
+      valEl.innerHTML = '';
+      valEl.classList.toggle('is-empty', !state.designCover);
+      valEl.appendChild(document.createTextNode(state.designCover ? state.designCover.label : 'Select…'));
+    }
+    card.querySelectorAll('.rb-chip').forEach(function(c){
+      c.classList.toggle('is-active', !!(state.designCover && c.dataset.val === state.designCover.v));
+    });
+  }
+
   function applyGateVisibility(){
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
@@ -712,7 +727,64 @@
     layoutTimer = setTimeout(layoutLines, 260);
   }
 
+  function buildDesignCard(){
+    var card = document.createElement('div');
+    card.className = 'rb-cfg-card';
+    card.dataset.zone = 'designCover';
+
+    var body = document.createElement('div');
+    body.className = 'rb-cfg-card-body';
+    var inner = document.createElement('div');
+    inner.className = 'rb-cfg-card-body-in';
+    body.appendChild(inner);
+
+    var head = headRow(DESIGN_OPTION.label);
+
+    var wrap = document.createElement('div');
+    wrap.className = 'rb-cfg-chips';
+    DESIGN_OPTION.values.forEach(function(val){
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'rb-chip';
+      el.dataset.val = val.v;
+      el.innerHTML = '<span class="rb-chip-txt">'+val.label+'</span>';
+      if (state.designCover === val) el.classList.add('is-active');
+
+      el.addEventListener('click', function(){
+        selectDesign(val);
+
+        var ownCard = wrap.closest('.rb-cfg-card');
+        if (ownCard){
+          ownCard.classList.remove('is-open');
+          setActiveZone('designCover', false);
+          scheduleLayout();
+        }
+        if (window.matchMedia('(max-width: 980px)').matches){
+          var scrollTarget = isComplete() ? '.rb-cfg-summary' : '.rb-cfg-imgwrap';
+          setTimeout(function(){
+            var t = root.querySelector(scrollTarget);
+            if (t) t.scrollIntoView({ behavior:'smooth', block:'center' });
+          }, 300);
+        }
+      });
+      wrap.appendChild(el);
+    });
+    inner.appendChild(wrap);
+
+    card.appendChild(head);
+    card.appendChild(body);
+    head.addEventListener('click', function(){ toggleCard(card); });
+    head.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleCard(card); }
+    });
+    head.addEventListener('mouseenter', function(){ if (!card.classList.contains('is-open')) setActiveZone('designCover', true); });
+    head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone('designCover', false); });
+
+    cardsGrid.appendChild(card);
+  }
+
   function buildCards(){
+    buildDesignCard();
     Object.keys(CURRENT.options).forEach(function(key){
       var opt = CURRENT.options[key];
       var card = document.createElement('div');
@@ -740,6 +812,7 @@
       cardsGrid.appendChild(card);
     });
     Object.keys(CURRENT.options).forEach(function(k){ updateHeadVal(k); });
+    updateDesignHeadVal();
   }
 
   function buildMarks(){
@@ -869,6 +942,7 @@
       b.classList.toggle('is-active', b.dataset.design === val.v);
     });
     syncNative(DESIGN_OPTION.csOptId, val);
+    updateDesignHeadVal();
     root.classList.remove('rb-cfg-shape-pending');
     changeTypeBtn.hidden = false;
     document.dispatchEvent(new CustomEvent('rb-airbagcover-design', { detail:{ key:val.v } }));

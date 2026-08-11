@@ -1,14 +1,47 @@
-<div id="rb-config" class="rb-cfg-shape-pending">
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Steering Wheel Configurator (PROTOTYPE v2 — Year + Shape gates)
+     NOT wired into CS-Cart yet — experimental file to review flow/UX before
+     merging into configurator-preview.deploy.html.
+
+     New vs. the live configurator-preview.deploy.html:
+       - Two sequential full-screen gates: Step 1 = Year, Step 2 = Shape
+         (Shape itself is unchanged — same D/F1 values — just promoted to a
+         mandatory gate for everyone, right after Year, instead of sitting
+         inline as the first option card.)
+       - Both Year and Shape still show up as normal, editable cards in the
+         options list once picked (same pattern Shape already used) — click
+         to change them in place. "Start over" button resets back to Step 1.
+       - "Add CF spoke covers" (Yes/No, csOptId 27) is unchanged. When Yes:
+           - "CF finish" (Gloss/Matte, csOptId 28) always shows — required
+             by CS-Cart regardless of year, per site owner.
+           - "CF covers option" (csOptId 61) additionally shows ONLY when
+             Year = 2007-2011, limited to its first 3 values (321/322/323 —
+             no audio/no bt $0, audio/no bt +$65, audio/bt +$130). Values
+             324/325 (+$385/+$450) exist in CS-Cart but are intentionally
+             never shown here, per site owner.
+           - For Year = 2006 or 2012-2013, no extra sub-option beyond finish.
+     Data pulled 2026-08-11 from the live product (id 350) option markup —
+     Year csOptId 60 (2006=318, 2007-2011=319, 2012-2013=320); CF covers
+     option csOptId 61 (321/322/323 kept, 324/325 excluded).
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config" class="rb-cfg-need-year">
 <div class="rb-cfg-inner">
 
   <div class="rb-cfg-head">
-    <h1 class="rb-cfg-title">Corvette C6 Custom Steering Wheel</h1>
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 Custom Steering Wheel<span class="rb-cfg-title-year" id="rb-cfg-title-year"></span></h1>
     <p class="rb-cfg-sub">Choose every option below — the diagram shows exactly where it applies.</p>
+    <button type="button" class="rb-cfg-restart" id="rb-cfg-restart-btn" hidden>↺ Start over (year &amp; shape)</button>
   </div>
 
-    <div class="rb-cfg-shape-gate">
-    <div class="rb-cfg-shape-gate-head">Step 1 — choose your wheel shape</div>
-    <div class="rb-cfg-shape-gate-grid" id="rb-cfg-shape-gate-grid"></div>
+  <div class="rb-cfg-gate rb-cfg-gate-year">
+    <div class="rb-cfg-gate-head">Step 1 — choose your wheel year</div>
+    <div class="rb-cfg-gate-grid rb-cfg-gate-grid--year" id="rb-cfg-gate-year-grid"></div>
+  </div>
+
+  <div class="rb-cfg-gate rb-cfg-gate-shape">
+    <div class="rb-cfg-gate-head">Step 2 — choose your wheel shape</div>
+    <div class="rb-cfg-gate-grid rb-cfg-gate-grid--shape" id="rb-cfg-gate-shape-grid"></div>
   </div>
 
     <div class="rb-cfg-stage">
@@ -27,11 +60,12 @@
     <div class="rb-cfg-col rb-cfg-col--r">
       <div class="rb-cfg-col-intro">Select &amp; configure your steering wheel design</div>
       <div class="rb-cfg-cards-grid">
+        <div class="rb-cfg-card" data-zone="year"></div>
         <div class="rb-cfg-card" data-zone="shape"></div>
+        <div class="rb-cfg-card" data-zone="spokes"></div>
         <div class="rb-cfg-card" data-zone="grips"></div>
         <div class="rb-cfg-card" data-zone="topSection"></div>
         <div class="rb-cfg-card" data-zone="bottomSection"></div>
-        <div class="rb-cfg-card" data-zone="spokes"></div>
         <div class="rb-cfg-card" data-zone="stitchingColor"></div>
         <div class="rb-cfg-card" data-zone="centerMark"></div>
         <div class="rb-cfg-card" data-zone="logo"></div>
@@ -86,7 +120,14 @@
 
 #rb-config .rb-cfg-head{ text-align:center; margin-bottom:14px; }
 #rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
-#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
+#rb-config .rb-cfg-title-year{ color:var(--rb-accent); }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0 0 10px; }
+#rb-config .rb-cfg-restart{
+  background:none; border:1px solid var(--rb-border-s); color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:12.5px; padding:7px 16px; border-radius:999px;
+  cursor:pointer; transition:.15s;
+}
+#rb-config .rb-cfg-restart:hover{ border-color:var(--rb-accent); color:var(--rb-accent); }
 
 #rb-config .rb-cfg-info{ position:relative; display:inline-flex; cursor:help; margin-left:6px; vertical-align:middle; }
 #rb-config .rb-cfg-info-ico{
@@ -112,7 +153,7 @@
   font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 15px; border-radius:999px;
   cursor:pointer; transition:.15s; max-width:100%;
 }
-#rb-config .rb-chip-txt{ white-space:nowrap; }
+#rb-config .rb-chip-txt{ white-space:normal; }
 #rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
 #rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
 #rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
@@ -122,34 +163,51 @@
   outline:1px solid var(--rb-border-s); outline-offset:1px;
 }
 
-#rb-config .rb-cfg-shape-gate{ display:none; margin-bottom:28px; }
-#rb-config .rb-cfg-shape-gate-head{
+/* ══════════════════════════════════════
+   GATES (Step 1 — Year, Step 2 — Shape)
+══════════════════════════════════════ */
+#rb-config .rb-cfg-gate{ display:none; margin-bottom:28px; }
+#rb-config.rb-cfg-need-year .rb-cfg-gate-year{ display:block; }
+#rb-config.rb-cfg-need-shape .rb-cfg-gate-shape{ display:block; }
+#rb-config.rb-cfg-need-year .rb-cfg-stage,
+#rb-config.rb-cfg-need-year .rb-cfg-gate-shape,
+#rb-config.rb-cfg-need-shape .rb-cfg-stage,
+#rb-config.rb-cfg-need-shape .rb-cfg-gate-year{ display:none; }
+
+#rb-config .rb-cfg-gate-head{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
   font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin-bottom:14px;
 }
-#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:520px; margin:0 auto; }
-#rb-config .rb-cfg-shape-gate-opt{
+#rb-config .rb-cfg-gate-grid{ display:grid; gap:14px; margin:0 auto; }
+#rb-config .rb-cfg-gate-grid--year{ grid-template-columns:1fr 1fr 1fr; max-width:640px; }
+#rb-config .rb-cfg-gate-grid--shape{ grid-template-columns:1fr 1fr; max-width:520px; }
+#rb-config .rb-cfg-gate-opt{
   background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
-  display:flex; flex-direction:column; align-items:center; gap:8px; transition:border-color .15s;
-  -webkit-tap-highlight-color:transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; transition:border-color .15s, background .15s;
+  -webkit-tap-highlight-color:transparent; min-height:64px;
 }
-#rb-config .rb-cfg-shape-gate-opt:hover, #rb-config .rb-cfg-shape-gate-opt:active{ border-color:var(--rb-accent); }
-#rb-config .rb-cfg-shape-gate-imgwrap{
+#rb-config .rb-cfg-gate-opt:hover, #rb-config .rb-cfg-gate-opt:active{ border-color:var(--rb-accent); }
+#rb-config .rb-cfg-gate-opt.is-active{ border-color:var(--rb-accent); background:#171512; }
+#rb-config .rb-cfg-gate-opt-year{
+  font-family:'Barlow Condensed', sans-serif; font-weight:800; font-size:clamp(20px,2.6vw,28px);
+  color:var(--rb-text); letter-spacing:.01em;
+}
+#rb-config .rb-cfg-gate-opt-imgwrap{
   width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative;
   background:
     radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
     radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
     linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
 }
-#rb-config .rb-cfg-shape-gate-imgwrap img{
+#rb-config .rb-cfg-gate-opt-imgwrap img{
   position:absolute; inset:0; margin:auto; width:84%; height:84%; object-fit:contain;
   filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
 }
-#rb-config .rb-cfg-shape-gate-label{
+#rb-config .rb-cfg-gate-opt-label{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
   font-size:13.5px; font-weight:700; color:var(--rb-text);
 }
-#rb-config .rb-cfg-shape-gate-price{ font-size:11.5px; color:var(--rb-text2); }
+#rb-config .rb-cfg-gate-opt-price{ font-size:11.5px; color:var(--rb-text2); }
 
 #rb-config .rb-cfg-stage{
   display:grid; grid-template-columns: minmax(320px,480px) minmax(460px,620px);
@@ -277,12 +335,13 @@
 #rb-config .rb-cfg-card-chevron{ flex:none; color:var(--rb-text2); font-size:10px; transition:transform .2s; }
 #rb-config .rb-cfg-card.is-open .rb-cfg-card-chevron{ transform:rotate(180deg); color:var(--rb-accent); }
 #rb-config .rb-cfg-card-body{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
-#rb-config .rb-cfg-card.is-open .rb-cfg-card-body{ max-height:540px; }
+#rb-config .rb-cfg-card.is-open .rb-cfg-card-body{ max-height:620px; }
 #rb-config .rb-cfg-card-body-in{ padding:0 14px 14px; }
 #rb-config .rb-cfg-card .rb-cfg-sub-label{ font-size:11px; color:var(--rb-text2); margin:10px 0 6px; text-transform:uppercase; letter-spacing:.04em; }
 #rb-config .rb-cfg-card .rb-cfg-sub-label:first-child{ margin-top:0; }
 #rb-config .rb-cfg-finish-block{ margin-top:14px; }
 #rb-config .rb-cfg-finish-block.is-disabled{ opacity:.4; pointer-events:none; }
+#rb-config .rb-cfg-hidden{ display:none !important; }
 
 #rb-config .rb-cfg-summary{
   display:flex; flex-direction:column; gap:10px;
@@ -327,14 +386,10 @@
   #rb-config .rb-cfg-lines{ display:none; }
   #rb-config .rb-cfg-marks{ display:none; }
   #rb-config .rb-cfg-step-marks{ display:block; }
-
-  #rb-config.rb-cfg-shape-pending .rb-cfg-shape-gate{ display:block; }
-  #rb-config.rb-cfg-shape-pending .rb-cfg-imgwrap,
-  #rb-config.rb-cfg-shape-pending .rb-cfg-cards-grid,
-  #rb-config.rb-cfg-shape-pending .rb-cfg-summary{ display:none; }
 }
 @media (max-width: 640px){
   #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
+  #rb-config .rb-cfg-gate-grid--year{ grid-template-columns:1fr 1fr 1fr; gap:8px; }
 }
 
 #option_350_AOC,
@@ -349,12 +404,37 @@
   var BASE_PRICE = 765.00;
 
   var OPTIONS = {
+    year: {
+      label:'Year', zone: null, csOptId: 60,
+      values: [
+        { v:'y2006',      label:'2006',      price:0, cs:318 },
+        { v:'y2007_2011', label:'2007-2011', price:0, cs:319 },
+        { v:'y2012_2013', label:'2012-2013', price:0, cs:320 }
+      ]
+    },
     shape: {
       label: 'Shape', zone: null, csOptId: 26,
       info: 'F1-shape flattens both the top <em>and</em> the bottom of the rim (like an F1 wheel). D-shape flattens only the bottom. The diagram shows the standard D-shape.',
       values: [
         { v:'d',  label:'D-shape',  price:0,   cs:181 },
         { v:'f1', label:'F1-shape', price:330, cs:182, img:'https://therunbird.com/images/Calculator/Prew-SW/SW11.png' }
+      ]
+    },
+    spokes: {
+      label:'CF spoke covers', zone:{ px:668, py:414 },
+      isSpokesGroup:true, csOptId: 27, finishCsOptId: 28, audioCsOptId: 61,
+      values:[
+        { v:'no',  label:'No', price:0, cs:183 },
+        { v:'yes', label:'Yes', price:165, cs:184 }
+      ],
+      finish:[
+        { v:'gloss', label:'Gloss', price:0, cs:185 },
+        { v:'matte', label:'Matte / Satin', price:0, cs:186 }
+      ],
+      audio:[
+        { v:'none',     label:'No audio / no bluetooth', price:0,   cs:321 },
+        { v:'audio',    label:'Audio / no bluetooth (buttons right side only)', price:65,  cs:322 },
+        { v:'audio_bt', label:'Audio / bluetooth', price:130, cs:323 }
       ]
     },
     grips: {
@@ -381,18 +461,6 @@
         { v:'perf', label:'Perforated leather', price:0, cs:195 },
         { v:'plain',label:'Plain leather', price:0, cs:196 },
         { v:'cf',   label:'Carbon fiber', price:220, cs:197 }
-      ]
-    },
-    spokes: {
-      label:'CF spoke covers', zone:{ px:668, py:414 },
-      isSpokesGroup:true, csOptId: 27, finishCsOptId: 28,
-      values:[
-        { v:'no',  label:'No', price:0, cs:183 },
-        { v:'yes', label:'Yes', price:165, cs:184 }
-      ],
-      finish:[
-        { v:'gloss', label:'Gloss', price:0, cs:185 },
-        { v:'matte', label:'Matte / Satin', price:0, cs:186 }
       ]
     },
     stitchingColor: {
@@ -449,6 +517,7 @@
   Object.keys(OPTIONS).forEach(function(k){
     state[k] = null;
     if (OPTIONS[k].finish) state[k+'__finish'] = null;
+    if (OPTIONS[k].audio) state[k+'__audio'] = null;
   });
 
   var root = document.getElementById('rb-config');
@@ -480,13 +549,43 @@
 
   function syncNative(optKey, valuesKey, val){
     var opt = OPTIONS[optKey];
-    var csOptId = (valuesKey === 'finish') ? opt.finishCsOptId : opt.csOptId;
+    var csOptId = opt.csOptId;
+    if (valuesKey === 'finish') csOptId = opt.finishCsOptId;
+    if (valuesKey === 'audio') csOptId = opt.audioCsOptId;
     var sel = document.getElementById('option_' + PRODUCT_ID + '_' + csOptId);
     if (!sel) return;
     sel.value = String(val.cs);
     if (typeof fn_change_options === 'function'){
       fn_change_options(PRODUCT_ID, PRODUCT_ID, String(csOptId));
     }
+  }
+
+  function updateTitleYear(){
+    var el = document.getElementById('rb-cfg-title-year');
+    if (el) el.textContent = state.year ? ' — ' + state.year.label : '';
+  }
+
+  // ── Gate progression (Step 1: Year → Step 2: Shape → full stage) ──
+  function syncGateActiveStates(){
+    root.querySelectorAll('.rb-cfg-gate-opt[data-year]').forEach(function(b){
+      b.classList.toggle('is-active', !!(state.year && b.dataset.year === state.year.v));
+    });
+    root.querySelectorAll('.rb-cfg-gate-opt[data-shape]').forEach(function(b){
+      b.classList.toggle('is-active', !!(state.shape && b.dataset.shape === state.shape.v));
+    });
+  }
+  function advanceGate(){
+    if (root.classList.contains('rb-cfg-need-year') && state.year){
+      root.classList.remove('rb-cfg-need-year');
+      if (!state.shape) root.classList.add('rb-cfg-need-shape');
+    } else if (root.classList.contains('rb-cfg-need-shape') && state.shape){
+      root.classList.remove('rb-cfg-need-shape');
+    }
+    var restartBtn = document.getElementById('rb-cfg-restart-btn');
+    var inGate = root.classList.contains('rb-cfg-need-year') || root.classList.contains('rb-cfg-need-shape');
+    if (restartBtn) restartBtn.hidden = inGate;
+    syncGateActiveStates();
+    if (!inGate) scheduleLayout();
   }
 
   function buildChipGroup(container, optKey, valuesKey){
@@ -508,14 +607,27 @@
       if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
       el.innerHTML = html;
 
-      var sKey = valuesKey === 'finish' ? optKey+'__finish' : optKey;
+      var sKey = valuesKey === 'finish' ? optKey+'__finish' : (valuesKey === 'audio' ? optKey+'__audio' : optKey);
       if (state[sKey] === val) el.classList.add('is-active');
       el.addEventListener('click', function(){
         state[sKey] = val;
         Array.prototype.forEach.call(wrap.children, function(c){ c.classList.remove('is-active'); });
         el.classList.add('is-active');
+
+        if (optKey === 'year'){
+          if (val.v !== 'y2007_2011' && state.spokes__audio){
+            state.spokes__audio = null;
+            var audioWrap = root.querySelector('.rb-cfg-card[data-zone="spokes"] [data-vk="audio"]');
+            if (audioWrap) Array.prototype.forEach.call(audioWrap.children, function(c){ c.classList.remove('is-active'); });
+            updateHeadVal('spokes');
+          }
+          updateSpokesFinishState();
+          updateTitleYear();
+          advanceGate();
+        }
+        if (optKey === 'shape'){ updateShapeImage(); advanceGate(); }
         if (optKey === 'spokes' && valuesKey === 'values'){ updateSpokesFinishState(); }
-        if (optKey === 'shape'){ updateShapeImage(); }
+
         updateHeadVal(optKey);
         applyGateVisibility();
         recalcPrice();
@@ -546,10 +658,18 @@
   }
 
   function updateSpokesFinishState(){
-    var finishCard = root.querySelector('.rb-cfg-card[data-zone="spokes"] [data-vk="finish"]');
     var isYes = !!(state.spokes && state.spokes.v === 'yes');
+
+    var finishCard = root.querySelector('.rb-cfg-card[data-zone="spokes"] [data-vk="finish"]');
     finishCard && finishCard.closest('.rb-cfg-finish-block') &&
       finishCard.closest('.rb-cfg-finish-block').classList.toggle('is-disabled', !isYes);
+
+    var audioBlock = root.querySelector('.rb-cfg-card[data-zone="spokes"] .rb-cfg-audio-block');
+    if (audioBlock){
+      var isYear0711 = !!(state.year && state.year.v === 'y2007_2011');
+      audioBlock.classList.toggle('rb-cfg-hidden', !isYear0711);
+      audioBlock.classList.toggle('is-disabled', !isYes);
+    }
   }
 
   function gateOpen(opt){
@@ -558,12 +678,19 @@
     return !!(gateVal && gateVal.v === opt.gatedBy.equals);
   }
 
+  function needsAudio(){
+    return !!(state.year && state.year.v === 'y2007_2011');
+  }
+
   function isOptSelected(optKey){
     var opt = OPTIONS[optKey];
     if (!gateOpen(opt)) return true;
     if (opt.isSpokesGroup){
       if (!state.spokes) return false;
-      if (state.spokes.v === 'yes' && !state.spokes__finish) return false;
+      if (state.spokes.v === 'yes'){
+        if (!state.spokes__finish) return false;
+        if (needsAudio() && !state.spokes__audio) return false;
+      }
       return true;
     }
     return !!state[optKey];
@@ -595,7 +722,7 @@
     btn.disabled = !complete;
   }
 
-  var STEP_ZONE_ORDER = ['grips','topSection','bottomSection','spokes','stitchingColor','centerMark','logo'];
+  var STEP_ZONE_ORDER = ['spokes','grips','topSection','bottomSection','stitchingColor','centerMark','logo'];
   function currentStepZone(){
     for (var i=0; i<STEP_ZONE_ORDER.length; i++){
       if (!isOptSelected(STEP_ZONE_ORDER[i])) return STEP_ZONE_ORDER[i];
@@ -609,8 +736,6 @@
     });
     var hint = document.getElementById('rb-cfg-photo-hint');
     if (hint) hint.classList.toggle('is-visible', !!current);
-
-    root.classList.toggle('rb-cfg-shape-pending', !state.shape);
   }
 
   function updateHeadVal(optKey){
@@ -630,9 +755,15 @@
             valEl.appendChild(document.createTextNode('Select…'));
           } else if (state.spokes.v === 'yes' && !state.spokes__finish){
             valEl.appendChild(document.createTextNode(state.spokes.label + ' · select finish'));
+          } else if (state.spokes.v === 'yes' && needsAudio() && !state.spokes__audio){
+            valEl.appendChild(document.createTextNode(state.spokes.label + ' · ' + state.spokes__finish.label + ' · select audio'));
           } else {
-            var covers = state.spokes, finish = state.spokes__finish;
-            var txt = covers.label + (covers.v === 'yes' ? ' · ' + finish.label : '');
+            var covers = state.spokes, finish = state.spokes__finish, audio = state.spokes__audio;
+            var txt = covers.label;
+            if (covers.v === 'yes'){
+              txt += ' · ' + finish.label;
+              if (audio) txt += ' · ' + audio.label;
+            }
             valEl.appendChild(document.createTextNode(txt));
           }
         } else if (!hasValue){
@@ -663,9 +794,15 @@
         valText = 'Select…';
       } else if (state.spokes.v === 'yes' && !state.spokes__finish){
         valText = state.spokes.label + ' · select finish';
+      } else if (state.spokes.v === 'yes' && needsAudio() && !state.spokes__audio){
+        valText = state.spokes.label + ' · ' + state.spokes__finish.label + ' · select audio';
       } else {
-        var covers = state.spokes, finish = state.spokes__finish;
-        valText = covers.label + (covers.v === 'yes' ? ' · ' + finish.label : '');
+        var covers = state.spokes, finish = state.spokes__finish, audio = state.spokes__audio;
+        valText = covers.label;
+        if (covers.v === 'yes'){
+          valText += ' · ' + finish.label;
+          if (audio) valText += ' · ' + audio.label;
+        }
       }
     } else {
       valText = state[optKey] ? state[optKey].label : 'Select…';
@@ -721,11 +858,19 @@
       var subA = document.createElement('div'); subA.className='rb-cfg-sub-label'; subA.textContent='Add CF spoke covers';
       inner.appendChild(subA);
       buildChipGroup(inner, 'spokes', 'values');
+
       var fb = document.createElement('div'); fb.className='rb-cfg-finish-block';
       var subB = document.createElement('div'); subB.className='rb-cfg-sub-label'; subB.textContent='CF finish (if applicable)';
       fb.appendChild(subB);
       buildChipGroup(fb, 'spokes', 'finish');
       inner.appendChild(fb);
+
+      var ab = document.createElement('div'); ab.className='rb-cfg-finish-block rb-cfg-audio-block';
+      var subC = document.createElement('div'); subC.className='rb-cfg-sub-label'; subC.textContent='CF covers option (2007-2011 only)';
+      ab.appendChild(subC);
+      buildChipGroup(ab, 'spokes', 'audio');
+      inner.appendChild(ab);
+
       updateSpokesFinishState();
     } else {
       var opt = OPTIONS[zone];
@@ -744,21 +889,45 @@
     head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone(zone, false); });
   });
 
-  var shapeGateGrid = document.getElementById('rb-cfg-shape-gate-grid');
+  var yearGateGrid = document.getElementById('rb-cfg-gate-year-grid');
+  OPTIONS.year.values.forEach(function(val){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'rb-cfg-gate-opt';
+    btn.dataset.year = val.v;
+    btn.innerHTML = '<span class="rb-cfg-gate-opt-year">'+val.label+'</span>';
+    btn.addEventListener('click', function(){
+      var chip = root.querySelector('.rb-cfg-card[data-zone="year"] .rb-chip[data-val="'+val.v+'"]');
+      if (chip) chip.click();
+    });
+    yearGateGrid.appendChild(btn);
+  });
+
+  var shapeGateGrid = document.getElementById('rb-cfg-gate-shape-grid');
   OPTIONS.shape.values.forEach(function(val){
     var btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'rb-cfg-shape-gate-opt';
+    btn.className = 'rb-cfg-gate-opt';
     btn.dataset.shape = val.v;
-    var priceHtml = val.price ? '<span class="rb-cfg-shape-gate-price">'+fmtPrice(val.price)+'</span>' : '';
+    var priceHtml = val.price ? '<span class="rb-cfg-gate-opt-price">'+fmtPrice(val.price)+'</span>' : '';
     btn.innerHTML =
-      '<span class="rb-cfg-shape-gate-imgwrap"><img src="'+(val.img || DEFAULT_WHEEL_IMG)+'" alt="'+val.label+'"></span>' +
-      '<span class="rb-cfg-shape-gate-label">'+val.label+'</span>' + priceHtml;
+      '<span class="rb-cfg-gate-opt-imgwrap"><img src="'+(val.img || DEFAULT_WHEEL_IMG)+'" alt="'+val.label+'"></span>' +
+      '<span class="rb-cfg-gate-opt-label">'+val.label+'</span>' + priceHtml;
     btn.addEventListener('click', function(){
       var chip = root.querySelector('.rb-cfg-card[data-zone="shape"] .rb-chip[data-val="'+val.v+'"]');
       if (chip) chip.click();
     });
     shapeGateGrid.appendChild(btn);
+  });
+
+  var restartBtn = document.getElementById('rb-cfg-restart-btn');
+  restartBtn.addEventListener('click', function(){
+    root.classList.remove('rb-cfg-need-shape');
+    root.classList.add('rb-cfg-need-year');
+    restartBtn.hidden = true;
+    syncGateActiveStates();
+    var gate = root.querySelector('.rb-cfg-gate-year');
+    if (gate) gate.scrollIntoView({ behavior:'smooth', block:'start' });
   });
 
   Object.keys(OPTIONS).forEach(function(key){
@@ -792,6 +961,7 @@
   Object.keys(OPTIONS).forEach(function(k){ updateHeadVal(k); });
   updateStepMarks();
   applyGateVisibility();
+  syncGateActiveStates();
 
   function getActiveZone(opt){
     if (state.shape && state.shape.v === 'f1' && opt.zoneF1) return opt.zoneF1;
@@ -860,6 +1030,7 @@
       if (opt.isSpokesGroup){
         total += (state[key] && state[key].price) || 0;
         total += (state[key+'__finish'] && state[key+'__finish'].price) || 0;
+        total += (state[key+'__audio'] && state[key+'__audio'].price) || 0;
       } else {
         total += (state[key] && state[key].price) || 0;
       }
@@ -934,7 +1105,15 @@
       var opt = OPTIONS[key];
       if (opt.isSpokesGroup){
         addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
-        addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.finishCsOptId + ']', String(state[key + '__finish'].cs));
+        // CF finish is required by CS-Cart regardless of year — default to Gloss when
+        // the customer answered "No" to spoke covers (block is hidden, no real choice made).
+        var finishCs = state[key].v === 'yes' ? state[key+'__finish'].cs : opt.finish[0].cs;
+        addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.finishCsOptId + ']', String(finishCs));
+        // CF covers option (audio/bluetooth) is NOT required by CS-Cart — only send it
+        // when it was actually applicable (Yes + Year 2007-2011) and answered.
+        if (state[key].v === 'yes' && needsAudio() && state[key+'__audio']){
+          addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.audioCsOptId + ']', String(state[key+'__audio'].cs));
+        }
       } else {
         var cs = gateOpen(opt) ? state[key].cs : opt.values[0].cs;
         addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(cs));
