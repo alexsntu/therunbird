@@ -111,6 +111,13 @@
   transform: translateX(-50%);
 }
 #rb-config *{ box-sizing: border-box; }
+/* Prevents mobile Safari/Chrome from misreading a tap on a chip whose label
+   reflows to a new line (long "audio/bluetooth" option text) as a double-tap
+   zoom gesture — the standard fix for tap targets that can shift under the
+   finger mid-tap. */
+#rb-config button,
+#rb-config a,
+#rb-config [tabindex]{ touch-action: manipulation; }
 #rb-config .rb-cfg-inner{
   max-width: 1370px;
   margin: 0 auto;
@@ -390,6 +397,12 @@
 @media (max-width: 640px){
   #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
   #rb-config .rb-cfg-gate-grid--year{ grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  /* Long combined summaries (e.g. "Yes · Matte / Satin · No audio / no
+     bluetooth") don't fit on one line at phone widths — wrap instead of
+     silently clipping the start of the text with no ellipsis. */
+  #rb-config .rb-cfg-card-head-val{
+    white-space:normal; overflow:visible; text-overflow:clip; text-align:right;
+  }
 }
 
 #option_350_AOC,
@@ -431,11 +444,19 @@
         { v:'gloss', label:'Gloss', price:0, cs:185 },
         { v:'matte', label:'Matte / Satin', price:0, cs:186 }
       ],
-      audio:[
-        { v:'none',     label:'No audio / no bluetooth', price:0,   cs:321 },
-        { v:'audio',    label:'Audio / no bluetooth (buttons right side only)', price:65,  cs:322 },
-        { v:'audio_bt', label:'Audio / bluetooth', price:130, cs:323 }
-      ]
+      // CF covers option (csOptId 61) has different value sets per year — same
+      // CS-Cart option, different underlying option-values depending on Year gate.
+      audioSets:{
+        y2007_2011:[
+          { v:'none',     label:'No audio / no bluetooth', price:0,   cs:321 },
+          { v:'audio',    label:'Audio / no bluetooth (buttons right side only)', price:65,  cs:322 },
+          { v:'audio_bt', label:'Audio / bluetooth', price:130, cs:323 }
+        ],
+        y2012_2013:[
+          { v:'audio385', label:'Audio / no bluetooth', price:385, cs:324 },
+          { v:'audio_bt450', label:'Audio / bluetooth', price:450, cs:325 }
+        ]
+      }
     },
     grips: {
       label:'Grips', zone:{ px:717, py:279 }, csOptId: 29,
@@ -531,6 +552,7 @@
 
   function updateShapeImage(){
     var val = state.shape;
+    document.dispatchEvent(new CustomEvent('rb-steeringwheel-shape', { detail:{ key: val ? val.v : null } }));
     var newSrc = (val && val.img) ? val.img : DEFAULT_WHEEL_IMG;
     if (wheelImgEl.getAttribute('src') === newSrc) return;
     wheelImgEl.setAttribute('src', newSrc);
@@ -588,13 +610,14 @@
     if (!inGate) scheduleLayout();
   }
 
-  function buildChipGroup(container, optKey, valuesKey){
+  function buildChipGroup(container, optKey, valuesKey, valuesList){
     valuesKey = valuesKey || 'values';
     var opt = OPTIONS[optKey];
+    var values = valuesList || opt[valuesKey];
     var wrap = document.createElement('div');
     wrap.className = 'rb-cfg-chips';
     wrap.dataset.opt = optKey; wrap.dataset.vk = valuesKey;
-    opt[valuesKey].forEach(function(val){
+    values.forEach(function(val){
       var el = document.createElement('button');
       el.type = 'button';
       el.className = 'rb-chip';
@@ -615,13 +638,10 @@
         el.classList.add('is-active');
 
         if (optKey === 'year'){
-          if (val.v !== 'y2007_2011' && state.spokes__audio){
-            state.spokes__audio = null;
-            var audioWrap = root.querySelector('.rb-cfg-card[data-zone="spokes"] [data-vk="audio"]');
-            if (audioWrap) Array.prototype.forEach.call(audioWrap.children, function(c){ c.classList.remove('is-active'); });
-            updateHeadVal('spokes');
-          }
+          state.spokes__audio = null;
+          rebuildAudioChips();
           updateSpokesFinishState();
+          updateHeadVal('spokes');
           updateTitleYear();
           advanceGate();
         }
@@ -666,20 +686,34 @@
 
     var audioBlock = root.querySelector('.rb-cfg-card[data-zone="spokes"] .rb-cfg-audio-block');
     if (audioBlock){
-      var isYear0711 = !!(state.year && state.year.v === 'y2007_2011');
-      audioBlock.classList.toggle('rb-cfg-hidden', !isYear0711);
+      audioBlock.classList.toggle('rb-cfg-hidden', !needsAudio());
       audioBlock.classList.toggle('is-disabled', !isYes);
     }
+  }
+
+  // CF covers option (csOptId 61) — the value set differs by year (2006 has
+  // none at all; 2007-2011 gets the $0/$65/$130 set; 2012-2013 gets the
+  // $385/$450 set, no free option). Same underlying CS-Cart option, rebuilt
+  // per year since the option-values themselves are different.
+  function currentAudioValues(){
+    return (state.year && OPTIONS.spokes.audioSets[state.year.v]) || null;
+  }
+  function needsAudio(){
+    return !!currentAudioValues();
+  }
+  function rebuildAudioChips(){
+    var block = root.querySelector('.rb-cfg-card[data-zone="spokes"] .rb-cfg-audio-block');
+    if (!block) return;
+    var oldWrap = block.querySelector('.rb-cfg-chips');
+    if (oldWrap) oldWrap.remove();
+    var values = currentAudioValues();
+    if (values) buildChipGroup(block, 'spokes', 'audio', values);
   }
 
   function gateOpen(opt){
     if (!opt.gatedBy) return true;
     var gateVal = state[opt.gatedBy.key];
     return !!(gateVal && gateVal.v === opt.gatedBy.equals);
-  }
-
-  function needsAudio(){
-    return !!(state.year && state.year.v === 'y2007_2011');
   }
 
   function isOptSelected(optKey){
@@ -866,10 +900,10 @@
       inner.appendChild(fb);
 
       var ab = document.createElement('div'); ab.className='rb-cfg-finish-block rb-cfg-audio-block';
-      var subC = document.createElement('div'); subC.className='rb-cfg-sub-label'; subC.textContent='CF covers option (2007-2011 only)';
+      var subC = document.createElement('div'); subC.className='rb-cfg-sub-label'; subC.textContent='CF covers option';
       ab.appendChild(subC);
-      buildChipGroup(ab, 'spokes', 'audio');
       inner.appendChild(ab);
+      rebuildAudioChips();
 
       updateSpokesFinishState();
     } else {
