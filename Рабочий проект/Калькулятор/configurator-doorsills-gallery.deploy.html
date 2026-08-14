@@ -154,22 +154,23 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 (function(){
 
   // Pulled from product #362 (side-skirts/corvette-c6-classic-door-sills-gallery).
-  // thumb = 570x570 CS-Cart-generated size, used in the scroll strip; full =
-  // 1920x1920 size, only fetched when a photo is opened in the lightbox.
+  // Served as WebP: /images/ab__webp/thumbnails/{size}/{size}/detailed/9/{name}_jpg.webp
+  // thumb = 570x570, used in the scroll strip; full = 1920x1920, only fetched
+  // when a photo is opened in the lightbox.
   var GALLERY_SRCS = [
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401148.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401148.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401164.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401164.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531202885.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531202885.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401002.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401002.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401084.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401084.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401108.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401108.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401055.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401055.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401130.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401130.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531202953.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531202953.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531202977.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531202977.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531203362.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531203362.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531202997.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531202997.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531203388.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531203388.jpg' }
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401148_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401148_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401164_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401164_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531202885_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531202885_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401002_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401002_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401084_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401084_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401108_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401108_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401055_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401055_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401130_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401130_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531202953_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531202953_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531202977_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531202977_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203362_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203362_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531202997_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531202997_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203388_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203388_jpg.webp' }
   ];
 
   var gallerySection = document.getElementById('rb-cfg-gallery');

@@ -29,7 +29,7 @@
 </svg>
 
 <div class="rb-cfg-gallery" id="rb-cfg-gallery" style="display:none">
-  <div class="rb-cfg-gal-head">Recent builds</div>
+  <div class="rb-cfg-gal-head" id="rb-cfg-gal-head">Recent builds</div>
   <div class="rb-cfg-gal-row">
     <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--prev" id="rb-cfg-gal-prev" aria-label="Scroll left">‹</button>
     <div class="rb-cfg-gal-track" id="rb-cfg-gal-track"></div>
@@ -40,8 +40,12 @@
 <div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
   <button type="button" class="rb-cfg-lb-close" id="rb-cfg-lb-close" aria-label="Close">✕</button>
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-prev" id="rb-cfg-lb-prev" aria-label="Previous photo">‹</button>
-  <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom shift knob build — full size">
+  <div class="rb-cfg-lb-imgwrap">
+    <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom shift knob build — full size">
+    <svg class="rb-cfg-lb-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>
+  </div>
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-next" id="rb-cfg-lb-next" aria-label="Next photo">›</button>
+  <div class="rb-cfg-lb-counter" id="rb-cfg-lb-counter"></div>
 </div>
 
 <style>
@@ -52,7 +56,7 @@
   --rb-border:   rgba(255,255,255,.08);
   --rb-border-s: rgba(255,255,255,.16);
   font-family:'Inter', sans-serif; color:var(--rb-text);
-  margin-top:8px;
+  max-width:1370px; margin:8px auto 0; padding:0 clamp(20px,4vw,56px);
 }
 #rb-cfg-gallery *{ box-sizing:border-box; }
 #rb-cfg-gallery .rb-cfg-gal-head{
@@ -60,7 +64,8 @@
   font-size:18px; font-weight:600; margin-bottom:16px; text-align:center;
 }
 #rb-cfg-gallery .rb-cfg-gal-track{
-  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity; justify-content:center;
+  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity;
+  justify-content:flex-start;
 }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar{ height:6px; }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-track{ background:transparent; }
@@ -87,10 +92,10 @@
 #rb-cfg-gallery .rb-cfg-gal-nav{
   position:absolute; top:50%; transform:translateY(-50%); z-index:3;
   width:38px; height:38px; border-radius:50%; flex:none;
-  background:rgba(10,10,10,.8); border:1px solid var(--rb-border-s); color:var(--rb-text);
+  background:var(--rb-accent); border:1px solid var(--rb-accent); color:#000;
   font-size:19px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.15s;
 }
-#rb-cfg-gallery .rb-cfg-gal-nav:hover{ background:var(--rb-accent); color:#000; border-color:var(--rb-accent); }
+#rb-cfg-gallery .rb-cfg-gal-nav:hover{ background:var(--rb-accent-h); border-color:var(--rb-accent-h); }
 #rb-cfg-gallery .rb-cfg-gal-nav--prev{ left:4px; }
 #rb-cfg-gallery .rb-cfg-gal-nav--next{ right:4px; }
 
@@ -100,29 +105,47 @@
 }
 .rb-cfg-lightbox *{ box-sizing:border-box; }
 .rb-cfg-lightbox.is-open{ display:flex; }
+.rb-cfg-lb-imgwrap{ position:relative; display:inline-block; line-height:0; }
 .rb-cfg-lb-img{
   max-width:min(88vw,900px); max-height:86vh; width:auto; height:auto; object-fit:contain;
   border-radius:16px; box-shadow:0 24px 48px rgba(0,0,0,.6);
 }
+.rb-cfg-lb-watermark{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:26%; max-width:220px; height:auto; opacity:.22; pointer-events:none;
+}
+.rb-cfg-lb-watermark path{ fill:#f1ebdb; }
 .rb-cfg-lb-close,
 .rb-cfg-lb-nav{
-  position:absolute; border-radius:50%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
-  color:#F0F0F0; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  position:absolute; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;
   transition:.15s; font-family:'Inter',sans-serif;
 }
-.rb-cfg-lb-close:hover,
-.rb-cfg-lb-nav:hover{ background:#C8A84C; color:#000; border-color:#C8A84C; }
+.rb-cfg-lb-close{
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#F0F0F0;
+}
+.rb-cfg-lb-close:hover{ background:#C8A84C; color:#000; border-color:#C8A84C; }
+.rb-cfg-lb-nav{ background:#C8A84C; border:1px solid #C8A84C; color:#000; }
+.rb-cfg-lb-nav:hover{ background:#D9BA62; border-color:#D9BA62; }
 .rb-cfg-lb-close{ top:24px; right:28px; width:42px; height:42px; font-size:17px; }
 .rb-cfg-lb-nav{ top:50%; transform:translateY(-50%); width:54px; height:54px; font-size:26px; }
 .rb-cfg-lb-prev{ left:24px; }
 .rb-cfg-lb-next{ right:24px; }
+.rb-cfg-lb-counter{
+  position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+  font-family:'Inter',sans-serif; font-size:13px; color:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+  border-radius:999px; padding:6px 14px; pointer-events:none;
+}
 
 html.rb-cfg-scroll-lock, body.rb-cfg-scroll-lock{ overflow:hidden !important; }
 body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
 @media (max-width: 700px){
   #rb-cfg-gallery .rb-cfg-gal-nav{ display:none; }
-  .rb-cfg-lb-nav{ display:none; }
+  .rb-cfg-lightbox{ padding:14px; }
+  .rb-cfg-lb-nav{ width:40px; height:40px; font-size:20px; }
+  .rb-cfg-lb-prev{ left:6px; }
+  .rb-cfg-lb-next{ right:6px; }
   .rb-cfg-lb-img{ max-width:94vw; }
 }
 </style>
@@ -130,16 +153,95 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 <script>
 (function(){
 
-  // Fill these in per variant when photos are ready — same keys as the configurator block.
+  // Pulled from products #369 (classic), #370 (ball), #371 (drift), #372 (cap),
+  // #373 (boot). All served as WebP: /images/ab__webp/thumbnails/{size}/{size}/detailed/9/{name}_{EXT}.webp
+  // — the _{EXT} suffix must match the original file's extension case exactly
+  // (some uploads are "name.jpg", others "name.JPG"; the generated WebP keeps
+  // whichever case the source had). thumb = 570, full = 1920 (cap tops out at
+  // 1140 — its source photos aren't large enough for a 1920 tier).
+  var CLASSIC_PHOTOS = [
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783530819520_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783530819520_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529526_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529526_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203124_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203124_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701039_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701039_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529543_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529543_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529626_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529626_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701091_tu00-r4_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701091_tu00-r4_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531702733_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531702733_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701027_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701027_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701200_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701200_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529361_ci6i-zx_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529361_ci6i-zx_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529487_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529487_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529509_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529509_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203111_zi2m-mi_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203111_zi2m-mi_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203136_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203136_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203290_6mpe-eo_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203290_6mpe-eo_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203302_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203302_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783530988108_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783530988108_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783530988128_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783530988128_jpg.webp' }
+  ];
+  var BALL_PHOTOS = [
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.49.11_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.49.11_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.49.31_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.49.31_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.50.21_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.50.21_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.56.06_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.56.06_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.46.06_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.46.06_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.52.48_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.52.48_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.48.50_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.48.50_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.57.14_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.57.14_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.57.27_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.57.27_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.54.50_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.54.50_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.55.57_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.55.57_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.55.40_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.55.40_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.52.27_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.52.27_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_14.48.34_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_14.48.34_JPG.webp' }
+  ];
+  var DRIFT_PHOTOS = [
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/photo_2026-08-08_10-15-37_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/photo_2026-08-08_10-15-37_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/photo_2026-08-08_10-15-39_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/photo_2026-08-08_10-15-39_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/photo_2026-08-08_10-15-41_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/photo_2026-08-08_10-15-41_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_13.51.13_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_13.51.13_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_13.47.44_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_13.47.44_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_13.50.54_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_13.50.54_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_13.51.44_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_13.51.44_JPG.webp' }
+  ];
+  var CAP_PHOTOS = [
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.13.54_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.13.54_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.12.56_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.12.56_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.14.06_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.14.06_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.13.40_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.13.40_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.13.24_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.13.24_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.13.08_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.13.08_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.12.43_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.12.43_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.12.29_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.12.29_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.12.16_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.12.16_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.12.01_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.12.01_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.11.45_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.11.45_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.11.26_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.11.26_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.11.07_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.11.07_JPG.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.14.21_JPG.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1140/1140/detailed/9/2026-06-22_15.14.21_JPG.webp' }
+  ];
+  var BOOT_PHOTOS = [
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.21.44_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.21.44_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.22.15_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.22.15_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.23.22_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.23.22_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.24.53_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.24.53_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.25.16_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.25.16_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.25.47_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.25.47_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.26.13_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.26.13_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/2026-06-22_15.26.35_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/2026-06-22_15.26.35_jpg.webp' }
+  ];
   var GALLERY_DATA = {
-    classic: [],
-    ball: [],
-    drift: [],
-    cap: [],
-    boot: []
+    classic: CLASSIC_PHOTOS,
+    ball: BALL_PHOTOS,
+    drift: DRIFT_PHOTOS,
+    cap: CAP_PHOTOS,
+    boot: BOOT_PHOTOS
   };
+  var VARIANT_LABEL = { classic:'Classic', ball:'Ball', drift:'Drift', cap:'Top Cap', boot:'Boot' };
 
   var gallerySection = document.getElementById('rb-cfg-gallery');
+  var galHead = document.getElementById('rb-cfg-gal-head');
   var galTrack = document.getElementById('rb-cfg-gal-track');
   var galSrcs = [];
 
@@ -150,12 +252,13 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
       gallerySection.style.display = 'none';
       return;
     }
+    galHead.textContent = 'Recent builds — ' + (VARIANT_LABEL[key] || '');
     gallerySection.style.display = '';
-    galSrcs.forEach(function(src, i){
+    galSrcs.forEach(function(photo, i){
       var item = document.createElement('div');
       item.className = 'rb-cfg-gal-item';
       item.innerHTML =
-        '<img src="'+src+'" alt="Custom shift knob build" loading="lazy">'+
+        '<img src="'+photo.thumb+'" alt="Custom shift knob build" loading="lazy">'+
         '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
       item.addEventListener('click', function(){ openLightbox(i); });
       galTrack.appendChild(item);
@@ -176,6 +279,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   var lightbox = document.getElementById('rb-cfg-lightbox');
   document.body.appendChild(lightbox);
   var lbImg = document.getElementById('rb-cfg-lb-img');
+  var lbCounter = document.getElementById('rb-cfg-lb-counter');
   var lbIndex = 0;
 
   var scrollLockY = 0;
@@ -192,9 +296,13 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     window.scrollTo(0, scrollLockY);
   }
 
+  function updateCounter(){
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + galSrcs.length;
+  }
   function openLightbox(i){
     lbIndex = i;
-    lbImg.src = galSrcs[lbIndex];
+    lbImg.src = galSrcs[lbIndex].full;
+    updateCounter();
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     lockPageScroll();
@@ -206,7 +314,8 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   }
   function lbShift(delta){
     lbIndex = (lbIndex + delta + galSrcs.length) % galSrcs.length;
-    lbImg.src = galSrcs[lbIndex];
+    lbImg.src = galSrcs[lbIndex].full;
+    updateCounter();
   }
 
   document.getElementById('rb-cfg-lb-close').addEventListener('click', closeLightbox);
@@ -219,6 +328,25 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     else if (e.key === 'ArrowLeft') lbShift(-1);
     else if (e.key === 'ArrowRight') lbShift(1);
   });
+
+  // Swipe-to-navigate for touch devices — mirrors the arrow-key behavior
+  // above so the lightbox pages through photos the same way a phone user
+  // expects from a native gallery.
+  var touchStartX = 0, touchStartY = 0, touchActive = false;
+  lightbox.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    touchActive = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', function(e){
+    if (!touchActive) return;
+    touchActive = false;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) lbShift(1); else lbShift(-1);
+  }, { passive: true });
 
 })();
 </script>

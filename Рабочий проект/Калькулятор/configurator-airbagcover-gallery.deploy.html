@@ -154,25 +154,27 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 (function(){
 
   // Pulled from product #363 (horn-pads/corvette-c6-airbag-cover-gallery).
-  // thumb = 570x570 CS-Cart-generated size, used in the scroll strip; full =
-  // 1920x1920 size, only fetched when a photo is opened in the lightbox.
+  // Served as WebP: /images/ab__webp/thumbnails/{size}/{size}/detailed/9/{name}_jpg.webp
+  // thumb = 570x570, used in the scroll strip; full = 1920x1920, only fetched
+  // when a photo is opened in the lightbox (last photo tops out at 1280 —
+  // its source isn't large enough for a 1920 tier).
   // One shared list for all stitch designs (Shield/Circle/Tee) for now — split
   // this by design once distinct per-design photos exist.
   var GALLERY_SRCS = [
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401318.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401318.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531702481.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531702481.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531702521.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531702521.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531701783.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531701783.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531700688.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531700688.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531401274.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531401274.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531700918.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531700918.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531700727.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531700727.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531701734.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531701734.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531700706.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531700706.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531701162.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531701162.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783531700765.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783531700765.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/1783530819286.jpg', full:'https://therunbird.com/images/thumbnails/1920/1920/detailed/9/1783530819286.jpg' },
-    { thumb:'https://therunbird.com/images/thumbnails/570/570/detailed/9/IMG_20241116_152700_723.jpg', full:'https://therunbird.com/images/thumbnails/1280/1280/detailed/9/IMG_20241116_152700_723.jpg' }
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401318_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401318_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531702481_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531702481_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531702521_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531702521_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701783_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701783_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700688_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700688_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401274_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401274_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700918_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700918_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700727_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700727_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701734_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701734_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700706_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700706_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701162_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701162_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700765_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700765_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783530819286_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783530819286_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/IMG_20241116_152700_723_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1280/1280/detailed/9/IMG_20241116_152700_723_jpg.webp' }
   ];
 
   var gallerySection = document.getElementById('rb-cfg-gallery');

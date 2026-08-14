@@ -28,7 +28,7 @@
   </symbol>
 </svg>
 
-<div class="rb-cfg-gallery" id="rb-cfg-gallery">
+<div class="rb-cfg-gallery" id="rb-cfg-gallery" style="display:none">
   <div class="rb-cfg-gal-head">Recent builds</div>
   <div class="rb-cfg-gal-row">
     <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--prev" id="rb-cfg-gal-prev" aria-label="Scroll left">‹</button>
@@ -40,8 +40,12 @@
 <div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
   <button type="button" class="rb-cfg-lb-close" id="rb-cfg-lb-close" aria-label="Close">✕</button>
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-prev" id="rb-cfg-lb-prev" aria-label="Previous photo">‹</button>
-  <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom center emblem build — full size">
+  <div class="rb-cfg-lb-imgwrap">
+    <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom center emblem build — full size">
+    <svg class="rb-cfg-lb-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>
+  </div>
   <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-next" id="rb-cfg-lb-next" aria-label="Next photo">›</button>
+  <div class="rb-cfg-lb-counter" id="rb-cfg-lb-counter"></div>
 </div>
 
 <style>
@@ -52,7 +56,7 @@
   --rb-border:   rgba(255,255,255,.08);
   --rb-border-s: rgba(255,255,255,.16);
   font-family:'Inter', sans-serif; color:var(--rb-text);
-  margin-top:8px;
+  max-width:1370px; margin:8px auto 0; padding:0 clamp(20px,4vw,56px);
 }
 #rb-cfg-gallery *{ box-sizing:border-box; }
 #rb-cfg-gallery .rb-cfg-gal-head{
@@ -61,11 +65,7 @@
 }
 #rb-cfg-gallery .rb-cfg-gal-track{
   display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity;
-  /* Centers the strip when it's short enough to fit without scrolling
-     (e.g. only 4 photos) instead of hugging the left edge with a big gap
-     on the right; once it overflows, this has no effect and it scrolls
-     normally from the left like before. */
-  justify-content:center;
+  justify-content:flex-start;
 }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar{ height:6px; }
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-track{ background:transparent; }
@@ -74,9 +74,6 @@
   position:relative; flex:0 0 auto; width:clamp(150px,17vw,210px); aspect-ratio:1/1;
   border-radius:14px; overflow:hidden; border:1px solid var(--rb-border); scroll-snap-align:start;
   cursor:zoom-in; transition:border-color .15s;
-  /* Lighter than the usual brand gradient on purpose — these emblems are
-     black carbon fiber, so the near-black studio background used elsewhere
-     made them disappear. */
   background:
     radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
     radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
@@ -95,10 +92,10 @@
 #rb-cfg-gallery .rb-cfg-gal-nav{
   position:absolute; top:50%; transform:translateY(-50%); z-index:3;
   width:38px; height:38px; border-radius:50%; flex:none;
-  background:rgba(10,10,10,.8); border:1px solid var(--rb-border-s); color:var(--rb-text);
+  background:var(--rb-accent); border:1px solid var(--rb-accent); color:#000;
   font-size:19px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.15s;
 }
-#rb-cfg-gallery .rb-cfg-gal-nav:hover{ background:var(--rb-accent); color:#000; border-color:var(--rb-accent); }
+#rb-cfg-gallery .rb-cfg-gal-nav:hover{ background:var(--rb-accent-h); border-color:var(--rb-accent-h); }
 #rb-cfg-gallery .rb-cfg-gal-nav--prev{ left:4px; }
 #rb-cfg-gallery .rb-cfg-gal-nav--next{ right:4px; }
 
@@ -108,29 +105,47 @@
 }
 .rb-cfg-lightbox *{ box-sizing:border-box; }
 .rb-cfg-lightbox.is-open{ display:flex; }
+.rb-cfg-lb-imgwrap{ position:relative; display:inline-block; line-height:0; }
 .rb-cfg-lb-img{
   max-width:min(88vw,900px); max-height:86vh; width:auto; height:auto; object-fit:contain;
   border-radius:16px; box-shadow:0 24px 48px rgba(0,0,0,.6);
 }
+.rb-cfg-lb-watermark{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:26%; max-width:220px; height:auto; opacity:.22; pointer-events:none;
+}
+.rb-cfg-lb-watermark path{ fill:#f1ebdb; }
 .rb-cfg-lb-close,
 .rb-cfg-lb-nav{
-  position:absolute; border-radius:50%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
-  color:#F0F0F0; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  position:absolute; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;
   transition:.15s; font-family:'Inter',sans-serif;
 }
-.rb-cfg-lb-close:hover,
-.rb-cfg-lb-nav:hover{ background:#C8A84C; color:#000; border-color:#C8A84C; }
+.rb-cfg-lb-close{
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#F0F0F0;
+}
+.rb-cfg-lb-close:hover{ background:#C8A84C; color:#000; border-color:#C8A84C; }
+.rb-cfg-lb-nav{ background:#C8A84C; border:1px solid #C8A84C; color:#000; }
+.rb-cfg-lb-nav:hover{ background:#D9BA62; border-color:#D9BA62; }
 .rb-cfg-lb-close{ top:24px; right:28px; width:42px; height:42px; font-size:17px; }
 .rb-cfg-lb-nav{ top:50%; transform:translateY(-50%); width:54px; height:54px; font-size:26px; }
 .rb-cfg-lb-prev{ left:24px; }
 .rb-cfg-lb-next{ right:24px; }
+.rb-cfg-lb-counter{
+  position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+  font-family:'Inter',sans-serif; font-size:13px; color:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+  border-radius:999px; padding:6px 14px; pointer-events:none;
+}
 
 html.rb-cfg-scroll-lock, body.rb-cfg-scroll-lock{ overflow:hidden !important; }
 body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 
 @media (max-width: 700px){
   #rb-cfg-gallery .rb-cfg-gal-nav{ display:none; }
-  .rb-cfg-lb-nav{ display:none; }
+  .rb-cfg-lightbox{ padding:14px; }
+  .rb-cfg-lb-nav{ width:40px; height:40px; font-size:20px; }
+  .rb-cfg-lb-prev{ left:6px; }
+  .rb-cfg-lb-next{ right:6px; }
   .rb-cfg-lb-img{ max-width:94vw; }
 }
 </style>
@@ -138,24 +153,50 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 <script>
 (function(){
 
+  // Pulled from product #366 (steering-wheel-emblems/corvette-c6-airbag-cf-center-emblem-gallery).
+  // Served as WebP: /images/ab__webp/thumbnails/{size}/{size}/detailed/9/{name}_jpg.webp
+  // thumb = 570x570, used in the scroll strip; full = 1920x1920, only fetched
+  // when a photo is opened in the lightbox.
   var GALLERY_SRCS = [
-    'https://therunbird.com/images/Calculator/Center%20Emblem/Z06.png',
-    'https://therunbird.com/images/Calculator/Center%20Emblem/ZR1.png',
-    'https://therunbird.com/images/Calculator/Center%20Emblem/panisher.png',
-    'https://therunbird.com/images/Calculator/Center%20Emblem/skulls.png'
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203080_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203080_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783530819542_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783530819542_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531702492_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531702492_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203337_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203337_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700600_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700600_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529163_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529163_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529433_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529433_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401717_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401717_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401388_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401388_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531401519_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531401519_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529241_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529241_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531202915_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531202915_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531702506_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531702506_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701113_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701113_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203038_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203038_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203052_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203052_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203095_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203095_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529609_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529609_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529654_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529654_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700665_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700665_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701054_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701054_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701091_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701091_jpg.webp' }
   ];
 
+  var gallerySection = document.getElementById('rb-cfg-gallery');
   var galTrack = document.getElementById('rb-cfg-gal-track');
 
-  GALLERY_SRCS.forEach(function(src, i){
-    var item = document.createElement('div');
-    item.className = 'rb-cfg-gal-item';
-    item.innerHTML =
-      '<img src="'+src+'" alt="Custom center emblem build" loading="lazy">'+
-      '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
-    item.addEventListener('click', function(){ openLightbox(i); });
-    galTrack.appendChild(item);
-  });
+  if (GALLERY_SRCS.length){
+    gallerySection.style.display = '';
+    GALLERY_SRCS.forEach(function(photo, i){
+      var item = document.createElement('div');
+      item.className = 'rb-cfg-gal-item';
+      item.innerHTML =
+        '<img src="'+photo.thumb+'" alt="Custom center emblem build" loading="lazy">'+
+        '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
+      item.addEventListener('click', function(){ openLightbox(i); });
+      galTrack.appendChild(item);
+    });
+  }
 
   document.getElementById('rb-cfg-gal-prev').addEventListener('click', function(){
     galTrack.scrollBy({ left: -Math.round(galTrack.clientWidth * 0.8), behavior: 'smooth' });
@@ -167,6 +208,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   var lightbox = document.getElementById('rb-cfg-lightbox');
   document.body.appendChild(lightbox);
   var lbImg = document.getElementById('rb-cfg-lb-img');
+  var lbCounter = document.getElementById('rb-cfg-lb-counter');
   var lbIndex = 0;
 
   var scrollLockY = 0;
@@ -183,9 +225,13 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     window.scrollTo(0, scrollLockY);
   }
 
+  function updateCounter(){
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + GALLERY_SRCS.length;
+  }
   function openLightbox(i){
     lbIndex = i;
-    lbImg.src = GALLERY_SRCS[lbIndex];
+    lbImg.src = GALLERY_SRCS[lbIndex].full;
+    updateCounter();
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     lockPageScroll();
@@ -197,7 +243,8 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   }
   function lbShift(delta){
     lbIndex = (lbIndex + delta + GALLERY_SRCS.length) % GALLERY_SRCS.length;
-    lbImg.src = GALLERY_SRCS[lbIndex];
+    lbImg.src = GALLERY_SRCS[lbIndex].full;
+    updateCounter();
   }
 
   document.getElementById('rb-cfg-lb-close').addEventListener('click', closeLightbox);
@@ -210,6 +257,25 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
     else if (e.key === 'ArrowLeft') lbShift(-1);
     else if (e.key === 'ArrowRight') lbShift(1);
   });
+
+  // Swipe-to-navigate for touch devices — mirrors the arrow-key behavior
+  // above so the lightbox pages through photos the same way a phone user
+  // expects from a native gallery.
+  var touchStartX = 0, touchStartY = 0, touchActive = false;
+  lightbox.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    touchActive = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', function(e){
+    if (!touchActive) return;
+    touchActive = false;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) lbShift(1); else lbShift(-1);
+  }, { passive: true });
 
 })();
 </script>
