@@ -1,46 +1,41 @@
 <!-- ══════════════════════════════════════════════════════
-     RunBird — Steering Wheel Configurator (PROTOTYPE v2 — Year + Shape gates)
+     RunBird — Steering Wheel Configurator (PROTOTYPE v2 — Shape gate, Year first-card)
      NOT wired into CS-Cart yet — experimental file to review flow/UX before
      merging into configurator-preview.deploy.html.
 
      New vs. the live configurator-preview.deploy.html:
-       - Two sequential full-screen gates: Step 1 = Year, Step 2 = Shape
-         (Shape itself is unchanged — same D/F1 values — just promoted to a
-         mandatory gate for everyone, right after Year, instead of sitting
-         inline as the first option card.)
+       - One full-screen gate: Step 1 = Shape (D/F1). Year is NOT a gate —
+         it's the first card in the options list, and gets auto-opened +
+         scrolled into view the moment the Shape gate closes, so it reads
+         as "the next required thing" without a second blocking screen.
        - Both Year and Shape still show up as normal, editable cards in the
-         options list once picked (same pattern Shape already used) — click
-         to change them in place. "Start over" button resets back to Step 1.
+         options list once picked — click to change them in place. The
+         "Change wheel shape" button re-opens the Shape gate.
        - "Add CF spoke covers" (Yes/No, csOptId 27) is unchanged. When Yes:
            - "CF finish" (Gloss/Matte, csOptId 28) always shows — required
              by CS-Cart regardless of year, per site owner.
-           - "CF covers option" (csOptId 61) additionally shows ONLY when
-             Year = 2007-2011, limited to its first 3 values (321/322/323 —
-             no audio/no bt $0, audio/no bt +$65, audio/bt +$130). Values
-             324/325 (+$385/+$450) exist in CS-Cart but are intentionally
-             never shown here, per site owner.
-           - For Year = 2006 or 2012-2013, no extra sub-option beyond finish.
-     Data pulled 2026-08-11 from the live product (id 350) option markup —
-     Year csOptId 60 (2006=318, 2007-2011=319, 2012-2013=320); CF covers
-     option csOptId 61 (321/322/323 kept, 324/325 excluded).
+           - "CF covers option" (csOptId 61) additionally shows a year-specific
+             audio/bluetooth sub-choice: for Year = 2007-2011, values 321/322/323
+             (no audio/no bt $0, audio/no bt +$65, audio/bt +$130); for Year =
+             2012-2013, values 324/325 (audio/no bt $0, audio/bt +$55).
+           - For Year = 2006, no extra sub-option beyond finish.
+     Data pulled 2026-08-18 from the live product (id 350) option markup —
+     Year csOptId 60 (2006=318 $0, 2007-2011=319 $0, 2012-2013=320 +$385);
+     CF covers option csOptId 61 (321/322/323 for 2007-2011; 324/325 for
+     2012-2013, repriced to +$0/+$55).
 ════════════════════════════════════════════════════════ -->
 
-<div id="rb-config" class="rb-cfg-need-year">
+<div id="rb-config" class="rb-cfg-need-shape">
 <div class="rb-cfg-inner">
 
   <div class="rb-cfg-head">
     <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 Custom Steering Wheel<span class="rb-cfg-title-year" id="rb-cfg-title-year"></span></h1>
     <p class="rb-cfg-sub">Choose every option below — the diagram shows exactly where it applies.</p>
-    <button type="button" class="rb-cfg-restart" id="rb-cfg-restart-btn" hidden>↺ Start over (year &amp; shape)</button>
-  </div>
-
-  <div class="rb-cfg-gate rb-cfg-gate-year">
-    <div class="rb-cfg-gate-head">Step 1 — choose your wheel year</div>
-    <div class="rb-cfg-gate-grid rb-cfg-gate-grid--year" id="rb-cfg-gate-year-grid"></div>
+    <button type="button" class="rb-cfg-restart" id="rb-cfg-restart-btn" hidden>↺ Change wheel shape</button>
   </div>
 
   <div class="rb-cfg-gate rb-cfg-gate-shape">
-    <div class="rb-cfg-gate-head">Step 2 — choose your wheel shape</div>
+    <div class="rb-cfg-gate-head">Step 1 — choose your wheel shape</div>
     <div class="rb-cfg-gate-grid rb-cfg-gate-grid--shape" id="rb-cfg-gate-shape-grid"></div>
   </div>
 
@@ -59,6 +54,7 @@
 
     <div class="rb-cfg-col rb-cfg-col--r">
       <div class="rb-cfg-col-intro">Select &amp; configure your steering wheel design</div>
+      <p class="rb-cfg-year-hint" id="rb-cfg-year-hint">Start with your <strong>Year</strong> below — a couple of options depend on it.</p>
       <div class="rb-cfg-cards-grid">
         <div class="rb-cfg-card" data-zone="year"></div>
         <div class="rb-cfg-card" data-zone="shape"></div>
@@ -171,22 +167,17 @@
 }
 
 /* ══════════════════════════════════════
-   GATES (Step 1 — Year, Step 2 — Shape)
+   GATE (Step 1 — Shape only; Year is the first inline option card)
 ══════════════════════════════════════ */
 #rb-config .rb-cfg-gate{ display:none; margin-bottom:28px; }
-#rb-config.rb-cfg-need-year .rb-cfg-gate-year{ display:block; }
 #rb-config.rb-cfg-need-shape .rb-cfg-gate-shape{ display:block; }
-#rb-config.rb-cfg-need-year .rb-cfg-stage,
-#rb-config.rb-cfg-need-year .rb-cfg-gate-shape,
-#rb-config.rb-cfg-need-shape .rb-cfg-stage,
-#rb-config.rb-cfg-need-shape .rb-cfg-gate-year{ display:none; }
+#rb-config.rb-cfg-need-shape .rb-cfg-stage{ display:none; }
 
 #rb-config .rb-cfg-gate-head{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
   font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin-bottom:14px;
 }
 #rb-config .rb-cfg-gate-grid{ display:grid; gap:14px; margin:0 auto; }
-#rb-config .rb-cfg-gate-grid--year{ grid-template-columns:1fr 1fr 1fr; max-width:640px; }
 #rb-config .rb-cfg-gate-grid--shape{ grid-template-columns:1fr 1fr; max-width:520px; }
 #rb-config .rb-cfg-gate-opt{
   background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
@@ -195,10 +186,6 @@
 }
 #rb-config .rb-cfg-gate-opt:hover, #rb-config .rb-cfg-gate-opt:active{ border-color:var(--rb-accent); }
 #rb-config .rb-cfg-gate-opt.is-active{ border-color:var(--rb-accent); background:#171512; }
-#rb-config .rb-cfg-gate-opt-year{
-  font-family:'Barlow Condensed', sans-serif; font-weight:800; font-size:clamp(20px,2.6vw,28px);
-  color:var(--rb-text); letter-spacing:.01em;
-}
 #rb-config .rb-cfg-gate-opt-imgwrap{
   width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative;
   background:
@@ -228,6 +215,11 @@
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
   font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
 }
+#rb-config .rb-cfg-year-hint{
+  font-size:12.5px; color:var(--rb-text2); margin:0 0 12px; line-height:1.4;
+}
+#rb-config .rb-cfg-year-hint strong{ color:var(--rb-accent); font-weight:600; }
+#rb-config .rb-cfg-year-hint.is-done{ display:none; }
 #rb-config .rb-cfg-lines{
   position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:4;
 }
@@ -396,7 +388,6 @@
 }
 @media (max-width: 640px){
   #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
-  #rb-config .rb-cfg-gate-grid--year{ grid-template-columns:1fr 1fr 1fr; gap:8px; }
   /* Long combined summaries (e.g. "Yes · Matte / Satin · No audio / no
      bluetooth") don't fit on one line at phone widths — wrap instead of
      silently clipping the start of the text with no ellipsis. */
@@ -420,9 +411,9 @@
     year: {
       label:'Year', zone: null, csOptId: 60,
       values: [
-        { v:'y2006',      label:'2006',      price:0, cs:318 },
-        { v:'y2007_2011', label:'2007-2011', price:0, cs:319 },
-        { v:'y2012_2013', label:'2012-2013', price:0, cs:320 }
+        { v:'y2006',      label:'2006',      price:0,   cs:318 },
+        { v:'y2007_2011', label:'2007-2011', price:0,   cs:319 },
+        { v:'y2012_2013', label:'2012-2013', price:385, cs:320 }
       ]
     },
     shape: {
@@ -453,8 +444,8 @@
           { v:'audio_bt', label:'Audio / bluetooth', price:130, cs:323 }
         ],
         y2012_2013:[
-          { v:'audio385', label:'Audio / no bluetooth', price:385, cs:324 },
-          { v:'audio_bt450', label:'Audio / bluetooth', price:450, cs:325 }
+          { v:'audio_2013', label:'Audio / no bluetooth', price:0,  cs:324 },
+          { v:'audio_bt_2013', label:'Audio / bluetooth',  price:55, cs:325 }
         ]
       }
     },
@@ -587,27 +578,30 @@
     if (el) el.textContent = state.year ? ' — ' + state.year.label : '';
   }
 
-  // ── Gate progression (Step 1: Year → Step 2: Shape → full stage) ──
+  // ── Gate progression (Step 1: Shape → full stage) ──
   function syncGateActiveStates(){
-    root.querySelectorAll('.rb-cfg-gate-opt[data-year]').forEach(function(b){
-      b.classList.toggle('is-active', !!(state.year && b.dataset.year === state.year.v));
-    });
     root.querySelectorAll('.rb-cfg-gate-opt[data-shape]').forEach(function(b){
       b.classList.toggle('is-active', !!(state.shape && b.dataset.shape === state.shape.v));
     });
   }
+  function openYearCardFirst(){
+    if (state.year) return;
+    var yearCard = root.querySelector('.rb-cfg-card[data-zone="year"]');
+    if (!yearCard) return;
+    if (!yearCard.classList.contains('is-open')) toggleCard(yearCard);
+    setTimeout(function(){ yearCard.scrollIntoView({ behavior:'smooth', block:'center' }); }, 300);
+  }
   function advanceGate(){
-    if (root.classList.contains('rb-cfg-need-year') && state.year){
-      root.classList.remove('rb-cfg-need-year');
-      if (!state.shape) root.classList.add('rb-cfg-need-shape');
-    } else if (root.classList.contains('rb-cfg-need-shape') && state.shape){
+    var wasInGate = root.classList.contains('rb-cfg-need-shape');
+    if (wasInGate && state.shape){
       root.classList.remove('rb-cfg-need-shape');
     }
     var restartBtn = document.getElementById('rb-cfg-restart-btn');
-    var inGate = root.classList.contains('rb-cfg-need-year') || root.classList.contains('rb-cfg-need-shape');
+    var inGate = root.classList.contains('rb-cfg-need-shape');
     if (restartBtn) restartBtn.hidden = inGate;
     syncGateActiveStates();
     if (!inGate) scheduleLayout();
+    if (wasInGate && !inGate) openYearCardFirst();
   }
 
   function buildChipGroup(container, optKey, valuesKey, valuesList){
@@ -643,7 +637,8 @@
           updateSpokesFinishState();
           updateHeadVal('spokes');
           updateTitleYear();
-          advanceGate();
+          var yearHint = document.getElementById('rb-cfg-year-hint');
+          if (yearHint) yearHint.classList.add('is-done');
         }
         if (optKey === 'shape'){ updateShapeImage(); advanceGate(); }
         if (optKey === 'spokes' && valuesKey === 'values'){ updateSpokesFinishState(); }
@@ -923,27 +918,13 @@
     head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone(zone, false); });
   });
 
-  var yearGateGrid = document.getElementById('rb-cfg-gate-year-grid');
-  OPTIONS.year.values.forEach(function(val){
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'rb-cfg-gate-opt';
-    btn.dataset.year = val.v;
-    btn.innerHTML = '<span class="rb-cfg-gate-opt-year">'+val.label+'</span>';
-    btn.addEventListener('click', function(){
-      var chip = root.querySelector('.rb-cfg-card[data-zone="year"] .rb-chip[data-val="'+val.v+'"]');
-      if (chip) chip.click();
-    });
-    yearGateGrid.appendChild(btn);
-  });
-
   var shapeGateGrid = document.getElementById('rb-cfg-gate-shape-grid');
   OPTIONS.shape.values.forEach(function(val){
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'rb-cfg-gate-opt';
     btn.dataset.shape = val.v;
-    var priceHtml = val.price ? '<span class="rb-cfg-gate-opt-price">'+fmtPrice(val.price)+'</span>' : '';
+    var priceHtml = '<span class="rb-cfg-gate-opt-price">from $'+(BASE_PRICE+val.price).toFixed(0)+'</span>';
     btn.innerHTML =
       '<span class="rb-cfg-gate-opt-imgwrap"><img src="'+(val.img || DEFAULT_WHEEL_IMG)+'" alt="'+val.label+'"></span>' +
       '<span class="rb-cfg-gate-opt-label">'+val.label+'</span>' + priceHtml;
@@ -956,11 +937,10 @@
 
   var restartBtn = document.getElementById('rb-cfg-restart-btn');
   restartBtn.addEventListener('click', function(){
-    root.classList.remove('rb-cfg-need-shape');
-    root.classList.add('rb-cfg-need-year');
+    root.classList.add('rb-cfg-need-shape');
     restartBtn.hidden = true;
     syncGateActiveStates();
-    var gate = root.querySelector('.rb-cfg-gate-year');
+    var gate = root.querySelector('.rb-cfg-gate-shape');
     if (gate) gate.scrollIntoView({ behavior:'smooth', block:'start' });
   });
 
