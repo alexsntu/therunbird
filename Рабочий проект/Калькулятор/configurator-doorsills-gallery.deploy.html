@@ -117,7 +117,7 @@
 .rb-cfg-lb-watermark path{ fill:#f1ebdb; }
 .rb-cfg-lb-close,
 .rb-cfg-lb-nav{
-  position:absolute; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  position:absolute; z-index:2; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;
   transition:.15s; font-family:'Inter',sans-serif;
 }
 .rb-cfg-lb-close{
@@ -219,13 +219,44 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   function updateCounter(){
     lbCounter.textContent = (lbIndex + 1) + ' / ' + GALLERY_SRCS.length;
   }
+  var lbPreloaded = {};
+  function preloadFull(url){
+    if (!url || lbPreloaded[url]) return;
+    lbPreloaded[url] = true;
+    var pre = new Image();
+    pre.src = url;
+  }
+  function preloadNeighbors(){
+    if (GALLERY_SRCS.length < 2) return;
+    var prevI = (lbIndex - 1 + GALLERY_SRCS.length) % GALLERY_SRCS.length;
+    var nextI = (lbIndex + 1) % GALLERY_SRCS.length;
+    preloadFull(GALLERY_SRCS[prevI].full);
+    preloadFull(GALLERY_SRCS[nextI].full);
+  }
+  // Jumping straight to the full-res photo left the frame blank whenever it
+  // wasn't already cached (the first photo opened, or swiping faster than
+  // the neighbor preload could keep up — both common on mobile). Showing
+  // the thumb — already loaded from the scroll strip — the instant we
+  // navigate, then silently swapping in the full photo once it's ready,
+  // means the user always sees something immediately instead of a frozen
+  // box while the ~400KB full photo is still in flight.
+  function showPhoto(i){
+    lbImg.src = GALLERY_SRCS[i].thumb;
+    updateCounter();
+    var full = new Image();
+    full.decoding = 'async';
+    full.onload = function(){
+      if (lbIndex === i) lbImg.src = GALLERY_SRCS[i].full;
+    };
+    full.src = GALLERY_SRCS[i].full;
+    preloadNeighbors();
+  }
   function openLightbox(i){
     lbIndex = i;
-    lbImg.src = GALLERY_SRCS[lbIndex].full;
-    updateCounter();
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     lockPageScroll();
+    showPhoto(i);
   }
   function closeLightbox(){
     lightbox.classList.remove('is-open');
@@ -234,8 +265,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   }
   function lbShift(delta){
     lbIndex = (lbIndex + delta + GALLERY_SRCS.length) % GALLERY_SRCS.length;
-    lbImg.src = GALLERY_SRCS[lbIndex].full;
-    updateCounter();
+    showPhoto(lbIndex);
   }
 
   document.getElementById('rb-cfg-lb-close').addEventListener('click', closeLightbox);

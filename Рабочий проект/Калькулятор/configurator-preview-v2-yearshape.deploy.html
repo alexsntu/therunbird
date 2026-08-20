@@ -657,7 +657,12 @@
             setActiveZone(ownCard.dataset.zone, false);
             scheduleLayout();
           }
-          if (window.matchMedia('(max-width: 980px)').matches){
+          // Picking a shape for the first time (Year still unanswered) already
+          // forces a scroll to the Year card via openYearCardFirst() above —
+          // skip this generic scroll here so the two smooth-scrolls don't race
+          // and steal focus away from Year on mobile.
+          var justGatedIntoYear = (optKey === 'shape' && !state.year);
+          if (window.matchMedia('(max-width: 980px)').matches && !justGatedIntoYear){
 
             var scrollTarget = isComplete() ? '.rb-cfg-summary' : '.rb-cfg-imgwrap';
             setTimeout(function(){
