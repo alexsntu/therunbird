@@ -6,7 +6,10 @@
 ════════════════════════════════════════════════════════ -->
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+/* Barlow Condensed / Inter are already loaded once, site-wide, via rb-work.css
+   (CS-Cart Design > Themes > Editor > custom CSS) — no @import needed here.
+   The 2 most-used weights (Barlow Condensed 900, Inter 400) are also preloaded
+   via the AB: Preload add-on for faster first paint. */
 
 /* ── Reset Bootstrap/UniTheme2 inside our block ── */
 #rb-hero,
@@ -358,7 +361,7 @@
       <!-- Visual -->
       <div class="rb-hero-visual">
         <div class="rb-hero-card">
-          <img class="rb-hero-card-img" src="https://therunbird.com/images/MainPAge/55image.jpg" alt="RunBird Corvette Accessories">
+          <img class="rb-hero-card-img" src="https://therunbird.com/images/MainPAge/55image.jpg" alt="RunBird Corvette Accessories" width="800" height="533" fetchpriority="high">
         </div>
         <div class="rb-hero-card-label">
           <div class="rb-label-title">Made By Hand, Not By Machine</div>

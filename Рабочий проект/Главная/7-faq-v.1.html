@@ -6,7 +6,8 @@
 ════════════════════════════════════════════════════════ -->
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+/* Barlow Condensed / Inter are already loaded once, site-wide, via rb-work.css
+   (CS-Cart Design > Themes > Editor > custom CSS) — no @import needed here. */
 
 /* ── Reset Bootstrap/UniTheme2 inside our block ── */
 #rb-faq,
@@ -87,6 +88,11 @@
   text-transform: uppercase !important; color: var(--rb-text) !important;
   text-align: left !important; transition: color .2s !important;
 }
+#rb-faq .rb-faq-q h3 {
+  margin: 0 !important; padding: 0 !important;
+  font: inherit !important; color: inherit !important;
+  display: inline !important;
+}
 #rb-faq .rb-faq-q:hover { color: var(--rb-accent) !important; }
 #rb-faq .rb-faq-item.open .rb-faq-q { color: var(--rb-accent) !important; }
 #rb-faq .rb-faq-icon {
@@ -134,7 +140,7 @@
 
       <div class="rb-faq-item">
         <button class="rb-faq-q" type="button">
-          How long does production take?
+          <h3>How long does production take?</h3>
           <span class="rb-faq-icon">+</span>
         </button>
         <p class="rb-faq-a">All products are handmade to order. Production time is 7–14 business days from order confirmation. You'll receive a tracking number as soon as your order ships, with updates at every stage.</p>
@@ -142,7 +148,7 @@
 
       <div class="rb-faq-item">
         <button class="rb-faq-q" type="button">
-          Will this fit my Corvette?
+          <h3>Will this fit my Corvette?</h3>
           <span class="rb-faq-icon">+</span>
         </button>
         <p class="rb-faq-a">Our accessories are designed specifically for the Chevrolet Corvette C6 (2005–2013), across Coupe, Convertible, Z06, Grand Sport, and ZR1 trims. Each product page lists exact fitment. Installation requires no permanent modifications — everything is a direct bolt-on or slip-on.</p>
@@ -150,7 +156,7 @@
 
       <div class="rb-faq-item">
         <button class="rb-faq-q" type="button">
-          How do I choose the right configuration?
+          <h3>How do I choose the right configuration?</h3>
           <span class="rb-faq-icon">+</span>
         </button>
         <p class="rb-faq-a">Browse each product page where all material options are shown with photos. Carbon finish (gloss or matte), carbon color, leather type, and thread color are all selectable. If you're unsure — contact us. We're happy to recommend a configuration based on your Corvette's interior and your preferences.</p>
@@ -158,7 +164,7 @@
 
       <div class="rb-faq-item">
         <button class="rb-faq-q" type="button">
-          What is your return policy?
+          <h3>What is your return policy?</h3>
           <span class="rb-faq-icon">+</span>
         </button>
         <p class="rb-faq-a">Since every piece is custom-made to your exact spec, we cannot accept returns on configured orders. However, if your item arrives damaged or doesn't match your order specifications, we will remake it at no cost. We stand behind every stitch.</p>
@@ -166,7 +172,7 @@
 
       <div class="rb-faq-item">
         <button class="rb-faq-q" type="button">
-          Do you ship internationally?
+          <h3>Do you ship internationally?</h3>
           <span class="rb-faq-icon">+</span>
         </button>
         <p class="rb-faq-a">Currently we ship within the United States only, with free shipping on all orders. International shipping to Canada, Europe, and Australia is planned — sign up to our newsletter to be notified when it launches.</p>
@@ -174,7 +180,7 @@
 
       <div class="rb-faq-item">
         <button class="rb-faq-q" type="button">
-          Why choose handmade over mass-produced accessories?
+          <h3>Why choose handmade over mass-produced accessories?</h3>
           <span class="rb-faq-icon">+</span>
         </button>
         <p class="rb-faq-a">Handmade pieces use real carbon fiber and genuine Alcantara&reg;, not printed vinyl wraps that peel and fade over time. Made to order also means it's built for your car's exact fitment, not a generic mold — and you see real photos of your piece for approval before it ships, something most mass-produced sellers don't offer.</p>
@@ -183,6 +189,63 @@
     </div>
   </div>
 </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does production take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All products are handmade to order. Production time is 7–14 business days from order confirmation. You'll receive a tracking number as soon as your order ships, with updates at every stage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will this fit my Corvette?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our accessories are designed specifically for the Chevrolet Corvette C6 (2005–2013), across Coupe, Convertible, Z06, Grand Sport, and ZR1 trims. Each product page lists exact fitment. Installation requires no permanent modifications — everything is a direct bolt-on or slip-on."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the right configuration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Browse each product page where all material options are shown with photos. Carbon finish (gloss or matte), carbon color, leather type, and thread color are all selectable. If you're unsure — contact us. We're happy to recommend a configuration based on your Corvette's interior and your preferences."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Since every piece is custom-made to your exact spec, we cannot accept returns on configured orders. However, if your item arrives damaged or doesn't match your order specifications, we will remake it at no cost. We stand behind every stitch."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you ship internationally?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Currently we ship within the United States only, with free shipping on all orders. International shipping to Canada, Europe, and Australia is planned — sign up to our newsletter to be notified when it launches."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why choose handmade over mass-produced accessories?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Handmade pieces use real carbon fiber and genuine Alcantara®, not printed vinyl wraps that peel and fade over time. Made to order also means it's built for your car's exact fitment, not a generic mold — and you see real photos of your piece for approval before it ships, something most mass-produced sellers don't offer."
+      }
+    }
+  ]
+}
+</script>
 
 <script>
 (function() {
