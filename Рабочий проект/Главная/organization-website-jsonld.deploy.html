@@ -1,0 +1,75 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Organization + WebSite JSON-LD (site-wide, per-page)
+     CS-Cart > Design > Layouts > Html+Smarty block — add this SAME
+     block to every page's layout individually (category pages,
+     configurator pages, etc). Content is identical everywhere,
+     just placed page by page instead of editing the shared theme
+     template (that approach broke meta.post.tpl on 2026-08-25 —
+     do not attempt to inject this via the shared template again).
+
+     Already live on the homepage as 9-jsonld-v.1.html — do NOT add
+     this block again there, it would duplicate it.
+
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Facts used below are only what's actually verifiable live on the site:
+       - name/url/logo: match the existing <title> and og:image already on
+         the homepage (logo file: images/logos/9/Logowhite_3x.png).
+       - sameAs: only the 3 footer social links that are real, working <a
+         href> tags today (Instagram, YouTube, TikTok). The footer's
+         Facebook icon is currently a bare <button> with no href — add it
+         here once that's fixed with a real Facebook Page URL, not before.
+       - SearchAction target: the site's real working search endpoint
+         (form action="https://therunbird.com/" method="get", input
+         name="q" — confirmed live on the homepage search form).
+     Deliberately NOT included: AggregateRating (the "4.9★ / 500+ Orders"
+     stat on the page isn't backed by a named review platform or dated
+     reviews — encoding it as schema would assert it's machine-verifiable
+     when it currently isn't; add this once/if a real review source backs
+     it).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{literal}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://therunbird.com/#organization",
+      "name": "RunBird",
+      "alternateName": "TheRunBird",
+      "url": "https://therunbird.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://therunbird.com/#logo",
+        "url": "https://therunbird.com/images/logos/9/Logowhite_3x.png"
+      },
+      "image": { "@id": "https://therunbird.com/#logo" },
+      "description": "Handmade C6 Corvette interior accessories — steering wheels, shift knobs, handbrakes, horn pads, emblems, and door sill plates, built to order and shipped nationwide across the US.",
+      "sameAs": [
+        "https://www.instagram.com/therunbird",
+        "https://youtube.com/@therunbird",
+        "https://www.tiktok.com/@therunbird"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://therunbird.com/#website",
+      "url": "https://therunbird.com/",
+      "name": "RunBird",
+      "description": "Feel the Drive",
+      "publisher": { "@id": "https://therunbird.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://therunbird.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+{/literal}
+</script>

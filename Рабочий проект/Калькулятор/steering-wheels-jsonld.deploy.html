@@ -1,0 +1,39 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /steering-wheels/ page: Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a
+     NEW content block on this page only (do not merge into the
+     configurator block itself — keep this separate, same pattern
+     as the homepage's 9-jsonld-v.1.html)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom C6 Corvette Steering Wheel",
+  "image": [
+    "https://therunbird.com/images/Calculator/SteeringWheel-C6.png",
+    "https://therunbird.com/images/Calculator/Prew-SW/SW11.png"
+  ],
+  "description": "Handmade custom steering wheel for the C6 Corvette (2006–2013). Choose D-shape or F1-shape, plain or perforated leather, genuine Alcantara®, or carbon fiber trim. Made to order in 7–14 business days, with real photos of your build sent for approval before it ships.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Leather", "Alcantara", "Carbon Fiber"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/steering-wheels/",
+    "priceCurrency": "USD",
+    "price": "765.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>
