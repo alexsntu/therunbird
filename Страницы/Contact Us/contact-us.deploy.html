@@ -29,6 +29,15 @@
 
      UX: submission is fire-and-forget — we POST via fetch() and do NOT wait for or read
      the response; the "request received" confirmation is shown immediately, client-side.
+
+     ANTI-SPAM (2026-08-25): CS-Cart's native pages.send_form endpoint now requires a
+     Google reCAPTCHA v3 token (g-recaptcha-v3-token) on every submission — enabled
+     store-wide via Add-ons > Google reCAPTCHA > Settings > Custom forms, after a spam
+     bot was found posting directly to the endpoint with none of our HTML/JS involved.
+     Without this token our fetch() submission is now silently rejected server-side
+     (no more ?sent=Y redirect) even though the client still shows "Request Received" —
+     so this page loads the reCAPTCHA v3 script and attaches a token before every submit.
+     Site key is public by design; the matching secret lives only in CS-Cart admin.
 ════════════════════════════════════════════════════════ -->
 
 <style>
@@ -256,6 +265,13 @@
   text-align: center !important; color: var(--rb-text2) !important; font-size: 11.5px !important;
   margin-top: 16px !important; line-height: 1.5 !important;
 }
+#rb-contact-us .rb-cu-fine a { color: var(--rb-text2) !important; text-decoration: underline !important; }
+
+/* The reCAPTCHA badge itself is hidden globally in rb-work.css (site-wide CSS), not
+   here — CS-Cart's AJAX page navigation swaps this block out while the badge node
+   persists in <body>, so a rule scoped to this page alone isn't enough. Google only
+   allows hiding the badge together with the visible attribution text above (next to
+   the submit button) — keep that text if the global hide rule stays. */
 
 /* ══════════════════════════════════════
    SUCCESS STATE
@@ -385,7 +401,7 @@
 
               <div class="rb-cu-field" data-field="phone">
                 <label class="rb-cu-label" for="rb-cu-phone">Your Phone <span>*</span></label>
-                <input id="rb-cu-phone" type="tel" name="form_values[10]" placeholder="+1 (555) 000-0000" autocomplete="tel" maxlength="18" />
+                <input id="rb-cu-phone" type="tel" name="form_values[10]" placeholder="+1 555 000 0000" autocomplete="tel" maxlength="20" />
                 <div class="rb-cu-err-msg">Please enter your phone number.</div>
               </div>
             </div>
@@ -410,7 +426,11 @@
             </div>
 
             <button type="submit" class="rb-cu-submit">Send Message</button>
-            <p class="rb-cu-fine">By submitting, you agree to be contacted by RunBird regarding your inquiry.</p>
+            <p class="rb-cu-fine">By submitting, you agree to be contacted by RunBird regarding your inquiry.
+              This site is protected by reCAPTCHA and the Google
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
+              <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.
+            </p>
           </form>
         </div>
 
@@ -438,25 +458,21 @@
   var validators = {
     name:    function(v) { return v.trim().length > 1; },
     email:   function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); },
-    phone:   function(v) { return v.replace(/\D/g, '').length === 10; },
+    phone:   function(v) { var d = v.replace(/\D/g, '').length; return d >= 6 && d <= 15; },
     comment: function(v) { return v.trim().length > 4; }
   };
 
-  // US phone mask: formats digits as "+1 (XXX) XXX-XXXX" while typing.
+  // International-friendly phone mask: groups digits in 3s for readability
+  // (e.g. "+44 20 7946 0018"), keeps a leading "+" if the visitor typed one,
+  // but doesn't force a US-only 10-digit / "+1 (XXX) XXX-XXXX" shape —
+  // any country's number, any length up to 15 digits (E.164 max), is fine.
   var phoneInput = document.getElementById('rb-cu-phone');
   if (phoneInput) {
     phoneInput.addEventListener('input', function() {
-      var digits = phoneInput.value.replace(/\D/g, '');
-      if (digits.charAt(0) === '1') digits = digits.slice(1);
-      digits = digits.slice(0, 10);
-
-      var out = '';
-      if (digits.length > 0) out = '+1 (' + digits.slice(0, 3);
-      if (digits.length >= 3) out += ')';
-      if (digits.length > 3) out += ' ' + digits.slice(3, 6);
-      if (digits.length >= 6) out += '-' + digits.slice(6, 10);
-
-      phoneInput.value = out;
+      var hasPlus = phoneInput.value.trim().charAt(0) === '+';
+      var digits = phoneInput.value.replace(/\D/g, '').slice(0, 15);
+      var groups = digits.match(/.{1,3}/g) || [];
+      phoneInput.value = (hasPlus ? '+' : '') + groups.join(' ');
     });
   }
 
@@ -523,21 +539,52 @@
     return ok;
   }
 
+  // Google reCAPTCHA v3 (site key is public by design, safe to embed):
+  // CS-Cart's native feedback-form endpoint now requires a g-recaptcha-v3-token
+  // field on every submission (server-side check, added 2026-08-25 to stop spam).
+  // Action name "form_builder" matches what CS-Cart's own native form sends.
+  var RECAPTCHA_SITE_KEY = '6LdDwJctAAAAAJoxP7if9Eq8uqzxZF-NDt0816PA';
+  var recaptchaReadyPromise = null;
+
+  function loadRecaptcha() {
+    if (recaptchaReadyPromise) return recaptchaReadyPromise;
+    recaptchaReadyPromise = new Promise(function(resolve, reject) {
+      if (window.grecaptcha && window.grecaptcha.execute) { resolve(); return; }
+      var s = document.createElement('script');
+      s.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
+      s.onload = function() { window.grecaptcha.ready(resolve); };
+      s.onerror = function() { reject(new Error('recaptcha script failed to load')); };
+      document.head.appendChild(s);
+    });
+    return recaptchaReadyPromise;
+  }
+  loadRecaptcha().catch(function() {});
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (!validate()) return;
 
-    // Fire-and-forget: submit via the site's own feedback-form mechanism (page_id 30)
-    // but never wait for/read the response — the user gets instant confirmation.
     var fd = new FormData(form);
-    fetch(form.action, { method: 'POST', body: fd }).catch(function() {});
 
-    root.classList.add('rb-cu-sent');
+    loadRecaptcha().then(function() {
+      return window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'form_builder' });
+    }).then(function(token) {
+      fd.append('g-recaptcha-v3-token', token);
+    }).catch(function() {
+      // If reCAPTCHA fails to load (blocked script, offline, etc.), submit anyway —
+      // CS-Cart will reject it server-side rather than us blocking a real user's message.
+    }).then(function() {
+      // Fire-and-forget: submit via the site's own feedback-form mechanism (page_id 30)
+      // but never wait for/read the response — the user gets instant confirmation.
+      fetch(form.action, { method: 'POST', body: fd }).catch(function() {});
 
-    var succTitle = root.querySelector('.rb-cu-succ-t');
-    if (succTitle) {
-      succTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+      root.classList.add('rb-cu-sent');
+
+      var succTitle = root.querySelector('.rb-cu-succ-t');
+      if (succTitle) {
+        succTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
   });
 
   var againBtn = document.getElementById('rb-cu-again');

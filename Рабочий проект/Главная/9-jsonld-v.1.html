@@ -1,0 +1,67 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 9: JSON-LD (Organization + WebSite)
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     No visual output — pure structured data, safe to place anywhere in the
+     page body (Google/Bing/AI crawlers parse JSON-LD regardless of DOM
+     position, it doesn't need to live in <head>).
+
+     Facts used below are only what's actually verifiable live on the site:
+       - name/url/logo: match the existing <title> and og:image already on
+         the homepage (logo file: images/logos/9/Logowhite_3x.png).
+       - sameAs: only the 3 footer social links that are real, working <a
+         href> tags today (Instagram, YouTube, TikTok). The footer's
+         Facebook icon is currently a bare <button> with no href — add it
+         here once that's fixed with a real Facebook Page URL, not before.
+       - SearchAction target: the site's real working search endpoint
+         (form action="https://therunbird.com/" method="get", input
+         name="q" — confirmed live on the homepage search form).
+     Deliberately NOT included: AggregateRating (the "4.9★ / 500+ Orders"
+     stat on the page isn't backed by a named review platform or dated
+     reviews — encoding it as schema would assert it's machine-verifiable
+     when it currently isn't; add this once/if a real review source backs
+     it).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://therunbird.com/#organization",
+      "name": "RunBird",
+      "alternateName": "TheRunBird",
+      "url": "https://therunbird.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://therunbird.com/#logo",
+        "url": "https://therunbird.com/images/logos/9/Logowhite_3x.png"
+      },
+      "image": { "@id": "https://therunbird.com/#logo" },
+      "description": "Handmade C6 Corvette interior accessories — steering wheels, shift knobs, handbrakes, horn pads, emblems, and door sill plates, built to order and shipped nationwide across the US.",
+      "sameAs": [
+        "https://www.instagram.com/therunbird",
+        "https://youtube.com/@therunbird",
+        "https://www.tiktok.com/@therunbird"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://therunbird.com/#website",
+      "url": "https://therunbird.com/",
+      "name": "RunBird",
+      "description": "Feel the Drive",
+      "publisher": { "@id": "https://therunbird.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://therunbird.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>

@@ -11,6 +11,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
 
 /* ══════════════════════════════════════════════════════
+   Google reCAPTCHA v3 floating badge — global hide.
+   The Contact Us page (contact-us.deploy.html) loads reCAPTCHA v3, which
+   injects a fixed bottom-right badge into <body>. Because CS-Cart's
+   storefront navigates between pages via AJAX (no full reload), that
+   badge node isn't cleaned up on navigation and "follows" the visitor
+   to other pages, where it overlaps UniTheme2's mobile sticky bottom
+   nav (Menu/Cart/Account). Scoping the hide rule to the Contact Us
+   page's own <style> block isn't enough since that block gets swapped
+   out on navigation while the badge itself persists — this rule must
+   live in the site-wide CSS instead.
+   Hiding it is allowed by Google's terms ONLY together with the visible
+   attribution text on the Contact Us page ("This site is protected by
+   reCAPTCHA...") — do not remove that text if this rule stays.
+════════════════════════════════════════════════════════ */
+.grecaptcha-badge { visibility: hidden !important; }
+
+/* ══════════════════════════════════════════════════════
    HEADER — scoped under #rb-header
    (native minicart / search overrides below are NOT scoped
    under #rb-header — those native blocks live outside it)

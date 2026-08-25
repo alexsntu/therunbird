@@ -153,6 +153,22 @@
 #rb-hero .rb-hero-h1 .rb-h1-the   { align-self: center !important; font-style: italic !important; color: var(--rb-accent) !important; }
 #rb-hero .rb-hero-h1 .rb-h1-drive { align-self: flex-end !important; }
 
+/* Real <h1> for SEO — "Feel The Drive" below is now a <div> (same class,
+   same look, zero visual change) so this can be the page's one true H1
+   without fighting it for size. Styled as a quiet kicker line, same
+   pattern as .rb-sec-eyebrow used on other homepage blocks. */
+#rb-hero .rb-hero-kicker {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text2) !important;
+  text-align: center !important;
+  margin: 0 0 14px !important;
+}
+
 #rb-hero .rb-hero-p {
   font-size: 15.5px !important; line-height: 1.72 !important;
   color: #777 !important; max-width: 440px !important;
@@ -318,15 +334,16 @@
 
       <!-- Copy -->
       <div class="rb-hero-copy">
+        <h1 class="rb-hero-kicker">Handmade Interior Accessories for the C6 Corvette</h1>
         <div class="rb-hero-badge">
           <span class="rb-badge-dot"></span>
           Exclusively Crafted for the C6 Corvette
         </div>
-        <h1 class="rb-hero-h1">
+        <div class="rb-hero-h1">
           <span class="rb-h1-feel">Feel</span>
           <span class="rb-h1-the">The</span>
           <span class="rb-h1-drive">Drive</span>
-        </h1>
+        </div>
         <p class="rb-hero-p">
           Premium handmade interior accessories tailored to your Corvette.
           <strong>Carbon fiber</strong>, <strong>Nappa leather</strong>, and genuine
