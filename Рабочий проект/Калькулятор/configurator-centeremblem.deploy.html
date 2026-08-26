@@ -10,13 +10,13 @@
 
     <div class="rb-cfg-imgwrap">
       <div class="rb-cfg-imgbox">
-        <img src="https://therunbird.com/images/Calculator/Center%20Emblem/center-logo.png" alt="Corvette C6 Airbag CF Center Emblem" draggable="false">
+        <img src="https://therunbird.com/images/ab__webp/detailed/9/center-logo_png.webp" alt="Corvette C6 Airbag CF Center Emblem" width="800" height="800" fetchpriority="high" draggable="false">
       </div>
       <p class="rb-cfg-img-caption">This is a schematic mockup to show the design style — not the final finish. We'll send you a realistic render of your actual build before we start making it.</p>
     </div>
 
     <div class="rb-cfg-col rb-cfg-col--r">
-      <div class="rb-cfg-col-intro">Select &amp; configure your center emblem</div>
+      <h2 class="rb-cfg-col-intro">Select &amp; configure your center emblem</h2>
       <div class="rb-cfg-cards-grid" id="rb-cfg-cards-grid"></div>
 
       <div class="rb-cfg-summary" id="rb-cfg-summary">
@@ -27,6 +27,9 @@
         </div>
         <div class="rb-cfg-summary-hint" id="rb-cfg-summary-hint">Select every option above to add this build to your cart.</div>
       </div>
+
+      <p class="rb-cfg-notice">Design names are RunBird's own decorative aftermarket styles — not official or licensed General Motors / Chevrolet trim badges.</p>
+      <p class="rb-cfg-notice"><a href="https://therunbird.com/materials-guide/">Materials Guide</a> · <a href="https://therunbird.com/shipping-and-returns/">Shipping &amp; Returns</a> · <a href="https://therunbird.com/warranty/">Warranty</a></p>
     </div>
 
   </div>
@@ -60,7 +63,7 @@
 #rb-config .rb-cfg-inner{
   max-width: 1370px;
   margin: 0 auto;
-  padding: 16px clamp(20px,4vw,56px) 48px;
+  padding: 0 clamp(20px,4vw,56px) 48px;
   box-sizing: border-box;
 }
 
@@ -90,7 +93,7 @@
 #rb-config .rb-cfg-cards-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px 16px; width:100%; box-sizing:border-box; }
 #rb-config .rb-cfg-col-intro{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
-  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin:0 0 2px;
 }
 
 #rb-config .rb-cfg-imgwrap{ position:sticky; align-self:start; top:16px; }
@@ -183,6 +186,11 @@
 }
 #rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
 #rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
+#rb-config .rb-cfg-notice{
+  font-size:12px; color:var(--rb-text2); text-align:center; margin:14px 0 0;
+}
+#rb-config .rb-cfg-notice a{ color:var(--rb-accent); text-decoration:underline; }
+#rb-config .rb-cfg-notice a:hover{ color:var(--rb-accent-h); }
 
 @media (max-width: 980px){
   #rb-config .rb-cfg-stage{ grid-template-columns:1fr; }
@@ -210,7 +218,7 @@
     { v:'matte', label:'Matte', price:0, cs:271 }
   ];
 
-  var PHOTO_DEFAULT = 'https://therunbird.com/images/Calculator/Center%20Emblem/center-logo.png';
+  var PHOTO_DEFAULT = 'https://therunbird.com/images/ab__webp/detailed/9/center-logo_png.webp';
 
   var PRODUCT = {
     id:'360', name:'Corvette C6 Airbag CF Center Emblem', basePrice:75.00,
@@ -235,10 +243,10 @@
       // back to PHOTO_DEFAULT (the 4-up grid photo).
       designCenterEmblem: { label:'Design Center Emblem', csOptId:59,
         values:[
-          { v:'flags',    label:'Flags', price:0, cs:311 },
-          { v:'z06',      label:'Z06', price:0, cs:312, img:'https://therunbird.com/images/Calculator/Center%20Emblem/Z06.png' },
-          { v:'zr1',      label:'ZR1', price:0, cs:313, img:'https://therunbird.com/images/Calculator/Center%20Emblem/ZR1.png' },
-          { v:'racing',   label:'Corvette racing', price:0, cs:314 },
+          { v:'flags',    label:'Flags-style', price:0, cs:311 },
+          { v:'z06',      label:'Z06-style', price:0, cs:312, img:'https://therunbird.com/images/Calculator/Center%20Emblem/Z06.png' },
+          { v:'zr1',      label:'ZR1-style', price:0, cs:313, img:'https://therunbird.com/images/Calculator/Center%20Emblem/ZR1.png' },
+          { v:'racing',   label:'Corvette Racing-style', price:0, cs:314 },
           { v:'punisher', label:'Punisher', price:0, cs:315, img:'https://therunbird.com/images/Calculator/Center%20Emblem/panisher.png' },
           { v:'skull',    label:'Skull', price:0, cs:316, img:'https://therunbird.com/images/Calculator/Center%20Emblem/skulls.png' },
           { v:'custom',   label:'Custom (your logo)', price:0, cs:317 }

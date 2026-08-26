@@ -1,0 +1,43 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /shift-knobs/standard-gear-knob/ (Classic): Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on THIS page only (do not merge into
+     configurator-shiftknob-classic.deploy.html — keep separate, same
+     pattern as steering-wheels-jsonld.deploy.html / horn-pads-jsonld /
+     emblems-jsonld).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 Classic Shift Knob Manual (6-Speed) and CF Top Cap",
+  "image": [
+    "https://therunbird.com/images/ab__webp/detailed/9/Corvette_C6_Classic_Shift_Knob_Manual__6-Speed__and_CF_Top_Cap_invn-pg_png.webp"
+  ],
+  "description": "Handmade classic C6 Corvette shift knob with matching carbon-fiber top cap. Choose synthetic Nappa leather, genuine Alcantara, or carbon fiber. Made to order in 7-14 business days, with real photos of your build sent for approval before it ships.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Synthetic Nappa Leather", "Alcantara", "Carbon Fiber"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/shift-knobs/standard-gear-knob/",
+    "priceCurrency": "USD",
+    "price": "170.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>

@@ -1,0 +1,58 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /shift-knobs/ hub page: static category description
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the card grid (configurator-shiftknob.deploy.html) on this
+     page. Same pattern as steering-wheels-static-text.deploy.html /
+     horn-pads-static-text.deploy.html / emblems-static-text.deploy.html.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: the hub's card grid gives name + price + 1-line desc per
+     style, but no fact-dense body copy about the category as a whole
+     (materials, fitment, transmission compatibility) — flagged by
+     today's audit (GEO-M12-01) as a fact-density gap for AI extraction.
+
+     Facts verified 2026-08-26 from the 5 variant configurators' own
+     PRODUCT data: materials are synthetic Nappa leather / genuine
+     Alcantara® / carbon fiber (mix varies by style, not all 5 offer
+     all three). Classic/Ball/Drift are named "...Manual (6-Speed)..."
+     in their own product names — manual-shifter specific. Boot is the
+     only style with an explicit Automatic/Manual shift-pattern option
+     in its own configurator — don't claim automatic compatibility for
+     the other 4 styles, that's not verified anywhere on the site.
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-sk-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #d0d0d0;
+}
+#rb-sk-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #f0f0f0;
+  margin: 0 0 18px;
+}
+#rb-sk-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-sk-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-sk-about">
+  <h2>About the Corvette C6 Shift Knob Line</h2>
+  <p>Every RunBird shift knob is handmade to order for the C6 Corvette (2005–2013).
+  Choose from five styles — Classic, Ball, Drift, Top Cap Only, and Boot — in
+  synthetic Nappa leather, genuine Alcantara®, or carbon fiber. Classic, Ball, and
+  Drift are built for manual 6-speed shifters; the Boot cover is available for both
+  manual and automatic transmissions.</p>
+  <p>Pricing starts at $55 and every build is made to order in 7–14 business days.
+  Before your shift knob ships, we send real photos of the finished piece for your
+  approval.</p>
+</div>

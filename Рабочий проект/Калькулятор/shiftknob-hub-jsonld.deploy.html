@@ -1,0 +1,46 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /shift-knobs/ hub page: ItemList JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a
+     NEW content block on this page only (same pattern as the other
+     *-jsonld.deploy.html files today — separate block, not merged
+     into the hub's own configurator-shiftknob.deploy.html file).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: this hub links to 5 shift-knob styles, each now living at
+     its own URL (Classic/Ball/Drift/Top Cap Only/Boot). The ItemList
+     below formally declares that relationship for AI/knowledge-graph
+     consumers — only "url" per item, no embedded Product/price data,
+     so pricing/availability stays owned exclusively by each child
+     page's own Product+Offer JSON-LD (no second source of truth).
+
+     Checked for the bare-word-in-braces pattern that broke earlier JSON-LD
+     blocks (Smarty misreads it as its own tag) — none present in the
+     payload below, so a literal-wrapper isn't needed here.
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://therunbird.com/shift-knobs/#webpage",
+      "url": "https://therunbird.com/shift-knobs/",
+      "name": "Custom C6 Corvette Shift Knobs",
+      "about": { "@id": "https://therunbird.com/shift-knobs/#itemlist" }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://therunbird.com/shift-knobs/#itemlist",
+      "name": "Shift Knobs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Classic", "url": "https://therunbird.com/shift-knobs/standard-gear-knob/" },
+        { "@type": "ListItem", "position": 2, "name": "Ball", "url": "https://therunbird.com/shift-knobs/gear-knob-ball/" },
+        { "@type": "ListItem", "position": 3, "name": "Drift", "url": "https://therunbird.com/shift-knobs/gear-knob-tall/" },
+        { "@type": "ListItem", "position": 4, "name": "Top Cap Only", "url": "https://therunbird.com/shift-knobs/shift-pattern/" },
+        { "@type": "ListItem", "position": 5, "name": "Boot", "url": "https://therunbird.com/shift-knobs/gear-knob-cover/" }
+      ]
+    }
+  ]
+}
+</script>
