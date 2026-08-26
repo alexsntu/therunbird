@@ -1558,3 +1558,41 @@ footer.ty-footer,
     justify-content: center !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════
+   Breadcrumb color fix — scoped, opt-in per block.
+   UniTheme2 hardcodes .ty-breadcrumbs__a and .ty-breadcrumbs__slash to
+   #262626 (near-black), a light-theme leftover that's illegible against
+   RunBird's dark background. No admin setting controls this color, and
+   we don't want to override the theme classes site-wide in case other
+   pages rely on them differently — so this only applies inside a block
+   that has the CSS class "rb-breadcrumb-fix" set (block's own General
+   tab > CSS class field). Only blocks you tag with this class are
+   affected; everything else is untouched.
+
+   Also fixes an unrelated theme bug: an unscoped ".row-fluid{background:
+   #6e6e6e !important;}" rule (meant for a sticky top panel state) leaks
+   onto this block's own .row-fluid wrapper, painting a light gray bar
+   behind the breadcrumbs. Can't target the parent .row-fluid directly
+   (the CSS-class field only tags this block's own child element), so
+   instead we paint our own element's background dark to visually cover
+   the gray showing through — matches the configurator's own content
+   background (#rb-config{--rb-bg:#0C0C0C}), confirmed 2026-08-26 as the
+   actual adjacent color. #171717 was too light and pure #000 was too
+   dark/flat against it — #0C0C0C is the real value used right below.
+════════════════════════════════════════════════════════ */
+.rb-breadcrumb-fix {
+  background: #0C0C0C !important;
+}
+.rb-breadcrumb-fix .ty-breadcrumbs__a {
+  color: #999 !important;
+}
+.rb-breadcrumb-fix .ty-breadcrumbs__a:hover {
+  color: #C8A84C !important;
+}
+.rb-breadcrumb-fix .ty-breadcrumbs__slash {
+  color: #555 !important;
+}
+.rb-breadcrumb-fix .ty-breadcrumbs__current {
+  color: #C8A84C !important;
+}

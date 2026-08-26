@@ -1,0 +1,56 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /steering-wheels/ page: static product description
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the configurator block and BEFORE the "Recent builds"
+     gallery block on this page.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: the configurator's material/pricing/fitment facts are
+     JS-rendered and invisible to non-JS AI crawlers (ChatGPT-User,
+     Claude-User, most search bots). This block puts the same real
+     facts in plain, always-visible HTML so they're readable without
+     JS. Also adds real body-copy depth to a page that was previously
+     almost all interactive UI with no static text.
+
+     All facts below are verified live on the page (2026-08-25 audit):
+     base price $765, fitment 2006-2013, D/F1 shape, material list,
+     CF trim +$220/section, CF spoke covers +$165, 7-14 business day
+     production, photo-approval-before-ship (site-wide differentiator).
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-sw-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #d0d0d0;
+}
+#rb-sw-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #f0f0f0;
+  margin: 0 0 18px;
+}
+#rb-sw-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-sw-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-sw-about">
+  <h2>About the Corvette C6 Custom Steering Wheel</h2>
+  <p>Every RunBird steering wheel is handmade to order for the C6 Corvette (2006–2013).
+  Choose a D-shape or F1-shape rim, then pick your material for the grips, top, and
+  bottom sections: plain leather, perforated leather, genuine Alcantara®, or carbon
+  fiber. Stitching color, center mark, and — on 2007–2013 models — carbon fiber spoke
+  covers with audio/bluetooth cutouts are all configurable.</p>
+  <p>Pricing starts at $765 and increases based on the options you choose — for example,
+  carbon fiber trim sections add $220 each, and CF spoke covers add $165. Every build
+  takes 7–14 business days, and before your wheel ships, we send real photos of the
+  finished piece for your approval.</p>
+</div>
