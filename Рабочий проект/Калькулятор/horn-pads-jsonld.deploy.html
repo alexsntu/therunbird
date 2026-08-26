@@ -1,0 +1,45 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /horn-pads/ page: Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a
+     NEW content block on this page only (do not merge into the
+     configurator block itself — same pattern as steering-wheels-jsonld.deploy.html)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Facts verified 2026-08-26 from the live page's own PRODUCT object
+     (product id 358): base price $355.00 (confirmed current by site owner),
+     materials leather/alcantara/leather+alcantara — labeled here as
+     "Synthetic Nappa Leather" per the site's established, brand-accurate
+     material fact (matches footer wording, matches the correction also
+     being applied to the configurator's own option labels).
+     Fitment: C6 Standard, C6 Z06, C6 ZR1 (all C6 Corvette trims 2005-2013).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 Airbag Cover / Horn Pad",
+  "image": [
+    "https://therunbird.com/images/detailed/9/Shield1_p1uj-h0.png"
+  ],
+  "description": "Handmade custom airbag cover (horn pad) for the C6 Corvette (2005–2013), fits C6 Standard, Z06, and ZR1. Choose synthetic Nappa leather, genuine Alcantara®, or a leather + Alcantara combo, with a Shield, Circle, or Tee stitch design and optional center emblem.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Synthetic Nappa Leather", "Alcantara"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/horn-pads/",
+    "priceCurrency": "USD",
+    "price": "355.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>

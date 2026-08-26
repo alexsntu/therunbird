@@ -1,0 +1,52 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /horn-pads/ page: static product description
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the configurator block and BEFORE the "Recent builds"
+     gallery block on this page (same pattern as steering-wheels-static-text.deploy.html).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: the configurator's material/pricing/fitment facts are
+     JS-rendered and invisible to non-JS AI crawlers. This block puts
+     the same real facts in plain, always-visible HTML.
+
+     All facts below verified live on the page (2026-08-26 audit):
+     base price $355 (confirmed current), fitment C6 Standard/Z06/ZR1,
+     materials synthetic Nappa leather / Alcantara / combo, stitch
+     designs Shield/Circle/Tee, optional center emblem +$75,
+     photo-approval-before-ship (site-wide differentiator).
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-hp-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #d0d0d0;
+}
+#rb-hp-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #f0f0f0;
+  margin: 0 0 18px;
+}
+#rb-hp-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-hp-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-hp-about">
+  <h2>About the Corvette C6 Airbag Cover</h2>
+  <p>Every RunBird airbag cover is handmade to order for the C6 Corvette (2005–2013),
+  fitting C6 Standard, Z06, and ZR1 trims. Choose synthetic Nappa leather, genuine
+  Alcantara®, or a leather + Alcantara combo, then pick a Shield, Circle, or Tee stitch
+  design with your choice of stitching color. An optional custom center emblem (gloss
+  or matte, several logo choices) can be added for +$75.</p>
+  <p>Pricing starts at $355 and every build is made to order in 7–14 business days.
+  Before your cover ships, we send real photos of the finished piece for your approval.</p>
+</div>

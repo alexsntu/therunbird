@@ -8,7 +8,7 @@
   </div>
 
   <div class="rb-cfg-shape-gate">
-    <div class="rb-cfg-shape-gate-head">Step 1 — choose your stitch design</div>
+    <h2 class="rb-cfg-shape-gate-head">Step 1 — choose your stitch design</h2>
     <div class="rb-cfg-shape-gate-grid" id="rb-cfg-shape-gate-grid"></div>
   </div>
 
@@ -17,7 +17,7 @@
     <div class="rb-cfg-imgwrap">
       <svg class="rb-cfg-lines" preserveAspectRatio="none"></svg>
       <div class="rb-cfg-imgbox">
-        <img src="https://therunbird.com/images/detailed/9/Shield1_p1uj-h0.png" alt="Corvette C6 Airbag Cover" draggable="false">
+        <img src="https://therunbird.com/images/ab__webp/detailed/9/Shield1_p1uj-h0_png.webp" alt="Corvette C6 Airbag Cover" width="800" height="801" fetchpriority="high" draggable="false">
       </div>
       <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint">Select appearance</div>
       <div class="rb-cfg-marks"></div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="rb-cfg-col rb-cfg-col--r">
-      <div class="rb-cfg-col-intro">Select &amp; configure your airbag cover</div>
+      <h2 class="rb-cfg-col-intro">Select &amp; configure your airbag cover</h2>
       <div class="rb-cfg-cards-grid" id="rb-cfg-cards-grid"></div>
 
       <div class="rb-cfg-summary" id="rb-cfg-summary">
@@ -106,7 +106,7 @@
 #rb-config.rb-cfg-shape-pending .rb-cfg-change-type{ display:none; }
 #rb-config .rb-cfg-shape-gate-head{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
-  font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin-bottom:14px;
+  font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin:0 0 14px;
 }
 #rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:820px; margin:0 auto; }
 #rb-config .rb-cfg-shape-gate-opt{
@@ -143,7 +143,7 @@
 #rb-config .rb-cfg-cards-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px 16px; width:100%; box-sizing:border-box; }
 #rb-config .rb-cfg-col-intro{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
-  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin:0 0 2px;
 }
 #rb-config .rb-cfg-lines{
   position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:4;
@@ -367,8 +367,8 @@
 
   // Tee and Circle each use their own product photo and zone coordinates
   // (measured against that photo) — Shield uses the default photo/zones.
-  var PHOTO_DEFAULT = 'https://therunbird.com/images/detailed/9/Shield1_p1uj-h0.png';
-  var PHOTO_TEE = 'https://therunbird.com/images/detailed/9/tee1_jicw-7c.png';
+  var PHOTO_DEFAULT = 'https://therunbird.com/images/ab__webp/detailed/9/Shield1_p1uj-h0_png.webp';
+  var PHOTO_TEE = 'https://therunbird.com/images/ab__webp/detailed/9/tee1_jicw-7c_png.webp';
   var PHOTO_CIRCLE = 'https://therunbird.com/images/Calculator/Airbag%20cover/pad-circle.png';
   var ZONE_DEFAULT = {
     leatherMaterial:    {px:720,py:277},
@@ -401,9 +401,9 @@
     options: {
       leatherMaterial: { label:'Leather material', zone:{px:720,py:277}, csOptId:55,
         values:[
-          { v:'leather',    label:'Leather', price:0, cs:300 },
+          { v:'leather',    label:'Synthetic Nappa Leather', price:0, cs:300 },
           { v:'alcantara',  label:'Alcantara', price:0, cs:301 },
-          { v:'leatherAlc', label:'Leather + Alcantara', price:0, cs:302 }
+          { v:'leatherAlc', label:'Synthetic Nappa Leather + Alcantara', price:0, cs:302 }
         ]},
       stitchingColor: { label:'Stitching color', zone:{px:660,py:256}, csOptId:32, isColor:true,
         values: STITCHING_COLOR_VALUES.slice() },
