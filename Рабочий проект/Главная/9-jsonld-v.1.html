@@ -8,7 +8,15 @@
 
      Facts used below are only what's actually verifiable live on the site:
        - name/url/logo: match the existing <title> and og:image already on
-         the homepage (logo file: images/logos/9/Logowhite_3x.png).
+         the homepage. Logo updated 2026-08-27 to the opaque dark circular
+         badge (images/logos/logo.jpg, 150x150, no alpha) instead of the
+         white-on-transparent mark (images/logos/9/Logowhite_3x.png) that
+         was previously used — the transparent white logo is only legible
+         against the site's own dark UI background and disappears on white
+         surfaces (Google Knowledge Panel, rich results, etc), which an
+         audit flagged. The white transparent logo is unaffected anywhere
+         else on the site (header/footer still show it correctly against
+         the dark theme) — this change is scoped to Organization.logo only.
        - sameAs: only the 3 footer social links that are real, working <a
          href> tags today (Instagram, YouTube, TikTok). The footer's
          Facebook icon is currently a bare <button> with no href — add it
@@ -36,10 +44,16 @@
       "logo": {
         "@type": "ImageObject",
         "@id": "https://therunbird.com/#logo",
-        "url": "https://therunbird.com/images/logos/9/Logowhite_3x.png"
+        "url": "https://therunbird.com/images/logos/logo.jpg"
       },
       "image": { "@id": "https://therunbird.com/#logo" },
       "description": "Handmade C6 Corvette interior accessories — steering wheels, shift knobs, handbrakes, horn pads, emblems, and door sill plates, built to order and shipped nationwide across the US.",
+      "email": "store@therunbird.com",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "store@therunbird.com",
+        "contactType": "customer service"
+      },
       "sameAs": [
         "https://www.instagram.com/therunbird",
         "https://youtube.com/@therunbird",
