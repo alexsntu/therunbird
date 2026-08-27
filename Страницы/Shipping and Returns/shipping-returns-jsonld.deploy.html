@@ -1,0 +1,69 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /shipping-and-returns/ page: FAQPage JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on this page only.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     All 5 Q&A pairs below are copied VERBATIM from the live page's
+     "Shipping & Returns FAQ" accordion section, 2026-08-27.
+
+     Note: same caveat as faq-jsonld.deploy.html / installhelp-jsonld
+     .deploy.html — Google restricted the FAQPage rich-result (SERP
+     accordion) to a narrow set of authoritative sites in 2023, so this
+     is not expected to win a SERP snippet. Included for AI answer
+     engines (ChatGPT Search, Perplexity, Google AI Overviews) that
+     consume FAQPage schema directly for citation/extraction (GEO value).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What if I don't like the photo you send me?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reply to that email and let us know what's off. If it doesn't match what you ordered, we'll fix it before it ships — that's exactly what the photo approval step is for."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I don't respond to the photo email?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We'll follow up before shipping. If your piece matches your order exactly and we don't hear back after reasonable attempts to reach you, we'll go ahead and ship it as configured."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I request changes after seeing the photo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If it doesn't match your original order, yes — we'll correct it at no cost. Requesting a completely different configuration at that stage may involve rebuilding the piece; contact us and we'll talk through the options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My tracking hasn't updated in a few days — is that normal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Carrier scans can lag, especially crossing into Canada or over a weekend. If it's been more than a few business days with no movement, contact us with your order number and we'll look into it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I start a damage or defect claim?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contact us with your order number and photos of the issue as soon as you notice it. We'll review it and arrange a free remake or replacement."
+      }
+    }
+  ]
+}
+</script>

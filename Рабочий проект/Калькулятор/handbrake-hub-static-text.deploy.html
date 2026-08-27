@@ -1,0 +1,63 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /handbrakes/ hub page: static category description
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the card grid (configurator-handbrake.deploy.html) on this
+     page. Same pattern as shiftknob-hub-static-text.deploy.html /
+     steering-wheels-static-text.deploy.html / horn-pads-static-text
+     .deploy.html.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: the hub's card grid gives name + price + 1-line desc per
+     style, but no fact-dense body copy about the category as a whole
+     (materials, fitment) — flagged by today's audit as a fact-density
+     gap for AI extraction (M12), same class of finding as the
+     shift-knobs hub before its text block was added.
+
+     Facts verified 2026-08-27 from the 3 variant configurators' own
+     PRODUCT data (material labels corrected same day — see each file's
+     own header comment): Handle top/bottom sections offer synthetic
+     Nappa leather, perforated synthetic Nappa leather, or Alcantara
+     (bottom section adds carbon fiber, +$55) — no automatic/manual
+     option on this variant, don't claim one. Knob Boot offers synthetic
+     Nappa leather, Alcantara, a leather+Alcantara mix, or textured
+     synthetic Nappa leather, and IS the only one of the 3 styles with
+     an explicit Automatic/Manual shift-pattern option. Handle Button is
+     black or carbon fiber only, no leather option.
+     Fitment: 2005-2013 C6 Corvette (per brand constants, all products).
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-hb-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #d0d0d0;
+}
+#rb-hb-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #f0f0f0;
+  margin: 0 0 18px;
+}
+#rb-hb-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-hb-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-hb-about">
+  <h2>About the Corvette C6 E-Brake Line</h2>
+  <p>Every RunBird e-brake accessory is handmade to order for the C6 Corvette (2005–2013).
+  Choose from three styles — Handle + CF Button, Knob Boot, and Handle Button — in
+  synthetic Nappa leather, genuine Alcantara®, or carbon fiber. The Knob Boot is available
+  for both manual and automatic-transmission cars; the Handle Button is a standalone
+  carbon-fiber or black finish button that fits your existing handle.</p>
+  <p>Pricing starts at $50 and every build is made to order in 7–14 business days.
+  Before your e-brake accessory ships, we send real photos of the finished piece for
+  your approval.</p>
+</div>

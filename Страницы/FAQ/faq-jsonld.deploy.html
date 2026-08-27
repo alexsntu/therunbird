@@ -1,0 +1,165 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /faq/ page: FAQPage JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on this page only.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     All 16 Q&A pairs below are copied VERBATIM from the live page's
+     4 accordion sections (Orders & Customization / Shipping & Delivery /
+     Materials & Fit / Returns, Warranty & Support), 2026-08-27, AFTER
+     the two honesty/accuracy fixes applied the same day: "Nappa leather"
+     -> "synthetic Nappa leather" in the material-care answer, and the
+     Track Order answer no longer claims a footer tool (footer link is
+     still a dead href="#" placeholder). Inline links in the source
+     (Materials Guide / Installation Help / Contact Us) are flattened to
+     plain text here — Google's FAQPage guidance wants plain-text answers,
+     not markup.
+
+     Note: Google restricted the FAQPage rich-result (SERP accordion) to
+     a narrow set of authoritative sites in 2023, so this block is not
+     expected to win a SERP snippet for this site — it's included for
+     AI answer engines (ChatGPT Search, Perplexity, Google AI Overviews)
+     that consume FAQPage schema directly for citation/extraction (GEO
+     value), not for a Google rich-result win.
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does production take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All products are handmade to order — nothing is pulled from a warehouse. Production takes 7-14 business days from order confirmation, and you'll get tracking updates as your build moves through each stage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I choose the right configuration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each product page shows every material, finish, and color option with photos. If you're unsure what will look best in your interior, contact us — we're happy to recommend a combination based on your Corvette's existing colors and trim."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I request a custom color or combination that isn't listed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often, yes. Since every piece is built by hand in our own workshop, we can usually accommodate custom thread colors or unlisted material pairings. Send us a message with what you have in mind before placing your order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change or cancel my order after placing it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contact us as soon as possible. If production hasn't started yet, we can usually adjust the spec or cancel the order. Once cutting and stitching are underway on your specific piece, changes are no longer possible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you ship?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We ship across North America — anywhere in the United States and Canada. Enter your address at checkout and shipping options for your location will be shown automatically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does shipping cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Shipping cost is calculated at checkout based on your location and the size of your order, before you pay."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does delivery take after production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once your build leaves our workshop, transit time depends on your location — typically a few business days within North America. You'll receive a tracking number as soon as it ships."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I track my order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You'll get a tracking number by email the moment your order ships. You can also look up any order using the Track Order tool in the site header."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What materials do you use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Exactly three: aerospace carbon fiber, premium synthetic Nappa leather, and genuine Alcantara. No cheap filler materials — just three consistent, purpose-picked options in every build. See our Materials Guide for a full breakdown of each one, plus how to care for it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Corvette does this fit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our accessories are designed specifically for the Chevrolet Corvette C6 (2005-2013), across Coupe, Convertible, Z06, Grand Sport, and ZR1 trims. Each product page lists exact fitment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will installation require any modifications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every piece bolts, threads, or clips onto the exact factory mounting point of the part it replaces — no cutting, drilling, or rewiring. See our Installation Help page for the full walkthrough, by product."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I take care of my material once it's installed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each material has its own care routine — carbon fiber, synthetic Nappa leather, and Alcantara all need different cleaning products and habits. Full instructions are in our Materials Guide, and a care card ships in every box."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Since every piece is custom-made to your exact spec, we can't accept returns on configured orders. If your item arrives damaged or doesn't match what you ordered, we'll remake it at no cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my item arrives damaged?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contact us with your order number and photos of the damage as soon as you notice it. We'll sort out a remake or replacement — you won't be left with a damaged part."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer a warranty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We stand behind every piece we build. If something fails due to a manufacturing defect rather than wear and tear, contact us and we'll make it right."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I contact support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reach out through our Contact Us page with your order number and question — our team built these parts by hand, so we can usually help right away."
+      }
+    }
+  ]
+}
+</script>

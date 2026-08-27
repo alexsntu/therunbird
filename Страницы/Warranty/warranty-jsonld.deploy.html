@@ -1,0 +1,72 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /warranty/ page: FAQPage JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on this page only.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     All 5 Q&A pairs below are copied VERBATIM from the live page's
+     "Warranty FAQ" accordion section, 2026-08-27. Inline links (Materials
+     Guide / Installation Help / Shipping & Returns) flattened to plain
+     text — Google's FAQPage guidance wants plain-text answers.
+
+     Note: same caveat as faq-jsonld.deploy.html / installhelp-jsonld
+     .deploy.html / shipping-returns-jsonld.deploy.html — Google
+     restricted the FAQPage rich-result (SERP accordion) to a narrow set
+     of authoritative sites in 2023, so this is not expected to win a
+     SERP snippet. Included for AI answer engines (ChatGPT Search,
+     Perplexity, Google AI Overviews) that consume FAQPage schema
+     directly for citation/extraction (GEO value).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does the warranty last?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "12 months from the day your order is delivered. It covers workmanship and material defects — not wear and tear from normal use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it cover my leather softening or fading over time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — that's normal wear, not a defect. Following the care routine in our Materials Guide will help slow it down and keep your piece looking its best."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I installed it myself and now something's wrong — is that covered?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If the problem is a genuine defect in how the piece was built, yes — installing it yourself doesn't void that. If the issue was caused by how it was installed, that falls outside the warranty. See our Installation Help guide for the correct process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my order arrived damaged in shipping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That's handled separately from this warranty — see our Shipping & Returns page for how we handle damage that happens in transit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do I need to file a claim?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your order number, clear photos of the issue, and a short description of what's wrong. Contact our support team and we'll take it from there."
+      }
+    }
+  ]
+}
+</script>

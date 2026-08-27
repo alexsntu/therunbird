@@ -1,0 +1,1126 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — E-Brake: Handle + CF Button (standalone single-product configurator)
+     Lives at its own subcategory URL: /handbrakes/handbrake/
+     Split out 2026-08-27 from the old combined configurator-handbrake.deploy.html
+     (which held all 3 e-brake variants behind one JS "Step 1" gate on
+     /handbrakes/). That file is now a static links-only hub; each variant
+     is its own page so it can carry its own title/meta/H1/Product schema.
+     Same engine pattern as configurator-shiftknob-classic.deploy.html /
+     configurator-airbagcover.deploy.html — single PRODUCT object, no
+     shape-gate, but WITH option gating (Carbon style / Finish top style
+     only show once Bottom section e-brake = Carbon), reused verbatim
+     from the old combined file's gateOpen/applyGateVisibility logic.
+
+     Gallery is bundled in this same file (own HANDLE_PHOTOS array,
+     pulled verbatim from the old shared configurator-handbrake-gallery
+     .deploy.html) rather than a separate file — matches the shift-knobs
+     "N+1 files" split plan.
+
+     Hero image: WebP already existed under ab__webp/detailed/9/ for this
+     product (handle_vquc-1y_png.webp, 800x800, 43,984 bytes vs 415,540
+     for the source PNG) — owner supplied the URL directly 2026-08-27.
+
+     Material labels corrected 2026-08-27: "Leather"/"Perforated Leather"
+     -> "Synthetic Nappa Leather"/"Perforated Synthetic Nappa Leather" per
+     the site's established honesty fix (same as steering-wheels/horn-pads/
+     shift-knobs). Missed during the initial split (copied verbatim from
+     the old combined file) — caught before writing the hub's static text
+     block, which needed to quote the real material list.
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config">
+<div class="rb-cfg-inner">
+
+  <div class="rb-cfg-head">
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 E-Brake Handle and CF Button</h1>
+    <p class="rb-cfg-sub">Choose every option below — the diagram shows exactly where it applies.</p>
+  </div>
+
+  <div class="rb-cfg-stage">
+
+    <div class="rb-cfg-imgwrap">
+      <svg class="rb-cfg-lines" preserveAspectRatio="none"></svg>
+      <div class="rb-cfg-imgbox">
+        <img src="https://therunbird.com/images/ab__webp/detailed/9/handle_vquc-1y_png.webp" alt="Corvette C6 E-Brake Handle and CF Button" width="800" height="800" fetchpriority="high" draggable="false">
+      </div>
+      <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint">Select appearance</div>
+      <div class="rb-cfg-marks"></div>
+      <div class="rb-cfg-step-marks" id="rb-cfg-step-marks"></div>
+      <p class="rb-cfg-img-caption">This is a schematic mockup to show where each option applies — not the final finish. We'll send you a realistic render of your actual build before we start making it.</p>
+    </div>
+
+    <div class="rb-cfg-col rb-cfg-col--r">
+      <h2 class="rb-cfg-col-intro">Select &amp; configure your e-brake handle</h2>
+      <div class="rb-cfg-cards-grid" id="rb-cfg-cards-grid"></div>
+
+      <div class="rb-cfg-summary" id="rb-cfg-summary">
+        <div class="rb-cfg-summary-row">
+          <span class="rb-cfg-price-label">Total price</span>
+          <span class="rb-cfg-price-value"><span class="rb-cfg-price-cur">$</span><span id="rb-cfg-price-num">0</span></span>
+          <button class="rb-cfg-add" id="rb-cfg-add-btn" disabled>Add to cart</button>
+        </div>
+        <div class="rb-cfg-summary-hint" id="rb-cfg-summary-hint">Select every option above to add this build to your cart.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<style>
+#rb-config{
+  --rb-accent:   #C8A84C;
+  --rb-accent-h: #D9BA62;
+  --rb-accent-b: rgba(200,168,76,.28);
+  --rb-bg:       #0C0C0C;
+  --rb-bg2:      #060606;
+  --rb-text:     #F0F0F0;
+  --rb-text2:    #808080;
+  --rb-border:   rgba(255,255,255,.08);
+  --rb-border-s: rgba(255,255,255,.16);
+  --rb-card-bg:  #131313;
+
+  background: var(--rb-bg);
+  color: var(--rb-text);
+  font-family: 'Inter', sans-serif;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#rb-config *{ box-sizing: border-box; }
+#rb-config .rb-cfg-inner{
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 clamp(20px,4vw,56px) 48px;
+  box-sizing: border-box;
+}
+
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:14px; }
+#rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0 0 10px; }
+
+#rb-config .rb-cfg-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+#rb-config .rb-chip{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--rb-border-s); background:transparent; color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 15px; border-radius:999px;
+  cursor:pointer; transition:.15s; white-space:nowrap;
+}
+#rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
+#rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
+#rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
+#rb-config .rb-chip.is-active .rb-chip-price{ opacity:.7; }
+#rb-config .rb-swatch-dot{
+  width:13px; height:13px; border-radius:50%; display:inline-block; margin-right:8px; flex:none;
+  outline:1px solid var(--rb-border-s); outline-offset:1px;
+}
+
+#rb-config .rb-cfg-stage{
+  display:grid; grid-template-columns: minmax(320px,480px) minmax(460px,560px);
+  gap:36px; align-items:start; justify-content:center; position:relative; margin-bottom:32px;
+  max-width:1160px; margin-left:auto; margin-right:auto;
+}
+#rb-config .rb-cfg-col{ display:flex; flex-direction:column; gap:16px; position:relative; z-index:2; }
+
+#rb-config .rb-cfg-cards-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px 16px; width:100%; box-sizing:border-box; }
+#rb-config .rb-cfg-col-intro{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin:0 0 2px;
+}
+#rb-config .rb-cfg-lines{
+  position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:4;
+}
+#rb-config .rb-cfg-lines line{ stroke:var(--rb-accent); stroke-width:1.2; opacity:0; transition:opacity .15s; }
+#rb-config .rb-cfg-lines line.is-active{ opacity:.95; }
+#rb-config .rb-cfg-lines circle{ fill:var(--rb-accent); opacity:0; transition:opacity .15s; }
+#rb-config .rb-cfg-lines circle.is-active{ opacity:1; }
+
+#rb-config .rb-cfg-imgwrap{ position:relative; }
+#rb-config .rb-cfg-img-caption{
+  margin:10px 4px 0; font-size:11.5px; line-height:1.5; color:var(--rb-text2); font-style:italic; text-align:center;
+}
+#rb-config .rb-cfg-imgbox{
+  position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+  border:1px solid var(--rb-border);
+}
+#rb-config .rb-cfg-imgbox::after{
+  content:''; position:absolute; left:8%; right:8%; bottom:6%; height:14%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+  z-index:1; pointer-events:none;
+}
+#rb-config .rb-cfg-imgbox img{
+  position:relative; z-index:2; width:100%; height:100%; object-fit:contain;
+  display:block;
+}
+
+#rb-config .rb-cfg-marks{ position:absolute; inset:0; z-index:5; pointer-events:none; }
+#rb-config .rb-cfg-mark{
+  position:absolute; transform:translate(-50%,-150%);
+  background:rgba(14,14,14,.92); border:1px solid var(--rb-accent-b); color:var(--rb-text);
+  font-size:11px; font-family:'Inter',sans-serif; padding:4px 10px; border-radius:6px; white-space:nowrap;
+  opacity:0; transition:opacity .15s; box-shadow:0 6px 16px rgba(0,0,0,.45);
+}
+#rb-config .rb-cfg-mark.is-active{ opacity:1; }
+#rb-config .rb-cfg-mark.is-gated-off{ display:none; }
+
+#rb-config .rb-cfg-step-marks{ position:absolute; inset:0; z-index:6; display:none; }
+#rb-config .rb-cfg-step-mark{
+  position:absolute; transform:translate(-50%,-50%); display:none;
+  flex-direction:column; align-items:center; gap:6px; background:none; border:none; padding:0;
+  cursor:pointer; -webkit-tap-highlight-color:transparent;
+}
+#rb-config .rb-cfg-step-mark.is-current{ display:flex; }
+#rb-config .rb-cfg-step-mark.is-gated-off{ display:none !important; }
+#rb-config .rb-cfg-step-mark-dot{
+  width:26px; height:26px; border-radius:50%; background:var(--rb-accent);
+  border:3px solid rgba(6,6,6,.85); box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5);
+  animation:rb-cfg-pulse 1.7s ease-in-out infinite;
+}
+#rb-config .rb-cfg-step-mark-label{
+  background:rgba(10,10,10,.94); border:1px solid var(--rb-accent-b); color:var(--rb-text);
+  font-size:12px; font-weight:600; padding:5px 11px; border-radius:999px; white-space:nowrap;
+  box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+@keyframes rb-cfg-pulse{
+  0%,100%{ box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5); }
+  50%{ box-shadow:0 0 0 9px rgba(200,168,76,0), 0 6px 14px rgba(0,0,0,.5); }
+}
+@media (prefers-reduced-motion: reduce){
+  #rb-config .rb-cfg-step-mark-dot{ animation:none; }
+}
+
+#rb-config .rb-cfg-photo-hint{
+  display:none; position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:7;
+  background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent);
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
+  font-size:12px; font-weight:700; padding:6px 16px; border-radius:999px; white-space:nowrap;
+  box-shadow:0 4px 14px rgba(0,0,0,.4); pointer-events:none;
+}
+@media (max-width: 980px){
+  #rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
+}
+@media (max-width: 480px){
+  #rb-config .rb-cfg-summary-row{ gap:8px; }
+  #rb-config .rb-cfg-add{ padding:11px 18px; font-size:13px; }
+  #rb-config .rb-cfg-price-value{ font-size:26px; }
+}
+
+#rb-config .rb-cfg-card{
+  border:1px solid var(--rb-border); background:var(--rb-card-bg); border-radius:10px;
+  padding:0; overflow:visible; transition:border-color .15s, background .15s;
+}
+#rb-config .rb-cfg-card.is-gated-off{ display:none; }
+#rb-config .rb-cfg-card.is-active{ border-color:var(--rb-accent-b); background:#171512; }
+#rb-config .rb-cfg-card-head{
+  display:flex; align-items:center; gap:10px; padding:15px 16px; cursor:pointer; user-select:none;
+}
+#rb-config .rb-cfg-card-head-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
+  font-size:14.5px; font-weight:600; flex:none; display:flex; align-items:center; gap:7px;
+  transition:color .15s;
+}
+#rb-config .rb-cfg-card.is-picked .rb-cfg-card-head-label{ color:var(--rb-accent); }
+#rb-config .rb-cfg-card-head-check{
+  display:none; align-items:center; justify-content:center; flex:none;
+  width:14px; height:14px; border-radius:50%; background:var(--rb-accent); color:#000; font-size:9px; line-height:1;
+}
+#rb-config .rb-cfg-card.is-picked .rb-cfg-card-head-check{ display:flex; }
+#rb-config .rb-cfg-card-head-val{
+  margin-left:auto; display:flex; align-items:center; gap:6px; font-size:13px; color:var(--rb-text2);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1 1 auto; justify-content:flex-end;
+  transition:color .15s;
+}
+#rb-config .rb-cfg-card.is-picked .rb-cfg-card-head-val{ color:var(--rb-accent); font-weight:600; }
+#rb-config .rb-cfg-card-head-val.is-empty{ color:var(--rb-text2); font-style:italic; font-weight:400; }
+#rb-config .rb-cfg-card-head-swatch{ width:13px; height:13px; border-radius:50%; flex:none; outline:1px solid var(--rb-border-s); outline-offset:1px; }
+#rb-config .rb-cfg-card-chevron{ flex:none; color:var(--rb-text2); font-size:10px; transition:transform .2s; }
+#rb-config .rb-cfg-card.is-open .rb-cfg-card-chevron{ transform:rotate(180deg); color:var(--rb-accent); }
+#rb-config .rb-cfg-card-body{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+#rb-config .rb-cfg-card.is-open .rb-cfg-card-body{ max-height:540px; }
+#rb-config .rb-cfg-card-body-in{ padding:0 14px 14px; }
+
+#rb-config .rb-cfg-summary{
+  display:flex; flex-direction:column; gap:10px;
+  border:1px solid var(--rb-border-s); border-radius:14px; padding:16px 20px; background:var(--rb-card-bg);
+  margin-top:6px; width:100%; box-sizing:border-box;
+}
+#rb-config .rb-cfg-summary-row{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px;
+}
+#rb-config .rb-cfg-price-label{ font-size:12px; color:var(--rb-text2); justify-self:end; }
+#rb-config .rb-cfg-price-value{
+  font-family:'Barlow Condensed', sans-serif; font-size:32px; font-weight:700; line-height:1;
+  justify-self:center;
+}
+#rb-config .rb-cfg-price-cur{ font-size:19px; opacity:.7; margin-right:1px; }
+#rb-config .rb-cfg-summary-row .rb-cfg-add{ justify-self:start; }
+#rb-config .rb-cfg-add{
+  background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:13px 28px;
+  font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:700; letter-spacing:.03em;
+  text-transform:uppercase; cursor:pointer; transition:.15s; flex:none; white-space:nowrap;
+}
+#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
+#rb-config .rb-cfg-add:disabled{
+  background:transparent; border:1px solid var(--rb-border-s); color:var(--rb-text2);
+  cursor:not-allowed;
+}
+#rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
+#rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
+
+@media (max-width: 980px){
+  #rb-config .rb-cfg-stage{ grid-template-columns:1fr; }
+  #rb-config .rb-cfg-lines{ display:none; }
+  #rb-config .rb-cfg-marks{ display:none; }
+  #rb-config .rb-cfg-step-marks{ display:block; }
+}
+@media (max-width: 640px){
+  #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
+}
+
+</style>
+
+<script>
+(function(){
+
+  var STITCHING_COLOR_VALUES = [
+    { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
+    { v:'white',    label:'White',    price:0, hex:'#f5f5f5', cs:199 },
+    { v:'red',      label:'Red',      price:0, hex:'#c81e1e', cs:200 },
+    { v:'blue',     label:'Blue',     price:0, hex:'#1e4fc8', cs:201 },
+    { v:'yellow',   label:'Yellow',   price:0, hex:'#e8c31e', cs:202 },
+    { v:'orange',   label:'Orange',   price:0, hex:'#e06b1e', cs:203 },
+    { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
+    { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
+  ];
+  var FINISH_TOP_STYLE_VALUES = [
+    { v:'gloss', label:'Gloss', price:0, cs:270 },
+    { v:'matte', label:'Matte', price:0, cs:271 }
+  ];
+
+  var PRODUCT = {
+    id:'356', name:'Corvette C6 E-Brake Handle and CF Button', basePrice:195.00,
+    options: {
+      topSection: { label:'Top section e-brake', zone:{px:446,py:348}, csOptId:49,
+        values:[
+          { v:'leather',   label:'Synthetic Nappa Leather', price:0, cs:281 },
+          { v:'perf',      label:'Perforated Synthetic Nappa Leather', price:0, cs:282 },
+          { v:'alcantara', label:'Alcantara', price:0, cs:283 }
+        ]},
+      bottomSection: { label:'Bottom section e-brake', zone:{px:385,py:453}, csOptId:50,
+        values:[
+          { v:'leather',   label:'Synthetic Nappa Leather', price:0, cs:284 },
+          { v:'perf',      label:'Perforated Synthetic Nappa Leather', price:0, cs:285 },
+          { v:'alcantara', label:'Alcantara', price:0, cs:286 },
+          { v:'carbon',    label:'Carbon', price:55, cs:287 }
+        ]},
+      carbonStyle: { label:'Carbon style', zone:{px:219,py:357}, csOptId:51, gatedBy:{ key:'bottomSection', equals:'carbon' },
+        values:[
+          { v:'blackCarbon',    label:'Black carbon',    price:0, cs:288 },
+          { v:'redCarbon',      label:'Red carbon',      price:0, cs:289 },
+          { v:'blueCarbon',     label:'Blue carbon',     price:0, cs:290 },
+          { v:'titaniumCarbon', label:'Titanium carbon', price:0, cs:291 },
+          { v:'alutex',         label:'Alutex',          price:0, cs:292 }
+        ]},
+      finishTopStyle: { label:'Finish top style', zone:{px:219,py:357}, csOptId:45, gatedBy:{ key:'bottomSection', equals:'carbon' },
+        values: FINISH_TOP_STYLE_VALUES.slice() },
+      stitchingColor: { label:'Stitching color', zone:{px:455,py:308}, csOptId:32, isColor:true,
+        values: STITCHING_COLOR_VALUES.slice() },
+      addCarbonButton: { label:'Add carbon fiber button', zone:{px:130,py:605}, csOptId:52,
+        values:[
+          { v:'yes', label:'Yes', price:50, cs:293 },
+          { v:'no',  label:'No',  price:0,  cs:294 }
+        ]}
+    }
+  };
+
+  var root = document.getElementById('rb-config');
+  var svg = root.querySelector('.rb-cfg-lines');
+  var marksLayer = root.querySelector('.rb-cfg-marks');
+  var stepMarksLayer = root.querySelector('.rb-cfg-step-marks');
+  var cardsGrid = document.getElementById('rb-cfg-cards-grid');
+  var wheelImgEl = root.querySelector('.rb-cfg-imgbox img');
+  var photoHint = document.getElementById('rb-cfg-photo-hint');
+  var priceNumEl = document.getElementById('rb-cfg-price-num');
+  var summaryEl = document.getElementById('rb-cfg-summary');
+  var addBtn = document.getElementById('rb-cfg-add-btn');
+
+  var PRODUCT_ID = PRODUCT.id;
+  var BASE_PRICE = PRODUCT.basePrice;
+  var CURRENT = PRODUCT;
+  var state = {};
+  Object.keys(CURRENT.options).forEach(function(k){ state[k] = null; });
+  var currentActiveZone = null;
+
+  function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
+
+  // ---- gating: an option can require another option to hold a specific
+  // value before it is shown (e.g. "Carbon style" / "Finish top style"
+  // only show once "Bottom section e-brake" is set to "Carbon"). ----
+  function gateOpen(opt){
+    if (!opt.gatedBy) return true;
+    var gateVal = state[opt.gatedBy.key];
+    return !!(gateVal && gateVal.v === opt.gatedBy.equals);
+  }
+
+  // ---- live price hydration from CS-Cart ----
+  // This block is a landing page, not the product page, so there is no native
+  // CS-Cart option markup on it. To keep prices in sync with CS-Cart without
+  // hand-editing this file, we fetch the real product page (same origin,
+  // canonical dispatch URL) and read the same option <select> markup CS-Cart
+  // renders there, then overwrite our price/label fields by matching `cs` id.
+  // If anything fails (network, markup change), we silently keep the
+  // hardcoded fallback values already in PRODUCT above.
+  function liveProductUrl(id){
+    return 'https://therunbird.com/index.php?dispatch=products.view&product_id=' + id;
+  }
+  function parsePriceAddon(text){
+    var m = String(text).match(/\(\s*\+\s*\$\s*([\d,]+(?:\.\d+)?)\s*\)/);
+    return m ? parseFloat(m[1].replace(/,/g,'')) : 0;
+  }
+  function parsePriceEl(el){
+    if (!el) return null;
+    var sup = el.querySelector('sup');
+    var cents = sup ? sup.textContent.replace(/[^\d]/g,'') : '';
+    var whole = (sup ? el.firstChild && el.firstChild.textContent : el.textContent) || '';
+    whole = whole.replace(/[^\d]/g,'');
+    if (!whole) return null;
+    return parseFloat(whole + '.' + (cents || '00'));
+  }
+  function hydrateOptionGroup(doc, key){
+    var opt = CURRENT.options[key];
+    var sel = doc.getElementById('option_' + PRODUCT_ID + '_' + opt.csOptId);
+    if (!sel) return 0;
+    var liveByCs = {};
+    var defaultDelta = 0;
+    Array.prototype.forEach.call(sel.querySelectorAll('option'), function(o){
+      var raw = (o.querySelector('bdi') || o).textContent;
+      var price = parsePriceAddon(raw);
+      var label = raw.replace(/\(\s*\+\s*\$[^)]*\)/,'').replace(/\s+/g,' ').trim();
+      liveByCs[o.value] = { price:price, label:label };
+      if (o.selected) defaultDelta += price;
+    });
+    var kept = [];
+    opt.values.forEach(function(val){
+      var live = liveByCs[String(val.cs)];
+      if (!live){
+        console.warn('[RB configurator] option value no longer found in CS-Cart, hiding it:', key, val.v);
+        if (state[key] === val) state[key] = null;
+        return;
+      }
+      val.price = live.price;
+      val.label = live.label;
+      kept.push(val);
+      delete liveByCs[String(val.cs)];
+    });
+    Object.keys(liveByCs).forEach(function(csId){
+      console.warn('[RB configurator] new CS-Cart option value not yet in configurator (needs manual setup):', key, csId, liveByCs[csId].label);
+    });
+    opt.values = kept;
+    return defaultDelta;
+  }
+  function hydrateProduct(){
+    return fetch(liveProductUrl(PRODUCT_ID), { credentials:'same-origin' })
+      .then(function(r){ if (!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+      .then(function(html){
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var priceEl = doc.getElementById('sec_discounted_price_' + PRODUCT_ID);
+        var displayed = parsePriceEl(priceEl);
+        var defaultDelta = 0;
+        Object.keys(CURRENT.options).forEach(function(key){
+          defaultDelta += hydrateOptionGroup(doc, key);
+        });
+        if (displayed != null){
+          BASE_PRICE = PRODUCT.basePrice = +(displayed - defaultDelta).toFixed(2);
+        }
+        clearDynamicNodes();
+        buildMarks();
+        buildCards();
+        buildStepMarks();
+        applyGateVisibility();
+        recalcPrice();
+        updateCompletionUI();
+        setTimeout(layoutLines, 60);
+      })
+      .catch(function(err){
+        console.warn('[RB configurator] price hydration failed — keeping fallback prices.', err);
+      });
+  }
+
+  function swatchFill(val){
+    if (val.none) return 'repeating-linear-gradient(45deg,#2a2a2a,#2a2a2a 3px,#1a1a1a 3px,#1a1a1a 6px)';
+    if (val.other) return '#1a1a1a';
+    return val.hex;
+  }
+
+  function syncNative(key, val){
+    var opt = CURRENT.options[key];
+    var sel = document.getElementById('option_' + PRODUCT_ID + '_' + opt.csOptId);
+    if (!sel) return;
+    sel.value = String(val.cs);
+    if (typeof fn_change_options === 'function'){
+      fn_change_options(PRODUCT_ID, PRODUCT_ID, String(opt.csOptId));
+    }
+  }
+
+  function headRow(labelText){
+    var head = document.createElement('div');
+    head.className = 'rb-cfg-card-head';
+    head.tabIndex = 0;
+    head.innerHTML =
+      '<span class="rb-cfg-card-head-label">'+labelText+'<span class="rb-cfg-card-head-check">✓</span></span>'+
+      '<span class="rb-cfg-card-head-val"></span>'+
+      '<span class="rb-cfg-card-chevron">▾</span>';
+    return head;
+  }
+
+  function isOptSelected(key){
+    var opt = CURRENT.options[key];
+    if (!gateOpen(opt)) return true;
+    return !!state[key];
+  }
+  function isComplete(){
+    return Object.keys(CURRENT.options).every(isOptSelected);
+  }
+  function updateCompletionUI(){
+    var complete = isComplete();
+    summaryEl.classList.toggle('is-complete', complete);
+    addBtn.disabled = !complete;
+  }
+
+  function currentStepZone(){
+    var keys = Object.keys(CURRENT.options);
+    for (var i=0; i<keys.length; i++){
+      var key = keys[i];
+      var opt = CURRENT.options[key];
+      if (!gateOpen(opt)) continue;
+      if (!isOptSelected(key)) return key;
+    }
+    return null;
+  }
+  function updateStepMarks(){
+    var current = currentStepZone();
+    root.querySelectorAll('.rb-cfg-step-mark').forEach(function(el){
+      el.classList.toggle('is-current', el.dataset.zone === current);
+    });
+    if (photoHint) photoHint.classList.toggle('is-visible', !!current);
+  }
+
+  function updateMarkText(key){
+    var opt = CURRENT.options[key];
+    if (!opt.zone) return;
+    var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
+    if (!mark) return;
+    mark.textContent = opt.label + ': ' + (state[key] ? state[key].label : 'Select…');
+  }
+
+  function updateHeadVal(key){
+    var opt = CURRENT.options[key];
+    var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
+    if (!card) return;
+    card.classList.toggle('is-picked', !!state[key]);
+    var valEl = card.querySelector('.rb-cfg-card-head-val');
+    if (!valEl) return;
+    valEl.innerHTML = '';
+    valEl.classList.toggle('is-empty', !state[key]);
+    if (!state[key]){
+      valEl.appendChild(document.createTextNode('Select…'));
+    } else if (opt.isColor){
+      var v = state[key];
+      var dot = document.createElement('span');
+      dot.className = 'rb-cfg-card-head-swatch';
+      dot.style.background = swatchFill(v);
+      valEl.appendChild(dot);
+      valEl.appendChild(document.createTextNode(v.label));
+    } else {
+      valEl.appendChild(document.createTextNode(state[key].label));
+    }
+    updateMarkText(key);
+  }
+
+  function applyGateVisibility(){
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      if (!opt.gatedBy) return;
+      var show = gateOpen(opt);
+      var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
+      if (card) card.classList.toggle('is-gated-off', !show);
+      var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
+      if (mark) mark.classList.toggle('is-gated-off', !show);
+      var stepMark = stepMarksLayer.querySelector('.rb-cfg-step-mark[data-zone="'+key+'"]');
+      if (stepMark) stepMark.classList.toggle('is-gated-off', !show);
+    });
+    updateStepMarks();
+    scheduleLayout();
+  }
+
+  function buildChipGroup(container, key){
+    var opt = CURRENT.options[key];
+    var wrap = document.createElement('div');
+    wrap.className = 'rb-cfg-chips';
+    wrap.dataset.opt = key;
+    opt.values.forEach(function(val){
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'rb-chip';
+      el.dataset.val = val.v;
+      var html = '';
+      if (opt.isColor) html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
+      html += '<span class="rb-chip-txt">'+val.label+'</span>';
+      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
+      el.innerHTML = html;
+      if (state[key] === val) el.classList.add('is-active');
+
+      el.addEventListener('click', function(){
+        state[key] = val;
+        Array.prototype.forEach.call(wrap.children, function(c){ c.classList.remove('is-active'); });
+        el.classList.add('is-active');
+
+        updateHeadVal(key);
+        applyGateVisibility();
+        recalcPrice();
+        updateCompletionUI();
+        updateStepMarks();
+        syncNative(key, val);
+
+        var ownCard = wrap.closest('.rb-cfg-card');
+        if (ownCard){
+          ownCard.classList.remove('is-open');
+          setActiveZone(key, false);
+          scheduleLayout();
+        }
+        if (window.matchMedia('(max-width: 980px)').matches){
+          var scrollTarget = isComplete() ? '.rb-cfg-summary' : '.rb-cfg-imgwrap';
+          setTimeout(function(){
+            var t = root.querySelector(scrollTarget);
+            if (t) t.scrollIntoView({ behavior:'smooth', block:'center' });
+          }, 300);
+        }
+      });
+      wrap.appendChild(el);
+    });
+    container.appendChild(wrap);
+  }
+
+  function toggleCard(card){
+    var zone = card.dataset.zone;
+    var wasOpen = card.classList.contains('is-open');
+    root.querySelectorAll('.rb-cfg-card').forEach(function(c){
+      c.classList.remove('is-open');
+      setActiveZone(c.dataset.zone, false);
+    });
+    if (!wasOpen){
+      card.classList.add('is-open');
+      setActiveZone(zone, true);
+    }
+    scheduleLayout();
+  }
+
+  var layoutTimer;
+  function scheduleLayout(){
+    clearTimeout(layoutTimer);
+    layoutTimer = setTimeout(layoutLines, 260);
+  }
+
+  function buildCards(){
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      var card = document.createElement('div');
+      card.className = 'rb-cfg-card';
+      card.dataset.zone = key;
+
+      var body = document.createElement('div');
+      body.className = 'rb-cfg-card-body';
+      var inner = document.createElement('div');
+      inner.className = 'rb-cfg-card-body-in';
+      body.appendChild(inner);
+
+      var head = headRow(opt.label);
+      buildChipGroup(inner, key);
+
+      card.appendChild(head);
+      card.appendChild(body);
+      head.addEventListener('click', function(){ toggleCard(card); });
+      head.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleCard(card); }
+      });
+      head.addEventListener('mouseenter', function(){ if (!card.classList.contains('is-open')) setActiveZone(key, true); });
+      head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone(key, false); });
+
+      cardsGrid.appendChild(card);
+    });
+    Object.keys(CURRENT.options).forEach(function(k){ updateHeadVal(k); });
+  }
+
+  function buildMarks(){
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      if (!opt.zone) return;
+      var m = document.createElement('div');
+      m.className = 'rb-cfg-mark';
+      m.dataset.zone = key;
+      marksLayer.appendChild(m);
+    });
+  }
+  function buildStepMarks(){
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      if (!opt.zone) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rb-cfg-step-mark';
+      btn.dataset.zone = key;
+      btn.innerHTML = '<span class="rb-cfg-step-mark-dot"></span><span class="rb-cfg-step-mark-label">'+opt.label+'</span>';
+      btn.addEventListener('click', function(){
+        var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
+        if (!card) return;
+        if (!card.classList.contains('is-open')) toggleCard(card);
+        setTimeout(function(){ card.scrollIntoView({ behavior:'smooth', block:'center' }); }, 270);
+      });
+      stepMarksLayer.appendChild(btn);
+    });
+  }
+
+  function setActiveZone(zone, active){
+    currentActiveZone = active ? zone : (currentActiveZone === zone ? null : currentActiveZone);
+    root.querySelectorAll('[data-zone="'+zone+'"]').forEach(function(el){
+      el.classList.toggle('is-active', active);
+    });
+  }
+
+  function recalcPrice(){
+    var total = BASE_PRICE;
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      if (!gateOpen(opt)) return;
+      total += (state[key] && state[key].price) || 0;
+    });
+    priceNumEl.textContent = total.toFixed(2).split('.')[0];
+  }
+
+  function layoutLines(){
+    svg.innerHTML = '';
+    var imgWrap = root.querySelector('.rb-cfg-imgwrap');
+    var imgEl = wheelImgEl;
+    if (!imgEl.naturalWidth) return;
+    var wrapRect = imgWrap.getBoundingClientRect();
+    var imgRect = imgEl.getBoundingClientRect();
+
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      if (!opt.zone) return;
+      if (!gateOpen(opt)) return;
+      var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
+      if (!card) return;
+      var dotX = imgRect.left - wrapRect.left + imgRect.width * (opt.zone.px / imgEl.naturalWidth);
+      var dotY = imgRect.top - wrapRect.top + imgRect.height * (opt.zone.py / imgEl.naturalHeight);
+      var cardRect = card.getBoundingClientRect();
+      var cardX = cardRect.left - wrapRect.left + (cardRect.left < imgRect.left ? cardRect.width : 0);
+      var cardY = cardRect.top - wrapRect.top + Math.min(cardRect.height, 44)/2;
+
+      var ns = 'http://www.w3.org/2000/svg';
+      var line = document.createElementNS(ns,'line');
+      line.setAttribute('x1', dotX); line.setAttribute('y1', dotY);
+      line.setAttribute('x2', cardX); line.setAttribute('y2', cardY);
+      line.dataset.zone = key;
+      svg.appendChild(line);
+
+      var circle = document.createElementNS(ns,'circle');
+      circle.setAttribute('cx', dotX); circle.setAttribute('cy', dotY); circle.setAttribute('r', 4);
+      circle.dataset.zone = key;
+      svg.appendChild(circle);
+
+      var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
+      if (mark){ mark.style.left = dotX + 'px'; mark.style.top = dotY + 'px'; }
+
+      var stepMark = stepMarksLayer.querySelector('.rb-cfg-step-mark[data-zone="'+key+'"]');
+      if (stepMark){ stepMark.style.left = dotX + 'px'; stepMark.style.top = dotY + 'px'; }
+
+      if (key === currentActiveZone){
+        line.classList.add('is-active');
+        circle.classList.add('is-active');
+      }
+    });
+  }
+
+  function clearDynamicNodes(){
+    cardsGrid.innerHTML = '';
+    marksLayer.innerHTML = '';
+    stepMarksLayer.innerHTML = '';
+    svg.innerHTML = '';
+  }
+
+  function init(){
+    var onLoad = function(){
+      wheelImgEl.removeEventListener('load', onLoad);
+      layoutLines();
+    };
+    wheelImgEl.addEventListener('load', onLoad);
+
+    buildMarks();
+    buildCards();
+    buildStepMarks();
+    applyGateVisibility();
+
+    recalcPrice();
+    updateCompletionUI();
+    updateStepMarks();
+    setTimeout(layoutLines, 60);
+
+    hydrateProduct();
+  }
+  init();
+
+  window.addEventListener('resize', layoutLines);
+  window.addEventListener('load', layoutLines);
+
+  addBtn.addEventListener('click', function(){
+    if (!isComplete()) return;
+
+    var securityHash = (window.Tygh && Tygh.security_hash) ? Tygh.security_hash : '';
+    if (!securityHash){
+      var hashInput = document.querySelector('input[name="security_hash"]');
+      if (hashInput) securityHash = hashInput.value;
+    }
+    if (!securityHash){
+      alert('Something went wrong (missing security token) — please refresh the page and try again.');
+      return;
+    }
+
+    var form = document.createElement('form');
+    form.action = 'https://therunbird.com/';
+    form.method = 'post';
+    form.enctype = 'multipart/form-data';
+    form.className = 'cm-disable-empty-files cm-ajax cm-ajax-full-render cm-ajax-status-middle';
+    form.style.display = 'none';
+
+    function addField(name, value){
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    addField('redirect_url', window.location.pathname + window.location.search);
+    addField('security_hash', securityHash);
+    addField('product_data[' + PRODUCT_ID + '][amount]', '1');
+    Object.keys(CURRENT.options).forEach(function(key){
+      var opt = CURRENT.options[key];
+      if (!gateOpen(opt)) return;
+      addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
+    });
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.name = 'dispatch[checkout.add..' + PRODUCT_ID + ']';
+    submitBtn.value = '';
+    submitBtn.style.display = 'none';
+    form.appendChild(submitBtn);
+
+    document.body.appendChild(form);
+    submitBtn.click();
+  });
+
+})();
+</script>
+
+<!-- ══════════════════════════════════════
+     Gallery — "Recent builds", Handle-only photos.
+     Bundled in this file (not a separate gallery file) — see header note.
+════════════════════════════════════════ -->
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="rb-logo-mark" viewBox="0 0 272.43 107.57">
+    <path d="M185.58,69.08c-9.31,20.17-40.69,28.79-57.39,17.33-.09-.06-.05-.21,.06-.21,5.66-.28,12.26-.06,18.64-1.16,8.23-1.42,15.05-6.04,20.23-12.58,2.08-2.62,4.17-3.67,7.4-3.44,3.52,.25,7.07,.06,11.06,.06"/>
+    <path d="M156.61,77.46c-12.73,10.05-35.05,6.34-46.25-7.8-.17-.22,0-.53,.28-.51,5.95,.33,11.22-1.27,16.45,3.33,8.34,7.35,18.59,8.05,29.52,4.98"/>
+    <path d="M135.84,30.14c-1.89-.16-9.32-.13-10.57,.06-2.42,6.15-4.86,12.35-7.3,18.55-.09,0-.18-.03-.27-.04-.1-.35-.22-.7-.29-1.06-.66-3.08-1.31-6.17-1.97-9.25-.37-1.75-.76-3.49-1.12-5.24-.41-2.03-1.74-3.19-3.89-3.12-1.68,.06-3.36,0-5.05,0h-3.05c-.27,.63-.54,1.19-.77,1.77-1.74,4.4-3.48,8.79-5.21,13.19-2.08,5.28-4.15,10.56-6.23,15.84-.17,.42-.45,.83-.28,1.32,1.93,.17,9.24,.13,10.49-.08,.61-1.56,1.25-3.17,1.88-4.78,.64-1.61,1.27-3.23,1.91-4.84,.64-1.61,1.25-3.24,1.92-4.83,.66-1.59,1.16-3.24,2.04-4.97,.18,.66,.32,1.11,.42,1.57,1.1,5.03,2.19,10.06,3.29,15.09,.08,.36,.15,.72,.26,1.07,.35,1.12,1.12,1.75,2.3,1.84,.37,.03,.74,.02,1.1,.02h7.73c.2-.46,.39-.83,.54-1.22,3.97-10.01,7.94-20.02,11.91-30.04,.1-.27,.14-.56,.2-.86"/>
+    <path d="M227.21,48.65c4.35-1.79,7.09-4.92,7.98-9.61,.68-3.59-.79-6.83-4.65-8.23-.15-.05-.3-.09-.45-.14-1.46-.47-2.96-.65-4.5-.64-6.04,.01-12.09,0-18.13,0h-1.08c-.26,.59-.49,1.06-.68,1.54-1,2.48-2,4.97-2.99,7.45-2.87,7.22-5.74,14.44-8.6,21.67-.18,.46-.56,.9-.32,1.45,1.83,.15,9.16,.12,10.49-.05,.17-.38,.37-.8,.54-1.23,1.25-3.12,2.49-6.24,3.75-9.36,.21-.52,.3-1.13,.79-1.5h4.14c.25,.55,.49,1.07,.71,1.6,1.18,2.81,2.34,5.62,3.52,8.43,.16,.39,.32,.78,.51,1.15,.35,.72,.88,1.08,1.75,1.06,2.89-.05,5.78,0,8.67-.02,.23,0,.53,.09,.75-.36-1.69-4.01-3.64-8-5.4-12.15,.44-.16,.78-.29,1.12-.4,.7-.23,1.42-.4,2.09-.68m-7.96-4.11c-.86,.21-1.76,.3-2.64,.32-1.67,.05-3.35,0-5.15,0,.28-1.45,2.58-7.44,3.66-9.6,.31-.04,.66-.1,1.02-.11,1.15-.02,2.31-.04,3.46,0,.68,.02,1.36,.09,2.02,.24,1.62,.36,2.49,1.48,2.5,3.15,0,2.84-1.94,5.29-4.87,5.99"/>
+    <path d="M272.33,39.03c-.36-3.48-2.11-5.98-5.32-7.42-.52-.24-1.07-.44-1.61-.62-1.91-.6-3.86-.96-5.88-.95-4.62,.02-9.25,0-13.87,.01-.36,0-.71,.05-1,.07-.74,1.32-11.48,28.04-12.61,31.36-.06,.19-.06,.4-.1,.71,.58,.02,1.09,.06,1.6,.06h14.66c1.94,0,3.88-.04,5.82-.28,4.94-.6,9.15-2.62,12.51-6.3,2.88-3.14,4.54-6.9,5.5-11.01,.43-1.86,.5-3.75,.3-5.64m-11.16,5.46c-.7,2.48-1.73,4.84-3,7.08-.31,.55-.67,1.07-1.05,1.57-1.86,2.43-4.27,3.84-7.37,3.94-1.47,.05-2.94,.02-4.41,0-.14,0-.27-.1-.44-.16,0-.18-.04-.34,0-.47,2.73-6.98,5.47-13.96,8.16-20.83,.77-.45,1.47-.27,2.14-.29,.68-.02,1.36,.04,2.04,.06,.81,.03,1.54,.32,2.23,.7,1.24,.67,1.95,1.71,2.15,3.11,.25,1.8,.02,3.56-.46,5.29"/>
+    <path d="M95.96,30.1h-10.51c-.32,.74-.62,1.4-.89,2.08-2.64,6.64-5.27,13.28-7.91,19.92-.21,.54-.41,1.09-.67,1.6-.86,1.65-2.09,2.9-3.94,3.4-1.44,.39-2.92,.41-4.38,.08-1.84-.41-2.84-1.86-2.6-3.74,.07-.52,.21-1.03,.37-1.53,.29-.9,.61-1.79,.95-2.67,2.31-5.92,4.63-11.84,6.93-17.77,.17-.42,.49-.82,.33-1.37h-10.48c-.36,.82-.75,1.62-1.07,2.44-1.58,4.01-3.14,8.02-4.71,12.04-.69,1.76-1.38,3.52-2.05,5.29-.64,1.69-.99,3.43-.89,5.25,.12,2.06,.96,3.74,2.53,5.07,.93,.79,1.96,1.45,3.14,1.75,1.42,.37,2.86,.76,4.31,.9,3.36,.32,6.72,.3,10.06-.27,2.24-.39,4.39-1.05,6.36-2.21,3.12-1.84,5.17-4.57,6.48-7.89,2.82-7.13,5.63-14.27,8.43-21.41,.11-.27,.13-.58,.2-.94"/>
+    <path d="M199.34,30.06h-9.92c-.6,.96-.98,1.94-1.36,2.91-1.22,3.07-2.43,6.14-3.66,9.22-2.44,6.14-4.89,12.28-7.33,18.43-.19,.48-.33,.97-.49,1.48,1.36,.23,9.47,.24,10.84,0,4.19-10.58,8.39-21.2,12.63-31.91-.32-.05-.51-.12-.7-.12"/>
+    <path d="M121.95,20.5c3.27,.21,5.38-.75,7.48-3.13,5.24-5.95,12.13-10.16,20.44-11.45,6.17-.96,12.55-.81,18.09-1.03,.32-.01,.43-.44,.15-.61-16.94-9.8-47.75-2.04-57.19,15.92l.39,.24c3.81-.01,7.25-.16,10.64,.06"/>
+    <path d="M176.17,35.59c4.12-2.93,6.14-6.96,5.91-12.03-.03-.68-.14-1.34-.32-1.97-.04-.13-.08-.26-.12-.39-.02-.08-.05-.16-.08-.24-2.23-6.82-10.53-11.15-19.55-12.3-7.84-1-16.22,.39-21.59,4.63,2.18-.61,4.33-.97,6.44-1.11h0s.25-.03,.68-.04c1.58-.07,3.13,0,4.66,.21,.93,.1,1.92,.25,2.96,.47,.37,.08,.75,.17,1.13,.27,2.7,.69,5.53,1.86,7.81,3.84,1.74,1.51,3.17,3.49,3.97,6.09h0c.26,.58,.43,1.23,.49,1.96,.44,5.36-3.53,9.94-8.91,10.18-1.68,.08-3.36,.03-5.05,.02-.19,0-.37-.09-.65-.16,.62-1.98,1.46-3.79,2.15-5.65,.69-1.85,2.59-6.63,3.06-8.58-1.9-.43-9.44,.75-13.91,2.02-.66,.74-1.99,4.69-2.36,5.62-2.41,6.11-4.82,12.21-7.24,18.32-1.84,4.64-3.69,9.27-5.51,13.92-.18,.47-.55,.92-.34,1.53,.35,.02,.72,.06,1.08,.06,9.41,0,18.82,0,28.24,0,2.81,0,5.55-.52,8.14-1.62,5.79-2.46,9.05-6.83,9.61-13.12,.23-2.56-.32-4.94-2.2-6.83-.7-.7-1.55-1.24-2.35-1.84-.33-.24-.69-.44-1.15-.73,.52-.2,.91-.32,1.28-.51,1.26-.65,2.6-1.19,3.74-2.01m-12.87,11.79c-.16,1.31-.51,2.58-1.14,3.75-1.77,3.27-4.49,5.06-8.24,5.13-2.47,.05-4.94,0-7.4,0-.26,0-.52-.03-.9-.06,.46-1.79,1.24-3.38,1.85-5.04,.62-1.67,1.3-3.32,1.95-4.98s1.29-3.31,1.97-5.08h6.78c.31,0,.62,.07,.93,.13,3.33,.7,4.58,2.98,4.2,6.13"/>
+    <path d="M262.87,71.67c-14.54,.02-66.27,.15-72.9,.17-.41,0-.79,.23-.99,.58l-2.74,4.9c-.24,.43,.06,.97,.56,.97,7.58,0,46.67-.05,72.71-.05,.45,0,.84-.27,1.01-.68l2.99-4.93c.18-.46-.14-.95-.63-.95"/>
+    <path d="M49.94,78.24h60.61c.32,0,.49-.37,.28-.61l-4.26-5.17c-.4-.49-.99-.77-1.62-.77-7.25-.01-51.88-.11-52.83-.24-2.16-.3-3.67-1.5-4.46-3.53-.29-.73-.51-1.49-.69-2.26-1.38-5.78-2.74-11.55-4.1-17.33-.21-.91-.42-1.83-.61-2.66,.11-.15,.14-.21,.18-.22,.48-.2,.96-.39,1.45-.58,4.54-1.73,8.34-4.43,11.07-8.51,2.36-3.52,3.6-7.36,3.05-11.63-.52-4.08-2.47-7.21-6.26-9.04-.57-.27-1.15-.52-1.73-.76-4.5-1.87-9.39-1.92-14.17-1.96-2.68-.02-5.37,.09-8.03,.44-7.57,1.01-14.91,2.91-22.03,5.59-.56,.21-.97,.5-1.24,.98h0s-3.81,7.68-3.17,7.91c.37-.08,.57-.09,.75-.16,.83-.32,1.66-.65,2.49-.98,7.25-2.83,14.59-5.34,22.38-6.3,2.88-.36,5.75-.61,8.65-.44,1.82,.11,3.58,.52,5.17,1.56,1.12,.73,1.93,1.87,2.3,3.15,.36,1.23,.45,2.48,.24,3.76-.29,1.83-.96,3.5-1.88,5.08-.63,1.09-1.4,2.08-2.32,2.94-3.66,3.42-7.53,3.69-11.44,3.63-.29,0-.62,.1-.91-.28,.14-.39,.28-.83,.45-1.26,1.68-4.25,3.37-8.5,5.04-12.76,.18-.46,.56-.9,.31-1.57-1.04,.07-2.09,.08-3.12,.22-3.43,.49-6.81,1.25-10.17,2.13-1.19,.32-1.97,.89-2.34,2.05-.08,.25-.21,.48-.3,.73-3.66,9.17-7.31,18.35-10.98,27.53-1.75,4.39-3.52,8.78-5.27,13.17-.19,.47-.52,.93-.4,1.49,1.14,.19,11.87,.25,14.11,.07,.29-.67,.61-1.38,.9-2.11,2.76-6.99,5.51-13.98,8.28-20.97,.23-.57,.32-1.22,.89-1.67,1.5,0,3.01-.14,4.54,.09,.1,.3,.19,.54,.24,.79,.64,2.87,1.27,5.74,1.91,8.62,1.03,4.67,2.06,9.34,3.09,14.01,.25,1.14,.66,2.22,1.21,3.24,1.17,2.14,2.9,3.55,5.31,4.11,1.44,.33,2.9,.48,4.38,.48"/>
+    <g>
+      <path d="M44.15,101.27h9.49l-.37,1.38h-7.66l-.39,1.45h6.97l-.37,1.38h-6.97l-.56,2.1h-1.83l1.68-6.3Z"/>
+      <path d="M59.06,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+      <path d="M74.19,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+      <path d="M89.32,101.27h1.83l-1.31,4.92h6.35l-.37,1.38h-8.17l1.68-6.3Z"/>
+      <path d="M113.13,102.65h-4.28l.37-1.38h10.38l-.37,1.38h-4.28l-1.32,4.92h-1.82l1.31-4.92Z"/>
+      <path d="M124.84,101.27h1.83l-.64,2.39h7.02l.64-2.39h1.83l-1.69,6.3h-1.82l.68-2.54h-7.02l-.67,2.54h-1.83l1.68-6.3Z"/>
+      <path d="M141.66,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+      <path d="M164.02,101.27h6.26c2.35,0,3.66,.96,3.66,2.74,0,1.98-1.74,3.56-4.62,3.56h-6.99l1.69-6.3Zm8,2.87c0-1-.59-1.49-1.94-1.49h-4.6l-.95,3.55h4.69c1.8,0,2.81-.95,2.81-2.05Z"/>
+      <path d="M180.45,101.27h6.9c1.53,0,2.41,.67,2.41,1.91,0,1.44-1.33,2.25-3.17,2.32l2.17,2.07h-2.24l-2.08-1.97h-3.31l-.53,1.97h-1.83l1.68-6.3Zm1.48,1.31l-.45,1.71h5c.96,0,1.41-.36,1.41-.95,0-.5-.33-.76-1.04-.76h-4.92Z"/>
+      <path d="M195.98,101.27h1.83l-1.68,6.3h-1.83l1.68-6.3Z"/>
+      <path d="M207.17,106.07l4.95-4.8h2.23l-6.52,6.3h-1.88l-3.14-6.3h2l2.36,4.8Z"/>
+      <path d="M219.37,101.27h9.49l-.33,1.24h-7.73l-.32,1.22h7.04l-.33,1.24h-7.04l-.37,1.36h7.8l-.32,1.24h-9.55l1.68-6.3Z"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="rb-cfg-gallery" id="rb-cfg-gallery">
+  <h2 class="rb-cfg-gal-head" id="rb-cfg-gal-head">Recent builds</h2>
+  <div class="rb-cfg-gal-row">
+    <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--prev" id="rb-cfg-gal-prev" aria-label="Scroll left">‹</button>
+    <div class="rb-cfg-gal-track" id="rb-cfg-gal-track"></div>
+    <button type="button" class="rb-cfg-gal-nav rb-cfg-gal-nav--next" id="rb-cfg-gal-next" aria-label="Scroll right">›</button>
+  </div>
+</div>
+
+<div class="rb-cfg-lightbox" id="rb-cfg-lightbox" aria-hidden="true">
+  <button type="button" class="rb-cfg-lb-close" id="rb-cfg-lb-close" aria-label="Close">✕</button>
+  <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-prev" id="rb-cfg-lb-prev" aria-label="Previous photo">‹</button>
+  <div class="rb-cfg-lb-imgwrap">
+    <img class="rb-cfg-lb-img" id="rb-cfg-lb-img" src="" alt="Custom e-brake build — full size">
+    <svg class="rb-cfg-lb-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>
+  </div>
+  <button type="button" class="rb-cfg-lb-nav rb-cfg-lb-next" id="rb-cfg-lb-next" aria-label="Next photo">›</button>
+  <div class="rb-cfg-lb-counter" id="rb-cfg-lb-counter"></div>
+</div>
+
+<style>
+#rb-cfg-gallery{
+  --rb-accent:   #C8A84C;
+  --rb-accent-b: rgba(200,168,76,.28);
+  --rb-text:     #F0F0F0;
+  --rb-border:   rgba(255,255,255,.08);
+  --rb-border-s: rgba(255,255,255,.16);
+  font-family:'Inter', sans-serif; color:var(--rb-text);
+  max-width:1370px; margin:8px auto 0; padding:0 clamp(20px,4vw,56px);
+}
+#rb-cfg-gallery *{ box-sizing:border-box; }
+#rb-cfg-gallery .rb-cfg-gal-head{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
+  font-size:18px; font-weight:600; margin:0 0 16px; text-align:center;
+}
+#rb-cfg-gallery .rb-cfg-gal-track{
+  display:flex; gap:14px; overflow-x:auto; padding:2px 2px 12px; scroll-snap-type:x proximity;
+  justify-content:flex-start;
+}
+#rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar{ height:6px; }
+#rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-track{ background:transparent; }
+#rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-thumb{ background:var(--rb-border-s); border-radius:99px; }
+#rb-cfg-gallery .rb-cfg-gal-item{
+  position:relative; flex:0 0 auto; width:clamp(150px,17vw,210px); aspect-ratio:1/1;
+  border-radius:14px; overflow:hidden; border:1px solid var(--rb-border); scroll-snap-align:start;
+  cursor:zoom-in; transition:border-color .15s;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+}
+#rb-cfg-gallery .rb-cfg-gal-item img{
+  position:absolute; inset:0; margin:auto; width:82%; height:82%; object-fit:contain;
+  filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
+}
+#rb-cfg-gallery .rb-cfg-gal-watermark{
+  position:absolute; right:7%; bottom:7%; width:32%; height:auto; opacity:.24; pointer-events:none;
+}
+#rb-cfg-gallery .rb-cfg-gal-watermark path{ fill:#f1ebdb; }
+#rb-cfg-gallery .rb-cfg-gal-item:hover{ border-color:var(--rb-accent-b); }
+#rb-cfg-gallery .rb-cfg-gal-row{ position:relative; }
+#rb-cfg-gallery .rb-cfg-gal-nav{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+  width:38px; height:38px; border-radius:50%; flex:none;
+  background:var(--rb-accent); border:1px solid var(--rb-accent); color:#000;
+  font-size:19px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:.15s;
+}
+#rb-cfg-gallery .rb-cfg-gal-nav:hover{ background:var(--rb-accent-h); border-color:var(--rb-accent-h); }
+#rb-cfg-gallery .rb-cfg-gal-nav--prev{ left:4px; }
+#rb-cfg-gallery .rb-cfg-gal-nav--next{ right:4px; }
+
+.rb-cfg-lightbox{
+  position:fixed; inset:0; z-index:99999; background:rgba(4,4,4,.96);
+  display:none; align-items:center; justify-content:center; padding:32px; box-sizing:border-box;
+}
+.rb-cfg-lightbox *{ box-sizing:border-box; }
+.rb-cfg-lightbox.is-open{ display:flex; }
+.rb-cfg-lb-imgwrap{ position:relative; display:inline-block; line-height:0; }
+.rb-cfg-lb-img{
+  max-width:min(88vw,900px); max-height:86vh; width:auto; height:auto; object-fit:contain;
+  border-radius:16px; box-shadow:0 24px 48px rgba(0,0,0,.6);
+}
+.rb-cfg-lb-watermark{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:26%; max-width:220px; height:auto; opacity:.22; pointer-events:none;
+}
+.rb-cfg-lb-watermark path{ fill:#f1ebdb; }
+.rb-cfg-lb-close,
+.rb-cfg-lb-nav{
+  position:absolute; z-index:2; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:.15s; font-family:'Inter',sans-serif;
+}
+.rb-cfg-lb-close{
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#F0F0F0;
+}
+.rb-cfg-lb-close:hover{ background:#C8A84C; color:#000; border-color:#C8A84C; }
+.rb-cfg-lb-nav{ background:#C8A84C; border:1px solid #C8A84C; color:#000; }
+.rb-cfg-lb-nav:hover{ background:#D9BA62; border-color:#D9BA62; }
+.rb-cfg-lb-close{ top:24px; right:28px; width:42px; height:42px; font-size:17px; }
+.rb-cfg-lb-nav{ top:50%; transform:translateY(-50%); width:54px; height:54px; font-size:26px; }
+.rb-cfg-lb-prev{ left:24px; }
+.rb-cfg-lb-next{ right:24px; }
+.rb-cfg-lb-counter{
+  position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+  font-family:'Inter',sans-serif; font-size:13px; color:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18);
+  border-radius:999px; padding:6px 14px; pointer-events:none;
+}
+
+html.rb-cfg-scroll-lock, body.rb-cfg-scroll-lock{ overflow:hidden !important; }
+body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
+
+@media (max-width: 700px){
+  #rb-cfg-gallery .rb-cfg-gal-nav{ display:none; }
+  .rb-cfg-lightbox{ padding:14px; }
+  .rb-cfg-lb-nav{ width:40px; height:40px; font-size:20px; }
+  .rb-cfg-lb-prev{ left:6px; }
+  .rb-cfg-lb-next{ right:6px; }
+  .rb-cfg-lb-img{ max-width:94vw; }
+}
+</style>
+
+<script>
+(function(){
+
+  // Pulled from the old shared configurator-handbrake-gallery.deploy.html's
+  // HANDLE_PHOTOS array (product #368, "handbrake handle").
+  var GALLERY_SRCS = [
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529361_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529361_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529684_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529684_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531529716_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531529716_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203067_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203067_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203111_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203111_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203150_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203150_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203171_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203171_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203186_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203186_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203201_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203201_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531203290_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531203290_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531701235_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531701235_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700782_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700782_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700805_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700805_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700827_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700827_jpg.webp' },
+    { thumb:'https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/1783531700854_jpg.webp', full:'https://therunbird.com/images/ab__webp/thumbnails/1920/1920/detailed/9/1783531700854_jpg.webp' }
+  ];
+
+  var galTrack = document.getElementById('rb-cfg-gal-track');
+
+  GALLERY_SRCS.forEach(function(photo, i){
+    var item = document.createElement('div');
+    item.className = 'rb-cfg-gal-item';
+    item.innerHTML =
+      '<img src="'+photo.thumb+'" alt="Custom e-brake build" loading="lazy">'+
+      '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';
+    item.addEventListener('click', function(){ openLightbox(i); });
+    galTrack.appendChild(item);
+  });
+
+  document.getElementById('rb-cfg-gal-prev').addEventListener('click', function(){
+    galTrack.scrollBy({ left: -Math.round(galTrack.clientWidth * 0.8), behavior: 'smooth' });
+  });
+  document.getElementById('rb-cfg-gal-next').addEventListener('click', function(){
+    galTrack.scrollBy({ left: Math.round(galTrack.clientWidth * 0.8), behavior: 'smooth' });
+  });
+
+  var lightbox = document.getElementById('rb-cfg-lightbox');
+  document.body.appendChild(lightbox);
+  var lbImg = document.getElementById('rb-cfg-lb-img');
+  var lbCounter = document.getElementById('rb-cfg-lb-counter');
+  var lbIndex = 0;
+
+  var scrollLockY = 0;
+  function lockPageScroll(){
+    scrollLockY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.documentElement.classList.add('rb-cfg-scroll-lock');
+    document.body.classList.add('rb-cfg-scroll-lock');
+    document.body.style.top = (-scrollLockY) + 'px';
+  }
+  function unlockPageScroll(){
+    document.documentElement.classList.remove('rb-cfg-scroll-lock');
+    document.body.classList.remove('rb-cfg-scroll-lock');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollLockY);
+  }
+
+  function updateCounter(){
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + GALLERY_SRCS.length;
+  }
+  var lbPreloaded = {};
+  function preloadFull(url){
+    if (!url || lbPreloaded[url]) return;
+    lbPreloaded[url] = true;
+    var pre = new Image();
+    pre.src = url;
+  }
+  function preloadNeighbors(){
+    if (GALLERY_SRCS.length < 2) return;
+    var prevI = (lbIndex - 1 + GALLERY_SRCS.length) % GALLERY_SRCS.length;
+    var nextI = (lbIndex + 1) % GALLERY_SRCS.length;
+    preloadFull(GALLERY_SRCS[prevI].full);
+    preloadFull(GALLERY_SRCS[nextI].full);
+  }
+  function showPhoto(i){
+    lbImg.src = GALLERY_SRCS[i].thumb;
+    updateCounter();
+    var full = new Image();
+    full.decoding = 'async';
+    full.onload = function(){
+      if (lbIndex === i) lbImg.src = GALLERY_SRCS[i].full;
+    };
+    full.src = GALLERY_SRCS[i].full;
+    preloadNeighbors();
+  }
+  function openLightbox(i){
+    lbIndex = i;
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    lockPageScroll();
+    showPhoto(i);
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    unlockPageScroll();
+  }
+  function lbShift(delta){
+    lbIndex = (lbIndex + delta + GALLERY_SRCS.length) % GALLERY_SRCS.length;
+    showPhoto(lbIndex);
+  }
+
+  document.getElementById('rb-cfg-lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('rb-cfg-lb-prev').addEventListener('click', function(e){ e.stopPropagation(); lbShift(-1); });
+  document.getElementById('rb-cfg-lb-next').addEventListener('click', function(e){ e.stopPropagation(); lbShift(1); });
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') lbShift(-1);
+    else if (e.key === 'ArrowRight') lbShift(1);
+  });
+
+  var touchStartX = 0, touchStartY = 0, touchActive = false;
+  lightbox.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    touchActive = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  lightbox.addEventListener('touchend', function(e){
+    if (!touchActive) return;
+    touchActive = false;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) lbShift(1); else lbShift(-1);
+  }, { passive: true });
+
+})();
+</script>

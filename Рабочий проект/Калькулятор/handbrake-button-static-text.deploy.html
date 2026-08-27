@@ -1,0 +1,53 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /handbrakes/handbrake-button/ (Handle Button): static
+     product description
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the configurator block (configurator-handbrake-button.deploy.html)
+     and BEFORE the gallery block on this page.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: same as handbrake-handle-static-text.deploy.html /
+     handbrake-cover-static-text.deploy.html — configurator facts are
+     JS-rendered and invisible to non-JS AI crawlers, this block puts
+     the same real facts in plain always-visible HTML.
+
+     All facts below pulled verbatim from configurator-handbrake-button
+     .deploy.html's own PRODUCT.options data (2026-08-27): base price
+     $50, style choices (black/carbon, carbon +$10), gloss/matte top
+     finish. No leather/Alcantara material option on this variant
+     (standalone button only, no handle body) — not claimed here.
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-hb-button-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #d0d0d0;
+}
+#rb-hb-button-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #f0f0f0;
+  margin: 0 0 18px;
+}
+#rb-hb-button-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-hb-button-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-hb-button-about">
+  <h2>About the Corvette C6 E-Brake Handle Button</h2>
+  <p>The RunBird Handle Button is a handmade replacement release button that fits your
+  existing C6 Corvette e-brake handle — no need to replace the whole handle. Choose
+  black or carbon fiber, in gloss or matte finish.</p>
+  <p>Pricing starts at $50 — a carbon-fiber finish adds $10. Every build is made to
+  order in 7–14 business days, and before your button ships, we send real photos of the
+  finished piece for your approval.</p>
+</div>

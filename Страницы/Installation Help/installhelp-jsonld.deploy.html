@@ -1,0 +1,77 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /installation-help/ page: FAQPage JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on this page only.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     All 6 Q&A pairs below are copied VERBATIM from the live page's
+     "Installation FAQ" accordion section, 2026-08-27.
+
+     Note: same caveat as faq-jsonld.deploy.html — Google restricted the
+     FAQPage rich-result (SERP accordion) to a narrow set of authoritative
+     sites in 2023, so this is not expected to win a SERP snippet. Included
+     for AI answer engines (ChatGPT Search, Perplexity, Google AI Overviews)
+     that consume FAQPage schema directly for citation/extraction (GEO
+     value).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will I need to modify my Corvette to install this?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every RunBird accessory is built to replace a specific factory part at its original mounting point. There's no cutting, drilling, or permanent modification involved — it's a direct swap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need any special tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most installs only need basic hand tools — the same ones you'd use to remove the factory part in the first place. Your step-by-step guide lists exactly what's needed for your specific product."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will my airbag, horn, or controls still work after installing a new steering wheel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Our steering wheels are built to accept your factory airbag, horn, and steering-column controls, so everything keeps working exactly as it did before — nothing is bypassed or rewired."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I install it myself, or do I need a professional?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most customers install their own parts at home using the included guide — it's the same process as removing and refitting a factory part. If you'd rather have it done professionally, any shop familiar with your Corvette's generation can handle it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's included in the box?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your RunBird part, a step-by-step installation guide specific to that product, and a material care card. Any small hardware unique to the part is included as well."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I get stuck during installation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reach out to our support team with your order number and a photo or description of where you're stuck — we'll walk you through it. We build these parts, so we know exactly how they go on."
+      }
+    }
+  ]
+}
+</script>

@@ -1,47 +1,69 @@
-<div id="rb-config" class="rb-cfg-shape-pending">
+<!-- ══════════════════════════════════════════════════════
+     RunBird — E-Brake / Handbrakes: category hub (static links, no configurator)
+     Lives at /handbrakes/ (the root category).
+
+     Rebuilt 2026-08-27: this used to be the single combined configurator
+     for all 3 e-brake variants (Handle+CF Button/Knob Boot/Handle Button),
+     switched via a JS "Step 1" gate. Each variant now has its own
+     standalone configurator page at its own subcategory URL (so each can
+     carry its own title/meta/H1/Product schema) — see:
+       configurator-handbrake-handle.deploy.html -> /handbrakes/handbrake/
+       configurator-handbrake-cover.deploy.html   -> /handbrakes/handbrake-cover/
+       configurator-handbrake-button.deploy.html  -> /handbrakes/handbrake-button/
+     This file is now purely a static links page — same visual "choose
+     your e-brake accessory" card grid as before, but each card is a real
+     <a href> to its own page instead of a JS state switch. No
+     configurator engine/JS needed here at all. Same pattern as
+     configurator-shiftknob.deploy.html (the shift-knobs hub).
+
+     Prices shown are the same hardcoded fallback figures the old file
+     used (verified today): Handle + CF Button $195, Knob Boot $65,
+     Handle Button $50. These are static display text only — if CS-Cart
+     pricing changes, update this file by hand (no live hydration on a
+     links-only page).
+
+     Gate images: use the FULL-SIZE ab__webp/detailed/9/ WebP files
+     (handle_vquc-1y_png.webp etc, ~30-44KB, hasAlpha:yes/RGBA — verified
+     via `sips -g hasAlpha`), NOT the ab__webp/thumbnails/570/570/ variant.
+     The 570x570 thumbnail is generated as lossy VP8 (hasAlpha:no, RGB) —
+     it flattens the source PNGs' transparent background to solid white,
+     which hides the .rb-cfg-shape-gate-imgwrap CSS gradient behind it.
+     Confirmed 2026-08-27 (owner: "на картинках на первом гейте был
+     красивый фон - в переделанном варианте ты его убрал?") — the full-size
+     alpha-preserving WebP is small enough to use directly at 570px
+     display size, no separate thumbnail needed.
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config">
 <div class="rb-cfg-inner">
 
   <div class="rb-cfg-head">
-    <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 Custom E-Brake</h1>
-    <p class="rb-cfg-sub">Pick your e-brake accessory, then choose every option below — the diagram shows exactly where it applies.</p>
-    <button type="button" class="rb-cfg-change-type" id="rb-cfg-change-type" hidden>↺ Choose a different accessory</button>
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Custom C6 Corvette E-Brake Accessories</h1>
+    <p class="rb-cfg-sub">Pick your e-brake accessory to start configuring — each style has its own materials, finishes, and options.</p>
   </div>
 
   <div class="rb-cfg-shape-gate">
-    <div class="rb-cfg-shape-gate-head">Step 1 — choose your e-brake accessory</div>
-    <div class="rb-cfg-shape-gate-grid" id="rb-cfg-shape-gate-grid"></div>
-  </div>
-
-  <div class="rb-cfg-stage">
-
-    <div class="rb-cfg-imgwrap">
-      <svg class="rb-cfg-lines" preserveAspectRatio="none"></svg>
-      <div class="rb-cfg-imgbox">
-        <img src="" alt="Corvette C6 Custom E-Brake" draggable="false">
-      </div>
-      <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint">Select appearance</div>
-      <div class="rb-cfg-marks"></div>
-      <div class="rb-cfg-step-marks" id="rb-cfg-step-marks"></div>
-      <p class="rb-cfg-img-caption">This is a schematic mockup to show where each option applies — not the final finish. We'll send you a realistic render of your actual build before we start making it.</p>
+    <div class="rb-cfg-shape-gate-grid">
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/handbrakes/handbrake/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/detailed/9/handle_vquc-1y_png.webp" alt="Handle + CF Button" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Handle + CF Button</span>
+        <span class="rb-cfg-shape-gate-desc">Full e-brake handle assembly with a carbon-fiber release button.</span>
+        <span class="rb-cfg-shape-gate-price">From $195</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/handbrakes/handbrake-cover/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/detailed/9/cover_png.webp" alt="Knob Boot" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Knob Boot</span>
+        <span class="rb-cfg-shape-gate-desc">Leather or Alcantara boot cover for your existing e-brake handle.</span>
+        <span class="rb-cfg-shape-gate-price">From $65</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/handbrakes/handbrake-button/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/detailed/9/CF-button_p0jg-8n_png.webp" alt="Handle Button" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Handle Button</span>
+        <span class="rb-cfg-shape-gate-desc">Standalone release button in black or carbon fiber, fits your existing handle.</span>
+        <span class="rb-cfg-shape-gate-price">From $50</span>
+      </a>
     </div>
-
-    <div class="rb-cfg-col rb-cfg-col--r">
-      <div class="rb-cfg-col-intro">Select &amp; configure your e-brake accessory</div>
-      <div class="rb-cfg-cards-grid" id="rb-cfg-cards-grid"></div>
-
-      <div class="rb-cfg-summary" id="rb-cfg-summary">
-        <div class="rb-cfg-summary-row">
-          <span class="rb-cfg-price-label">Total price</span>
-          <span class="rb-cfg-price-value"><span class="rb-cfg-price-cur">$</span><span id="rb-cfg-price-num">0</span></span>
-          <button class="rb-cfg-add" id="rb-cfg-add-btn" disabled>Add to cart</button>
-        </div>
-        <div class="rb-cfg-summary-hint" id="rb-cfg-summary-hint">Select every option above to add this build to your cart.</div>
-      </div>
-    </div>
-
   </div>
-
-
 </div>
 </div>
 
@@ -51,12 +73,9 @@
   --rb-accent-h: #D9BA62;
   --rb-accent-b: rgba(200,168,76,.28);
   --rb-bg:       #0C0C0C;
-  --rb-bg2:      #060606;
   --rb-text:     #F0F0F0;
   --rb-text2:    #808080;
   --rb-border:   rgba(255,255,255,.08);
-  --rb-border-s: rgba(255,255,255,.16);
-  --rb-card-bg:  #131313;
 
   background: var(--rb-bg);
   color: var(--rb-text);
@@ -71,47 +90,17 @@
 #rb-config .rb-cfg-inner{
   max-width: 1370px;
   margin: 0 auto;
-  padding: 16px clamp(20px,4vw,56px) 48px;
+  padding: 0 clamp(20px,4vw,56px) 48px;
   box-sizing: border-box;
 }
 
-#rb-config .rb-cfg-head{ text-align:center; margin-bottom:14px; }
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:28px; }
 #rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
-#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0 0 10px; }
-#rb-config .rb-cfg-change-type{
-  background:none; border:1px solid var(--rb-border-s); color:var(--rb-text2);
-  font-family:'Inter',sans-serif; font-size:12.5px; padding:7px 16px; border-radius:999px;
-  cursor:pointer; transition:.15s;
-}
-#rb-config .rb-cfg-change-type:hover{ border-color:var(--rb-accent); color:var(--rb-accent); }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
 
-#rb-config .rb-cfg-chips{ display:flex; flex-wrap:wrap; gap:8px; }
-#rb-config .rb-chip{
-  display:inline-flex; align-items:center;
-  border:1px solid var(--rb-border-s); background:transparent; color:var(--rb-text2);
-  font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 15px; border-radius:999px;
-  cursor:pointer; transition:.15s; white-space:nowrap;
-}
-#rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
-#rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
-#rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
-#rb-config .rb-chip.is-active .rb-chip-price{ opacity:.7; }
-#rb-config .rb-swatch-dot{
-  width:13px; height:13px; border-radius:50%; display:inline-block; margin-right:8px; flex:none;
-  outline:1px solid var(--rb-border-s); outline-offset:1px;
-}
-
-#rb-config .rb-cfg-shape-gate{ display:none; margin-bottom:28px; }
-#rb-config.rb-cfg-shape-pending .rb-cfg-shape-gate{ display:block; }
-#rb-config.rb-cfg-shape-pending .rb-cfg-stage{ display:none; }
-#rb-config.rb-cfg-shape-pending .rb-cfg-change-type{ display:none; }
-#rb-config .rb-cfg-shape-gate-head{
-  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
-  font-size:12px; font-weight:600; color:var(--rb-accent); text-align:center; margin-bottom:14px;
-}
 #rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:820px; margin:0 auto; }
 #rb-config .rb-cfg-shape-gate-opt{
-  width:100%;
+  width:100%; text-decoration:none;
   background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
   display:flex; flex-direction:column; align-items:center; gap:8px; transition:border-color .15s;
   -webkit-tap-highlight-color:transparent;
@@ -131,822 +120,13 @@
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
   font-size:16px; font-weight:700; color:var(--rb-text); text-align:center;
 }
+#rb-config .rb-cfg-shape-gate-desc{ font-size:11.5px; line-height:1.4; color:var(--rb-text2); text-align:center; }
 #rb-config .rb-cfg-shape-gate-price{ font-size:14px; color:var(--rb-text2); }
 
-#rb-config .rb-cfg-stage{
-  display:grid; grid-template-columns: minmax(320px,480px) minmax(460px,560px);
-  gap:36px; align-items:start; justify-content:center; position:relative; margin-bottom:32px;
-  max-width:1160px; margin-left:auto; margin-right:auto;
-}
-#rb-config .rb-cfg-col{ display:flex; flex-direction:column; gap:16px; position:relative; z-index:2; }
-
-#rb-config .rb-cfg-cards-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px 16px; width:100%; box-sizing:border-box; }
-#rb-config .rb-cfg-col-intro{
-  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
-  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
-}
-#rb-config .rb-cfg-lines{
-  position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:4;
-}
-#rb-config .rb-cfg-lines line{ stroke:var(--rb-accent); stroke-width:1.2; opacity:0; transition:opacity .15s; }
-#rb-config .rb-cfg-lines line.is-active{ opacity:.95; }
-#rb-config .rb-cfg-lines circle{ fill:var(--rb-accent); opacity:0; transition:opacity .15s; }
-#rb-config .rb-cfg-lines circle.is-active{ opacity:1; }
-
-#rb-config .rb-cfg-imgwrap{ position:relative; }
-#rb-config .rb-cfg-img-caption{
-  margin:10px 4px 0; font-size:11.5px; line-height:1.5; color:var(--rb-text2); font-style:italic; text-align:center;
-}
-#rb-config .rb-cfg-imgbox{
-  position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
-  background:
-    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
-    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
-  border:1px solid var(--rb-border);
-}
-#rb-config .rb-cfg-imgbox::after{
-  content:''; position:absolute; left:8%; right:8%; bottom:6%; height:14%;
-  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
-  z-index:1; pointer-events:none;
-}
-#rb-config .rb-cfg-imgbox img{
-  position:relative; z-index:2; width:100%; height:100%; object-fit:contain;
-  display:block;
-}
-
-#rb-config .rb-cfg-marks{ position:absolute; inset:0; z-index:5; pointer-events:none; }
-#rb-config .rb-cfg-mark{
-  position:absolute; transform:translate(-50%,-150%);
-  background:rgba(14,14,14,.92); border:1px solid var(--rb-accent-b); color:var(--rb-text);
-  font-size:11px; font-family:'Inter',sans-serif; padding:4px 10px; border-radius:6px; white-space:nowrap;
-  opacity:0; transition:opacity .15s; box-shadow:0 6px 16px rgba(0,0,0,.45);
-}
-#rb-config .rb-cfg-mark.is-active{ opacity:1; }
-#rb-config .rb-cfg-mark.is-gated-off{ display:none; }
-
-#rb-config .rb-cfg-step-marks{ position:absolute; inset:0; z-index:6; display:none; }
-#rb-config .rb-cfg-step-mark{
-  position:absolute; transform:translate(-50%,-50%); display:none;
-  flex-direction:column; align-items:center; gap:6px; background:none; border:none; padding:0;
-  cursor:pointer; -webkit-tap-highlight-color:transparent;
-}
-#rb-config .rb-cfg-step-mark.is-current{ display:flex; }
-#rb-config .rb-cfg-step-mark.is-gated-off{ display:none !important; }
-#rb-config .rb-cfg-step-mark-dot{
-  width:26px; height:26px; border-radius:50%; background:var(--rb-accent);
-  border:3px solid rgba(6,6,6,.85); box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5);
-  animation:rb-cfg-pulse 1.7s ease-in-out infinite;
-}
-#rb-config .rb-cfg-step-mark-label{
-  background:rgba(10,10,10,.94); border:1px solid var(--rb-accent-b); color:var(--rb-text);
-  font-size:12px; font-weight:600; padding:5px 11px; border-radius:999px; white-space:nowrap;
-  box-shadow:0 4px 12px rgba(0,0,0,.4);
-}
-@keyframes rb-cfg-pulse{
-  0%,100%{ box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5); }
-  50%{ box-shadow:0 0 0 9px rgba(200,168,76,0), 0 6px 14px rgba(0,0,0,.5); }
-}
-@media (prefers-reduced-motion: reduce){
-  #rb-config .rb-cfg-step-mark-dot{ animation:none; }
-}
-
-#rb-config .rb-cfg-photo-hint{
-  display:none; position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:7;
-  background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent);
-  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
-  font-size:12px; font-weight:700; padding:6px 16px; border-radius:999px; white-space:nowrap;
-  box-shadow:0 4px 14px rgba(0,0,0,.4); pointer-events:none;
-}
 @media (max-width: 980px){
-  #rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
-}
-@media (max-width: 480px){
-  #rb-config .rb-cfg-summary-row{ gap:8px; }
-  #rb-config .rb-cfg-add{ padding:11px 18px; font-size:13px; }
-  #rb-config .rb-cfg-price-value{ font-size:26px; }
-}
-
-#rb-config .rb-cfg-card{
-  border:1px solid var(--rb-border); background:var(--rb-card-bg); border-radius:10px;
-  padding:0; overflow:visible; transition:border-color .15s, background .15s;
-}
-#rb-config .rb-cfg-card.is-gated-off{ display:none; }
-#rb-config .rb-cfg-card.is-active{ border-color:var(--rb-accent-b); background:#171512; }
-#rb-config .rb-cfg-card-head{
-  display:flex; align-items:center; gap:10px; padding:15px 16px; cursor:pointer; user-select:none;
-}
-#rb-config .rb-cfg-card-head-label{
-  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
-  font-size:14.5px; font-weight:600; flex:none; display:flex; align-items:center; gap:7px;
-  transition:color .15s;
-}
-#rb-config .rb-cfg-card.is-picked .rb-cfg-card-head-label{ color:var(--rb-accent); }
-#rb-config .rb-cfg-card-head-check{
-  display:none; align-items:center; justify-content:center; flex:none;
-  width:14px; height:14px; border-radius:50%; background:var(--rb-accent); color:#000; font-size:9px; line-height:1;
-}
-#rb-config .rb-cfg-card.is-picked .rb-cfg-card-head-check{ display:flex; }
-#rb-config .rb-cfg-card-head-val{
-  margin-left:auto; display:flex; align-items:center; gap:6px; font-size:13px; color:var(--rb-text2);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1 1 auto; justify-content:flex-end;
-  transition:color .15s;
-}
-#rb-config .rb-cfg-card.is-picked .rb-cfg-card-head-val{ color:var(--rb-accent); font-weight:600; }
-#rb-config .rb-cfg-card-head-val.is-empty{ color:var(--rb-text2); font-style:italic; font-weight:400; }
-#rb-config .rb-cfg-card-head-swatch{ width:13px; height:13px; border-radius:50%; flex:none; outline:1px solid var(--rb-border-s); outline-offset:1px; }
-#rb-config .rb-cfg-card-chevron{ flex:none; color:var(--rb-text2); font-size:10px; transition:transform .2s; }
-#rb-config .rb-cfg-card.is-open .rb-cfg-card-chevron{ transform:rotate(180deg); color:var(--rb-accent); }
-#rb-config .rb-cfg-card-body{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
-#rb-config .rb-cfg-card.is-open .rb-cfg-card-body{ max-height:540px; }
-#rb-config .rb-cfg-card-body-in{ padding:0 14px 14px; }
-
-#rb-config .rb-cfg-summary{
-  display:flex; flex-direction:column; gap:10px;
-  border:1px solid var(--rb-border-s); border-radius:14px; padding:16px 20px; background:var(--rb-card-bg);
-  margin-top:6px; width:100%; box-sizing:border-box;
-}
-#rb-config .rb-cfg-summary-row{
-  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px;
-}
-#rb-config .rb-cfg-price-label{ font-size:12px; color:var(--rb-text2); justify-self:end; }
-#rb-config .rb-cfg-price-value{
-  font-family:'Barlow Condensed', sans-serif; font-size:32px; font-weight:700; line-height:1;
-  justify-self:center;
-}
-#rb-config .rb-cfg-price-cur{ font-size:19px; opacity:.7; margin-right:1px; }
-#rb-config .rb-cfg-summary-row .rb-cfg-add{ justify-self:start; }
-#rb-config .rb-cfg-add{
-  background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:13px 28px;
-  font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:700; letter-spacing:.03em;
-  text-transform:uppercase; cursor:pointer; transition:.15s; flex:none; white-space:nowrap;
-}
-#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
-#rb-config .rb-cfg-add:disabled{
-  background:transparent; border:1px solid var(--rb-border-s); color:var(--rb-text2);
-  cursor:not-allowed;
-}
-#rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
-#rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
-
-@media (max-width: 980px){
-  #rb-config .rb-cfg-stage{ grid-template-columns:1fr; }
-  #rb-config .rb-cfg-lines{ display:none; }
-  #rb-config .rb-cfg-marks{ display:none; }
-  #rb-config .rb-cfg-step-marks{ display:block; }
   #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr 1fr; max-width:520px; }
 }
 @media (max-width: 640px){
-  #rb-config .rb-cfg-cards-grid{ grid-template-columns:1fr; }
   #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr; gap:14px; max-width:340px; }
 }
-
 </style>
-
-<script>
-(function(){
-
-  var STITCHING_COLOR_VALUES = [
-    { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
-    { v:'white',    label:'White',    price:0, hex:'#f5f5f5', cs:199 },
-    { v:'red',      label:'Red',      price:0, hex:'#c81e1e', cs:200 },
-    { v:'blue',     label:'Blue',     price:0, hex:'#1e4fc8', cs:201 },
-    { v:'yellow',   label:'Yellow',   price:0, hex:'#e8c31e', cs:202 },
-    { v:'orange',   label:'Orange',   price:0, hex:'#e06b1e', cs:203 },
-    { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
-    { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
-  ];
-  var FINISH_TOP_STYLE_VALUES = [
-    { v:'gloss', label:'Gloss', price:0, cs:270 },
-    { v:'matte', label:'Matte', price:0, cs:271 }
-  ];
-
-  var PRODUCT_VARIANTS = {
-
-    knobBoot: {
-      id:'355', label:'Knob Boot', name:'Corvette C6 E-Brake Knob Boot', priceFrom:65.00, basePrice:65.00,
-      thumb:'https://therunbird.com/images/Calculator/Handle/cover.png',
-      img:'https://therunbird.com/images/Calculator/Handle/cover.png',
-      options: {
-        gripMaterial: { label:'Grip material', zone:{px:464,py:449}, csOptId:47,
-          values:[
-            { v:'leather',       label:'Leather', price:0, cs:275 },
-            { v:'alcantara',     label:'Alcantara', price:0, cs:276 },
-            { v:'leatherAlc',    label:'Leather + Alcantara', price:0, cs:277 },
-            { v:'texturedLeather', label:'Textured leather', price:0, cs:278 }
-          ]},
-        stitchingColor: { label:'Stitching color', zone:{px:401,py:256}, csOptId:32, isColor:true,
-          values: STITCHING_COLOR_VALUES.slice() },
-        shiftPattern: { label:'Shift pattern', csOptId:48,
-          values:[
-            { v:'automatic', label:'Automatic', price:0, cs:279 },
-            { v:'manual',    label:'Manual (6-Speed)', price:0, cs:280 }
-          ]}
-      }
-    },
-
-    handle: {
-      id:'356', label:'Handle + CF Button', name:'Corvette C6 E-Brake Handle and CF Button', priceFrom:195.00, basePrice:195.00,
-      thumb:'https://therunbird.com/images/Calculator/Handle/handle.png',
-      img:'https://therunbird.com/images/Calculator/Handle/handle.png',
-      options: {
-        topSection: { label:'Top section e-brake', zone:{px:446,py:348}, csOptId:49,
-          values:[
-            { v:'leather',   label:'Leather', price:0, cs:281 },
-            { v:'perf',      label:'Perforated Leather', price:0, cs:282 },
-            { v:'alcantara', label:'Alcantara', price:0, cs:283 }
-          ]},
-        bottomSection: { label:'Bottom section e-brake', zone:{px:385,py:453}, csOptId:50,
-          values:[
-            { v:'leather',   label:'Leather', price:0, cs:284 },
-            { v:'perf',      label:'Perforated Leather', price:0, cs:285 },
-            { v:'alcantara', label:'Alcantara', price:0, cs:286 },
-            { v:'carbon',    label:'Carbon', price:55, cs:287 }
-          ]},
-        carbonStyle: { label:'Carbon style', zone:{px:219,py:357}, csOptId:51, gatedBy:{ key:'bottomSection', equals:'carbon' },
-          values:[
-            { v:'blackCarbon',    label:'Black carbon',    price:0, cs:288 },
-            { v:'redCarbon',      label:'Red carbon',      price:0, cs:289 },
-            { v:'blueCarbon',     label:'Blue carbon',     price:0, cs:290 },
-            { v:'titaniumCarbon', label:'Titanium carbon', price:0, cs:291 },
-            { v:'alutex',         label:'Alutex',          price:0, cs:292 }
-          ]},
-        finishTopStyle: { label:'Finish top style', zone:{px:219,py:357}, csOptId:45, gatedBy:{ key:'bottomSection', equals:'carbon' },
-          values: FINISH_TOP_STYLE_VALUES.slice() },
-        stitchingColor: { label:'Stitching color', zone:{px:455,py:308}, csOptId:32, isColor:true,
-          values: STITCHING_COLOR_VALUES.slice() },
-        addCarbonButton: { label:'Add carbon fiber button', zone:{px:130,py:605}, csOptId:52,
-          values:[
-            { v:'yes', label:'Yes', price:50, cs:293 },
-            { v:'no',  label:'No',  price:0,  cs:294 }
-          ]}
-      }
-    },
-
-    button: {
-      id:'357', label:'Handle Button', name:'Corvette C6 E-Brake Handle Button', priceFrom:50.00, basePrice:50.00,
-      thumb:'https://therunbird.com/images/Calculator/Handle/CF-button.png',
-      img:'https://therunbird.com/images/Calculator/Handle/CF-button.png',
-      options: {
-        style: { label:'Style', csOptId:53,
-          values:[
-            { v:'black',  label:'Black', price:0, cs:295 },
-            { v:'carbon', label:'Carbon', price:10, cs:296 }
-          ]},
-        finishTopStyle: { label:'Finish top style', csOptId:45,
-          values: FINISH_TOP_STYLE_VALUES.slice() }
-      }
-    }
-  };
-
-  var VARIANT_ORDER = ['handle','knobBoot','button'];
-
-  var root = document.getElementById('rb-config');
-  var svg = root.querySelector('.rb-cfg-lines');
-  var marksLayer = root.querySelector('.rb-cfg-marks');
-  var stepMarksLayer = root.querySelector('.rb-cfg-step-marks');
-  var cardsGrid = document.getElementById('rb-cfg-cards-grid');
-  var wheelImgEl = root.querySelector('.rb-cfg-imgbox img');
-  var photoHint = document.getElementById('rb-cfg-photo-hint');
-  var priceNumEl = document.getElementById('rb-cfg-price-num');
-  var summaryEl = document.getElementById('rb-cfg-summary');
-  var addBtn = document.getElementById('rb-cfg-add-btn');
-  var shapeGateGrid = document.getElementById('rb-cfg-shape-gate-grid');
-  var changeTypeBtn = document.getElementById('rb-cfg-change-type');
-  var titleEl = document.getElementById('rb-cfg-title');
-  var DEFAULT_TITLE = titleEl.textContent;
-
-  var PRODUCT_ID = null;
-  var BASE_PRICE = 0;
-  var CURRENT = null;
-  var state = {};
-  var currentActiveZone = null;
-
-  function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
-  function fmtBase(p){ return '$'+Math.round(p); }
-
-  // ---- gating: an option can require another option in the SAME variant to
-  // hold a specific value before it is shown (e.g. "Carbon style" only shows
-  // once "Bottom section e-brake" is set to "Carbon"). ----
-  function gateOpen(opt){
-    if (!opt.gatedBy) return true;
-    var gateVal = state[opt.gatedBy.key];
-    return !!(gateVal && gateVal.v === opt.gatedBy.equals);
-  }
-
-  // ---- live price hydration from CS-Cart ----
-  // This block is a landing page, not the product page, so there is no native
-  // CS-Cart option markup on it. To keep prices in sync with CS-Cart without
-  // hand-editing this file, we fetch each product's real page (same origin,
-  // canonical dispatch URL) and read the same option <select> markup CS-Cart
-  // renders there, then overwrite our price/label fields by matching `cs` id.
-  // If anything fails (network, markup change), we silently keep the
-  // hardcoded fallback values already in PRODUCT_VARIANTS above.
-  function liveProductUrl(id){
-    return 'https://therunbird.com/index.php?dispatch=products.view&product_id=' + id;
-  }
-  function parsePriceAddon(text){
-    var m = String(text).match(/\(\s*\+\s*\$\s*([\d,]+(?:\.\d+)?)\s*\)/);
-    return m ? parseFloat(m[1].replace(/,/g,'')) : 0;
-  }
-  function parsePriceEl(el){
-    if (!el) return null;
-    var sup = el.querySelector('sup');
-    var cents = sup ? sup.textContent.replace(/[^\d]/g,'') : '';
-    var whole = (sup ? el.firstChild && el.firstChild.textContent : el.textContent) || '';
-    whole = whole.replace(/[^\d]/g,'');
-    if (!whole) return null;
-    return parseFloat(whole + '.' + (cents || '00'));
-  }
-  function hydrateOptionGroup(doc, variant, key){
-    var opt = variant.options[key];
-    var sel = doc.getElementById('option_' + variant.id + '_' + opt.csOptId);
-    if (!sel) return 0;
-    var liveByCs = {};
-    var defaultDelta = 0;
-    Array.prototype.forEach.call(sel.querySelectorAll('option'), function(o){
-      var raw = (o.querySelector('bdi') || o).textContent;
-      var price = parsePriceAddon(raw);
-      var label = raw.replace(/\(\s*\+\s*\$[^)]*\)/,'').replace(/\s+/g,' ').trim();
-      liveByCs[o.value] = { price:price, label:label };
-      if (o.selected) defaultDelta += price;
-    });
-    var kept = [];
-    opt.values.forEach(function(val){
-      var live = liveByCs[String(val.cs)];
-      if (!live){
-        console.warn('[RB configurator] option value no longer found in CS-Cart, hiding it:', variant.id, key, val.v);
-        if (state[key] === val) state[key] = null;
-        return;
-      }
-      val.price = live.price;
-      val.label = live.label;
-      kept.push(val);
-      delete liveByCs[String(val.cs)];
-    });
-    Object.keys(liveByCs).forEach(function(csId){
-      console.warn('[RB configurator] new CS-Cart option value not yet in configurator (needs manual setup):', variant.id, key, csId, liveByCs[csId].label);
-    });
-    opt.values = kept;
-    return defaultDelta;
-  }
-  function hydrateVariant(variant){
-    return fetch(liveProductUrl(variant.id), { credentials:'same-origin' })
-      .then(function(r){ if (!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
-      .then(function(html){
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var priceEl = doc.getElementById('sec_discounted_price_' + variant.id);
-        var displayed = parsePriceEl(priceEl);
-        var defaultDelta = 0;
-        Object.keys(variant.options).forEach(function(key){
-          defaultDelta += hydrateOptionGroup(doc, variant, key);
-        });
-        if (displayed != null){
-          variant.basePrice = variant.priceFrom = +(displayed - defaultDelta).toFixed(2);
-        }
-      })
-      .catch(function(err){
-        console.warn('[RB configurator] price hydration failed for product', variant.id, '— keeping fallback prices.', err);
-      });
-  }
-
-  function swatchFill(val){
-    if (val.none) return 'repeating-linear-gradient(45deg,#2a2a2a,#2a2a2a 3px,#1a1a1a 3px,#1a1a1a 6px)';
-    if (val.other) return '#1a1a1a';
-    return val.hex;
-  }
-
-  function syncNative(key, val){
-    var opt = CURRENT.options[key];
-    var sel = document.getElementById('option_' + PRODUCT_ID + '_' + opt.csOptId);
-    if (!sel) return;
-    sel.value = String(val.cs);
-    if (typeof fn_change_options === 'function'){
-      fn_change_options(PRODUCT_ID, PRODUCT_ID, String(opt.csOptId));
-    }
-  }
-
-  function headRow(labelText){
-    var head = document.createElement('div');
-    head.className = 'rb-cfg-card-head';
-    head.tabIndex = 0;
-    head.innerHTML =
-      '<span class="rb-cfg-card-head-label">'+labelText+'<span class="rb-cfg-card-head-check">✓</span></span>'+
-      '<span class="rb-cfg-card-head-val"></span>'+
-      '<span class="rb-cfg-card-chevron">▾</span>';
-    return head;
-  }
-
-  function isOptSelected(key){
-    var opt = CURRENT.options[key];
-    if (!gateOpen(opt)) return true;
-    return !!state[key];
-  }
-  function isComplete(){
-    return Object.keys(CURRENT.options).every(isOptSelected);
-  }
-  function updateCompletionUI(){
-    var complete = isComplete();
-    summaryEl.classList.toggle('is-complete', complete);
-    addBtn.disabled = !complete;
-  }
-
-  function currentStepZone(){
-    var keys = Object.keys(CURRENT.options);
-    for (var i=0; i<keys.length; i++){
-      var key = keys[i];
-      var opt = CURRENT.options[key];
-      if (!gateOpen(opt)) continue;
-      if (!isOptSelected(key)) return key;
-    }
-    return null;
-  }
-  function updateStepMarks(){
-    var current = currentStepZone();
-    root.querySelectorAll('.rb-cfg-step-mark').forEach(function(el){
-      el.classList.toggle('is-current', el.dataset.zone === current);
-    });
-    if (photoHint) photoHint.classList.toggle('is-visible', !!current);
-  }
-
-  function updateMarkText(key){
-    var opt = CURRENT.options[key];
-    if (!opt.zone) return;
-    var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
-    if (!mark) return;
-    mark.textContent = opt.label + ': ' + (state[key] ? state[key].label : 'Select…');
-  }
-
-  function updateHeadVal(key){
-    var opt = CURRENT.options[key];
-    var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
-    if (!card) return;
-    card.classList.toggle('is-picked', !!state[key]);
-    var valEl = card.querySelector('.rb-cfg-card-head-val');
-    if (!valEl) return;
-    valEl.innerHTML = '';
-    valEl.classList.toggle('is-empty', !state[key]);
-    if (!state[key]){
-      valEl.appendChild(document.createTextNode('Select…'));
-    } else if (opt.isColor){
-      var v = state[key];
-      var dot = document.createElement('span');
-      dot.className = 'rb-cfg-card-head-swatch';
-      dot.style.background = swatchFill(v);
-      valEl.appendChild(dot);
-      valEl.appendChild(document.createTextNode(v.label));
-    } else {
-      valEl.appendChild(document.createTextNode(state[key].label));
-    }
-    updateMarkText(key);
-  }
-
-  function applyGateVisibility(){
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      if (!opt.gatedBy) return;
-      var show = gateOpen(opt);
-      var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
-      if (card) card.classList.toggle('is-gated-off', !show);
-      var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
-      if (mark) mark.classList.toggle('is-gated-off', !show);
-      var stepMark = stepMarksLayer.querySelector('.rb-cfg-step-mark[data-zone="'+key+'"]');
-      if (stepMark) stepMark.classList.toggle('is-gated-off', !show);
-    });
-    updateStepMarks();
-    scheduleLayout();
-  }
-
-  function buildChipGroup(container, key){
-    var opt = CURRENT.options[key];
-    var wrap = document.createElement('div');
-    wrap.className = 'rb-cfg-chips';
-    wrap.dataset.opt = key;
-    opt.values.forEach(function(val){
-      var el = document.createElement('button');
-      el.type = 'button';
-      el.className = 'rb-chip';
-      el.dataset.val = val.v;
-      var html = '';
-      if (opt.isColor) html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
-      html += '<span class="rb-chip-txt">'+val.label+'</span>';
-      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
-      el.innerHTML = html;
-      if (state[key] === val) el.classList.add('is-active');
-
-      el.addEventListener('click', function(){
-        state[key] = val;
-        Array.prototype.forEach.call(wrap.children, function(c){ c.classList.remove('is-active'); });
-        el.classList.add('is-active');
-
-        updateHeadVal(key);
-        applyGateVisibility();
-        recalcPrice();
-        updateCompletionUI();
-        updateStepMarks();
-        syncNative(key, val);
-
-        var ownCard = wrap.closest('.rb-cfg-card');
-        if (ownCard){
-          ownCard.classList.remove('is-open');
-          setActiveZone(key, false);
-          scheduleLayout();
-        }
-        if (window.matchMedia('(max-width: 980px)').matches){
-          var scrollTarget = isComplete() ? '.rb-cfg-summary' : '.rb-cfg-imgwrap';
-          setTimeout(function(){
-            var t = root.querySelector(scrollTarget);
-            if (t) t.scrollIntoView({ behavior:'smooth', block:'center' });
-          }, 300);
-        }
-      });
-      wrap.appendChild(el);
-    });
-    container.appendChild(wrap);
-  }
-
-  function toggleCard(card){
-    var zone = card.dataset.zone;
-    var wasOpen = card.classList.contains('is-open');
-    root.querySelectorAll('.rb-cfg-card').forEach(function(c){
-      c.classList.remove('is-open');
-      setActiveZone(c.dataset.zone, false);
-    });
-    if (!wasOpen){
-      card.classList.add('is-open');
-      setActiveZone(zone, true);
-    }
-    scheduleLayout();
-  }
-
-  var layoutTimer;
-  function scheduleLayout(){
-    clearTimeout(layoutTimer);
-    layoutTimer = setTimeout(layoutLines, 260);
-  }
-
-  function buildCards(){
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      var card = document.createElement('div');
-      card.className = 'rb-cfg-card';
-      card.dataset.zone = key;
-
-      var body = document.createElement('div');
-      body.className = 'rb-cfg-card-body';
-      var inner = document.createElement('div');
-      inner.className = 'rb-cfg-card-body-in';
-      body.appendChild(inner);
-
-      var head = headRow(opt.label);
-      buildChipGroup(inner, key);
-
-      card.appendChild(head);
-      card.appendChild(body);
-      head.addEventListener('click', function(){ toggleCard(card); });
-      head.addEventListener('keydown', function(e){
-        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleCard(card); }
-      });
-      head.addEventListener('mouseenter', function(){ if (!card.classList.contains('is-open')) setActiveZone(key, true); });
-      head.addEventListener('mouseleave', function(){ if (!card.classList.contains('is-open')) setActiveZone(key, false); });
-
-      cardsGrid.appendChild(card);
-    });
-    Object.keys(CURRENT.options).forEach(function(k){ updateHeadVal(k); });
-  }
-
-  function buildMarks(){
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      if (!opt.zone) return;
-      var m = document.createElement('div');
-      m.className = 'rb-cfg-mark';
-      m.dataset.zone = key;
-      marksLayer.appendChild(m);
-    });
-  }
-  function buildStepMarks(){
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'rb-cfg-step-mark';
-      btn.dataset.zone = key;
-      btn.innerHTML = '<span class="rb-cfg-step-mark-dot"></span><span class="rb-cfg-step-mark-label">'+opt.label+'</span>';
-      btn.addEventListener('click', function(){
-        var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
-        if (!card) return;
-        if (!card.classList.contains('is-open')) toggleCard(card);
-        setTimeout(function(){ card.scrollIntoView({ behavior:'smooth', block:'center' }); }, 270);
-      });
-      stepMarksLayer.appendChild(btn);
-    });
-  }
-
-  function setActiveZone(zone, active){
-    currentActiveZone = active ? zone : (currentActiveZone === zone ? null : currentActiveZone);
-    root.querySelectorAll('[data-zone="'+zone+'"]').forEach(function(el){
-      el.classList.toggle('is-active', active);
-    });
-  }
-
-  function recalcPrice(){
-    if (!CURRENT) return;
-    var total = BASE_PRICE;
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      if (!gateOpen(opt)) return;
-      total += (state[key] && state[key].price) || 0;
-    });
-    priceNumEl.textContent = total.toFixed(2).split('.')[0];
-  }
-
-  function layoutLines(){
-    if (!CURRENT) return;
-    svg.innerHTML = '';
-    var imgWrap = root.querySelector('.rb-cfg-imgwrap');
-    var imgEl = wheelImgEl;
-    if (!imgEl.naturalWidth) return;
-    var wrapRect = imgWrap.getBoundingClientRect();
-    var imgRect = imgEl.getBoundingClientRect();
-
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      if (!opt.zone) return;
-      if (!gateOpen(opt)) return;
-      var card = root.querySelector('.rb-cfg-card[data-zone="'+key+'"]');
-      if (!card) return;
-      var dotX = imgRect.left - wrapRect.left + imgRect.width * (opt.zone.px / imgEl.naturalWidth);
-      var dotY = imgRect.top - wrapRect.top + imgRect.height * (opt.zone.py / imgEl.naturalHeight);
-      var cardRect = card.getBoundingClientRect();
-      var cardX = cardRect.left - wrapRect.left + (cardRect.left < imgRect.left ? cardRect.width : 0);
-      var cardY = cardRect.top - wrapRect.top + Math.min(cardRect.height, 44)/2;
-
-      var ns = 'http://www.w3.org/2000/svg';
-      var line = document.createElementNS(ns,'line');
-      line.setAttribute('x1', dotX); line.setAttribute('y1', dotY);
-      line.setAttribute('x2', cardX); line.setAttribute('y2', cardY);
-      line.dataset.zone = key;
-      svg.appendChild(line);
-
-      var circle = document.createElementNS(ns,'circle');
-      circle.setAttribute('cx', dotX); circle.setAttribute('cy', dotY); circle.setAttribute('r', 4);
-      circle.dataset.zone = key;
-      svg.appendChild(circle);
-
-      var mark = marksLayer.querySelector('.rb-cfg-mark[data-zone="'+key+'"]');
-      if (mark){ mark.style.left = dotX + 'px'; mark.style.top = dotY + 'px'; }
-
-      var stepMark = stepMarksLayer.querySelector('.rb-cfg-step-mark[data-zone="'+key+'"]');
-      if (stepMark){ stepMark.style.left = dotX + 'px'; stepMark.style.top = dotY + 'px'; }
-
-      if (key === currentActiveZone){
-        line.classList.add('is-active');
-        circle.classList.add('is-active');
-      }
-    });
-  }
-
-  function clearDynamicNodes(){
-    cardsGrid.innerHTML = '';
-    marksLayer.innerHTML = '';
-    stepMarksLayer.innerHTML = '';
-    svg.innerHTML = '';
-  }
-
-  function selectVariant(key){
-    CURRENT = PRODUCT_VARIANTS[key];
-    PRODUCT_ID = CURRENT.id;
-    BASE_PRICE = CURRENT.basePrice;
-    state = {};
-    Object.keys(CURRENT.options).forEach(function(k){ state[k] = null; });
-    currentActiveZone = null;
-
-    clearDynamicNodes();
-
-    var onLoad = function(){
-      wheelImgEl.removeEventListener('load', onLoad);
-      layoutLines();
-    };
-    wheelImgEl.addEventListener('load', onLoad);
-    wheelImgEl.setAttribute('src', CURRENT.img);
-    wheelImgEl.setAttribute('alt', CURRENT.name);
-    titleEl.textContent = CURRENT.name;
-
-    buildMarks();
-    buildCards();
-    buildStepMarks();
-    applyGateVisibility();
-    document.dispatchEvent(new CustomEvent('rb-handbrake-variant', { detail:{ key:key } }));
-
-    root.classList.remove('rb-cfg-shape-pending');
-    changeTypeBtn.hidden = false;
-
-    recalcPrice();
-    updateCompletionUI();
-    updateStepMarks();
-    setTimeout(layoutLines, 60);
-
-    setTimeout(function(){
-      var head = root.querySelector('.rb-cfg-head');
-      if (!head) return;
-      var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rb-header-h')) || 0;
-      var y = head.getBoundingClientRect().top + window.pageYOffset - headerH - 12;
-      window.scrollTo({ top: Math.max(y, 0), behavior:'smooth' });
-    }, 60);
-  }
-
-  VARIANT_ORDER.forEach(function(key){
-    var v = PRODUCT_VARIANTS[key];
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'rb-cfg-shape-gate-opt';
-    btn.dataset.variant = key;
-    btn.innerHTML =
-      '<span class="rb-cfg-shape-gate-imgwrap"><img src="'+v.thumb+'" alt="'+v.label+'"></span>' +
-      '<span class="rb-cfg-shape-gate-label">'+v.label+'</span>' +
-      '<span class="rb-cfg-shape-gate-price">From '+fmtBase(v.priceFrom)+'</span>';
-    btn.addEventListener('click', function(){ selectVariant(key); });
-    shapeGateGrid.appendChild(btn);
-  });
-
-  VARIANT_ORDER.forEach(function(key){
-    hydrateVariant(PRODUCT_VARIANTS[key]).then(function(){
-      var v = PRODUCT_VARIANTS[key];
-      var priceEl = shapeGateGrid.querySelector('[data-variant="'+key+'"] .rb-cfg-shape-gate-price');
-      if (priceEl) priceEl.textContent = 'From ' + fmtBase(v.priceFrom);
-      if (CURRENT === v){
-        BASE_PRICE = v.basePrice;
-        clearDynamicNodes();
-        buildMarks();
-        buildCards();
-        buildStepMarks();
-        applyGateVisibility();
-        recalcPrice();
-        updateCompletionUI();
-        setTimeout(layoutLines, 60);
-      }
-    });
-  });
-
-  changeTypeBtn.addEventListener('click', function(){
-    root.classList.add('rb-cfg-shape-pending');
-    changeTypeBtn.hidden = true;
-    titleEl.textContent = DEFAULT_TITLE;
-    var gate = root.querySelector('.rb-cfg-shape-gate');
-    if (gate) gate.scrollIntoView({ behavior:'smooth', block:'start' });
-  });
-
-  window.addEventListener('resize', layoutLines);
-  window.addEventListener('load', layoutLines);
-
-  addBtn.addEventListener('click', function(){
-    if (!CURRENT || !isComplete()) return;
-
-    var securityHash = (window.Tygh && Tygh.security_hash) ? Tygh.security_hash : '';
-    if (!securityHash){
-      var hashInput = document.querySelector('input[name="security_hash"]');
-      if (hashInput) securityHash = hashInput.value;
-    }
-    if (!securityHash){
-      alert('Something went wrong (missing security token) — please refresh the page and try again.');
-      return;
-    }
-
-    var form = document.createElement('form');
-    form.action = 'https://therunbird.com/';
-    form.method = 'post';
-    form.enctype = 'multipart/form-data';
-    form.className = 'cm-disable-empty-files cm-ajax cm-ajax-full-render cm-ajax-status-middle';
-    form.style.display = 'none';
-
-    function addField(name, value){
-      var input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    }
-
-    addField('redirect_url', window.location.pathname + window.location.search);
-    addField('security_hash', securityHash);
-    addField('product_data[' + PRODUCT_ID + '][amount]', '1');
-    Object.keys(CURRENT.options).forEach(function(key){
-      var opt = CURRENT.options[key];
-      if (!gateOpen(opt)) return;
-      addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
-    });
-
-    var submitBtn = document.createElement('button');
-    submitBtn.type = 'submit';
-    submitBtn.name = 'dispatch[checkout.add..' + PRODUCT_ID + ']';
-    submitBtn.value = '';
-    submitBtn.style.display = 'none';
-    form.appendChild(submitBtn);
-
-    document.body.appendChild(form);
-    submitBtn.click();
-  });
-
-})();
-</script>
