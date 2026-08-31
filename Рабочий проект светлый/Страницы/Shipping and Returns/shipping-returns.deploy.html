@@ -1,0 +1,998 @@
+<!-- LIGHT-ONLY VARIANT — white page, off-white elevated panel for the Journey block,
+     #D1382A accents, white text on accent-filled elements. The Returns section's
+     No/Yes comparison deliberately does NOT use brand red for the "Yes" side (unlike
+     most accents on this page): with the brand accent itself being red, a red "no"
+     chip right next to a red "yes" chip in a prominent binary comparison would read
+     as two variants of the same signal rather than opposites. "No" stays muted
+     brick-red (matches the Materials Guide's "don't" marker convention); "Yes" uses
+     the same success green already established for the Contact Us captcha's correct
+     state (#34c759) — a real color-opposite, not just a saturation difference. CTA
+     band stays the one dramatic dark photo section. Fixes the same
+     rgba(var(--rb-accent-rgb), Y) compiler-bug pattern found in the CTA block. -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-sr-hero,
+#rb-sr-hero *,
+#rb-sr-hero *::before,
+#rb-sr-hero *::after {
+  box-sizing: border-box !important;
+}
+#rb-sr-hero a { text-decoration: none !important; }
+
+#rb-sr-hero {
+  --rb-bg:         #FFFFFF;
+  --rb-accent:     #D1382A;
+  --rb-accent-b:   rgba(209,56,42,.28);
+  --rb-text:       #121212;
+  --rb-text2:      #6E6A63;
+  --rb-border:     rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  overflow: hidden !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-sr-hero .rb-srh-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(209,56,42,.06) 0%, transparent 65%) !important;
+}
+#rb-sr-hero .rb-srh-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+
+#rb-sr-hero .rb-srh-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 56px !important;
+  text-align: center !important;
+}
+#rb-sr-hero .rb-srh-eyebrow {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .18em !important; text-transform: uppercase !important;
+  margin-bottom: 26px !important;
+  background: rgba(209,56,42,.05) !important;
+}
+#rb-sr-hero .rb-srh-h1 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(36px, 5.4vw, 64px) !important;
+  line-height: .98 !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  margin: 0 0 22px !important;
+}
+#rb-sr-hero .rb-srh-h1 em {
+  color: var(--rb-accent) !important;
+  font-style: italic !important;
+}
+#rb-sr-hero .rb-srh-p {
+  font-size: 15.5px !important;
+  color: var(--rb-text2) !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+  max-width: 640px !important;
+  margin: 0 auto 40px !important;
+}
+#rb-sr-hero .rb-srh-p strong { color: var(--rb-text) !important; font-weight: 500 !important; }
+
+#rb-sr-hero .rb-srh-chips {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-sr-hero .rb-srh-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 11px 22px !important;
+  border: 1px solid rgba(18,18,18,.14) !important;
+  border-radius: 100px !important;
+  background: rgba(18,18,18,.02) !important;
+  color: var(--rb-text2) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  transition: border-color .2s, color .2s, background .2s !important;
+}
+#rb-sr-hero .rb-srh-chip:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-text) !important;
+  background: rgba(209,56,42,.05) !important;
+}
+
+@media (max-width: 768px) {
+  #rb-sr-hero .rb-srh-inner { padding: 48px 20px 40px !important; }
+  #rb-sr-hero .rb-srh-chips { gap: 8px !important; }
+  #rb-sr-hero .rb-srh-chip { padding: 9px 16px !important; font-size: 13px !important; }
+}
+</style>
+
+<div id="rb-sr-hero">
+  <div class="rb-srh-glow"></div>
+  <div class="rb-srh-cf"></div>
+  <div class="rb-srh-inner">
+    <span class="rb-srh-eyebrow">Shipping &amp; Returns</span>
+    <h1 class="rb-srh-h1">From Our Hands<br><em>To Your Door.</em></h1>
+    <p class="rb-srh-p">
+      Every order ships only once it's finished — and only after <strong>you've seen photos and approved it</strong>.
+      Here's exactly how your build moves from our workshop to your Corvette, and what happens if anything's
+      not right.
+    </p>
+    <div class="rb-srh-chips">
+      <a href="#journey" class="rb-srh-chip">Order Journey</a>
+      <a href="#shipping" class="rb-srh-chip">Shipping Details</a>
+      <a href="#returns" class="rb-srh-chip">Returns &amp; Damages</a>
+      <a href="#faq" class="rb-srh-chip">FAQ</a>
+    </div>
+  </div>
+</div>
+
+<style>
+#rb-sr-journey,
+#rb-sr-journey *,
+#rb-sr-journey *::before,
+#rb-sr-journey *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-sr-journey {
+  --rb-bg-elevated: #FAF9F7;
+  --rb-accent:      #D1382A;
+  --rb-text:        #121212;
+  --rb-text2:       #6E6A63;
+  --rb-border:      rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg-elevated) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-sr-journey .rb-sj-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-sr-journey .rb-sj-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+#rb-sr-journey .rb-sj-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-sr-journey .rb-sj-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4,1fr) !important;
+  gap: 0 !important;
+  padding-top: 20px !important;
+}
+#rb-sr-journey .rb-sj-item {
+  padding: 28px 32px !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+}
+#rb-sr-journey .rb-sj-item:last-child { border-right: none !important; }
+#rb-sr-journey .rb-sj-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 40px !important; font-weight: 900 !important;
+  color: rgba(18,18,18,.07) !important;
+  line-height: 1 !important; margin-bottom: 14px !important;
+  user-select: none !important;
+}
+#rb-sr-journey .rb-sj-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 21px !important;
+  text-transform: uppercase !important; letter-spacing: .03em !important;
+  color: var(--rb-text) !important; margin-bottom: 10px !important;
+}
+#rb-sr-journey .rb-sj-desc {
+  font-size: 13.5px !important; color: var(--rb-text2) !important; line-height: 1.75 !important;
+  margin: 0 !important;
+}
+#rb-sr-journey .rb-sj-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 12px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+}
+#rb-sr-journey .rb-sj-tag::before {
+  content: '' !important;
+  width: 6px !important; height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--rb-accent) !important;
+  flex-shrink: 0 !important;
+}
+#rb-sr-journey .rb-sj-item:not(:last-child)::after {
+  content: '→' !important;
+  position: absolute !important; top: 34px !important; right: -14px !important;
+  width: 28px !important; height: 28px !important; z-index: 10 !important;
+  background: var(--rb-bg-elevated) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 12px !important; color: var(--rb-accent) !important;
+  line-height: 28px !important; text-align: center !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-sr-journey .rb-sj-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-sr-journey .rb-sj-grid { grid-template-columns: 1fr 1fr !important; }
+  #rb-sr-journey .rb-sj-item {
+    border-right: 1px solid var(--rb-border) !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-sr-journey .rb-sj-item:nth-child(2n) { border-right: none !important; }
+  #rb-sr-journey .rb-sj-item:nth-child(1)::after,
+  #rb-sr-journey .rb-sj-item:nth-child(3)::after { display: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-sr-journey .rb-sj-wrap { padding: 15px 20px 0 !important; }
+  #rb-sr-journey .rb-sj-title { font-size: 30px !important; }
+  #rb-sr-journey .rb-sj-grid { grid-template-columns: 1fr !important; padding-top: 8px !important; }
+  #rb-sr-journey .rb-sj-item { padding: 22px 20px !important; border-right: none !important; }
+  #rb-sr-journey .rb-sj-item:not(:last-child)::after { display: none !important; }
+}
+</style>
+
+<div id="rb-sr-journey">
+  <a id="journey"></a>
+  <div class="rb-sj-wrap">
+    <span class="rb-sj-eyebrow">Order Journey</span>
+    <h2 class="rb-sj-title">What Happens After You Order</h2>
+  </div>
+
+  <div class="rb-sj-grid">
+
+    <div class="rb-sj-item">
+      <div class="rb-sj-num">01</div>
+      <div class="rb-sj-item-title">Handcrafted</div>
+      <p class="rb-sj-desc">Your piece is cut, wrapped, and hand-stitched in our workshop. Nothing ships until the craftsman working on it is finished.</p>
+      <span class="rb-sj-tag">7&ndash;14 Days Average</span>
+    </div>
+
+    <div class="rb-sj-item">
+      <div class="rb-sj-num">02</div>
+      <div class="rb-sj-item-title">Photo Approval</div>
+      <p class="rb-sj-desc">We email you photos of your finished piece before it ever leaves the workshop, so you can see exactly what you're getting.</p>
+      <span class="rb-sj-tag">Sent To Your Email</span>
+    </div>
+
+    <div class="rb-sj-item">
+      <div class="rb-sj-num">03</div>
+      <div class="rb-sj-item-title">Shipped</div>
+      <p class="rb-sj-desc">Once you're happy with the photos and nothing needs adjusting, we package it up and send it to your address.</p>
+      <span class="rb-sj-tag">Tracking Number Provided</span>
+    </div>
+
+    <div class="rb-sj-item">
+      <div class="rb-sj-num">04</div>
+      <div class="rb-sj-item-title">Tracked To Your Door</div>
+      <p class="rb-sj-desc">We keep you posted as your order moves — you'll always know where it is until it arrives, anywhere in North America.</p>
+      <span class="rb-sj-tag">Status Updates Included</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-journey');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-sr-ship,
+#rb-sr-ship *,
+#rb-sr-ship *::before,
+#rb-sr-ship *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-sr-ship {
+  --rb-bg:      #FFFFFF;
+  --rb-accent:  #D1382A;
+  --rb-text:    #121212;
+  --rb-text2:   #6E6A63;
+  --rb-border:  rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-sr-ship .rb-sd-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-sr-ship .rb-sd-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+#rb-sr-ship .rb-sd-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-sr-ship .rb-sd-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+}
+#rb-sr-ship .rb-sd-item {
+  padding: 26px 40px !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: background .25s !important;
+}
+#rb-sr-ship .rb-sd-item:nth-child(3n) { border-right: none !important; }
+#rb-sr-ship .rb-sd-item::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important;
+  transform: scaleX(0) !important; transform-origin: left !important; transition: transform .35s !important;
+}
+#rb-sr-ship .rb-sd-item:hover::before { transform: scaleX(1) !important; }
+#rb-sr-ship .rb-sd-item:hover { background: rgba(209,56,42,.04) !important; }
+#rb-sr-ship .rb-sd-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 22px !important; text-transform: uppercase !important;
+  color: var(--rb-text) !important; letter-spacing: .02em !important; margin-bottom: 8px !important;
+}
+#rb-sr-ship .rb-sd-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.72 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-sr-ship .rb-sd-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-sr-ship .rb-sd-grid { grid-template-columns: 1fr 1fr !important; }
+  #rb-sr-ship .rb-sd-item:nth-child(3n) { border-right: 1px solid var(--rb-border) !important; }
+  #rb-sr-ship .rb-sd-item:nth-child(2n) { border-right: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-sr-ship .rb-sd-wrap { padding: 15px 20px 0 !important; }
+  #rb-sr-ship .rb-sd-title { font-size: 30px !important; }
+  #rb-sr-ship .rb-sd-grid { grid-template-columns: 1fr !important; }
+  #rb-sr-ship .rb-sd-item { border-right: none !important; padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-sr-ship">
+  <a id="shipping"></a>
+  <div class="rb-sd-wrap">
+    <span class="rb-sd-eyebrow">The Details</span>
+    <h2 class="rb-sd-title">Shipping Details</h2>
+  </div>
+
+  <div class="rb-sd-grid">
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Where We Ship</div>
+      <p class="rb-sd-desc">Anywhere in North America — the United States and Canada. Enter your address at checkout to see it confirmed.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Shipping Cost</div>
+      <p class="rb-sd-desc">Calculated at checkout based on your location and order size, before you pay — no surprises later.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Nothing Ships Early</div>
+      <p class="rb-sd-desc">Your order only ships after production is finished and you've approved the photos we send you.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Tracking Number</div>
+      <p class="rb-sd-desc">Sent to your email the moment your package leaves our workshop, so you can follow it the whole way.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Status Updates</div>
+      <p class="rb-sd-desc">We keep you informed at every stage — from photo approval to shipped to delivered — not just a single tracking link.</p>
+    </div>
+
+    <div class="rb-sd-item">
+      <div class="rb-sd-item-title">Careful Packaging</div>
+      <p class="rb-sd-desc">Every piece is packaged to protect its finish in transit, and arrives with an installation guide and material care card.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-ship');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-sr-returns,
+#rb-sr-returns *,
+#rb-sr-returns *::before,
+#rb-sr-returns *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-sr-returns {
+  --rb-bg:      #FFFFFF;
+  --rb-accent:  #D1382A;
+  --rb-text:    #121212;
+  --rb-text2:   #6E6A63;
+  --rb-border:  rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-sr-returns .rb-sre-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+}
+
+#rb-sr-returns .rb-sre-col-h {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 22px !important;
+}
+#rb-sr-returns .rb-sre-col-icon {
+  width: 34px !important; height: 34px !important;
+  border-radius: 9px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+  font-size: 16px !important;
+}
+#rb-sr-returns .rb-sre-col-icon.no { background: rgba(161,83,83,.10) !important; color: #A15353 !important; }
+#rb-sr-returns .rb-sre-col-icon.yes { background: rgba(52,199,89,.12) !important; color: #248A46 !important; }
+#rb-sr-returns .rb-sre-col-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 26px !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+}
+
+#rb-sr-returns .rb-sre-p {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.8 !important;
+  margin: 0 0 22px !important; font-weight: 300 !important;
+}
+#rb-sr-returns .rb-sre-p strong { color: var(--rb-text) !important; font-weight: 500 !important; }
+
+#rb-sr-returns .rb-sre-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+#rb-sr-returns .rb-sre-list li {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: flex-start !important;
+  font-size: 14px !important;
+  color: var(--rb-text) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 14px !important;
+}
+#rb-sr-returns .rb-sre-list li:last-child { margin-bottom: 0 !important; }
+#rb-sr-returns .rb-sre-list li::before {
+  flex-shrink: 0 !important;
+  width: 18px !important; height: 18px !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 11px !important; font-weight: 700 !important;
+  margin-top: 1px !important;
+}
+#rb-sr-returns .rb-sre-col.no .rb-sre-list li::before {
+  content: '✕' !important;
+  color: #A15353 !important;
+  border: 1px solid rgba(161,83,83,.4) !important;
+}
+#rb-sr-returns .rb-sre-col.yes .rb-sre-list li::before {
+  content: '✓' !important;
+  color: #248A46 !important;
+  border: 1px solid rgba(52,199,89,.45) !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-sr-returns .rb-sre-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-sr-returns .rb-sre-wrap { grid-template-columns: 1fr !important; gap: 40px !important; }
+}
+@media (max-width: 768px) {
+  #rb-sr-returns .rb-sre-wrap { padding: 48px 20px !important; }
+}
+</style>
+
+<div id="rb-sr-returns">
+  <a id="returns"></a>
+  <div class="rb-sre-wrap">
+
+    <div class="rb-sre-col no">
+      <div class="rb-sre-col-h">
+        <span class="rb-sre-col-icon no">✕</span>
+        <span class="rb-sre-col-title">No Returns On Custom Orders</span>
+      </div>
+      <p class="rb-sre-p">
+        Every piece is built by hand to your exact spec — material, finish, color, and thread — the moment
+        you order it. Because of that, we <strong>can't accept returns</strong> for a completed order that
+        matches what you configured.
+      </p>
+      <ul class="rb-sre-list">
+        <li>No returns for change of mind once production has started</li>
+        <li>No returns for a correctly-built order matching your configuration</li>
+        <li>You approve photos before it ships, so there are no surprises on arrival</li>
+      </ul>
+    </div>
+
+    <div class="rb-sre-col yes">
+      <div class="rb-sre-col-h">
+        <span class="rb-sre-col-icon yes">✓</span>
+        <span class="rb-sre-col-title">We'll Make It Right</span>
+      </div>
+      <p class="rb-sre-p">
+        If something goes wrong on our end or in transit, we stand behind it — <strong>no cost to you</strong>.
+        Contact us with your order number and photos, and we'll sort it out.
+      </p>
+      <ul class="rb-sre-list">
+        <li>Arrived damaged in transit — we remake it, free</li>
+        <li>Doesn't match your order specification — we remake it, free</li>
+        <li>Manufacturing defect discovered after install — contact us and we'll make it right</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-returns');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-sr-faq,
+#rb-sr-faq *,
+#rb-sr-faq *::before,
+#rb-sr-faq *::after {
+  box-sizing: border-box !important;
+}
+#rb-sr-faq button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-sr-faq {
+  --rb-bg:        #FFFFFF;
+  --rb-accent:    #D1382A;
+  --rb-accent-dim:  rgba(209,56,42,.10);
+  --rb-accent-b:    rgba(209,56,42,.28);
+  --rb-text:      #121212;
+  --rb-text2:     #6E6A63;
+  --rb-border:    rgba(18,18,18,.08);
+  --rb-border-s:  rgba(18,18,18,.16);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-sr-faq .rb-sf-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-sr-faq .rb-sf-head { display: block !important; margin-bottom: 24px !important; }
+#rb-sr-faq .rb-sf-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+#rb-sr-faq .rb-sf-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-sr-faq .rb-sf-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-sr-faq .rb-sf-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-sr-faq .rb-sf-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 22px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 19px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-sr-faq .rb-sf-q:hover { color: var(--rb-accent) !important; }
+#rb-sr-faq .rb-sf-item.open .rb-sf-q { color: var(--rb-accent) !important; }
+#rb-sr-faq .rb-sf-icon {
+  width: 32px !important; height: 32px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 18px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-sr-faq .rb-sf-item.open .rb-sf-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-sr-faq .rb-sf-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important;
+}
+#rb-sr-faq .rb-sf-item.open .rb-sf-a { max-height: 300px !important; padding-bottom: 22px !important; }
+
+@media (max-width: 1024px) {
+  #rb-sr-faq .rb-sf-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-sr-faq .rb-sf-wrap { padding: 15px 20px 32px !important; }
+  #rb-sr-faq .rb-sf-title { font-size: 30px !important; }
+  #rb-sr-faq .rb-sf-q { font-size: 16px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-sr-faq">
+  <a id="faq"></a>
+  <div class="rb-sf-wrap">
+
+    <div class="rb-sf-head">
+      <div class="rb-sf-eyebrow">Got Questions</div>
+      <h2 class="rb-sf-title">Shipping &amp; Returns FAQ</h2>
+    </div>
+
+    <div class="rb-sf-list">
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          What if I don't like the photo you send me?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">Reply to that email and let us know what's off. If it doesn't match what you ordered, we'll fix it before it ships — that's exactly what the photo approval step is for.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          What if I don't respond to the photo email?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">We'll follow up before shipping. If your piece matches your order exactly and we don't hear back after reasonable attempts to reach you, we'll go ahead and ship it as configured.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          Can I request changes after seeing the photo?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">If it doesn't match your original order, yes — we'll correct it at no cost. Requesting a completely different configuration at that stage may involve rebuilding the piece; contact us and we'll talk through the options.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          My tracking hasn't updated in a few days — is that normal?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">Carrier scans can lag, especially crossing into Canada or over a weekend. If it's been more than a few business days with no movement, contact us with your order number and we'll look into it.</p>
+      </div>
+
+      <div class="rb-sf-item">
+        <button class="rb-sf-q" type="button">
+          How do I start a damage or defect claim?
+          <span class="rb-sf-icon">+</span>
+        </button>
+        <p class="rb-sf-a">Contact us with your order number and photos of the issue as soon as you notice it. We'll review it and arrange a free remake or replacement.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-faq');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-sr-faq .rb-sf-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-sf-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-sr-faq .rb-sf-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<style>
+#rb-sr-cta,
+#rb-sr-cta *,
+#rb-sr-cta *::before,
+#rb-sr-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-sr-cta a { text-decoration: none !important; }
+#rb-sr-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-sr-cta {
+  --rb-accent:      #D1382A;
+  --rb-accent-h:    #A82C20;
+  --rb-text:        #F0F0F0;
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.webp') center / cover no-repeat !important;
+  padding: 68px 48px !important;
+  border-top: 1px solid rgba(255,255,255,.07) !important;
+}
+
+#rb-sr-cta .rb-sct-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(209,56,42,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 50%, rgba(209,56,42,.10) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 50%, rgba(209,56,42,.10) 0%, transparent 100%) !important;
+}
+#rb-sr-cta .rb-sct-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 9px 9px !important;
+}
+#rb-sr-cta .rb-sct-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 720px !important; margin: 0 auto !important;
+}
+#rb-sr-cta .rb-sct-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .24em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 22px !important;
+}
+#rb-sr-cta .rb-sct-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(40px, 6vw, 76px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: .96 !important; margin: 0 0 20px !important;
+}
+#rb-sr-cta .rb-sct-h em {
+  color: var(--rb-accent) !important; font-style: italic !important;
+  text-shadow: 0 0 40px rgba(209,56,42,.5) !important;
+}
+#rb-sr-cta .rb-sct-p {
+  color: #999 !important; font-size: 15.5px !important; font-weight: 300 !important;
+  line-height: 1.72 !important; margin: 0 auto 44px !important; max-width: 560px !important;
+}
+#rb-sr-cta .rb-sct-btns {
+  display: flex !important; flex-direction: row !important;
+  gap: 14px !important; justify-content: center !important; flex-wrap: wrap !important;
+}
+#rb-sr-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #FFFFFF !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s, box-shadow .2s !important;
+  box-shadow: 0 4px 24px rgba(209,56,42,.35) !important;
+}
+#rb-sr-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+  box-shadow: 0 10px 40px rgba(209,56,42,.55) !important;
+}
+#rb-sr-cta .rb-btn-ghost {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important; background: transparent !important;
+  color: #C8C8C8 !important; border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: border-color .2s, background .2s !important;
+}
+#rb-sr-cta .rb-btn-ghost:hover { border-color: rgba(255,255,255,.42) !important; background: rgba(255,255,255,.05) !important; }
+
+@media (max-width: 768px) {
+  #rb-sr-cta { padding: 56px 20px !important; }
+  #rb-sr-cta .rb-sct-btns { flex-wrap: nowrap !important; gap: 10px !important; }
+  #rb-sr-cta .rb-btn-gold, #rb-sr-cta .rb-btn-ghost { padding: 13px 20px !important; font-size: 15px !important; flex: 1 !important; }
+}
+</style>
+
+<div id="rb-sr-cta">
+  <div class="rb-sct-glow"></div>
+  <div class="rb-sct-cf"></div>
+  <div class="rb-sct-inner">
+    <span class="rb-sct-eye">Already Ordered?</span>
+    <h2 class="rb-sct-h">Questions About<br><em>Your Order?</em></h2>
+    <p class="rb-sct-p">Reach out to our team any time — we're happy to help with order status, shipping, or anything else.</p>
+    <div class="rb-sct-btns">
+      <a href="https://therunbird.com/contact-us/" class="rb-btn-gold">Contact Support</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-sr-cta');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

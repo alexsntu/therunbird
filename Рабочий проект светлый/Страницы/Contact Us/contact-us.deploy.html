@@ -1,0 +1,629 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Contact Us page — LIGHT-ONLY VARIANT
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, standalone CMS page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-contact-us — no conflict with UniTheme2
+     or with other RunBird blocks (#rb-categories, #rb-custom-order, etc.)
+     No theme toggle — permanently light, separate track from
+     Рабочий проект/. White page, off-white form card (matches the
+     --rb-bg-card convention used site-wide), white input fields,
+     #D1382A accents/submit button (white text).
+
+     ERROR COLOR CHOICE: the dark track used a coral-red (#E0645A) for
+     validation errors, which read fine against a gold accent. Here the
+     brand accent itself is red (#D1382A) — keeping a same-hue red for
+     "this field is wrong" would make an error look like it's just in the
+     accent color, not a warning. First tried a burnt orange (#C2410C),
+     but side-by-side it still read as "another shade of red" (hue only
+     ~12° apart) — moved further to a true amber (#D97706, hue ~36° from
+     the brand red) so the two states are unambiguous at a glance.
+     Everything else (validators, captcha logic, reCAPTCHA v3 submission,
+     field names) is carried over unchanged from the dark track's file —
+     this page's behavior does not depend on theme.
+
+     FORM MECHANISM: this reuses CS-Cart's native "Pages > Feedback form" (page_id=30,
+     https://therunbird.com/contact-uss/) — same action URL, same form_values[] field IDs:
+       form_values[1]  = Full Name
+       form_values[2]  = Email      (paired with hidden customer_email=2, the reply-to field)
+       form_values[10] = Phone
+       form_values[3]  = Comment (Body)
+
+     security_hash is NOT hardcoded (and no longer sent at all): it turned out to be a
+     per-request/session nonce (confirmed 2026-08-10 by fetching the live page repeatedly —
+     the value differs every time), so any hardcoded value goes stale immediately and CS-Cart
+     silently drops the submission. Verified by direct curl POST omitting security_hash
+     entirely: CS-Cart accepted it (302 redirect to /contact-uss/?sent=Y, the same success
+     signal the native form produces). This mirrors a known-working reference implementation
+     (maxmobiles.ru CS-Cart feedback-form widget) which also omits security_hash.
+
+     Also fixed: dispatch[pages.send_form] must be its own hidden <input>, not just a
+     name/value on the <button>. new FormData(form) (used below for the fetch() submit)
+     does NOT include submit-button name/value pairs unless the button is passed as the
+     FormData submitter argument — so with dispatch only on the button, the POST body never
+     actually contained dispatch[pages.send_form], and CS-Cart had no idea this was a form
+     submission at all. This was the primary reason no emails arrived.
+
+     UX: submission is fire-and-forget — we POST via fetch() and do NOT wait for or read
+     the response; the "request received" confirmation is shown immediately, client-side.
+
+     ANTI-SPAM (2026-08-25): CS-Cart's native pages.send_form endpoint now requires a
+     Google reCAPTCHA v3 token (g-recaptcha-v3-token) on every submission — enabled
+     store-wide via Add-ons > Google reCAPTCHA > Settings > Custom forms, after a spam
+     bot was found posting directly to the endpoint with none of our HTML/JS involved.
+     Without this token our fetch() submission is now silently rejected server-side
+     (no more ?sent=Y redirect) even though the client still shows "Request Received" —
+     so this page loads the reCAPTCHA v3 script and attaches a token before every submit.
+     Site key is public by design; the matching secret lives only in CS-Cart admin.
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-contact-us,
+#rb-contact-us *,
+#rb-contact-us *::before,
+#rb-contact-us *::after {
+  box-sizing: border-box !important;
+}
+#rb-contact-us a { text-decoration: none !important; }
+
+#rb-contact-us {
+  --rb-bg:         #FFFFFF;
+  --rb-bg-card:    #FAF9F7;
+  --rb-bg-field:   #FFFFFF;
+  --rb-accent:     #D1382A;
+  --rb-accent-h:   #A82C20;
+  --rb-accent-b:   rgba(209,56,42,.28);
+  --rb-text:       #121212;
+  --rb-text2:      #6E6A63;
+  --rb-border:     rgba(18,18,18,.08);
+  --rb-error:      #D97706;
+
+  display: block !important;
+  width: 100vw !important; max-width: 100vw !important;
+  position: relative !important; left: 50% !important; transform: translateX(-50%) !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  margin: 0 !important; padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#rb-contact-us .rb-cu-hero {
+  position: relative !important; overflow: hidden !important;
+  text-align: center !important;
+  padding: 72px 24px 48px !important;
+  background:
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(209,56,42,.05), transparent 65%),
+    var(--rb-bg) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+}
+#rb-contact-us .rb-cu-hero::before {
+  content: '' !important; position: absolute !important; inset: 0 !important; z-index: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+#rb-contact-us .rb-cu-hero-in { position: relative !important; z-index: 1 !important; max-width: 640px !important; margin: 0 auto !important; }
+#rb-contact-us .rb-cu-badge {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .15em !important; text-transform: uppercase !important;
+  margin-bottom: 22px !important;
+  background: rgba(209,56,42,.05) !important;
+}
+#rb-contact-us .rb-cu-badge-dot {
+  width: 6px !important; height: 6px !important; border-radius: 50% !important;
+  background: var(--rb-accent) !important;
+}
+#rb-contact-us .rb-cu-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(38px, 6vw, 64px) !important;
+  text-transform: uppercase !important; line-height: 1 !important; letter-spacing: -.01em !important;
+  color: var(--rb-text) !important; margin: 0 0 18px !important;
+}
+#rb-contact-us .rb-cu-title em {
+  font-style: normal !important; color: var(--rb-accent) !important;
+}
+#rb-contact-us .rb-cu-sub {
+  color: var(--rb-text2) !important; font-size: 15.5px !important; line-height: 1.65 !important;
+  max-width: 480px !important; margin: 0 auto !important;
+}
+#rb-contact-us .rb-cu-sub a { color: var(--rb-accent) !important; text-decoration: none !important; }
+#rb-contact-us .rb-cu-sub a:hover { text-decoration: underline !important; }
+
+/* ══════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════ */
+#rb-contact-us .rb-cu-wrap { max-width: 1100px !important; margin: 0 auto !important; padding: 64px 48px 96px !important; }
+#rb-contact-us .rb-cu-info { margin: 0 0 40px !important; }
+
+/* ══════════════════════════════════════
+   INFO ROW ("Before You Write")
+   Mobile-first: stacked list with dividers, icon left / text right.
+   Desktop (see RESPONSIVE below) switches to a 3-across horizontal row.
+══════════════════════════════════════ */
+#rb-contact-us .rb-cu-info-t {
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 800 !important;
+  text-transform: uppercase !important; letter-spacing: .02em !important;
+  font-size: 24px !important; color: var(--rb-text) !important; margin: 0 0 28px !important;
+}
+#rb-contact-us .rb-cu-item {
+  display: flex !important; gap: 16px !important; align-items: flex-start !important;
+  padding: 0 0 26px !important; margin: 0 0 26px !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+}
+#rb-contact-us .rb-cu-item:last-child { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+#rb-contact-us .rb-cu-ic {
+  flex: 0 0 auto !important; width: 40px !important; height: 40px !important; border-radius: 50% !important;
+  border: 1px solid var(--rb-accent-b) !important; background: rgba(209,56,42,.05) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  color: var(--rb-accent) !important;
+}
+#rb-contact-us .rb-cu-item-t {
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 700 !important;
+  text-transform: uppercase !important; letter-spacing: .02em !important;
+  font-size: 16px !important; color: var(--rb-text) !important; margin: 6px 0 6px !important;
+}
+#rb-contact-us .rb-cu-item-d { color: var(--rb-text2) !important; font-size: 13.5px !important; line-height: 1.6 !important; }
+
+/* ══════════════════════════════════════
+   FORM CARD
+══════════════════════════════════════ */
+#rb-contact-us .rb-cu-card {
+  position: relative !important;
+  background: var(--rb-bg-card) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 12px !important;
+  padding: 40px !important;
+  overflow: hidden !important;
+}
+#rb-contact-us .rb-cu-card::before {
+  content: '' !important; position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: linear-gradient(90deg, transparent, var(--rb-accent), transparent) !important;
+}
+#rb-contact-us .rb-cu-card-t {
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 800 !important;
+  text-transform: uppercase !important; letter-spacing: .02em !important;
+  font-size: 26px !important; color: var(--rb-text) !important; margin: 0 0 8px !important;
+}
+#rb-contact-us .rb-cu-card-s { color: var(--rb-text2) !important; font-size: 14px !important; margin: 0 0 30px !important; }
+
+#rb-contact-us .rb-cu-field { margin-bottom: 20px !important; }
+#rb-contact-us .rb-cu-field-row { margin-bottom: 0 !important; }
+#rb-contact-us .rb-cu-label {
+  display: block !important; font-size: 12px !important; font-weight: 600 !important;
+  letter-spacing: .06em !important; text-transform: uppercase !important;
+  color: var(--rb-text2) !important; margin-bottom: 9px !important;
+}
+#rb-contact-us .rb-cu-label span { color: var(--rb-accent) !important; }
+#rb-contact-us .rb-cu-field input,
+#rb-contact-us .rb-cu-field textarea {
+  width: 100% !important; background: var(--rb-bg-field) !important;
+  border: 1px solid var(--rb-border) !important; border-radius: 8px !important;
+  color: var(--rb-text) !important; font-family: 'Inter', sans-serif !important;
+  font-size: 14.5px !important; padding: 13px 16px !important;
+  transition: border-color .18s, box-shadow .18s !important;
+}
+#rb-contact-us .rb-cu-field textarea { resize: vertical !important; min-height: 110px !important; line-height: 1.5 !important; }
+#rb-contact-us .rb-cu-field input::placeholder,
+#rb-contact-us .rb-cu-field textarea::placeholder { color: #9C968C !important; }
+#rb-contact-us .rb-cu-field input:focus,
+#rb-contact-us .rb-cu-field textarea:focus {
+  outline: none !important; border-color: var(--rb-accent) !important;
+  box-shadow: 0 0 0 3px rgba(209,56,42,.12) !important;
+}
+#rb-contact-us .rb-cu-field.rb-cu-err input,
+#rb-contact-us .rb-cu-field.rb-cu-err textarea {
+  border-color: var(--rb-error) !important;
+}
+#rb-contact-us .rb-cu-err-msg {
+  display: none !important; color: var(--rb-error) !important; font-size: 12px !important; margin-top: 7px !important;
+}
+#rb-contact-us .rb-cu-field.rb-cu-err .rb-cu-err-msg { display: block !important; }
+
+/* Captcha (3-number pick) */
+#rb-contact-us .rb-cu-cap-wrap {
+  background: var(--rb-bg-field) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 8px !important;
+  padding: 14px 16px !important;
+  transition: border-color .18s, box-shadow .18s !important;
+}
+#rb-contact-us .rb-cu-cap-q {
+  font-size: 13px !important; color: var(--rb-text2) !important; font-weight: 500 !important;
+  margin: 0 0 12px !important;
+}
+#rb-contact-us .rb-cu-cap-q strong { color: var(--rb-accent) !important; }
+#rb-contact-us .rb-cu-cap-btns { display: flex !important; gap: 10px !important; }
+#rb-contact-us .rb-cu-cap-btn {
+  flex: 1 !important; padding: 12px 8px !important;
+  border: 1.5px solid var(--rb-border) !important; border-radius: 8px !important;
+  background: var(--rb-bg-card) !important; font-size: 18px !important; font-weight: 700 !important;
+  color: var(--rb-text) !important; cursor: pointer !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: border-color .18s, background .18s, color .18s !important;
+}
+#rb-contact-us .rb-cu-cap-btn:hover {
+  border-color: var(--rb-accent) !important; color: var(--rb-accent) !important;
+  background: rgba(209,56,42,.05) !important;
+}
+#rb-contact-us .rb-cu-cap-btn.rb-cu-cap-correct {
+  border-color: #34c759 !important; background: rgba(52,199,89,.10) !important; color: #34c759 !important;
+}
+#rb-contact-us .rb-cu-cap-btn.rb-cu-cap-wrong {
+  border-color: var(--rb-error) !important; background: rgba(217,119,6,.08) !important;
+  color: var(--rb-error) !important; animation: rb-cu-shake .3s ease !important;
+}
+@keyframes rb-cu-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
+}
+#rb-contact-us .rb-cu-field.rb-cu-err .rb-cu-cap-wrap {
+  border-color: var(--rb-error) !important; box-shadow: 0 0 0 3px rgba(217,119,6,.12) !important;
+}
+
+#rb-contact-us .rb-cu-submit {
+  width: 100% !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 9px !important;
+  background: var(--rb-accent) !important; color: #FFFFFF !important; border: none !important;
+  border-radius: 999px !important; padding: 15px 30px !important; margin-top: 6px !important;
+  font-family: 'Barlow Condensed', sans-serif !important; font-size: 15px !important; font-weight: 700 !important;
+  letter-spacing: .05em !important; text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .15s !important;
+}
+#rb-contact-us .rb-cu-submit:hover { background: var(--rb-accent-h) !important; }
+#rb-contact-us .rb-cu-fine {
+  text-align: center !important; color: var(--rb-text2) !important; font-size: 11.5px !important;
+  margin-top: 16px !important; line-height: 1.5 !important;
+}
+#rb-contact-us .rb-cu-fine a { color: var(--rb-text2) !important; text-decoration: underline !important; }
+
+/* The reCAPTCHA badge itself is hidden globally in rb-work-light.css (site-wide CSS),
+   not here — CS-Cart's AJAX page navigation swaps this block out while the badge node
+   persists in <body>, so a rule scoped to this page alone isn't enough. Google only
+   allows hiding the badge together with the visible attribution text above (next to
+   the submit button) — keep that text if the global hide rule stays. */
+
+/* ══════════════════════════════════════
+   SUCCESS STATE
+══════════════════════════════════════ */
+#rb-contact-us .rb-cu-success { display: none !important; text-align: center !important; padding: 26px 0 !important; }
+#rb-contact-us.rb-cu-sent .rb-cu-form { display: none !important; }
+#rb-contact-us.rb-cu-sent .rb-cu-success { display: block !important; }
+#rb-contact-us .rb-cu-succ-ic {
+  width: 62px !important; height: 62px !important; border-radius: 50% !important; margin: 0 auto 22px !important;
+  border: 1px solid var(--rb-accent-b) !important; background: rgba(209,56,42,.06) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  color: var(--rb-accent) !important;
+}
+#rb-contact-us .rb-cu-succ-t {
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 800 !important;
+  text-transform: uppercase !important; font-size: 24px !important; color: var(--rb-text) !important; margin: 0 0 10px !important;
+}
+#rb-contact-us .rb-cu-succ-d { color: var(--rb-text2) !important; font-size: 14px !important; line-height: 1.6 !important; max-width: 340px !important; margin: 0 auto 22px !important; }
+#rb-contact-us .rb-cu-succ-again { color: var(--rb-accent) !important; font-size: 13px !important; font-weight: 600 !important; cursor: pointer !important; background: none !important; border: none !important; font-family: inherit !important; }
+#rb-contact-us .rb-cu-succ-again:hover { color: var(--rb-accent-h) !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+   Desktop (>900px): "Before You Write" becomes a horizontal 3-across row
+   above the form, and Name/E-mail/Phone share one row inside the form —
+   the whole thing fits without the long scroll a single narrow column forces.
+══════════════════════════════════════ */
+@media (min-width: 901px) {
+  #rb-contact-us .rb-cu-info-t { text-align: center !important; margin-bottom: 32px !important; }
+  #rb-contact-us .rb-cu-info-row {
+    display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 32px !important;
+  }
+  #rb-contact-us .rb-cu-item {
+    flex-direction: column !important; align-items: flex-start !important;
+    border-bottom: none !important; padding: 0 !important; margin: 0 !important;
+  }
+  #rb-contact-us .rb-cu-field-row {
+    display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 20px !important;
+    margin-bottom: 20px !important;
+  }
+  #rb-contact-us .rb-cu-field-row .rb-cu-field { margin-bottom: 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-contact-us .rb-cu-wrap { padding: 56px 32px 72px !important; }
+}
+@media (max-width: 640px) {
+  #rb-contact-us .rb-cu-hero { padding: 52px 20px 36px !important; }
+  #rb-contact-us .rb-cu-wrap { padding: 44px 18px 56px !important; }
+  #rb-contact-us .rb-cu-card { padding: 26px !important; }
+}
+</style>
+
+<div id="rb-contact-us">
+
+  <div class="rb-cu-hero">
+    <div class="rb-cu-hero-in">
+      <span class="rb-cu-badge"><span class="rb-cu-badge-dot"></span>Get In Touch</span>
+      <h1 class="rb-cu-title">Contact <em>Us</em></h1>
+      <p class="rb-cu-sub">Questions about fitment, materials, or a custom build? Send us a message — a real member of the RunBird team will get back to you personally.</p>
+      <p class="rb-cu-sub">Prefer email? Reach us directly at <a href="mailto:store@therunbird.com">store@therunbird.com</a>.</p>
+    </div>
+  </div>
+
+  <div class="rb-cu-wrap">
+
+      <!-- Info row: horizontal on desktop, stacked list on mobile -->
+      <div class="rb-cu-info">
+        <h2 class="rb-cu-info-t">Before You Write</h2>
+
+        <div class="rb-cu-info-row">
+          <div class="rb-cu-item">
+            <div class="rb-cu-ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="rb-cu-item-t">Fast Response</div>
+              <div class="rb-cu-item-d">Most messages are answered within 24 hours on business days.</div>
+            </div>
+          </div>
+
+          <div class="rb-cu-item">
+            <div class="rb-cu-ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <div class="rb-cu-item-t">Real People</div>
+              <div class="rb-cu-item-d">Every reply comes from someone on the RunBird team — no bots, no scripts.</div>
+            </div>
+          </div>
+
+          <div class="rb-cu-item">
+            <div class="rb-cu-ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div>
+              <div class="rb-cu-item-t">What To Include</div>
+              <div class="rb-cu-item-d">For order questions, add your order number. For fitment or custom builds, a few words about your Corvette C6 help us reply faster.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form card -->
+      <div class="rb-cu-card">
+        <div class="rb-cu-form">
+          <h2 class="rb-cu-card-t">Send a Message</h2>
+          <p class="rb-cu-card-s">Fill out the form below and we'll be in touch shortly.</p>
+
+          <form id="rb-cu-form-el" action="https://therunbird.com/" method="post" enctype="multipart/form-data" name="forms_form" novalidate>
+            <input type="hidden" name="fake" value="1" />
+            <input type="hidden" name="page_id" value="30" />
+            <input type="hidden" name="customer_email" value="2" />
+            <input type="hidden" name="dispatch[pages.send_form]" value="Submit" />
+
+            <div class="rb-cu-field-row">
+              <div class="rb-cu-field" data-field="name">
+                <label class="rb-cu-label" for="rb-cu-name">Your Full Name <span>*</span></label>
+                <input id="rb-cu-name" type="text" name="form_values[1]" placeholder="John Smith" autocomplete="name" />
+                <div class="rb-cu-err-msg">Please enter your name.</div>
+              </div>
+
+              <div class="rb-cu-field" data-field="email">
+                <label class="rb-cu-label" for="rb-cu-email">Your E-mail <span>*</span></label>
+                <input id="rb-cu-email" type="email" name="form_values[2]" placeholder="you@example.com" autocomplete="email" />
+                <div class="rb-cu-err-msg">Please enter a valid e-mail address.</div>
+              </div>
+
+              <div class="rb-cu-field" data-field="phone">
+                <label class="rb-cu-label" for="rb-cu-phone">Your Phone <span>*</span></label>
+                <input id="rb-cu-phone" type="tel" name="form_values[10]" placeholder="+1 555 000 0000" autocomplete="tel" maxlength="20" />
+                <div class="rb-cu-err-msg">Please enter your phone number.</div>
+              </div>
+            </div>
+
+            <div class="rb-cu-field" data-field="comment">
+              <label class="rb-cu-label" for="rb-cu-comment">Your Comment <span>*</span></label>
+              <textarea id="rb-cu-comment" name="form_values[3]" placeholder="Tell us what you need..."></textarea>
+              <div class="rb-cu-err-msg">Please enter a short message.</div>
+            </div>
+
+            <div class="rb-cu-field rb-cu-cap-field" id="rb-cu-cap-field">
+              <label class="rb-cu-label">Security Check <span>*</span></label>
+              <div class="rb-cu-cap-wrap">
+                <p class="rb-cu-cap-q" id="rb-cu-cap-q"></p>
+                <div class="rb-cu-cap-btns" id="rb-cu-cap-btns">
+                  <button type="button" class="rb-cu-cap-btn" data-idx="0"></button>
+                  <button type="button" class="rb-cu-cap-btn" data-idx="1"></button>
+                  <button type="button" class="rb-cu-cap-btn" data-idx="2"></button>
+                </div>
+              </div>
+              <div class="rb-cu-err-msg">Please click the correct number.</div>
+            </div>
+
+            <button type="submit" class="rb-cu-submit">Send Message</button>
+            <p class="rb-cu-fine">By submitting, you agree to be contacted by RunBird regarding your inquiry.
+              This site is protected by reCAPTCHA and the Google
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
+              <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.
+            </p>
+          </form>
+        </div>
+
+        <div class="rb-cu-success">
+          <div class="rb-cu-succ-ic">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="rb-cu-succ-t">Request Received</div>
+          <p class="rb-cu-succ-d">Thanks — your message is on its way to our team. We typically get back to you within 24 hours.</p>
+          <button type="button" class="rb-cu-succ-again" id="rb-cu-again">Send another message</button>
+        </div>
+      </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var root = document.getElementById('rb-contact-us');
+  if (!root) return;
+
+  var form = document.getElementById('rb-cu-form-el');
+
+  var validators = {
+    name:    function(v) { return v.trim().length > 1; },
+    email:   function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); },
+    phone:   function(v) { var d = v.replace(/\D/g, '').length; return d >= 6 && d <= 15; },
+    comment: function(v) { return v.trim().length > 4; }
+  };
+
+  // International-friendly phone mask: groups digits in 3s for readability
+  // (e.g. "+44 20 7946 0018"), keeps a leading "+" if the visitor typed one,
+  // but doesn't force a US-only 10-digit / "+1 (XXX) XXX-XXXX" shape —
+  // any country's number, any length up to 15 digits (E.164 max), is fine.
+  var phoneInput = document.getElementById('rb-cu-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      var hasPlus = phoneInput.value.trim().charAt(0) === '+';
+      var digits = phoneInput.value.replace(/\D/g, '').slice(0, 15);
+      var groups = digits.match(/.{1,3}/g) || [];
+      phoneInput.value = (hasPlus ? '+' : '') + groups.join(' ');
+    });
+  }
+
+  // Captcha: pick the button showing a given number, out of 3 choices.
+  var capField    = document.getElementById('rb-cu-cap-field');
+  var capQ        = document.getElementById('rb-cu-cap-q');
+  var capBtnsWrap = document.getElementById('rb-cu-cap-btns');
+  var capBtns     = capBtnsWrap.querySelectorAll('.rb-cu-cap-btn');
+  var capCorrect  = null;
+  var capSolved   = false;
+
+  function generateCaptcha() {
+    var nums = [];
+    while (nums.length < 3) {
+      var n = Math.floor(Math.random() * 89) + 10;
+      if (nums.indexOf(n) === -1) nums.push(n);
+    }
+    nums.sort(function() { return Math.random() - 0.5; });
+    capCorrect = nums[Math.floor(Math.random() * 3)];
+    capSolved  = false;
+
+    capQ.innerHTML = 'Click the number <strong>' + capCorrect + '</strong>:';
+    Array.prototype.forEach.call(capBtns, function(btn, i) {
+      btn.textContent = nums[i];
+      btn.dataset.num = nums[i];
+      btn.className   = 'rb-cu-cap-btn';
+    });
+    capField.classList.remove('rb-cu-err');
+  }
+
+  capBtnsWrap.addEventListener('click', function(e) {
+    var btn = e.target.closest('.rb-cu-cap-btn');
+    if (!btn) return;
+    var val = parseInt(btn.dataset.num, 10);
+
+    Array.prototype.forEach.call(capBtns, function(b) { b.className = 'rb-cu-cap-btn'; });
+    capField.classList.remove('rb-cu-err');
+
+    if (val === capCorrect) {
+      btn.classList.add('rb-cu-cap-correct');
+      capSolved = true;
+    } else {
+      btn.classList.add('rb-cu-cap-wrong');
+      capSolved = false;
+      setTimeout(generateCaptcha, 900);
+    }
+  });
+
+  generateCaptcha();
+
+  function validate() {
+    var ok = true;
+    ['name', 'email', 'phone', 'comment'].forEach(function(key) {
+      var field = form.querySelector('[data-field="' + key + '"]');
+      var input = field.querySelector('input, textarea');
+      var valid = validators[key](input.value || '');
+      field.classList.toggle('rb-cu-err', !valid);
+      if (!valid) ok = false;
+    });
+    if (!capSolved) {
+      capField.classList.add('rb-cu-err');
+      ok = false;
+    }
+    return ok;
+  }
+
+  // Google reCAPTCHA v3 (site key is public by design, safe to embed):
+  // CS-Cart's native feedback-form endpoint now requires a g-recaptcha-v3-token
+  // field on every submission (server-side check, added 2026-08-25 to stop spam).
+  // Action name "form_builder" matches what CS-Cart's own native form sends.
+  var RECAPTCHA_SITE_KEY = '6LdDwJctAAAAAJoxP7if9Eq8uqzxZF-NDt0816PA';
+  var recaptchaReadyPromise = null;
+
+  function loadRecaptcha() {
+    if (recaptchaReadyPromise) return recaptchaReadyPromise;
+    recaptchaReadyPromise = new Promise(function(resolve, reject) {
+      if (window.grecaptcha && window.grecaptcha.execute) { resolve(); return; }
+      var s = document.createElement('script');
+      s.src = 'https://www.google.com/recaptcha/api.js?render=' + RECAPTCHA_SITE_KEY;
+      s.onload = function() { window.grecaptcha.ready(resolve); };
+      s.onerror = function() { reject(new Error('recaptcha script failed to load')); };
+      document.head.appendChild(s);
+    });
+    return recaptchaReadyPromise;
+  }
+  loadRecaptcha().catch(function() {});
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    var fd = new FormData(form);
+
+    loadRecaptcha().then(function() {
+      return window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'form_builder' });
+    }).then(function(token) {
+      fd.append('g-recaptcha-v3-token', token);
+    }).catch(function() {
+      // If reCAPTCHA fails to load (blocked script, offline, etc.), submit anyway —
+      // CS-Cart will reject it server-side rather than us blocking a real user's message.
+    }).then(function() {
+      // Fire-and-forget: submit via the site's own feedback-form mechanism (page_id 30)
+      // but never wait for/read the response — the user gets instant confirmation.
+      fetch(form.action, { method: 'POST', body: fd }).catch(function() {});
+
+      root.classList.add('rb-cu-sent');
+
+      var succTitle = root.querySelector('.rb-cu-succ-t');
+      if (succTitle) {
+        succTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+
+  var againBtn = document.getElementById('rb-cu-again');
+  if (againBtn) {
+    againBtn.addEventListener('click', function() {
+      form.reset();
+      Array.prototype.forEach.call(form.querySelectorAll('.rb-cu-err'), function(f) {
+        f.classList.remove('rb-cu-err');
+      });
+      generateCaptcha();
+      root.classList.remove('rb-cu-sent');
+    });
+  }
+
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-bleed section. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay
+  // intact; a block in the middle of the page has no business zeroing its ancestors' spacing.
+  var parent = root.parentElement;
+  while (parent && parent.tagName !== 'BODY') {
+    parent.style.setProperty('background', 'transparent', 'important');
+    parent.style.setProperty('background-color', 'transparent', 'important');
+    parent = parent.parentElement;
+  }
+})();
+</script>

@@ -1,22 +1,16 @@
 <!-- ══════════════════════════════════════════════════════
-     RunBird — Header Block v2.1
+     RunBird — Header Block v2.1 — LIGHT-ONLY VARIANT
      CS-Cart > Design > Layouts > Html+Smarty block (Header area)
+     No theme toggle here — this build is permanently light, a separate
+     track from the dark/light-toggle system in Рабочий проект/.
      Cache: DISABLED (block contains auth state via Smarty)
      All styles scoped under #rb-header — no conflict with UniTheme2
 ════════════════════════════════════════════════════════ -->
 
-<!-- CSS moved to Рабочий проект\rb-work.css — loaded site-wide via CS-Cart theme's custom CSS, no <link> needed here -->
-
-<!-- Light/dark theme toggle. rb-work.css above already carries the dark-
-     theme html{...} token defaults (kept in sync with them by hand) — but
-     the LIGHT-theme override + the toggle switch's own button styling
-     live in rb-cfg-theme.css, the one shared palette file every wizard
-     configurator also loads, so there's a single source of truth for the
-     site's light-mode colors rather than forking it into rb-work.css too.
-     rb-cfg-theme.js sets data-rb-theme on <html> and wires up the
-     .rb-cfg-theme-toggle button mounted below in .rb-nav-right. -->
-<link rel="stylesheet" href="https://therunbird.com/rb-assets/rb-cfg-theme.css">
-<script src="https://therunbird.com/rb-assets/rb-cfg-theme.js"></script>
+<!-- CSS lives in Рабочий проект светлый\rb-work-light.css — loaded
+     site-wide via CS-Cart theme's custom CSS, no <link> needed here.
+     Light-only build — no theme toggle, no data-rb-theme attribute, no
+     dependency on rb-cfg-theme.css/js at all. -->
 
 <div id="rb-header">
 
@@ -191,8 +185,6 @@
 
             </div><!-- end .rb-acc-drop -->
           </div><!-- end .rb-acc-wrap -->
-
-          <div id="rb-cfg-theme-toggle"></div>
 
           <button class="rb-cart-btn" id="rb-cart-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>

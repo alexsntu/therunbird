@@ -1,0 +1,177 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Homepage Block 4: Premium Materials — LIGHT-ONLY VARIANT
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, homepage)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-mat — no conflict with UniTheme2
+     No theme toggle — permanently light, separate track from
+     Рабочий проект/. Off-white elevated panel (matches the --rb-bg-card
+     convention used site-wide), #D1382A accents.
+     Deliberately avoids `rgba(var(--x), Y)` / `rgb(var(--x))` anywhere —
+     CS-Cart's CSS bundler mis-inlines that exact pattern into garbage
+     colors (confirmed on the header block). Every color that needs an
+     opacity is written as a fully literal rgba(...) instead.
+════════════════════════════════════════════════════════ -->
+
+<style>
+/* Barlow Condensed / Inter are already loaded once, site-wide, via
+   rb-work-light.css (CS-Cart Design > Themes > Editor > custom CSS) —
+   no @import needed here. */
+
+/* ── Reset Bootstrap/UniTheme2 inside our block ── */
+#rb-mat,
+#rb-mat *,
+#rb-mat *::before,
+#rb-mat *::after {
+  box-sizing: border-box !important;
+}
+
+/* ── CSS tokens ── */
+#rb-mat {
+  --rb-bg-elevated: #FAF9F7;
+  --rb-accent:      #D1382A;
+  --rb-text:        #121212;
+  --rb-text2:       #6E6A63;
+  --rb-border:      rgba(18,18,18,.08);
+
+  display: block !important;
+  width: 100% !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg-elevated) !important;
+  border-top: 1px solid var(--rb-border) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   WRAP + SECTION HEAD
+══════════════════════════════════════ */
+#rb-mat .rb-mat-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-mat .rb-sec-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+#rb-mat .rb-sec-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   MATERIALS GRID
+══════════════════════════════════════ */
+#rb-mat .rb-mat-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+}
+#rb-mat .rb-mat-item {
+  padding: 36px 40px !important;
+  border-right: 1px solid var(--rb-border) !important;
+}
+#rb-mat .rb-mat-item:last-child { border-right: none !important; }
+#rb-mat .rb-mat-img {
+  width: 100% !important; height: 200px !important;
+  object-fit: cover !important; object-position: center !important;
+  border-radius: 14px !important; margin-bottom: 24px !important; display: block !important;
+  border: 1px solid rgba(209,56,42,.16) !important;
+  transition: transform .4s ease, box-shadow .4s ease !important;
+}
+#rb-mat .rb-mat-item:hover .rb-mat-img {
+  transform: scale(1.02) !important;
+  box-shadow: 0 8px 32px rgba(209,56,42,.16) !important;
+}
+#rb-mat .rb-mat-name {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 26px !important;
+  text-transform: uppercase !important; letter-spacing: .04em !important;
+  color: var(--rb-text) !important; margin-bottom: 6px !important;
+}
+#rb-mat .rb-mat-origin {
+  font-size: 11px !important; color: var(--rb-accent) !important;
+  letter-spacing: .14em !important; text-transform: uppercase !important;
+  font-weight: 700 !important; margin-bottom: 14px !important;
+}
+#rb-mat .rb-mat-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.78 !important;
+  margin: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-mat .rb-mat-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-mat .rb-mat-grid { grid-template-columns: 1fr !important; }
+  #rb-mat .rb-mat-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+    padding: 32px 32px !important;
+  }
+  #rb-mat .rb-mat-item:last-child { border-bottom: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-mat .rb-mat-wrap { padding: 15px 20px 0 !important; }
+  #rb-mat .rb-sec-title { font-size: 30px !important; }
+  #rb-mat .rb-mat-item { padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-mat">
+  <div class="rb-mat-wrap">
+    <span class="rb-sec-eyebrow">What We Use</span>
+    <h2 class="rb-sec-title">Premium Materials</h2>
+  </div>
+
+  <div class="rb-mat-grid">
+    <div class="rb-mat-item">
+      <img class="rb-mat-img" src="https://therunbird.com/images/MainPAge/Carbon.webp" alt="Carbon Fiber" width="750" height="500" loading="lazy">
+      <div class="rb-mat-name">Carbon Fiber</div>
+      <div class="rb-mat-origin">Gloss · Matte · Multiple Colors Available</div>
+      <p class="rb-mat-desc">Aerospace-grade carbon fiber with a distinctive 2&times;2 twill weave. Gloss or matte lacquer, available in black, red, blue, gold, and silver — matched to your Corvette's style.</p>
+    </div>
+    <div class="rb-mat-item">
+      <img class="rb-mat-img" src="https://therunbird.com/images/MainPAge/leather.webp" alt="Synthetic Nappa Leather" width="750" height="500" loading="lazy">
+      <div class="rb-mat-name">Nappa Leather</div>
+      <div class="rb-mat-origin">Premium Synthetic · Smooth or Perforated</div>
+      <p class="rb-mat-desc">Buttery premium synthetic Nappa leather — engineered to match the quality used in high-end European sport cars. Smooth or perforated, with your choice of contrast thread color.</p>
+    </div>
+    <div class="rb-mat-item">
+      <img class="rb-mat-img" src="https://therunbird.com/images/MainPAge/Alcantara.webp" alt="Alcantara" width="750" height="500" loading="lazy">
+      <div class="rb-mat-name">Alcantara&reg;</div>
+      <div class="rb-mat-origin">Genuine Alcantara&reg; · Racing-Grade Suede</div>
+      <p class="rb-mat-desc">The material of choice for Formula 1 steering wheels and exotic interiors. Alcantara&reg; offers superior grip, minimal glare, and an unmatched tactile feel at speed.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-width block. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay intact.
+  var el = document.getElementById('rb-mat');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

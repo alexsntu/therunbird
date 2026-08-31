@@ -23,6 +23,9 @@
          the steering wheel handles this with no special-casing needed.
 ════════════════════════════════════════════════════════ -->
 
+<link rel="stylesheet" href="https://therunbird.com/rb-assets/rb-cfg-theme.css">
+<script src="https://therunbird.com/rb-assets/rb-cfg-theme.js"></script>
+
 <div id="rb-config">
 <div class="rb-cfg-inner">
 
@@ -74,6 +77,17 @@
   --rb-border:   rgba(255,255,255,.08);
   --rb-border-s: rgba(255,255,255,.16);
   --rb-card-bg:  #131313;
+  --rb-accent-fill: #C8A84C;
+  --rb-accent-fill-h: #D9BA62;
+  --rb-card-active-bg: #171512;
+  --rb-desc-bg:  rgba(255,255,255,.02);
+  --rb-notice-bg: rgba(200,168,76,.08);
+  --rb-stage-bg:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+  --rb-stage-shadow: radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+  --rb-icon-outline: rgba(255,255,255,.32);
 
   background: var(--rb-bg);
   color: var(--rb-text);
@@ -107,7 +121,7 @@
   cursor:pointer; transition:.15s; white-space:nowrap;
 }
 #rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
-#rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
+#rb-config .rb-chip.is-active{ background:var(--rb-accent-fill); border-color:var(--rb-accent-fill); color:#000; font-weight:600; }
 #rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
 #rb-config .rb-chip.is-active .rb-chip-price{ opacity:.7; }
 #rb-config .rb-swatch-dot{
@@ -133,15 +147,12 @@
 }
 #rb-config .rb-cfg-imgbox{
   position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
-  background:
-    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
-    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+  background: var(--rb-stage-bg);
   border:1px solid var(--rb-border);
 }
 #rb-config .rb-cfg-imgbox::after{
   content:''; position:absolute; left:8%; right:8%; bottom:6%; height:14%;
-  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+  background: var(--rb-stage-shadow);
   z-index:1; pointer-events:none;
 }
 #rb-config .rb-cfg-imgbox img{
@@ -151,7 +162,7 @@
 
 #rb-config .rb-cfg-photo-hint{
   display:none; position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:7;
-  background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent);
+  background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent-fill);
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
   font-size:12px; font-weight:700; padding:6px 16px; border-radius:999px; white-space:nowrap;
   box-shadow:0 4px 14px rgba(0,0,0,.4); cursor:pointer; max-width:90%; overflow:hidden; text-overflow:ellipsis;
@@ -165,7 +176,7 @@
 #rb-config .rb-cfg-active-mark.is-visible{ display:flex; }
 #rb-config .rb-cfg-active-mark-dot{
   position:relative;
-  width:26px; height:26px; border-radius:50%; background:var(--rb-accent);
+  width:26px; height:26px; border-radius:50%; background:var(--rb-accent-fill);
   border:3px solid rgba(6,6,6,.85); box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5);
   animation:rb-cfg-pulse 1.7s ease-in-out infinite;
 }
@@ -190,14 +201,14 @@
   transition:border-color .15s, background .15s;
 }
 
-#rb-config .rb-cfg-step--done{ cursor:pointer; border-color:var(--rb-accent-b); background:#171512; }
+#rb-config .rb-cfg-step--done{ cursor:pointer; border-color:var(--rb-accent-b); background:var(--rb-card-active-bg); }
 #rb-config .rb-cfg-step--done:hover{ border-color:var(--rb-accent); }
 #rb-config .rb-cfg-step-done-row{
   display:flex; align-items:center; gap:10px; padding:13px 16px;
 }
 #rb-config .rb-cfg-step-done-check{
   display:flex; align-items:center; justify-content:center; flex:none;
-  width:18px; height:18px; border-radius:50%; background:var(--rb-accent); color:#000; font-size:11px; line-height:1;
+  width:18px; height:18px; border-radius:50%; background:var(--rb-accent-fill); color:#000; font-size:11px; line-height:1;
 }
 #rb-config .rb-cfg-step-done-label{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.04em;
@@ -213,7 +224,7 @@
 }
 #rb-config .rb-cfg-step--done:hover .rb-cfg-step-done-edit{ opacity:1; }
 
-#rb-config .rb-cfg-step--active{ border-color:var(--rb-accent-b); background:#171512; padding:18px 18px 20px; }
+#rb-config .rb-cfg-step--active{ border-color:var(--rb-accent-b); background:var(--rb-card-active-bg); padding:18px 18px 20px; }
 #rb-config .rb-cfg-step-active-top{
   display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px;
 }
@@ -234,7 +245,7 @@
 
 #rb-config .rb-cfg-step-desc{
   margin-top:16px; padding:12px 14px; border:1px solid var(--rb-border); border-radius:8px;
-  background:rgba(255,255,255,.02); font-size:12.5px; line-height:1.6; color:var(--rb-text2);
+  background:var(--rb-desc-bg); font-size:12.5px; line-height:1.6; color:var(--rb-text2);
 }
 
 /* -- Stitch Design step: icon tiles -- */
@@ -245,17 +256,14 @@
   -webkit-tap-highlight-color:transparent;
 }
 #rb-config .rb-cfg-design-opt:hover{ border-color:var(--rb-accent); }
-#rb-config .rb-cfg-design-opt.is-active{ border-color:var(--rb-accent); background:#1d1a14; }
+#rb-config .rb-cfg-design-opt.is-active{ border-color:var(--rb-accent); background:var(--rb-card-active-bg); }
 #rb-config .rb-cfg-design-opt-imgwrap{
   width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative;
   display:flex; align-items:center; justify-content:center; padding:14%;
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(200,168,76,.24), transparent 60%),
-    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.09), transparent 65%),
-    linear-gradient(180deg, #2c2c2c 0%, #1c1c1c 65%, #161616 100%);
+  background: var(--rb-stage-bg);
 }
 #rb-config .rb-cfg-design-icon{ width:100%; height:100%; overflow:visible; }
-#rb-config .rb-di-outline{ fill:none; stroke:rgba(255,255,255,.32); stroke-width:14; stroke-linejoin:round; }
+#rb-config .rb-di-outline{ fill:none; stroke:var(--rb-icon-outline); stroke-width:14; stroke-linejoin:round; }
 #rb-config .rb-di-stitch{ fill:none; stroke:var(--rb-accent); stroke-width:15; stroke-dasharray:26 20; stroke-linecap:round; }
 #rb-config .rb-cfg-design-opt-label{
   font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
@@ -279,17 +287,17 @@
 #rb-config .rb-cfg-price-cur{ font-size:19px; opacity:.7; margin-right:1px; }
 #rb-config .rb-cfg-summary-row .rb-cfg-add{ justify-self:start; }
 #rb-config .rb-cfg-add{
-  background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:13px 28px;
+  background:var(--rb-accent-fill); color:#000; border:none; border-radius:999px; padding:13px 28px;
   font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:700; letter-spacing:.03em;
   text-transform:uppercase; cursor:pointer; transition:.15s; flex:none; white-space:nowrap;
 }
-#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
+#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-fill-h); }
 #rb-config .rb-cfg-add:disabled{
   background:transparent; border:1px solid var(--rb-border-s); color:var(--rb-text2);
   cursor:not-allowed;
 }
 #rb-config .rb-cfg-add.is-loading:disabled{
-  background:var(--rb-accent); border:none; color:#000; cursor:wait;
+  background:var(--rb-accent-fill); border:none; color:#000; cursor:wait;
   display:inline-flex; align-items:center; gap:8px;
 }
 #rb-config .rb-cfg-add-spinner{

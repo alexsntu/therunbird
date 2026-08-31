@@ -1,0 +1,819 @@
+<!-- LIGHT-ONLY VARIANT — white page, off-white elevated panel for the Claim block,
+     #D1382A accents, white text on accent-filled elements. The Coverage section's
+     Yes/No comparison uses the same green-for-yes / muted-red-for-no convention
+     established on the Shipping & Returns page — with the brand accent itself being
+     red, reusing it for "Yes" right next to a red "No" would read as two shades of
+     the same signal instead of opposites in this prominent binary comparison. CTA
+     band stays the one dramatic dark photo section. Fixes the same
+     rgba(var(--rb-accent-rgb), Y) compiler-bug pattern found in the CTA block. -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-wty-hero,
+#rb-wty-hero *,
+#rb-wty-hero *::before,
+#rb-wty-hero *::after {
+  box-sizing: border-box !important;
+}
+#rb-wty-hero a { text-decoration: none !important; }
+
+#rb-wty-hero {
+  --rb-bg:         #FFFFFF;
+  --rb-accent:     #D1382A;
+  --rb-accent-b:   rgba(209,56,42,.28);
+  --rb-text:       #121212;
+  --rb-text2:      #6E6A63;
+  --rb-border:     rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  overflow: hidden !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#rb-wty-hero .rb-wh-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(209,56,42,.06) 0%, transparent 65%) !important;
+}
+#rb-wty-hero .rb-wh-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+
+#rb-wty-hero .rb-wh-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+  padding: 72px 48px 56px !important;
+  text-align: center !important;
+}
+#rb-wty-hero .rb-wh-eyebrow {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-accent) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .18em !important; text-transform: uppercase !important;
+  margin-bottom: 26px !important;
+  background: rgba(209,56,42,.05) !important;
+}
+#rb-wty-hero .rb-wh-h1 {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(36px, 5.4vw, 64px) !important;
+  line-height: .98 !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  margin: 0 0 22px !important;
+}
+#rb-wty-hero .rb-wh-h1 em {
+  color: var(--rb-accent) !important;
+  font-style: italic !important;
+}
+#rb-wty-hero .rb-wh-p {
+  font-size: 15.5px !important;
+  color: var(--rb-text2) !important;
+  line-height: 1.75 !important;
+  font-weight: 300 !important;
+  max-width: 620px !important;
+  margin: 0 auto 40px !important;
+}
+#rb-wty-hero .rb-wh-p strong { color: var(--rb-text) !important; font-weight: 500 !important; }
+
+#rb-wty-hero .rb-wh-chips {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+#rb-wty-hero .rb-wh-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 11px 22px !important;
+  border: 1px solid rgba(18,18,18,.14) !important;
+  border-radius: 100px !important;
+  background: rgba(18,18,18,.02) !important;
+  color: var(--rb-text2) !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  text-transform: uppercase !important;
+  transition: border-color .2s, color .2s, background .2s !important;
+}
+#rb-wty-hero .rb-wh-chip:hover {
+  border-color: var(--rb-accent) !important;
+  color: var(--rb-text) !important;
+  background: rgba(209,56,42,.05) !important;
+}
+
+@media (max-width: 768px) {
+  #rb-wty-hero .rb-wh-inner { padding: 48px 20px 40px !important; }
+  #rb-wty-hero .rb-wh-chips { gap: 8px !important; }
+  #rb-wty-hero .rb-wh-chip { padding: 9px 16px !important; font-size: 13px !important; }
+}
+</style>
+
+<div id="rb-wty-hero">
+  <div class="rb-wh-glow"></div>
+  <div class="rb-wh-cf"></div>
+  <div class="rb-wh-inner">
+    <span class="rb-wh-eyebrow">Warranty</span>
+    <h1 class="rb-wh-h1">Built To Last.<br><em>Backed For 12 Months.</em></h1>
+    <p class="rb-wh-p">
+      Every RunBird piece is covered by a <strong>12-month workmanship warranty</strong> from the day it's
+      delivered. If something fails because of how it was made — not how it was used — we'll repair, remake,
+      or replace it.
+    </p>
+    <div class="rb-wh-chips">
+      <a href="#covered" class="rb-wh-chip">What's Covered</a>
+      <a href="#claim" class="rb-wh-chip">File A Claim</a>
+      <a href="#faq" class="rb-wh-chip">FAQ</a>
+    </div>
+  </div>
+</div>
+
+<style>
+#rb-wty-cov,
+#rb-wty-cov *,
+#rb-wty-cov *::before,
+#rb-wty-cov *::after {
+  box-sizing: border-box !important;
+}
+#rb-wty-cov a { text-decoration: none !important; }
+
+#rb-wty-cov {
+  --rb-bg:      #FFFFFF;
+  --rb-accent:  #D1382A;
+  --rb-text:    #121212;
+  --rb-text2:   #6E6A63;
+  --rb-border:  rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-wty-cov .rb-wc-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 80px 48px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 72px !important;
+}
+
+#rb-wty-cov .rb-wc-col-h {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 22px !important;
+}
+#rb-wty-cov .rb-wc-col-icon {
+  width: 34px !important; height: 34px !important;
+  border-radius: 9px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  flex-shrink: 0 !important;
+  font-size: 16px !important;
+}
+#rb-wty-cov .rb-wc-col-icon.yes { background: rgba(52,199,89,.12) !important; color: #248A46 !important; }
+#rb-wty-cov .rb-wc-col-icon.no { background: rgba(161,83,83,.10) !important; color: #A15353 !important; }
+#rb-wty-cov .rb-wc-col-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 26px !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+}
+
+#rb-wty-cov .rb-wc-p {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.8 !important;
+  margin: 0 0 22px !important; font-weight: 300 !important;
+}
+#rb-wty-cov .rb-wc-p strong { color: var(--rb-text) !important; font-weight: 500 !important; }
+#rb-wty-cov .rb-wc-p a { color: var(--rb-accent) !important; font-weight: 600 !important; }
+#rb-wty-cov .rb-wc-p a:hover { text-decoration: underline !important; }
+
+#rb-wty-cov .rb-wc-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+#rb-wty-cov .rb-wc-list li {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: flex-start !important;
+  font-size: 14px !important;
+  color: var(--rb-text) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 14px !important;
+}
+#rb-wty-cov .rb-wc-list li:last-child { margin-bottom: 0 !important; }
+#rb-wty-cov .rb-wc-list li::before {
+  flex-shrink: 0 !important;
+  width: 18px !important; height: 18px !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 11px !important; font-weight: 700 !important;
+  margin-top: 1px !important;
+}
+#rb-wty-cov .rb-wc-col.yes .rb-wc-list li::before {
+  content: '✓' !important;
+  color: #248A46 !important;
+  border: 1px solid rgba(52,199,89,.45) !important;
+}
+#rb-wty-cov .rb-wc-col.no .rb-wc-list li::before {
+  content: '✕' !important;
+  color: #A15353 !important;
+  border: 1px solid rgba(161,83,83,.4) !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-wty-cov .rb-wc-wrap { padding: 64px 32px !important; gap: 48px !important; }
+}
+@media (max-width: 900px) {
+  #rb-wty-cov .rb-wc-wrap { grid-template-columns: 1fr !important; gap: 40px !important; }
+}
+@media (max-width: 768px) {
+  #rb-wty-cov .rb-wc-wrap { padding: 48px 20px !important; }
+}
+</style>
+
+<div id="rb-wty-cov">
+  <a id="covered"></a>
+  <div class="rb-wc-wrap">
+
+    <div class="rb-wc-col yes">
+      <div class="rb-wc-col-h">
+        <span class="rb-wc-col-icon yes">✓</span>
+        <span class="rb-wc-col-title">What's Covered</span>
+      </div>
+      <p class="rb-wc-p">
+        For <strong>12 months from the day your order is delivered</strong>, we'll repair, remake, or
+        replace your piece if the problem comes down to how it was built.
+      </p>
+      <ul class="rb-wc-list">
+        <li>Stitching failures or seam separation under normal use</li>
+        <li>Material defects in the carbon fiber, synthetic Nappa leather, or Alcantara&reg; present from delivery</li>
+        <li>Carbon fiber cracking, delamination, or clear-coat failure not caused by an impact</li>
+        <li>Hardware or fitment issues traced back to how the piece was built</li>
+      </ul>
+    </div>
+
+    <div class="rb-wc-col no">
+      <div class="rb-wc-col-h">
+        <span class="rb-wc-col-icon no">✕</span>
+        <span class="rb-wc-col-title">What's Not Covered</span>
+      </div>
+      <p class="rb-wc-p">
+        This warranty covers workmanship, not wear. It doesn't cover damage caused by use, time, or how
+        the piece was installed.
+      </p>
+      <ul class="rb-wc-list">
+        <li>Normal wear and tear — fading, minor scuffing, leather softening with age</li>
+        <li>Gradual changes to lacquer or clear-coat finishes (e.g. sheen shift on matte surfaces) from repeated handling and contact over time</li>
+        <li>Damage from improper or unauthorized installation</li>
+        <li>Damage from accidents, misuse, or aftermarket modification</li>
+        <li>Damage from extreme weather, prolonged direct sun, or improper cleaning products — see our <a href="https://therunbird.com/materials-guide/#care">Materials Guide</a> for care instructions</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-wty-cov');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-wty-claim,
+#rb-wty-claim *,
+#rb-wty-claim *::before,
+#rb-wty-claim *::after {
+  box-sizing: border-box !important;
+}
+
+#rb-wty-claim {
+  --rb-bg-elevated: #FAF9F7;
+  --rb-accent:      #D1382A;
+  --rb-text:        #121212;
+  --rb-text2:       #6E6A63;
+  --rb-border:      rgba(18,18,18,.08);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg-elevated) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-wty-claim .rb-wcl-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px 0 !important;
+}
+#rb-wty-claim .rb-wcl-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+#rb-wty-claim .rb-wcl-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-wty-claim .rb-wcl-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,1fr) !important;
+  gap: 0 !important;
+  padding-top: 20px !important;
+}
+#rb-wty-claim .rb-wcl-item {
+  padding: 28px 40px !important;
+  border-right: 1px solid var(--rb-border) !important;
+  position: relative !important;
+}
+#rb-wty-claim .rb-wcl-item:last-child { border-right: none !important; }
+#rb-wty-claim .rb-wcl-num {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 44px !important; font-weight: 900 !important;
+  color: rgba(18,18,18,.07) !important;
+  line-height: 1 !important; margin-bottom: 10px !important;
+  user-select: none !important;
+}
+#rb-wty-claim .rb-wcl-item-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 800 !important; font-size: 24px !important;
+  text-transform: uppercase !important; letter-spacing: .04em !important;
+  color: var(--rb-text) !important; margin-bottom: 10px !important;
+}
+#rb-wty-claim .rb-wcl-desc {
+  font-size: 14px !important; color: var(--rb-text2) !important; line-height: 1.78 !important;
+  margin: 0 !important;
+}
+#rb-wty-claim .rb-wcl-item:not(:last-child)::after {
+  content: '→' !important;
+  position: absolute !important; top: 44px !important; right: -14px !important;
+  width: 28px !important; height: 28px !important; z-index: 10 !important;
+  background: var(--rb-bg-elevated) !important;
+  border: 1px solid var(--rb-border) !important;
+  border-radius: 50% !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 12px !important; color: var(--rb-accent) !important;
+  line-height: 28px !important; text-align: center !important;
+}
+
+@media (max-width: 1024px) {
+  #rb-wty-claim .rb-wcl-wrap { padding: 32px 32px 0 !important; }
+}
+@media (max-width: 900px) {
+  #rb-wty-claim .rb-wcl-grid { grid-template-columns: 1fr !important; }
+  #rb-wty-claim .rb-wcl-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--rb-border) !important;
+  }
+  #rb-wty-claim .rb-wcl-item:last-child { border-bottom: none !important; }
+  #rb-wty-claim .rb-wcl-item:not(:last-child)::after { display: none !important; }
+}
+@media (max-width: 768px) {
+  #rb-wty-claim .rb-wcl-wrap { padding: 15px 20px 0 !important; }
+  #rb-wty-claim .rb-wcl-title { font-size: 30px !important; }
+  #rb-wty-claim .rb-wcl-grid { padding-top: 8px !important; }
+  #rb-wty-claim .rb-wcl-item { padding: 22px 20px !important; }
+}
+</style>
+
+<div id="rb-wty-claim">
+  <a id="claim"></a>
+  <div class="rb-wcl-wrap">
+    <span class="rb-wcl-eyebrow">If Something's Wrong</span>
+    <h2 class="rb-wcl-title">How To File A Claim</h2>
+  </div>
+
+  <div class="rb-wcl-grid">
+
+    <div class="rb-wcl-item">
+      <div class="rb-wcl-num">01</div>
+      <div class="rb-wcl-item-title">Contact Us</div>
+      <p class="rb-wcl-desc">Send us your order number along with photos and a short description of the issue — the more detail, the faster we can help.</p>
+    </div>
+
+    <div class="rb-wcl-item">
+      <div class="rb-wcl-num">02</div>
+      <div class="rb-wcl-item-title">We Review It</div>
+      <p class="rb-wcl-desc">Our team compares what you're seeing against how that piece was built and our workmanship standards to confirm it's covered.</p>
+    </div>
+
+    <div class="rb-wcl-item">
+      <div class="rb-wcl-num">03</div>
+      <div class="rb-wcl-item-title">We Make It Right</div>
+      <p class="rb-wcl-desc">If it's a covered defect, we'll repair, remake, or replace your piece at no cost — whatever fixes it properly.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-wty-claim');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>
+
+<style>
+#rb-wty-faq,
+#rb-wty-faq *,
+#rb-wty-faq *::before,
+#rb-wty-faq *::after {
+  box-sizing: border-box !important;
+}
+#rb-wty-faq a { text-decoration: none !important; }
+#rb-wty-faq button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-wty-faq {
+  --rb-bg:        #FFFFFF;
+  --rb-accent:    #D1382A;
+  --rb-accent-dim:  rgba(209,56,42,.10);
+  --rb-accent-b:    rgba(209,56,42,.28);
+  --rb-text:      #121212;
+  --rb-text2:     #6E6A63;
+  --rb-border:    rgba(18,18,18,.08);
+  --rb-border-s:  rgba(18,18,18,.16);
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  border-top: 1px solid var(--rb-border) !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-margin-top: 24px !important;
+}
+
+#rb-wty-faq .rb-wf-wrap {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 32px 48px !important;
+}
+#rb-wty-faq .rb-wf-head { display: block !important; margin-bottom: 24px !important; }
+#rb-wty-faq .rb-wf-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--rb-accent) !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+#rb-wty-faq .rb-wf-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(30px, 4vw, 56px) !important;
+  text-transform: uppercase !important;
+  color: var(--rb-text) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+#rb-wty-faq .rb-wf-list {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#rb-wty-faq .rb-wf-item { border-bottom: 1px solid var(--rb-border) !important; }
+#rb-wty-faq .rb-wf-q {
+  width: 100% !important; display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 24px !important;
+  padding: 22px 0 !important; background: none !important; border: none !important; cursor: pointer !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 19px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; color: var(--rb-text) !important;
+  text-align: left !important; transition: color .2s !important;
+}
+#rb-wty-faq .rb-wf-q:hover { color: var(--rb-accent) !important; }
+#rb-wty-faq .rb-wf-item.open .rb-wf-q { color: var(--rb-accent) !important; }
+#rb-wty-faq .rb-wf-icon {
+  width: 32px !important; height: 32px !important; border-radius: 50% !important; flex-shrink: 0 !important;
+  border: 1px solid var(--rb-border-s) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 18px !important; font-weight: 300 !important; color: var(--rb-accent) !important;
+  font-family: 'Inter', sans-serif !important; font-style: normal !important;
+  transition: transform .3s, background .2s, border-color .2s !important;
+}
+#rb-wty-faq .rb-wf-item.open .rb-wf-icon {
+  transform: rotate(45deg) !important;
+  background: var(--rb-accent-dim) !important; border-color: var(--rb-accent-b) !important;
+}
+#rb-wty-faq .rb-wf-a {
+  font-size: 14.5px !important; color: var(--rb-text2) !important; line-height: 1.82 !important;
+  max-height: 0 !important; overflow: hidden !important;
+  transition: max-height .38s cubic-bezier(.4,0,.2,1), padding .3s !important;
+  padding-bottom: 0 !important; margin: 0 !important;
+}
+#rb-wty-faq .rb-wf-item.open .rb-wf-a { max-height: 300px !important; padding-bottom: 22px !important; }
+#rb-wty-faq .rb-wf-a a { color: var(--rb-accent) !important; font-weight: 600 !important; }
+#rb-wty-faq .rb-wf-a a:hover { text-decoration: underline !important; }
+
+@media (max-width: 1024px) {
+  #rb-wty-faq .rb-wf-wrap { padding: 32px 32px !important; }
+}
+@media (max-width: 768px) {
+  #rb-wty-faq .rb-wf-wrap { padding: 15px 20px 32px !important; }
+  #rb-wty-faq .rb-wf-title { font-size: 30px !important; }
+  #rb-wty-faq .rb-wf-q { font-size: 16px !important; gap: 16px !important; }
+}
+</style>
+
+<div id="rb-wty-faq">
+  <a id="faq"></a>
+  <div class="rb-wf-wrap">
+
+    <div class="rb-wf-head">
+      <div class="rb-wf-eyebrow">Got Questions</div>
+      <h2 class="rb-wf-title">Warranty FAQ</h2>
+    </div>
+
+    <div class="rb-wf-list">
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          How long does the warranty last?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">12 months from the day your order is delivered. It covers workmanship and material defects — not wear and tear from normal use.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          Does it cover my leather softening or fading over time?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">No — that's normal wear, not a defect. Following the care routine in our <a href="https://therunbird.com/materials-guide/#care">Materials Guide</a> will help slow it down and keep your piece looking its best.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          I installed it myself and now something's wrong — is that covered?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">If the problem is a genuine defect in how the piece was built, yes — installing it yourself doesn't void that. If the issue was caused by how it was installed, that falls outside the warranty. See our <a href="https://therunbird.com/installation-help/">Installation Help</a> guide for the correct process.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          What if my order arrived damaged in shipping?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">That's handled separately from this warranty — see our <a href="https://therunbird.com/shipping-and-returns/">Shipping &amp; Returns</a> page for how we handle damage that happens in transit.</p>
+      </div>
+
+      <div class="rb-wf-item">
+        <button class="rb-wf-q" type="button">
+          What do I need to file a claim?
+          <span class="rb-wf-icon">+</span>
+        </button>
+        <p class="rb-wf-a">Your order number, clear photos of the issue, and a short description of what's wrong. Contact our support team and we'll take it from there.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-wty-faq');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+
+(function() {
+  document.querySelectorAll('#rb-wty-faq .rb-wf-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.rb-wf-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('#rb-wty-faq .rb-wf-item.open').forEach(function(i) {
+        i.classList.remove('open');
+      });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<style>
+#rb-wty-cta,
+#rb-wty-cta *,
+#rb-wty-cta *::before,
+#rb-wty-cta *::after {
+  box-sizing: border-box !important;
+}
+#rb-wty-cta a { text-decoration: none !important; }
+#rb-wty-cta button {
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+#rb-wty-cta {
+  --rb-accent:      #D1382A;
+  --rb-accent-h:    #A82C20;
+  --rb-text:        #F0F0F0;
+
+  display: block !important;
+  font-family: 'Inter', sans-serif !important;
+
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.webp') center / cover no-repeat !important;
+  padding: 68px 48px !important;
+  border-top: 1px solid rgba(255,255,255,.07) !important;
+}
+
+#rb-wty-cta .rb-wct-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(209,56,42,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 50%, rgba(209,56,42,.10) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 50%, rgba(209,56,42,.10) 0%, transparent 100%) !important;
+}
+#rb-wty-cta .rb-wct-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 9px 9px !important;
+}
+#rb-wty-cta .rb-wct-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 720px !important; margin: 0 auto !important;
+}
+#rb-wty-cta .rb-wct-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .24em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 22px !important;
+}
+#rb-wty-cta .rb-wct-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(40px, 6vw, 76px) !important;
+  color: var(--rb-text) !important; text-transform: uppercase !important;
+  line-height: .96 !important; margin: 0 0 20px !important;
+}
+#rb-wty-cta .rb-wct-h em {
+  color: var(--rb-accent) !important; font-style: italic !important;
+  text-shadow: 0 0 40px rgba(209,56,42,.5) !important;
+}
+#rb-wty-cta .rb-wct-p {
+  color: #999 !important; font-size: 15.5px !important; font-weight: 300 !important;
+  line-height: 1.72 !important; margin: 0 auto 44px !important; max-width: 560px !important;
+}
+#rb-wty-cta .rb-wct-btns {
+  display: flex !important; flex-direction: row !important;
+  gap: 14px !important; justify-content: center !important; flex-wrap: wrap !important;
+}
+#rb-wty-cta .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #FFFFFF !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 800 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s, box-shadow .2s !important;
+  box-shadow: 0 4px 24px rgba(209,56,42,.35) !important;
+}
+#rb-wty-cta .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+  box-shadow: 0 10px 40px rgba(209,56,42,.55) !important;
+}
+#rb-wty-cta .rb-btn-ghost {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  padding: 15px 38px !important; background: transparent !important;
+  color: #C8C8C8 !important; border: 1px solid rgba(255,255,255,.18) !important;
+  border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 17px !important; font-weight: 700 !important; letter-spacing: .1em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: border-color .2s, background .2s !important;
+}
+#rb-wty-cta .rb-btn-ghost:hover { border-color: rgba(255,255,255,.42) !important; background: rgba(255,255,255,.05) !important; }
+
+@media (max-width: 768px) {
+  #rb-wty-cta { padding: 56px 20px !important; }
+  #rb-wty-cta .rb-wct-btns { flex-wrap: nowrap !important; gap: 10px !important; }
+  #rb-wty-cta .rb-btn-gold, #rb-wty-cta .rb-btn-ghost {
+    padding: 13px 8px !important; font-size: 11px !important; letter-spacing: 0 !important;
+    flex: 1 !important; white-space: nowrap !important;
+  }
+}
+</style>
+
+<div id="rb-wty-cta">
+  <div class="rb-wct-glow"></div>
+  <div class="rb-wct-cf"></div>
+  <div class="rb-wct-inner">
+    <span class="rb-wct-eye">Think Something's Covered?</span>
+    <h2 class="rb-wct-h">File A<br><em>Warranty Claim</em></h2>
+    <p class="rb-wct-p">Send us your order number and photos — our team built the piece, so we'll know right away whether it's covered and how to fix it.</p>
+    <div class="rb-wct-btns">
+      <a href="https://therunbird.com/contact-us/" class="rb-btn-gold">Contact Support</a>
+      <a href="https://therunbird.com/materials-guide/#care" class="rb-btn-ghost">Read Care Guide</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var el = document.getElementById('rb-wty-cta');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

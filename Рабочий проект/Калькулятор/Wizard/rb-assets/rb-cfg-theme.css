@@ -1,0 +1,180 @@
+/* ══════════════════════════════════════════════════════
+   RunBird configurator wizard — shared theme system
+   Loaded by every configurator-*.wizard.html via a single <link>:
+     <link rel="stylesheet" href="https://therunbird.com/rb-assets/rb-cfg-theme.css">
+   Palette lives HERE, in one place — edit it once, it applies to
+   every configurator on the site. Don't duplicate these rules
+   into individual .wizard.html files.
+
+   How it works: rb-cfg-theme.js sets data-rb-theme="light"|"dark"
+   on <html> (persisted per-visitor in localStorage under the key
+   "rb-cfg-theme", shared across every product page on this
+   domain). Dark is the default look already baked into each
+   .wizard.html file as its own inline CSS custom properties on
+   #rb-config / #rb-cfg-gallery — this file only supplies the
+   LIGHT overrides (selectors below only match when the light
+   attribute is present) plus the toggle switch's own styling,
+   which is theme-agnostic.
+
+   The lightbox photo viewer (.rb-cfg-lightbox, appended to
+   <body>, outside #rb-config) intentionally stays dark in BOTH
+   themes — same reasoning as most photo viewers (Apple Photos,
+   Instagram, etc.): product finish/colour reads truer against a
+   dark surround regardless of page theme. Not themed here. The
+   floating "Step X of N" photo badge and the pulsing zone dot
+   also stay dark-styled in both themes for the same reason — they
+   sit on top of the product photo itself, not the page chrome.
+════════════════════════════════════════════════════════ */
+
+/* ── Restore normal inheritance, theme-agnostic (both themes need this) ──
+   therunbird.com's own site-wide CSS carries a very old, very broad rule
+   — `body, p, div, li { color:#F0F0F0 }` plus `h1,h2,h3,h4,h5,h6 { color:
+   #F0F0F0 }` — predating this whole theme system, presumably written back
+   when the entire storefront was dark-only. It happened to be invisible
+   in our dark theme purely by coincidence (#F0F0F0 IS --rb-text's dark
+   value), which is exactly why this went unnoticed until the light theme
+   shipped: any bare <div>/<p>/<li>/<h1-6> inside #rb-config or
+   #rb-cfg-gallery that relies on ordinary inheritance from its ancestor's
+   `color:var(--rb-text)` — rather than declaring its own `color` — loses
+   to that direct (if low-specificity) site-wide rule, because a direct
+   match always beats inheritance regardless of specificity. Titles, step
+   headings, and the price number are exactly this case. Re-declaring
+   color here restores ordinary inheritance for just those tag types
+   inside our two scopes, without touching the site-wide rule itself
+   (other, still-dark parts of the site may depend on it). */
+#rb-config div, #rb-config p, #rb-config li,
+#rb-config h1, #rb-config h2, #rb-config h3,
+#rb-config h4, #rb-config h5, #rb-config h6,
+#rb-cfg-gallery div, #rb-cfg-gallery p, #rb-cfg-gallery li,
+#rb-cfg-gallery h1, #rb-cfg-gallery h2, #rb-cfg-gallery h3,
+#rb-cfg-gallery h4, #rb-cfg-gallery h5, #rb-cfg-gallery h6{
+  color: inherit;
+}
+
+html[data-rb-theme="light"] #rb-config{
+  /* Two golds instead of one: --rb-accent is deepened for AA text contrast
+     on a light page (labels, links, counters); --rb-accent-fill is the
+     exact brand gold (#C8A84C, same as dark theme and the homepage hero's
+     "Shop Collection" button) rather than a light-tuned shade, so filled
+     surfaces (Add to cart, active chips, badges) read as the same gold
+     everywhere on the site. --rb-accent-fill-h is its OWN hover (lightens,
+     matching Shop Collection's hover) — kept separate from --rb-accent-h,
+     which stays deepened for text-hover contexts (e.g. the notice links)
+     where a light gold would be unreadable against this page. */
+  --rb-accent:          #A8842A;
+  --rb-accent-fill:     #C8A84C;
+  --rb-accent-fill-h:   #D9BA62;
+  --rb-accent-h:        #8A6B1E;
+  --rb-accent-b:        rgba(168,132,42,.20);
+  --rb-bg:              #F6F4EE;
+  --rb-bg2:             #ECE8DC;
+  --rb-text:            #201D18;
+  --rb-text2:           #74695C;
+  --rb-border:          rgba(32,29,24,.10);
+  --rb-border-s:        rgba(32,29,24,.20);
+  --rb-card-bg:         #FFFFFF;
+  --rb-card-active-bg:  #FCF6E6;
+  --rb-desc-bg:         rgba(32,29,24,.035);
+  --rb-notice-bg:       rgba(168,132,42,.10);
+  --rb-stage-bg:
+    radial-gradient(ellipse at 50% 38%, rgba(168,132,42,.16), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.05), transparent 60%),
+    linear-gradient(180deg, #E9E4D6 0%, #DAD3C0 60%, #C9C0A9 100%);
+  --rb-stage-shadow: radial-gradient(ellipse at center, rgba(0,0,0,.18), transparent 70%);
+  /* Airbag cover's "Stitch design" tiles trace an SVG silhouette in this
+     color, over --rb-stage-bg — needs to flip dark-on-light like everything
+     else that sits on the studio backdrop. Harmless if unused elsewhere. */
+  --rb-icon-outline: rgba(32,29,24,.35);
+}
+
+/* The "Recent builds" gallery sits directly on the page background
+   (CS-Cart's own chrome, not themed by us) — only its accent/border
+   and the per-thumbnail studio backdrop need to follow the theme. */
+html[data-rb-theme="light"] #rb-cfg-gallery{
+  --rb-accent:   #A8842A;
+  --rb-accent-h: #8A6B1E;
+  --rb-accent-b: rgba(168,132,42,.20);
+  --rb-text:     #201D18;
+  --rb-border:   rgba(32,29,24,.10);
+  --rb-border-s: rgba(32,29,24,.20);
+  --rb-stage-bg:
+    radial-gradient(ellipse at 50% 38%, rgba(168,132,42,.16), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.05), transparent 60%),
+    linear-gradient(180deg, #E9E4D6 0%, #DAD3C0 60%, #C9C0A9 100%);
+}
+
+/* ══════════════════════════════════════════════════════
+   Site header (and anything else that declares its dark defaults on
+   <html> directly, rather than its own scoped #id) — see
+   Рабочий проект/Хедер/header-runbird-v2.1.deploy.html. Its cart-popup
+   and search-overlay panels are NOT descendants of #rb-header in the DOM
+   (CS-Cart renders them elsewhere on the page), which is exactly why the
+   header declares its palette on <html> instead of on #rb-header — every
+   themed surface on the page inherits from one place. Override that same
+   root scope here. --rb-accent-b/--rb-border/--rb-border-s are built from
+   --rb-accent-rgb/--rb-fg-rgb on <html>, so overriding just the two RGB
+   triplets below re-derives them automatically — no need to restate them.
+════════════════════════════════════════════════════════ */
+html[data-rb-theme="light"]{
+  --rb-accent-rgb:  201,162,39;
+  --rb-accent:      #A8842A;
+  /* --rb-accent-fill stays the exact brand gold (#C8A84C, same as dark
+     theme) rather than a light-tuned shade — owner wants it to match the
+     homepage hero's "Shop Collection" button (#rb-hero .rb-btn-gold,
+     var(--rb-accent) there, never overridden since that section isn't
+     wired into the theme system yet) so the two read as the same gold
+     wherever they appear, dark or light page. */
+  --rb-accent-fill: #C8A84C;
+  --rb-accent-h:    #8A6B1E;
+  --rb-logo:        #201D18;
+  --rb-text:        #201D18;
+  --rb-text2:       #74695C;
+  --rb-text3:       #948C7E;
+  --rb-fg-rgb:      32,29,24;
+  --rb-panel-rgb:   255,255,255;
+  --rb-thumb-bg:    #EDEAE2;
+  /* Primary buttons (cart, sign in, checkout) — same reasoning: match the
+     homepage's gold button exactly, hover included (its hover is
+     var(--rb-accent-h) dark-theme value, #D9BA62 — reused verbatim here
+     rather than the deepened --rb-accent-h above, which stays separate
+     for text-hover contexts like link/notice hovers where a light gold
+     would be unreadable against this page's light background). */
+  --rb-btn-bg:      #C8A84C;
+  --rb-btn-bg-h:    #D9BA62;
+  --rb-btn-text:    #000;
+  --rb-page-bg:     #F6F4EE;
+}
+
+/* ---- toggle switch (theme-agnostic chrome, same in both themes) ----
+   #rb-cfg-theme-toggle is just an empty mount slot — rb-cfg-theme.js finds
+   it by id and drops a .rb-theme-toggle button inside. In the wizard
+   configurators it's positioned absolute (floating in the header row); in
+   the site header/footer/pages it sits inline whererever it's placed in
+   the markup, so positioning is scoped to #rb-config specifically rather
+   than applied to every #rb-cfg-theme-toggle sitewide. */
+#rb-config .rb-cfg-inner{ position:relative; }
+#rb-config #rb-cfg-theme-toggle{
+  position:absolute; top:2px; right:clamp(20px,4vw,56px); z-index:5;
+}
+@media (max-width: 480px){
+  #rb-config #rb-cfg-theme-toggle{ top:0; right:20px; }
+}
+
+/* Uses --rb-border / --rb-text / --rb-border-s / --rb-accent, which every
+   themed scope already declares (wizard configurators, header, and
+   anywhere else a #rb-cfg-theme-toggle slot gets mounted) — so this one
+   button works everywhere without needing a "card background" token of
+   its own; it reuses the border's own translucent tone as a subtle fill. */
+.rb-theme-toggle{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:50%; padding:0;
+  background:var(--rb-border,rgba(255,255,255,.08));
+  border:1px solid var(--rb-border-s,rgba(255,255,255,.16));
+  color:var(--rb-text,#F0F0F0); font-size:15px; line-height:1; cursor:pointer;
+  transition:border-color .15s, transform .15s;
+}
+.rb-theme-toggle:hover{ border-color:var(--rb-accent,#C8A84C); }
+.rb-theme-toggle:active{ transform:scale(.92); }
+@media (max-width: 480px){
+  .rb-theme-toggle{ width:30px; height:30px; font-size:13px; }
+}

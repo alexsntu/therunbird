@@ -1,10 +1,15 @@
 /* ══════════════════════════════════════════════════════
-   RunBird — Shared site-wide CSS (Header + Footer)
-   Loaded via CS-Cart Design > Themes > Editor > custom CSS
-   (theme includes it automatically on every page — no <link>
-   tag needed in the header/footer blocks themselves).
+   RunBird — Shared site-wide CSS (Header + Footer) — LIGHT-ONLY VARIANT
+   Separate track from Рабочий проект/rb-work.css (the dark/light-toggle
+   system). This file has NO toggle, NO data-rb-theme attribute, NO dark
+   defaults — every value here IS the live, permanent look. White page
+   background, black primary buttons/logo, decorative accents in #D1382A.
+   Loaded via CS-Cart Design > Themes > Editor > custom CSS (theme
+   includes it automatically on every page — no <link> tag needed in the
+   header/footer blocks themselves).
    Header/footer blocks that pair with this file:
-     header-runbird-v2.1-nocss.html / footer-runbird-nocss.html
+     Рабочий проект светлый/Хедер/header-runbird-light.html
+     Рабочий проект светлый/Футер/footer-runbird-light.html
    (markup only, no inline <style>).
 ════════════════════════════════════════════════════════ */
 
@@ -16,11 +21,11 @@
    injects a fixed bottom-right badge into <body>. Because CS-Cart's
    storefront navigates between pages via AJAX (no full reload), that
    badge node isn't cleaned up on navigation and "follows" the visitor
-   to other pages, where it overlaps UniTheme2's mobile sticky bottom
-   nav (Menu/Cart/Account). Scoping the hide rule to the Contact Us
-   page's own <style> block isn't enough since that block gets swapped
-   out on navigation while the badge itself persists — this rule must
-   live in the site-wide CSS instead.
+   to every other page, overlapping the sticky bottom mobile nav. Hiding
+   it site-wide here (rather than only on the Contact Us page) is the fix
+   — carried over from Рабочий проект/rb-work.css, which this light-variant
+   file otherwise doesn't inherit from since only the header/footer block
+   was extracted from it.
    Hiding it is allowed by Google's terms ONLY together with the visible
    attribution text on the Contact Us page ("This site is protected by
    reCAPTCHA...") — do not remove that text if this rule stays.
@@ -74,30 +79,32 @@
   overflow: visible !important;
 }
 
-/* ── CSS tokens ── */
+/* ── CSS tokens — light-only palette, no toggle, no dark defaults ──
+   Background white, primary buttons black, decorative accents #D1382A.
+   --rb-accent and --rb-accent-fill are the SAME value here (unlike the
+   toggle-based dark/light system in Рабочий проект/, which needed two
+   separate golds — one deepened for text contrast, one vivid for fills).
+   #D1382A is dark/saturated enough to work as both text-on-white AND a
+   filled surface with light text on top, so one token covers both. */
 html {
-  --rb-accent:      #C8A84C;
-  --rb-accent-fill: #C8A84C;
-  --rb-accent-h:    #D9BA62;
-  --rb-accent-b:    rgba(var(--rb-accent-rgb),.28);
-  --rb-accent-rgb:  200,168,76;
-  --rb-logo:        #f1ebdb;
-  --rb-text:        #F0F0F0;
-  --rb-text2:       #808080;
-  --rb-text3:       #666666;
-  --rb-fg-rgb:      255,255,255;
-  --rb-border:      rgba(var(--rb-fg-rgb),.07);
-  --rb-border-s:    rgba(var(--rb-fg-rgb),.14);
-  --rb-panel-rgb:   12,12,12;
-  --rb-thumb-bg:    #161616;
-  --rb-btn-bg:      var(--rb-accent-fill);
-  --rb-btn-bg-h:    var(--rb-accent-h);
-  --rb-btn-text:    #000;
-  /* Page background, sitewide — used by the breadcrumb color fix below to
-     match whatever page it sits above (matches #rb-config's own --rb-bg
-     in the wizard configurators, which is #0C0C0C dark / #F6F4EE light —
-     keep these in sync if that palette ever changes). */
-  --rb-page-bg:     #0C0C0C;
+  --rb-accent:      #D1382A;
+  --rb-accent-fill: #D1382A;
+  --rb-accent-h:    #A82C20;
+  --rb-accent-b:    rgba(209,56,42,.18);
+  --rb-accent-rgb:  209,56,42;
+  --rb-logo:        #121212;
+  --rb-text:        #121212;
+  --rb-text2:       #6E6A63;
+  --rb-text3:       #9A968E;
+  --rb-fg-rgb:      18,18,18;
+  --rb-border:      rgba(18,18,18,.10);
+  --rb-border-s:    rgba(18,18,18,.18);
+  --rb-panel-rgb:   255,255,255;
+  --rb-thumb-bg:    #EFEEEA;
+  --rb-btn-bg:      #D1382A;
+  --rb-btn-bg-h:    #A82C20;
+  --rb-btn-text:    #FFFFFF;
+  --rb-page-bg:     #FFFFFF;
 }
 
 #rb-header {
@@ -121,7 +128,7 @@ html {
 /* ── Announcement bar ── */
 #rb-header .rb-ann {
   background: var(--rb-accent-fill) !important;
-  color: #000 !important;
+  color: var(--rb-btn-text) !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 11.5px !important;
   font-weight: 700 !important;
@@ -137,7 +144,7 @@ html {
 #rb-header .rb-nav {
   position: relative !important;
   border-bottom: 1px solid var(--rb-border) !important;
-  background: rgba(var(--rb-panel-rgb),.97) !important;
+  background: rgba(255,255,255,.97) !important;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
@@ -235,7 +242,7 @@ html {
 #rb-header .rb-icon-btn.active {
   border-color: var(--rb-accent) !important;
   color: var(--rb-accent) !important;
-  background: rgba(var(--rb-accent-rgb),.08) !important;
+  background: rgba(209,56,42,.08) !important;
 }
 #rb-header .rb-icon-btn svg {
   display: block !important;
@@ -252,10 +259,10 @@ html {
   top: calc(100% + 10px) !important;
   right: 0 !important;
   width: 280px !important;
-  background: rgb(var(--rb-panel-rgb)) !important;
-  border: 1px solid rgba(var(--rb-accent-rgb),.22) !important;
+  background: rgb(255,255,255) !important;
+  border: 1px solid rgba(209,56,42,.22) !important;
   border-radius: 12px !important;
-  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(var(--rb-accent-rgb),.05) !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(209,56,42,.05) !important;
   z-index: 100000 !important;
   opacity: 0 !important;
   transform: translateY(-8px) !important;
@@ -275,7 +282,7 @@ html {
   align-items: center !important;
   justify-content: space-between !important;
   padding: 14px 16px 12px !important;
-  border-bottom: 1px solid rgba(var(--rb-accent-rgb),.1) !important;
+  border-bottom: 1px solid rgba(209,56,42,.1) !important;
 }
 #rb-header .rb-acc-drop-title {
   font-family: 'Barlow Condensed', sans-serif !important;
@@ -288,7 +295,7 @@ html {
 #rb-header .rb-acc-drop-close {
   width: 24px !important; height: 24px !important;
   border-radius: 50% !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.1) !important;
+  border: 1px solid rgba(18,18,18,.1) !important;
   background: transparent !important;
   color: var(--rb-text3) !important;
   cursor: pointer !important;
@@ -298,7 +305,7 @@ html {
   padding: 0 !important; box-shadow: none !important;
 }
 #rb-header .rb-acc-drop-close:hover {
-  border-color: rgba(var(--rb-fg-rgb),.3) !important;
+  border-color: rgba(18,18,18,.3) !important;
   color: var(--rb-text) !important;
 }
 
@@ -308,7 +315,7 @@ html {
   font-size: 12px !important;
   color: var(--rb-text3) !important;
   font-family: 'Inter', sans-serif !important;
-  border-bottom: 1px solid rgba(var(--rb-fg-rgb),.04) !important;
+  border-bottom: 1px solid rgba(18,18,18,.04) !important;
   line-height: 1.4 !important;
 }
 #rb-header .rb-acc-drop-user strong {
@@ -319,7 +326,7 @@ html {
 /* Dropdown nav links */
 #rb-header .rb-acc-drop-links {
   padding: 6px 0 !important;
-  border-bottom: 1px solid rgba(var(--rb-fg-rgb),.04) !important;
+  border-bottom: 1px solid rgba(18,18,18,.04) !important;
 }
 #rb-header .rb-acc-drop-links a {
   display: flex !important;
@@ -342,7 +349,7 @@ html {
 }
 #rb-header .rb-acc-drop-links a:hover {
   color: var(--rb-text) !important;
-  background: rgba(var(--rb-accent-rgb),.045) !important;
+  background: rgba(209,56,42,.045) !important;
   padding-left: 22px !important;
 }
 #rb-header .rb-acc-drop-links a:hover svg {
@@ -352,7 +359,7 @@ html {
 /* Track order section */
 #rb-header .rb-acc-track {
   padding: 12px 16px !important;
-  border-bottom: 1px solid rgba(var(--rb-fg-rgb),.04) !important;
+  border-bottom: 1px solid rgba(18,18,18,.04) !important;
 }
 #rb-header .rb-acc-track-label {
   font-size: 10px !important;
@@ -371,8 +378,8 @@ html {
 #rb-header .rb-acc-track-input {
   flex: 1 !important;
   height: 34px !important;
-  background: rgba(var(--rb-fg-rgb),.04) !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.09) !important;
+  background: rgba(18,18,18,.04) !important;
+  border: 1px solid rgba(18,18,18,.09) !important;
   border-radius: 6px !important;
   padding: 0 11px !important;
   font-size: 12px !important;
@@ -384,12 +391,12 @@ html {
 }
 #rb-header .rb-acc-track-input::placeholder { color: var(--rb-text3) !important; }
 #rb-header .rb-acc-track-input:focus {
-  border-color: rgba(var(--rb-accent-rgb),.38) !important;
+  border-color: rgba(209,56,42,.38) !important;
 }
 #rb-header .rb-acc-track-submit {
   width: 34px !important; height: 34px !important;
-  background: rgba(var(--rb-accent-rgb),.1) !important;
-  border: 1px solid rgba(var(--rb-accent-rgb),.28) !important;
+  background: rgba(209,56,42,.1) !important;
+  border: 1px solid rgba(209,56,42,.28) !important;
   border-radius: 6px !important;
   color: var(--rb-accent) !important;
   cursor: pointer !important;
@@ -399,7 +406,7 @@ html {
   padding: 0 !important; box-shadow: none !important;
 }
 #rb-header .rb-acc-track-submit:hover {
-  background: rgba(var(--rb-accent-rgb),.22) !important;
+  background: rgba(209,56,42,.22) !important;
 }
 
 /* Auth buttons (guest) */
@@ -433,7 +440,7 @@ html {
   height: 36px !important;
   background: transparent !important;
   color: var(--rb-text2) !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.13) !important;
+  border: 1px solid rgba(18,18,18,.13) !important;
   border-radius: 7px !important;
   font-family: 'Barlow Condensed', sans-serif !important;
   font-size: 14px !important; font-weight: 700 !important; letter-spacing: .08em !important;
@@ -445,7 +452,7 @@ html {
   box-shadow: none !important; line-height: 1 !important;
 }
 #rb-header .rb-acc-btn-reg:hover {
-  border-color: rgba(var(--rb-fg-rgb),.32) !important;
+  border-color: rgba(18,18,18,.32) !important;
   color: var(--rb-text) !important;
 }
 
@@ -457,7 +464,7 @@ html {
   margin: 4px 16px 14px !important;
   height: 34px !important;
   background: transparent !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.08) !important;
+  border: 1px solid rgba(18,18,18,.08) !important;
   border-radius: 7px !important;
   color: var(--rb-text3) !important;
   font-family: 'Barlow Condensed', sans-serif !important;
@@ -544,7 +551,7 @@ html {
   top: 100% !important;
   left: 0 !important;
   right: 0 !important;
-  background: rgb(var(--rb-panel-rgb)) !important;
+  background: rgb(255,255,255) !important;
   padding: 8px 0 16px !important;
   gap: 0 !important;
   border-bottom: 1px solid var(--rb-border) !important;
@@ -553,7 +560,7 @@ html {
   animation: rb-menuSlide .22s ease both !important;
 }
 #rb-header .rb-nav-links.open li {
-  border-bottom: 1px solid rgba(var(--rb-fg-rgb),.045) !important;
+  border-bottom: 1px solid rgba(18,18,18,.045) !important;
 }
 #rb-header .rb-nav-links.open li:last-child {
   border-bottom: none !important;
@@ -574,7 +581,7 @@ html {
 }
 #rb-header .rb-nav-links.open a:hover {
   color: var(--rb-text) !important;
-  background: rgba(var(--rb-accent-rgb),.05) !important;
+  background: rgba(209,56,42,.05) !important;
   padding-left: 30px !important;
 }
 #rb-header .rb-nav-links.open li.rb-cat-first a {
@@ -592,13 +599,13 @@ html {
 #rb-header .rb-nav-links.open .rb-mnav-search,
 #rb-header .rb-nav-links.open .rb-mnav-account {
   display: block !important;
-  background: rgba(var(--rb-accent-rgb),.05) !important;
+  background: rgba(209,56,42,.05) !important;
 }
 #rb-header .rb-nav-links.open .rb-mnav-search {
-  border-bottom: 1px solid rgba(var(--rb-accent-rgb),.18) !important;
+  border-bottom: 1px solid rgba(209,56,42,.18) !important;
 }
 #rb-header .rb-nav-links.open .rb-mnav-account {
-  border-top: 1px solid rgba(var(--rb-accent-rgb),.18) !important;
+  border-top: 1px solid rgba(209,56,42,.18) !important;
   border-bottom: none !important;
 }
 #rb-header .rb-mnav-search-btn,
@@ -629,7 +636,7 @@ html {
 }
 #rb-header .rb-mnav-search-btn:hover,
 #rb-header .rb-nav-links.open a.rb-mnav-account-link:hover {
-  background: rgba(var(--rb-accent-rgb),.1) !important;
+  background: rgba(209,56,42,.1) !important;
   padding-left: 30px !important;
 }
 /* Secondary account links (Orders / Wish List / Comparison List) —
@@ -641,7 +648,7 @@ html {
   letter-spacing: 0 !important;
   color: var(--rb-text2) !important;
   padding: 13px 24px !important;
-  border-top: 1px solid rgba(var(--rb-fg-rgb),.04) !important;
+  border-top: 1px solid rgba(18,18,18,.04) !important;
 }
 #rb-header .rb-nav-links.open a.rb-mnav-account-sub svg {
   opacity: .8 !important;
@@ -730,10 +737,10 @@ html {
   width: 390px !important;
   max-width: calc(100vw - 32px) !important;
   margin: 0 !important;
-  background: rgb(var(--rb-panel-rgb)) !important;
-  border: 1px solid rgba(var(--rb-accent-rgb),.22) !important;
+  background: rgb(255,255,255) !important;
+  border: 1px solid rgba(209,56,42,.22) !important;
   border-radius: 12px !important;
-  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(var(--rb-accent-rgb),.05) !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,.85), 0 0 0 1px rgba(209,56,42,.05) !important;
   z-index: 100000 !important;
   padding: 0 !important;
   font-family: 'Inter', sans-serif !important;
@@ -747,7 +754,7 @@ html {
   align-items: center !important;
   justify-content: space-between !important;
   padding: 14px 16px 12px !important;
-  border-bottom: 1px solid rgba(var(--rb-accent-rgb),.1) !important;
+  border-bottom: 1px solid rgba(209,56,42,.1) !important;
   font-family: 'Barlow Condensed', sans-serif !important;
   font-size: 15px !important;
   font-weight: 800 !important;
@@ -758,7 +765,7 @@ html {
 .ty-dropdown-box__content--cart .ut2-btn-close {
   width: 24px !important; height: 24px !important;
   border-radius: 50% !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.1) !important;
+  border: 1px solid rgba(18,18,18,.1) !important;
   color: var(--rb-text3) !important;
   display: flex !important; align-items: center !important; justify-content: center !important;
   cursor: pointer !important;
@@ -766,7 +773,7 @@ html {
   transition: border-color .18s, color .18s !important;
 }
 .ty-dropdown-box__content--cart .ut2-btn-close:hover {
-  border-color: rgba(var(--rb-fg-rgb),.3) !important;
+  border-color: rgba(18,18,18,.3) !important;
   color: var(--rb-text) !important;
 }
 .ty-dropdown-box__content--cart .ut2-added-products {
@@ -779,7 +786,7 @@ html {
   align-items: center !important;
   gap: 12px !important;
   padding: 10px 16px !important;
-  border-bottom: 1px solid rgba(var(--rb-fg-rgb),.04) !important;
+  border-bottom: 1px solid rgba(18,18,18,.04) !important;
 }
 .ty-dropdown-box__content--cart .product-pict {
   flex-shrink: 0 !important;
@@ -834,7 +841,7 @@ html {
 }
 .ty-dropdown-box__content--cart .cart_subtotal {
   padding: 12px 16px !important;
-  border-top: 1px solid rgba(var(--rb-fg-rgb),.04) !important;
+  border-top: 1px solid rgba(18,18,18,.04) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -876,11 +883,11 @@ html {
 }
 .ty-dropdown-box__content--cart .ty-btn__outline {
   background: transparent !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.13) !important;
+  border: 1px solid rgba(18,18,18,.13) !important;
   color: var(--rb-text2) !important;
 }
 .ty-dropdown-box__content--cart .ty-btn__outline:hover {
-  border-color: rgba(var(--rb-fg-rgb),.32) !important;
+  border-color: rgba(18,18,18,.32) !important;
   color: var(--rb-text) !important;
 }
 .ty-dropdown-box__content--cart .ty-btn__primary {
@@ -935,11 +942,11 @@ html {
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
-  background: rgba(var(--rb-panel-rgb),.98) !important;
+  background: rgba(255,255,255,.98) !important;
   backdrop-filter: blur(18px) !important;
   -webkit-backdrop-filter: blur(18px) !important;
   border: none !important;
-  border-bottom: 1px solid rgba(var(--rb-accent-rgb),.22) !important;
+  border-bottom: 1px solid rgba(209,56,42,.22) !important;
   box-shadow: 0 20px 50px rgba(0,0,0,.6) !important;
   z-index: 100000 !important;
   padding: 22px 48px !important;
@@ -962,8 +969,8 @@ html {
   flex: 1 1 auto !important;
   min-width: 0 !important;
   height: 46px !important;
-  background: rgba(var(--rb-fg-rgb),.04) !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.1) !important;
+  background: rgba(18,18,18,.04) !important;
+  border: 1px solid rgba(18,18,18,.1) !important;
   border-radius: 8px !important;
   padding: 0 16px !important;
   font-family: 'Inter', sans-serif !important;
@@ -974,7 +981,7 @@ html {
   transition: border-color .18s !important;
 }
 .ty-search-block__input::placeholder { color: var(--rb-text3) !important; }
-.ty-search-block__input:focus { border-color: rgba(var(--rb-accent-rgb),.38) !important; }
+.ty-search-block__input:focus { border-color: rgba(209,56,42,.38) !important; }
 .ty-search-magnifier {
   position: static !important;
   top: auto !important;
@@ -989,7 +996,7 @@ html {
   background: var(--rb-accent-fill) !important;
   border: none !important;
   border-radius: 8px !important;
-  color: #000 !important;
+  color: var(--rb-btn-text) !important;
   display: flex !important; align-items: center !important; justify-content: center !important;
   cursor: pointer !important;
   transition: background .18s !important;
@@ -1002,7 +1009,7 @@ html {
   height: 46px !important;
   flex-shrink: 0 !important;
   background: transparent !important;
-  border: 1px solid rgba(var(--rb-fg-rgb),.12) !important;
+  border: 1px solid rgba(18,18,18,.12) !important;
   border-radius: 8px !important;
   color: var(--rb-text2) !important;
   display: flex !important; align-items: center !important; justify-content: center !important;
@@ -1013,7 +1020,7 @@ html {
   box-shadow: none !important;
 }
 .ty-search-block .rb-search-close:hover {
-  border-color: rgba(var(--rb-fg-rgb),.32) !important;
+  border-color: rgba(18,18,18,.32) !important;
   color: var(--rb-text) !important;
 }
 
@@ -1025,8 +1032,8 @@ html {
   right: 0 !important;
   max-height: 420px !important;
   overflow-y: auto !important;
-  background: rgb(var(--rb-panel-rgb)) !important;
-  border: 1px solid rgba(var(--rb-accent-rgb),.18) !important;
+  background: rgb(255,255,255) !important;
+  border: 1px solid rgba(209,56,42,.18) !important;
   border-radius: 10px !important;
   box-shadow: 0 24px 64px rgba(0,0,0,.7) !important;
   padding: 6px !important;
@@ -1060,7 +1067,7 @@ html {
   transition: background .16s !important;
 }
 .ty-search-block .ty-search-item:hover {
-  background: rgba(var(--rb-accent-rgb),.06) !important;
+  background: rgba(209,56,42,.06) !important;
 }
 .ty-search-block .ty-search-item__picture {
   flex-shrink: 0 !important;
@@ -1158,19 +1165,15 @@ footer.ty-footer,
   min-height: 0 !important;
 }
 
-/* ── CSS tokens ── */
+/* ── CSS tokens — reuses the shared <html> tokens from the header block
+   above (this file always ships them together) for --rb-accent/-h/-rgb,
+   --rb-logo, --rb-text, --rb-text2, --rb-border; only footer-specific
+   extras are declared locally here. ── */
 #rb-footer {
-  --rb-accent:     #C8A84C;
-  --rb-accent-h:   #D9BA62;
-  --rb-accent-b:   rgba(200,168,76,.28);
-  --rb-accent-dim: rgba(200,168,76,.12);
-  --rb-logo:       #f1ebdb;
-  --rb-text:       #F0F0F0;
-  --rb-text2:      #808080;
-  --rb-border:     rgba(255,255,255,.07);
-  --rb-bg-card:    #111111;
+  --rb-accent-dim: rgba(209,56,42,.08);
+  --rb-bg-card:    #FAF9F7;
   display: block !important;
-  background: #030303 !important;
+  background: var(--rb-page-bg) !important;
   font-family: 'Inter', sans-serif !important;
 
   /* Break out of UniTheme2 Bootstrap container — force full viewport width */
@@ -1190,7 +1193,7 @@ footer.ty-footer,
 #rb-footer .rb-foot-stripe {
   height: 5px !important;
   min-height: 5px !important;
-  background: #C8A84C !important;
+  background: var(--rb-accent) !important;
   display: block !important;
   width: 100% !important;
   flex-shrink: 0 !important;
@@ -1198,12 +1201,12 @@ footer.ty-footer,
 #rb-footer .rb-foot-checker {
   height: 20px !important;
   min-height: 20px !important;
-  background-color: #070707 !important;
+  background-color: var(--rb-bg-card) !important;
   background-image:
-    linear-gradient(45deg, rgba(200,168,76,.22) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(200,168,76,.22) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(200,168,76,.22) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(200,168,76,.22) 75%) !important;
+    linear-gradient(45deg, rgba(209,56,42,.14) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(209,56,42,.14) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(209,56,42,.14) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(209,56,42,.14) 75%) !important;
   background-size: 20px 20px !important;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px !important;
   display: block !important;
@@ -1220,7 +1223,7 @@ footer.ty-footer,
   font-size: 200px !important;
   font-weight: 900 !important;
   font-style: italic !important;
-  color: rgba(255,255,255,.018) !important;
+  color: rgba(18,18,18,.035) !important;
   text-transform: uppercase !important;
   letter-spacing: -.02em !important;
   pointer-events: none !important;
@@ -1264,7 +1267,7 @@ footer.ty-footer,
 }
 #rb-footer .rb-foot-about p {
   font-size: 13px !important;
-  color: #787878 !important;
+  color: var(--rb-text2) !important;
   line-height: 1.82 !important;
   max-width: 270px !important;
   margin: 0 !important;
@@ -1280,14 +1283,14 @@ footer.ty-footer,
 }
 #rb-footer .rb-foot-badge {
   padding: 5px 13px !important;
-  border: 1px solid rgba(255,255,255,.1) !important;
+  border: 1px solid var(--rb-border) !important;
   border-radius: 3px !important;
   font-size: 10px !important;
   font-weight: 700 !important;
   letter-spacing: .12em !important;
   text-transform: uppercase !important;
-  color: #777 !important;
-  background: rgba(255,255,255,.03) !important;
+  color: var(--rb-text2) !important;
+  background: var(--rb-bg-card) !important;
   transition: all .2s !important;
   cursor: default !important;
   font-family: 'Inter', sans-serif !important;
@@ -1298,9 +1301,9 @@ footer.ty-footer,
   color: var(--rb-accent) !important;
 }
 #rb-footer .rb-foot-badge.gold {
-  border-color: rgba(200,168,76,.4) !important;
+  border-color: rgba(209,56,42,.4) !important;
   color: var(--rb-accent) !important;
-  background: rgba(200,168,76,.06) !important;
+  background: var(--rb-accent-dim) !important;
 }
 
 /* ── Social buttons ── */
@@ -1313,9 +1316,9 @@ footer.ty-footer,
   height: 36px !important;
   padding: 0 16px !important;
   border-radius: 4px !important;
-  border: 1px solid rgba(255,255,255,.11) !important;
-  color: #888 !important;
-  background: rgba(255,255,255,.03) !important;
+  border: 1px solid var(--rb-border) !important;
+  color: var(--rb-text2) !important;
+  background: var(--rb-bg-card) !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -1338,7 +1341,7 @@ footer.ty-footer,
 #rb-footer .rb-soc-btn:hover {
   border-color: var(--rb-accent) !important;
   color: var(--rb-accent) !important;
-  background: rgba(200,168,76,.06) !important;
+  background: var(--rb-accent-dim) !important;
 }
 #rb-footer .rb-soc-btn:hover svg {
   opacity: 1 !important;
@@ -1354,7 +1357,7 @@ footer.ty-footer,
   color: var(--rb-accent) !important;
   margin-bottom: 22px !important;
   padding-bottom: 12px !important;
-  border-bottom: 1px solid rgba(200,168,76,.18) !important;
+  border-bottom: 1px solid rgba(209,56,42,.25) !important;
   display: block !important;
 }
 #rb-footer .rb-foot-links {
@@ -1364,7 +1367,7 @@ footer.ty-footer,
 }
 #rb-footer .rb-foot-links a {
   font-size: 13.5px !important;
-  color: #888 !important;
+  color: var(--rb-text2) !important;
   transition: color .18s !important;
   display: flex !important;
   align-items: center !important;
@@ -1381,7 +1384,7 @@ footer.ty-footer,
   transition: opacity .18s, transform .18s !important;
 }
 #rb-footer .rb-foot-links a:hover {
-  color: #E8E8E8 !important;
+  color: var(--rb-text) !important;
 }
 #rb-footer .rb-foot-links a:hover::before {
   opacity: 1 !important;
@@ -1398,7 +1401,7 @@ footer.ty-footer,
 }
 #rb-footer .rb-foot-divider-line {
   height: 1px !important;
-  background: linear-gradient(to right, transparent, rgba(200,168,76,.3) 20%, rgba(200,168,76,.3) 80%, transparent) !important;
+  background: linear-gradient(to right, transparent, rgba(209,56,42,.3) 20%, rgba(209,56,42,.3) 80%, transparent) !important;
 }
 
 /* ── Bottom bar ── */
@@ -1421,7 +1424,7 @@ footer.ty-footer,
 }
 #rb-footer .rb-foot-copy {
   font-size: 11.5px !important;
-  color: #555 !important;
+  color: var(--rb-text3) !important;
   letter-spacing: .02em !important;
   font-family: 'Inter', sans-serif !important;
 }
@@ -1443,11 +1446,11 @@ footer.ty-footer,
   height: 24px !important;
   padding: 0 9px !important;
   border-radius: 3px !important;
-  background: rgba(255,255,255,.05) !important;
-  border: 1px solid rgba(255,255,255,.09) !important;
+  background: var(--rb-bg-card) !important;
+  border: 1px solid var(--rb-border) !important;
   font-size: 9px !important;
   font-weight: 800 !important;
-  color: #777 !important;
+  color: var(--rb-text2) !important;
   letter-spacing: .06em !important;
   text-transform: uppercase !important;
   display: flex !important;
@@ -1573,178 +1576,4 @@ footer.ty-footer,
   #rb-footer .rb-pay-icons {
     justify-content: center !important;
   }
-}
-
-/* ══════════════════════════════════════════════════════
-   Breadcrumb color fix — scoped, opt-in per block.
-   UniTheme2 hardcodes .ty-breadcrumbs__a and .ty-breadcrumbs__slash to
-   #262626 (near-black), a light-theme leftover that's illegible against
-   RunBird's dark background. No admin setting controls this color, and
-   we don't want to override the theme classes site-wide in case other
-   pages rely on them differently — so this only applies inside a block
-   that has the CSS class "rb-breadcrumb-fix" set (block's own General
-   tab > CSS class field). Only blocks you tag with this class are
-   affected; everything else is untouched.
-
-   Also fixes an unrelated theme bug: an unscoped ".row-fluid{background:
-   #6e6e6e !important;}" rule (meant for a sticky top panel state) leaks
-   onto this block's own .row-fluid wrapper, painting a light gray bar
-   behind the breadcrumbs. Can't target the parent .row-fluid directly
-   (the CSS-class field only tags this block's own child element), so
-   instead we paint our own element's background dark to visually cover
-   the gray showing through — matches the configurator's own content
-   background (#rb-config{--rb-bg:#0C0C0C}), confirmed 2026-08-26 as the
-   actual adjacent color. #171717 was too light and pure #000 was too
-   dark/flat against it — #0C0C0C is the real value used right below.
-════════════════════════════════════════════════════════ */
-.rb-breadcrumb-fix {
-  background: var(--rb-page-bg) !important;
-}
-.rb-breadcrumb-fix .ty-breadcrumbs__a {
-  color: var(--rb-text2) !important;
-}
-.rb-breadcrumb-fix .ty-breadcrumbs__a:hover {
-  color: var(--rb-accent) !important;
-}
-.rb-breadcrumb-fix .ty-breadcrumbs__slash {
-  color: var(--rb-text3) !important;
-}
-.rb-breadcrumb-fix .ty-breadcrumbs__current {
-  color: var(--rb-accent) !important;
-}
-
-/* ══════════════════════════════════════════════════════
-   "Added to cart" notification popup — native CS-Cart dialog
-   (.cm-notification-content-extended, appended straight to <body> when
-   you click Add to cart). Its dark look isn't from anything in this
-   file — the black panel is painted by a ::before pseudo-element that's
-   part of CS-Cart's own theme CSS, which we don't have source access to
-   edit directly, so we override it here instead, sitewide, the same way
-   the breadcrumb fix does. Scoped to light theme only: dark theme
-   already reads correctly by coincidence (the popup's hardcoded colors
-   happen to equal this site's dark palette), so it's deliberately left
-   untouched rather than risking a regression there.
-════════════════════════════════════════════════════════ */
-.notification-content-extended div,
-.notification-content-extended p,
-.notification-content-extended li,
-.notification-content-extended span {
-  color: inherit;
-}
-html[data-rb-theme="light"] .notification-content-extended::before {
-  background-color: rgb(var(--rb-panel-rgb)) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended {
-  color: var(--rb-text2) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended h1,
-html[data-rb-theme="light"] .notification-content-extended .product-name,
-html[data-rb-theme="light"] .notification-content-extended .product-name a,
-html[data-rb-theme="light"] .notification-content-extended .ty-product-options-content {
-  color: var(--rb-text) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended h1 {
-  background: transparent !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-product-options-name {
-  color: var(--rb-text2) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .cm-notification-close {
-  color: var(--rb-text2) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .product-pict {
-  background: var(--rb-thumb-bg) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-product-notification__divider {
-  border-color: var(--rb-border-s) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-product-notification__buttons {
-  background: transparent !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-btn__secondary {
-  background: rgba(var(--rb-fg-rgb),.08) !important;
-  color: var(--rb-text) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-btn__secondary:hover {
-  background: rgba(var(--rb-fg-rgb),.16) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-btn__primary {
-  background: var(--rb-btn-bg) !important;
-  color: var(--rb-btn-text) !important;
-}
-html[data-rb-theme="light"] .notification-content-extended .ty-btn__primary:hover {
-  background: var(--rb-btn-bg-h) !important;
-}
-
-/* ══════════════════════════════════════════════════════
-   Native CS-Cart pages (cart contents, checkout, account, etc.) —
-   the main content-area wrapper (.container-fluid.content-grid) has a
-   hardcoded near-black background site-wide, same story as the
-   breadcrumb/notification fixes above: comes from the theme, not from
-   this file, override it here. Safe to do sitewide (not just on the
-   cart page) — on the wizard configurator pages this sits completely
-   underneath the configurator's own full-bleed #rb-config block, so
-   nothing visibly changes there; everywhere else (cart, account, etc.)
-   it's what was making those pages solid black regardless of toggle
-   state. Deliberately NOT touching the sibling ".row-fluid" class here
-   — it's reused for an unrelated sticky-panel state elsewhere and a
-   blanket override risks that (see the breadcrumb-fix comment above).
-════════════════════════════════════════════════════════ */
-html[data-rb-theme="light"] .container-fluid.content-grid {
-  background: var(--rb-page-bg) !important;
-  color: var(--rb-text2) !important;
-}
-/* Same "direct rule beats inheritance" problem as the wizard configurator
-   fix (rb-cfg-theme.css) — the site-wide body,p,div,li,h1-h6{color:
-   #F0F0F0} rule directly matches native CS-Cart page elements (page
-   titles, panel headings, etc.) that never declared their own color,
-   so restoring ordinary inheritance here fixes any current or future
-   native page inside the main content area, not just the cart page. */
-html[data-rb-theme="light"] .container-fluid.content-grid div,
-html[data-rb-theme="light"] .container-fluid.content-grid p,
-html[data-rb-theme="light"] .container-fluid.content-grid li,
-html[data-rb-theme="light"] .container-fluid.content-grid h1,
-html[data-rb-theme="light"] .container-fluid.content-grid h2,
-html[data-rb-theme="light"] .container-fluid.content-grid h3,
-html[data-rb-theme="light"] .container-fluid.content-grid h4,
-html[data-rb-theme="light"] .container-fluid.content-grid h5,
-html[data-rb-theme="light"] .container-fluid.content-grid h6 {
-  color: inherit;
-}
-html[data-rb-theme="light"] .ty-mainbox-title {
-  color: var(--rb-text) !important;
-}
-/* The .row-fluid wrapping the main page content — AND the one wrapping
-   the breadcrumbs row just above it — are ALSO hardcoded dark
-   (rgb(23,23,23)). Scoped via :has() to only these two specific
-   .row-fluid usages — NOT every .row-fluid sitewide — to avoid the
-   documented conflict with the unrelated sticky-top-panel .row-fluid
-   usage (see the breadcrumb-fix comment above). */
-html[data-rb-theme="light"] .row-fluid:has(.ty-mainbox-container),
-html[data-rb-theme="light"] .row-fluid:has(.breadcrumbs-grid) {
-  background: var(--rb-page-bg) !important;
-}
-html[data-rb-theme="light"] .ty-breadcrumbs__a {
-  color: var(--rb-text2) !important;
-}
-html[data-rb-theme="light"] .ty-breadcrumbs__a:hover {
-  color: var(--rb-accent) !important;
-}
-html[data-rb-theme="light"] .ty-breadcrumbs__slash {
-  color: var(--rb-text3) !important;
-}
-html[data-rb-theme="light"] .ty-breadcrumbs__current {
-  color: var(--rb-accent) !important;
-}
-html[data-rb-theme="light"] div:has(> .ty-mainbox-cart__body),
-html[data-rb-theme="light"] .ty-mainbox-cart__body > div {
-  background: rgb(var(--rb-panel-rgb)) !important;
-}
-html[data-rb-theme="light"] .ut2-cart-checkout_totals {
-  background: rgb(var(--rb-panel-rgb)) !important;
-}
-html[data-rb-theme="light"] .ty-mainbox-cart__body select,
-html[data-rb-theme="light"] .ty-mainbox-cart__body option {
-  background: rgb(var(--rb-panel-rgb)) !important;
-  color: var(--rb-text) !important;
 }
