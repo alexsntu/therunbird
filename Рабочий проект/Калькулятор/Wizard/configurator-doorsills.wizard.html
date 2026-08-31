@@ -1,0 +1,706 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Door Sills Configurator (WIZARD PROTOTYPE — step-by-step flow)
+     Fourth product converted to the step-by-step wizard pattern. See
+     ../configurator-preview-v2-yearshape.wizard.html (steering wheel, the
+     reference build) for the full write-up of every rule this follows.
+
+     Source of truth for option data / CS-Cart mapping (csOptId / value ids)
+     is ../configurator-doorsills.deploy.html — this file mirrors that data,
+     INCLUDING its live-price-hydration fetch (see hydrateProduct()), same
+     as center emblem / airbag cover. NOT wired into CS-Cart, NOT deployed
+     — local preview only, for owner review.
+
+     Simplest of the four so far: 4 flat options, all with a static photo
+     zone (no design gate, no photo/zone swapping, no gating between
+     options) — closer to center emblem's shape than airbag cover's.
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config">
+<div class="rb-cfg-inner">
+
+  <div class="rb-cfg-head">
+    <h1 class="rb-cfg-title">Corvette C6 Carbon Fiber Door Sills</h1>
+    <p class="rb-cfg-sub">Answer one question at a time — we'll tell you exactly what it changes and where it sits.</p>
+  </div>
+
+  <div class="rb-cfg-stage">
+
+    <div class="rb-cfg-imgwrap">
+      <div class="rb-cfg-imgbox">
+        <img src="https://therunbird.com/images/ab__webp/detailed/9/Corvette_C6_carbon_fiber_door_sills22_png.webp" alt="Corvette C6 Carbon Fiber Door Sills" width="800" height="800" fetchpriority="high" draggable="false">
+      </div>
+      <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint"></div>
+      <div class="rb-cfg-active-mark" id="rb-cfg-active-mark"><span class="rb-cfg-active-mark-dot"></span></div>
+      <p class="rb-cfg-img-caption">This is a schematic mockup to show where each option applies — not the final finish. We'll send you a realistic render of your actual build before we start making it.</p>
+    </div>
+
+    <div class="rb-cfg-col rb-cfg-col--r">
+      <div class="rb-cfg-col-intro">Build your door sills — step by step</div>
+
+      <div class="rb-cfg-steps" id="rb-cfg-steps"></div>
+
+      <div class="rb-cfg-summary" id="rb-cfg-summary">
+        <div class="rb-cfg-summary-row">
+          <span class="rb-cfg-price-label">Total price</span>
+          <span class="rb-cfg-price-value"><span class="rb-cfg-price-cur">$</span><span id="rb-cfg-price-num">0</span></span>
+          <button class="rb-cfg-add" id="rb-cfg-add-btn" disabled>Add to cart</button>
+        </div>
+        <div class="rb-cfg-summary-hint" id="rb-cfg-summary-hint">Answer every step above to add this build to your cart.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<style>
+#rb-config{
+  --rb-accent:   #C8A84C;
+  --rb-accent-h: #D9BA62;
+  --rb-accent-b: rgba(200,168,76,.28);
+  --rb-bg:       #0C0C0C;
+  --rb-bg2:      #060606;
+  --rb-text:     #F0F0F0;
+  --rb-text2:    #808080;
+  --rb-border:   rgba(255,255,255,.08);
+  --rb-border-s: rgba(255,255,255,.16);
+  --rb-card-bg:  #131313;
+
+  background: var(--rb-bg);
+  color: var(--rb-text);
+  font-family: 'Inter', sans-serif;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#rb-config *{ box-sizing: border-box; }
+#rb-config button,
+#rb-config a,
+#rb-config [tabindex]{ touch-action: manipulation; }
+#rb-config .rb-cfg-inner{
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 clamp(20px,4vw,56px) 48px;
+  box-sizing: border-box;
+}
+
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:14px; }
+#rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
+
+#rb-config .rb-cfg-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+#rb-config .rb-chip{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--rb-border-s); background:transparent; color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 15px; border-radius:999px;
+  cursor:pointer; transition:.15s; white-space:nowrap;
+}
+#rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
+#rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
+#rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
+#rb-config .rb-chip.is-active .rb-chip-price{ opacity:.7; }
+#rb-config .rb-swatch-dot{
+  width:13px; height:13px; border-radius:50%; display:inline-block; margin-right:8px; flex:none;
+  outline:1px solid var(--rb-border-s); outline-offset:1px;
+}
+
+#rb-config .rb-cfg-stage{
+  display:grid; grid-template-columns: minmax(320px,480px) minmax(460px,560px);
+  gap:36px; align-items:start; justify-content:center; position:relative; margin-bottom:32px;
+  max-width:1160px; margin-left:auto; margin-right:auto;
+}
+#rb-config .rb-cfg-col{ display:flex; flex-direction:column; gap:16px; }
+
+#rb-config .rb-cfg-col-intro{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
+}
+
+#rb-config .rb-cfg-imgwrap{ position:relative; position:sticky; top:16px; }
+#rb-config .rb-cfg-img-caption{
+  margin:10px 4px 0; font-size:11.5px; line-height:1.5; color:var(--rb-text2); font-style:italic; text-align:center;
+}
+#rb-config .rb-cfg-imgbox{
+  position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+  border:1px solid var(--rb-border);
+}
+#rb-config .rb-cfg-imgbox::after{
+  content:''; position:absolute; left:8%; right:8%; bottom:6%; height:14%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+  z-index:1; pointer-events:none;
+}
+#rb-config .rb-cfg-imgbox img{
+  position:relative; z-index:2; width:100%; height:100%; object-fit:contain;
+  display:block;
+}
+
+#rb-config .rb-cfg-photo-hint{
+  display:none; position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:7;
+  background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent);
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
+  font-size:12px; font-weight:700; padding:6px 16px; border-radius:999px; white-space:nowrap;
+  box-shadow:0 4px 14px rgba(0,0,0,.4); cursor:pointer; max-width:90%; overflow:hidden; text-overflow:ellipsis;
+}
+#rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
+
+#rb-config .rb-cfg-active-mark{
+  display:none; position:absolute; z-index:6; transform:translate(-50%,-50%);
+  flex-direction:column; align-items:center; cursor:pointer;
+}
+#rb-config .rb-cfg-active-mark.is-visible{ display:flex; }
+#rb-config .rb-cfg-active-mark-dot{
+  position:relative;
+  width:26px; height:26px; border-radius:50%; background:var(--rb-accent);
+  border:3px solid rgba(6,6,6,.85); box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5);
+  animation:rb-cfg-pulse 1.7s ease-in-out infinite;
+}
+#rb-config .rb-cfg-active-mark-dot::after{
+  content:''; position:absolute; inset:-16px;
+}
+@keyframes rb-cfg-pulse{
+  0%,100%{ box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5); }
+  50%{ box-shadow:0 0 0 9px rgba(200,168,76,0), 0 6px 14px rgba(0,0,0,.5); }
+}
+@media (prefers-reduced-motion: reduce){
+  #rb-config .rb-cfg-active-mark-dot{ animation:none; }
+}
+
+/* ══════════════════════════════════════
+   STEP LIST
+══════════════════════════════════════ */
+#rb-config .rb-cfg-steps{ display:flex; flex-direction:column; gap:10px; }
+
+#rb-config .rb-cfg-step{
+  border:1px solid var(--rb-border); background:var(--rb-card-bg); border-radius:12px;
+  transition:border-color .15s, background .15s;
+}
+
+#rb-config .rb-cfg-step--done{ cursor:pointer; border-color:var(--rb-accent-b); background:#171512; }
+#rb-config .rb-cfg-step--done:hover{ border-color:var(--rb-accent); }
+#rb-config .rb-cfg-step-done-row{
+  display:flex; align-items:center; gap:10px; padding:13px 16px;
+}
+#rb-config .rb-cfg-step-done-check{
+  display:flex; align-items:center; justify-content:center; flex:none;
+  width:18px; height:18px; border-radius:50%; background:var(--rb-accent); color:#000; font-size:11px; line-height:1;
+}
+#rb-config .rb-cfg-step-done-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.04em;
+  font-size:13.5px; font-weight:600; color:var(--rb-accent); flex:none;
+}
+#rb-config .rb-cfg-step-done-val{
+  margin-left:auto; display:flex; align-items:center; gap:6px; font-size:13px; color:var(--rb-text);
+  text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0;
+}
+#rb-config .rb-cfg-step-done-swatch{ width:13px; height:13px; border-radius:50%; flex:none; outline:1px solid var(--rb-border-s); outline-offset:1px; }
+#rb-config .rb-cfg-step-done-edit{
+  flex:none; font-size:11px; color:var(--rb-text2); opacity:0; transition:opacity .15s; margin-left:4px;
+}
+#rb-config .rb-cfg-step--done:hover .rb-cfg-step-done-edit{ opacity:1; }
+
+#rb-config .rb-cfg-step--active{ border-color:var(--rb-accent-b); background:#171512; padding:18px 18px 20px; }
+#rb-config .rb-cfg-step-active-top{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px;
+}
+#rb-config .rb-cfg-step-counter{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
+  font-size:11.5px; font-weight:600; color:var(--rb-accent); margin:0 0 4px;
+}
+#rb-config .rb-cfg-step-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.03em;
+  font-size:19px; font-weight:700; margin:0; line-height:1.15;
+}
+#rb-config .rb-cfg-step-collapse{
+  flex:none; background:none; border:1px solid var(--rb-border-s); color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:11.5px; padding:6px 13px; border-radius:999px;
+  cursor:pointer; transition:.15s; white-space:nowrap;
+}
+#rb-config .rb-cfg-step-collapse:hover{ border-color:var(--rb-accent); color:var(--rb-accent); }
+
+#rb-config .rb-cfg-step-desc{
+  margin-top:16px; padding:12px 14px; border:1px solid var(--rb-border); border-radius:8px;
+  background:rgba(255,255,255,.02); font-size:12.5px; line-height:1.6; color:var(--rb-text2);
+}
+
+#rb-config .rb-cfg-summary{
+  display:flex; flex-direction:column; gap:10px;
+  border:1px solid var(--rb-border-s); border-radius:14px; padding:16px 20px; background:var(--rb-card-bg);
+  margin-top:6px; width:100%; box-sizing:border-box;
+}
+#rb-config .rb-cfg-summary-row{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px;
+}
+#rb-config .rb-cfg-price-label{ font-size:12px; color:var(--rb-text2); justify-self:end; }
+#rb-config .rb-cfg-price-value{
+  font-family:'Barlow Condensed', sans-serif; font-size:32px; font-weight:700; line-height:1;
+  justify-self:center;
+}
+#rb-config .rb-cfg-price-cur{ font-size:19px; opacity:.7; margin-right:1px; }
+#rb-config .rb-cfg-summary-row .rb-cfg-add{ justify-self:start; }
+#rb-config .rb-cfg-add{
+  background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:13px 28px;
+  font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:700; letter-spacing:.03em;
+  text-transform:uppercase; cursor:pointer; transition:.15s; flex:none; white-space:nowrap;
+}
+#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
+#rb-config .rb-cfg-add:disabled{
+  background:transparent; border:1px solid var(--rb-border-s); color:var(--rb-text2);
+  cursor:not-allowed;
+}
+#rb-config .rb-cfg-add.is-loading:disabled{
+  background:var(--rb-accent); border:none; color:#000; cursor:wait;
+  display:inline-flex; align-items:center; gap:8px;
+}
+#rb-config .rb-cfg-add-spinner{
+  width:14px; height:14px; border-radius:50%; flex:none;
+  border:2px solid rgba(0,0,0,.28); border-top-color:#000;
+  animation:rb-cfg-add-spin .7s linear infinite;
+}
+@keyframes rb-cfg-add-spin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){
+  #rb-config .rb-cfg-add-spinner{ animation:none; }
+}
+#rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
+#rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
+
+@media (max-width: 980px){
+  #rb-config .rb-cfg-stage{ grid-template-columns:1fr; }
+  #rb-config .rb-cfg-imgwrap{ position:relative; top:auto; }
+}
+@media (max-width: 480px){
+  #rb-config .rb-cfg-summary-row{ gap:8px; }
+  #rb-config .rb-cfg-add{ padding:11px 18px; font-size:13px; }
+  #rb-config .rb-cfg-price-value{ font-size:26px; }
+  #rb-config .rb-cfg-step-done-val{ white-space:normal; text-overflow:clip; }
+}
+
+/* Hide the native CS-Cart title/price/options/button block on product #361's
+   page — our rb-cfg-summary above replaces it visually. The native <select>
+   elements stay in the DOM and keep working under the hood (driven via
+   syncNative()/fn_change_options in the script below). */
+#option_361_AOC,
+.ut2-pb__price-wrap,
+.ut2-pb__button,
+.ut2-pb__title{ display:none !important; }
+</style>
+
+<script>
+(function(){
+
+  var STEP_ORDER = ['styleDoorSills','finishTopStyle','logoDoorSills','logoColor'];
+
+  var PRODUCT = {
+    id:'361', name:'Corvette C6 Carbon Fiber Door Sills', basePrice:315.00,
+    options: {
+      styleDoorSills: { label:'Style door sills', zone:{px:634,py:344}, csOptId:62,
+        desc:'The carbon-fiber weave color and finish of the sill panel itself.',
+        values:[
+          { v:'black',    label:'Black carbon',    price:0, cs:326 },
+          { v:'blue',     label:'Blue carbon',     price:0, cs:327 },
+          { v:'red',      label:'Red carbon',      price:0, cs:328 },
+          { v:'titanium', label:'Titanium carbon', price:0, cs:329 },
+          { v:'alutex',   label:'Alutex',          price:0, cs:330 },
+          { v:'custom',   label:'Custom',          price:0, cs:331 }
+        ]},
+      finishTopStyle: { label:'Finish top style', zone:{px:739,py:357}, csOptId:45,
+        desc:'The clear-coat sheen over the top surface of the sill — a glossy shine, or a flat matte look.',
+        values:[
+          { v:'gloss', label:'Gloss', price:0, cs:270 },
+          { v:'matte', label:'Matte', price:0, cs:271 }
+        ]},
+      logoDoorSills: { label:'Logo door sills', zone:{px:549,py:388}, csOptId:63,
+        desc:'Which logo is inlaid into the sill — pick one of our house designs, choose No logo for a clean panel, or Custom to send us your own.',
+        values:[
+          { v:'corvette',   label:'Corvette',            price:0, cs:332 },
+          { v:'flags',      label:'C6 flags',            price:0, cs:333 },
+          { v:'grandsport', label:'Grand sport',         price:0, cs:334 },
+          { v:'z06',        label:'Z06',                 price:0, cs:335 },
+          { v:'z51',        label:'Z51',                 price:0, cs:336 },
+          { v:'zr1',        label:'ZR1',                 price:0, cs:337 },
+          { v:'427',        label:'427',                 price:0, cs:338 },
+          { v:'nologo',     label:'No logo',              price:0, cs:339 },
+          { v:'custom',     label:'Custom (your logo)',  price:0, cs:340 }
+        ]},
+      logoColor: { label:'Logo color', zone:{px:635,py:381}, csOptId:64, isColor:true,
+        desc:'The color of the inlaid logo itself, against the sill’s carbon-fiber base.',
+        values:[
+          { v:'black',     label:'Black',       price:0, hex:'#1a1a1a', cs:341 },
+          { v:'white',     label:'White',       price:0, hex:'#f5f5f5', cs:342 },
+          { v:'blue',      label:'Blue (ZR1)',  price:0, hex:'#1e4fc8', cs:343 },
+          { v:'lightblue', label:'Light blue',  price:0, hex:'#7ec8e3', cs:344 },
+          { v:'yellow',    label:'Yellow',      price:0, hex:'#e8c31e', cs:345 },
+          { v:'orange',    label:'Orange',      price:0, hex:'#e06b1e', cs:346 },
+          { v:'red',       label:'Red',         price:0, hex:'#c81e1e', cs:347 },
+          { v:'green',     label:'Green',       price:0, hex:'#2e8b3d', cs:348 },
+          { v:'titanium',  label:'Titanium',    price:0, hex:'#8a8d90', cs:349 },
+          { v:'chrome',    label:'Chrome',      price:0, hex:'#c9ccd1', cs:350 },
+          { v:'custom',    label:'Custom',      price:0, other:true, cs:351 }
+        ]}
+    }
+  };
+
+  var PRODUCT_ID = PRODUCT.id;
+  var BASE_PRICE = PRODUCT.basePrice;
+
+  var root = document.getElementById('rb-config');
+  var stepsEl = document.getElementById('rb-cfg-steps');
+  var imgEl = root.querySelector('.rb-cfg-imgbox img');
+  var priceNumEl = document.getElementById('rb-cfg-price-num');
+  var summaryEl = document.getElementById('rb-cfg-summary');
+  var addBtn = document.getElementById('rb-cfg-add-btn');
+
+  var state = {};
+  STEP_ORDER.forEach(function(k){ state[k] = null; });
+  var activeStep = null;
+
+  function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
+
+  function isComplete(){
+    return STEP_ORDER.every(function(key){ return !!state[key]; });
+  }
+  function computeNextStep(){
+    for (var i=0;i<STEP_ORDER.length;i++){ if (!state[STEP_ORDER[i]]) return STEP_ORDER[i]; }
+    return null;
+  }
+  function updateCompletionUI(){
+    var complete = isComplete();
+    summaryEl.classList.toggle('is-complete', complete);
+    addBtn.disabled = !complete;
+  }
+
+  function recalcPrice(){
+    var total = BASE_PRICE;
+    STEP_ORDER.forEach(function(key){ total += (state[key] && state[key].price) || 0; });
+    priceNumEl.textContent = total.toFixed(2).split('.')[0];
+  }
+
+  function swatchFill(val){
+    if (val.other) return '#1a1a1a';
+    return val.hex;
+  }
+
+  function syncNative(csOptId, val){
+    var sel = document.getElementById('option_' + PRODUCT_ID + '_' + csOptId);
+    if (!sel) return;
+    sel.value = String(val.cs);
+    if (typeof fn_change_options === 'function'){
+      fn_change_options(PRODUCT_ID, PRODUCT_ID, String(csOptId));
+    }
+  }
+
+  function updatePhotoHint(){
+    var hint = document.getElementById('rb-cfg-photo-hint');
+    if (!activeStep){ hint.classList.remove('is-visible'); return; }
+    var opt = PRODUCT.options[activeStep];
+    var idx = STEP_ORDER.indexOf(activeStep);
+    hint.textContent = 'Step ' + (idx+1) + ' of ' + STEP_ORDER.length + ' — ' + opt.label;
+    hint.classList.add('is-visible');
+  }
+
+  function updateActiveMark(){
+    var markEl = document.getElementById('rb-cfg-active-mark');
+    var hint = document.getElementById('rb-cfg-photo-hint');
+    var opt = activeStep ? PRODUCT.options[activeStep] : null;
+    var zone = opt ? opt.zone : null;
+    if (!zone){ markEl.classList.remove('is-visible'); return; }
+
+    var imgWrap = root.querySelector('.rb-cfg-imgwrap');
+    var wrapRect = imgWrap.getBoundingClientRect();
+    var imgRect = imgEl.getBoundingClientRect();
+    if (!imgEl.naturalWidth){ markEl.classList.remove('is-visible'); return; }
+    var dotX = imgRect.left - wrapRect.left + imgRect.width * (zone.px / imgEl.naturalWidth);
+    var dotY = imgRect.top - wrapRect.top + imgRect.height * (zone.py / imgEl.naturalHeight);
+    if (hint.classList.contains('is-visible')){
+      var hintBottom = hint.getBoundingClientRect().bottom - wrapRect.top;
+      dotY = Math.max(dotY, hintBottom + 16);
+    }
+    markEl.style.left = dotX + 'px';
+    markEl.style.top = dotY + 'px';
+    markEl.classList.add('is-visible');
+  }
+
+  var isMobile = function(){ return window.matchMedia('(max-width: 980px)').matches; };
+
+  function scrollToActiveStep(){
+    var el = stepsEl.querySelector('.rb-cfg-step--active');
+    if (!el) return;
+    var prev = el.previousElementSibling;
+    var target = (prev && prev.classList.contains('rb-cfg-step--done')) ? prev : el;
+    var fixedHeader = document.querySelector('.rb-fixed-wrap');
+    var headerH = fixedHeader ? fixedHeader.getBoundingClientRect().height : 0;
+    var targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerH - 12;
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  }
+
+  function applyPick(key, val){
+    state[key] = val;
+    syncNative(PRODUCT.options[key].csOptId, val);
+    activeStep = computeNextStep();
+    renderSteps();
+    if (isMobile()){
+      setTimeout(scrollToActiveStep, 250);
+    }
+  }
+
+  function buildChips(container, key, opt){
+    var wrap = document.createElement('div');
+    wrap.className = 'rb-cfg-chips';
+    opt.values.forEach(function(val){
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'rb-chip';
+      if (state[key] === val) el.classList.add('is-active');
+      var html = '';
+      if (opt.isColor) html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
+      html += '<span class="rb-chip-txt">'+val.label+'</span>';
+      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
+      el.innerHTML = html;
+      el.addEventListener('click', function(){ applyPick(key, val); });
+      wrap.appendChild(el);
+    });
+    container.appendChild(wrap);
+  }
+
+  function buildActiveStep(key, stepNum, total){
+    var opt = PRODUCT.options[key];
+    var el = document.createElement('div');
+    el.className = 'rb-cfg-step rb-cfg-step--active';
+    el.dataset.zone = key;
+
+    var top = document.createElement('div');
+    top.className = 'rb-cfg-step-active-top';
+    var heading = document.createElement('div');
+    heading.innerHTML =
+      '<div class="rb-cfg-step-counter">Step '+stepNum+' of '+total+'</div>' +
+      '<h2 class="rb-cfg-step-label">'+opt.label+'</h2>';
+    top.appendChild(heading);
+    if (state[key]){
+      var collapseBtn = document.createElement('button');
+      collapseBtn.type = 'button';
+      collapseBtn.className = 'rb-cfg-step-collapse';
+      collapseBtn.textContent = 'Done editing';
+      collapseBtn.addEventListener('click', function(){
+        activeStep = computeNextStep();
+        renderSteps();
+      });
+      top.appendChild(collapseBtn);
+    }
+    el.appendChild(top);
+
+    buildChips(el, key, opt);
+
+    var desc = document.createElement('div');
+    desc.className = 'rb-cfg-step-desc';
+    desc.textContent = opt.desc;
+    el.appendChild(desc);
+
+    return el;
+  }
+
+  function buildDoneStep(key){
+    var opt = PRODUCT.options[key];
+    var val = state[key];
+    var el = document.createElement('div');
+    el.className = 'rb-cfg-step rb-cfg-step--done';
+    el.dataset.zone = key;
+    el.tabIndex = 0;
+    var valHtml = '';
+    if (opt.isColor && val){ valHtml += '<span class="rb-cfg-step-done-swatch" style="background:'+swatchFill(val)+'"></span>'; }
+    valHtml += (val ? val.label : 'Select…');
+    el.innerHTML =
+      '<div class="rb-cfg-step-done-row">' +
+        '<span class="rb-cfg-step-done-check">✓</span>' +
+        '<span class="rb-cfg-step-done-label">'+opt.label+'</span>' +
+        '<span class="rb-cfg-step-done-val">'+valHtml+'</span>' +
+        '<span class="rb-cfg-step-done-edit">Edit</span>' +
+      '</div>';
+    function open(){
+      activeStep = key;
+      renderSteps();
+      if (isMobile()) setTimeout(scrollToActiveStep, 250);
+    }
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', function(e){ if (e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+    return el;
+  }
+
+  function renderSteps(){
+    stepsEl.innerHTML = '';
+    var total = STEP_ORDER.length;
+    STEP_ORDER.forEach(function(key, idx){
+      if (key === activeStep){
+        stepsEl.appendChild(buildActiveStep(key, idx+1, total));
+      } else if (state[key]){
+        stepsEl.appendChild(buildDoneStep(key));
+      }
+    });
+    recalcPrice();
+    updateCompletionUI();
+    updatePhotoHint();
+    updateActiveMark();
+  }
+
+  // ---- live price hydration from CS-Cart ----
+  // This block replaces the native product-page markup, so there is no live
+  // price shown elsewhere on the page. To keep prices in sync with CS-Cart
+  // without hand-editing this file, we fetch the product's own page (same
+  // origin, canonical dispatch URL) and read the same option <select>
+  // markup CS-Cart renders there, then overwrite our price/label fields by
+  // matching `cs` id. If anything fails, we keep the fallback values above.
+  function liveProductUrl(id){
+    return 'https://therunbird.com/index.php?dispatch=products.view&product_id=' + id;
+  }
+  function parsePriceAddon(text){
+    var m = String(text).match(/\(\s*\+\s*\$\s*([\d,]+(?:\.\d+)?)\s*\)/);
+    return m ? parseFloat(m[1].replace(/,/g,'')) : 0;
+  }
+  function parsePriceEl(el){
+    if (!el) return null;
+    var sup = el.querySelector('sup');
+    var cents = sup ? sup.textContent.replace(/[^\d]/g,'') : '';
+    var whole = (sup ? el.firstChild && el.firstChild.textContent : el.textContent) || '';
+    whole = whole.replace(/[^\d]/g,'');
+    if (!whole) return null;
+    return parseFloat(whole + '.' + (cents || '00'));
+  }
+  function hydrateOptionValues(doc, opt, onDropSelected){
+    var sel = doc.getElementById('option_' + PRODUCT_ID + '_' + opt.csOptId);
+    if (!sel) return 0;
+    var liveByCs = {};
+    var defaultDelta = 0;
+    Array.prototype.forEach.call(sel.querySelectorAll('option'), function(o){
+      var raw = (o.querySelector('bdi') || o).textContent;
+      var price = parsePriceAddon(raw);
+      var label = raw.replace(/\(\s*\+\s*\$[^)]*\)/,'').replace(/\s+/g,' ').trim();
+      liveByCs[o.value] = { price:price, label:label };
+      if (o.selected) defaultDelta += price;
+    });
+    var kept = [];
+    opt.values.forEach(function(val){
+      var live = liveByCs[String(val.cs)];
+      if (!live){
+        console.warn('[RB configurator] option value no longer found in CS-Cart, hiding it:', opt.label, val.v);
+        onDropSelected(val);
+        return;
+      }
+      val.price = live.price;
+      val.label = live.label;
+      kept.push(val);
+      delete liveByCs[String(val.cs)];
+    });
+    Object.keys(liveByCs).forEach(function(csId){
+      console.warn('[RB configurator] new CS-Cart option value not yet in configurator (needs manual setup):', opt.label, csId, liveByCs[csId].label);
+    });
+    opt.values = kept;
+    return defaultDelta;
+  }
+  function hydrateProduct(){
+    return fetch(liveProductUrl(PRODUCT_ID), { credentials:'same-origin' })
+      .then(function(r){ if (!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+      .then(function(html){
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var priceEl = doc.getElementById('sec_discounted_price_' + PRODUCT_ID);
+        var displayed = parsePriceEl(priceEl);
+        var defaultDelta = 0;
+        STEP_ORDER.forEach(function(key){
+          defaultDelta += hydrateOptionValues(doc, PRODUCT.options[key], function(val){
+            if (state[key] === val) state[key] = null;
+          });
+        });
+        if (displayed != null){
+          BASE_PRICE = PRODUCT.basePrice = +(displayed - defaultDelta).toFixed(2);
+        }
+        activeStep = computeNextStep();
+        renderSteps();
+      })
+      .catch(function(err){
+        console.warn('[RB configurator] price hydration failed — keeping fallback prices.', err);
+      });
+  }
+
+  function init(){
+    activeStep = computeNextStep();
+    renderSteps();
+    window.addEventListener('resize', updateActiveMark);
+    window.addEventListener('load', updateActiveMark);
+    setTimeout(updateActiveMark, 50);
+    hydrateProduct();
+  }
+
+  addBtn.addEventListener('click', function(){
+    if (!isComplete()) return;
+    if (this.classList.contains('is-loading')) return; // guard against double-tap while the request is in flight
+
+    var btn = this;
+    var originalLabel = btn.textContent;
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+    btn.innerHTML = '<span class="rb-cfg-add-spinner"></span><span>Adding…</span>';
+    // CS-Cart's response can take several seconds on mobile — if nothing
+    // comes back at all, don't leave the button stuck forever.
+    setTimeout(function(){
+      if (btn.classList.contains('is-loading')){
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      }
+    }, 20000);
+
+    var securityHash = (window.Tygh && Tygh.security_hash) ? Tygh.security_hash : '';
+    if (!securityHash){
+      var hashInput = document.querySelector('input[name="security_hash"]');
+      if (hashInput) securityHash = hashInput.value;
+    }
+    if (!securityHash){
+      btn.classList.remove('is-loading');
+      btn.disabled = false;
+      btn.textContent = originalLabel;
+      alert('Something went wrong (missing security token) — please refresh the page and try again.');
+      return;
+    }
+
+    var form = document.createElement('form');
+    form.action = 'https://therunbird.com/';
+    form.method = 'post';
+    form.enctype = 'multipart/form-data';
+    form.className = 'cm-disable-empty-files cm-ajax cm-ajax-full-render cm-ajax-status-middle';
+    form.style.display = 'none';
+
+    function addField(name, value){
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    addField('redirect_url', window.location.pathname + window.location.search);
+    addField('security_hash', securityHash);
+    addField('product_data[' + PRODUCT_ID + '][amount]', '1');
+    STEP_ORDER.forEach(function(key){
+      var opt = PRODUCT.options[key];
+      addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
+    });
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.name = 'dispatch[checkout.add..' + PRODUCT_ID + ']';
+    submitBtn.value = '';
+    submitBtn.style.display = 'none';
+    form.appendChild(submitBtn);
+
+    document.body.appendChild(form);
+    submitBtn.click();
+  });
+
+  init();
+
+})();
+</script>

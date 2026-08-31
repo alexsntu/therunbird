@@ -1,0 +1,976 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Steering Wheel Configurator (WIZARD PROTOTYPE — step-by-step flow)
+     Test build for a new UX pattern: options are answered ONE AT A TIME, in a
+     fixed order, instead of a free-order grid of collapsible cards.
+
+     Source of truth for option data / CS-Cart mapping (csOptId / value ids /
+     prices) is ../configurator-preview-v2-yearshape.deploy.html — this file
+     mirrors that data. NOT wired into CS-Cart, NOT deployed — local preview
+     only, for owner review before we roll the pattern out further.
+
+     How it differs from the grid version:
+       - Fixed step order: Year → Shape → CF spoke covers → Grips → Top
+         section → Bottom section → Stitching color → Center mark → Logo
+         (Logo only appears once Bottom section = Carbon fiber, same gating
+         as the original).
+       - Only ONE step is open/editable at a time ("STEP 3 OF 8"). Answered
+         steps collapse into a highlighted, clickable summary row and stay
+         at the top, in order. Unanswered steps beyond the current one are
+         not rendered at all yet.
+       - Clicking any answered row re-opens it for editing; picking a new
+         value there snaps the flow back to wherever the real next
+         unanswered step is (so changing Year, e.g., can legitimately kick
+         you back to redo the CF audio/bluetooth sub-choice if it resets).
+       - Every open step shows a short "what this is / what it affects /
+         where it sits on the wheel" text block under the choices — drafted
+         copy, flagged for owner review, not final marketing copy.
+       - The photo keeps a single pulsing location dot for whichever step is
+         currently open (replaces the old multi-mark hover system, which
+         doesn't fit a one-at-a-time flow).
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config">
+<div class="rb-cfg-inner">
+
+  <div class="rb-cfg-head">
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Corvette C6 Custom Steering Wheel<span class="rb-cfg-title-year" id="rb-cfg-title-year"></span></h1>
+    <p class="rb-cfg-sub">Answer one question at a time — we'll tell you exactly what it changes and where it sits on the wheel.</p>
+  </div>
+
+  <div class="rb-cfg-stage">
+
+    <div class="rb-cfg-imgwrap">
+      <div class="rb-cfg-imgbox">
+        <img src="https://therunbird.com/images/detailed/9/SteeringWheel-C6-1.png" alt="Corvette C6 Custom Steering Wheel" width="800" height="800" fetchpriority="high" draggable="false">
+      </div>
+      <div class="rb-cfg-photo-hint" id="rb-cfg-photo-hint"></div>
+      <div class="rb-cfg-active-mark" id="rb-cfg-active-mark"><span class="rb-cfg-active-mark-dot"></span></div>
+      <p class="rb-cfg-img-caption">This is a schematic mockup to show where each option applies — not the final finish. We'll send you a realistic render of your actual wheel before we start building it.</p>
+    </div>
+
+    <div class="rb-cfg-col rb-cfg-col--r">
+      <div class="rb-cfg-col-intro">Build your steering wheel — step by step</div>
+
+      <div class="rb-cfg-steps" id="rb-cfg-steps"></div>
+
+      <div class="rb-cfg-summary" id="rb-cfg-summary">
+        <div class="rb-cfg-summary-row">
+          <span class="rb-cfg-price-label">Total price</span>
+          <span class="rb-cfg-price-value"><span class="rb-cfg-price-cur">$</span><span id="rb-cfg-price-num">765</span></span>
+          <button class="rb-cfg-add" id="rb-cfg-add-btn" disabled>Add to cart</button>
+        </div>
+        <div class="rb-cfg-summary-hint" id="rb-cfg-summary-hint">Answer every step above to add this build to your cart.</div>
+      </div>
+
+      <p class="rb-cfg-notice"><strong>Not included:</strong> horn pad &amp; center emblem — order separately: <a href="https://therunbird.com/horn-pads/">Horn Pads</a> · <a href="https://therunbird.com/steering-wheel-emblems/">SW Emblems</a></p>
+      <p class="rb-cfg-notice"><a href="https://therunbird.com/shipping-and-returns/">Shipping &amp; Returns</a> · <a href="https://therunbird.com/warranty/">Warranty</a></p>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<style>
+#rb-config{
+  --rb-accent:   #C8A84C;
+  --rb-accent-h: #D9BA62;
+  --rb-accent-b: rgba(200,168,76,.28);
+  --rb-bg:       #0C0C0C;
+  --rb-bg2:      #060606;
+  --rb-text:     #F0F0F0;
+  --rb-text2:    #808080;
+  --rb-border:   rgba(255,255,255,.08);
+  --rb-border-s: rgba(255,255,255,.16);
+  --rb-card-bg:  #131313;
+
+  background: var(--rb-bg);
+  color: var(--rb-text);
+  font-family: 'Inter', sans-serif;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#rb-config *{ box-sizing: border-box; }
+#rb-config button,
+#rb-config a,
+#rb-config [tabindex]{ touch-action: manipulation; }
+#rb-config .rb-cfg-inner{
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 clamp(20px,4vw,56px) 48px;
+  box-sizing: border-box;
+}
+
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:14px; }
+#rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
+#rb-config .rb-cfg-title-year{ color:var(--rb-accent); }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
+
+#rb-config .rb-cfg-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+#rb-config .rb-chip{
+  display:inline-flex; align-items:center; flex-wrap:wrap; row-gap:2px;
+  border:1px solid var(--rb-border-s); background:transparent; color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 15px; border-radius:999px;
+  cursor:pointer; transition:.15s; max-width:100%;
+}
+#rb-config .rb-chip-txt{ white-space:normal; }
+#rb-config .rb-chip:hover{ border-color:var(--rb-accent); color:var(--rb-text); }
+#rb-config .rb-chip.is-active{ background:var(--rb-accent); border-color:var(--rb-accent); color:#000; font-weight:600; }
+#rb-config .rb-chip .rb-chip-price{ opacity:.75; margin-left:5px; font-size:11px; }
+#rb-config .rb-chip.is-active .rb-chip-price{ opacity:.7; }
+#rb-config .rb-swatch-dot{
+  width:13px; height:13px; border-radius:50%; display:inline-block; margin-right:8px; flex:none;
+  outline:1px solid var(--rb-border-s); outline-offset:1px;
+}
+
+#rb-config .rb-cfg-stage{
+  display:grid; grid-template-columns: minmax(320px,480px) minmax(460px,620px);
+  gap:36px; align-items:start; justify-content:center; position:relative; margin-bottom:32px;
+  max-width:1160px; margin-left:auto; margin-right:auto;
+}
+#rb-config .rb-cfg-col{ display:flex; flex-direction:column; gap:16px; }
+
+#rb-config .rb-cfg-col-intro{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.12em;
+  font-size:12px; font-weight:600; color:var(--rb-accent); margin-bottom:2px;
+}
+
+#rb-config .rb-cfg-imgwrap{ position:relative; position:sticky; top:16px; }
+#rb-config .rb-cfg-img-caption{
+  margin:10px 4px 0; font-size:11.5px; line-height:1.5; color:var(--rb-text2); font-style:italic; text-align:center;
+}
+#rb-config .rb-cfg-imgbox{
+  position:relative; aspect-ratio:1/1; border-radius:20px; overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+  border:1px solid var(--rb-border);
+}
+#rb-config .rb-cfg-imgbox::after{
+  content:''; position:absolute; left:8%; right:8%; bottom:6%; height:14%;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+  z-index:1; pointer-events:none;
+}
+#rb-config .rb-cfg-imgbox img{
+  position:relative; z-index:2; width:88%; height:88%; object-fit:contain;
+  margin:6% auto 0; display:block; filter:drop-shadow(0 18px 24px rgba(0,0,0,.55));
+}
+
+#rb-config .rb-cfg-photo-hint{
+  display:none; position:absolute; top:14px; left:50%; transform:translateX(-50%); z-index:7;
+  background:rgba(10,10,10,.88); border:1px solid var(--rb-accent-b); color:var(--rb-accent);
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.08em;
+  font-size:12px; font-weight:700; padding:6px 16px; border-radius:999px; white-space:nowrap;
+  box-shadow:0 4px 14px rgba(0,0,0,.4); cursor:pointer; max-width:90%; overflow:hidden; text-overflow:ellipsis;
+}
+#rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
+
+#rb-config .rb-cfg-active-mark{
+  display:none; position:absolute; z-index:6; transform:translate(-50%,-50%);
+  flex-direction:column; align-items:center; cursor:pointer;
+}
+#rb-config .rb-cfg-active-mark.is-visible{ display:flex; }
+#rb-config .rb-cfg-active-mark-dot{
+  position:relative;
+  width:26px; height:26px; border-radius:50%; background:var(--rb-accent);
+  border:3px solid rgba(6,6,6,.85); box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5);
+  animation:rb-cfg-pulse 1.7s ease-in-out infinite;
+}
+#rb-config .rb-cfg-active-mark-dot::after{
+  /* Enlarges the tap target well past the visible 26px dot for mobile,
+     without affecting the JS-computed centering of the dot itself. */
+  content:''; position:absolute; inset:-16px;
+}
+@keyframes rb-cfg-pulse{
+  0%,100%{ box-shadow:0 0 0 4px var(--rb-accent-b), 0 6px 14px rgba(0,0,0,.5); }
+  50%{ box-shadow:0 0 0 9px rgba(200,168,76,0), 0 6px 14px rgba(0,0,0,.5); }
+}
+@media (prefers-reduced-motion: reduce){
+  #rb-config .rb-cfg-active-mark-dot{ animation:none; }
+}
+
+/* ══════════════════════════════════════
+   STEP LIST
+══════════════════════════════════════ */
+#rb-config .rb-cfg-steps{ display:flex; flex-direction:column; gap:10px; }
+
+#rb-config .rb-cfg-step{
+  border:1px solid var(--rb-border); background:var(--rb-card-bg); border-radius:12px;
+  transition:border-color .15s, background .15s;
+}
+
+/* -- done / collapsed rows -- */
+#rb-config .rb-cfg-step--done{ cursor:pointer; border-color:var(--rb-accent-b); background:#171512; }
+#rb-config .rb-cfg-step--done:hover{ border-color:var(--rb-accent); }
+#rb-config .rb-cfg-step-done-row{
+  display:flex; align-items:center; gap:10px; padding:13px 16px;
+}
+#rb-config .rb-cfg-step-done-check{
+  display:flex; align-items:center; justify-content:center; flex:none;
+  width:18px; height:18px; border-radius:50%; background:var(--rb-accent); color:#000; font-size:11px; line-height:1;
+}
+#rb-config .rb-cfg-step-done-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.04em;
+  font-size:13.5px; font-weight:600; color:var(--rb-accent); flex:none;
+}
+#rb-config .rb-cfg-step-done-val{
+  margin-left:auto; font-size:13px; color:var(--rb-text); text-align:right;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0;
+}
+#rb-config .rb-cfg-step-done-edit{
+  flex:none; font-size:11px; color:var(--rb-text2); opacity:0; transition:opacity .15s; margin-left:4px;
+}
+#rb-config .rb-cfg-step--done:hover .rb-cfg-step-done-edit{ opacity:1; }
+
+/* -- active / open step -- */
+#rb-config .rb-cfg-step--active{ border-color:var(--rb-accent-b); background:#171512; padding:18px 18px 20px; }
+#rb-config .rb-cfg-step-active-top{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px;
+}
+#rb-config .rb-cfg-step-counter{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
+  font-size:11.5px; font-weight:600; color:var(--rb-accent); margin:0 0 4px;
+}
+#rb-config .rb-cfg-step-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.03em;
+  font-size:19px; font-weight:700; margin:0; line-height:1.15;
+}
+#rb-config .rb-cfg-step-collapse{
+  flex:none; background:none; border:1px solid var(--rb-border-s); color:var(--rb-text2);
+  font-family:'Inter',sans-serif; font-size:11.5px; padding:6px 13px; border-radius:999px;
+  cursor:pointer; transition:.15s; white-space:nowrap;
+}
+#rb-config .rb-cfg-step-collapse:hover{ border-color:var(--rb-accent); color:var(--rb-accent); }
+
+#rb-config .rb-cfg-step-sub-label{
+  font-size:11px; color:var(--rb-text2); margin:14px 0 12px; text-transform:uppercase; letter-spacing:.04em;
+}
+/* Only the very first sub-label directly under the step heading skips the
+   top gap (the heading's own margin-bottom already provides it). Deliberately
+   NOT :first-of-type — "CF finish" / "CF covers option" each sit as the
+   first <div> inside their own wrapper block, so that pseudo-class was
+   zeroing their top margin too and pulling them flush against the row of
+   chips above them. */
+#rb-config .rb-cfg-step-sub-label--lead{ margin-top:0; }
+#rb-config .rb-cfg-step-block.is-disabled{ opacity:.4; pointer-events:none; }
+#rb-config .rb-cfg-hidden{ display:none !important; }
+
+#rb-config .rb-cfg-step-desc{
+  margin-top:16px; padding:12px 14px; border:1px solid var(--rb-border); border-radius:8px;
+  background:rgba(255,255,255,.02); font-size:12.5px; line-height:1.6; color:var(--rb-text2);
+}
+#rb-config .rb-cfg-step-desc strong{ color:var(--rb-text); font-weight:600; }
+
+/* -- shape step: image tiles -- */
+#rb-config .rb-cfg-shape-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:420px; }
+#rb-config .rb-cfg-shape-opt{
+  background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; transition:border-color .15s, background .15s;
+  -webkit-tap-highlight-color:transparent; min-height:64px;
+}
+#rb-config .rb-cfg-shape-opt:hover{ border-color:var(--rb-accent); }
+#rb-config .rb-cfg-shape-opt.is-active{ border-color:var(--rb-accent); background:#1d1a14; }
+#rb-config .rb-cfg-shape-opt-imgwrap{
+  width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(200,168,76,.18), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(180deg, #4a4a4a 0%, #333333 60%, #262626 100%);
+}
+#rb-config .rb-cfg-shape-opt-imgwrap img{
+  position:absolute; inset:0; margin:auto; width:84%; height:84%; object-fit:contain;
+  filter:drop-shadow(0 10px 14px rgba(0,0,0,.5));
+}
+#rb-config .rb-cfg-shape-opt-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
+  font-size:13.5px; font-weight:700; color:var(--rb-text);
+}
+#rb-config .rb-cfg-shape-opt-price{ font-size:11.5px; color:var(--rb-text2); }
+
+#rb-config .rb-cfg-summary{
+  display:flex; flex-direction:column; gap:10px;
+  border:1px solid var(--rb-border-s); border-radius:14px; padding:16px 20px; background:var(--rb-card-bg);
+  margin-top:6px; width:100%; box-sizing:border-box;
+}
+#rb-config .rb-cfg-summary-row{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px;
+}
+#rb-config .rb-cfg-price-label{ font-size:12px; color:var(--rb-text2); justify-self:end; }
+#rb-config .rb-cfg-price-value{
+  font-family:'Barlow Condensed', sans-serif; font-size:32px; font-weight:700; line-height:1;
+  justify-self:center;
+}
+#rb-config .rb-cfg-price-cur{ font-size:19px; opacity:.7; margin-right:1px; }
+#rb-config .rb-cfg-summary-row .rb-cfg-add{ justify-self:start; }
+#rb-config .rb-cfg-add{
+  background:var(--rb-accent); color:#000; border:none; border-radius:999px; padding:13px 28px;
+  font-family:'Barlow Condensed', sans-serif; font-size:15px; font-weight:700; letter-spacing:.03em;
+  text-transform:uppercase; cursor:pointer; transition:.15s; flex:none; white-space:nowrap;
+}
+#rb-config .rb-cfg-add:hover{ background:var(--rb-accent-h); }
+#rb-config .rb-cfg-add:disabled{
+  background:transparent; border:1px solid var(--rb-border-s); color:var(--rb-text2);
+  cursor:not-allowed;
+}
+/* Add-to-cart click submits a real form and waits on a slow CS-Cart
+   full-render response (multi-second on mobile) — without this, the button
+   just goes inert and the page reads as hung. Source order after :disabled
+   so it wins the tie in specificity. */
+#rb-config .rb-cfg-add.is-loading:disabled{
+  background:var(--rb-accent); border:none; color:#000; cursor:wait;
+  display:inline-flex; align-items:center; gap:8px;
+}
+#rb-config .rb-cfg-add-spinner{
+  width:14px; height:14px; border-radius:50%; flex:none;
+  border:2px solid rgba(0,0,0,.28); border-top-color:#000;
+  animation:rb-cfg-add-spin .7s linear infinite;
+}
+@keyframes rb-cfg-add-spin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion: reduce){
+  #rb-config .rb-cfg-add-spinner{ animation:none; }
+}
+#rb-config .rb-cfg-summary-hint{ font-size:11.5px; color:var(--rb-text2); text-align:center; }
+#rb-config .rb-cfg-summary.is-complete .rb-cfg-summary-hint{ display:none; }
+
+#rb-config .rb-cfg-notice{
+  display:inline-block; align-self:center; text-align:center; margin:0; padding:9px 18px;
+  border:1px solid var(--rb-accent-b); border-radius:999px; background:rgba(200,168,76,.08);
+  color:var(--rb-text2); font-size:12.5px; line-height:1.5; max-width:100%;
+}
+#rb-config .rb-cfg-notice strong{ color:var(--rb-accent); font-weight:600; }
+#rb-config .rb-cfg-notice a{ color:var(--rb-accent); text-decoration:underline; }
+#rb-config .rb-cfg-notice a:hover{ color:var(--rb-accent-h); }
+
+@media (max-width: 980px){
+  #rb-config .rb-cfg-stage{ grid-template-columns:1fr; }
+  #rb-config .rb-cfg-imgwrap{ position:relative; top:auto; }
+  #rb-config .rb-cfg-photo-hint.is-visible{ display:block; }
+}
+@media (max-width: 480px){
+  #rb-config .rb-cfg-summary-row{ gap:8px; }
+  #rb-config .rb-cfg-add{ padding:11px 18px; font-size:13px; }
+  #rb-config .rb-cfg-price-value{ font-size:26px; }
+  #rb-config .rb-cfg-step-done-val{ white-space:normal; text-overflow:clip; }
+  #rb-config .rb-cfg-shape-grid{ max-width:none; }
+}
+
+#option_350_AOC,
+.ut2-pb__price-wrap,
+.ut2-pb__button,
+.ut2-pb__title{ display:none !important; }
+</style>
+
+<script>
+(function(){
+
+  var BASE_PRICE = 765.00;
+  var PRODUCT_ID = '350';
+
+  // Fixed wizard order. Data (csOptId / value ids / prices) mirrors the live
+  // grid configurator — keep in sync with ../configurator-preview-v2-yearshape.deploy.html.
+  var STEP_ORDER = ['year','shape','spokes','grips','topSection','bottomSection','stitchingColor','centerMark','logo'];
+
+  var OPTIONS = {
+    year: {
+      label:'Year', zone:null, csOptId: 60,
+      desc:'Not a visible part of the wheel — we use your Corvette’s model year to confirm the correct fit for your car. It also sets the price on this build (2012-2013 cores run higher) and decides which CF spoke-cover sub-options show up two steps from now.',
+      values: [
+        { v:'y2006',      label:'2006',      price:0,   cs:318 },
+        { v:'y2007_2011', label:'2007-2011', price:0,   cs:319 },
+        { v:'y2012_2013', label:'2012-2013', price:220, cs:320 }
+      ]
+    },
+    shape: {
+      label: 'Shape', zone: null, csOptId: 26,
+      desc:'This changes the outline of the rim itself, shown in the photo to the right. D-shape flattens only the bottom of the rim (the standard look). F1-shape flattens both the top and the bottom, like an F1 car’s wheel.',
+      values: [
+        { v:'d',  label:'D-shape',  price:0,   cs:181 },
+        { v:'f1', label:'F1-shape', price:330, cs:182, img:'https://therunbird.com/images/Calculator/Prew-SW/SW11.png' }
+      ]
+    },
+    spokes: {
+      label:'CF spoke covers', zone:{ px:668, py:414 },
+      isSpokesGroup:true, csOptId: 27, finishCsOptId: 28, audioCsOptId: 61,
+      desc:'Located on the spokes — the bars connecting the rim to the center hub. Choosing “Yes” wraps them in carbon fiber and unlocks a finish choice, plus (depending on your year) an audio/bluetooth button option on the covers themselves.',
+      values:[
+        { v:'no',  label:'No', price:0, cs:183 },
+        { v:'yes', label:'Yes', price:165, cs:184 }
+      ],
+      finish:[
+        { v:'gloss', label:'Gloss', price:0, cs:185 },
+        { v:'matte', label:'Matte / Satin', price:0, cs:186 }
+      ],
+      audioSets:{
+        y2007_2011:[
+          { v:'none',     label:'No audio / no bluetooth', price:0,   cs:321 },
+          { v:'audio',    label:'Audio / no bluetooth (buttons right side only)', price:65,  cs:322 },
+          { v:'audio_bt', label:'Audio / bluetooth', price:130, cs:323 }
+        ],
+        y2012_2013:[
+          { v:'audio_2013', label:'Audio / no bluetooth', price:0,  cs:324 },
+          { v:'audio_bt_2013', label:'Audio / bluetooth',  price:55, cs:325 }
+        ]
+      }
+    },
+    grips: {
+      label:'Grips', zone:{ px:717, py:279 }, csOptId: 29,
+      desc:'This is the side of the rim — left and right, roughly 3 and 9 o’clock — where your hands actually sit while driving. It’s the material your palms grip.',
+      values:[
+        { v:'plain', label:'Nappa Leather', price:0, cs:187 },
+        { v:'perf',  label:'Perforated Nappa Leather', price:0, cs:188 },
+        { v:'alc',   label:'Alcantara', price:0, cs:189 }
+      ]
+    },
+    topSection: {
+      label:'Top section', zone:{ px:589, py:105 }, csOptId: 30,
+      desc:'The top of the rim, roughly the 11-1 o’clock area. Carbon fiber here is a common upgrade for a more aggressive look and adds to the price.',
+      values:[
+        { v:'alc',  label:'Alcantara', price:0, cs:190 },
+        { v:'perf', label:'Perforated Nappa Leather', price:0, cs:191 },
+        { v:'plain',label:'Nappa Leather', price:0, cs:192 },
+        { v:'cf',   label:'Carbon fiber', price:220, cs:193 }
+      ]
+    },
+    bottomSection: {
+      label:'Bottom section', zone:{ px:403, py:704 }, csOptId: 31,
+      desc:'The bottom of the rim, roughly the 5-7 o’clock area. Choosing Carbon fiber here also unlocks a Logo option at the last step.',
+      values:[
+        { v:'alc',  label:'Alcantara', price:0, cs:194 },
+        { v:'perf', label:'Perforated Nappa Leather', price:0, cs:195 },
+        { v:'plain',label:'Nappa Leather', price:0, cs:196 },
+        { v:'cf',   label:'Carbon fiber', price:220, cs:197 }
+      ]
+    },
+    stitchingColor: {
+      label:'Stitching color', zone:{ px:570, py:142 }, zoneF1:{ px:661, py:572 }, isColor:true, csOptId: 32,
+      desc:'The thread color sewn along the rim’s leather/Alcantara seams — a small detail, but it reads clearly in photos and against your interior.',
+      values:[
+        { v:'black',  label:'Black',  price:0, hex:'#1a1a1a', cs:198 },
+        { v:'white',  label:'White',  price:0, hex:'#f5f5f5', cs:199 },
+        { v:'red',    label:'Red',    price:0, hex:'#c81e1e', cs:200 },
+        { v:'blue',   label:'Blue',   price:0, hex:'#1e4fc8', cs:201 },
+        { v:'yellow', label:'Yellow', price:0, hex:'#e8c31e', cs:202 },
+        { v:'orange', label:'Orange', price:0, hex:'#e06b1e', cs:203 },
+        { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
+        { v:'other',  label:'Other (specify in comments)', price:0, other:true, cs:205 }
+      ]
+    },
+    centerMark: {
+      label:'Center mark (top)', zone:{ px:400, py:47 }, zoneF1:{ px:403, py:91 }, isColor:true, csOptId: 33,
+      desc:'A color accent at the very top center of the rim (12 o’clock), just above the horn pad area — a quick way to spot “wheel straight” at a glance from the driver’s seat.',
+      values:[
+        { v:'none',   label:'No center mark', price:0, none:true, cs:206 },
+        { v:'red',    label:'Red',    price:0, hex:'#c81e1e', cs:207 },
+        { v:'blue',   label:'Blue',   price:0, hex:'#1e4fc8', cs:208 },
+        { v:'orange', label:'Orange', price:0, hex:'#e06b1e', cs:209 },
+        { v:'yellow', label:'Yellow', price:0, hex:'#e8c31e', cs:210 },
+        { v:'green',  label:'Green',  price:0, hex:'#2e8b3f', cs:211 },
+        { v:'white',  label:'White',  price:0, hex:'#f5f5f5', cs:212 },
+        { v:'black',  label:'Black',  price:0, hex:'#1a1a1a', cs:213 },
+        { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:214 },
+        { v:'cf',     label:'Carbon fiber (leather top only)', price:55, cf:true, cs:215 },
+        { v:'other',  label:'Other (specify in comments)', price:0, other:true, cs:216 }
+      ]
+    },
+    logo: {
+      label:'Logo (bottom)', zone:{ px:405, py:699 }, zoneF1:{ px:413, py:687 }, csOptId: 34,
+      gatedBy:{ key:'bottomSection', equals:'cf' },
+      desc:'Only available because you chose Carbon fiber for the bottom section. Places a small emblem at the bottom of the rim (6 o’clock), just below center.',
+      values:[
+        { v:'none', label:'No logo', price:0, cs:217 },
+        { v:'z06c6', label:'Z06 (C6)', price:15, cs:218 },
+        { v:'z06c7', label:'Z06 (C7)', price:15, cs:219 },
+        { v:'zr1a', label:'ZR1 (2010-11)', price:15, cs:220 },
+        { v:'zr1b', label:'ZR1 (2012-13)', price:15, cs:221 },
+        { v:'z51', label:'Z51', price:15, cs:222 },
+        { v:'gs', label:'Grand Sport', price:15, cs:223 },
+        { v:'zr6x', label:'ZR6X', price:15, cs:224 },
+        { v:'zr8x', label:'ZR8X', price:15, cs:225 },
+        { v:'flags', label:'Corvette flags (C6)', price:15, cs:226 },
+        { v:'other', label:'Other (specify in comments)', price:15, cs:227 }
+      ]
+    }
+  };
+
+  var state = {};
+  STEP_ORDER.forEach(function(k){
+    state[k] = null;
+    if (OPTIONS[k].finish) state[k+'__finish'] = null;
+    if (OPTIONS[k].audioSets) state[k+'__audio'] = null;
+  });
+  var activeStep = null;
+
+  var root = document.getElementById('rb-config');
+  var stepsEl = document.getElementById('rb-cfg-steps');
+  var wheelImgEl = root.querySelector('.rb-cfg-imgbox img');
+  var DEFAULT_WHEEL_IMG = wheelImgEl.getAttribute('src');
+
+  function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
+
+  function swatchFill(val){
+    if (val.none) return 'repeating-linear-gradient(45deg,#2a2a2a,#2a2a2a 3px,#1a1a1a 3px,#1a1a1a 6px)';
+    if (val.other) return '#1a1a1a';
+    if (val.cf) return 'repeating-linear-gradient(45deg,#1c1c1e,#1c1c1e 2px,#2c2c2f 2px,#2c2c2f 4px)';
+    return val.hex;
+  }
+
+  function updateShapeImage(){
+    var val = state.shape;
+    document.dispatchEvent(new CustomEvent('rb-steeringwheel-shape', { detail:{ key: val ? val.v : null } }));
+    var newSrc = (val && val.img) ? val.img : DEFAULT_WHEEL_IMG;
+    if (wheelImgEl.getAttribute('src') === newSrc) return;
+    wheelImgEl.setAttribute('src', newSrc);
+    wheelImgEl.addEventListener('load', function onLoad(){
+      wheelImgEl.removeEventListener('load', onLoad);
+      updateActiveMark();
+    });
+  }
+
+  function syncNative(optKey, valuesKey, val){
+    var opt = OPTIONS[optKey];
+    var csOptId = opt.csOptId;
+    if (valuesKey === 'finish') csOptId = opt.finishCsOptId;
+    if (valuesKey === 'audio') csOptId = opt.audioCsOptId;
+    var sel = document.getElementById('option_' + PRODUCT_ID + '_' + csOptId);
+    if (!sel) return;
+    sel.value = String(val.cs);
+    if (typeof fn_change_options === 'function'){
+      fn_change_options(PRODUCT_ID, PRODUCT_ID, String(csOptId));
+    }
+  }
+
+  function updateTitleYear(){
+    var el = document.getElementById('rb-cfg-title-year');
+    if (el) el.textContent = state.year ? ' — ' + state.year.label : '';
+  }
+
+  function gateOpen(opt){
+    if (!opt.gatedBy) return true;
+    var gateVal = state[opt.gatedBy.key];
+    return !!(gateVal && gateVal.v === opt.gatedBy.equals);
+  }
+
+  function currentAudioValues(){
+    return (state.year && OPTIONS.spokes.audioSets[state.year.v]) || null;
+  }
+  function needsAudio(){
+    return !!currentAudioValues();
+  }
+
+  function isOptSelected(key){
+    var opt = OPTIONS[key];
+    if (!gateOpen(opt)) return true;
+    if (opt.isSpokesGroup){
+      if (!state.spokes) return false;
+      if (state.spokes.v === 'yes'){
+        if (!state.spokes__finish) return false;
+        if (needsAudio() && !state.spokes__audio) return false;
+      }
+      return true;
+    }
+    return !!state[key];
+  }
+
+  function applicableSteps(){
+    return STEP_ORDER.filter(function(k){ return gateOpen(OPTIONS[k]); });
+  }
+  function computeNextStep(){
+    var steps = applicableSteps();
+    for (var i=0;i<steps.length;i++){ if (!isOptSelected(steps[i])) return steps[i]; }
+    return null;
+  }
+  function isComplete(){
+    return STEP_ORDER.every(isOptSelected);
+  }
+
+  function getActiveZone(opt){
+    if (state.shape && state.shape.v === 'f1' && opt.zoneF1) return opt.zoneF1;
+    return opt.zone;
+  }
+
+  function stepValueText(key){
+    var opt = OPTIONS[key];
+    if (opt.isSpokesGroup){
+      if (!state.spokes) return 'Select…';
+      if (state.spokes.v === 'no') return state.spokes.label;
+      var txt = state.spokes.label;
+      if (state.spokes__finish) txt += ' · ' + state.spokes__finish.label;
+      if (state.spokes__audio) txt += ' · ' + state.spokes__audio.label;
+      return txt;
+    }
+    return state[key] ? state[key].label : 'Select…';
+  }
+
+  function recalcPrice(){
+    var total = BASE_PRICE;
+    STEP_ORDER.forEach(function(key){
+      var opt = OPTIONS[key];
+      if (!gateOpen(opt)) return;
+      if (opt.isSpokesGroup){
+        total += (state[key] && state[key].price) || 0;
+        total += (state[key+'__finish'] && state[key+'__finish'].price) || 0;
+        total += (state[key+'__audio'] && state[key+'__audio'].price) || 0;
+      } else {
+        total += (state[key] && state[key].price) || 0;
+      }
+    });
+    var el = document.getElementById('rb-cfg-price-num');
+    if (el) el.textContent = total.toFixed(2).split('.')[0];
+  }
+
+  function updateCompletionUI(){
+    var complete = isComplete();
+    var summary = document.getElementById('rb-cfg-summary');
+    var btn = document.getElementById('rb-cfg-add-btn');
+    summary.classList.toggle('is-complete', complete);
+    btn.disabled = !complete;
+  }
+
+  function updateActiveMark(){
+    var markEl = document.getElementById('rb-cfg-active-mark');
+    var hint = document.getElementById('rb-cfg-photo-hint');
+    var opt = activeStep ? OPTIONS[activeStep] : null;
+
+    if (opt){
+      var steps = applicableSteps();
+      var idx = steps.indexOf(activeStep);
+      hint.textContent = 'Step ' + (idx+1) + ' of ' + steps.length + ' — ' + opt.label;
+      hint.classList.add('is-visible');
+    } else {
+      hint.classList.remove('is-visible');
+    }
+
+    var zone = opt ? getActiveZone(opt) : null;
+    if (!zone){ markEl.classList.remove('is-visible'); return; }
+
+    var imgEl = root.querySelector('.rb-cfg-imgbox img');
+    var imgWrap = root.querySelector('.rb-cfg-imgwrap');
+    var wrapRect = imgWrap.getBoundingClientRect();
+    var imgRect = imgEl.getBoundingClientRect();
+    if (!imgEl.naturalWidth){ markEl.classList.remove('is-visible'); return; }
+    var dotX = imgRect.left - wrapRect.left + imgRect.width * (zone.px / imgEl.naturalWidth);
+    var dotY = imgRect.top - wrapRect.top + imgRect.height * (zone.py / imgEl.naturalHeight);
+    // Zones near the very top of the rim (e.g. the center mark) can land the
+    // dot underneath the "Step X of N" badge — keep it clear of the badge's
+    // own bottom edge instead of hardcoding a pixel value.
+    if (hint.classList.contains('is-visible')){
+      var hintBottom = hint.getBoundingClientRect().bottom - wrapRect.top;
+      dotY = Math.max(dotY, hintBottom + 16);
+    }
+    markEl.style.left = dotX + 'px';
+    markEl.style.top = dotY + 'px';
+    markEl.classList.add('is-visible');
+  }
+
+  var isMobile = function(){ return window.matchMedia('(max-width: 980px)').matches; };
+
+  // Tap the pulsing dot / photo badge to jump down to the open step. Also
+  // used (mobile only) whenever a new step becomes active, so the growing
+  // stack of answered rows above it never buries the thing you're actually
+  // choosing right now — we deliberately do NOT scroll back up to the photo
+  // after answering, though (tried that, read as disorienting).
+  function scrollToActiveStep(){
+    var el = stepsEl.querySelector('.rb-cfg-step--active');
+    if (!el) return;
+    // Scroll the one done row directly above the active step (if any) to the
+    // top instead of the active step itself, so that single answered step
+    // stays visible for context and the active step follows right under it —
+    // scrolling the active step itself to the top would hide that context.
+    var prev = el.previousElementSibling;
+    var target = (prev && prev.classList.contains('rb-cfg-step--done')) ? prev : el;
+    // The site's own header (.rb-fixed-wrap) is position:fixed and sits on
+    // top of the page — a plain scrollIntoView doesn't know about it and
+    // ends up landing the target partway underneath it. Measure the header's
+    // real rendered height and leave room for it.
+    var fixedHeader = document.querySelector('.rb-fixed-wrap');
+    var headerH = fixedHeader ? fixedHeader.getBoundingClientRect().height : 0;
+    var targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerH - 12;
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+  }
+
+  function applyPick(key, valuesKey, val){
+    var sKey = valuesKey === 'finish' ? key+'__finish' : (valuesKey === 'audio' ? key+'__audio' : key);
+    state[sKey] = val;
+
+    if (key === 'year'){ state.spokes__audio = null; }
+    if (key === 'shape'){ updateShapeImage(); }
+
+    syncNative(key, valuesKey, val);
+    updateTitleYear();
+    activeStep = computeNextStep();
+    renderSteps();
+
+    if (isMobile()){
+      setTimeout(scrollToActiveStep, 250);
+    }
+  }
+
+  function buildChips(container, key, valuesKey, valuesList, opt){
+    var values = valuesList;
+    var wrap = document.createElement('div');
+    wrap.className = 'rb-cfg-chips';
+    var sKey = valuesKey === 'finish' ? key+'__finish' : (valuesKey === 'audio' ? key+'__audio' : key);
+    values.forEach(function(val){
+      var el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'rb-chip';
+      if (state[sKey] === val) el.classList.add('is-active');
+      var html = '';
+      if (opt.isColor) html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
+      html += '<span class="rb-chip-txt">'+val.label+'</span>';
+      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
+      el.innerHTML = html;
+      el.addEventListener('click', function(){ applyPick(key, valuesKey, val); });
+      wrap.appendChild(el);
+    });
+    container.appendChild(wrap);
+  }
+
+  function buildShapeTiles(container, opt){
+    var grid = document.createElement('div');
+    grid.className = 'rb-cfg-shape-grid';
+    opt.values.forEach(function(val){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rb-cfg-shape-opt';
+      if (state.shape === val) btn.classList.add('is-active');
+      var priceHtml = '<span class="rb-cfg-shape-opt-price">from $'+(BASE_PRICE+val.price).toFixed(0)+'</span>';
+      btn.innerHTML =
+        '<span class="rb-cfg-shape-opt-imgwrap"><img src="'+(val.img || DEFAULT_WHEEL_IMG)+'" alt="'+val.label+'" width="800" height="800"></span>' +
+        '<span class="rb-cfg-shape-opt-label">'+val.label+'</span>' + priceHtml;
+      btn.addEventListener('click', function(){ applyPick('shape', 'values', val); });
+      grid.appendChild(btn);
+    });
+    container.appendChild(grid);
+  }
+
+  function buildActiveStep(key, stepNum, total){
+    var opt = OPTIONS[key];
+    var el = document.createElement('div');
+    el.className = 'rb-cfg-step rb-cfg-step--active';
+    el.dataset.zone = key;
+
+    var top = document.createElement('div');
+    top.className = 'rb-cfg-step-active-top';
+    var heading = document.createElement('div');
+    heading.innerHTML =
+      '<div class="rb-cfg-step-counter">Step '+stepNum+' of '+total+'</div>' +
+      '<h2 class="rb-cfg-step-label">'+opt.label+'</h2>';
+    top.appendChild(heading);
+    if (isOptSelected(key)){
+      var collapseBtn = document.createElement('button');
+      collapseBtn.type = 'button';
+      collapseBtn.className = 'rb-cfg-step-collapse';
+      collapseBtn.textContent = 'Done editing';
+      collapseBtn.addEventListener('click', function(){
+        activeStep = computeNextStep();
+        renderSteps();
+      });
+      top.appendChild(collapseBtn);
+    }
+    el.appendChild(top);
+
+    if (key === 'shape'){
+      buildShapeTiles(el, opt);
+    } else if (opt.isSpokesGroup){
+      var subA = document.createElement('div'); subA.className='rb-cfg-step-sub-label rb-cfg-step-sub-label--lead'; subA.textContent='Add CF spoke covers';
+      el.appendChild(subA);
+      buildChips(el, 'spokes', 'values', opt.values, opt);
+
+      var isYes = !!(state.spokes && state.spokes.v === 'yes');
+
+      var fb = document.createElement('div'); fb.className='rb-cfg-step-block' + (isYes ? '' : ' is-disabled');
+      var subB = document.createElement('div'); subB.className='rb-cfg-step-sub-label'; subB.textContent='CF finish';
+      fb.appendChild(subB);
+      buildChips(fb, 'spokes', 'finish', opt.finish, opt);
+      el.appendChild(fb);
+
+      if (isYes && needsAudio()){
+        var ab = document.createElement('div'); ab.className='rb-cfg-step-block';
+        var subC = document.createElement('div'); subC.className='rb-cfg-step-sub-label'; subC.textContent='CF covers option';
+        ab.appendChild(subC);
+        buildChips(ab, 'spokes', 'audio', currentAudioValues(), opt);
+        el.appendChild(ab);
+      }
+    } else {
+      buildChips(el, key, 'values', opt.values, opt);
+    }
+
+    var desc = document.createElement('div');
+    desc.className = 'rb-cfg-step-desc';
+    desc.textContent = opt.desc;
+    el.appendChild(desc);
+
+    return el;
+  }
+
+  function buildDoneStep(key){
+    var opt = OPTIONS[key];
+    var el = document.createElement('div');
+    el.className = 'rb-cfg-step rb-cfg-step--done';
+    el.dataset.zone = key;
+    el.tabIndex = 0;
+    el.innerHTML =
+      '<div class="rb-cfg-step-done-row">' +
+        '<span class="rb-cfg-step-done-check">✓</span>' +
+        '<span class="rb-cfg-step-done-label">'+opt.label+'</span>' +
+        '<span class="rb-cfg-step-done-val">'+stepValueText(key)+'</span>' +
+        '<span class="rb-cfg-step-done-edit">Edit</span>' +
+      '</div>';
+    function open(){
+      activeStep = key;
+      renderSteps();
+      if (isMobile()) setTimeout(scrollToActiveStep, 250);
+    }
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', function(e){ if (e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+    return el;
+  }
+
+  function renderSteps(){
+    stepsEl.innerHTML = '';
+    var steps = applicableSteps();
+    var total = steps.length;
+    steps.forEach(function(key, idx){
+      if (key === activeStep){
+        stepsEl.appendChild(buildActiveStep(key, idx+1, total));
+      } else if (isOptSelected(key)){
+        stepsEl.appendChild(buildDoneStep(key));
+      }
+    });
+    recalcPrice();
+    updateCompletionUI();
+    updateActiveMark();
+  }
+
+  window.addEventListener('resize', updateActiveMark);
+  window.addEventListener('load', updateActiveMark);
+  setTimeout(updateActiveMark, 50);
+
+  var activeMarkEl = document.getElementById('rb-cfg-active-mark');
+  var photoHintEl = document.getElementById('rb-cfg-photo-hint');
+  [activeMarkEl, photoHintEl].forEach(function(el){
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.addEventListener('click', scrollToActiveStep);
+    el.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); scrollToActiveStep(); }
+    });
+  });
+
+  activeStep = computeNextStep();
+  renderSteps();
+
+  function readNativePrice(){
+    var node = document.querySelector('[id="sec_discounted_price_350"]');
+    if (!node) return null;
+    var supEl = node.querySelector('sup');
+    var cents = supEl ? supEl.textContent.trim() : '00';
+    var clone = node.cloneNode(true);
+    var supInClone = clone.querySelector('sup');
+    if (supInClone) supInClone.remove();
+    return { dollars: clone.textContent.trim(), cents: cents };
+  }
+  function syncPriceFromNative(){
+    var p = readNativePrice();
+    if (!p) return;
+    document.getElementById('rb-cfg-price-num').textContent = p.dollars;
+    var centsEl = document.getElementById('rb-cfg-price-cents');
+    if (centsEl) centsEl.textContent = '.' + p.cents;
+  }
+  var nativePriceNode = document.querySelector('[id="sec_discounted_price_350"]');
+  if (nativePriceNode){
+    syncPriceFromNative();
+    new MutationObserver(syncPriceFromNative).observe(
+      document.querySelector('[id="price_update_350"]') || nativePriceNode,
+      { childList:true, subtree:true, characterData:true }
+    );
+  }
+
+  document.getElementById('rb-cfg-add-btn').addEventListener('click', function(){
+    if (!isComplete()) return;
+    if (this.classList.contains('is-loading')) return; // guard against double-tap while the request is in flight
+
+    var btn = this;
+    var originalLabel = btn.textContent;
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+    btn.innerHTML = '<span class="rb-cfg-add-spinner"></span><span>Adding…</span>';
+    // CS-Cart's response can take several seconds on mobile (see the "Add to
+    // cart" hang investigated separately) — if nothing comes back at all,
+    // don't leave the button stuck forever.
+    setTimeout(function(){
+      if (btn.classList.contains('is-loading')){
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      }
+    }, 20000);
+
+    var securityHash = (window.Tygh && Tygh.security_hash) ? Tygh.security_hash : '';
+    if (!securityHash){
+      var hashInput = document.querySelector('input[name="security_hash"]');
+      if (hashInput) securityHash = hashInput.value;
+    }
+    if (!securityHash){
+      btn.classList.remove('is-loading');
+      btn.disabled = false;
+      btn.textContent = originalLabel;
+      alert('Something went wrong (missing security token) — please refresh the page and try again.');
+      return;
+    }
+
+    var form = document.createElement('form');
+    // Posting to the current page URL instead of the site root broke the
+    // "added to cart" popup entirely (tried it, reverted) — cm-ajax's
+    // full-render dialog logic apparently depends on posting to root. Back
+    // to matching the live grid configurator's behavior; the multi-second
+    // hang after Add to cart is a separate, unresolved CS-Cart/theme issue.
+    form.action = 'https://therunbird.com/';
+    form.method = 'post';
+    form.enctype = 'multipart/form-data';
+    form.className = 'cm-disable-empty-files cm-ajax cm-ajax-full-render cm-ajax-status-middle';
+    form.style.display = 'none';
+
+    function addField(name, value){
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    addField('redirect_url', window.location.pathname + window.location.search);
+    addField('security_hash', securityHash);
+    addField('product_data[' + PRODUCT_ID + '][amount]', '1');
+    STEP_ORDER.forEach(function(key){
+      var opt = OPTIONS[key];
+      if (opt.isSpokesGroup){
+        addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
+        var finishCs = state[key].v === 'yes' ? state[key+'__finish'].cs : opt.finish[0].cs;
+        addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.finishCsOptId + ']', String(finishCs));
+        if (state[key].v === 'yes' && needsAudio() && state[key+'__audio']){
+          addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.audioCsOptId + ']', String(state[key+'__audio'].cs));
+        }
+      } else {
+        var cs = gateOpen(opt) ? state[key].cs : opt.values[0].cs;
+        addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(cs));
+      }
+    });
+
+    var submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.name = 'dispatch[checkout.add..' + PRODUCT_ID + ']';
+    submitBtn.value = '';
+    submitBtn.style.display = 'none';
+    form.appendChild(submitBtn);
+
+    document.body.appendChild(form);
+    submitBtn.click();
+  });
+})();
+</script>
