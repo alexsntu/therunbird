@@ -1,0 +1,14 @@
+---
+description: Load CLAUDE.md project instructions before starting work
+alwaysApply: true
+---
+
+# Claude Project Context
+
+- At the start of work in a project, locate and read the applicable `CLAUDE.md` or `claude.md` files before making changes.
+- Also check the matching Claude project-memory directory under `~/.claude/projects/`; read `memory/MEMORY.md` first, then every linked or task-relevant memory file in full.
+- Check the project root and relevant parent and nested directories; the closest applicable file takes precedence.
+- Follow those instructions together with higher-priority system and user instructions.
+- If `CLAUDE.md` is absent but project memory exists, state that distinction and initialize from the memory.
+- If neither source exists, state that clearly instead of treating initialization as complete.
+- Re-check the applicable file after switching to a different project.

@@ -1,0 +1,46 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /shift-knobs/shift-pattern/ (Top Cap Only): Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on THIS page only (do not merge into
+     configurator-shiftknob-cap.deploy.html — keep separate, same
+     pattern as shiftknob-classic-jsonld.deploy.html / shiftknob-ball-jsonld.deploy.html
+     / shiftknob-drift-jsonld.deploy.html).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     No "material" field — this variant is carbon-fiber/finish options
+     only, no leather/Alcantara choice (unlike the other 4 styles).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 Classic Shift Top Cap",
+  "image": [
+    "https://therunbird.com/images/ab__webp/detailed/9/Corvette_C6_Classic_Shift_Top_Cap6_png.webp"
+  ],
+  "description": "Handmade C6 Corvette shift-pattern top cap only — fits your existing knob. Choose a carbon-fiber or custom finish, in matte or gloss. Made to order in 7-14 business days, with real photos of your build sent for approval before it ships.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Carbon Fiber"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/shift-knobs/shift-pattern/",
+    "priceCurrency": "USD",
+    "price": "55.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>

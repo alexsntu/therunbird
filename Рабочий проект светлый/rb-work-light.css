@@ -4,7 +4,7 @@
    system). This file has NO toggle, NO data-rb-theme attribute, NO dark
    defaults — every value here IS the live, permanent look. White page
    background, black primary buttons/logo, decorative accents in #D1382A.
-   Loaded via CS-Cart Design > Themes > Editor > custom CSS (theme
+   Loaded via CS-Cart Design > Theames > Editor > custom CSS (theme
    includes it automatically on every page — no <link> tag needed in the
    header/footer blocks themselves).
    Header/footer blocks that pair with this file:
@@ -1121,6 +1121,30 @@ html {
     width: 64px !important;
     height: 64px !important;
   }
+}
+
+/* ══════════════════════════════════════════════════════
+   Breadcrumb spacing fix — scoped, opt-in per block (same hook as the
+   dark track's .rb-breadcrumb-fix color fix — see that file's comment
+   for the full story on why this is scoped instead of site-wide).
+   UniTheme2's native `.ty-breadcrumbs{margin-bottom:var(--gap-s)}` (20px)
+   sits directly above our own H1 with nothing else in between, reading
+   as excess dead space — confirmed on the live steering-wheel product
+   page 2026-09-02 (owner screenshot). Colors aren't touched here — the
+   native theme color already reads fine against white, unlike the dark
+   track which needed a color override too.
+
+   NOTE: an earlier version of this fix also zeroed out
+   `.span16.ut2-bottom-sm`'s own 20px margin-bottom (it used to stack
+   with .ty-breadcrumbs for ~40px total). The owner removed that
+   `ut2-bottom-sm` CSS class from the block's own CS-Cart admin config
+   directly (2026-09-02, before this CSS was ever deployed) — so the
+   class no longer exists on the live wrapper and that half of the fix
+   is now a no-op. Left out entirely rather than kept as dead defensive
+   CSS; if the class ever gets re-added in admin, re-add that rule too.
+════════════════════════════════════════════════════════ */
+.rb-breadcrumb-fix .ty-breadcrumbs {
+  margin-bottom: 8px !important;
 }
 
 /* ══════════════════════════════════════════════════════

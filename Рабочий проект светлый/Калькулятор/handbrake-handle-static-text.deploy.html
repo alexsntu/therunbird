@@ -1,0 +1,59 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /handbrakes/handbrake/ (Handle + CF Button): static
+     product description
+     LIGHT-ONLY VARIANT — trivial recolor of the dark-track file (body
+     text #d0d0d0->#6E6A63, heading #f0f0f0->#121212), text unchanged.
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the configurator block (configurator-handbrake-handle.deploy.html)
+     and BEFORE the gallery block on this page.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: same as shiftknob-classic-static-text.deploy.html —
+     configurator facts are JS-rendered and invisible to non-JS AI
+     crawlers, this block puts the same real facts in plain
+     always-visible HTML.
+
+     All facts below pulled verbatim from configurator-handbrake-handle
+     .deploy.html's own PRODUCT.options data (2026-08-27, material
+     labels corrected same day): base price $195, top/bottom section
+     material choices, carbon bottom section +$55 (gates Carbon
+     style/Finish top style options), stitching color choices, optional
+     carbon-fiber button add-on +$50.
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-hb-handle-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #6E6A63;
+}
+#rb-hb-handle-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #121212;
+  margin: 0 0 18px;
+}
+#rb-hb-handle-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-hb-handle-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-hb-handle-about">
+  <h2>About the Corvette C6 E-Brake Handle</h2>
+  <p>The RunBird E-Brake Handle is a handmade replacement e-brake handle for the C6
+  Corvette, with a matching carbon-fiber release button. Choose synthetic Nappa leather,
+  perforated synthetic Nappa leather, or genuine Alcantara® for the top and bottom
+  sections, with your choice of stitching color. The bottom section can also be built in
+  carbon fiber (black, red, blue, titanium, or Alutex, in matte or gloss).</p>
+  <p>Pricing starts at $195 and increases based on the options you choose — for
+  example, a carbon-fiber bottom section adds $55, and adding a carbon-fiber release
+  button adds $50. Every build is made to order in 7–14 business days, and before your
+  handle ships, we send real photos of the finished piece for your approval.</p>
+</div>

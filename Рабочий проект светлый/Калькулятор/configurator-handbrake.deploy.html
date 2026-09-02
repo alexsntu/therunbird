@@ -1,0 +1,125 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — E-Brake / Handbrakes: category hub (static links, no configurator)
+     LIGHT-ONLY VARIANT. Lives at /handbrakes/ (the root category).
+
+     Unlike the homepage category grid / crosssell strip (real photography
+     with an on-photo label needing a dark scrim), this hub's label/desc/
+     price sit BELOW each photo, not overlaid on it — so there's no
+     legibility reason to keep the tile dark. Styled like the wizard
+     configurators' own shape/design image tiles instead (same precedent
+     as the shift-knobs hub, configurator-shiftknob.deploy.html): card
+     border + hover accent + text follow the light palette, image sits on
+     the light studio-backdrop gradient (var(--rb-stage-bg)) as a fallback
+     surface, object-fit:cover kept as-is since these are full-bleed
+     product photos, not floating product shots.
+
+     Gate images: same as the dark-track file — use the FULL-SIZE
+     ab__webp/detailed/9/ WebP files (handle_vquc-1y_png.webp etc), NOT
+     the ab__webp/thumbnails/570/570/ variant, which flattens the source
+     PNGs' transparent background to solid white and would hide the
+     imgwrap gradient behind it (dark-track file's own note, 2026-08-27,
+     still applies here since it's about the source asset, not the theme).
+
+     Prices shown are the same hardcoded fallback figures the dark-track
+     file uses: Handle + CF Button $195, Knob Boot $65, Handle Button $50.
+     Static display text only — if CS-Cart pricing changes, update this
+     file by hand (no live hydration on a links-only page).
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config">
+<div class="rb-cfg-inner">
+
+  <div class="rb-cfg-head">
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Custom C6 Corvette E-Brake Accessories</h1>
+    <p class="rb-cfg-sub">Pick your e-brake accessory to start configuring — each style has its own materials, finishes, and options.</p>
+  </div>
+
+  <div class="rb-cfg-shape-gate">
+    <div class="rb-cfg-shape-gate-grid">
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/handbrakes/handbrake/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/detailed/9/handle_vquc-1y_png.webp" alt="Handle + CF Button" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Handle + CF Button</span>
+        <span class="rb-cfg-shape-gate-desc">Full e-brake handle assembly with a carbon-fiber release button.</span>
+        <span class="rb-cfg-shape-gate-price">From $195</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/handbrakes/handbrake-cover/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/detailed/9/cover_png.webp" alt="Knob Boot" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Knob Boot</span>
+        <span class="rb-cfg-shape-gate-desc">Leather or Alcantara boot cover for your existing e-brake handle.</span>
+        <span class="rb-cfg-shape-gate-price">From $65</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/handbrakes/handbrake-button/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/detailed/9/CF-button_p0jg-8n_png.webp" alt="Handle Button" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Handle Button</span>
+        <span class="rb-cfg-shape-gate-desc">Standalone release button in black or carbon fiber, fits your existing handle.</span>
+        <span class="rb-cfg-shape-gate-price">From $50</span>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<style>
+#rb-config{
+  --rb-accent:   #D1382A;
+  --rb-accent-h: #A82C20;
+  --rb-accent-b: rgba(209,56,42,.20);
+  --rb-bg:       #FFFFFF;
+  --rb-text:     #121212;
+  --rb-text2:    #6E6A63;
+  --rb-border:   rgba(18,18,18,.08);
+  --rb-stage-bg:
+    radial-gradient(ellipse at 50% 38%, rgba(209,56,42,.14), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.05), transparent 60%),
+    linear-gradient(180deg, #E9E4D6 0%, #DAD3C0 60%, #C9C0A9 100%);
+
+  background: var(--rb-bg);
+  color: var(--rb-text);
+  font-family: 'Inter', sans-serif;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#rb-config *{ box-sizing: border-box; }
+#rb-config .rb-cfg-inner{
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 clamp(20px,4vw,56px) 48px;
+  box-sizing: border-box;
+}
+
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:28px; }
+#rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
+
+#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:820px; margin:0 auto; }
+#rb-config .rb-cfg-shape-gate-opt{
+  width:100%; text-decoration:none;
+  background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:8px; transition:border-color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+#rb-config .rb-cfg-shape-gate-opt:hover, #rb-config .rb-cfg-shape-gate-opt:active{ border-color:var(--rb-accent); }
+#rb-config .rb-cfg-shape-gate-imgwrap{
+  width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative;
+  background: var(--rb-stage-bg);
+}
+#rb-config .rb-cfg-shape-gate-imgwrap img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
+#rb-config .rb-cfg-shape-gate-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
+  font-size:16px; font-weight:700; color:var(--rb-text); text-align:center;
+}
+#rb-config .rb-cfg-shape-gate-desc{ font-size:11.5px; line-height:1.4; color:var(--rb-text2); text-align:center; }
+#rb-config .rb-cfg-shape-gate-price{ font-size:14px; color:var(--rb-text2); }
+
+@media (max-width: 980px){
+  #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr 1fr; max-width:520px; }
+}
+@media (max-width: 640px){
+  #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr; gap:14px; max-width:340px; }
+}
+</style>

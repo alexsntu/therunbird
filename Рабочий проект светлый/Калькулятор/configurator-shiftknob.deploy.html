@@ -1,0 +1,127 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Shift Knobs: category hub (static links, no configurator)
+     LIGHT-ONLY VARIANT. Lives at /shift-knobs/ (the root category).
+
+     Unlike the homepage category grid / crosssell strip (real photography
+     with an on-photo label needing a dark scrim), this hub's label/desc/
+     price sit BELOW each photo, not overlaid on it — so there's no
+     legibility reason to keep the tile dark. Styled like the wizard
+     configurators' own shape/design image tiles instead: card border +
+     hover accent + text follow the light palette, image sits on the
+     light studio-backdrop gradient (var(--rb-stage-bg)) as a fallback
+     surface, object-fit:cover kept as-is since these are full-bleed
+     product photos, not floating product shots.
+
+     Prices shown are the same hardcoded fallback figures the dark-track
+     file uses: Classic $170, Ball $250, Drift $220, Top Cap $55, Boot $55.
+     Static display text only — if CS-Cart pricing changes, update this
+     file by hand (no live hydration on a links-only page).
+════════════════════════════════════════════════════════ -->
+
+<div id="rb-config">
+<div class="rb-cfg-inner">
+
+  <div class="rb-cfg-head">
+    <h1 class="rb-cfg-title" id="rb-cfg-title">Custom C6 Corvette Shift Knobs</h1>
+    <p class="rb-cfg-sub">Pick your shift knob to start configuring — each style has its own materials, finishes, and options.</p>
+  </div>
+
+  <div class="rb-cfg-shape-gate">
+    <div class="rb-cfg-shape-gate-grid">
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/shift-knobs/standard-gear-knob/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_Classic_Shift_Knob_Manual__6-Speed__and_CF_Top_Cap_invn-pg_png.webp" alt="Classic" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Classic</span>
+        <span class="rb-cfg-shape-gate-desc">Traditional round knob with a matching carbon-fiber top cap.</span>
+        <span class="rb-cfg-shape-gate-price">From $170</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/shift-knobs/gear-knob-ball/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_BALL_Shift_Knob_Manual__6-Speed__png.webp" alt="Ball" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Ball</span>
+        <span class="rb-cfg-shape-gate-desc">Round ball-shaped knob for a shorter, grippier throw.</span>
+        <span class="rb-cfg-shape-gate-price">From $250</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/shift-knobs/gear-knob-tall/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_DRIFT_Shift_Knob_Manual__6-Speed__ociu-ky_png.webp" alt="Drift" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Drift</span>
+        <span class="rb-cfg-shape-gate-desc">Taller, elongated knob with a separate upper and lower section.</span>
+        <span class="rb-cfg-shape-gate-price">From $220</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/shift-knobs/shift-pattern/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/Corvette_C6_Classic_Shift_Top_Cap6_png.webp" alt="Top Cap Only" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Top Cap Only</span>
+        <span class="rb-cfg-shape-gate-desc">Just the shift-pattern top cap — fits your existing knob.</span>
+        <span class="rb-cfg-shape-gate-price">From $55</span>
+      </a>
+      <a class="rb-cfg-shape-gate-opt" href="https://therunbird.com/shift-knobs/gear-knob-cover/">
+        <span class="rb-cfg-shape-gate-imgwrap"><img src="https://therunbird.com/images/ab__webp/thumbnails/570/570/detailed/9/11_jpg.webp" alt="Boot" width="570" height="570" loading="lazy"></span>
+        <span class="rb-cfg-shape-gate-label">Boot</span>
+        <span class="rb-cfg-shape-gate-desc">Leather or Alcantara boot cover only, no knob included.</span>
+        <span class="rb-cfg-shape-gate-price">From $55</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<style>
+#rb-config{
+  --rb-accent:   #D1382A;
+  --rb-accent-h: #A82C20;
+  --rb-accent-b: rgba(209,56,42,.20);
+  --rb-bg:       #FFFFFF;
+  --rb-text:     #121212;
+  --rb-text2:    #6E6A63;
+  --rb-border:   rgba(18,18,18,.08);
+  --rb-stage-bg:
+    radial-gradient(ellipse at 50% 38%, rgba(209,56,42,.14), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.05), transparent 60%),
+    linear-gradient(180deg, #E9E4D6 0%, #DAD3C0 60%, #C9C0A9 100%);
+
+  background: var(--rb-bg);
+  color: var(--rb-text);
+  font-family: 'Inter', sans-serif;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#rb-config *{ box-sizing: border-box; }
+#rb-config .rb-cfg-inner{
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: 0 clamp(20px,4vw,56px) 48px;
+  box-sizing: border-box;
+}
+
+#rb-config .rb-cfg-head{ text-align:center; margin-bottom:28px; }
+#rb-config .rb-cfg-title{ font-size:clamp(20px,3.4vw,32px); margin:0 0 6px; font-weight:700; letter-spacing:-.01em; }
+#rb-config .rb-cfg-sub{ color:var(--rb-text2); font-size:13.5px; margin:0; }
+
+#rb-config .rb-cfg-shape-gate-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; max-width:1080px; margin:0 auto; }
+#rb-config .rb-cfg-shape-gate-opt{
+  width:100%; text-decoration:none;
+  background:none; border:1px solid var(--rb-border); border-radius:14px; padding:12px; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:8px; transition:border-color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+#rb-config .rb-cfg-shape-gate-opt:hover, #rb-config .rb-cfg-shape-gate-opt:active{ border-color:var(--rb-accent); }
+#rb-config .rb-cfg-shape-gate-imgwrap{
+  width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden; position:relative;
+  background: var(--rb-stage-bg);
+}
+#rb-config .rb-cfg-shape-gate-imgwrap img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
+#rb-config .rb-cfg-shape-gate-label{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.05em;
+  font-size:16px; font-weight:700; color:var(--rb-text); text-align:center;
+}
+#rb-config .rb-cfg-shape-gate-desc{ font-size:11.5px; line-height:1.4; color:var(--rb-text2); text-align:center; }
+#rb-config .rb-cfg-shape-gate-price{ font-size:14px; color:var(--rb-text2); }
+
+@media (max-width: 980px){
+  #rb-config .rb-cfg-shape-gate-grid{ grid-template-columns:1fr 1fr; max-width:420px; }
+}
+</style>

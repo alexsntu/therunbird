@@ -1,0 +1,46 @@
+/* ══════════════════════════════════════════════════════
+   RunBird configurator wizard — LIGHT-ONLY shared file
+   Loaded by every configurator-*.wizard.html in this light-only track via
+   a single <link>:
+     <link rel="stylesheet" href="https://therunbird.com/rb-assets/rb-cfg-theme-light.css">
+   Separate track from Рабочий проект/Калькулятор/Wizard/rb-assets/rb-cfg-theme.css
+   (the dark/light-toggle system) — no data-rb-theme attribute, no toggle
+   switch, no dark defaults anywhere. Each .wizard.html file inlines its
+   OWN complete #rb-config (and #rb-cfg-gallery, in files with a gallery)
+   token block directly with the light palette values already baked in —
+   see the "Palette rule" section of the therunbird-light-variant-project
+   memory file for the exact values and why a single --rb-accent works for
+   both text and filled surfaces here (unlike the dark track's two-gold
+   split). Because of that, THIS shared file only needs to carry what's
+   genuinely identical across every configurator: the site-wide
+   color-inheritance fix below. Don't add token declarations here — they'd
+   be silently overridden by each file's own later inline <style> block
+   anyway (same #rb-config specificity, later source wins), so it'd be
+   dead code.
+
+   The lightbox photo viewer, the "Step X of N" photo badge, and the
+   pulsing zone dot all intentionally stay dark-styled regardless of page
+   theme (same reasoning as the dark/toggle track: product finish reads
+   truer against a dark surround, and these sit on top of the product
+   photo itself, not the page chrome) — styled inline in each
+   .wizard.html/gallery file, nothing to do here.
+════════════════════════════════════════════════════════ */
+
+/* ── Restore normal inheritance (see rb-cfg-theme.css's identical comment
+   for the full story) — therunbird.com's own site-wide CSS carries a very
+   old, very broad rule (`body, p, div, li { color:#F0F0F0 }` plus
+   `h1-h6 { color:#F0F0F0 }`) that beats ordinary inheritance from our own
+   `color:var(--rb-text)` on any bare <div>/<p>/<li>/<h1-6> that doesn't
+   declare its own color — a direct match always wins over inheritance
+   regardless of specificity. On the DARK track this rule was invisible by
+   coincidence (#F0F0F0 IS the dark theme's --rb-text value); on this
+   LIGHT track it would render near-white text on a white page unless
+   reset here. */
+#rb-config div, #rb-config p, #rb-config li,
+#rb-config h1, #rb-config h2, #rb-config h3,
+#rb-config h4, #rb-config h5, #rb-config h6,
+#rb-cfg-gallery div, #rb-cfg-gallery p, #rb-cfg-gallery li,
+#rb-cfg-gallery h1, #rb-cfg-gallery h2, #rb-cfg-gallery h3,
+#rb-cfg-gallery h4, #rb-cfg-gallery h5, #rb-cfg-gallery h6{
+  color: inherit;
+}

@@ -1,0 +1,421 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — Custom Order page — LIGHT-ONLY VARIANT
+     CS-Cart > Design > Layouts > Html+Smarty block (Content area, standalone CMS page)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+     All styles scoped under #rb-custom-order — no conflict with UniTheme2
+     or with the homepage categories block (#rb-categories)
+     No data-rb-theme attribute, no toggle — permanently light, separate
+     track from Рабочий проект/. White page background, #D1382A accents/
+     buttons/links, white button text, near-black body text — same tokens
+     as the homepage hero (1-hero-v.1.html) and category grid
+     (2-categories-v.1.html).
+
+     Category grid tiles stay DARK — same call as the homepage's own
+     category grid: real product photography with a bottom scrim for
+     on-photo label legibility is a photography treatment, not a
+     site-theme color, so it's intentionally not recolored. Only the page
+     chrome around the tiles (hero, badge, title, "Not sure" CTA) follows
+     the light palette. This page's grid is a near 1:1 mirror of
+     #rb-categories (down to shared class-name suffixes like .rb-c-sw),
+     so its conversion reuses that file's exact tile-side decisions.
+
+     Glow/text-shadow effects that worked on the dark hero are DROPPED on
+     white (badge box-shadow glow, badge-dot glow, title <em> text-shadow,
+     price text-shadow) — same rule already applied to the homepage hero
+     and category grid conversions; only the ambient background radial
+     glow behind the hero is kept (recolored, still very low-opacity
+     decoration, not a text effect). The diagonal grid-line texture behind
+     the (now white) hero is flipped from white-tinted to dark-tinted
+     (rgba(18,18,18,.018), matching 1-hero-v.1.html's .rb-hero-cf) so it
+     stays visible; the texture over the (still-dark) tiles keeps its
+     original white tint unchanged.
+     Deliberately avoids `rgba(var(--x), Y)` / `rgb(var(--x))` anywhere —
+     CS-Cart's CSS bundler mis-inlines that exact pattern into garbage
+     colors (confirmed on the header block). Every color that needs an
+     opacity is written as a fully literal rgba(...) instead.
+
+     Owner feedback fixes, same day:
+     - `.rb-co-badge` ("Build Your Own") text was red-on-pale-pink (low
+       contrast) — changed to var(--rb-text) (black). The badge dot stays
+       accent-red as the one deliberate color cue.
+     - `.rb-co-desc` (the tile's middle line, e.g. "11 configurations ·
+       Carbon · Nappa · Alcantara") was accent-red on the dark tile —
+       changed to #F0F0F0 (white), matching `.rb-co-name` above it.
+       `.rb-co-price` stays accent-red — the one deliberate color cue
+       per tile, same role as elsewhere in this project (price is always
+       the accent-colored element, other tile text is neutral).
+     - Breadcrumb-to-badge gap: owner's live screenshot (2026-09-02)
+       confirmed the `.rb-breadcrumb-fix` class was already applied to
+       this page's block (the breadcrumb row itself sits tight against
+       the divider above it) — the large remaining gap was this hero's
+       OWN top padding, `72px` at desktop / `52px` at ≤768px, which read
+       as excess dead space directly under a breadcrumb row (unlike the
+       homepage hero, which has no breadcrumb above it and can afford
+       full breathing room). Cut to `24px` desktop / `20px` mobile —
+       bottom padding (56px / 40px) left untouched, that space separates
+       the hero from the category grid below and wasn't part of the
+       complaint. If any other page-hero in this project sits directly
+       under a visible breadcrumb, apply the same reduced top-padding
+       call there too rather than the homepage's fuller value.
+     - "Not sure what you need?" strip replaced the plain white
+       border-top block (owner: too much empty space, asked for the
+       site's photo-CTA block instead) with the same full-bleed Corvette
+       photo-CTA band used at the bottom of the homepage (`#rb-cta` in
+       8-cta-v.1.html) and FAQ (`#rb-faq-cta`) — dark overlay + red glow,
+       the one other deliberate dark moment on this page besides the
+       tiles. Scoped as `.rb-co-cta`/`.rb-coc-*` (nested under
+       `#rb-custom-order`, unlike the other two pages' copies which are
+       separate top-level blocks — this page keeps everything under one
+       wrapper) rather than a new top-level id, since this file's whole
+       structure is already one `#rb-custom-order` scope. Copy carried
+       over verbatim from the old strip (heading text, body text, button
+       label/link) — only the container changed, not the message.
+════════════════════════════════════════════════════════ -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+
+#rb-custom-order,
+#rb-custom-order *,
+#rb-custom-order *::before,
+#rb-custom-order *::after {
+  box-sizing: border-box !important;
+}
+#rb-custom-order a { text-decoration: none !important; }
+
+#rb-custom-order {
+  --rb-bg:         #FFFFFF;
+  --rb-bg-card:    #FAF9F7;
+  --rb-accent:     #D1382A;
+  --rb-accent-h:   #A82C20;
+  --rb-accent-b:   rgba(209,56,42,.22);
+  --rb-text:       #121212;
+  --rb-text2:      #6E6A63;
+  --rb-border:     rgba(18,18,18,.08);
+
+  display: block !important;
+  width: 100vw !important; max-width: 100vw !important;
+  position: relative !important; left: 50% !important; transform: translateX(-50%) !important;
+  font-family: 'Inter', sans-serif !important;
+  background: var(--rb-bg) !important;
+  margin: 0 !important; padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   PAGE HEADER
+══════════════════════════════════════ */
+#rb-custom-order .rb-co-hero {
+  position: relative !important; overflow: hidden !important;
+  text-align: center !important;
+  padding: 24px 24px 56px !important;
+  background:
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(209,56,42,.08), transparent 65%),
+    var(--rb-bg) !important;
+  border-bottom: 1px solid var(--rb-border) !important;
+}
+#rb-custom-order .rb-co-hero::before {
+  content: '' !important; position: absolute !important; inset: 0 !important; z-index: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(18,18,18,.018) 0, rgba(18,18,18,.018) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 10px 10px !important;
+}
+#rb-custom-order .rb-co-hero-in { position: relative !important; z-index: 1 !important; max-width: 720px !important; margin: 0 auto !important; }
+#rb-custom-order .rb-co-badge {
+  display: inline-flex !important; align-items: center !important; gap: 9px !important;
+  padding: 6px 18px !important; border-radius: 100px !important;
+  border: 1px solid var(--rb-accent-b) !important;
+  color: var(--rb-text) !important; font-size: 11px !important; font-weight: 700 !important;
+  letter-spacing: .15em !important; text-transform: uppercase !important;
+  margin-bottom: 22px !important;
+  background: rgba(209,56,42,.05) !important;
+}
+#rb-custom-order .rb-co-badge-dot {
+  width: 6px !important; height: 6px !important; border-radius: 50% !important;
+  background: var(--rb-accent) !important;
+}
+#rb-custom-order .rb-co-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(38px, 6vw, 68px) !important;
+  text-transform: uppercase !important; line-height: 1 !important; letter-spacing: -.01em !important;
+  color: var(--rb-text) !important; margin: 0 0 18px !important;
+}
+#rb-custom-order .rb-co-title em {
+  font-style: normal !important; color: var(--rb-accent) !important;
+}
+#rb-custom-order .rb-co-sub {
+  color: var(--rb-text2) !important; font-size: 15.5px !important; line-height: 1.65 !important;
+  max-width: 560px !important; margin: 0 auto !important;
+}
+#rb-custom-order .rb-co-sub b { color: var(--rb-text) !important; font-weight: 600 !important; }
+
+/* ══════════════════════════════════════
+   CATEGORY GRID  (tiles stay dark — see file header note)
+══════════════════════════════════════ */
+#rb-custom-order .rb-co-wrap { max-width: 1440px !important; margin: 0 auto !important; padding: 56px 48px 88px !important; }
+#rb-custom-order .rb-co-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2,1fr) !important;
+  grid-template-rows: repeat(3, 400px) !important;
+  gap: 3px !important;
+}
+#rb-custom-order .rb-co-card {
+  position: relative !important; overflow: hidden !important; cursor: pointer !important;
+  background: #111 !important; display: block !important; transition: box-shadow .35s !important;
+}
+#rb-custom-order .rb-co-card:hover { box-shadow: inset 0 0 60px rgba(209,56,42,.09), 0 0 40px rgba(209,56,42,.12) !important; }
+#rb-custom-order .rb-co-card::before {
+  content: '' !important; position: absolute !important; inset: 0 !important; z-index: 1 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.011) 0, rgba(255,255,255,.011) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.011) 0, rgba(255,255,255,.011) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 7px 7px !important;
+}
+#rb-custom-order .rb-co-card::after {
+  content: '' !important; position: absolute !important; inset: 0 !important; z-index: 2 !important;
+  background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.72) 28%, rgba(0,0,0,.18) 55%, transparent 100%) !important;
+}
+#rb-custom-order .rb-c-sw { background: linear-gradient(148deg, #1C1818 0%, #0C0A0A 100%) !important; }
+#rb-custom-order .rb-c-sk { background: linear-gradient(148deg, #1E1709 0%, #110D05 100%) !important; }
+#rb-custom-order .rb-c-hb { background: linear-gradient(148deg, #1C1009 0%, #0E0805 100%) !important; }
+#rb-custom-order .rb-c-hp { background: linear-gradient(148deg, #0F1422 0%, #09101A 100%) !important; }
+#rb-custom-order .rb-c-em { background: linear-gradient(148deg, #1A1608 0%, #0E0C04 100%) !important; }
+#rb-custom-order .rb-c-ss { background: linear-gradient(148deg, #14111C 0%, #0A0912 100%) !important; }
+
+#rb-custom-order .rb-co-img {
+  position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: right top !important;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94) !important; display: block !important;
+}
+#rb-custom-order .rb-co-card:hover .rb-co-img { transform: scale(1.07) !important; }
+
+#rb-custom-order .rb-co-info { position: absolute !important; bottom: 0 !important; left: 0 !important; right: 0 !important; z-index: 4 !important; padding: 24px 26px !important; }
+#rb-custom-order .rb-co-name {
+  font-family: 'Barlow Condensed', sans-serif !important; font-weight: 700 !important; font-size: 22px !important;
+  color: #F0F0F0 !important; text-transform: uppercase !important; letter-spacing: .04em !important; margin-bottom: 5px !important;
+}
+#rb-custom-order .rb-co-desc { font-size: 11.5px !important; color: #F0F0F0 !important; letter-spacing: .06em !important; }
+#rb-custom-order .rb-co-price {
+  font-family: 'Barlow Condensed', sans-serif !important; font-size: 17px !important; font-weight: 800 !important;
+  color: var(--rb-accent) !important; margin-top: 7px !important; letter-spacing: .03em !important;
+}
+#rb-custom-order .rb-co-arr {
+  position: absolute !important; right: 22px !important; bottom: 28px !important; z-index: 5 !important;
+  width: 34px !important; height: 34px !important; border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,.22) !important; color: #fff !important;
+  display: flex !important; align-items: center !important; justify-content: center !important; font-size: 15px !important;
+  opacity: 0 !important; transform: translateX(-10px) !important; transition: opacity .28s, transform .28s !important;
+}
+#rb-custom-order .rb-co-card:hover .rb-co-arr { opacity: 1 !important; transform: translateX(0) !important; }
+#rb-custom-order .rb-co-card > .rb-co-hover-line {
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; height: 2px !important;
+  background: var(--rb-accent) !important; z-index: 6 !important;
+  transform: scaleX(0) !important; transition: transform .35s !important; transform-origin: left !important;
+}
+#rb-custom-order .rb-co-card:hover > .rb-co-hover-line { transform: scaleX(1) !important; }
+
+/* ══════════════════════════════════════
+   NOT SURE / CONTACT CTA — full-bleed photo band, same treatment as
+   every other page's closing CTA (8-cta-v.1.html / faq.deploy.html's
+   #rb-faq-cta): real Corvette photography with a dark overlay, the one
+   deliberate dark moment on this otherwise white page. Replaces the
+   earlier plain white border-top strip, which the owner flagged as too
+   much empty space and asked to be replaced with this richer block.
+══════════════════════════════════════ */
+#rb-custom-order .rb-co-cta {
+  position: relative !important; overflow: hidden !important;
+  text-align: center !important;
+  background: #050505 url('https://therunbird.com/images/MainPAge/Corvette-c6.webp') center / cover no-repeat !important;
+  padding: 68px 48px !important;
+}
+#rb-custom-order .rb-coc-glow {
+  position: absolute !important; inset: 0 !important; pointer-events: none !important;
+  background:
+    linear-gradient(to bottom, rgba(5,5,5,.72) 0%, rgba(5,5,5,.58) 50%, rgba(5,5,5,.78) 100%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(209,56,42,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 50%, rgba(209,56,42,.10) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 50%, rgba(209,56,42,.10) 0%, transparent 100%) !important;
+}
+#rb-custom-order .rb-coc-cf {
+  position: absolute !important; inset: 0 !important;
+  background-image:
+    repeating-linear-gradient( 45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.009) 0, rgba(255,255,255,.009) 1px, transparent 1px, transparent 50%) !important;
+  background-size: 9px 9px !important;
+}
+#rb-custom-order .rb-coc-inner {
+  position: relative !important; z-index: 1 !important;
+  max-width: 640px !important; margin: 0 auto !important;
+}
+#rb-custom-order .rb-coc-eye {
+  display: block !important;
+  font-size: 11px !important; letter-spacing: .24em !important;
+  text-transform: uppercase !important; color: var(--rb-accent) !important;
+  font-weight: 700 !important; margin-bottom: 22px !important;
+}
+#rb-custom-order .rb-coc-h {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 900 !important; font-size: clamp(38px, 5.4vw, 60px) !important;
+  color: #F0F0F0 !important; text-transform: uppercase !important;
+  line-height: .96 !important; margin: 0 0 18px !important;
+}
+#rb-custom-order .rb-coc-h em {
+  color: var(--rb-accent) !important; font-style: italic !important;
+  text-shadow: 0 0 40px rgba(209,56,42,.5) !important;
+}
+#rb-custom-order .rb-coc-p {
+  color: #999 !important; font-size: 15px !important; font-weight: 300 !important;
+  line-height: 1.7 !important; margin: 0 auto 36px !important; max-width: 480px !important;
+}
+#rb-custom-order .rb-btn-gold {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important;
+  padding: 15px 38px !important;
+  background: var(--rb-accent) !important; color: #FFFFFF !important;
+  border: none !important; border-radius: 11px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important; letter-spacing: .08em !important;
+  text-transform: uppercase !important; cursor: pointer !important;
+  transition: background .2s, transform .15s, box-shadow .2s !important;
+  box-shadow: 0 4px 24px rgba(209,56,42,.35) !important;
+}
+#rb-custom-order .rb-btn-gold:hover {
+  background: var(--rb-accent-h) !important; transform: translateY(-2px) !important;
+  box-shadow: 0 10px 40px rgba(209,56,42,.55) !important;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  #rb-custom-order .rb-co-wrap { padding: 56px 32px 72px !important; }
+}
+@media (max-width: 900px) {
+  #rb-custom-order .rb-co-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+  #rb-custom-order .rb-co-card { min-height: 260px !important; }
+  #rb-custom-order .rb-co-card:first-child { grid-column: span 2 !important; }
+}
+@media (max-width: 768px) {
+  #rb-custom-order .rb-co-hero { padding: 20px 20px 40px !important; }
+  #rb-custom-order .rb-co-wrap { padding: 15px 20px 56px !important; }
+  #rb-custom-order .rb-co-cta { padding: 56px 20px !important; }
+  #rb-custom-order .rb-co-grid { grid-template-columns: 1fr !important; gap: 10px !important; padding: 0 !important; }
+  #rb-custom-order .rb-co-card:first-child { grid-column: span 1 !important; }
+  #rb-custom-order .rb-co-card {
+    width: 100% !important; height: 260px !important;
+    box-shadow: 0 8px 30px rgba(18,18,18,.14), 0 2px 8px rgba(0,0,0,.5) !important;
+  }
+}
+</style>
+
+<div id="rb-custom-order">
+
+  <div class="rb-co-hero">
+    <div class="rb-co-hero-in">
+      <span class="rb-co-badge"><span class="rb-co-badge-dot"></span>Build Your Own</span>
+      <h1 class="rb-co-title">Custom <em>Order</em></h1>
+      <p class="rb-co-sub">Every RunBird accessory is <b>handmade to your exact spec</b> — carbon fiber, Nappa leather, and Alcantara&reg;, tailored to your Corvette C6. Pick a category below to start configuring your build.</p>
+    </div>
+  </div>
+
+  <div class="rb-co-wrap">
+    <div class="rb-co-grid">
+
+      <a href="https://therunbird.com/steering-wheels/" class="rb-co-card rb-c-sw">
+        <div class="rb-co-hover-line"></div>
+        <img class="rb-co-img" src="https://therunbird.com/images/MainPAge/runbird_wheel_hero-mob.png" alt="Steering Wheels">
+        <div class="rb-co-info">
+          <div class="rb-co-name">Steering Wheels</div>
+          <div class="rb-co-desc">11 configurations · Carbon · Nappa · Alcantara</div>
+          <div class="rb-co-price">from $765</div>
+        </div>
+        <div class="rb-co-arr">→</div>
+      </a>
+
+      <a href="https://therunbird.com/shift-knobs/" class="rb-co-card rb-c-sk">
+        <div class="rb-co-hover-line"></div>
+        <img class="rb-co-img" src="https://therunbird.com/images/MainPAge/runbird_shiftknob_cat.png" alt="Shift Knobs">
+        <div class="rb-co-info">
+          <div class="rb-co-name">Shift Knobs</div>
+          <div class="rb-co-desc">5 styles · Standard · Ball · Tall · Drift</div>
+          <div class="rb-co-price">from $170</div>
+        </div>
+        <div class="rb-co-arr">→</div>
+      </a>
+
+      <a href="https://therunbird.com/handbrakes/" class="rb-co-card rb-c-hb">
+        <div class="rb-co-hover-line"></div>
+        <img class="rb-co-img" src="https://therunbird.com/images/MainPAge/runbird_handbrake_handle-cat.png" alt="Handbrakes">
+        <div class="rb-co-info">
+          <div class="rb-co-name">Handbrakes</div>
+          <div class="rb-co-desc">Grip · Cover · Button · 8 material options</div>
+          <div class="rb-co-price">from $195</div>
+        </div>
+        <div class="rb-co-arr">→</div>
+      </a>
+
+      <a href="https://therunbird.com/horn-pads/" class="rb-co-card rb-c-hp">
+        <div class="rb-co-hover-line"></div>
+        <img class="rb-co-img" src="https://therunbird.com/images/MainPAge/runbird_airbag_shield_cat.png" alt="Horn Pads">
+        <div class="rb-co-info">
+          <div class="rb-co-name">Horn Pads</div>
+          <div class="rb-co-desc">Round &amp; T-shaped · Leather · Alcantara</div>
+          <div class="rb-co-price">from $355</div>
+        </div>
+        <div class="rb-co-arr">→</div>
+      </a>
+
+      <a href="https://therunbird.com/steering-wheel-emblems/" class="rb-co-card rb-c-em">
+        <div class="rb-co-hover-line"></div>
+        <img class="rb-co-img" src="https://therunbird.com/images/MainPAge/runbird_emblems_cat.png" alt="SW Emblems">
+        <div class="rb-co-info">
+          <div class="rb-co-name">SW Emblems</div>
+          <div class="rb-co-desc">Z06 · ZR1 · Racing · Punisher · Carbon base</div>
+          <div class="rb-co-price">from $75</div>
+        </div>
+        <div class="rb-co-arr">→</div>
+      </a>
+
+      <a href="https://therunbird.com/side-skirts/" class="rb-co-card rb-c-ss">
+        <div class="rb-co-hover-line"></div>
+        <img class="rb-co-img" src="https://therunbird.com/images/MainPAge/por1.png" alt="Door Sill Plates">
+        <div class="rb-co-info">
+          <div class="rb-co-name">Door Sill Plates</div>
+          <div class="rb-co-desc">Carbon Fiber · Gloss or Matte · Custom decal</div>
+          <div class="rb-co-price">from $260</div>
+        </div>
+        <div class="rb-co-arr">→</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="rb-co-cta">
+    <div class="rb-coc-glow"></div>
+    <div class="rb-coc-cf"></div>
+    <div class="rb-coc-inner">
+      <span class="rb-coc-eye">Need Help Deciding?</span>
+      <h2 class="rb-coc-h">Not Sure <em>What You Need?</em></h2>
+      <p class="rb-coc-p">Tell us about your build and we'll help you design the perfect piece.</p>
+      <a href="https://therunbird.com/contact-us/" class="rb-btn-gold">Contact Us →</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  // Neutralize only the BACKGROUND of ancestor containers up to <body>, so no
+  // theme wrapper shows a gray/white strip around our full-bleed section. Deliberately
+  // does NOT touch padding/margin — those carry real vertical spacing that must stay
+  // intact; a block in the middle of the page has no business zeroing its ancestors' spacing.
+  var el = document.getElementById('rb-custom-order');
+  if (el) {
+    var parent = el.parentElement;
+    while (parent && parent.tagName !== 'BODY') {
+      parent.style.setProperty('background', 'transparent', 'important');
+      parent.style.setProperty('background-color', 'transparent', 'important');
+      parent = parent.parentElement;
+    }
+  }
+})();
+</script>

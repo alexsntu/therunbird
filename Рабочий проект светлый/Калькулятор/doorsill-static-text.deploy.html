@@ -1,0 +1,54 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /door-sill-plate/ page: static product description
+     LIGHT-ONLY VARIANT — trivial recolor of the dark-track file (body
+     text #d0d0d0->#6E6A63, heading #f0f0f0->#121212), text unchanged.
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the configurator block and BEFORE the "Recent builds" gallery
+     block on this page.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: the configurator's material/pricing/fitment facts are
+     JS-rendered and invisible to non-JS AI crawlers. This block puts
+     the same real facts in plain, always-visible HTML.
+
+     All facts below pulled verbatim from the live configurator's own
+     PRODUCT.options data (2026-08-27): base price $315, style choices
+     (black/blue/red/titanium carbon, Alutex, custom), gloss/matte
+     finish, logo choices, logo color choices. Logo option labels
+     (Corvette/Z06/ZR1/etc) intentionally left unedited per owner
+     instruction — not claimed as licensed/OEM anywhere in this text.
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-ds-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #6E6A63;
+}
+#rb-ds-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #121212;
+  margin: 0 0 18px;
+}
+#rb-ds-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-ds-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-ds-about">
+  <h2>About the Corvette C6 Carbon Fiber Door Sills</h2>
+  <p>Every RunBird door sill set is handmade to order for the C6 Corvette. Choose a
+  carbon-fiber finish (black, blue, red, or titanium), Alutex, or a custom finish, in
+  matte or gloss, and pick a logo design (or no logo) with your choice of color.</p>
+  <p>Pricing starts at $315. Every build is made to order in 7–14 business days, and
+  before your door sills ship, we send real photos of the finished piece for your
+  approval.</p>
+</div>

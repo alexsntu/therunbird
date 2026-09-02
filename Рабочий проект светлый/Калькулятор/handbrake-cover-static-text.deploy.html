@@ -1,0 +1,59 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /handbrakes/handbrake-cover/ (Knob Boot): static product
+     description
+     LIGHT-ONLY VARIANT — trivial recolor of the dark-track file (body
+     text #d0d0d0->#6E6A63, heading #f0f0f0->#121212), text unchanged.
+     CS-Cart > Design > Layouts > Html+Smarty block — place directly
+     AFTER the configurator block (configurator-handbrake-cover.deploy.html)
+     and BEFORE the gallery block on this page.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: same as handbrake-handle-static-text.deploy.html —
+     configurator facts are JS-rendered and invisible to non-JS AI
+     crawlers, this block puts the same real facts in plain
+     always-visible HTML.
+
+     All facts below pulled verbatim from configurator-handbrake-cover
+     .deploy.html's own PRODUCT.options data (2026-08-27, material
+     labels corrected same day): base price $65, grip material choices,
+     stitching color choices, and the Automatic/Manual shift-pattern
+     choice — this is the only one of the 3 e-brake styles with an
+     explicit transmission-type option, don't imply Handle/Button support
+     automatic.
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-hb-cover-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #6E6A63;
+}
+#rb-hb-cover-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #121212;
+  margin: 0 0 18px;
+}
+#rb-hb-cover-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-hb-cover-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-hb-cover-about">
+  <h2>About the Corvette C6 E-Brake Knob Boot</h2>
+  <p>The RunBird Knob Boot is a handmade replacement e-brake boot cover for the C6
+  Corvette — fits your existing handle, no need to replace the whole assembly. Choose
+  synthetic Nappa leather, genuine Alcantara®, a synthetic Nappa leather and Alcantara
+  mix, or textured synthetic Nappa leather, with your choice of stitching color.
+  Available for both manual and automatic transmissions.</p>
+  <p>Pricing starts at $65. Every build is made to order in 7–14 business days, and
+  before your boot ships, we send real photos of the finished piece for your
+  approval.</p>
+</div>

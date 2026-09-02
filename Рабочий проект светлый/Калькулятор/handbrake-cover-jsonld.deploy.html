@@ -1,0 +1,46 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /handbrakes/handbrake-cover/ (Knob Boot): Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on THIS page only (do not merge into
+     configurator-handbrake-cover.deploy.html — keep separate, same
+     pattern as handbrake-handle-jsonld.deploy.html).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     Product id 355 ("Corvette C6 E-Brake Knob Boot") — a DIFFERENT real
+     CS-Cart product from the shift-knob Boot (id 359, $55), confirmed
+     by owner 2026-08-27. Do not merge/confuse the two.
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 E-Brake Knob Boot",
+  "image": [
+    "https://therunbird.com/images/ab__webp/detailed/9/cover_png.webp"
+  ],
+  "description": "Handmade C6 Corvette e-brake boot cover, fits your existing handle. Choose synthetic Nappa leather, genuine Alcantara, a leather-and-Alcantara mix, or textured synthetic Nappa leather, for manual or automatic transmissions. Made to order in 7-14 business days, with real photos of your build sent for approval before it ships.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Synthetic Nappa Leather", "Alcantara"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/handbrakes/handbrake-cover/",
+    "priceCurrency": "USD",
+    "price": "65.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>

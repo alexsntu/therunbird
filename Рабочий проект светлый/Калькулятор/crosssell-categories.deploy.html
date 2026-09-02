@@ -1,0 +1,89 @@
+<!-- LIGHT-ONLY VARIANT of crosssell-categories.deploy.html — "Shop More
+     Accessories" cross-sell strip shown at the bottom of every product
+     page. Tiles stay dark (real product photography with a dark scrim for
+     label legibility, same convention as the homepage category grid) —
+     only the section heading and hover accent follow this track's palette.
+     Heading color is literal black per owner's explicit request (not the
+     usual --rb-accent red used for section eyebrows elsewhere), kept
+     separate from --rb-text below since --rb-text here is still needed
+     white for the on-photo tile name labels. -->
+
+<div id="rb-crosssell">
+  <h2 class="rb-crosssell-head">Shop More Accessories</h2>
+  <div class="rb-crosssell-grid">
+    <a href="https://therunbird.com/steering-wheels/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/runbird_wheel_hero-mob.png" alt="Steering Wheels" width="700" height="467" loading="lazy">
+      <span class="rb-crosssell-name">Steering Wheels</span>
+    </a>
+    <a href="https://therunbird.com/shift-knobs/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/runbird_shiftknob_cat.png" alt="Shift Knobs" width="750" height="500" loading="lazy">
+      <span class="rb-crosssell-name">Shift Knobs</span>
+    </a>
+    <a href="https://therunbird.com/handbrakes/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/runbird_handbrake_handle-cat.png" alt="Handbrakes" width="750" height="500" loading="lazy">
+      <span class="rb-crosssell-name">Handbrakes</span>
+    </a>
+    <a href="https://therunbird.com/horn-pads/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/runbird_airbag_shield_cat.png" alt="Horn Pads" width="750" height="500" loading="lazy">
+      <span class="rb-crosssell-name">Horn Pads</span>
+    </a>
+    <a href="https://therunbird.com/steering-wheel-emblems/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/runbird_emblems_cat.png" alt="SW Emblems" width="750" height="500" loading="lazy">
+      <span class="rb-crosssell-name">SW Emblems</span>
+    </a>
+    <a href="https://therunbird.com/side-skirts/" class="rb-crosssell-card">
+      <img src="https://therunbird.com/images/MainPAge/por1.png" alt="Door Sill Plates" width="750" height="500" loading="lazy">
+      <span class="rb-crosssell-name">Door Sill Plates</span>
+    </a>
+  </div>
+</div>
+
+<style>
+#rb-crosssell{
+  --rb-accent:   #D1382A;
+  --rb-accent-b: rgba(209,56,42,.20);
+  --rb-text:     #F0F0F0;
+  --rb-border:   rgba(255,255,255,.08);
+  font-family:'Inter', sans-serif; color:var(--rb-text);
+  max-width:1600px; margin:0 auto; padding:24px clamp(20px,4vw,56px);
+  box-sizing:border-box;
+}
+#rb-crosssell *{ box-sizing:border-box; }
+#rb-crosssell .rb-crosssell-head{
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.1em;
+  font-size:16px; font-weight:600; color:#121212; margin:0 0 14px; text-align:center;
+}
+/* Desktop: all 6 tiles in a single row, evenly filling the container
+   width — square via aspect-ratio on the card, so tile size just follows
+   whatever the column width comes out to. */
+#rb-crosssell .rb-crosssell-grid{
+  display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:14px;
+}
+#rb-crosssell .rb-crosssell-card{
+  position:relative; display:block; aspect-ratio:1/1; border-radius:10px; overflow:hidden;
+  border:1px solid var(--rb-border); background:#111; text-decoration:none; transition:border-color .2s;
+}
+#rb-crosssell .rb-crosssell-card:hover{ border-color:var(--rb-accent-b); }
+#rb-crosssell .rb-crosssell-card img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top;
+  transition:transform .5s;
+}
+#rb-crosssell .rb-crosssell-card:hover img{ transform:scale(1.06); }
+#rb-crosssell .rb-crosssell-card::after{
+  content:''; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 55%, transparent 100%);
+}
+#rb-crosssell .rb-crosssell-name{
+  position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 10px;
+  font-family:'Barlow Condensed', sans-serif; text-transform:uppercase; letter-spacing:.03em;
+  font-size:16px; font-weight:700; color:var(--rb-text);
+}
+
+/* Mobile: 2 columns so the 6 tiles wrap into 3 rows of 2 — bigger tiles
+   than a 3-per-row layout. Square via aspect-ratio, size follows the
+   column width rather than a fixed 250px. */
+@media (max-width: 900px){
+  #rb-crosssell .rb-crosssell-grid{ grid-template-columns:repeat(2, 1fr); }
+  #rb-crosssell .rb-crosssell-name{ font-size:14px; }
+}
+</style>

@@ -1,0 +1,47 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /handbrakes/handbrake-button/ (Handle Button): Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on THIS page only (do not merge into
+     configurator-handbrake-button.deploy.html — keep separate, same
+     pattern as handbrake-handle-jsonld.deploy.html / handbrake-cover-jsonld
+     .deploy.html).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     No "material" field with leather/Alcantara — this variant is
+     black/carbon-fiber finish options only, no leather choice (unlike
+     Handle and Knob Boot).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 E-Brake Handle Button",
+  "image": [
+    "https://therunbird.com/images/ab__webp/detailed/9/CF-button_p0jg-8n_png.webp"
+  ],
+  "description": "Handmade C6 Corvette carbon-fiber or black e-brake release button, fits your existing handle. Made to order in 7-14 business days, with real photos of your build sent for approval before it ships.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Carbon Fiber"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/handbrakes/handbrake-button/",
+    "priceCurrency": "USD",
+    "price": "50.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>

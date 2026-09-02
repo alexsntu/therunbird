@@ -1,0 +1,53 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /steering-wheel-emblems/ page: static product description
+     LIGHT-ONLY VARIANT. CS-Cart > Design > Layouts > Html+Smarty block —
+     place directly AFTER the configurator block and BEFORE the "Recent
+     builds" gallery block on this page.
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Purpose: the configurator's option/pricing facts are JS-rendered
+     and invisible to non-JS AI crawlers. This block puts the same real
+     facts in plain, always-visible HTML.
+
+     All facts below verified live on the page (2026-08-26 audit):
+     base price $75, fitment C6 Standard/Z06/ZR1, style options
+     Black/Carbon/Custom, finish Gloss/Matte, photo-approval-before-ship
+     (site-wide differentiator).
+
+     Design names (Flags, Z06, ZR1, Corvette Racing, Punisher, Skull) are
+     deliberately kept generic here too ("a design of your choice") —
+     same OEM/licensed-avoidance rule as the JSON-LD and meta description.
+════════════════════════════════════════════════════════ -->
+
+<style>
+#rb-em-about {
+  font-family: 'Inter', sans-serif;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 0 24px;
+  color: #6E6A63;
+}
+#rb-em-about h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 38px);
+  text-transform: uppercase;
+  color: #121212;
+  margin: 0 0 18px;
+}
+#rb-em-about p {
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 16px;
+}
+#rb-em-about p:last-child { margin-bottom: 0; }
+</style>
+
+<div id="rb-em-about">
+  <h2>About the Corvette C6 Center Emblem</h2>
+  <p>Every RunBird center emblem is handmade to order for the C6 Corvette (2005–2013)
+  airbag cover, fitting C6 Standard, Z06, and ZR1 trims. Choose a black, carbon fiber,
+  or custom style, then pick a gloss or matte finish and a design of your choice.</p>
+  <p>Pricing starts at $75 and every build is made to order in 7–14 business days.
+  Before your emblem ships, we send real photos of the finished piece for your approval.</p>
+</div>

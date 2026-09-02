@@ -1,0 +1,47 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /shift-knobs/gear-knob-cover/ (Boot): Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a NEW content
+     block on THIS page only (do not merge into
+     configurator-shiftknob-boot.deploy.html — keep separate, same
+     pattern as shiftknob-classic-jsonld.deploy.html / shiftknob-ball-jsonld.deploy.html
+     / shiftknob-drift-jsonld.deploy.html / shiftknob-cap-jsonld.deploy.html).
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Grepped whole file (incl. this comment) for the bare-brace-word
+     pattern that breaks Smarty compilation — none present, safe as
+     HTML+Smarty.
+
+     Image is the source PNG (no WebP available for this file — outside
+     the ab__webp cron's /images/detailed/ coverage, same as noted in
+     configurator-shiftknob-boot.deploy.html's own header comment).
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 Shift Knob Boot",
+  "image": [
+    "https://therunbird.com/images/Calculator/Handle/cover.png"
+  ],
+  "description": "Handmade C6 Corvette shift knob boot cover, no knob included. Choose synthetic Nappa leather, genuine Alcantara, a leather-and-Alcantara mix, or textured synthetic Nappa leather, for manual or automatic transmissions. Made to order in 7-14 business days, with real photos of your build sent for approval before it ships.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "material": ["Synthetic Nappa Leather", "Alcantara"],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/shift-knobs/gear-knob-cover/",
+    "priceCurrency": "USD",
+    "price": "55.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>

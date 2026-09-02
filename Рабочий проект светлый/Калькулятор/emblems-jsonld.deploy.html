@@ -1,0 +1,47 @@
+<!-- ══════════════════════════════════════════════════════
+     RunBird — /steering-wheel-emblems/ page: Product JSON-LD
+     CS-Cart > Design > Layouts > Html+Smarty block, add as a
+     NEW content block on this page only (same pattern as
+     steering-wheels-jsonld.deploy.html / horn-pads-jsonld.deploy.html)
+     Cache: can be ENABLED (fully static, no Smarty dynamic data)
+
+     Facts verified 2026-08-26 from the live page's own PRODUCT object
+     (product id 360): base price $75.00, style options Black/Carbon/Custom,
+     finish Gloss/Matte, fitment C6 Standard/Z06/ZR1.
+
+     IMPORTANT: design names (Flags, Z06, ZR1, Corvette Racing, Punisher,
+     Skull) are RunBird's own decorative aftermarket design options, NOT
+     official/licensed GM trim badges — deliberately omitted from this
+     schema's name/description to avoid any implied OEM/licensed claim.
+     Description stays generic ("your choice of design") per the same
+     rule already applied to the title/meta description.
+════════════════════════════════════════════════════════ -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Corvette C6 Airbag CF Center Emblem",
+  "image": [
+    "https://therunbird.com/images/Calculator/Center%20Emblem/center-logo.png"
+  ],
+  "description": "Handmade center emblem for the C6 Corvette (2005–2013) airbag cover, fits C6 Standard, Z06, and ZR1. Choose a black, carbon fiber, or custom style, a gloss or matte finish, and your choice of design.",
+  "brand": {
+    "@type": "Brand",
+    "name": "RunBird"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://therunbird.com/steering-wheel-emblems/",
+    "priceCurrency": "USD",
+    "price": "75.00",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "RunBird",
+      "url": "https://therunbird.com/"
+    }
+  }
+}
+</script>
