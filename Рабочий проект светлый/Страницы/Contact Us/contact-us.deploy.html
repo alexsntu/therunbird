@@ -28,13 +28,9 @@
        form_values[10] = Phone
        form_values[3]  = Comment (Body)
 
-     security_hash is NOT hardcoded (and no longer sent at all): it turned out to be a
-     per-request/session nonce (confirmed 2026-08-10 by fetching the live page repeatedly —
-     the value differs every time), so any hardcoded value goes stale immediately and CS-Cart
-     silently drops the submission. Verified by direct curl POST omitting security_hash
-     entirely: CS-Cart accepted it (302 redirect to /contact-uss/?sent=Y, the same success
-     signal the native form produces). This mirrors a known-working reference implementation
-     (maxmobiles.ru CS-Cart feedback-form widget) which also omits security_hash.
+     security_hash is a per-request/session nonce, so it must never be hardcoded. The form
+     reads the current value from CS-Cart's global Tygh object immediately before submission
+     and includes it in FormData, matching the native page_id=30 form.
 
      Also fixed: dispatch[pages.send_form] must be its own hidden <input>, not just a
      name/value on the <button>. new FormData(form) (used below for the fetch() submit)
@@ -43,8 +39,9 @@
      actually contained dispatch[pages.send_form], and CS-Cart had no idea this was a form
      submission at all. This was the primary reason no emails arrived.
 
-     UX: submission is fire-and-forget — we POST via fetch() and do NOT wait for or read
-     the response; the "request received" confirmation is shown immediately, client-side.
+     UX: after the POST, success is shown only when CS-Cart redirects to a URL carrying
+     its native sent=Y confirmation. Network/reCAPTCHA/server failures keep the form data
+     in place and show a retryable error instead of a false "request received" state.
 
      ANTI-SPAM (2026-08-25): CS-Cart's native pages.send_form endpoint now requires a
      Google reCAPTCHA v3 token (g-recaptcha-v3-token) on every submission — enabled
@@ -93,7 +90,7 @@
 #rb-contact-us .rb-cu-hero {
   position: relative !important; overflow: hidden !important;
   text-align: center !important;
-  padding: 72px 24px 48px !important;
+  padding: 24px 24px 32px !important;
   background:
     radial-gradient(ellipse 60% 100% at 50% 0%, rgba(209,56,42,.05), transparent 65%),
     var(--rb-bg) !important;
@@ -139,8 +136,8 @@
 /* ══════════════════════════════════════
    LAYOUT
 ══════════════════════════════════════ */
-#rb-contact-us .rb-cu-wrap { max-width: 1100px !important; margin: 0 auto !important; padding: 64px 48px 96px !important; }
-#rb-contact-us .rb-cu-info { margin: 0 0 40px !important; }
+#rb-contact-us .rb-cu-wrap { max-width: 1100px !important; margin: 0 auto !important; padding: 32px 48px 72px !important; }
+#rb-contact-us .rb-cu-info { margin: 0 0 28px !important; }
 
 /* ══════════════════════════════════════
    INFO ROW ("Before You Write")
@@ -150,11 +147,11 @@
 #rb-contact-us .rb-cu-info-t {
   font-family: 'Barlow Condensed', sans-serif !important; font-weight: 800 !important;
   text-transform: uppercase !important; letter-spacing: .02em !important;
-  font-size: 24px !important; color: var(--rb-text) !important; margin: 0 0 28px !important;
+  font-size: 24px !important; color: var(--rb-text) !important; margin: 0 0 20px !important;
 }
 #rb-contact-us .rb-cu-item {
   display: flex !important; gap: 16px !important; align-items: flex-start !important;
-  padding: 0 0 26px !important; margin: 0 0 26px !important;
+  padding: 0 0 18px !important; margin: 0 0 18px !important;
   border-bottom: 1px solid var(--rb-border) !important;
 }
 #rb-contact-us .rb-cu-item:last-child { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
@@ -277,6 +274,12 @@
   transition: background .15s !important;
 }
 #rb-contact-us .rb-cu-submit:hover { background: var(--rb-accent-h) !important; }
+#rb-contact-us .rb-cu-submit:disabled { opacity: .65 !important; cursor: wait !important; }
+#rb-contact-us .rb-cu-submit-error {
+  display: none !important; margin: 12px 0 0 !important; text-align: center !important;
+  color: var(--rb-error) !important; font-size: 12.5px !important; line-height: 1.5 !important;
+}
+#rb-contact-us .rb-cu-submit-error.rb-cu-visible { display: block !important; }
 #rb-contact-us .rb-cu-fine {
   text-align: center !important; color: var(--rb-text2) !important; font-size: 11.5px !important;
   margin-top: 16px !important; line-height: 1.5 !important;
@@ -316,7 +319,7 @@
    the whole thing fits without the long scroll a single narrow column forces.
 ══════════════════════════════════════ */
 @media (min-width: 901px) {
-  #rb-contact-us .rb-cu-info-t { text-align: center !important; margin-bottom: 32px !important; }
+  #rb-contact-us .rb-cu-info-t { text-align: center !important; margin-bottom: 20px !important; }
   #rb-contact-us .rb-cu-info-row {
     display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 32px !important;
   }
@@ -331,11 +334,11 @@
   #rb-contact-us .rb-cu-field-row .rb-cu-field { margin-bottom: 0 !important; }
 }
 @media (max-width: 900px) {
-  #rb-contact-us .rb-cu-wrap { padding: 56px 32px 72px !important; }
+  #rb-contact-us .rb-cu-wrap { padding: 30px 32px 60px !important; }
 }
 @media (max-width: 640px) {
-  #rb-contact-us .rb-cu-hero { padding: 52px 20px 36px !important; }
-  #rb-contact-us .rb-cu-wrap { padding: 44px 18px 56px !important; }
+  #rb-contact-us .rb-cu-hero { padding: 20px 20px 28px !important; }
+  #rb-contact-us .rb-cu-wrap { padding: 28px 18px 48px !important; }
   #rb-contact-us .rb-cu-card { padding: 26px !important; }
 }
 </style>
@@ -416,9 +419,9 @@
               </div>
 
               <div class="rb-cu-field" data-field="phone">
-                <label class="rb-cu-label" for="rb-cu-phone">Your Phone <span>*</span></label>
+                <label class="rb-cu-label" for="rb-cu-phone">Your Phone</label>
                 <input id="rb-cu-phone" type="tel" name="form_values[10]" placeholder="+1 555 000 0000" autocomplete="tel" maxlength="20" />
-                <div class="rb-cu-err-msg">Please enter your phone number.</div>
+                <div class="rb-cu-err-msg">Please enter a valid phone number.</div>
               </div>
             </div>
 
@@ -442,6 +445,7 @@
             </div>
 
             <button type="submit" class="rb-cu-submit">Send Message</button>
+            <p class="rb-cu-submit-error" role="alert" aria-live="polite">We couldn't send your message. Please check your connection and try again.</p>
             <p class="rb-cu-fine">By submitting, you agree to be contacted by RunBird regarding your inquiry.
               This site is protected by reCAPTCHA and the Google
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
@@ -474,7 +478,7 @@
   var validators = {
     name:    function(v) { return v.trim().length > 1; },
     email:   function(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); },
-    phone:   function(v) { var d = v.replace(/\D/g, '').length; return d >= 6 && d <= 15; },
+    phone:   function(v) { var d = v.replace(/\D/g, '').length; return !v.trim() || (d >= 6 && d <= 15); },
     comment: function(v) { return v.trim().length > 4; }
   };
 
@@ -580,26 +584,43 @@
     e.preventDefault();
     if (!validate()) return;
 
+    var submitBtn = form.querySelector('.rb-cu-submit');
+    var submitError = form.querySelector('.rb-cu-submit-error');
+    var originalSubmitText = submitBtn.textContent;
+    var securityHash = window.Tygh && window.Tygh.security_hash;
+
+    submitError.classList.remove('rb-cu-visible');
+    if (!securityHash) {
+      submitError.classList.add('rb-cu-visible');
+      return;
+    }
+
     var fd = new FormData(form);
+    fd.append('security_hash', securityHash);
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
 
     loadRecaptcha().then(function() {
       return window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'form_builder' });
     }).then(function(token) {
       fd.append('g-recaptcha-v3-token', token);
-    }).catch(function() {
-      // If reCAPTCHA fails to load (blocked script, offline, etc.), submit anyway —
-      // CS-Cart will reject it server-side rather than us blocking a real user's message.
-    }).then(function() {
-      // Fire-and-forget: submit via the site's own feedback-form mechanism (page_id 30)
-      // but never wait for/read the response — the user gets instant confirmation.
-      fetch(form.action, { method: 'POST', body: fd }).catch(function() {});
-
+      return fetch(form.action, { method: 'POST', body: fd });
+    }).then(function(response) {
+      var responseUrl = new URL(response.url, window.location.href);
+      if (!response.ok || responseUrl.searchParams.get('sent') !== 'Y') {
+        throw new Error('CS-Cart did not confirm the submission');
+      }
       root.classList.add('rb-cu-sent');
 
       var succTitle = root.querySelector('.rb-cu-succ-t');
       if (succTitle) {
         succTitle.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+    }).catch(function() {
+      submitError.classList.add('rb-cu-visible');
+    }).then(function() {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalSubmitText;
     });
   });
 

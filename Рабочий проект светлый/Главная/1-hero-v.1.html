@@ -423,18 +423,52 @@
   // .rb-hero-copy's own intrinsic content size, which the grid uses to size the row
   // — inflating it and re-introducing letterboxing around the image. Taking
   // .rb-hero-btns fully out of flow avoids that feedback loop.
+  // At mid-range widths (roughly 800-1350px) the text column narrows enough that
+  // .rb-hero-p wraps onto extra lines while .rb-hero-visual (and so the stretched
+  // copyHeight below) shrinks — so a naive bottom-pin can land ABOVE the end of the
+  // paragraph and overlap it. Guard against that by never placing btns higher than
+  // directly under the paragraph's natural flow position (pText's bottom + its own
+  // margin-bottom); only pin to the image-matched bottom when there's room to do so.
+  // Because .rb-hero-btns is taken fully out of flow, .rb-hero-inner never grows
+  // to account for it — so when the minTop fallback above pushes btns down past
+  // .rb-hero-inner's own bottom edge, the next sibling (.rb-stats-strip, an opaque
+  // block later in paint order) ends up covering/clipping it. Grow .rb-hero-inner's
+  // bottom padding by the overflow amount so the section's own box always contains
+  // btns — this only adds trailing space after the grid row, it doesn't feed back
+  // into the row's own height (which stays driven by .rb-hero-visual's image, so
+  // no letterboxing).
   function rbAlignHeroBtns() {
     var copy = document.querySelector('#rb-hero .rb-hero-copy');
     var btns = document.querySelector('#rb-hero .rb-hero-btns');
+    var pText = document.querySelector('#rb-hero .rb-hero-p');
+    var innerEl = document.querySelector('#rb-hero .rb-hero-inner');
     if (!copy || !btns) return;
+    if (innerEl) innerEl.style.removeProperty('padding-bottom');
     if (window.innerWidth <= 768) {
       btns.style.top = ''; // mobile: static position in normal flow, JS not needed
       return;
     }
-    var copyHeight = copy.getBoundingClientRect().height;
+    var copyRect = copy.getBoundingClientRect();
     var btnsHeight = btns.getBoundingClientRect().height;
-    var top = copyHeight - btnsHeight;
+    var pinnedTop = copyRect.height - btnsHeight;
+    var minTop = 0;
+    if (pText) {
+      var pRect = pText.getBoundingClientRect();
+      var pMarginBottom = parseFloat(getComputedStyle(pText).marginBottom) || 0;
+      minTop = (pRect.bottom - copyRect.top) + pMarginBottom;
+    }
+    var top = Math.max(pinnedTop, minTop);
     btns.style.top = (top > 0 ? top : 0) + 'px';
+
+    if (innerEl) {
+      var innerRect = innerEl.getBoundingClientRect();
+      var btnsRect = btns.getBoundingClientRect();
+      var overflow = btnsRect.bottom - innerRect.bottom;
+      if (overflow > 0) {
+        var basePB = parseFloat(getComputedStyle(innerEl).paddingBottom) || 0;
+        innerEl.style.setProperty('padding-bottom', (basePB + overflow + 8) + 'px', 'important');
+      }
+    }
   }
   var rbResizeTimer;
   window.addEventListener('resize', function() {

@@ -60,6 +60,12 @@
   appearance: none !important;
   background: transparent !important;
 }
+#rb-header a:focus-visible,
+#rb-header button:focus-visible,
+#rb-header input:focus-visible {
+  outline: 2px solid #D1382A !important;
+  outline-offset: 3px !important;
+}
 
 /* ── Fix native theme header wrapper ──
    UniTheme2 wraps our block in <div class="tygh-header header-grid light-header v2">
@@ -1373,6 +1379,13 @@ footer.ty-footer,
 
 /* ── Nav columns ── */
 #rb-footer .rb-foot-col-h {
+  width: 100% !important;
+  background: none !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  text-align: left !important;
+  appearance: none !important;
   font-family: 'Barlow Condensed', sans-serif !important;
   font-size: 14px !important;
   font-weight: 800 !important;
@@ -1383,6 +1396,10 @@ footer.ty-footer,
   padding-bottom: 12px !important;
   border-bottom: 1px solid rgba(209,56,42,.25) !important;
   display: block !important;
+}
+#rb-footer .rb-foot-col-h:focus-visible {
+  outline: 2px solid var(--rb-accent) !important;
+  outline-offset: 3px !important;
 }
 #rb-footer .rb-foot-links {
   display: flex !important;

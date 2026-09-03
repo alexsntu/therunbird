@@ -498,11 +498,22 @@
       el.type = 'button';
       el.className = 'rb-chip';
       if (state[key] === val) el.classList.add('is-active');
-      var html = '';
-      if (opt.isColor) html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
-      html += '<span class="rb-chip-txt">'+val.label+'</span>';
-      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
-      el.innerHTML = html;
+      if (opt.isColor){
+        var swatch = document.createElement('span');
+        swatch.className = 'rb-swatch-dot';
+        swatch.style.background = swatchFill(val);
+        el.appendChild(swatch);
+      }
+      var chipText = document.createElement('span');
+      chipText.className = 'rb-chip-txt';
+      chipText.textContent = val.label;
+      el.appendChild(chipText);
+      if (val.price){
+        var chipPrice = document.createElement('span');
+        chipPrice.className = 'rb-chip-price';
+        chipPrice.textContent = fmtPrice(val.price);
+        el.appendChild(chipPrice);
+      }
       el.addEventListener('click', function(){ applyPick(key, val); });
       wrap.appendChild(el);
     });
@@ -518,9 +529,14 @@
     var top = document.createElement('div');
     top.className = 'rb-cfg-step-active-top';
     var heading = document.createElement('div');
-    heading.innerHTML =
-      '<div class="rb-cfg-step-counter">Step '+stepNum+' of '+total+'</div>' +
-      '<h2 class="rb-cfg-step-label">'+opt.label+'</h2>';
+    var counter = document.createElement('div');
+    counter.className = 'rb-cfg-step-counter';
+    counter.textContent = 'Step ' + stepNum + ' of ' + total;
+    heading.appendChild(counter);
+    var stepLabel = document.createElement('h2');
+    stepLabel.className = 'rb-cfg-step-label';
+    stepLabel.textContent = opt.label;
+    heading.appendChild(stepLabel);
     top.appendChild(heading);
     if (state[key]){
       var collapseBtn = document.createElement('button');
@@ -553,16 +569,31 @@
     el.className = 'rb-cfg-step rb-cfg-step--done';
     el.dataset.zone = key;
     el.tabIndex = 0;
-    var valHtml = '';
-    if (opt.isColor && val){ valHtml += '<span class="rb-cfg-step-done-swatch" style="background:'+swatchFill(val)+'"></span>'; }
-    valHtml += (val ? val.label : 'Select…');
-    el.innerHTML =
-      '<div class="rb-cfg-step-done-row">' +
-        '<span class="rb-cfg-step-done-check">✓</span>' +
-        '<span class="rb-cfg-step-done-label">'+opt.label+'</span>' +
-        '<span class="rb-cfg-step-done-val">'+valHtml+'</span>' +
-        '<span class="rb-cfg-step-done-edit">Edit</span>' +
-      '</div>';
+    var row = document.createElement('div');
+    row.className = 'rb-cfg-step-done-row';
+    var check = document.createElement('span');
+    check.className = 'rb-cfg-step-done-check';
+    check.textContent = '✓';
+    row.appendChild(check);
+    var doneLabel = document.createElement('span');
+    doneLabel.className = 'rb-cfg-step-done-label';
+    doneLabel.textContent = opt.label;
+    row.appendChild(doneLabel);
+    var doneValue = document.createElement('span');
+    doneValue.className = 'rb-cfg-step-done-val';
+    if (opt.isColor && val){
+      var doneSwatch = document.createElement('span');
+      doneSwatch.className = 'rb-cfg-step-done-swatch';
+      doneSwatch.style.background = swatchFill(val);
+      doneValue.appendChild(doneSwatch);
+    }
+    doneValue.appendChild(document.createTextNode(val ? val.label : 'Select…'));
+    row.appendChild(doneValue);
+    var edit = document.createElement('span');
+    edit.className = 'rb-cfg-step-done-edit';
+    edit.textContent = 'Edit';
+    row.appendChild(edit);
+    el.appendChild(row);
     function open(){
       activeStep = key;
       renderSteps();
@@ -832,6 +863,7 @@
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-thumb{ background:var(--rb-border-s); border-radius:99px; }
 #rb-cfg-gallery .rb-cfg-gal-item{
   position:relative; flex:0 0 auto; width:clamp(150px,17vw,210px); aspect-ratio:1/1;
+  padding:0; appearance:none;
   border-radius:14px; overflow:hidden; border:1px solid var(--rb-border); scroll-snap-align:start;
   cursor:zoom-in; transition:border-color .15s;
   background: var(--rb-stage-bg);
@@ -845,6 +877,7 @@
 }
 #rb-cfg-gallery .rb-cfg-gal-watermark path{ fill:#121212; }
 #rb-cfg-gallery .rb-cfg-gal-item:hover{ border-color:var(--rb-accent-b); }
+#rb-cfg-gallery .rb-cfg-gal-item:focus-visible{ outline:2px solid var(--rb-accent); outline-offset:2px; }
 #rb-cfg-gallery .rb-cfg-gal-row{ position:relative; }
 #rb-cfg-gallery .rb-cfg-gal-nav{
   position:absolute; top:50%; transform:translateY(-50%); z-index:3;
@@ -935,8 +968,10 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   var galTrack = document.getElementById('rb-cfg-gal-track');
 
   GALLERY_SRCS.forEach(function(photo, i){
-    var item = document.createElement('div');
+    var item = document.createElement('button');
+    item.type = 'button';
     item.className = 'rb-cfg-gal-item';
+    item.setAttribute('aria-label', 'Open shift knob photo ' + (i + 1) + ' of ' + GALLERY_SRCS.length);
     item.innerHTML =
       '<img src="'+photo.thumb+'" alt="Custom shift knob build" loading="lazy">'+
       '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';

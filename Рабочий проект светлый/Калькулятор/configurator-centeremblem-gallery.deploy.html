@@ -73,6 +73,7 @@
 #rb-cfg-gallery .rb-cfg-gal-track::-webkit-scrollbar-thumb{ background:var(--rb-border-s); border-radius:99px; }
 #rb-cfg-gallery .rb-cfg-gal-item{
   position:relative; flex:0 0 auto; width:clamp(150px,17vw,210px); aspect-ratio:1/1;
+  padding:0; appearance:none;
   border-radius:14px; overflow:hidden; border:1px solid var(--rb-border); scroll-snap-align:start;
   cursor:zoom-in; transition:border-color .15s;
   background:
@@ -89,6 +90,7 @@
 }
 #rb-cfg-gallery .rb-cfg-gal-watermark path{ fill:#121212; }
 #rb-cfg-gallery .rb-cfg-gal-item:hover{ border-color:var(--rb-accent-b); }
+#rb-cfg-gallery .rb-cfg-gal-item:focus-visible{ outline:2px solid var(--rb-accent); outline-offset:2px; }
 #rb-cfg-gallery .rb-cfg-gal-row{ position:relative; }
 #rb-cfg-gallery .rb-cfg-gal-nav{
   position:absolute; top:50%; transform:translateY(-50%); z-index:3;
@@ -155,7 +157,7 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
 (function(){
 
   // Pulled from product #366 (steering-wheel-emblems/corvette-c6-airbag-cf-center-emblem-gallery).
-  // Served as WebP: /images/ab__webp/thumbnails/{size}/{size}/detailed/9/{name}_jpg.webp
+  // Served as WebP using size folders and an image-name filename.
   // thumb = 570x570, used in the scroll strip; full = 1920x1920, only fetched
   // when a photo is opened in the lightbox.
   var GALLERY_SRCS = [
@@ -189,8 +191,10 @@ body.rb-cfg-scroll-lock{ position:fixed; left:0; right:0; width:100%; }
   if (GALLERY_SRCS.length){
     gallerySection.style.display = '';
     GALLERY_SRCS.forEach(function(photo, i){
-      var item = document.createElement('div');
+      var item = document.createElement('button');
+      item.type = 'button';
       item.className = 'rb-cfg-gal-item';
+      item.setAttribute('aria-label', 'Open center emblem photo ' + (i + 1) + ' of ' + GALLERY_SRCS.length);
       item.innerHTML =
         '<img src="'+photo.thumb+'" alt="Custom center emblem build" loading="lazy">'+
         '<svg class="rb-cfg-gal-watermark" viewBox="0 0 272.43 107.57" aria-hidden="true"><use href="#rb-logo-mark"></use></svg>';

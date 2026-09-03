@@ -80,8 +80,8 @@
 
     <!-- Products column -->
     <div class="rb-foot-nav-col">
-      <div class="rb-foot-col-h">Products</div>
-      <ul class="rb-foot-links">
+      <button type="button" class="rb-foot-col-h" aria-expanded="false" aria-controls="rb-foot-products">Products</button>
+      <ul class="rb-foot-links" id="rb-foot-products">
         <li><a href="https://therunbird.com/steering-wheels/">Steering Wheels</a></li>
         <li><a href="https://therunbird.com/shift-knobs/">Shift Knobs</a></li>
         <li><a href="https://therunbird.com/handbrakes/">Handbrakes</a></li>
@@ -93,8 +93,8 @@
 
     <!-- Information column -->
     <div class="rb-foot-nav-col">
-      <div class="rb-foot-col-h">Information</div>
-      <ul class="rb-foot-links">
+      <button type="button" class="rb-foot-col-h" aria-expanded="false" aria-controls="rb-foot-information">Information</button>
+      <ul class="rb-foot-links" id="rb-foot-information">
         <li><a href="https://therunbird.com/about-us/">About Us</a></li>
         <li><a href="https://therunbird.com/materials-guide/">Materials Guide</a></li>
         <li><a href="https://therunbird.com/custom-order/">Custom Orders</a></li>
@@ -105,10 +105,9 @@
 
     <!-- Support column -->
     <div class="rb-foot-nav-col">
-      <div class="rb-foot-col-h">Support</div>
-      <ul class="rb-foot-links">
+      <button type="button" class="rb-foot-col-h" aria-expanded="false" aria-controls="rb-foot-support">Support</button>
+      <ul class="rb-foot-links" id="rb-foot-support">
         <li><a href="https://therunbird.com/shipping-and-returns/">Shipping &amp; Returns</a></li>
-        <li><a href="#">Track Order</a></li>
         <li><a href="https://therunbird.com/contact-us/">Contact Us</a></li>
         <li><a href="mailto:store@therunbird.com">store@therunbird.com</a></li>
         <li><a href="https://therunbird.com/warranty/">Warranty</a></li>
@@ -142,11 +141,27 @@
 <script>
 (function() {
   // Footer accordion (mobile)
-  document.querySelectorAll('#rb-footer .rb-foot-nav-col .rb-foot-col-h').forEach(function(heading) {
+  var footerMobile = window.matchMedia('(max-width: 768px)');
+  var footerHeadings = document.querySelectorAll('#rb-footer .rb-foot-nav-col .rb-foot-col-h');
+
+  function syncFooterAccordion() {
+    footerHeadings.forEach(function(heading) {
+      var column = heading.closest('.rb-foot-nav-col');
+      heading.disabled = !footerMobile.matches;
+      heading.setAttribute('aria-expanded', footerMobile.matches ? String(column.classList.contains('open')) : 'true');
+    });
+  }
+
+  footerHeadings.forEach(function(heading) {
     heading.addEventListener('click', function() {
-      heading.closest('.rb-foot-nav-col').classList.toggle('open');
+      var column = heading.closest('.rb-foot-nav-col');
+      var isOpen = column.classList.toggle('open');
+      heading.setAttribute('aria-expanded', String(isOpen));
     });
   });
+  if (footerMobile.addEventListener) footerMobile.addEventListener('change', syncFooterAccordion);
+  else footerMobile.addListener(syncFooterAccordion);
+  syncFooterAccordion();
 
   // Neutralize background/padding of all ancestor containers up to <body>
   // so no theme wrapper shows a gray strip around our footer
