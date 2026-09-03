@@ -759,11 +759,22 @@
       el.type = 'button';
       el.className = 'rb-chip';
       if (state[sKey] === val) el.classList.add('is-active');
-      var html = '';
-      if (opt.isColor) html += '<span class="rb-swatch-dot" style="background:'+swatchFill(val)+'"></span>';
-      html += '<span class="rb-chip-txt">'+val.label+'</span>';
-      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
-      el.innerHTML = html;
+      if (opt.isColor){
+        var swatch = document.createElement('span');
+        swatch.className = 'rb-swatch-dot';
+        swatch.style.background = swatchFill(val);
+        el.appendChild(swatch);
+      }
+      var chipText = document.createElement('span');
+      chipText.className = 'rb-chip-txt';
+      chipText.textContent = val.label;
+      el.appendChild(chipText);
+      if (val.price){
+        var chipPrice = document.createElement('span');
+        chipPrice.className = 'rb-chip-price';
+        chipPrice.textContent = fmtPrice(val.price);
+        el.appendChild(chipPrice);
+      }
       el.addEventListener('click', function(){ applyPick(key, valuesKey, val); });
       wrap.appendChild(el);
     });
@@ -778,10 +789,23 @@
       btn.type = 'button';
       btn.className = 'rb-cfg-shape-opt';
       if (state.shape === val) btn.classList.add('is-active');
-      var priceHtml = '<span class="rb-cfg-shape-opt-price">from $'+(BASE_PRICE+val.price).toFixed(0)+'</span>';
-      btn.innerHTML =
-        '<span class="rb-cfg-shape-opt-imgwrap"><img src="'+(val.img || DEFAULT_WHEEL_IMG)+'" alt="'+val.label+'" width="800" height="800"></span>' +
-        '<span class="rb-cfg-shape-opt-label">'+val.label+'</span>' + priceHtml;
+      var imgWrap = document.createElement('span');
+      imgWrap.className = 'rb-cfg-shape-opt-imgwrap';
+      var img = document.createElement('img');
+      img.src = val.img || DEFAULT_WHEEL_IMG;
+      img.alt = val.label;
+      img.width = 800;
+      img.height = 800;
+      imgWrap.appendChild(img);
+      btn.appendChild(imgWrap);
+      var shapeLabel = document.createElement('span');
+      shapeLabel.className = 'rb-cfg-shape-opt-label';
+      shapeLabel.textContent = val.label;
+      btn.appendChild(shapeLabel);
+      var shapePrice = document.createElement('span');
+      shapePrice.className = 'rb-cfg-shape-opt-price';
+      shapePrice.textContent = 'from $' + (BASE_PRICE + val.price).toFixed(0);
+      btn.appendChild(shapePrice);
       btn.addEventListener('click', function(){ applyPick('shape', 'values', val); });
       grid.appendChild(btn);
     });
@@ -797,9 +821,14 @@
     var top = document.createElement('div');
     top.className = 'rb-cfg-step-active-top';
     var heading = document.createElement('div');
-    heading.innerHTML =
-      '<div class="rb-cfg-step-counter">Step '+stepNum+' of '+total+'</div>' +
-      '<h2 class="rb-cfg-step-label">'+opt.label+'</h2>';
+    var counter = document.createElement('div');
+    counter.className = 'rb-cfg-step-counter';
+    counter.textContent = 'Step ' + stepNum + ' of ' + total;
+    heading.appendChild(counter);
+    var stepLabel = document.createElement('h2');
+    stepLabel.className = 'rb-cfg-step-label';
+    stepLabel.textContent = opt.label;
+    heading.appendChild(stepLabel);
     top.appendChild(heading);
     if (isOptSelected(key)){
       var collapseBtn = document.createElement('button');
@@ -855,13 +884,25 @@
     el.className = 'rb-cfg-step rb-cfg-step--done';
     el.dataset.zone = key;
     el.tabIndex = 0;
-    el.innerHTML =
-      '<div class="rb-cfg-step-done-row">' +
-        '<span class="rb-cfg-step-done-check">✓</span>' +
-        '<span class="rb-cfg-step-done-label">'+opt.label+'</span>' +
-        '<span class="rb-cfg-step-done-val">'+stepValueText(key)+'</span>' +
-        '<span class="rb-cfg-step-done-edit">Edit</span>' +
-      '</div>';
+    var row = document.createElement('div');
+    row.className = 'rb-cfg-step-done-row';
+    var check = document.createElement('span');
+    check.className = 'rb-cfg-step-done-check';
+    check.textContent = '✓';
+    row.appendChild(check);
+    var doneLabel = document.createElement('span');
+    doneLabel.className = 'rb-cfg-step-done-label';
+    doneLabel.textContent = opt.label;
+    row.appendChild(doneLabel);
+    var doneValue = document.createElement('span');
+    doneValue.className = 'rb-cfg-step-done-val';
+    doneValue.textContent = stepValueText(key);
+    row.appendChild(doneValue);
+    var edit = document.createElement('span');
+    edit.className = 'rb-cfg-step-done-edit';
+    edit.textContent = 'Edit';
+    row.appendChild(edit);
+    el.appendChild(row);
     function open(){
       activeStep = key;
       renderSteps();

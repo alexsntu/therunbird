@@ -406,9 +406,16 @@
       el.type = 'button';
       el.className = 'rb-chip';
       if (state[key] === val) el.classList.add('is-active');
-      var html = '<span class="rb-chip-txt">'+val.label+'</span>';
-      if (val.price) html += '<span class="rb-chip-price">'+fmtPrice(val.price)+'</span>';
-      el.innerHTML = html;
+      var chipText = document.createElement('span');
+      chipText.className = 'rb-chip-txt';
+      chipText.textContent = val.label;
+      el.appendChild(chipText);
+      if (val.price){
+        var chipPrice = document.createElement('span');
+        chipPrice.className = 'rb-chip-price';
+        chipPrice.textContent = fmtPrice(val.price);
+        el.appendChild(chipPrice);
+      }
       el.addEventListener('click', function(){ applyPick(key, val); });
       wrap.appendChild(el);
     });
@@ -424,9 +431,14 @@
     var top = document.createElement('div');
     top.className = 'rb-cfg-step-active-top';
     var heading = document.createElement('div');
-    heading.innerHTML =
-      '<div class="rb-cfg-step-counter">Step '+stepNum+' of '+total+'</div>' +
-      '<h2 class="rb-cfg-step-label">'+opt.label+'</h2>';
+    var counter = document.createElement('div');
+    counter.className = 'rb-cfg-step-counter';
+    counter.textContent = 'Step ' + stepNum + ' of ' + total;
+    heading.appendChild(counter);
+    var stepLabel = document.createElement('h2');
+    stepLabel.className = 'rb-cfg-step-label';
+    stepLabel.textContent = opt.label;
+    heading.appendChild(stepLabel);
     top.appendChild(heading);
     if (state[key]){
       var collapseBtn = document.createElement('button');
@@ -454,17 +466,30 @@
 
   function buildDoneStep(key){
     var opt = PRODUCT.options[key];
+    var val = state[key];
     var el = document.createElement('div');
     el.className = 'rb-cfg-step rb-cfg-step--done';
     el.dataset.zone = key;
     el.tabIndex = 0;
-    el.innerHTML =
-      '<div class="rb-cfg-step-done-row">' +
-        '<span class="rb-cfg-step-done-check">✓</span>' +
-        '<span class="rb-cfg-step-done-label">'+opt.label+'</span>' +
-        '<span class="rb-cfg-step-done-val">'+(state[key] ? state[key].label : 'Select…')+'</span>' +
-        '<span class="rb-cfg-step-done-edit">Edit</span>' +
-      '</div>';
+    var row = document.createElement('div');
+    row.className = 'rb-cfg-step-done-row';
+    var check = document.createElement('span');
+    check.className = 'rb-cfg-step-done-check';
+    check.textContent = '✓';
+    row.appendChild(check);
+    var doneLabel = document.createElement('span');
+    doneLabel.className = 'rb-cfg-step-done-label';
+    doneLabel.textContent = opt.label;
+    row.appendChild(doneLabel);
+    var doneValue = document.createElement('span');
+    doneValue.className = 'rb-cfg-step-done-val';
+    doneValue.textContent = val ? val.label : 'Select…';
+    row.appendChild(doneValue);
+    var edit = document.createElement('span');
+    edit.className = 'rb-cfg-step-done-edit';
+    edit.textContent = 'Edit';
+    row.appendChild(edit);
+    el.appendChild(row);
     function open(){
       activeStep = key;
       renderSteps();
