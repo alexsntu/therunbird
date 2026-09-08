@@ -22,9 +22,9 @@
      there too if this UX fix should also apply to the toggle-based system.
 
      How it differs from the grid version (same as the dark track):
-       - Fixed step order: Year → Shape → CF spoke covers → Grips → Top
-         section → Bottom section → Stitching color → Center mark → Logo
-         (Logo only appears once Bottom section = Carbon fiber).
+       - Fixed step order: Year → Transmission → Shape → CF spoke covers →
+         Grips → Top section → Bottom section → Stitching color → Center
+         mark → Logo (Logo only appears once Bottom section = Carbon fiber).
        - Only ONE step is open/editable at a time ("STEP 3 OF 8"). Answered
          steps collapse into a highlighted, clickable summary row and stay
          at the top, in order.
@@ -396,7 +396,7 @@
 
   // Fixed wizard order. Data (csOptId / value ids / prices) mirrors the live
   // grid configurator — keep in sync with ../configurator-preview-v2-yearshape.deploy.html.
-  var STEP_ORDER = ['year','shape','spokes','grips','topSection','bottomSection','stitchingColor','centerMark','logo'];
+  var STEP_ORDER = ['year','transmission','shape','spokes','grips','topSection','bottomSection','stitchingColor','centerMark','logo'];
 
   var OPTIONS = {
     year: {
@@ -406,6 +406,14 @@
         { v:'y2006',      label:'2006',      price:0,   cs:318 },
         { v:'y2007_2011', label:'2007-2011', price:0,   cs:319 },
         { v:'y2012_2013', label:'2012-2013', price:220, cs:320 }
+      ]
+    },
+    transmission: {
+      label:'Transmission', zone:null, csOptId: 65,
+      desc:'Not a visible part of the wheel — we use this to confirm the correct fit for your Corvette.',
+      values: [
+        { v:'manual',    label:'Manual',    price:0, cs:352 },
+        { v:'automatic', label:'Automatic', price:0, cs:353 }
       ]
     },
     shape: {
@@ -488,16 +496,16 @@
       desc:'A color accent at the very top center of the rim (12 o’clock), just above the airbag cover area — a quick way to spot “wheel straight” at a glance from the driver’s seat.',
       values:[
         { v:'none',   label:'No center mark', price:0, none:true, cs:206 },
-        { v:'red',    label:'Red',    price:0, hex:'#c81e1e', cs:207 },
-        { v:'blue',   label:'Blue',   price:0, hex:'#1e4fc8', cs:208 },
-        { v:'orange', label:'Orange', price:0, hex:'#e06b1e', cs:209 },
-        { v:'yellow', label:'Yellow', price:0, hex:'#e8c31e', cs:210 },
-        { v:'green',  label:'Green',  price:0, hex:'#2e8b3f', cs:211 },
-        { v:'white',  label:'White',  price:0, hex:'#f5f5f5', cs:212 },
-        { v:'black',  label:'Black',  price:0, hex:'#1a1a1a', cs:213 },
-        { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:214 },
+        { v:'red',    label:'Red',    price:15, hex:'#c81e1e', cs:207 },
+        { v:'blue',   label:'Blue',   price:15, hex:'#1e4fc8', cs:208 },
+        { v:'orange', label:'Orange', price:15, hex:'#e06b1e', cs:209 },
+        { v:'yellow', label:'Yellow', price:15, hex:'#e8c31e', cs:210 },
+        { v:'green',  label:'Green',  price:15, hex:'#2e8b3f', cs:211 },
+        { v:'white',  label:'White',  price:15, hex:'#f5f5f5', cs:212 },
+        { v:'black',  label:'Black',  price:15, hex:'#1a1a1a', cs:213 },
+        { v:'titanium', label:'Titanium grey', price:15, hex:'#8a8d90', cs:214 },
         { v:'cf',     label:'Carbon fiber (leather top only)', price:55, cf:true, cs:215 },
-        { v:'other',  label:'Other (specify in comments)', price:0, other:true, cs:216 }
+        { v:'other',  label:'Other (specify in comments)', price:15, other:true, cs:216 }
       ]
     },
     logo: {
