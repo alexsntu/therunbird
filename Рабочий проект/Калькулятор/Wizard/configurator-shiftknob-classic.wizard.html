@@ -298,7 +298,7 @@
 <script>
 (function(){
 
-  var STEP_ORDER = ['backPart','frontPart','styleTopCap','topCapFinish','shiftLogo','shiftColor'];
+  var STEP_ORDER = ['backPart','frontPart','styleTopCap','topCapFinish','shiftColor','shiftLogo'];
 
   var PRODUCT = {
     id:'351', name:'Corvette C6 Classic Shift Knob Manual (6-Speed) and CF Top Cap', basePrice:170.00,
@@ -334,25 +334,26 @@
           { v:'matte', label:'Matte', price:0, cs:245 },
           { v:'gloss', label:'Gloss', price:0, cs:244 }
         ]},
-      shiftLogo: { label:'Shift pattern logo', zone:{px:897,py:591}, csOptId:40,
-        desc:'Which shift-pattern graphic is inlaid into the top cap — pick a house design, or Custom to send us your own.',
-        values:[
-          { v:'blueZR1',   label:'Blue ZR1',   price:0, cs:246 },
-          { v:'greyZ06',   label:'Grey Z06',   price:0, cs:247 },
-          { v:'chromeZR1', label:'Chrome ZR1', price:0, cs:248 },
-          { v:'custom',    label:'Custom (your logo)', price:0, cs:249 }
-        ]},
-      shiftColor: { label:'Shift pattern color', zone:{px:915,py:522}, csOptId:41, isColor:true,
-        desc:'The color of the shift-pattern logo itself, against the top cap.',
+      shiftColor: { label:'Shift Pattern Number Color', zone:{px:915,py:522}, csOptId:41, isColor:true,
+        desc:'The color of the numbers and gate lines that make up the shift-pattern graphic on the top cap.',
         values:[
           { v:'red',    label:'Red',      price:0, hex:'#c81e1e', cs:250 },
           { v:'blue',   label:'Blue',     price:0, hex:'#1e4fc8', cs:251 },
           { v:'grey',   label:'Grey',     price:0, hex:'#8a8d90', cs:252 },
           { v:'white',  label:'White',    price:0, hex:'#f5f5f5', cs:253 },
           { v:'yellow', label:'Yellow',   price:0, hex:'#e8c31e', cs:254 },
-          { v:'no',     label:'No',       price:0, none:true, cs:255 },
-          { v:'bluev2', label:'Blue v.2', price:0, hex:'#3d6ad1', cs:256 }
-        ]}
+          { v:'bluev2', label:'Blue v.2', price:0, hex:'#3d6ad1', cs:256 },
+          { v:'no',     label:'No shift pattern', price:0, none:true, cs:255 }
+        ]},
+      shiftLogo: { label:'Shift pattern logo', zone:{px:897,py:591}, csOptId:40,
+        desc:'Which shift-pattern graphic is inlaid into the top cap — pick a house design, or Custom to send us your own.',
+        values:[
+          { v:'nologo',    label:'No logo',    price:0, cs:354 },
+          { v:'greyZ06',   label:'Grey Z06',   price:5, cs:247 },
+          { v:'chromeZR1', label:'Chrome ZR1', price:5, cs:248 },
+          { v:'blueZR1',   label:'Blue ZR1',   price:5, cs:246 },
+          { v:'custom',    label:'Custom (your logo)', price:5, cs:249 }
+        ]},
     }
   };
 

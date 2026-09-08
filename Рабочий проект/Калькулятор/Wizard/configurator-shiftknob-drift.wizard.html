@@ -315,6 +315,7 @@
           { v:'carbon',  label:'Carbon', price:40, cs:262 }
         ]},
       stitchingColor: { label:'Stitching color', zone:{px:534,py:408}, csOptId:32, isColor:true,
+        gatedBy:{ key:'upperPart', notEquals:'carbon' },
         desc:'The thread color sewn along the knob’s seams — a small detail that reads clearly up close.',
         values:[
           { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
@@ -327,13 +328,13 @@
           { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
         ]},
       carbonTopStyle: { label:'Carbon top style', zone:{px:608,py:155}, csOptId:44,
-        desc:'The finish of the top of the knob — flat black matte, a carbon-fiber weave color, Alutex, or Custom.',
+        desc:'The finish of the top of the knob — flat black matte, a carbon-fiber weave color, Alutex, or Custom. Carbon upper parts only pair with a carbon-weave top.',
         values:[
           { v:'blackMatte',     label:'Black matte',     price:0,  cs:263 },
-          { v:'blackCarbon',    label:'Black carbon',    price:20, cs:264 },
-          { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:265 },
-          { v:'redCarbon',      label:'Red carbon',      price:20, cs:266 },
-          { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:267 },
+          { v:'blackCarbon',    label:'Black carbon',    price:20, cs:264, carbonOnly:true },
+          { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:265, carbonOnly:true },
+          { v:'redCarbon',      label:'Red carbon',      price:20, cs:266, carbonOnly:true },
+          { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:267, carbonOnly:true },
           { v:'alutex',         label:'Alutex',          price:25, cs:268 },
           { v:'custom',         label:'Custom',          price:30, cs:269 }
         ]},
@@ -362,11 +363,30 @@
 
   function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
 
+  function gateOpen(opt){
+    if (!opt.gatedBy) return true;
+    var gateVal = state[opt.gatedBy.key];
+    if (opt.gatedBy.equals !== undefined) return !!(gateVal && gateVal.v === opt.gatedBy.equals);
+    if (opt.gatedBy.notEquals !== undefined) return !gateVal || gateVal.v !== opt.gatedBy.notEquals;
+    return true;
+  }
+  function applicableSteps(){
+    return STEP_ORDER.filter(function(k){ return gateOpen(PRODUCT.options[k]); });
+  }
+  function getStepValues(key){
+    var opt = PRODUCT.options[key];
+    if (key === 'carbonTopStyle' && state.upperPart && state.upperPart.v === 'carbon'){
+      return opt.values.filter(function(v){ return v.carbonOnly; });
+    }
+    return opt.values;
+  }
+
   function isComplete(){
-    return STEP_ORDER.every(function(key){ return !!state[key]; });
+    return applicableSteps().every(function(key){ return !!state[key]; });
   }
   function computeNextStep(){
-    for (var i=0;i<STEP_ORDER.length;i++){ if (!state[STEP_ORDER[i]]) return STEP_ORDER[i]; }
+    var steps = applicableSteps();
+    for (var i=0;i<steps.length;i++){ if (!state[steps[i]]) return steps[i]; }
     return null;
   }
   function updateCompletionUI(){
@@ -377,7 +397,7 @@
 
   function recalcPrice(){
     var total = BASE_PRICE;
-    STEP_ORDER.forEach(function(key){ total += (state[key] && state[key].price) || 0; });
+    applicableSteps().forEach(function(key){ total += (state[key] && state[key].price) || 0; });
     priceNumEl.textContent = total.toFixed(2).split('.')[0];
   }
 
@@ -399,8 +419,9 @@
     var hint = document.getElementById('rb-cfg-photo-hint');
     if (!activeStep){ hint.classList.remove('is-visible'); return; }
     var opt = PRODUCT.options[activeStep];
-    var idx = STEP_ORDER.indexOf(activeStep);
-    hint.textContent = 'Step ' + (idx+1) + ' of ' + STEP_ORDER.length + ' — ' + opt.label;
+    var steps = applicableSteps();
+    var idx = steps.indexOf(activeStep);
+    hint.textContent = 'Step ' + (idx+1) + ' of ' + steps.length + ' — ' + opt.label;
     hint.classList.add('is-visible');
   }
 
@@ -442,6 +463,10 @@
   function applyPick(key, val){
     state[key] = val;
     syncNative(PRODUCT.options[key].csOptId, val);
+    if (key === 'upperPart' && val.v === 'carbon'){
+      state.stitchingColor = null;
+      if (state.carbonTopStyle && !state.carbonTopStyle.carbonOnly) state.carbonTopStyle = null;
+    }
     activeStep = computeNextStep();
     renderSteps();
     if (isMobile()){
@@ -452,7 +477,7 @@
   function buildChips(container, key, opt){
     var wrap = document.createElement('div');
     wrap.className = 'rb-cfg-chips';
-    opt.values.forEach(function(val){
+    getStepValues(key).forEach(function(val){
       var el = document.createElement('button');
       el.type = 'button';
       el.className = 'rb-chip';
@@ -533,8 +558,9 @@
 
   function renderSteps(){
     stepsEl.innerHTML = '';
-    var total = STEP_ORDER.length;
-    STEP_ORDER.forEach(function(key, idx){
+    var steps = applicableSteps();
+    var total = steps.length;
+    steps.forEach(function(key, idx){
       if (key === activeStep){
         stepsEl.appendChild(buildActiveStep(key, idx+1, total));
       } else if (state[key]){
@@ -686,7 +712,8 @@
     addField('product_data[' + PRODUCT_ID + '][amount]', '1');
     STEP_ORDER.forEach(function(key){
       var opt = PRODUCT.options[key];
-      addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
+      var cs = gateOpen(opt) ? state[key].cs : opt.values[0].cs;
+      addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(cs));
     });
 
     var submitBtn = document.createElement('button');
