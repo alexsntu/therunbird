@@ -7,16 +7,20 @@
   <title>{{ company_name }}: Message title</title>
   <style type="text/css">
     /* ==========================================================
-       RunBird mail palette (light theme)
-       bg outer:      #F4F1EA
+       RunBird mail palette — LIGHT-ONLY VARIANT, matches the
+       Рабочий проект светлый/ site track (white bg, #D1382A red
+       accent for both text and filled surfaces — see rb-work-light.css).
+       bg outer:      #FAF9F7  (site's "elevated panel" off-white)
        bg card:       #FFFFFF
-       bg footer:     #FAF7F0
-       border:        #E5E0D5
-       text:          #1A1A1A
-       text secondary:#767676
-       accent (gold): #B8973E   -- darkened for AA contrast on white
-       title bar bg:  #141414   -- matches site's dark header band
-       title bar text:#F0F0F0
+       bg footer:     #FAF9F7
+       border:        rgba(18,18,18,.08)
+       text:          #121212
+       text secondary:#6E6A63
+       accent (red):  #D1382A
+       accent hover:  #A82C20
+       No dark title-bar tier — simplified 2026-09-08 to announce bar +
+       logo only; the per-email {{title}} now renders as plain text at
+       the top of the message body instead of its own dark band.
        Note: styles live here (header). Footer template reuses these
        classes, so header + footer must always be deployed together.
        ========================================================== */
@@ -31,7 +35,7 @@
       -ms-text-size-adjust: 100%;
       margin: 0;
       padding: 0;
-      background-color: #F4F1EA;
+      background-color: #FAF9F7;
     }
 
     img {
@@ -53,10 +57,10 @@
     }
 
     .rb-mail-announce > td {
-      background-color: #0C0C0C;
+      background-color: #D1382A;
       padding: 8px 20px;
       text-align: center;
-      color: #C8A84C !important;
+      color: #FFFFFF !important;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif !important;
       font-size: 11px !important;
       letter-spacing: 1.5px;
@@ -64,29 +68,23 @@
     }
 
     .message-header {
-      background-color: #141414;
+      background-color: #FFFFFF;
     }
 
     .message-header > td {
       padding: 22px 30px 18px 30px;
     }
 
-    .message-header__title {
-      background-color: #141414;
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    .message-header__title > td {
-      padding: 20px 30px;
-    }
-
-    .message-header__title h1 {
-      font-size: 18px;
+    .rb-mail-title {
+      font-size: 20px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
-      color: #F0F0F0;
+      letter-spacing: .5px;
+      font-weight: 700;
+      color: #121212;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
+      margin: 0 0 18px 0;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(18,18,18,.08);
     }
 
     .message-title > td,
@@ -96,7 +94,7 @@
 
     .message-footer > td {
       padding: 24px 30px;
-      background-color: #FAF7F0;
+      background-color: #FAF9F7;
     }
 
     .message-copyright > td {
@@ -108,19 +106,19 @@
     .message-body th, .message-body td,
     .message-footer th, .message-footer td,
     .message-copyright th, .message-copyright td {
-      color: #1A1A1A;
+      color: #121212;
       font-size: 15px;
       font-family: 'Inter', Helvetica, Arial, sans-serif;
     }
 
     .message-footer {
-      border-top: 1px solid #E5E0D5;
+      border-top: 1px solid rgba(18,18,18,.08);
     }
 
     .message-body table th,
     .message-footer table th {
       text-transform: uppercase;
-      border-bottom: 1px solid #E5E0D5;
+      border-bottom: 1px solid rgba(18,18,18,.08);
       text-align: left;
     }
 
@@ -134,7 +132,7 @@
     }
 
     .message-footer td {
-      color: #767676;
+      color: #6E6A63;
     }
 
     .footer-contact__title {
@@ -143,7 +141,7 @@
       letter-spacing: .5px;
       font-size: 14px !important;
       font-weight: 600;
-      color: #B8973E !important;
+      color: #D1382A !important;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     }
 
@@ -153,7 +151,7 @@
       letter-spacing: .5px;
       font-size: 14px !important;
       font-weight: 600;
-      color: #B8973E !important;
+      color: #D1382A !important;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
     }
 
@@ -165,7 +163,7 @@
     /* ---- Extended footer content (brand info, nav, badges, payments) ---- */
 
     .rb-mail-eyebrow {
-      color: #B8973E;
+      color: #D1382A;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
       font-size: 13px;
       font-weight: 600;
@@ -175,7 +173,7 @@
     }
 
     .rb-mail-desc {
-      color: #767676;
+      color: #6E6A63;
       font-size: 13px;
       line-height: 1.6;
       margin: 0 0 14px 0;
@@ -185,20 +183,20 @@
       display: inline-block;
       padding: 4px 10px;
       margin: 0 6px 6px 0;
-      border: 1px solid #E5E0D5;
+      border: 1px solid rgba(18,18,18,.08);
       font-size: 11px;
-      color: #767676;
+      color: #6E6A63;
       text-transform: uppercase;
       letter-spacing: .3px;
     }
 
     .rb-mail-badge.gold {
-      border-color: #B8973E;
-      color: #B8973E;
+      border-color: #D1382A;
+      color: #D1382A;
     }
 
     .rb-mail-nav-col-h {
-      color: #1A1A1A;
+      color: #121212;
       font-family: 'Barlow Condensed', Helvetica, Arial, sans-serif;
       font-size: 14px;
       font-weight: 600;
@@ -210,16 +208,16 @@
     .rb-mail-nav-links {
       font-size: 13px;
       line-height: 2;
-      color: #767676;
+      color: #6E6A63;
     }
 
     .rb-mail-nav-links a {
-      color: #767676;
+      color: #6E6A63;
       text-decoration: none;
     }
 
     .rb-mail-divider td {
-      border-top: 1px solid #E5E0D5;
+      border-top: 1px solid rgba(18,18,18,.08);
       font-size: 0;
       line-height: 0;
       padding: 0 !important;
@@ -229,9 +227,9 @@
       display: inline-block;
       padding: 6px 12px;
       margin: 0 0 8px 6px;
-      border: 1px solid #E5E0D5;
+      border: 1px solid rgba(18,18,18,.08);
       font-size: 12px;
-      color: #1A1A1A;
+      color: #121212;
       text-decoration: none;
     }
 
@@ -239,15 +237,15 @@
       display: inline-block;
       padding: 4px 8px;
       margin-left: 6px;
-      border: 1px solid #E5E0D5;
+      border: 1px solid rgba(18,18,18,.08);
       font-size: 10px;
-      color: #767676;
+      color: #6E6A63;
       text-transform: uppercase;
       letter-spacing: .5px;
     }
 
     .rb-mail-disclaimer {
-      color: #999999;
+      color: #9A958C;
       font-size: 11px;
     }
 
@@ -263,12 +261,12 @@
     }
 
     .with-subline {
-      color: #1A1A1A;
+      color: #121212;
       text-transform: uppercase;
       font-weight: bold;
       font-size: 1em;
       padding-bottom: 10px;
-      border-bottom: 1px solid #E5E0D5;
+      border-bottom: 1px solid rgba(18,18,18,.08);
     }
 
     p {
@@ -276,19 +274,19 @@
     }
 
     h1,h2,h3,h4,h5,h6 {
-      color: #1A1A1A;
+      color: #121212;
     }
 
     h1 a,h2 a,h3 a,h4 a,h5 a,h6 a {
-      color: #B8973E;
+      color: #D1382A;
     }
 
     h1 a:active,h2 a:active,h3 a:active,h4 a:active,h5 a:active,h6 a:active {
-      color: #8C6F2A;
+      color: #A82C20;
     }
 
     h1 a:visited,h2 a:visited,h3 a:visited,h4 a:visited,h5 a:visited,h6 a:visited {
-      color: #8C6F2A;
+      color: #A82C20;
     }
 
     table td,
@@ -305,23 +303,23 @@
     address {
       margin: 0px;
       font-style: normal;
-      color: #767676;
+      color: #6E6A63;
     }
 
     .content-wrapper {
-      border: 1px solid #E5E0D5;
+      border: 1px solid rgba(18,18,18,.08);
       background-color: #FFFFFF;
     }
 
     .copyright td {
       padding: 10px 0 0 0;
       padding-bottom: 0 !important;
-      color: #767676;
+      color: #6E6A63;
       font-size: 12px;
     }
 
     a {
-      color: #B8973E;
+      color: #D1382A;
     }
 
     {% if language_direction == "rtl" %}
@@ -353,7 +351,7 @@
     <style>
 
       @media only screen and (max-device-width: 480px){
-        .content-wrapper{width: 100% !important; border: 1px solid #E5E0D5 !important; }
+        .content-wrapper{width: 100% !important; border: 1px solid rgba(18,18,18,.08) !important; }
 
         .message-header > td,
         .message-title > td,
@@ -394,7 +392,7 @@
         /* Target Outlook 2007 and 2010 */
     </style>
   <![endif]-->
-  <table class="main-wrapper" cellpadding="0" cellspacing="0" width="100%" bgcolor="#F4F1EA" style="background-color: #F4F1EA" dir="{{ language_direction }}">
+  <table class="main-wrapper" cellpadding="0" cellspacing="0" width="100%" bgcolor="#FAF9F7" style="background-color: #FAF9F7" dir="{{ language_direction }}">
     <tr>
       <td style="padding: 40px 10px 40px 10px;">
         <table class="content-wrapper" cellpadding="0" cellspacing="0" align="center" width="600">
@@ -412,14 +410,9 @@
               </table>
             </td>
           </tr>
-          {% if title %}
-          <tr class="message-header__title">
-            <td>
-              <h1>{{title}}</h1>
-            </td>
-          </tr>
-          {% endif %}
-
           <tr class="message-body">
 
 <td>
+{% if title %}
+<p class="rb-mail-title">{{title}}</p>
+{% endif %}
