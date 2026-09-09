@@ -10,12 +10,17 @@
      that data, INCLUDING its live-price-hydration fetch. NOT wired into
      CS-Cart, NOT deployed — local preview only, for owner review.
 
-     6 flat options, all with photo zones, no gating — the largest of the
-     shift-knob variants (adds Back/Front body material to the same
-     top-cap option set as Ball/Cap). Fixed "Synthetic Nappa Leather" ->
-     "Nappa Leather" wording. The "Recent builds" gallery + lightbox (own
-     Classic-only photo set, 19 photos) bundled in the source file is
-     carried over verbatim, unchanged.
+     7 options, all with photo zones — the largest of the shift-knob
+     variants (adds Back/Front body material to the same top-cap option
+     set as Ball/Cap). One gated pair (2026-09-09 addition): "Carbon
+     style" (csOptId 66, new CS-Cart option covering both the back panel
+     AND top cap carbon-weave color at once) shows only when Back =
+     Carbon; "Style top cap" (csOptId 38, unchanged) shows only when
+     Back != Carbon — mutually exclusive, same gatedBy equals/notEquals
+     pattern as ../configurator-shiftknob-drift.wizard.html. Fixed
+     "Synthetic Nappa Leather" -> "Nappa Leather" wording. The "Recent
+     builds" gallery + lightbox (own Classic-only photo set, 19 photos)
+     bundled in the source file is carried over verbatim, unchanged.
 
      LIGHT-ONLY VARIANT (this file) — separate track from the dark/toggle
      system above. No data-rb-theme attribute, no toggle — permanently
@@ -265,6 +270,7 @@
   margin-top:16px; padding:12px 14px; border:1px solid var(--rb-border); border-radius:8px;
   background:var(--rb-desc-bg); font-size:12.5px; line-height:1.6; color:var(--rb-text2);
 }
+#rb-config .rb-cfg-step-desc strong{ color:var(--rb-accent-fill); font-weight:700; }
 
 #rb-config .rb-cfg-summary{
   display:flex; flex-direction:column; gap:10px;
@@ -322,7 +328,7 @@
 <script>
 (function(){
 
-  var STEP_ORDER = ['backPart','frontPart','styleTopCap','topCapFinish','shiftColor','shiftLogo'];
+  var STEP_ORDER = ['backPart','carbonStyle','frontPart','styleTopCap','topCapFinish','shiftColor','shiftLogo'];
 
   var PRODUCT = {
     id:'351', name:'Corvette C6 Classic Shift Knob Manual (6-Speed) and CF Top Cap', basePrice:170.00,
@@ -335,6 +341,14 @@
           { v:'alc',     label:'Alcantara', price:0, cs:230 },
           { v:'carbon',  label:'Carbon', price:35, cs:231 }
         ]},
+      carbonStyle: { label:'Carbon style', zone:{px:965,py:632}, csOptId:66, gatedBy:{ key:'backPart', equals:'carbon' },
+        descHtml:'This sets the carbon-fiber weave color used on <strong>both the back of the knob body and the top cap</strong> — the same carbon style applies to both, so there’s no separate top-cap choice when the back is Carbon.',
+        values:[
+          { v:'blackCarbon',    label:'Black carbon',    price:20, cs:355 },
+          { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:356 },
+          { v:'redCarbon',      label:'Red carbon',      price:20, cs:357 },
+          { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:358 }
+        ]},
       frontPart: { label:'Front (facing center console)', zone:{px:647,py:565}, csOptId:36,
         desc:'The material on the front of the knob body, the side facing the center console.',
         values:[
@@ -342,7 +356,7 @@
           { v:'perf',    label:'Perforated Nappa Leather', price:0, cs:233 },
           { v:'alc',     label:'Alcantara', price:0, cs:234 }
         ]},
-      styleTopCap: { label:'Style top cap', zone:{px:965,py:632}, csOptId:38,
+      styleTopCap: { label:'Style top cap', zone:{px:965,py:632}, csOptId:38, gatedBy:{ key:'backPart', notEquals:'carbon' },
         desc:'The carbon-fiber weave color for the top cap, or Custom to request a different finish with us.',
         values:[
           { v:'blackCarbon',    label:'Black carbon',    price:20, cs:238 },
@@ -397,11 +411,22 @@
 
   function fmtPrice(p){ return (p>0?'+$'+p.toFixed(0):''); }
 
+  function gateOpen(opt){
+    if (!opt.gatedBy) return true;
+    var gateVal = state[opt.gatedBy.key];
+    if (opt.gatedBy.equals !== undefined) return !!(gateVal && gateVal.v === opt.gatedBy.equals);
+    if (opt.gatedBy.notEquals !== undefined) return !gateVal || gateVal.v !== opt.gatedBy.notEquals;
+    return true;
+  }
+  function applicableSteps(){
+    return STEP_ORDER.filter(function(k){ return gateOpen(PRODUCT.options[k]); });
+  }
   function isComplete(){
-    return STEP_ORDER.every(function(key){ return !!state[key]; });
+    return applicableSteps().every(function(key){ return !!state[key]; });
   }
   function computeNextStep(){
-    for (var i=0;i<STEP_ORDER.length;i++){ if (!state[STEP_ORDER[i]]) return STEP_ORDER[i]; }
+    var steps = applicableSteps();
+    for (var i=0;i<steps.length;i++){ if (!state[steps[i]]) return steps[i]; }
     return null;
   }
   function updateCompletionUI(){
@@ -412,7 +437,7 @@
 
   function recalcPrice(){
     var total = BASE_PRICE;
-    STEP_ORDER.forEach(function(key){ total += (state[key] && state[key].price) || 0; });
+    applicableSteps().forEach(function(key){ total += (state[key] && state[key].price) || 0; });
     priceNumEl.textContent = total.toFixed(2).split('.')[0];
   }
 
@@ -435,8 +460,9 @@
     var hint = document.getElementById('rb-cfg-photo-hint');
     if (!activeStep){ hint.classList.remove('is-visible'); return; }
     var opt = PRODUCT.options[activeStep];
-    var idx = STEP_ORDER.indexOf(activeStep);
-    hint.textContent = 'Step ' + (idx+1) + ' of ' + STEP_ORDER.length + ' — ' + opt.label;
+    var steps = applicableSteps();
+    var idx = steps.indexOf(activeStep);
+    hint.textContent = 'Step ' + (idx+1) + ' of ' + steps.length + ' — ' + opt.label;
     hint.classList.add('is-visible');
   }
 
@@ -557,7 +583,7 @@
 
     var desc = document.createElement('div');
     desc.className = 'rb-cfg-step-desc';
-    desc.textContent = opt.desc;
+    if (opt.descHtml){ desc.innerHTML = opt.descHtml; } else { desc.textContent = opt.desc; }
     el.appendChild(desc);
 
     return el;
@@ -607,8 +633,9 @@
 
   function renderSteps(){
     stepsEl.innerHTML = '';
-    var total = STEP_ORDER.length;
-    STEP_ORDER.forEach(function(key, idx){
+    var steps = applicableSteps();
+    var total = steps.length;
+    steps.forEach(function(key, idx){
       if (key === activeStep){
         stepsEl.appendChild(buildActiveStep(key, idx+1, total));
       } else if (state[key]){
@@ -760,6 +787,7 @@
     addField('product_data[' + PRODUCT_ID + '][amount]', '1');
     STEP_ORDER.forEach(function(key){
       var opt = PRODUCT.options[key];
+      if (!gateOpen(opt)) return;
       addField('product_data[' + PRODUCT_ID + '][product_options][' + opt.csOptId + ']', String(state[key].cs));
     });
 

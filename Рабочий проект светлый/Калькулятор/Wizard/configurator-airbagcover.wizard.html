@@ -339,7 +339,7 @@
 <script>
 (function(){
 
-  var STEP_ORDER = ['designCover','leatherMaterial','stitchingColor','centerEmblemAdd','styleCenterEmblem','finishTopStyle','airbagCompat','designCenterEmblem'];
+  var STEP_ORDER = ['designCover','leatherMaterial','stitchingColor','centerEmblemAdd','styleCenterEmblem','finishTopStyle','designCenterEmblem'];
 
   var STITCHING_COLOR_VALUES = [
     { v:'black',    label:'Black',    price:0, hex:'#1a1a1a', cs:198 },
@@ -459,13 +459,6 @@
       finishTopStyle: { label:'Finish top style', zone:{px:440,py:227}, csOptId:45, gatedBy:{ key:'centerEmblemAdd', equals:'yes' },
         desc:'The clear-coat sheen over the top surface of the emblem — a glossy shine, or a flat matte look.',
         values: FINISH_TOP_STYLE_VALUES.slice() },
-      airbagCompat: { label:'Airbag compatibility', zone:null, csOptId:58, gatedBy:{ key:'centerEmblemAdd', equals:'yes' },
-        desc:'Which airbag cover trim your C6 has — this sets the exact mounting fit for the emblem, so double-check your car’s trim before choosing (Standard, Z06, or ZR1 covers are shaped differently).',
-        values:[
-          { v:'standard', label:'C6 Standard', price:0, cs:308 },
-          { v:'z06',      label:'C6 Z06',      price:0, cs:309 },
-          { v:'zr1',      label:'C6 ZR1',      price:0, cs:310 }
-        ]},
       designCenterEmblem: { label:'Design center emblem', zone:{px:478,py:299}, csOptId:59, gatedBy:{ key:'centerEmblemAdd', equals:'yes' },
         desc:'The graphic pattern inlaid into the emblem face — pick one of our house designs, or choose Custom to send us your own logo to reproduce.',
         values:[

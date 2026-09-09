@@ -308,7 +308,7 @@
 <script>
 (function(){
 
-  var STEP_ORDER = ['styleCenterEmblem','finishTopStyle','airbagCompat','designCenterEmblem'];
+  var STEP_ORDER = ['styleCenterEmblem','finishTopStyle','designCenterEmblem'];
 
   var PHOTO_DEFAULT = 'https://therunbird.com/images/ab__webp/detailed/9/center-logo_png.webp';
 
@@ -328,13 +328,6 @@
         values:[
           { v:'gloss', label:'Gloss', price:0, cs:270 },
           { v:'matte', label:'Matte', price:0, cs:271 }
-        ]},
-      airbagCompat: { label:'Airbag compatibility', csOptId:58,
-        desc:'Which airbag cover trim your C6 has — this sets the exact mounting fit for the emblem, so double-check your car’s trim before choosing (Standard, Z06, or ZR1 covers are shaped differently).',
-        values:[
-          { v:'standard', label:'C6 Standard', price:0, cs:308 },
-          { v:'z06',      label:'C6 Z06',      price:0, cs:309 },
-          { v:'zr1',      label:'C6 ZR1',      price:0, cs:310 }
         ]},
       // Values with an `img` swap the main product photo to that design's
       // own reference photo when picked (see updatePhoto()); the rest fall

@@ -10,7 +10,16 @@
      that data, INCLUDING its live-price-hydration fetch. NOT wired into
      CS-Cart, NOT deployed — local preview only, for owner review.
 
-     5 flat options, all with photo zones, no gating. Fixed "Synthetic
+     6 options, all with photo zones. "Stitching color" is gated: hidden
+     when Upper part = Carbon (gatedBy notEquals). One gated pair
+     (2026-09-09 addition, same pattern as
+     ../configurator-shiftknob-classic.wizard.html): "Carbon style"
+     (csOptId 67, new CS-Cart option covering both the upper part AND
+     top cap carbon-weave color at once) shows only when Upper part =
+     Carbon; "Top cap style" (csOptId 44, unchanged option/values) shows
+     only when Upper part != Carbon — mutually exclusive, replacing the
+     older same-step carbonOnly value-filtering approach now that CS-Cart
+     has a dedicated option for the combined choice. Fixed "Synthetic
      Nappa Leather" -> "Nappa Leather" wording. The "Recent builds"
      gallery + lightbox (own Drift-only photo set, 7 photos) bundled in
      the source file is carried over verbatim, unchanged.
@@ -264,6 +273,7 @@
   margin-top:16px; padding:12px 14px; border:1px solid var(--rb-border); border-radius:8px;
   background:var(--rb-desc-bg); font-size:12.5px; line-height:1.6; color:var(--rb-text2);
 }
+#rb-config .rb-cfg-step-desc strong{ color:var(--rb-accent-fill); font-weight:700; }
 
 #rb-config .rb-cfg-summary{
   display:flex; flex-direction:column; gap:10px;
@@ -321,7 +331,7 @@
 <script>
 (function(){
 
-  var STEP_ORDER = ['bottomPart','upperPart','stitchingColor','carbonTopStyle','finishTopStyle'];
+  var STEP_ORDER = ['bottomPart','upperPart','stitchingColor','carbonStyle','carbonTopStyle','finishTopStyle'];
 
   var PRODUCT = {
     id:'353', name:'Corvette C6 DRIFT Shift Knob Manual (6-Speed)', basePrice:220.00,
@@ -352,14 +362,22 @@
           { v:'titanium', label:'Titanium grey', price:0, hex:'#8a8d90', cs:204 },
           { v:'other',    label:'Other (specify in comments)', price:0, other:true, cs:205 }
         ]},
-      carbonTopStyle: { label:'Top cap style', zone:{px:608,py:155}, csOptId:44,
-        desc:'The finish of the top of the knob — flat black matte, a carbon-fiber weave color, Alutex, or Custom. Carbon upper parts only pair with a carbon-weave top.',
+      carbonStyle: { label:'Carbon style', zone:{px:608,py:155}, csOptId:67, gatedBy:{ key:'upperPart', equals:'carbon' },
+        descHtml:'This sets the carbon-fiber weave color used on <strong>both the upper part of the knob and the top cap</strong> — the same carbon style applies to both, so there’s no separate top-cap choice when the upper part is Carbon.',
+        values:[
+          { v:'blackCarbon',    label:'Black carbon',    price:20, cs:359 },
+          { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:360 },
+          { v:'redCarbon',      label:'Red carbon',      price:20, cs:361 },
+          { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:362 }
+        ]},
+      carbonTopStyle: { label:'Top cap style', zone:{px:608,py:155}, csOptId:44, gatedBy:{ key:'upperPart', notEquals:'carbon' },
+        desc:'The finish of the top of the knob — flat black matte, a carbon-fiber weave color, Alutex, or Custom.',
         values:[
           { v:'blackMatte',     label:'Black matte',     price:0,  cs:263 },
-          { v:'blackCarbon',    label:'Black carbon',    price:20, cs:264, carbonOnly:true },
-          { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:265, carbonOnly:true },
-          { v:'redCarbon',      label:'Red carbon',      price:20, cs:266, carbonOnly:true },
-          { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:267, carbonOnly:true },
+          { v:'blackCarbon',    label:'Black carbon',    price:20, cs:264 },
+          { v:'blueCarbon',     label:'Blue carbon',     price:20, cs:265 },
+          { v:'redCarbon',      label:'Red carbon',      price:20, cs:266 },
+          { v:'titaniumCarbon', label:'Titanium carbon', price:20, cs:267 },
           { v:'alutex',         label:'Alutex',          price:25, cs:268 },
           { v:'custom',         label:'Custom',          price:30, cs:269 }
         ]},
@@ -398,14 +416,6 @@
   function applicableSteps(){
     return STEP_ORDER.filter(function(k){ return gateOpen(PRODUCT.options[k]); });
   }
-  function getStepValues(key){
-    var opt = PRODUCT.options[key];
-    if (key === 'carbonTopStyle' && state.upperPart && state.upperPart.v === 'carbon'){
-      return opt.values.filter(function(v){ return v.carbonOnly; });
-    }
-    return opt.values;
-  }
-
   function isComplete(){
     return applicableSteps().every(function(key){ return !!state[key]; });
   }
@@ -498,7 +508,6 @@
     syncNative(PRODUCT.options[key].csOptId, val);
     if (key === 'upperPart' && val.v === 'carbon'){
       state.stitchingColor = null;
-      if (state.carbonTopStyle && !state.carbonTopStyle.carbonOnly) state.carbonTopStyle = null;
     }
     activeStep = computeNextStep();
     renderSteps();
@@ -508,7 +517,7 @@
   function buildChips(container, key, opt){
     var wrap = document.createElement('div');
     wrap.className = 'rb-cfg-chips';
-    getStepValues(key).forEach(function(val){
+    opt.values.forEach(function(val){
       var el = document.createElement('button');
       el.type = 'button';
       el.className = 'rb-chip';
@@ -571,7 +580,7 @@
 
     var desc = document.createElement('div');
     desc.className = 'rb-cfg-step-desc';
-    desc.textContent = opt.desc;
+    if (opt.descHtml){ desc.innerHTML = opt.descHtml; } else { desc.textContent = opt.desc; }
     el.appendChild(desc);
 
     return el;
