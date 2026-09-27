@@ -147,7 +147,7 @@
 #rb-hero .rb-hero-h1 {
   font-family: 'Barlow Condensed', sans-serif !important;
   font-weight: 900 !important;
-  font-size: clamp(58px, 6.8vw, 100px) !important;
+  font-size: clamp(48px, 5.2vw, 78px) !important; /* sized so the copy column matches the 16:9 hero image height */
   line-height: .92 !important;
   text-transform: uppercase !important;
   color: var(--rb-text) !important;
@@ -367,7 +367,7 @@
       <!-- Visual -->
       <div class="rb-hero-visual">
         <div class="rb-hero-card">
-          <img class="rb-hero-card-img" src="https://therunbird.com/images/MainPAge/55image.webp" alt="RunBird Corvette Accessories" width="800" height="533" fetchpriority="high">
+          <img class="rb-hero-card-img" src="https://therunbird.com/images/MainPAge/55image.webp?v=2" alt="RunBird Corvette Accessories" width="1024" height="576" fetchpriority="high">
         </div>
         <div class="rb-hero-card-label">
           <div class="rb-label-title">Made By Hand, Not By Machine</div>
@@ -449,6 +449,10 @@
       return;
     }
     var copyRect = copy.getBoundingClientRect();
+    // Block not laid out yet (e.g. hidden behind the theme's preloader when this
+    // first runs) — every rect is 0, which would pin btns near the top. Skip; the
+    // ResizeObserver below re-runs this once the columns get real sizes.
+    if (copyRect.height < 1) return;
     var btnsHeight = btns.getBoundingClientRect().height;
     var pinnedTop = copyRect.height - btnsHeight;
     var minTop = 0;
@@ -480,6 +484,18 @@
     rbHeroImg.addEventListener('load', rbAlignHeroBtns);
   }
   window.addEventListener('load', rbAlignHeroBtns);
+  // Re-align whenever the columns change size for any reason (block shown after a
+  // preloader, web fonts swapping in, image decoding late). Only the two columns are
+  // observed — btns (absolute) and .rb-hero-inner's padding don't affect their size,
+  // so this can't loop.
+  if (window.ResizeObserver) {
+    var rbHeroRO = new ResizeObserver(function() { rbAlignHeroBtns(); });
+    var rbCopyEl = document.querySelector('#rb-hero .rb-hero-copy');
+    var rbVisEl = document.querySelector('#rb-hero .rb-hero-visual');
+    if (rbCopyEl) rbHeroRO.observe(rbCopyEl);
+    if (rbVisEl) rbHeroRO.observe(rbVisEl);
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(rbAlignHeroBtns);
   rbAlignHeroBtns();
 })();
 </script>
