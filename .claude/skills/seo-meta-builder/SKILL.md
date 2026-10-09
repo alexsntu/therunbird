@@ -114,7 +114,7 @@ Goal: find informational queries RunBird could be cited for by AI answer engines
 
 **Title** — 50–65 chars. Primary keyword first, brand (`| RunBird`) last and expendable if length forces a cut. AEO pattern: front-load the noun phrase a voice assistant or AI Overview would read back verbatim.
 
-**Meta description** — CS-Cart hard limit is **255 characters**; target **180–250**. Lead with the concrete differentiator (handmade / material / lead time), not a generic adjective. Weave in an Autocomplete/PAA-validated USP phrase only if Step 2b confirmed demand for it; otherwise use a real product spec instead.
+**Meta description** — target **150–160 characters** (Google clips the snippet at roughly 155–160 on desktop, so anything past that is not shown; CS-Cart's own hard limit is 255). The differentiator and the trust line must both fit inside that length. Lead with the concrete differentiator (handmade / material / lead time), not a generic adjective. Weave in an Autocomplete/PAA-validated USP phrase only if Step 2b confirmed demand for it; otherwise use a real product spec instead.
 
 **E-E-A-T mapping** (fill from the brand constants above, never invent):
 - *Experience* — "handcrafted since 2014"
@@ -137,7 +137,7 @@ Goal: find informational queries RunBird could be cited for by AI answer engines
 ### Step 4 — Pre-output checklist
 - [ ] Title 50–65 chars, primary keyword leads, brand tail is what would clip
 - [ ] Exactly one H1, matches page topic, no keyword stuffing
-- [ ] Meta description 180–250 chars, hard cap 255, no truncated word at the boundary
+- [ ] Meta description 150–160 chars (never over 160), no truncated word at the boundary
 - [ ] AEO answer-block present on category/FAQ-type pages — 40–60 word direct answer immediately after each question heading, ~134–167 word self-contained passage, question sourced from real Step 2d/2b data
 - [ ] Competitor gap analysis covered at least 3 relevant results, or the output honestly flags a thin competitive field instead of padding
 - [ ] "Schema types seen" cells are either sourced from a real visible signal (SERP rich result or WebFetched markdown) or marked not-detectable — never guessed
