@@ -604,6 +604,9 @@
       return window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'form_builder' });
     }).then(function(token) {
       fd.append('g-recaptcha-v3-token', token);
+      // CS-Cart only verifies a v3 token with Google when validate_token is present;
+      // without it the score defaults to 0 and the antibot check rejects the form.
+      fd.append('validate_token', '1');
       return fetch(form.action, { method: 'POST', body: fd });
     }).then(function(response) {
       var responseUrl = new URL(response.url, window.location.href);
