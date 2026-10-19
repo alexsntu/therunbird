@@ -1,0 +1,601 @@
+<!-- RunBird — site search (LIGHT track)
+     CS-Cart > Design > Layouts > Default > add ONE "HTML block with Smarty support"
+     to any container that renders on every page (e.g. next to the header block).
+     The block itself shows nothing until opened.
+
+     Replaces the native CS-Cart product search (and its live-search add-on):
+     searches ONLY configurators, info pages and FAQ answers — never products.
+     Opens from the existing header buttons without touching the header code:
+     a capture-phase document listener claims clicks on #rb-search-btn (desktop
+     magnifier), #rb-mnav-search-btn (hamburger menu item) and the theme's
+     mobile sticky-bar search link before their own handlers run.
+
+     The index below is hand-maintained (no server code): configurator prices
+     are the "from" prices in each product's JSON-LD; answers are copied from
+     the FAQPage JSON-LD of /faq/, /installation-help/, /shipping-and-returns/
+     and /warranty/. Update them here when those pages change.
+
+     Smarty: CSS and JS are wrapped in literal tags because both are full of
+     curly braces; keep any new code inside them. -->
+
+<div id="rb-search" class="rbs" hidden>
+  <div class="rbs-backdrop" data-rbs-close></div>
+  <div class="rbs-panel" role="dialog" aria-modal="true" aria-label="Search RunBird">
+    <div class="rbs-bar">
+      <svg class="rbs-bar-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <label for="rbs-input" class="rbs-sr">Search RunBird</label>
+      <input id="rbs-input" class="rbs-input" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search" placeholder="Search configurators, shipping, warranty…">
+      <span class="rbs-esc" aria-hidden="true">Esc</span>
+      <button type="button" class="rbs-x" data-rbs-close aria-label="Close search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button type="button" class="rbs-cancel" data-rbs-close>Cancel</button>
+    </div>
+    <div class="rbs-body" id="rbs-body" aria-live="polite"></div>
+    <div class="rbs-foot"><span>↑ ↓ to navigate</span><span>Enter to open</span><span class="rbs-foot-count" id="rbs-count"></span></div>
+  </div>
+</div>
+
+{literal}
+<style>
+#rb-search{ position:fixed; inset:0; z-index:100000; font-family:'Inter',sans-serif; color:#121212; }
+#rb-search[hidden]{ display:none; }
+#rb-search *{ box-sizing:border-box; }
+#rb-search div, #rb-search p, #rb-search span, #rb-search li, #rb-search h3{ color:inherit; }
+html.rbs-lock, html.rbs-lock body{ overflow:hidden !important; }
+.rbs-sr{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.rbs-backdrop{ position:absolute; inset:0; background:rgba(18,18,18,.45); }
+.rbs-panel{
+  position:relative; margin:9vh auto 0; width:min(760px, calc(100% - 32px)); max-height:82vh;
+  display:flex; flex-direction:column; background:#FFFFFF; border-radius:18px;
+  box-shadow:0 24px 60px rgba(0,0,0,.25); overflow:hidden;
+}
+.rbs-bar{ display:flex; align-items:center; gap:12px; padding:14px 16px 14px 20px; border-bottom:1px solid rgba(18,18,18,.08); flex:none; }
+.rbs-bar-icon{ width:22px; height:22px; flex:none; fill:none; stroke:#6E6A63; stroke-width:2; stroke-linecap:round; }
+#rb-search .rbs-input{
+  flex:1 1 auto; min-width:0; height:44px; margin:0; padding:0; border:0; outline:none; box-shadow:none; background:transparent;
+  font:400 20px/1.2 'Inter',sans-serif; color:#121212; -webkit-appearance:none; appearance:none;
+}
+#rb-search .rbs-input::-webkit-search-cancel-button{ -webkit-appearance:none; }
+#rb-search .rbs-input::placeholder{ color:#8A857D; }
+.rbs-esc{ flex:none; font-size:12px; color:#6E6A63 !important; border:1px solid rgba(18,18,18,.16); border-radius:6px; padding:3px 7px; }
+#rb-search .rbs-x{
+  flex:none; width:44px; height:44px; padding:0; border:0; border-radius:50%; background:#FAF9F7; color:#121212;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.rbs-x svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+#rb-search .rbs-cancel{ display:none; flex:none; height:44px; padding:0 6px; border:0; background:none; font:600 15px 'Inter',sans-serif; color:#D1382A; cursor:pointer; }
+.rbs-body{ flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; padding:6px 0 14px; }
+.rbs-foot{ flex:none; display:flex; gap:18px; padding:10px 20px; border-top:1px solid rgba(18,18,18,.08); background:#FAF9F7; font-size:12px; color:#6E6A63 !important; }
+.rbs-foot span{ color:#6E6A63 !important; }
+.rbs-foot-count{ margin-left:auto; }
+
+.rbs-group{ margin:16px 20px 6px; font:700 13px 'Barlow Condensed',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:#6E6A63 !important; }
+.rbs-group:first-child{ margin-top:10px; }
+#rb-search mark{ background:#F6DAD7; color:inherit; border-radius:3px; padding:0 1px; }
+
+#rb-search a.rbs-cfg{
+  display:flex; align-items:center; gap:14px; padding:10px 20px; color:#121212; text-decoration:none; outline:none;
+}
+#rb-search a.rbs-cfg:hover, #rb-search a.rbs-cfg:focus-visible, #rb-search a.rbs-cfg.is-active{ background:#FAF9F7; }
+.rbs-ico{ width:48px; height:48px; flex:none; border-radius:10px; background:#121212; color:#FFFFFF !important; display:flex; align-items:center; justify-content:center; }
+.rbs-ico svg{ width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.rbs-cfg-text{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.rbs-cfg-title{ font-size:16px; font-weight:600; line-height:1.3; }
+.rbs-cfg-desc{ font-size:13px; line-height:1.35; color:#6E6A63 !important; }
+.rbs-price{ flex:none; font-size:14px; font-weight:600; white-space:nowrap; }
+.rbs-go{ flex:none; font-size:13px; font-weight:600; color:#D1382A !important; white-space:nowrap; }
+
+.rbs-qa{ margin:8px 12px 0; border:1px solid rgba(18,18,18,.10); border-radius:12px; overflow:hidden; }
+#rb-search .rbs-q{
+  width:100%; display:flex; align-items:flex-start; gap:12px; margin:0; padding:13px 14px; border:0; background:#FFFFFF;
+  text-align:left; font:600 15px/1.4 'Inter',sans-serif; color:#121212; cursor:pointer; outline:none;
+}
+#rb-search .rbs-q:hover, #rb-search .rbs-q:focus-visible, #rb-search .rbs-q.is-active{ background:#FAF9F7; }
+.rbs-q-text{ flex:1 1 auto; }
+.rbs-q svg{ width:18px; height:18px; flex:none; margin-top:2px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; transition:transform .15s; }
+.rbs-q[aria-expanded="true"] svg{ transform:rotate(180deg); }
+.rbs-a{ padding:0 14px 14px; }
+.rbs-a[hidden]{ display:none; }
+.rbs-a p{ margin:0 0 8px; font-size:14px; line-height:1.55; color:#3D3A35 !important; }
+#rb-search .rbs-a a{ font-size:13px; font-weight:600; color:#D1382A; text-decoration:none; }
+
+.rbs-pages{ display:flex; flex-wrap:wrap; gap:8px; padding:0 12px; }
+#rb-search a.rbs-page{
+  flex:1 1 220px; display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:12px; background:#FAF9F7;
+  color:#121212; text-decoration:none; outline:none; border:1px solid transparent;
+}
+#rb-search a.rbs-page:hover, #rb-search a.rbs-page:focus-visible, #rb-search a.rbs-page.is-active{ border-color:rgba(209,56,42,.45); }
+.rbs-page svg{ width:18px; height:18px; flex:none; fill:none; stroke:#D1382A; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.rbs-page-text{ display:flex; flex-direction:column; gap:1px; min-width:0; }
+.rbs-page-title{ font-size:14px; font-weight:600; }
+.rbs-page-desc{ font-size:12px; color:#6E6A63 !important; }
+
+.rbs-empty{ padding:14px 20px 6px; display:flex; flex-direction:column; gap:20px; }
+.rbs-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+#rb-search .rbs-chip{
+  padding:9px 14px; border-radius:99px; border:1px solid rgba(18,18,18,.16); background:#FFFFFF;
+  font:400 14px 'Inter',sans-serif; color:#121212; text-decoration:none; cursor:pointer;
+}
+#rb-search .rbs-chip:hover{ border-color:#D1382A; }
+.rbs-cats{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+#rb-search a.rbs-cat{ display:flex; flex-direction:column; gap:4px; padding:14px 16px; border-radius:12px; background:#FAF9F7; color:#121212; text-decoration:none; }
+#rb-search a.rbs-cat:hover{ background:#F3F0EB; }
+.rbs-cat-name{ font:700 19px/1.1 'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:.02em; }
+.rbs-cat-price{ font-size:13px; color:#6E6A63 !important; }
+.rbs-custom{ display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:12px; border:1px dashed rgba(209,56,42,.45); font-size:14px; }
+.rbs-custom span{ flex:1 1 auto; color:#3D3A35 !important; }
+#rb-search .rbs-custom a{ font-weight:600; color:#D1382A; text-decoration:none; white-space:nowrap; }
+
+.rbs-none{ padding:28px 24px 8px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
+.rbs-none-title{ margin:0; font:700 24px/1.15 'Barlow Condensed',sans-serif; text-transform:uppercase; }
+.rbs-none p{ margin:0; font-size:15px; line-height:1.5; color:#3D3A35 !important; max-width:440px; }
+.rbs-none-btns{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+#rb-search .rbs-btn{ display:inline-flex; align-items:center; justify-content:center; height:48px; padding:0 20px; border-radius:12px; font:600 15px 'Inter',sans-serif; text-decoration:none; }
+#rb-search .rbs-btn--fill{ background:#D1382A; color:#FFFFFF; }
+#rb-search .rbs-btn--fill:hover{ background:#A82C20; }
+#rb-search .rbs-btn--line{ border:1px solid rgba(18,18,18,.16); color:#121212; }
+
+@media (max-width: 640px){
+  .rbs-backdrop{ display:none; }
+  .rbs-panel{ margin:0; width:100%; height:100%; max-height:none; border-radius:0; box-shadow:none; }
+  .rbs-bar{ padding:10px 10px 10px 14px; gap:8px; }
+  .rbs-bar-icon{ display:none; }
+  #rb-search .rbs-input{ height:46px; padding:0 12px; border-radius:12px; background:#FAF9F7; font-size:16px; }
+  .rbs-esc, #rb-search .rbs-x{ display:none; }
+  #rb-search .rbs-cancel{ display:block; }
+  .rbs-foot{ display:none; }
+  #rb-search a.rbs-cfg{ padding:10px 16px; gap:12px; }
+  .rbs-ico{ width:44px; height:44px; }
+  .rbs-go{ display:none; }
+  .rbs-group{ margin-left:16px; }
+  .rbs-cats{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .rbs-empty{ padding:12px 16px 6px; }
+  .rbs-none-btns{ flex-direction:column; align-self:stretch; }
+}
+</style>
+
+<script>
+(function(){
+  'use strict';
+  var root = document.getElementById('rb-search');
+  if (!root || root.getAttribute('data-ready')) return;
+  root.setAttribute('data-ready', '1');
+  document.body.appendChild(root); // escape any transformed/overflow-clipped layout container
+
+  var SITE = 'https://therunbird.com/';
+
+  /* ── Icons (stroke, currentColor) ── */
+  var ICONS = {
+    wheel:  '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M3.5 10.5h6M14.5 10.5h6M12 14.5v6"/>',
+    airbag: '<path d="M4 9c0-3 3.5-5 8-5s8 2 8 5v4c0 4-3.5 7-8 7s-8-3-8-7z"/><circle cx="12" cy="11" r="3"/>',
+    emblem: '<circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/>',
+    sill:   '<path d="M3 15l3-6h15l-3 6z"/><path d="M8 12h8"/>',
+    brake:  '<path d="M5 19l9-9"/><rect x="12" y="4" width="8" height="5" rx="2.5" transform="rotate(-45 16 6.5)"/><circle cx="5" cy="19" r="1.6"/>',
+    knob:   '<circle cx="12" cy="8" r="5"/><path d="M10 13v7h4v-7"/>',
+    custom: '<path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/>',
+    page:   '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',
+    tool:   '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+    book:   '<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"/><path d="M8 9h6M8 13h6"/>',
+    truck:  '<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    mail:   '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    info:   '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+    lock:   '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    help:   '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17v.5"/>'
+  };
+
+  /* ── Index: configurators (no individual products, ever) ── */
+  var CONFIGS = [
+    { t:'Steering Wheels', d:'D-shape or F1-shape · carbon fiber, leather or Alcantara', p:765, u:'steering-wheels/', i:'wheel', k:'steering wheel rim grip d-shape f1 flat bottom' },
+    { t:'Airbag Cover', d:'Horn pad in Nappa leather or Alcantara, custom stitching', p:355, u:'horn-pads/', i:'airbag', k:'airbag horn pad steering wheel center cover stitching' },
+    { t:'Steering Wheel Emblems', d:'Center emblem for your airbag cover · carbon fiber or custom', p:75, u:'steering-wheel-emblems/', i:'emblem', k:'emblem logo badge center crossed flags airbag' },
+    { t:'Door Sill Plates', d:'Carbon fiber sills with your logo and accent color', p:315, u:'door-sill-plate/', i:'sill', k:'door sill sills threshold kick scuff plate logo' },
+    { t:'E-Brake Accessories', d:'Handle, release button or boot — all e-brake options', p:50, u:'handbrakes/', i:'brake', k:'ebrake handbrake parking brake handle button boot' },
+    { t:'E-Brake Handle & CF Button', d:'Leather, Alcantara or carbon with a matching CF button', p:195, u:'handbrakes/handbrake/', i:'brake', k:'ebrake handbrake parking brake handle grip button' },
+    { t:'E-Brake Release Button', d:'Carbon fiber or black, fits your existing handle', p:50, u:'handbrakes/handbrake-button/', i:'brake', k:'ebrake handbrake parking brake release button carbon' },
+    { t:'E-Brake Knob Boot', d:'Leather or Alcantara boot, fits your existing handle', p:65, u:'handbrakes/handbrake-cover/', i:'brake', k:'ebrake handbrake parking brake boot cover manual automatic' },
+    { t:'Shift Knobs', d:'All 5 styles: Classic, Ball, Drift, Top Cap and Boot', p:55, u:'shift-knobs/', i:'knob', k:'shift knob shifter gear knob manual automatic' },
+    { t:'Classic Shift Knob', d:'Factory shape with a matching carbon-fiber top cap', p:170, u:'shift-knobs/standard-gear-knob/', i:'knob', k:'shift knob shifter gear classic standard 6-speed manual top cap' },
+    { t:'Ball Shift Knob', d:'Round knob for a shorter, grippier throw', p:250, u:'shift-knobs/gear-knob-ball/', i:'knob', k:'shift knob shifter gear ball round 6-speed manual' },
+    { t:'Drift Shift Knob', d:'Taller, two-section design', p:220, u:'shift-knobs/gear-knob-tall/', i:'knob', k:'shift knob shifter gear drift tall 6-speed manual' },
+    { t:'Shift Top Cap', d:'Shift-pattern cap that fits your existing knob', p:55, u:'shift-knobs/shift-pattern/', i:'knob', k:'shift knob shifter gear top cap pattern carbon matte gloss' },
+    { t:'Shift Knob Boot', d:'Boot cover only, manual or automatic', p:55, u:'shift-knobs/gear-knob-cover/', i:'knob', k:'shift knob shifter gear boot cover manual automatic' },
+    { t:'Custom Order', d:'Something not listed? We can build it to your spec', p:0, u:'custom-order/', i:'custom', k:'custom order bespoke special request build anything' }
+  ];
+
+  /* ── Index: info pages ── */
+  var PAGES = [
+    { t:'FAQ', d:'Orders, shipping, materials & returns', u:'faq/', i:'help', k:'faq questions answers help' },
+    { t:'Installation Help', d:'Direct swap, step-by-step guides', u:'installation-help/', i:'tool', k:'install installation fit fitment guide tools' },
+    { t:'Materials Guide', d:'Carbon fiber, Nappa leather & Alcantara', u:'materials-guide/', i:'book', k:'materials carbon fiber leather nappa alcantara care cleaning' },
+    { t:'Shipping & Returns', d:'Delivery, photo approval, tracking, remakes', u:'shipping-and-returns/', i:'truck', k:'shipping delivery returns refund tracking damaged' },
+    { t:'Warranty', d:'12-month workmanship warranty, how to claim', u:'warranty/', i:'shield', k:'warranty guarantee claim defect' },
+    { t:'Contact Us', d:'Real people, usually reply within 24 hours', u:'contact-us/', i:'mail', k:'contact email message support question help' },
+    { t:'About Us', d:'Small C6 Corvette workshop since 2014', u:'about-us/', i:'info', k:'about company workshop story team' },
+    { t:'Privacy Policy', d:'What we collect and how we protect it', u:'privacy-policy/', i:'lock', k:'privacy policy data cookies personal information' }
+  ];
+  var PAGE_NAME = { 'faq':'FAQ', 'installation-help':'Installation Help', 'shipping-and-returns':'Shipping & Returns', 'warranty':'Warranty' };
+
+  /* ── Index: answers (copied from each page's FAQPage JSON-LD) ── */
+  var ANSWERS = [
+    { "q": "How long does production take?", "a": "All products are handmade to order — nothing is pulled from a warehouse. Production takes 7-14 business days from order confirmation, and you'll get tracking updates as your build moves through each stage.", "p": "faq" },
+    { "q": "How do I choose the right configuration?", "a": "Each product page shows every material, finish, and color option with photos. If you're unsure what will look best in your interior, contact us — we're happy to recommend a combination based on your Corvette's existing colors and trim.", "p": "faq" },
+    { "q": "Can I request a custom color or combination that isn't listed?", "a": "Often, yes. Since every piece is built by hand in our own workshop, we can usually accommodate custom thread colors or unlisted material pairings. Send us a message with what you have in mind before placing your order.", "p": "faq" },
+    { "q": "Can I change or cancel my order after placing it?", "a": "Contact us as soon as possible. If production hasn't started yet, we can usually adjust the spec or cancel the order. Once cutting and stitching are underway on your specific piece, changes are no longer possible.", "p": "faq" },
+    { "q": "Where do you ship?", "a": "We ship across North America — anywhere in the United States and Canada. Enter your address at checkout and shipping options for your location will be shown automatically.", "p": "faq" },
+    { "q": "How much does shipping cost?", "a": "Shipping cost is calculated at checkout based on your location and the size of your order, before you pay.", "p": "faq" },
+    { "q": "How long does delivery take after production?", "a": "Once your build leaves our workshop, transit time depends on your location — typically a few business days within North America. You'll receive a tracking number as soon as it ships.", "p": "faq" },
+    { "q": "How do I track my order?", "a": "You'll get a tracking number by email the moment your order ships. You can also look up any order using the Track Order tool in the site header.", "p": "faq" },
+    { "q": "What materials do you use?", "a": "Exactly three: aerospace carbon fiber, premium synthetic Nappa leather, and genuine Alcantara. No cheap filler materials — just three consistent, purpose-picked options in every build. See our Materials Guide for a full breakdown of each one, plus how to care for it.", "p": "faq" },
+    { "q": "Which Corvette does this fit?", "a": "Our accessories are designed specifically for the Chevrolet Corvette C6 (2005-2013), across Coupe, Convertible, Z06, Grand Sport, and ZR1 trims. Each product page lists exact fitment.", "p": "faq" },
+    { "q": "Will installation require any modifications?", "a": "No. Every piece bolts, threads, or clips onto the exact factory mounting point of the part it replaces — no cutting, drilling, or rewiring. See our Installation Help page for the full walkthrough, by product.", "p": "faq" },
+    { "q": "How do I take care of my material once it's installed?", "a": "Each material has its own care routine — carbon fiber, synthetic Nappa leather, and Alcantara all need different cleaning products and habits. Full instructions are in our Materials Guide, and a care card ships in every box.", "p": "faq" },
+    { "q": "What is your return policy?", "a": "Since every piece is custom-made to your exact spec, we can't accept returns on configured orders. If your item arrives damaged or doesn't match what you ordered, we'll remake it at no cost.", "p": "faq" },
+    { "q": "What if my item arrives damaged?", "a": "Contact us with your order number and photos of the damage as soon as you notice it. We'll sort out a remake or replacement — you won't be left with a damaged part.", "p": "faq" },
+    { "q": "Do you offer a warranty?", "a": "We stand behind every piece we build. If something fails due to a manufacturing defect rather than wear and tear, contact us and we'll make it right.", "p": "faq" },
+    { "q": "How do I contact support?", "a": "Reach out through our Contact Us page with your order number and question — our team built these parts by hand, so we can usually help right away.", "p": "faq" },
+    { "q": "Will I need to modify my Corvette to install this?", "a": "No. Every RunBird accessory is built to replace a specific factory part at its original mounting point. There's no cutting, drilling, or permanent modification involved — it's a direct swap.", "p": "installation-help" },
+    { "q": "Do I need any special tools?", "a": "Most installs only need basic hand tools — the same ones you'd use to remove the factory part in the first place. Your step-by-step guide lists exactly what's needed for your specific product.", "p": "installation-help" },
+    { "q": "Will my airbag, horn, or controls still work after installing a new steering wheel?", "a": "Yes. Our steering wheels are built to accept your factory airbag, horn, and steering-column controls, so everything keeps working exactly as it did before — nothing is bypassed or rewired.", "p": "installation-help" },
+    { "q": "Can I install it myself, or do I need a professional?", "a": "Most customers install their own parts at home using the included guide — it's the same process as removing and refitting a factory part. If you'd rather have it done professionally, any shop familiar with your Corvette's generation can handle it.", "p": "installation-help" },
+    { "q": "What's included in the box?", "a": "Your RunBird part, a step-by-step installation guide specific to that product, and a material care card. Any small hardware unique to the part is included as well.", "p": "installation-help" },
+    { "q": "What if I get stuck during installation?", "a": "Reach out to our support team with your order number and a photo or description of where you're stuck — we'll walk you through it. We build these parts, so we know exactly how they go on.", "p": "installation-help" },
+    { "q": "What if I don't like the photo you send me?", "a": "Reply to that email and let us know what's off. If it doesn't match what you ordered, we'll fix it before it ships — that's exactly what the photo approval step is for.", "p": "shipping-and-returns" },
+    { "q": "What if I don't respond to the photo email?", "a": "We'll follow up before shipping. If your piece matches your order exactly and we don't hear back after reasonable attempts to reach you, we'll go ahead and ship it as configured.", "p": "shipping-and-returns" },
+    { "q": "Can I request changes after seeing the photo?", "a": "If it doesn't match your original order, yes — we'll correct it at no cost. Requesting a completely different configuration at that stage may involve rebuilding the piece; contact us and we'll talk through the options.", "p": "shipping-and-returns" },
+    { "q": "My tracking hasn't updated in a few days — is that normal?", "a": "Carrier scans can lag, especially crossing into Canada or over a weekend. If it's been more than a few business days with no movement, contact us with your order number and we'll look into it.", "p": "shipping-and-returns" },
+    { "q": "How do I start a damage or defect claim?", "a": "Contact us with your order number and photos of the issue as soon as you notice it. We'll review it and arrange a free remake or replacement.", "p": "shipping-and-returns" },
+    { "q": "How long does the warranty last?", "a": "12 months from the day your order is delivered. It covers workmanship and material defects — not wear and tear from normal use.", "p": "warranty" },
+    { "q": "Does it cover my leather softening or fading over time?", "a": "No — that's normal wear, not a defect. Following the care routine in our Materials Guide will help slow it down and keep your piece looking its best.", "p": "warranty" },
+    { "q": "I installed it myself and now something's wrong — is that covered?", "a": "If the problem is a genuine defect in how the piece was built, yes — installing it yourself doesn't void that. If the issue was caused by how it was installed, that falls outside the warranty. See our Installation Help guide for the correct process.", "p": "warranty" },
+    { "q": "What if my order arrived damaged in shipping?", "a": "That's handled separately from this warranty — see our Shipping & Returns page for how we handle damage that happens in transit.", "p": "warranty" },
+    { "q": "What do I need to file a claim?", "a": "Your order number, clear photos of the issue, and a short description of what's wrong. Contact our support team and we'll take it from there.", "p": "warranty" }
+  ];
+
+  var POPULAR = ['steering wheel', 'shift knob', 'e-brake', 'production time', 'warranty', 'installation'];
+  var CATS = [
+    { t:'Steering Wheels', p:765, u:'steering-wheels/' }, { t:'Airbag Cover', p:355, u:'horn-pads/' },
+    { t:'Shift Knobs', p:55, u:'shift-knobs/' },         { t:'E-Brake', p:50, u:'handbrakes/' },
+    { t:'SW Emblems', p:75, u:'steering-wheel-emblems/' }, { t:'Door Sill Plates', p:315, u:'door-sill-plate/' }
+  ];
+
+  /* ── Text normalisation + synonyms ──
+     Phrases are folded to one token first (same on both sides), then each
+     query word also matches every word of its synonym group. */
+  var PHRASES = [
+    [/\be\s?brake\b|\bemergency brake\b|\bparking brake\b|\bhand\s?brake\b/g, 'ebrake'],
+    [/\bhorn\s?pads?\b|\bair\s?bags?\b/g, 'airbag'],
+    [/\bgear\s?knobs?\b|\bshift\s?knobs?\b|\bshifters?\b/g, 'shiftknob'],
+    [/\bsteering\s?wheels?\b/g, 'steeringwheel'],
+    [/\bdoor\s?sills?\b/g, 'sill'],
+    [/\bcarbon\s?fiber\b|\bcarbon\s?fibre\b/g, 'carbon']
+  ];
+  var SYN = [
+    ['ebrake','brake','handbrake','parking'],
+    ['airbag','horn','hornpad'],
+    ['shiftknob','knob','shift','gear','shifting'],
+    ['steeringwheel','wheel','steering','rim'],
+    ['emblem','logo','badge'],
+    ['sill','sills','threshold','kick','scuff'],
+    ['carbon','cf'],
+    ['alcantara','suede'],
+    ['leather','nappa'],
+    ['ship','shipping','shipped','delivery','deliver','delivered'],
+    ['return','returns','refund','exchange'],
+    ['warranty','guarantee','warrant'],
+    ['install','installation','installing','installed'],
+    ['fit','fits','fitment','compatible','compatibility'],
+    ['corvette','c5','c6','c7','c8'],
+    ['price','cost','costs','much'],
+    ['track','tracking'],
+    ['damage','damaged','broken','defect','defects'],
+    ['cancel','change','modify'],
+    ['contact','email','support','message'],
+    ['production','lead','make','made','build','built']
+  ];
+  var STOP = /^(the|a|an|to|do|does|i|my|me|is|are|of|for|and|or|it|can|how|what|when|where|which|you|your|in|on|with|after|will|be|if|this|that|there|any|from)$/;
+  var synOf = {};
+  SYN.forEach(function(g){ g.forEach(function(w){ synOf[w] = g; }); });
+
+  function canon(s){
+    s = String(s).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ');
+    PHRASES.forEach(function(p){ s = s.replace(p[0], p[1]); });
+    return s.trim();
+  }
+  function words(s){ var c = canon(s); return c ? c.split(' ') : []; }
+
+  function prep(item, fields){
+    item._f = fields.map(function(f){ return { w: words(item[f[0]] || ''), weight: f[1] }; });
+    return item;
+  }
+  CONFIGS.forEach(function(c){ prep(c, [['t', 8], ['k', 4], ['d', 1]]); });
+  PAGES.forEach(function(p){ prep(p, [['t', 8], ['k', 4], ['d', 1]]); });
+  ANSWERS.forEach(function(a){ prep(a, [['q', 6], ['a', 1]]); });
+
+  function termScore(item, term){
+    var group = synOf[term] || null, best = 0;
+    item._f.forEach(function(f){
+      for (var i = 0; i < f.w.length; i++){
+        var w = f.w[i], s = 0;
+        if (w === term) s = f.weight + 1;
+        else if (term.length >= 2 && w.indexOf(term) === 0) s = f.weight;
+        else if (group && group.indexOf(w) !== -1) s = f.weight * 0.8;
+        if (s > best) best = s;
+      }
+    });
+    return best;
+  }
+  function rank(list, terms){
+    var out = [];
+    list.forEach(function(item, idx){
+      var total = 0, hits = 0;
+      terms.forEach(function(t){ var s = termScore(item, t); if (s) { hits++; total += s; } });
+      if (hits < terms.length) return;
+      out.push({ item: item, score: total + hits * 2, idx: idx });
+    });
+    out.sort(function(a, b){ return b.score - a.score || a.idx - b.idx; });
+    return out.map(function(r){ return r.item; });
+  }
+
+  /* ── DOM helpers (all text goes in via textContent — query is user input) ── */
+  function el(tag, cls, text){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function icon(name){
+    var s = el('span', 'rbs-ico');
+    s.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.page) + '</svg>';
+    return s;
+  }
+  function highlight(node, text, terms){
+    if (!terms.length) { node.textContent = text; return node; }
+    String(text).split(/([A-Za-z0-9’'\-]+)/).forEach(function(part, i){
+      if (i % 2 === 1){
+        var c = canon(part), hit = terms.some(function(t){ return t.length >= 2 && c.indexOf(t) === 0; });
+        if (hit){ node.appendChild(el('mark', null, part)); return; }
+      }
+      node.appendChild(document.createTextNode(part));
+    });
+    return node;
+  }
+  function money(p){ return p ? 'from $' + p : ''; }
+
+  var body = document.getElementById('rbs-body');
+  var input = document.getElementById('rbs-input');
+  var countEl = document.getElementById('rbs-count');
+
+  function cfgRow(c, terms){
+    var a = el('a', 'rbs-cfg');
+    a.href = SITE + c.u;
+    a.setAttribute('data-rbs-item', '');
+    a.appendChild(icon(c.i));
+    var tx = el('span', 'rbs-cfg-text');
+    tx.appendChild(highlight(el('span', 'rbs-cfg-title'), c.t, terms));
+    tx.appendChild(highlight(el('span', 'rbs-cfg-desc'), c.d, terms));
+    a.appendChild(tx);
+    if (c.p) a.appendChild(el('span', 'rbs-price', money(c.p)));
+    a.appendChild(el('span', 'rbs-go', c.p ? 'Configure →' : 'Start →'));
+    return a;
+  }
+  var qaSeq = 0;
+  function qaRow(qa, terms, open){
+    var box = el('div', 'rbs-qa');
+    var id = 'rbs-a-' + (++qaSeq);
+    var btn = el('button', 'rbs-q');
+    btn.type = 'button';
+    btn.setAttribute('data-rbs-item', '');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-controls', id);
+    btn.appendChild(highlight(el('span', 'rbs-q-text'), qa.q, terms));
+    btn.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+    var ans = el('div', 'rbs-a');
+    ans.id = id;
+    ans.hidden = !open;
+    ans.appendChild(highlight(el('p'), qa.a, terms));
+    var link = el('a', null, 'More on ' + (PAGE_NAME[qa.p] || 'this page') + ' →');
+    link.href = SITE + qa.p + '/';
+    ans.appendChild(link);
+    btn.addEventListener('click', function(){
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      ans.hidden = isOpen;
+      track('answer');
+    });
+    box.appendChild(btn);
+    box.appendChild(ans);
+    return box;
+  }
+  function pageRow(p, terms){
+    var a = el('a', 'rbs-page');
+    a.href = SITE + p.u;
+    a.setAttribute('data-rbs-item', '');
+    a.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[p.i] || ICONS.page) + '</svg>');
+    var tx = el('span', 'rbs-page-text');
+    tx.appendChild(highlight(el('span', 'rbs-page-title'), p.t, terms));
+    tx.appendChild(el('span', 'rbs-page-desc', p.d));
+    a.appendChild(tx);
+    return a;
+  }
+
+  function renderEmpty(){
+    body.innerHTML = '';
+    countEl.textContent = '';
+    var wrap = el('div', 'rbs-empty');
+    var g1 = el('div');
+    g1.appendChild(el('p', 'rbs-group', 'Popular searches'));
+    var chips = el('div', 'rbs-chips');
+    POPULAR.forEach(function(q){
+      var b = el('button', 'rbs-chip', q);
+      b.type = 'button';
+      b.addEventListener('click', function(){ input.value = q; run(); input.focus(); });
+      chips.appendChild(b);
+    });
+    g1.appendChild(chips);
+    var g2 = el('div');
+    g2.appendChild(el('p', 'rbs-group', 'Build your own'));
+    var cats = el('div', 'rbs-cats');
+    CATS.forEach(function(c){
+      var a = el('a', 'rbs-cat');
+      a.href = SITE + c.u;
+      a.appendChild(el('span', 'rbs-cat-name', c.t));
+      a.appendChild(el('span', 'rbs-cat-price', money(c.p)));
+      cats.appendChild(a);
+    });
+    g2.appendChild(cats);
+    var custom = el('div', 'rbs-custom');
+    custom.appendChild(el('span', null, 'Have something specific in mind?'));
+    var ca = el('a', null, 'Start a custom order →');
+    ca.href = SITE + 'custom-order/';
+    custom.appendChild(ca);
+    wrap.appendChild(g1); wrap.appendChild(g2); wrap.appendChild(custom);
+    body.appendChild(wrap);
+  }
+
+  function renderNone(raw){
+    var box = el('div', 'rbs-none');
+    box.appendChild(el('p', 'rbs-none-title', 'No matches for “' + raw + '”'));
+    box.appendChild(el('p', null, 'We build interior parts by hand for the C6 Corvette. If it’s not on the site, we may still be able to make it.'));
+    var btns = el('div', 'rbs-none-btns');
+    var b1 = el('a', 'rbs-btn rbs-btn--fill', 'Start a custom order'); b1.href = SITE + 'custom-order/';
+    var b2 = el('a', 'rbs-btn rbs-btn--line', 'Ask us a question');   b2.href = SITE + 'contact-us/';
+    btns.appendChild(b1); btns.appendChild(b2);
+    box.appendChild(btns);
+    body.appendChild(box);
+    var g = el('div', 'rbs-empty');
+    var inner = el('div');
+    inner.appendChild(el('p', 'rbs-group', 'Or browse'));
+    var chips = el('div', 'rbs-chips');
+    CATS.forEach(function(c){ var a = el('a', 'rbs-chip', c.t); a.href = SITE + c.u; chips.appendChild(a); });
+    inner.appendChild(chips);
+    g.appendChild(inner);
+    body.appendChild(g);
+  }
+
+  function run(){
+    var raw = input.value.trim();
+    var all = words(raw);
+    var terms = all.filter(function(w){ return !STOP.test(w); });
+    if (!terms.length) terms = all;
+    body.innerHTML = '';
+    activeIdx = -1;
+    if (!terms.length) { renderEmpty(); return; }
+
+    // Every word must match (an any-word fallback surfaced unrelated answers,
+    // e.g. "seat covers" -> warranty "covers workmanship"); no match shows the
+    // custom-order prompt instead, which is the useful answer for those.
+    var cf = rank(CONFIGS, terms), an = rank(ANSWERS, terms), pg = rank(PAGES, terms);
+    cf = cf.slice(0, 6); an = an.slice(0, 5); pg = pg.slice(0, 4);
+    var total = cf.length + an.length + pg.length;
+    countEl.textContent = total ? total + (total === 1 ? ' result' : ' results') : '';
+    if (!total) { renderNone(raw); scheduleTrack(raw, 0); return; }
+
+    if (cf.length){
+      body.appendChild(el('p', 'rbs-group', 'Configurators'));
+      cf.forEach(function(c){ body.appendChild(cfgRow(c, terms)); });
+    }
+    if (an.length){
+      body.appendChild(el('p', 'rbs-group', 'Answers'));
+      an.forEach(function(qa, i){ body.appendChild(qaRow(qa, terms, i === 0 && !cf.length)); });
+    }
+    if (pg.length){
+      body.appendChild(el('p', 'rbs-group', 'Pages'));
+      var wrap = el('div', 'rbs-pages');
+      pg.forEach(function(p){ wrap.appendChild(pageRow(p, terms)); });
+      body.appendChild(wrap);
+    }
+    body.scrollTop = 0;
+    scheduleTrack(raw, total);
+  }
+
+  /* ── GA4: one "search" event per settled query (if gtag is on the page) ── */
+  var trackTimer = null, lastTracked = '';
+  function scheduleTrack(q, n){
+    clearTimeout(trackTimer);
+    trackTimer = setTimeout(function(){
+      if (q.length < 2 || q === lastTracked || typeof window.gtag !== 'function') return;
+      lastTracked = q;
+      window.gtag('event', 'search', { search_term: q, rb_results: n });
+    }, 1200);
+  }
+  function track(kind){
+    if (typeof window.gtag === 'function') window.gtag('event', 'rb_search_' + kind, { search_term: input.value.trim() });
+  }
+
+  /* ── Keyboard: ↑/↓ move through results, Enter opens, Esc closes ── */
+  var activeIdx = -1;
+  function items(){ return Array.prototype.slice.call(body.querySelectorAll('[data-rbs-item]')); }
+  function setActive(i){
+    var list = items();
+    list.forEach(function(n){ n.classList.remove('is-active'); });
+    if (!list.length) { activeIdx = -1; return; }
+    activeIdx = Math.max(-1, Math.min(i, list.length - 1));
+    if (activeIdx < 0) { input.focus(); return; }
+    list[activeIdx].classList.add('is-active');
+    list[activeIdx].focus();
+    list[activeIdx].scrollIntoView({ block: 'nearest' });
+  }
+  root.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+    else if (e.key === 'Enter' && e.target === input) {
+      e.preventDefault();
+      var first = items()[0];
+      if (first) first.click();
+    }
+  });
+  body.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (a) track('click');
+  });
+
+  var debounce = null;
+  input.addEventListener('input', function(){ clearTimeout(debounce); debounce = setTimeout(run, 60); });
+
+  /* ── Open / close ── */
+  var opener = null;
+  function open(from){
+    if (!root.hidden) return;
+    opener = from || document.activeElement;
+    var nav = document.getElementById('rb-nav-links'), burger = document.getElementById('rb-burger');
+    if (nav) nav.classList.remove('open');
+    if (burger) burger.classList.remove('active');
+    document.body.style.overflow = '';
+    root.hidden = false;
+    document.documentElement.classList.add('rbs-lock');
+    run();
+    setTimeout(function(){ input.focus(); input.select(); }, 30);
+  }
+  function close(){
+    if (root.hidden) return;
+    root.hidden = true;
+    document.documentElement.classList.remove('rbs-lock');
+    if (opener && opener.focus) { try { opener.focus(); } catch (err) {} }
+  }
+  root.addEventListener('click', function(e){
+    if (e.target.closest && e.target.closest('[data-rbs-close]')) close();
+  });
+
+  // Claim the existing header search triggers before their own handlers run.
+  var TRIGGERS = '#rb-search-btn, #rb-mnav-search-btn, .ut2-btn-search';
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest(TRIGGERS);
+    if (!t) {
+      var ic = e.target.closest && e.target.closest('[class*="ut2-icon-outline-search"]');
+      t = ic && (ic.closest('a') || ic.closest('button'));
+    }
+    if (!t || root.contains(t)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    open(t);
+  }, true);
+  // Ctrl/Cmd+K also opens search on desktop.
+  document.addEventListener('keydown', function(e){
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
+  });
+  window.rbOpenSearch = open;
+})();
+</script>
+{/literal}
