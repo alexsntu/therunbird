@@ -1,0 +1,4 @@
+0 3 * * 0 /srv/projects/backups/backup.sh >> /srv/projects/backups/backup.log 2>&1
+7 23 * * * /usr/local/bin/php /srv/projects/therunbird.com/public_html/ADMIN.php --dispatch=ab__advanced_sitemap.cron --switch_company_id=1
+*/30 * * * * /usr/local/bin/php /srv/projects/therunbird.com/public_html/ADMIN.php --dispatch=ab__webp.run_queue --p
+0 8 * * * /srv/projects/backups/health-check.sh >> /srv/projects/backups/health.log 2>&1
