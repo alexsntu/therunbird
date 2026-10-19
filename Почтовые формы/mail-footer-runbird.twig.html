@@ -2,133 +2,47 @@
 
 </tr>
 
-<tr class="message-footer">
-<td>
+<!-- ══ Footer — rebuilt 2026-10-19 (owner: "huge and unreadable on mobile").
+     Removed: brand blurb + badges (repeated the red announce bar), "Track
+     Order" (linked to the homepage), the native contact/address block (showed
+     CS-Cart's placeholder "44 Main street, Boston"), payment-method boxes and
+     the default "Thank you for using our shopping cart" line.
+     All styles are INLINE and the rows use their own rb-mail-foot* classes on
+     purpose: the header's mobile media query forces 16px on every
+     .message-footer / .message-copyright cell, and some mail apps drop <style>
+     entirely, so this footer no longer depends on the header stylesheet. ══ -->
+<tr class="rb-mail-foot">
+  <td style="padding: 26px 24px 8px; background-color: #FAF9F7; border-top: 1px solid #ECEAE6; text-align: center;">
 
-<!-- ══ About / brand block ══ -->
-<table width="100%" cellpadding="0" cellspacing="0">
-  <tr>
-    <td>
-      <p class="rb-mail-eyebrow">Feel the Drive</p>
-      <p class="rb-mail-desc">Premium handmade interior accessories for C6 Corvette owners. Crafted to order using carbon fiber, synthetic Nappa leather, and genuine Alcantara&reg;. Ships across the United States.</p>
-      <table cellpadding="0" cellspacing="0">
-        <tr>
-          <td class="rb-mail-badge gold">Handmade</td>
-          <td width="6"></td>
-          <td class="rb-mail-badge">C6 Only</td>
-          <td width="6"></td>
-          <td class="rb-mail-badge">USA Shipping</td>
-          <td width="6"></td>
-          <td class="rb-mail-badge">Made to Order</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+    <table cellpadding="0" cellspacing="0" border="0" align="center" role="presentation">
+      <tr>
+        <td style="padding: 0; font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 22px; color: #121212; text-align: center;">
+          <a href="https://therunbird.com/contact-us/" style="color: #121212; text-decoration: none; font-weight: 600;">Contact&nbsp;us</a>
+          <span style="color: #B9B4AC;">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+          <a href="https://therunbird.com/shipping-and-returns/" style="color: #121212; text-decoration: none; font-weight: 600;">Shipping&nbsp;&amp;&nbsp;Returns</a>
+          <span style="color: #B9B4AC;">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+          <a href="https://therunbird.com/warranty/" style="color: #121212; text-decoration: none; font-weight: 600;">Warranty</a>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 14px 0 0; font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 13px; line-height: 20px; text-align: center;">
+          <a href="https://www.instagram.com/therunbird" target="_blank" style="color: #D1382A; text-decoration: none; font-weight: 600;">Instagram</a>
+          <span style="color: #B9B4AC;">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+          <a href="https://youtube.com/@therunbird" target="_blank" style="color: #D1382A; text-decoration: none; font-weight: 600;">YouTube</a>
+          <span style="color: #B9B4AC;">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+          <a href="https://www.tiktok.com/@therunbird" target="_blank" style="color: #D1382A; text-decoration: none; font-weight: 600;">TikTok</a>
+        </td>
+      </tr>
+    </table>
 
-<table width="100%" cellpadding="0" cellspacing="0" class="rb-mail-divider" style="margin: 20px 0;">
-  <tr><td>&nbsp;</td></tr>
-</table>
-
-<!-- ══ Nav — simplified 2026-09-08: one row of support-relevant links only
-     (was 3 columns / ~15 links incl. product categories & about/materials
-     content — trimmed since those belong on the site, not a transactional
-     email footer). ══ -->
-<table width="100%" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="center">
-      <div class="rb-mail-nav-links">
-        <a href="https://therunbird.com/contact-us/">Contact Us</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://therunbird.com/">Track Order</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://therunbird.com/shipping-and-returns/">Shipping &amp; Returns</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://therunbird.com/warranty/">Warranty</a>
-        &nbsp;&middot;&nbsp;
-        <a href="https://therunbird.com/privacy-policy/">Privacy Policy</a>
-      </div>
-    </td>
-  </tr>
-</table>
-
-<table width="100%" cellpadding="0" cellspacing="0" class="rb-mail-divider" style="margin: 20px 0;">
-  <tr><td>&nbsp;</td></tr>
-</table>
-
-<!-- ══ Contact / social (native CS-Cart footer fields, kept dynamic) ══ -->
-<table class="info ty-email-footer-left-part" width="250" align="left">
-  <tr>
-    <th class="footer-contact__title ty-email-footer" style="text-align: center;">
-      {{ __("contact_information") }}
-    </th>
-  </tr>
-  <tr>
-    <td class="ty-email-footer" style="text-align: center;">
-      <address>{{ company_data.company_address }}, {{ company_data.company_city }}</address>
-    </td>
-  </tr>
-</table>
-
-<table class="info ty-email-footer-right-part" width="250" align="right">
-  <tr>
-    <th class="footer-social__title ty-email-footer" style="text-align: center;">
-      {{ __("get_social") }}
-    </th>
-  </tr>
-  <tr>
-    <td class="ty-email-footer-social-buttons footer-social" style="text-align: center;">
-      <table cellspacing="0" cellpadding="0" align="center">
-        <tr>
-          <td><a class="rb-mail-soc-btn" href="https://www.instagram.com/therunbird" target="_blank">Instagram</a></td>
-          <td><a class="rb-mail-soc-btn" href="https://youtube.com/@therunbird" target="_blank">YouTube</a></td>
-          <!-- Facebook removed 2026-08-25: no live page yet (was a dead href="#").
-               Re-add as a real <a href="..."> once a real page exists. -->
-          <td><a class="rb-mail-soc-btn" href="https://www.tiktok.com/@therunbird" target="_blank">TikTok</a></td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-
-<table width="100%" cellpadding="0" cellspacing="0" class="rb-mail-divider" style="margin: 24px 0 16px;">
-  <tr><td>&nbsp;</td></tr>
-</table>
-
-<!-- ══ Payment icons ══ -->
-<table width="100%" cellpadding="0" cellspacing="0">
-  <tr>
-    <td align="center">
-      <table cellpadding="0" cellspacing="0">
-        <tr>
-          <td class="rb-mail-pay-ic">Visa</td>
-          <td class="rb-mail-pay-ic">Mastercard</td>
-          <td class="rb-mail-pay-ic">Amex</td>
-          <td class="rb-mail-pay-ic">PayPal</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-
-</td>
-</tr>
-{% if company_data.company_name %}
-<tr class="message-copyright">
-<td>
-<table class="copyright" width="100%">
-<tr>
-  <td>
-    &copy;&nbsp;{{ company_data.company_name }} &middot; All rights reserved &middot; <span class="rb-mail-disclaimer">Not affiliated with General Motors or Chevrolet</span>
-  </td>
-  <td align="right">
-    {{ __("customer_text_letter_footer") }}
   </td>
 </tr>
-</table>
-</td>
+<tr class="rb-mail-foot-copy">
+  <td style="padding: 14px 24px 22px; background-color: #FAF9F7; text-align: center; font-family: 'Inter', Helvetica, Arial, sans-serif; font-size: 11px; line-height: 17px; color: #9A958C;">
+    &copy;&nbsp;{% if company_data.company_name %}{{ company_data.company_name }}{% else %}RunBird{% endif %} · Handmade to order for the C6&nbsp;Corvette<br />
+    Not affiliated with General Motors or Chevrolet · <a href="https://therunbird.com/privacy-policy/" style="color: #9A958C; text-decoration: underline;">Privacy&nbsp;Policy</a>
+  </td>
 </tr>
-{% endif %}
 </table>
 <!-- content-wrapper -->
 </td>
