@@ -577,8 +577,24 @@ html.rbs-lock, html.rbs-lock body{ overflow:hidden !important; }
     if (e.target.closest && e.target.closest('[data-rbs-close]')) close();
   });
 
+  // The theme's mobile sticky bottom bar only renders its own Search item while
+  // the native search block is enabled — that block is switched off now, so
+  // add an identical-looking item ourselves (2nd, right after Menu).
+  function addStickySearch(){
+    var panel = document.querySelector('.ut2-sticky-panel');
+    if (!panel || panel.querySelector('.rbs-sticky')) return;
+    var item = document.createElement('div');
+    item.className = 'ut2-sticky-panel__item';
+    item.innerHTML = '<a class="ut2-sticky-panel__link rbs-sticky" href="#" role="button"><i class="ut2-icon-search"></i><span>Search</span></a>';
+    var first = panel.querySelector('.ut2-sticky-panel__item');
+    panel.insertBefore(item, first ? first.nextElementSibling : null);
+  }
+  addStickySearch();
+  document.addEventListener('DOMContentLoaded', addStickySearch);
+  window.addEventListener('load', addStickySearch);
+
   // Claim the existing header search triggers before their own handlers run.
-  var TRIGGERS = '#rb-search-btn, #rb-mnav-search-btn, .ut2-btn-search';
+  var TRIGGERS = '#rb-search-btn, #rb-mnav-search-btn, .ut2-btn-search, .rbs-sticky';
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest(TRIGGERS);
     if (!t) {
